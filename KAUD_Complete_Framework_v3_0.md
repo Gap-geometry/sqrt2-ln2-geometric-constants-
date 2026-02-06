@@ -1097,11 +1097,11 @@ dim(so(16)) = 120 = H₄-related
 
 **Companion paper (Gap Scaling Formula):** doi:10.17605/OSF.IO/C4GK5
 
-**Prior versions:**
-- K_AUD v1.0: https://osf.io/qhs52
-- K_AUD v2.0: https://osf.io/sjbe9
-
-**GitHub repository:** https://github.com/Gap-geometry
+DOCUMENT LINKS
+This paper (K_AUD Framework v3.0): https://osf.io/qh5s2
+Companion paper (Gap Scaling Formula): https://osf.io/c4gk5
+Prior versions: - K_AUD v1.0: https://osf.io/5vz2r - K_AUD v2.0: https://osf.io/sjbe9
+GitHub repository: https://github.com/Gap-geometry
 
 ---
 
