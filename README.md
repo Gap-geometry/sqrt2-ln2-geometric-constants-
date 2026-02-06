@@ -1,45 +1,39 @@
-# √2 × ln(2): Geometric Constants from H4
+√2 × ln(2): Geometric Constants from H₄
+Project DOI
+10.17605/OSF.IO/QH5S2
 
-**DOI:** [10.17605/OSF.IO/QHS52](https://doi.org/10.17605/OSF.IO/QHS52)
-
-## The Framework
-
-This project provides the complete combined framework connecting H4 geometry to information-theoretic constants.
-
-### Key Constants
-
-| Constant | Formula | Value |
-|----------|---------|-------|
-| **Floor** | 1/φ | ≈ 0.618 |
-| **Ceiling (K_AUD)** | √2 × ln(2) | ≈ 0.980258143 |
-| **Gap** | 1 - K_AUD | ≈ 0.01974 (1.97%) |
-
-### The K_AUD Formula
-
+The Framework
+This project presents the complete K_AUD framework connecting H₄ geometry to information-theoretic constants, now extended with the Binary Tower scaling discovery.
+Key Constants
+ConstantFormulaValueFloor1/φ≈ 0.618Ceiling (K_AUD)√2 × ln(2)≈ 0.980258143Gap1 - K_AUD≈ 0.01974 (1.97%)Pivot√φ≈ 1.272
+The K_AUD Formula
 K_AUD = √2 × ln(2) = 0.980258143...
 
-- **√2**: Geometric embedding (H4 polytope diagonal)
-- **ln(2)**: Information-theoretic selection (Shannon entropy)
-- **Binary (n=2)**: The unique base producing a sub-unity ceiling
+√2: Geometric embedding (H₄ polytope diagonal, tesseract midradius)
+ln(2): Information-theoretic selection (Shannon entropy of binary choice)
+Binary (n=2): The unique base producing a sub-unity ceiling
 
-## Core Results
+The Binary Tower (v3.0)
+2^k × G = 2^(k-6) × √φ × (1 - ε)
 
-- **Corridor Identity**: The 1/φ to K_AUD corridor
-- **Golden Partition**: φ-based structure
-- **Binary Uniqueness**: n=2 is geometrically singular
-- **Depth Scaling**: Hierarchical relationships
+G = 1 - K_AUD ≈ 0.01974 (the gap)
+ε = 0.671% (constant error across all k)
+k = 5 (32): Floor — 32 × G ≈ 1/φ
+k = 6 (64): Pivot — 64 × G ≈ √φ
 
-## Links
+The gap scales through binary powers to track golden ratio powers.
+Core Results
 
-- **OSF (official publication):** https://osf.io/qhs52
-- **GitHub:** https://github.com/Gap-geometry
-- **Related work (400/11 Formula):** https://osf.io/c4gk5
+Corridor Identity: Corridor = 1/φ² − G
+Golden Partition: 1/φ + 1/φ² = 1
+Binary Uniqueness: n=2 is geometrically singular
+Depth Scaling: L_n = 1/(e × φ^(n-1))
+Binary Tower: 2^k × G tracks √φ powers with constant -0.671% error
+Connection to 400/11: Closure cycle 4² in ρ, 4³ = 64 as pivot
 
-## Source Documents
+Links
 
-- Document 1 (Original): [The Coherence Ceiling and the Geometric Singularity of Binary](https://osf.io/5vz2r/files/p6yqr)
-- Document 2 (Extended Framework v2.0): [Geometric Constants from H4](https://osf.io/sjbe9/files/ekt5s)
-
-## Note
-
-Mathematics is independently verifiable. This is a selection argument, not a derivation. Empirical applications remain open for investigation.
+OSF (v1 Original): https://osf.io/5vz2r
+OSF (v3.0 Complete): https://osf.io/qh5s2
+OSF (400/11 Formula): https://osf.io/c4gk5
+GitHub: https://github.com/Gap-geometry
