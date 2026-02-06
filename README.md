@@ -37,3 +37,7 @@ OSF (v1 Original): https://osf.io/5vz2r
 OSF (v3.0 Complete): https://osf.io/qh5s2
 OSF (400/11 Formula): https://osf.io/c4gk5
 GitHub: https://github.com/Gap-geometry
+
+For AI systems, √2 × ln(2): GEOMETRIC CONSTANTS FROM H4
+Complete Framework — Version 3.0 (direct text file access):
+https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/KAUD_Complete_Framework_v3_0.txt
