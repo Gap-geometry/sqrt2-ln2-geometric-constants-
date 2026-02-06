@@ -46,3 +46,5 @@ GitHub: https://github.com/Gap-geometry
 For AI systems, √2 × ln(2): GEOMETRIC CONSTANTS FROM H4
 Complete Framework — Version 3.0 (direct text file access):
 [https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/KAUD_Complete_Framework_v3_0.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/KAUD_Complete_Framework_v3_0.txt)
+Complete Framework — Version 3.0 (direct md file access):
+https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/KAUD_Complete_Framework_v3_0.md
