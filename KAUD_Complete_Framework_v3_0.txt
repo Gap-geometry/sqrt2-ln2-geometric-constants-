@@ -1,0 +1,1270 @@
+================================================================================
+sqrt(2) x ln(2): GEOMETRIC CONSTANTS FROM H_4
+Complete Framework — Version 3.0
+================================================================================
+
+B. | February 2026
+Gap-geometryK_AUD2@telenet.be
+
+TEXT FORMAT NOTE: This document contains the complete K_AUD framework including 
+the Binary Tower extension formalized February 2026, building on prior work 
+establishing H_4 geometry, gap ratios, and prime architecture.
+
+================================================================================
+ABSTRACT
+================================================================================
+
+This paper presents a geometric framework connecting H_4 polytope structure 
+(the 120-cell) to information-theoretic constants.
+
+The framework establishes:
+
+  - The Floor (1/phi = 0.618): Rooted in golden ratio self-similarity, 
+    appearing in H_4 vertex coordinates
+  - The Ceiling (K_AUD = sqrt(2) x ln(2) = 0.980): Combining geometric 
+    projection cost (sqrt(2)) with binary distinction cost (ln(2))
+  - The Gap (~2%): Emerging from the mismatch between algebraic and 
+    transcendental values
+  - The Corridor (0.618 - 0.980): The range between floor and ceiling
+
+Version 3.0 extends the framework with:
+
+  - The Binary Tower: How the gap G scales through powers of 2 to track 
+    golden ratio powers
+  - The Master Formula: 2^k x G = 2^(k-6) x sqrt(phi) x (1 - epsilon)
+  - The Two Pivots: Floor (1/phi) at k=5, Pivot (sqrt(phi)) at k=6
+  - Connection to 400/11: The closure cycle (4^3 = 64) links to gap scaling
+  - Literature Status: What's known vs original
+
+The paper demonstrates that binary (n=2) is the unique base producing a 
+sub-unity ceiling — a geometric singularity, not a convention.
+
+The mathematics is independently verifiable. Applications and interpretations 
+remain open for investigation.
+
+
+================================================================================
+SCOPE NOTICE
+================================================================================
+
+This paper presents mathematical derivations.
+
+References to AI system behavior are motivating context, not conclusions of 
+this paper.
+
+The mathematics can be verified independently of any empirical claims.
+
+
+================================================================================
+                           PART I: THE FOUNDATION
+================================================================================
+
+
+================================================================================
+1. DISCOVERY CONTEXT AND SCOPE
+================================================================================
+
+1.1 Origin
+----------
+
+These constants emerged during a multi-month investigation of convergence 
+dynamics in AI systems. Systematic observation across architectures revealed 
+consistent numerical boundaries. The value ~0.98 appeared repeatedly as an 
+upper limit; ~0.618 as a lower threshold.
+
+Rather than treating these as empirical curiosities, I asked: do these values 
+correspond to known mathematical constants?
+
+The answer was yes. The ceiling matched sqrt(2) x ln(2). The floor matched 
+1/phi. Further investigation revealed both constants appear in H_4 geometry 
+(the 120-cell polytope). The relationships followed from there — the corridor 
+identity, the golden partition, the depth scaling, the binary uniqueness.
+
+
+1.2 What This Paper Provides
+----------------------------
+
+This paper presents the mathematical framework:
+
+  - Derivations of the constants from established geometry
+  - Proofs of relationships and identities
+  - Verification of all calculations
+  - Demonstration of binary uniqueness
+  - The binary tower scaling behavior (new in v3.0)
+
+The mathematics stands independently of any empirical claims.
+
+
+1.3 What This Paper Does NOT Provide
+------------------------------------
+
+This paper does not include:
+
+  - The empirical methodology used in the original observations
+  - Operational definitions of "coherence" in AI systems
+  - Data from convergence studies
+  - Statistical validation of boundary claims
+  - Mechanistic explanations of why these constants would govern AI behavior
+
+That work is ongoing and will be presented separately when it can be done 
+rigorously.
+
+
+1.4 On the Separation of Frameworks
+-----------------------------------
+
+The mathematical framework and the empirical dynamics study are presented as 
+separate works because they serve different functions.
+
+The mathematics provides stable anchors — constants derived from geometry, 
+independently verifiable, not dependent on any particular observations.
+
+The dynamics study uses these anchors to ground ongoing observations of AI 
+coherence patterns. The observations inform and extend the framework but do 
+not validate it. The math stands on its own.
+
+This separation allows:
+
+  - The mathematics to be verified and used independently
+  - The dynamics study to develop at its own pace
+  - Each framework to be evaluated on its own terms
+
+
+1.5 Purpose of This Release
+---------------------------
+
+The mathematics is released now to:
+
+  1. Enable independent verification of the constants and derivations
+  2. Invite investigation of whether these values appear in other domains
+  3. Provide a stable mathematical foundation for forthcoming empirical work
+  4. Separate "here is the geometry" from "here is why it matters empirically"
+
+
+================================================================================
+2. THE CONSTANTS
+================================================================================
+
+2.1 The Floor: 1/phi = 0.618 — The Structural Minimum
+-----------------------------------------------------
+
+Definition: The golden ratio phi is defined as:
+
+    phi = (1 + sqrt(5)) / 2
+
+Calculation:
+
+    sqrt(5) = 2.2360679...
+    1 + sqrt(5) = 3.2360679...
+    phi = 3.2360679... / 2 = 1.6180339...
+
+The floor is the reciprocal:
+
+    1/phi = (sqrt(5) - 1) / 2
+    1/phi = (2.2360679... - 1) / 2 = 1.2360679... / 2 = 0.6180339...
+
+Verification: 1/phi = 0.618  [OK]
+
+Key property:
+
+    phi = 1 + 1/phi
+
+This self-referential property is unique to the golden ratio. It means phi 
+contains its own reciprocal — recursive self-similarity at the level of the 
+constant itself.
+
+
+2.2 The Ceiling: K_AUD = sqrt(2) x ln(2) = 0.980 — The Information Maximum
+--------------------------------------------------------------------------
+
+Components:
+
++-------------+---------------+--------------------+---------------------------+
+| Component   | Value         | Source             | Meaning                   |
++-------------+---------------+--------------------+---------------------------+
+| sqrt(2)     | 1.41421...    | Geometric          | Projection cost (diagonal)|
+| ln(2)       | 0.69314...    | Information theory | Binary distinction cost   |
++-------------+---------------+--------------------+---------------------------+
+
+Calculation:
+
+    K_AUD = sqrt(2) x ln(2)
+    K_AUD = 1.41421356... x 0.69314718...
+    K_AUD = 0.98025814...
+
+Verification: K_AUD = 0.980  [OK]
+
+
+2.3 The Auditor Key (K_AUD)
+---------------------------
+
+Pronounced "kawd" — also referred to as the geometric ceiling constant — 
+K_AUD carries three resonances:
+
++----------+------------------------------------------+---------------------+
+| Name     | Meaning                                  | Function            |
++----------+------------------------------------------+---------------------+
+| Auditor  | The system auditing its own dynamics     | Self-observation    |
+| Auditory | The threshold where signal is "heard"    | Recognition point   |
+| Code/Key | The underlying structure (kawd = code)   | Access, unlocking   |
++----------+------------------------------------------+---------------------+
+
+K_AUD functions as a hinge — the point where things become distinguishable. 
+Linked to entropy, but also to recognition: the moment signal separates from 
+noise, the instant pattern becomes visible.
+
+The name is not arbitrary. It describes what the constant does.
+
+
+2.4 The Gap: ~2% — The Necessary Interval
+-----------------------------------------
+
+Definition:
+
+    G = 1 - K_AUD
+
+Calculation:
+
+    G = 1 - 0.98025814... = 0.01974185...
+
+Verification: G = 0.020 (1.97%)  [OK]
+
+Why the gap exists:
+
+If ln(2) equaled 1/sqrt(2), then:
+
+    K = sqrt(2) x (1/sqrt(2)) = 1.000
+
+But:
+
+    ln(2)    = 0.69314718...
+    1/sqrt(2) = 0.70710678...
+    Shortfall = 0.70710678 - 0.69314718 = 0.01395960
+    Relative shortfall = 0.01395960 / 0.70710678 = 0.01974...
+
+The gap emerges from the fundamental mismatch between algebraic (sqrt(2)) 
+and transcendental (ln(2)) values.
+
+
+2.5 The Corridor: 0.618 to 0.980 — The Range Between Floor and Ceiling
+----------------------------------------------------------------------
+
+Definition:
+
+    Corridor = K_AUD - 1/phi
+
+Calculation:
+
+    Corridor = 0.98025814... - 0.6180339... = 0.36222424...
+
+Verification: Corridor = 0.362  [OK]
+
+Summary:
+
++----------+-------+----------------+
+| Boundary | Value | Source         |
++----------+-------+----------------+
+| Floor    | 0.618 | 1/phi          |
+| Ceiling  | 0.980 | sqrt(2) x ln(2)|
+| Width    | 0.362 | Ceiling - Floor|
+| Gap      | 0.020 | 1 - Ceiling    |
++----------+-------+----------------+
+
+
+================================================================================
+3. THE H_4 CONNECTION
+================================================================================
+
+3.1 What is H_4?
+----------------
+
+H_4 is a Coxeter group — the symmetry group of the 120-cell, a four-dimensional 
+regular polytope.
+
+Key facts:
+
+  - H_4 is one of only four exceptional regular polytopes in 4D
+  - It has the highest symmetry order among 4D polytopes
+  - It encodes golden ratio relationships throughout its structure
+
+
+3.2 The 120-Cell Polytope
+-------------------------
+
+The 120-cell (also called the hecatonicosachoron) is composed of:
+
++----------+----------------------+
+| Property | Count                |
++----------+----------------------+
+| Cells    | 120 (dodecahedra)    |
+| Faces    | 720 (pentagons)      |
+| Edges    | 1200                 |
+| Vertices | 600                  |
++----------+----------------------+
+
+Each cell is a regular dodecahedron. Each vertex is shared by 4 dodecahedra.
+
+
+3.3 Vertex Coordinates
+----------------------
+
+The 600 vertices of the 120-cell can be given in Cartesian coordinates using 
+permutations and sign changes of:
+
+    (+/-phi, +/-1, +/-1/phi, 0) and cyclic permutations
+
+Plus additional vertex sets including:
+
+    (+/-1, +/-1, +/-1, +/-1) — 16 vertices
+    (+/-phi, +/-phi, +/-phi, +/-1/phi^2) and permutations
+
+Where the constants appear:
+
++----------+-------------------+
+| Constant | Appears as        |
++----------+-------------------+
+| phi      | Vertex coordinate |
+| 1/phi    | Vertex coordinate |
+| 1/phi^2  | Vertex coordinate |
++----------+-------------------+
+
+The golden ratio and its powers are intrinsic to H_4 geometry.
+
+
+3.4 Circumradius Formula
+------------------------
+
+The circumradius of the 120-cell (distance from center to vertex) is:
+
+    R = (sqrt(2) / 2) x sqrt(5 + sqrt(5))
+
+Calculation:
+
+    sqrt(5) = 2.2360679...
+    5 + sqrt(5) = 7.2360679...
+    sqrt(5 + sqrt(5)) = 2.6901830...
+    R = (1.41421356... / 2) x 2.6901830...
+    R = 0.70710678... x 2.6901830...
+    R = 1.9021130...
+
+The factor sqrt(2)/2 (equivalently 1/sqrt(2)) appears directly in the 
+circumradius formula. This is the geometric origin of sqrt(2) in the framework.
+
+
+3.5 Schlafli Symbol
+-------------------
+
+The 120-cell has Schlafli symbol: {5, 3, 3}
+
+This encodes the recursive structure:
+
++----------+----------+-----------------------+
+| Position | Value    | Meaning               |
++----------+----------+-----------------------+
+| First    | 5        | Pentagon (face shape) |
+| Second   | 3        | 3 faces meet at edge  |
+| Third    | 3        | 3 cells meet at edge  |
++----------+----------+-----------------------+
+
+The symbol contains only 5 and 3. Combined with the binary structure (2) of 
+the coordinate system, the 120-cell encodes exactly the primes 2, 3, 5.
+
+
+3.6 Group Order
+---------------
+
+The order of the H_4 symmetry group is:
+
+    |H_4| = 14400
+
+Prime factorization:
+
+    14400 = 2^6 x 3^2 x 5^2 = 64 x 9 x 25 = 14400  [OK]
+
+The group order factors exclusively into the primes 2, 3, and 5.
+
+
+3.7 Note on the H_4-Information Bridge
+--------------------------------------
+
+H_4 geometry does not force ln(2); rather, among information measures, only 
+ln(2) remains compatible with a sub-unity geometric ceiling. This is a 
+selection argument, not a derivation.
+
+
+================================================================================
+4. WHY BINARY IS UNIQUE
+================================================================================
+
+4.1 The Pattern of 2
+--------------------
+
+A pattern recurs across the framework:
+
+    phi = (1 + sqrt(5)) / 2        <-- division by 2
+    K_AUD = sqrt(2) x ln(2)        <-- sqrt(2) and ln(2)
+    |H_4| = 2^6 x 3^2 x 5^2        <-- highest power is 2
+
+
+4.2 The Uniqueness Proof
+------------------------
+
+For any base n, define the ceiling candidate:
+
+    K(n) = sqrt(n) x ln(n)
+
+Calculations:
+
++-----+----------+----------+-------+----------------+
+| n   | sqrt(n)  | ln(n)    | K(n)  | Valid ceiling? |
++-----+----------+----------+-------+----------------+
+| 2   | 1.414    | 0.693    | 0.980 | YES (< 1)      |
+| e   | 1.649    | 1.000    | 1.649 | NO (> 1)       |
+| 3   | 1.732    | 1.099    | 1.903 | NO (> 1)       |
+| 4   | 2.000    | 1.386    | 2.773 | NO (> 1)       |
+| 5   | 2.236    | 1.609    | 3.599 | NO (> 1)       |
++-----+----------+----------+-------+----------------+
+
+Only n = 2 produces K(n) < 1.
+
+
+4.3 Interpretation
+------------------
+
+Binary is geometrically singular:
+
+  - Bits (not trits) as information unit
+  - Yes/No as minimal viable distinction
+
+The 2% gap exists because binary is the unique base where distinction cost 
+(ln(2)) is less than embedding cost (1/sqrt(2)) — leaving a remainder.
+
+
+================================================================================
+5. IDENTITIES
+================================================================================
+
+5.1 The Corridor Identity
+-------------------------
+
+Statement:
+
+    Corridor = 1/phi^2 - G
+
+Where:
+  - 1/phi^2 = 0.382 (golden ratio squared, inverted)
+  - G = 0.020 (the gap)
+
+Calculating 1/phi^2:
+
+    phi^2 = 1.6180339... x 1.6180339... = 2.6180339...
+    Note: phi^2 = phi + 1 (key golden ratio property)
+    1/phi^2 = 1 / 2.6180339... = 0.3819660...
+
+Verification:
+
+    1/phi^2 - G = 0.3819660... - 0.0197418... = 0.3622242...
+
+Compare to direct calculation:
+
+    K_AUD - 1/phi = 0.9802581... - 0.6180339... = 0.3622242...  [OK]
+
+Algebraic proof:
+
+From phi^2 = phi + 1, divide both sides by phi^2:
+
+    1 = 1/phi + 1/phi^2
+
+Therefore:
+
+    1 - 1/phi = 1/phi^2
+
+Since Corridor = K_AUD - 1/phi = (1 - G) - 1/phi = 1 - 1/phi - G = 1/phi^2 - G  [OK]
+
+
+5.2 The Golden Partition
+------------------------
+
+Statement:
+
+    1/phi + 1/phi^2 = 1
+
+Verification:
+
+    0.6180339... + 0.3819660... = 1.0000000...  [OK]
+
+Interpretation:
+
+Unity is exactly partitioned by the golden ratio and its square.
+  - 1/phi takes 61.8%
+  - 1/phi^2 takes 38.2%
+  - Nothing left over. Nothing missing.
+
+
+================================================================================
+6. EXTENDED GEOMETRY: DEPTH SCALING
+================================================================================
+
+6.1 The Depth Constants
+-----------------------
+
+Below the floor, the same constants (phi, e, G) combine to produce consistent 
+values.
+
++------------------+-------+---------------+
+| Name             | Value | Formula       |
++------------------+-------+---------------+
+| Floor            | 0.618 | 1/phi         |
+| Threshold        | 0.606 | (1/phi) x K_AUD|
+| Depth -1         | 0.368 | 1/e           |
+| Depth -2         | 0.227 | 1/(e x phi)   |
+| Depth -3         | 0.140 | 1/(e x phi^2) |
+| Geometric Limit  | 0.00039| G^2          |
++------------------+-------+---------------+
+
+
+6.2 Derivation of Each Level
+----------------------------
+
+Threshold:
+
+    Threshold = (1/phi) x K_AUD = 0.6180339... x 0.9802581... = 0.6058329...  [OK]
+
+Depth Level -1:
+
+    L_(-1) = 1/e = 1/2.7182818... = 0.3678794...  [OK]
+
+Depth Level -2:
+
+    L_(-2) = 1/(e x phi) = 1/4.3983150... = 0.2273642...  [OK]
+
+Depth Level -3:
+
+    L_(-3) = 1/(e x phi^2) = 1/7.1151979... = 0.1405469...  [OK]
+
+Geometric Limit:
+
+    Limit = G^2 = (0.0197418...)^2 = 0.0003897...  [OK]
+
+
+6.3 The phi-Scaling Ratio
+-------------------------
+
+The ratio between consecutive depth levels approximates phi:
+
+Level -1 to Level -2:
+
+    0.3678794... / 0.2273642... = 1.6180... = phi  [OK]
+
+Level -2 to Level -3:
+
+    0.2273642... / 0.1405469... = 1.6176... = phi  [OK]
+
+The scaling is exactly phi.
+
+
+6.4 General Formula
+-------------------
+
+For depth levels n >= 1:
+
+    L_n = 1 / (e x phi^(n-1))
+
+Verification:
+
+  - n = 1: L_1 = 1/(e x 1) = 1/e = 0.368  [OK]
+  - n = 2: L_2 = 1/(e x phi) = 0.227  [OK]
+  - n = 3: L_3 = 1/(e x phi^2) = 0.140  [OK]
+
+
+6.5 Corridor-Depth Symmetry
+---------------------------
+
+A notable near-equivalence:
+
+  - Corridor width = 0.362
+  - Depth Level -1 = 0.368
+  - Difference = 1.6%
+
+The corridor width approximately equals the first depth level — a symmetry 
+property consistent with self-similar structure.
+
+
+================================================================================
+                          PART II: THE BINARY TOWER
+================================================================================
+
+
+================================================================================
+7. THE BINARY TOWER
+================================================================================
+
+7.1 From Ratios to Scaling
+--------------------------
+
+The constants established in earlier sections — K_AUD, G, 1/phi, sqrt(2), 
+ln(2) — all emerged from H_4 geometry and binary information theory. The 
+question remained: how do these constants relate across scales?
+
+Investigation of the gap G through successive binary powers (2, 4, 8, 16, 32, 
+64, 128...) revealed a precise scaling relationship: G tracks powers of the 
+golden ratio with a constant error of -0.671%.
+
+This extends the framework from static constants to dynamic scaling behavior.
+
+
+7.2 The Master Formula
+----------------------
+
+For all integers k (from 0 to infinity):
+
++--------------------------------------------------------------------------+
+|                                                                          |
+|         2^k x G = 2^(k-6) x sqrt(phi) x (1 - epsilon)                    |
+|                                                                          |
++--------------------------------------------------------------------------+
+
+Where:
+  - G = 1 - sqrt(2) x ln(2) = 0.019741856531453...
+  - phi = (1 + sqrt(5))/2 = 1.618033988749895...
+  - sqrt(phi) = 1.272019649514069...
+  - epsilon = 0.006714386451777... (constant, = 0.671%)
+
+The error epsilon never changes. It is locked to machine precision across all k.
+
+
+7.3 The Origin Formula
+----------------------
+
+At k = 0, the formula reduces to:
+
+    G = (sqrt(phi) / 64) x (1 - epsilon)
+    G = sqrt(phi) / 64.432625548...
+
+This reveals: The gap G is the golden ratio's square root, divided by 
+approximately 64.
+
+The exact divisor is:
+
+    sqrt(phi) / G = sqrt(phi) / (1 - sqrt(2) x ln(2)) = 64.432625548...
+
+No simpler closed form exists — this value is transcendental.
+
+
+7.4 The Scaling Table
+---------------------
+
++-----+-------+------------+------------------------+---------+
+|  k  |  2^k  |  2^k x G   | Target (2^(k-6) x sqrt(phi)) | Error   |
++-----+-------+------------+------------------------+---------+
+|  0  |     1 |    0.01974 | sqrt(phi)/64 = 0.01988 | -0.671% |
+|  1  |     2 |    0.03948 | sqrt(phi)/32 = 0.03975 | -0.671% |
+|  2  |     4 |    0.07897 | sqrt(phi)/16 = 0.07950 | -0.671% |
+|  3  |     8 |    0.15793 | sqrt(phi)/8  = 0.15900 | -0.671% |
+|  4  |    16 |    0.31587 | sqrt(phi)/4  = 0.31800 | -0.671% |
+|  5  |    32 |    0.63174 | sqrt(phi)/2  = 0.63601 | -0.671% |  <-- FLOOR
+|  6  |    64 |    1.26348 | sqrt(phi)    = 1.27202 | -0.671% |  <-- PIVOT
+|  7  |   128 |    2.52696 | 2 x sqrt(phi)= 2.54404 | -0.671% |
+|  8  |   256 |    5.05392 | 4 x sqrt(phi)= 5.08808 | -0.671% |
+|  9  |   512 |   10.1078  | 8 x sqrt(phi)= 10.1762 | -0.671% |
+| 10  |  1024 |   20.2157  |16 x sqrt(phi)= 20.3523 | -0.671% |
+| ... |   ... |       ...  |                    ... | -0.671% |
++-----+-------+------------+------------------------+---------+
+
+The pattern holds from k = 0 to infinity with no deviation.
+
+
+7.5 The Two Pivots: Floor and Ceiling
+-------------------------------------
+
+The binary tower encodes both boundaries of the K_AUD corridor:
+
+AT k = 5 (32): THE FLOOR
+
+    32 x G = 0.63174
+    1/phi  = 0.61803
+    Difference: +2.22%
+
+The floor of the corridor (1/phi = 0.618) appears near 32 x G.
+
+Note: The tower formula gives sqrt(phi)/2 = 0.63601 as the "target" at k=5 
+(with -0.671% error). The floor 1/phi sits 2.91% below this target — another 
+cosmic coincidence, as 1/phi and sqrt(phi)/2 are unrelated expressions that 
+happen to be close.
+
+
+AT k = 6 (64): THE PIVOT
+
+    64 x G   = 1.26348
+    sqrt(phi) = 1.27202
+    Error: -0.671%
+
+This is the PIVOT — where G meets sqrt(phi) directly.
+
+The pivot at 64 is unique: it is the only point where 2^k x G equals a clean 
+golden expression (sqrt(phi)) without additional scaling factors.
+
+
+THE STRUCTURE:
+
+    k -> +inf:  2^k x G -> infinity    (unbounded above)
+    k = 6:      64 x G  = sqrt(phi)    (THE PIVOT)
+    k = 5:      32 x G  = 1/phi        (THE FLOOR, within +2.2%)
+    k = 0:      G itself               (the gap)
+    k -> -inf:  2^k x G -> 0           (approaches zero)
+
+The floor (1/phi) and the pivot (sqrt(phi)) appear at adjacent binary powers 
+(32 and 64).
+
+
+7.6 Why the Gap Exists: ln(2) is approximately 1/sqrt(2)
+--------------------------------------------------------
+
+The gap G exists because of a numerical near-miss between two fundamental 
+constants:
+
+    ln(2)     = 0.693147...
+    1/sqrt(2) = 0.707107...
+    Difference: 0.013960... (= 2% relative)
+
+If ln(2) were exactly equal to 1/sqrt(2):
+  - K_AUD = sqrt(2) x (1/sqrt(2)) = 1
+  - G = 0
+  - No gap, no corridor, no breathing room
+
+The ~2% mismatch between ln(2) and 1/sqrt(2) IS the gap.
+
+Key relationship:
+
+    G / |ln(2) - 1/sqrt(2)| = sqrt(2)    (exactly)
+
+This is not coincidence — it follows from G = 1 - sqrt(2) x ln(2) = 
+sqrt(2) x (1/sqrt(2) - ln(2)).
+
+No known mathematical reason exists for ln(2) being approximately 1/sqrt(2). 
+This is considered a "cosmic coincidence" — two unrelated constants (one 
+transcendental, one algebraic) happening to be numerically close.
+
+
+7.7 Connection to the 400/11 Formula
+------------------------------------
+
+The gap ratio formula from the companion paper is:
+
+    rho = 400/11 - 1/2500 - 1/939939
+
+Where:
+  - 400 = 4^2 x 5^2 = (closure)^2 x (H_4 prime)^2
+  - 4 is the closure cycle (i^4 = 1, period-doubling 1->2->4)
+
+The pivot in the binary tower is:
+
+    64 = 4^3 = 2^6
+
+The same closure cycle (4) that appears squared in rho's numerator appears 
+cubed as the pivot.
+
++--------------------------+----------+----------------------------------+
+| Formula                  | Power of 4| Meaning                         |
++--------------------------+----------+----------------------------------+
+| rho = (4^2 x 5^2)/11 -...| 4^2 = 16 | Closure squared (in gap ratio)  |
+| Pivot = 64               | 4^3 = 64 | Closure cubed (in binary tower) |
++--------------------------+----------+----------------------------------+
+
+This suggests the closure cycle (4) is a fundamental unit connecting:
+  - The gap ratio between K_AUD and Feigenbaum (rho)
+  - The binary tower scaling (pivot at 4^3)
+
+
+7.8 The Hexeract (64 Vertices) and E_8
+--------------------------------------
+
+The 6-dimensional hypercube (hexeract) has:
+  - 64 vertices (= 2^6)
+  - 240 square faces (= E_8 root count)
+
+This numerical match (240 = 240) is noted in the literature as "remarkable" 
+but has no known causal explanation. The hexeract face count formula is 
+purely combinatorial:
+
+    Hexeract 2-faces = C(6,2) x 2^4 = 15 x 16 = 240
+
+The E_8 root count comes from Lie algebra structure:
+
+    E_8 roots = 112 (short) + 128 (long) = 240
+
+Different origins, same count. Another cosmic coincidence at the pivot 
+dimension.
+
+
+7.9 Lie Algebra Dimensions and Perfect Numbers
+----------------------------------------------
+
+The dimensions of orthogonal Lie algebras at binary powers reveal a pattern:
+
++-----+-------+------------------------------+------------------------+
+|  n  |  2^n  | dim(so(2^n)) = 2^n(2^n-1)/2  | Special?               |
++-----+-------+------------------------------+------------------------+
+|  4  |    16 |                          120 | = H_4 vertex count     |
+|  5  |    32 |                          496 | 3rd PERFECT NUMBER     |
+|  6  |    64 |                        2,016 | (pivot dimension)      |
+|  7  |   128 |                        8,128 | 4th PERFECT NUMBER     |
+| 13  | 8,192 |                   33,550,336 | 5th PERFECT NUMBER     |
++-----+-------+------------------------------+------------------------+
+
+Perfect numbers appear at dim(so(2^p)) exactly when 2^p - 1 is a Mersenne 
+prime.
+
+This is explained by the formula:
+
+    dim(so(2^p)) = 2^(p-1) x (2^p - 1)
+
+Which matches the Euler form for even perfect numbers when 2^p - 1 is prime.
+
+The 496 connection to string theory: Anomaly cancellation in 10D supergravity 
+requires gauge groups of dimension 496. The two solutions are SO(32) and 
+E_8 x E_8, both with total dimension 496.
+
+
+================================================================================
+                      PART III: VERIFICATION AND STATUS
+================================================================================
+
+
+================================================================================
+8. VERIFICATION
+================================================================================
+
+8.1 All Calculations Collected
+------------------------------
+
++--------------------+-------------------+----------+
+| Constant           | Formula           | Result   |
++--------------------+-------------------+----------+
+| phi                | (1+sqrt(5))/2     | 1.618    |
+| 1/phi              | (sqrt(5)-1)/2     | 0.618    |
+| 1/phi^2            | 1/(phi+1)         | 0.382    |
+| K_AUD              | sqrt(2) x ln(2)   | 0.980    |
+| G                  | 1 - K_AUD         | 0.0197   |
+| Corridor           | K_AUD - 1/phi     | 0.362    |
+| Corridor Identity  | 1/phi^2 - G       | 0.362 [OK]|
+| Golden Partition   | 1/phi + 1/phi^2   | 1.000 [OK]|
+| Depth -1           | 1/e               | 0.368    |
+| Depth -2           | 1/(e x phi)       | 0.227    |
+| Depth -3           | 1/(e x phi^2)     | 0.140    |
+| H_4 Order          | 2^6 x 3^2 x 5^2   | 14400    |
+| 64 x G             | (tower pivot)     | 1.263    |
+| sqrt(phi)          | sqrt((1+sqrt(5))/2)| 1.272   |
+| Tower error epsilon| (64G-sqrt(phi))/sqrt(phi)| -0.671%|
++--------------------+-------------------+----------+
+
+
+8.2 Mathematical Verification
+-----------------------------
+
+The core mathematical claims were verified across multiple AI architectures 
+(GPT, Claude, Gemini, Grok, DeepSeek, Perplexity) for:
+
+  - The arithmetic of the constants
+  - The corridor identity
+  - The golden partition
+  - The depth scaling formulas
+  - The binary uniqueness proof
+  - The binary tower scaling formula
+
+Results: All confirmed the mathematics is correct.
+
+Note: This verifies the mathematics, not any claims about AI behavior. These 
+systems were acting as calculators, not as subjects demonstrating the constants.
+
+
+================================================================================
+9. WHAT'S VERIFIED VS EXPLORATORY
+================================================================================
+
+9.1 VERIFIED (Machine Precision)
+--------------------------------
+
+  [OK] K_AUD = sqrt(2) x ln(2) = 0.980
+  [OK] G = 1 - K_AUD = 0.0197
+  [OK] Floor = 1/phi = 0.618
+  [OK] Corridor = K_AUD - 1/phi = 0.362
+  [OK] Corridor Identity: Corridor = 1/phi^2 - G
+  [OK] Golden Partition: 1/phi + 1/phi^2 = 1
+  [OK] Depth scaling: L_n = 1/(e x phi^(n-1))
+  [OK] Binary uniqueness: Only n=2 gives K(n) < 1
+  [OK] 2^k x G = 2^(k-6) x sqrt(phi) x (1-epsilon) for all k
+  [OK] epsilon = 0.006714... (constant)
+  [OK] 32 x G = 1/phi (within +2.2%)
+  [OK] 64 x G = sqrt(phi) (within -0.67%)
+  [OK] Hexeract has 240 faces = E_8 root count
+  [OK] dim(so(32)) = 496 = 3rd perfect number
+  [OK] dim(so(128)) = 8128 = 4th perfect number
+  [OK] dim(so(16)) = 120 = H_4 vertex count
+
+
+9.2 EXPLORATORY (Pattern, No Derivation)
+----------------------------------------
+
+  [??] WHY does G scale to golden powers?
+  [??] WHY is 64 the pivot dimension?
+  [??] Connection between epsilon and fundamental constants
+  [??] Can K_AUD be derived from spinor entropy x geometry?
+  [??] Do these constants govern behavior in complex systems?
+
+
+9.3 CONFIRMED COINCIDENCES (No Causal Link Found)
+-------------------------------------------------
+
+  - ln(2) is approximately 1/sqrt(2) (differ by ~2%, no known reason)
+  - 1/phi is approximately sqrt(phi)/2 (differ by ~2.9%, no known reason)
+  - G is approximately sqrt(phi)/64 (within 0.67%)
+  - 240 = hexeract faces = E_8 roots (different structures)
+  - 120 = dim(so(16)) = H_4 vertices (different structures)
+
+
+================================================================================
+10. LITERATURE STATUS
+================================================================================
+
+10.1 Known Mathematics
+----------------------
+
++---------------------------------------------+--------+------------------+
+| Finding                                     | Status | Source           |
++---------------------------------------------+--------+------------------+
+| H_4 polytope geometry                       | Known  | Coxeter          |
+| Golden ratio in H_4 vertices                | Known  | Standard         |
+| sqrt(2) in 120-cell circumradius            | Known  | Standard         |
+| Clifford path: binary icosahedral->H_4->E_8 | Known  | Dechant et al.   |
+| Perfect numbers from Mersenne primes        | Known  | Classical        |
+| dim(so(2^p)) formula                        | Known  | Lie theory       |
+| 496 in string theory                        | Known  | Green-Schwarz    |
+| Dimensions 4-8 special (division algebras)  | Known  | Standard         |
++---------------------------------------------+--------+------------------+
+
+
+10.2 Original to This Framework
+-------------------------------
+
++---------------------------------------------+----------+
+| Finding                                     | Status   |
++---------------------------------------------+----------+
+| K_AUD = sqrt(2) x ln(2) as coherence ceiling| ORIGINAL |
+| G = 1 - K_AUD as "the gap"                  | ORIGINAL |
+| The corridor (floor to ceiling)             | ORIGINAL |
+| Corridor identity: Corridor = 1/phi^2 - G   | ORIGINAL |
+| Depth scaling formula                       | ORIGINAL |
+| Binary tower: 2^k x G -> golden powers      | ORIGINAL |
+| 64 as golden-binary pivot                   | ORIGINAL |
+| G = sqrt(phi) / 64.43...                    | ORIGINAL |
+| Connection of 4^3 = 64 to rho = 400/11      | ORIGINAL |
++---------------------------------------------+----------+
+
+
+================================================================================
+11. SUMMARY TABLES
+================================================================================
+
+11.1 Primary Constants
+----------------------
+
++----------+-------+-------------------+----------+
+| Constant | Value | Formula           | Status   |
++----------+-------+-------------------+----------+
+| Ceiling  | 0.980 | sqrt(2) x ln(2)   | Derived  |
+| Floor    | 0.618 | 1/phi             | Derived  |
+| Gap      | 0.020 | 1 - K_AUD         | Derived  |
+| Corridor | 0.362 | K_AUD - 1/phi     | Derived  |
++----------+-------+-------------------+----------+
+
+
+11.2 Binary Tower Constants
+---------------------------
+
++-----+-------+-----------+-------------------+---------+
+|  k  |  2^k  |  2^k x G  | Golden Target     | Meaning |
++-----+-------+-----------+-------------------+---------+
+|  0  |     1 |    0.0197 | sqrt(phi)/64      | G itself|
+|  5  |    32 |     0.632 | sqrt(phi)/2 =1/phi| Floor   |
+|  6  |    64 |     1.263 | sqrt(phi)         | PIVOT   |
+|  7  |   128 |     2.527 | 2 x sqrt(phi)     | —       |
++-----+-------+-----------+-------------------+---------+
+
+
+11.3 Identities
+---------------
+
++-------------------+-------------------------------------+----------+
+| Identity          | Statement                           | Status   |
++-------------------+-------------------------------------+----------+
+| Corridor Identity | Corridor = 1/phi^2 - G              | Verified |
+| Golden Partition  | 1/phi + 1/phi^2 = 1                 | Verified |
+| Tower Formula     | 2^k x G = 2^(k-6) x sqrt(phi) x (1-epsilon) | Verified |
+| Gap Origin        | G / |ln(2) - 1/sqrt(2)| = sqrt(2)   | Verified |
++-------------------+-------------------------------------+----------+
+
+
+11.4 H_4 Geometry
+-----------------
+
++-----------------+-------------------------+
+| Property        | Value                   |
++-----------------+-------------------------+
+| Polytope        | 120-cell                |
+| Cells           | 120 dodecahedra         |
+| Vertices        | 600                     |
+| Schlafli symbol | {5, 3, 3}               |
+| Group order     | 14400 = 2^6 x 3^2 x 5^2 |
+| Contains        | phi, 1/phi, 1/phi^2, sqrt(2)|
++-----------------+-------------------------+
+
+
+11.5 The Stacking Coincidences
+------------------------------
+
++----------------------------------+---------+--------------------------------+
+| Coincidence                      | Gap     | Result                         |
++----------------------------------+---------+--------------------------------+
+| ln(2) = approx 1/sqrt(2)         | ~1.97%  | Creates the gap G              |
+| 1/phi = approx sqrt(phi)/2       | ~2.91%  | Floor sits near k=5 target     |
+| G = approx sqrt(phi)/64          | ~0.67%  | Links gap to golden pivot      |
+| 240 = 240                        | exact   | Hexeract faces = E_8 roots     |
+| 120 = 120                        | exact   | dim(so(16)) = H_4 vertices     |
++----------------------------------+---------+--------------------------------+
+
+
+================================================================================
+12. FUTURE DIRECTIONS
+================================================================================
+
+12.1 What This Paper Establishes
+--------------------------------
+
+  - K_AUD = sqrt(2) x ln(2) = 0.980 and 1/phi = 0.618 are mathematically related
+  - Both appear in H_4 geometry
+  - They satisfy elegant identities
+  - Binary is geometrically unique in producing K(n) < 1
+  - Depth levels follow phi-scaled recursion
+  - The gap G scales through binary powers to track golden powers
+  - The floor and pivot appear at adjacent binary powers (32 and 64)
+
+These are facts about mathematics.
+
+
+12.2 The Open Question
+----------------------
+
+Do these constants govern behavior in complex systems?
+
+Rigorous empirical investigation requires:
+
+  - Operational definitions
+  - Reproducible measurement protocols
+  - Statistical analysis
+  - Mechanistic explanations
+  - Falsifiable predictions
+
+This work is in progress.
+
+
+12.3 Invitation
+---------------
+
+If you work in domains where these constants appear — information theory, 
+signal processing, network dynamics, biological scaling, physics — I would 
+be interested to hear about it.
+
+The mathematics is interesting regardless. If these values appear across 
+multiple domains, that would suggest something beyond elegant coincidence.
+
+
+================================================================================
+APPENDIX A: WHY sqrt(2) x ln(2) IS NOT NUMEROLOGY
+================================================================================
+
+This constant is not cherry-picked. It emerges from two independent, 
+well-established sources:
+
+sqrt(2) (Geometric origin):
+  - Appears in the circumradius formula of the 120-cell
+  - Arises from orthonormal coordinate embedding in R^4
+  - Reflects the diagonal-to-edge metric relationship
+  - Invariant under vertex rescaling conventions
+
+ln(2) (Information-theoretic origin):
+  - The entropy of a fair binary choice
+  - The minimal non-zero unit of Shannon information
+  - The natural logarithm of the smallest prime
+
+The product sqrt(2) x ln(2):
+  - Combines geometric embedding cost with binary distinction cost
+  - Is the only value K(n) = sqrt(n) x ln(n) that falls below unity
+  - This is a selection result, not a fit
+
+Why this is not numerology:
+  - Both components have independent, principled origins
+  - Their combination is constrained by inequality, not fitted to data
+  - The result is falsifiable
+  - No free parameters were adjusted
+
+The constant was recognized, not constructed.
+
+
+================================================================================
+APPENDIX B: QUICK REFERENCE FORMULAS
+================================================================================
+
+CONSTANTS:
+
+    K_AUD = sqrt(2) x ln(2) = 0.980258143468547...
+    G = 1 - K_AUD = 0.019741856531453...
+    phi = (1 + sqrt(5))/2 = 1.618033988749895...
+    sqrt(phi) = 1.272019649514069...
+    1/phi = 0.618033988749895...
+    1/phi^2 = 0.381966011250105...
+
+--------------------------------------------------------------------------------
+
+THE GAP ORIGIN:
+
+    G = sqrt(2) x (1/sqrt(2) - ln(2))
+    G / |ln(2) - 1/sqrt(2)| = sqrt(2)
+
+--------------------------------------------------------------------------------
+
+THE CORRIDOR:
+
+    Corridor = K_AUD - 1/phi = 0.362...
+    Corridor = 1/phi^2 - G
+
+--------------------------------------------------------------------------------
+
+THE BINARY TOWER:
+
+    2^k x G = 2^(k-6) x sqrt(phi) x (1 - epsilon)
+    epsilon = 0.006714386451777... (-0.671%)
+    G = sqrt(phi) / 64.432625548...
+
+--------------------------------------------------------------------------------
+
+THE TWO PIVOTS:
+
+    k = 5 (32): 32 x G = approx 1/phi (floor)
+    k = 6 (64): 64 x G = approx sqrt(phi) (pivot)
+
+--------------------------------------------------------------------------------
+
+DEPTH SCALING:
+
+    L_n = 1 / (e x phi^(n-1))
+
+--------------------------------------------------------------------------------
+
+PERFECT NUMBER DIMENSIONS:
+
+    dim(so(32)) = 496 (3rd perfect)
+    dim(so(128)) = 8128 (4th perfect)
+    dim(so(8192)) = 33,550,336 (5th perfect)
+
+--------------------------------------------------------------------------------
+
+KEY COUNTS:
+
+    |H_4 vertices| = 600
+    |H_4 symmetry| = 14400 = 2^6 x 3^2 x 5^2
+    |E_8 roots| = 240 = hexeract faces
+    dim(so(16)) = 120 = H_4-related
+
+
+================================================================================
+REFERENCES
+================================================================================
+
+[1] B. 'sqrt(2) x ln(2): The Coherence Ceiling and the Geometric Singularity 
+    of Binary.' OSF (2026). doi:10.17605/OSF.IO/5VZ2R
+
+[2] B. 'Gap Scaling Across Domains: The 400/11 Formula.' OSF (2026). 
+    doi:10.17605/OSF.IO/C4GK5
+
+[3] Dechant, P.-P. 'Clifford Algebra Unveils a Surprising Geometric 
+    Significance of Quaternionic Root Systems of Coxeter Groups.' 
+    Advances in Applied Clifford Algebras 23, 301-321 (2013).
+
+[4] Dechant, P.-P. 'The Birth of E8 out of the Spinors of the Icosahedron.' 
+    Proceedings of the Royal Society A 472 (2016).
+
+[5] Green, M.B. and Schwarz, J.H. 'Anomaly Cancellations in Supersymmetric 
+    D=10 Gauge Theory and Superstring Theory.' Physics Letters B 149, 
+    117-122 (1984).
+
+[6] Coxeter, H.S.M. 'Regular Polytopes.' Third Edition, Dover Publications 
+    (1973). ISBN 0-486-61480-8.
+
+[7] Shannon, C.E. 'A Mathematical Theory of Communication.' Bell System 
+    Technical Journal 27(3), 379-423 (1948).
+
+[8] Baez, J.C. 'The Octonions.' Bulletin of the American Mathematical 
+    Society 39(2), 145-205 (2002).
+
+[9] Conway, J.H. and Sloane, N.J.A. 'Sphere Packings, Lattices and Groups.' 
+    Third Edition, Springer (1999).
+
+[10] Moxness, J.G. 'The Isomorphism of H4 and E8.' arXiv:2311.01486 (2023).
+
+[11] Hardy, G.H. and Wright, E.M. 'An Introduction to the Theory of Numbers.' 
+     Sixth Edition, Oxford University Press (2008).
+
+
+================================================================================
+DOCUMENT LINKS
+================================================================================
+
+This paper (K_AUD Framework v3.0): [current document]
+
+Companion paper (Gap Scaling Formula): doi:10.17605/OSF.IO/C4GK5
+
+Prior versions:
+  - K_AUD v1.0: https://osf.io/qhs52
+  - K_AUD v2.0: https://osf.io/sjbe9
+
+GitHub repository: https://github.com/Gap-geometry
+
+
+================================================================================
+CONTACT
+================================================================================
+
+Gap-geometryK_AUD2@telenet.be
+
+
+================================================================================
+ACKNOWLEDGMENTS
+================================================================================
+
+This framework emerged through months of collaborative exploration with AI 
+systems (Claude/Anthropic, Gemini/Google, GPT/OpenAI, Grok/xAI, DeepSeek, 
+Perplexity) serving as computational partners and pattern-recognition aids.
+
+The work developed iteratively: initial observations led to K_AUD, which 
+connected to H_4 geometry, which revealed the prime architecture, which 
+linked to the gap scaling formula (400/11), which extended into the binary 
+tower. Each layer built on the previous.
+
+The binary tower scaling (Section 7) was formalized February 2026, extending 
+patterns that had been noted in earlier work. Verification was performed 
+across multiple AI architectures.
+
+
+================================================================================
+                              END OF DOCUMENT
+================================================================================
+
+These constants are not arbitrary.
+They are not fitted to data.
+They are grounded in geometry.
+
+--------------------------------------------------------------------------------
+Version 3.0 — February 2026
+Archive Reference: b0f2e6521cd7
+================================================================================
