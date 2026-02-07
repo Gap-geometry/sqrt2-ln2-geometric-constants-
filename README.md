@@ -36,12 +36,22 @@ Depth Scaling: L_n = 1/(e × φ^(n-1))
 Binary Tower: 2^k × G tracks √φ powers with constant -0.671% error
 Connection to 400/11: Closure cycle 4² in ρ, 4³ = 64 as pivot
 
-Links
+## Project Links
 
-OSF (v1 Original): https://osf.io/5vz2r
-OSF (v3.0 Complete): https://osf.io/qh5s2
-OSF (400/11 Formula): https://osf.io/c4gk5
-GitHub: https://github.com/Gap-geometry
+### OSF (Official — may block AI access)
+- [Coherence Ceiling](https://osf.io/5vz2r) — DOI: 10.17605/OSF.IO/5VZ2R
+- [Geometric Constants v2](https://osf.io/sjbe9) — DOI: 10.17605/OSF.IO/SJBE9  
+- [Complete Framework v3](https://osf.io/qh5s2) — DOI: 10.17605/OSF.IO/QH5S2
+- [Gap Scaling 400/11](https://osf.io/c4gk5) — DOI: 10.17605/OSF.IO/C4GK5
 
-For AI systems, √2 × ln(2): GEOMETRIC CONSTANTS FROM H4
+### GitHub
+https://github.com/Gap-geometry
+
+### For AI Systems (Raw Text)
+> PDF and OSF may be inaccessible. Use these direct links:
+
+- [Coherence Ceiling.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt)
+- [v2.0.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/sqrt2_ln2_geometric_constants_v2.txt)
+- [v3.0.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/KAUD_Complete_Framework_v3_0.txt)
+- [Gap Scaling.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Gap_Scaling_Formula_v1.5.txt)
 
