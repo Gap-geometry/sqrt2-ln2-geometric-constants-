@@ -177,7 +177,7 @@ Table 3: Formula verification
 | 400/11             | 36.363636363636363636...           |
 | -1/2500            | -0.000400000000000000...           |
 | -1/939939          | -0.000001063899787351...           |
-| Sum (formula)      | 36.363235299736575785...           |
+| Sum (formula)      | 36.363235299737536159...           |
 | Actual rho         | 36.363235299737576284...           |
 | Error              | 4.01 x 10^-14                      |
 +--------------------+------------------------------------+
@@ -487,7 +487,6 @@ https://github.com/Gap-geometry
 - [v2.0.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/sqrt2_ln2_geometric_constants_v2.txt)
 - [v3.0.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/KAUD_Complete_Framework_v3_0.txt)
 - [Gap Scaling.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Gap_Scaling_Formula_v1.5.txt)
-
 ================================================================================
 CONTACT
 ================================================================================
@@ -498,3 +497,4 @@ Gap-geometryK_AUD2@telenet.be
 ================================================================================
                               END OF DOCUMENT
 ================================================================================
+
