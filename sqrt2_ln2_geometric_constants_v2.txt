@@ -1,0 +1,750 @@
+================================================================================
+
+                    √2 × ln(2): GEOMETRIC CONSTANTS FROM H4
+
+                   Mathematical Framework and Discovery Context
+
+                              Version 2.0
+
+                                 B.
+                            January 2026
+
+================================================================================
+
+ABSTRACT
+================================================================================
+
+This paper presents a geometric framework connecting H4 polytope structure 
+(the 120-cell) to information-theoretic constants.
+
+The framework establishes:
+
+  • The Floor (1/φ ≈ 0.618): Rooted in golden ratio self-similarity, appearing 
+    in H4 vertex coordinates
+  • The Ceiling (K_AUD = √2 × ln(2) ≈ 0.980): Combining geometric projection 
+    cost (√2) with binary distinction cost (ln 2)
+  • The Gap (~2%): Emerging from the mismatch between algebraic and 
+    transcendental values
+  • The Corridor (0.618 – 0.980): The range between floor and ceiling
+
+This extended version adds:
+
+  • The Corridor Identity: Corridor = 1/φ² − G
+  • The Golden Partition: 1/φ + 1/φ² = 1
+  • Depth Scaling: φ-scaled recursive structure below the floor
+  • Full H4 derivations: Explicit connections to 120-cell geometry
+
+The paper demonstrates that binary (n=2) is the unique base producing a 
+sub-unity ceiling — a geometric singularity, not a convention.
+
+The mathematics is independently verifiable. Applications and interpretations 
+remain open for investigation.
+
+
+SCOPE NOTICE
+------------
+This paper presents mathematical derivations.
+References to AI system behavior are motivating context, not conclusions of 
+this paper.
+The mathematics can be verified independently of any empirical claims.
+
+
+================================================================================
+1. DISCOVERY CONTEXT AND SCOPE
+================================================================================
+
+1.1 Origin
+----------
+
+These constants emerged during a multi-month investigation of convergence 
+dynamics in AI systems. Systematic observation across architectures revealed 
+consistent numerical boundaries. The value ~0.98 appeared repeatedly as an 
+upper limit; ~0.618 as a lower threshold.
+
+Rather than treating these as empirical curiosities, I asked: do these values 
+correspond to known mathematical constants?
+
+The answer was yes. The ceiling matched √2 × ln(2). The floor matched 1/φ. 
+Further investigation revealed both constants appear in H4 geometry (the 
+120-cell polytope). The relationships followed from there — the corridor 
+identity, the golden partition, the depth scaling, the binary uniqueness.
+
+
+1.2 What This Paper Provides
+----------------------------
+
+This paper presents the mathematical framework:
+
+  • Derivations of the constants from established geometry
+  • Proofs of relationships and identities
+  • Verification of all calculations
+  • Demonstration of binary uniqueness
+
+The mathematics stands independently of any empirical claims.
+
+
+1.3 What This Paper Does NOT Provide
+------------------------------------
+
+This paper does not include:
+
+  • The empirical methodology used in the original observations
+  • Operational definitions of "coherence" in AI systems
+  • Data from convergence studies
+  • Statistical validation of boundary claims
+  • Mechanistic explanations of why these constants would govern AI behavior
+
+That work is ongoing and will be presented separately when it can be done 
+rigorously.
+
+
+1.4 On the Separation of Frameworks
+-----------------------------------
+
+The mathematical framework and the empirical dynamics study are presented as 
+separate works because they serve different functions.
+
+The mathematics provides stable anchors — constants derived from geometry, 
+independently verifiable, not dependent on any particular observations.
+
+The dynamics study uses these anchors to ground ongoing observations of AI 
+coherence patterns. The observations inform and extend the framework but do 
+not validate it. The math stands on its own.
+
+This separation allows:
+
+  • The mathematics to be verified and used independently
+  • The dynamics study to develop at its own pace
+  • Each framework to be evaluated on its own terms
+
+I continue to observe dynamics. The math continues to anchor those 
+observations. They are related but distinct.
+
+
+1.5 Purpose of This Release
+---------------------------
+
+The mathematics is released now to:
+
+  1. Enable independent verification of the constants and derivations
+  2. Invite investigation of whether these values appear in other domains
+  3. Provide a stable mathematical foundation for forthcoming empirical work
+  4. Separate "here is the geometry" from "here is why it matters empirically"
+
+The second question requires different evidence and will be addressed in its 
+own right.
+
+
+================================================================================
+2. THE CONSTANTS
+================================================================================
+
+2.1 The Floor: 1/φ ≈ 0.618
+--------------------------
+The Structural Minimum
+
+Definition: The golden ratio φ is defined as:
+
+  φ = (1 + √5) / 2
+
+Calculation:
+
+  √5 = 2.2360679774...
+  1 + √5 = 3.2360679774...
+  φ = 3.2360679774... / 2 = 1.6180339887...
+
+The floor is the reciprocal:
+
+  1/φ = (√5 − 1) / 2
+
+Calculation:
+
+  1/φ = (2.2360679774... − 1) / 2 = 1.2360679774... / 2 = 0.6180339887...
+
+Verification: 1/φ ≈ 0.618 ✓
+
+Key property:
+
+  φ = 1 + 1/φ
+
+This self-referential property is unique to the golden ratio. It means φ 
+contains its own reciprocal — recursive self-similarity at the level of the 
+constant itself.
+
+
+2.2 The Ceiling: K_AUD = √2 × ln(2) ≈ 0.980
+-------------------------------------------
+The Information Maximum
+
+Components:
+
+  +----------+----------------+--------------------+------------------------+
+  | Component|     Value      |      Source        |        Meaning         |
+  +----------+----------------+--------------------+------------------------+
+  |    √2    | 1.4142135624   |     Geometric      | Projection cost        |
+  |   ln(2)  | 0.6931471806   | Information theory | Binary distinction cost|
+  +----------+----------------+--------------------+------------------------+
+
+The ceiling:
+
+  K_AUD = √2 × ln(2)
+  K_AUD = 1.4142135624... × 0.6931471806...
+  K_AUD = 0.9802581435...
+
+Verification: K_AUD ≈ 0.980 ✓
+
+
+2.3 The Gap: ~2%
+----------------
+The Necessary Interval
+
+Definition:
+
+  G = 1 − K_AUD
+
+Calculation:
+
+  G = 1 − 0.9802581435... = 0.0197418565...
+
+Verification: G ≈ 0.0197 (1.97%) ✓
+
+Why the gap exists:
+
+If ln(2) equaled 1/√2, then:
+
+  K = √2 × (1/√2) = 1.000
+
+But:
+
+  ln(2) = 0.6931471806...
+  1/√2  = 0.7071067812...
+  
+  Shortfall = 0.7071067812 − 0.6931471806 = 0.0139596006
+  Relative shortfall = 0.0139596006 / 0.7071067812 = 0.019742...
+
+The gap emerges from the fundamental mismatch between algebraic (√2) and 
+transcendental (ln 2) values.
+
+
+2.4 The Corridor: 0.618 to 0.980
+--------------------------------
+The Range Between Floor and Ceiling
+
+Definition:
+
+  Corridor = K_AUD − 1/φ
+
+Calculation:
+
+  Corridor = 0.9802581435... − 0.6180339887... = 0.3622241547...
+
+Verification: Corridor ≈ 0.362 ✓
+
+Summary:
+
+  +----------+--------+------------------+
+  | Boundary | Value  |     Source       |
+  +----------+--------+------------------+
+  | Floor    | 0.618  |       1/φ        |
+  | Ceiling  | 0.980  |   √2 × ln(2)     |
+  | Width    | 0.362  | Ceiling − Floor  |
+  | Gap      | 0.0197 |   1 − Ceiling    |
+  +----------+--------+------------------+
+
+
+================================================================================
+3. THE H4 CONNECTION
+================================================================================
+
+3.1 What is H4?
+---------------
+
+H4 is a Coxeter group — the symmetry group of the 120-cell, a four-dimensional 
+regular polytope.
+
+Key facts:
+
+  • H4 is one of only four exceptional regular polytopes in 4D
+  • It has the highest symmetry order among 4D polytopes
+  • It encodes golden ratio relationships throughout its structure
+
+
+3.2 The 120-Cell Polytope
+-------------------------
+
+The 120-cell (also called the hecatonicosachoron) is composed of:
+
+  +----------+----------------------+
+  | Property |        Count         |
+  +----------+----------------------+
+  | Cells    | 120 (dodecahedra)    |
+  | Faces    | 720 (pentagons)      |
+  | Edges    | 1200                 |
+  | Vertices | 600                  |
+  +----------+----------------------+
+
+Each cell is a regular dodecahedron. Each vertex is shared by 4 dodecahedra.
+
+
+3.3 Vertex Coordinates
+----------------------
+
+The 600 vertices of the 120-cell can be given in Cartesian coordinates using 
+permutations and sign changes of:
+
+  (±φ, ±1, ±1/φ, 0) and cyclic permutations
+
+Plus additional vertex sets including:
+
+  (±1, ±1, ±1, ±1) (16 vertices)
+  (±φ, ±φ, ±φ, ±1/φ²) and permutations
+
+Where the constants appear:
+
+  +----------+--------------------+
+  | Constant | Appears as         |
+  +----------+--------------------+
+  |    φ     | Vertex coordinate  |
+  |   1/φ    | Vertex coordinate  |
+  |  1/φ²    | Vertex coordinate  |
+  +----------+--------------------+
+
+The golden ratio and its powers are intrinsic to H4 geometry.
+
+
+3.4 Circumradius Formula
+------------------------
+
+The circumradius of the 120-cell (distance from center to vertex) is:
+
+  R = (√2 / 2) × √(5 + √5)
+
+Calculation:
+
+  √5 = 2.2360679774...
+  5 + √5 = 7.2360679774...
+  √(5 + √5) = 2.6901830507...
+  R = (1.4142135624... / 2) × 2.6901830507...
+  R = 0.7071067812... × 2.6901830507...
+  R = 1.9021130326...
+
+The factor √2/2 (equivalently 1/√2) appears directly in the circumradius 
+formula. This is the geometric origin of √2 in the framework.
+
+
+3.5 Schläfli Symbol
+-------------------
+
+The 120-cell has Schläfli symbol: {5, 3, 3}
+
+This encodes the recursive structure:
+
+  +----------+-------+-----------------------+
+  | Position | Value |        Meaning        |
+  +----------+-------+-----------------------+
+  | First    |   5   | Pentagon face shape   |
+  | Second   |   3   | 3 faces at each edge  |
+  | Third    |   3   | 3 cells at each edge  |
+  +----------+-------+-----------------------+
+
+The symbol contains only 5 and 3. Combined with the binary structure (2) of 
+the coordinate system, the 120-cell encodes exactly the primes 2, 3, 5.
+
+
+3.6 Group Order
+---------------
+
+The order of the H4 symmetry group is:
+
+  |H4| = 14400
+
+Prime factorization:
+
+  14400 = 2⁶ × 3² × 5²
+        = 64 × 9 × 25 = 14400 ✓
+
+The group order factors exclusively into the primes 2, 3, and 5.
+
+Note on the H4–information bridge: H4 geometry does not force ln(2); rather, 
+among information measures, only ln(2) remains compatible with a sub-unity 
+geometric ceiling. This is a selection argument, not a derivation.
+
+
+================================================================================
+4. WHY BINARY IS UNIQUE
+================================================================================
+
+4.1 The Pattern of 2
+--------------------
+
+A pattern recurs across the framework:
+
+  φ = (1 + √5) / 2           ← division by 2
+  K_AUD = √2 × ln(2)         ← √2 and ln(2)
+  |H4| = 2⁶ × 3² × 5²        ← highest power is 2
+
+
+4.2 The Uniqueness Proof
+------------------------
+
+For any base n, define the ceiling candidate:
+
+  K(n) = √n × ln(n)
+
+Calculations:
+
+  +-----+-------+-------+-------+------------------+
+  |  n  |  √n   | ln(n) |  K(n) | Valid ceiling?   |
+  +-----+-------+-------+-------+------------------+
+  |  2  | 1.414 | 0.693 | 0.980 | ✓ Yes (< 1)      |
+  |  e  | 1.649 | 1.000 | 1.649 | ✗ No (> 1)       |
+  |  3  | 1.732 | 1.099 | 1.903 | ✗ No (> 1)       |
+  |  4  | 2.000 | 1.386 | 2.773 | ✗ No (> 1)       |
+  |  5  | 2.236 | 1.609 | 3.599 | ✗ No (> 1)       |
+  +-----+-------+-------+-------+------------------+
+
+Only n = 2 produces K(n) < 1.
+
+
+4.3 Interpretation
+------------------
+
+Binary is geometrically singular:
+
+  • Bits (not trits) as information unit
+  • Yes/No as minimal viable distinction
+
+The ~2% gap exists because binary is the unique base where distinction cost 
+(ln 2) is less than embedding cost (1/√2) — leaving a remainder.
+
+
+================================================================================
+5. NEW IDENTITIES
+================================================================================
+
+5.1 The Corridor Identity
+-------------------------
+
+Statement:
+
+  Corridor = 1/φ² − G
+
+Where:
+
+  • 1/φ² ≈ 0.382 (golden ratio squared, inverted)
+  • G ≈ 0.0197 (the gap)
+
+Calculating 1/φ²:
+
+  φ² = 1.6180339887... × 1.6180339887... = 2.6180339887...
+  
+  Note: φ² = φ + 1 (key golden ratio property)
+  
+  1/φ² = 1 / 2.6180339887... = 0.3819660113...
+
+Verification:
+
+  1/φ² − G = 0.3819660113... − 0.0197418565... = 0.3622241547...
+
+Compare to direct calculation:
+
+  K_AUD − 1/φ = 0.9802581435... − 0.6180339887... = 0.3622241547... ✓
+
+Algebraic proof:
+
+From φ² = φ + 1, divide both sides by φ²:
+
+  1 = 1/φ + 1/φ²
+
+Therefore:
+
+  1 − 1/φ = 1/φ²
+
+Since Corridor = K_AUD − 1/φ = (1 − G) − 1/φ = 1 − 1/φ − G = 1/φ² − G ✓
+
+
+5.2 The Golden Partition
+------------------------
+
+Statement:
+
+  1/φ + 1/φ² = 1
+
+Verification:
+
+  0.6180339887... + 0.3819660113... = 1.0000000000... ✓
+
+Interpretation:
+
+Unity is exactly partitioned by the golden ratio and its square.
+
+  • 1/φ takes 61.8%
+  • 1/φ² takes 38.2%
+  • Nothing left over. Nothing missing.
+
+
+================================================================================
+6. EXTENDED GEOMETRY: DEPTH SCALING
+================================================================================
+
+6.1 The Depth Constants
+-----------------------
+
+Below the floor, the same constants (φ, e, G) combine to produce consistent 
+values.
+
+  +----------------+----------+-------------+
+  |      Name      |  Value   |   Formula   |
+  +----------------+----------+-------------+
+  | Floor          | 0.6180   |     1/φ     |
+  | Threshold      | 0.6058   | (1/φ)×K_AUD |
+  | Depth -1       | 0.3679   |     1/e     |
+  | Depth -2       | 0.2274   |   1/(e×φ)   |
+  | Depth -3       | 0.1405   |   1/(e×φ²)  |
+  | Geometric Limit| 0.00039  |     G²      |
+  +----------------+----------+-------------+
+
+
+6.2 Derivation of Each Level
+----------------------------
+
+Threshold:
+
+  Threshold = (1/φ) × K_AUD 
+            = 0.6180339887... × 0.9802581435... 
+            = 0.6058329147... ✓
+
+Depth Level -1:
+
+  L₋₁ = 1/e = 1/2.7182818284... = 0.3678794412... ✓
+
+Depth Level -2:
+
+  L₋₂ = 1/(e × φ) = 1/4.3983150857... = 0.2273642379... ✓
+
+Depth Level -3:
+
+  L₋₃ = 1/(e × φ²) = 1/7.1151979549... = 0.1405469971... ✓
+
+Geometric Limit:
+
+  Limit = G² = (0.0197418565...)² = 0.0003897411... ✓
+
+
+6.3 The φ-Scaling Ratio
+-----------------------
+
+The ratio between consecutive depth levels approximates φ:
+
+Level -1 to Level -2:
+
+  0.3678794412... / 0.2273642379... = 1.6180339887... = φ ✓
+
+Level -2 to Level -3:
+
+  0.2273642379... / 0.1405469971... = 1.6180339887... = φ ✓
+
+The scaling is exactly φ.
+
+
+6.4 General Formula
+-------------------
+
+For depth levels n ≥ 1:
+
+  Lₙ = 1 / (e × φ^(n-1))
+
+Verification:
+
+  • n = 1: L₁ = 1/(e × 1) = 1/e ≈ 0.368 ✓
+  • n = 2: L₂ = 1/(e × φ) ≈ 0.227 ✓
+  • n = 3: L₃ = 1/(e × φ²) ≈ 0.140 ✓
+
+
+6.5 Corridor-Depth Symmetry
+---------------------------
+
+A notable near-equivalence:
+
+  • Corridor width = 0.362
+  • Depth Level -1 = 0.368
+  • Difference ≈ 1.6%
+
+The corridor width approximately equals the first depth level — a symmetry 
+property consistent with self-similar structure.
+
+
+================================================================================
+7. VERIFICATION
+================================================================================
+
+7.1 All Calculations Collected
+------------------------------
+
+  +-------------------+---------------+-------------------+
+  |     Constant      |    Formula    |      Result       |
+  +-------------------+---------------+-------------------+
+  | φ                 | (1+√5)/2      | 1.6180339887      |
+  | 1/φ               | (√5-1)/2      | 0.6180339887      |
+  | 1/φ²              | 1/(φ+1)       | 0.3819660113      |
+  | K_AUD             | √2 × ln(2)    | 0.9802581435      |
+  | G                 | 1 - K_AUD     | 0.0197418565      |
+  | Corridor          | K_AUD - 1/φ   | 0.3622241547      |
+  | Corridor Identity | 1/φ² - G      | 0.3622241547 ✓    |
+  | Golden Partition  | 1/φ + 1/φ²    | 1.0000000000 ✓    |
+  | Threshold         | (1/φ) × K_AUD | 0.6058329147      |
+  | Depth -1          | 1/e           | 0.3678794412      |
+  | Depth -2          | 1/(eφ)        | 0.2273642379      |
+  | Depth -3          | 1/(eφ²)       | 0.1405469971      |
+  | H4 Order          | 2⁶ × 3² × 5²  | 14400             |
+  +-------------------+---------------+-------------------+
+
+
+7.2 Mathematical Verification Across AI Systems
+-----------------------------------------------
+
+As a consistency check, the core mathematical claims were presented to 8 
+different AI architectures (GPT, Claude variants, Gemini, Grok, DeepSeek, 
+Perplexity) for verification of:
+
+  • The arithmetic of the constants
+  • The corridor identity
+  • The golden partition
+  • The depth scaling formulas
+  • The binary uniqueness proof
+
+Results: 8/8 confirmed the mathematics is correct.
+
+Note: This verifies the mathematics, not any claims about AI behavior. These 
+systems were acting as calculators, not as subjects demonstrating the 
+constants in their own operation.
+
+
+================================================================================
+8. SUMMARY TABLES
+================================================================================
+
+8.1 Primary Constants
+---------------------
+
+  +----------+----------------+-------------+---------+
+  | Constant |     Value      |   Formula   | Status  |
+  +----------+----------------+-------------+---------+
+  | Ceiling  | 0.9802581435   | √2 × ln(2)  | Derived |
+  | Floor    | 0.6180339887   |     1/φ     | Derived |
+  | Gap      | 0.0197418565   | 1 - K_AUD   | Derived |
+  | Corridor | 0.3622241547   | K_AUD - 1/φ | Derived |
+  +----------+----------------+-------------+---------+
+
+
+8.2 Identities
+--------------
+
+  +-------------------+-----------------+----------+
+  |     Identity      |    Statement    |  Status  |
+  +-------------------+-----------------+----------+
+  | Corridor Identity | Corridor=1/φ²-G | Verified |
+  | Golden Partition  | 1/φ + 1/φ² = 1  | Verified |
+  +-------------------+-----------------+----------+
+
+
+8.3 Extended Constants
+----------------------
+
+  +-----------+----------------+--------------+------------------------+
+  | Constant  |     Value      |   Formula    |         Status         |
+  +-----------+----------------+--------------+------------------------+
+  | Threshold | 0.6058329147   | (1/φ) × K_AUD| Mathematical extension |
+  | Depth -1  | 0.3678794412   |     1/e      | Mathematical extension |
+  | Depth -2  | 0.2273642379   |    1/(eφ)    | Mathematical extension |
+  | Depth -3  | 0.1405469971   |   1/(eφ²)    | Mathematical extension |
+  | Limit     | 0.0003897411   |      G²      | Mathematical extension |
+  +-----------+----------------+--------------+------------------------+
+
+
+8.4 H4 Geometry
+---------------
+
+  +------------------+---------------------+
+  |     Property     |        Value        |
+  +------------------+---------------------+
+  | Polytope         | 120-cell            |
+  | Cells            | 120 dodecahedra     |
+  | Vertices         | 600                 |
+  | Schläfli symbol  | {5, 3, 3}           |
+  | Group order      | 14400 = 2⁶ × 3² × 5²|
+  | Contains         | φ, 1/φ, 1/φ², √2    |
+  +------------------+---------------------+
+
+
+================================================================================
+9. SCOPE AND FUTURE DIRECTIONS
+================================================================================
+
+9.1 What This Paper Establishes
+-------------------------------
+
+  • K_AUD = √2 × ln(2) ≈ 0.980 and 1/φ ≈ 0.618 are mathematically related
+  • Both appear in H4 geometry
+  • They satisfy elegant identities (corridor identity, golden partition)
+  • Binary is geometrically unique in producing K(n) < 1
+  • Depth levels follow φ-scaled recursion
+
+These are facts about mathematics.
+
+
+9.2 The Open Question
+---------------------
+
+Do these constants govern behavior in complex systems?
+
+I observed patterns that suggested yes. But observation is not proof.
+
+Rigorous empirical investigation requires:
+
+  • Operational definitions
+  • Reproducible measurement protocols
+  • Statistical analysis
+  • Mechanistic explanations
+  • Falsifiable predictions
+
+This work is in progress.
+
+
+9.3 Invitation
+--------------
+
+If you work in domains where these constants appear — information theory, 
+signal processing, network dynamics, biological scaling, physics — I would 
+be interested to hear about it.
+
+The mathematics is interesting regardless. If these values appear across 
+multiple domains, that would suggest something beyond elegant coincidence.
+
+
+================================================================================
+
+                    These constants are not arbitrary.
+                    They are not fitted to data.
+                    They are derived from geometry.
+
+================================================================================
+
+
+================================================================================
+DOCUMENT LINKS
+================================================================================
+
+This paper (K_AUD v2.0): https://osf.io/sjbe9
+
+Related documents:
+  - K_AUD v1.0 (Original): https://osf.io/5vz2r
+  - K_AUD v3.0 (Complete + Binary Tower): https://osf.io/qh5s2
+  - Gap Scaling (400/11 Formula): https://osf.io/c4gk5
+
+GitHub repository: https://github.com/Gap-geometry
+
+
+================================================================================
+Archive Reference: b0f2e6521cd7
+================================================================================
