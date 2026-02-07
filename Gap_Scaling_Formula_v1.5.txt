@@ -469,7 +469,7 @@ print("All factorizations verified.")
 DOCUMENT LINKS
 ================================================================================
 
-Prior work (K_AUD framework): https://osf.io/qhs52
+Prior work 
 GitHub repository: https://github.com/Gap-geometry
 
 
