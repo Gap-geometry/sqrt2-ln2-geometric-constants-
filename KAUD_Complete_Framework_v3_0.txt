@@ -342,9 +342,9 @@ Calculation:
 
     sqrt(5) = 2.2360679...
     5 + sqrt(5) = 7.2360679...
-    sqrt(5 + sqrt(5)) = 2.6901830...
-    R = (1.41421356... / 2) x 2.6901830...
-    R = 0.70710678... x 2.6901830...
+    sqrt(5 + sqrt(5)) = 2.6899940...
+    R = (1.41421356... / 2) x 2.6899940...
+    R = 0.70710678... x 2.6899940...
     R = 1.9021130...
 
 The factor sqrt(2)/2 (equivalently 1/sqrt(2)) appears directly in the 
@@ -528,7 +528,7 @@ values.
 
 Threshold:
 
-    Threshold = (1/phi) x K_AUD = 0.6180339... x 0.9802581... = 0.6058329...  [OK]
+    Threshold = (1/phi) x K_AUD = 0.6180339... x 0.9802581... = 0.6058328...  [OK]
 
 Depth Level -1:
 
@@ -536,11 +536,11 @@ Depth Level -1:
 
 Depth Level -2:
 
-    L_(-2) = 1/(e x phi) = 1/4.3983150... = 0.2273642...  [OK]
+    L_(-2) = 1/(e x phi) = 1/4.3982723... = 0.2273619...  [OK]
 
 Depth Level -3:
 
-    L_(-3) = 1/(e x phi^2) = 1/7.1151979... = 0.1405469...  [OK]
+    L_(-3) = 1/(e x phi^2) = 1/7.1165542... = 0.1405174...  [OK]
 
 Geometric Limit:
 
@@ -1276,3 +1276,4 @@ They are grounded in geometry.
 Version 3.0 — February 2026
 Archive Reference: b0f2e6521cd7
 ================================================================================
+
