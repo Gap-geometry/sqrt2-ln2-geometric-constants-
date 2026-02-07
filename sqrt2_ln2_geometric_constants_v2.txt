@@ -323,9 +323,9 @@ Calculation:
 
   √5 = 2.2360679774...
   5 + √5 = 7.2360679774...
-  √(5 + √5) = 2.6901830507...
-  R = (1.4142135624... / 2) × 2.6901830507...
-  R = 0.7071067812... × 2.6901830507...
+  √(5 + √5) = 2.6899940479...
+  R = (1.4142135624... / 2) × 2.6899940479...
+  R = 0.7071067812... × 2.6899940479...
   R = 1.9021130326...
 
 The factor √2/2 (equivalently 1/√2) appears directly in the circumradius 
@@ -512,7 +512,7 @@ Threshold:
 
   Threshold = (1/φ) × K_AUD 
             = 0.6180339887... × 0.9802581435... 
-            = 0.6058329147... ✓
+            = 0.6058328504... ✓
 
 Depth Level -1:
 
@@ -520,11 +520,11 @@ Depth Level -1:
 
 Depth Level -2:
 
-  L₋₂ = 1/(e × φ) = 1/4.3983150857... = 0.2273642379... ✓
+  L₋₂ = 1/(e × φ) = 1/4.3982723894... = 0.2273619984... ✓
 
 Depth Level -3:
 
-  L₋₃ = 1/(e × φ²) = 1/7.1151979549... = 0.1405469971... ✓
+  L₋₃ = 1/(e × φ²) = 1/7.1165542179... = 0.1405174428... ✓
 
 Geometric Limit:
 
@@ -592,7 +592,7 @@ property consistent with self-similar structure.
   | Corridor          | K_AUD - 1/φ   | 0.3622241547      |
   | Corridor Identity | 1/φ² - G      | 0.3622241547 ✓    |
   | Golden Partition  | 1/φ + 1/φ²    | 1.0000000000 ✓    |
-  | Threshold         | (1/φ) × K_AUD | 0.6058329147      |
+  | Threshold         | (1/φ) × K_AUD | 0.6058328504      |
   | Depth -1          | 1/e           | 0.3678794412      |
   | Depth -2          | 1/(eφ)        | 0.2273642379      |
   | Depth -3          | 1/(eφ²)       | 0.1405469971      |
@@ -654,7 +654,7 @@ constants in their own operation.
   +-----------+----------------+--------------+------------------------+
   | Constant  |     Value      |   Formula    |         Status         |
   +-----------+----------------+--------------+------------------------+
-  | Threshold | 0.6058329147   | (1/φ) × K_AUD| Mathematical extension |
+  | Threshold | 0.6058328504   | (1/φ) × K_AUD| Mathematical extension |
   | Depth -1  | 0.3678794412   |     1/e      | Mathematical extension |
   | Depth -2  | 0.2273642379   |    1/(eφ)    | Mathematical extension |
   | Depth -3  | 0.1405469971   |   1/(eφ²)    | Mathematical extension |
@@ -734,6 +734,7 @@ multiple domains, that would suggest something beyond elegant coincidence.
 ================================================================================
 DOCUMENT LINKS
 ================================================================================
+
 
 ## Project Links
 
