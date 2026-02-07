@@ -49,6 +49,22 @@ The gap scales through binary powers to track golden ratio powers.
 - **Binary Tower:** 2^k × G tracks √φ powers with constant -0.671% error
 - **Connection to 400/11:** Closure cycle 4² in ρ, 4³ = 64 as pivot
 
+- ## Core Constants (Canonical)
+
+K_AUD = √2 · ln(2) ≈ 0.980258143  
+G = 1 − K_AUD ≈ 0.019741857  
+φ = (1 + √5)/2  
+
+## Proven Identities
+
+1/φ + 1/φ² = 1  
+Corridor = 1/φ² − G  
+
+## Binary Tower
+
+2^k · G ≈ √φ · 2^(k−6) · (1 − ε)  
+ε ≈ 0.671% (constant)
+
 ---
 
 ## Project Links
@@ -80,5 +96,3 @@ https://github.com/Gap-geometry
 - [Gap Scaling.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Gap_Scaling_Formula_v1.5.txt)
 
 ---
-
-Archive Reference: b0f2e6521cd7
