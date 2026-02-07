@@ -1,4 +1,4 @@
-# √2 × ln(2): Geometric Constants from H₄ — **VERSION 3.0 (February 2026)** 🚀
+# √2 × ln(2): Geometric Constants from H₄ (February 2026)** 🚀
 
 **This is the complete current framework**, including the new **Binary Tower** extension.
 **Key New in v3.0**: Binary Tower scaling (2^k × G → golden powers with constant ε ≈ 0.671%), pivot at 64 = √φ, floor at 32×G ≈ 1/φ.
