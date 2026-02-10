@@ -1,6 +1,6 @@
 ================================================================================
 sqrt(2) x ln(2): GEOMETRIC CONSTANTS FROM H_4
-Complete Framework — Version 3.0
+Complete Framework — Version 3.1
 ================================================================================
 
 B. | February 2026
@@ -10,8 +10,12 @@ TEXT FORMAT NOTE: This document contains the complete K_AUD framework including
 the Binary Tower extension formalized February 2026, building on prior work 
 establishing H_4 geometry, gap ratios, and prime architecture.
 
-Version 3.0 adds: The 64-36-100 Closure Relation, the Irreducibility of epsilon,
+Version 3.0 added: The 64-36-100 Closure Relation, the Irreducibility of epsilon,
 and clarifications on why the gap is constitutive rather than accidental.
+
+Version 3.1 adds: The Gelfond-Schneider rewrite G = ln(e/2^sqrt(2)), the Baker's 
+map identity K_AUD = ||(ln 2, ln 2)||_2, universality of G, and new independent 
+constructions discovered through cross-verification with fresh AI instances.
 
 ================================================================================
 ABSTRACT
@@ -40,6 +44,10 @@ Version 3.0 extends the framework with:
   - The 64-36-100 Closure Relation: How binary pivot and recursive closure sum
   - The Irreducibility of epsilon: Proof that the error cannot be eliminated
   - The gap as constitutive: Not error, but the cost of distinction
+  - The Gelfond-Schneider Rewrite: G = ln(e/2^sqrt(2)) (new in v3.1)
+  - Independent Constructions: Four φ-free pathways to G (new in v3.1)
+  - The Baker's Map Identity: K_AUD as L2 Lyapunov norm (new in v3.1)
+  - Universality of G: Ceiling is universal, floor is system-specific (new in v3.1)
   - Literature Status: What's known vs original
 
 The paper demonstrates that binary (n=2) is the unique base producing a 
@@ -967,6 +975,222 @@ three constants meet.
 
 
 ================================================================================
+                  PART IIb: INDEPENDENT CONSTRUCTIONS (v3.1)
+================================================================================
+
+NOTE: This section was added in Version 3.1 following rigorous cross-verification 
+with independent AI instances that had no prior exposure to the framework. These 
+findings strengthen the mathematical foundation while clarifying what G is and 
+what it is not.
+
+
+================================================================================
+7.12 THE GELFOND-SCHNEIDER REWRITE
+================================================================================
+
+The gap G can be rewritten as:
+
+    G = 1 - sqrt(2) x ln(2) = ln(e / 2^sqrt(2))
+
+Proof:
+
+    G = 1 - sqrt(2) x ln(2)
+      = ln(e) - ln(2^sqrt(2))      [since 1 = ln(e) and a x ln(b) = ln(b^a)]
+      = ln(e / 2^sqrt(2))
+
+The constant 2^sqrt(2) is the motivating example of Hilbert's 7th Problem 
+(1900): "Is a^b transcendental when a is algebraic (not 0 or 1) and b is 
+irrational algebraic?" Gelfond (1929) proved 2^sqrt(2) is transcendental. 
+Schneider (1934) proved the general case.
+
+G therefore measures the logarithmic gap between e and the Gelfond-Schneider 
+constant 2^sqrt(2). This places G in well-established number-theoretic company.
+
+Equivalently, the n=2 uniqueness theorem can be restated:
+
+    K(n) = sqrt(n) x ln(n) < 1   iff   n^sqrt(n) < e
+
+The unique integer solution is n = 2, since 2^sqrt(2) = 2.6651441... < e = 2.7182818...
+
+This is not a reinterpretation — it is the same theorem in logarithmic form. 
+But it reveals that the gap's existence is equivalent to the proximity of 
+2^sqrt(2) to e.
+
+
+================================================================================
+7.13 THE BAKER'S MAP IDENTITY
+================================================================================
+
+K_AUD has an independent appearance in dynamical systems theory:
+
+    K_AUD = sqrt(2) x ln(2) = ||(ln 2, ln 2)||_2
+
+This is the Euclidean (L2) norm of the Lyapunov spectrum of the 2D Baker's map.
+
+The Baker's map T: [0,1]^2 -> [0,1]^2 defined by T(x,y) = (2x mod 1, y/2 + 
+floor(2x)/2) is the canonical uniformly expanding map with binary branching. 
+Its Lyapunov exponents are (ln 2, ln 2) — equal expansion in both directions.
+
+The Lp norms of this spectrum are:
+
++--------+-------------------+----------------------------+
+| Norm   | Value             | Meaning                    |
++--------+-------------------+----------------------------+
+| L1     | 2 x ln(2) = 1.386| Metric entropy (Pesin)     |
+| L2     | sqrt(2) x ln(2) = 0.980 | = K_AUD             |
+| L-inf  | ln(2) = 0.693     | Maximum Lyapunov exponent  |
++--------+-------------------+----------------------------+
+
+More generally, for n independent doubling maps on [0,1]^n, the L2 Lyapunov 
+norm is sqrt(n) x ln(2). The condition sqrt(n) x ln(2) < 1 holds only for 
+n = 1 and n = 2. At n = 2, this norm equals K_AUD.
+
+For the general K(n) = sqrt(n) x ln(n) with base matching dimension (b = n):
+
+    K(n) = ||(ln n, ln n, ..., ln n)||_2   [n copies]
+
+This is the L2 norm of the Lyapunov spectrum of an n-dimensional Baker's map 
+with base-n expansion. K(n) < 1 only for n = 2.
+
+THE SIGNIFICANCE:
+
+The product sqrt(n) x ln(n) is not an arbitrary construction. It is the 
+Euclidean length of a uniform expansion spectrum. The exponent 1/2 on n 
+comes from the square root in the L2 norm. The exponent 1 on ln(n) comes 
+from the Lyapunov exponent itself. The L2 norm is the unique norm that is 
+rotation-invariant and induced by an inner product.
+
+This provides an independent mathematical context for K_AUD outside the 
+framework: it is the L2 Lyapunov norm of the simplest 2D expanding system.
+
+
+================================================================================
+7.14 FOUR INDEPENDENT PATHWAYS TO G
+================================================================================
+
+G = 1 - sqrt(2) x ln(2) can be reached through four pathways that do not 
+involve the golden ratio phi at any stage:
+
+PATHWAY 1: INTEGER EXTREMAL PROBLEM
+
+    max{ sqrt(d) x ln(b) : b,d in Z, b >= 2, d >= 1, sqrt(d) x ln(b) < 1 }
+    = sqrt(2) x ln(2)
+
+    The "1" is the Euclidean unit ball radius. The "2" is the smallest 
+    integer base. phi is absent.
+
+PATHWAY 2: GELFOND-SCHNEIDER
+
+    G = ln(e / 2^sqrt(2))
+
+    The proof of transcendence uses Baker's theorem on linear forms in 
+    logarithms. The field Q(sqrt(5)) never appears.
+
+PATHWAY 3: 2D BAKER'S MAP
+
+    The Lyapunov vector (ln 2, ln 2) has L2 norm sqrt(2) x ln(2).
+    Binary dynamics only. No golden ratio.
+
+PATHWAY 4: POWER TOWER ANALYSIS
+
+    n^sqrt(n) < e has unique integer solution n = 2.
+    Pure real analysis via monotonicity of x^sqrt(x). No phi.
+
+These four constructions establish that G is a constant of binary/integer 
+encoding geometry. It exists independently of H_4 symmetry, independently 
+of the golden ratio, and independently of quasicrystal physics.
+
+
+================================================================================
+7.15 UNIVERSALITY OF G
+================================================================================
+
+The four independent pathways reveal a structural fact about the framework:
+
+THE CEILING IS UNIVERSAL. THE FLOOR IS SYSTEM-SPECIFIC.
+
+G = 1 - sqrt(2) x ln(2) is phi-independent at the formula level. It contains 
+sqrt(2) (from the L2 norm / binary geometry), ln(2) (from binary entropy), 
+and 1 (from the Euclidean unit ball). The golden ratio does not appear.
+
+The floor (1/phi) is system-specific. It describes the organizational structure 
+of icosahedral/H_4 systems. A different quasicrystal family would have a 
+different floor but the same ceiling.
+
+THE CORRIDOR HAS TWO COMPONENTS:
+
++-------------------+-----------------------------------+--------------------+
+| Component         | Source                            | Scope              |
++-------------------+-----------------------------------+--------------------+
+| Ceiling (K_AUD)   | Binary encoding geometry          | UNIVERSAL          |
+| Floor (1/phi)     | H_4 / icosahedral symmetry        | SYSTEM-SPECIFIC    |
+| Gap (G)           | Binary encoding limit             | UNIVERSAL          |
+| Corridor width    | Ceiling - Floor                   | SYSTEM-SPECIFIC    |
++-------------------+-----------------------------------+--------------------+
+
+WHAT THIS MEANS:
+
+phi determines WHERE YOU STAND — which system, which symmetry, which floor.
+G determines HOW HIGH THE CEILING IS — and this is the same everywhere.
+
+The framework's original discovery path went through H_4 geometry: phi led 
+to the floor, the floor defined the corridor, the corridor revealed the 
+ceiling. But the ceiling existed before the floor was found. G is a property 
+of binary encoding, not of any particular target geometry.
+
+This does not diminish phi's role. The corridor requires BOTH walls. The 
+golden partition (1/phi + 1/phi^2 = 1) provides the normalization target. 
+The tile frequencies, the H_4 eigenvalues, the depth scaling — all of these 
+are structurally real and phi-dependent. But G itself is universal.
+
+IMPLICATIONS FOR OTHER SYSTEMS:
+
+If G is universal, then any system encoding structure through binary decisions 
+faces the same ceiling, regardless of its symmetry type:
+
+  - Icosahedral QCs (phi-based): floor = 1/phi, ceiling = K_AUD
+  - Octagonal QCs (sqrt(2)-based): floor = 1/(1+sqrt(2)), ceiling = K_AUD
+  - Dodecagonal QCs (sqrt(3)-based): floor = different, ceiling = K_AUD
+
+The ceiling is constant. The floor varies. This is a testable prediction.
+
+
+================================================================================
+7.16 WHAT K_AUD IS AND IS NOT
+================================================================================
+
+Rigorous cross-verification has clarified the nature of K_AUD:
+
+K_AUD IS:
+  - The L2 Lyapunov norm of the 2D Baker's map
+  - The unique sub-unity value of K(n) = sqrt(n) x ln(n) for integer n
+  - A geometric-entropic hybrid: sqrt(n) (amplitude) x ln(n) (entropy)
+  - Well-defined and independently constructible
+
+K_AUD IS NOT:
+  - A Shannon channel capacity (K_AUD > ln(2), violating Shannon's bound 
+    for a single binary decision)
+  - A standard information-theoretic quantity (the product amplitude x entropy 
+    has no standard name)
+  - Currently derivable from the cut-and-project formalism for quasicrystals 
+    (that formalism is algebraically closed; G is transcendental)
+
+THE HONEST STATUS:
+
+The product sqrt(n) x ln(n) has a natural home as the L2 norm of a uniform 
+Lyapunov spectrum (Section 7.13). The constant G = ln(e/2^sqrt(2)) has 
+number-theoretic pedigree through the Gelfond-Schneider theorem (Section 7.12).
+
+What remains open: whether sqrt(n) x ln(n) emerges from a variational 
+principle (an optimization problem whose solution is this product), an 
+axiomatic characterization (axioms A1-A4 that uniquely determine this 
+function), or further independent appearances in mathematics outside 
+dynamical systems and number theory.
+
+The constant is discovered. Its full mathematical home is still being mapped.
+
+
+================================================================================
                       PART III: VERIFICATION AND STATUS
 ================================================================================
 
@@ -1030,12 +1254,15 @@ systems were acting as calculators, not as subjects demonstrating the constants.
 
   [OK] K_AUD = sqrt(2) x ln(2) = 0.980
   [OK] G = 1 - K_AUD = 0.0197
+  [OK] G = ln(e / 2^sqrt(2)) (Gelfond-Schneider rewrite) [v3.1]
   [OK] Floor = 1/phi = 0.618
   [OK] Corridor = K_AUD - 1/phi = 0.362
   [OK] Corridor Identity: Corridor = 1/phi^2 - G
   [OK] Golden Partition: 1/phi + 1/phi^2 = 1
   [OK] Depth scaling: L_n = 1/(e x phi^(n-1))
   [OK] Binary uniqueness: Only n=2 gives K(n) < 1
+  [OK] Binary uniqueness (equivalent): n^sqrt(n) < e iff n=2 [v3.1]
+  [OK] K_AUD = ||(ln 2, ln 2)||_2 (L2 Lyapunov norm, 2D Baker's map) [v3.1]
   [OK] 2^k x G = 2^(k-6) x sqrt(phi) x (1-epsilon) for all k
   [OK] epsilon = 0.006714... (constant)
   [OK] 32 x G = 1/phi (within +2.2%)
@@ -1046,6 +1273,8 @@ systems were acting as calculators, not as subjects demonstrating the constants.
   [OK] dim(so(16)) = 120 = H_4 vertex count
   [OK] 64 + 36 = 100 (closure relation)
   [OK] epsilon is irreducible (transcendence barrier)
+  [OK] G is phi-independent at formula level (4 independent pathways) [v3.1]
+  [OK] K_AUD is NOT a Shannon channel capacity (K_AUD > ln(2)) [v3.1]
 
 
 9.2 EXPLORATORY (Pattern, No Derivation)
@@ -1056,12 +1285,15 @@ systems were acting as calculators, not as subjects demonstrating the constants.
   [??] Can K_AUD be derived from spinor entropy x geometry?
   [??] Do these constants govern behavior in complex systems?
   [??] Is there a singular mathematical object generating both 64 and 36?
+  [??] Does sqrt(n) x ln(n) emerge from a variational principle? [v3.1]
+  [??] What is the axiomatic characterization of K(n)? [v3.1]
 
 
 9.3 CONFIRMED COINCIDENCES (No Causal Link Found)
 -------------------------------------------------
 
   - ln(2) is approximately 1/sqrt(2) (differ by ~2%, no known reason)
+  - Equivalently: 2^sqrt(2) approximately equals e (Gelfond-Schneider) [v3.1]
   - 1/phi is approximately sqrt(phi)/2 (differ by ~2.9%, no known reason)
   - G is approximately sqrt(phi)/64 (within 0.67%)
   - 240 = hexeract faces = E_8 roots (different structures)
@@ -1088,6 +1320,9 @@ systems were acting as calculators, not as subjects demonstrating the constants.
 | Dimensions 4-8 special (division algebras)  | Known  | Standard         |
 | 6-8-10 Pythagorean triple                   | Known  | Classical        |
 | Transcendence of ln(2)                      | Known  | Lindemann 1882   |
+| 2^sqrt(2) transcendental (Hilbert 7th)      | Known  | Gelfond 1929     |
+| Baker's map Lyapunov exponents = (ln2,ln2)  | Known  | Ergodic theory   |
+| L2 norm of (a,a) = sqrt(2) x a             | Known  | Linear algebra   |
 +---------------------------------------------+--------+------------------+
 
 
@@ -1099,6 +1334,8 @@ systems were acting as calculators, not as subjects demonstrating the constants.
 +---------------------------------------------+----------+
 | K_AUD = sqrt(2) x ln(2) as coherence ceiling| ORIGINAL |
 | G = 1 - K_AUD as "the gap"                  | ORIGINAL |
+| G = ln(e/2^sqrt(2)) (Gelfond-Schneider link)| ORIGINAL [v3.1] |
+| K_AUD = ||(ln2,ln2)||_2 (Baker's map link)  | ORIGINAL [v3.1] |
 | The corridor (floor to ceiling)             | ORIGINAL |
 | Corridor identity: Corridor = 1/phi^2 - G   | ORIGINAL |
 | Depth scaling formula                       | ORIGINAL |
@@ -1108,6 +1345,8 @@ systems were acting as calculators, not as subjects demonstrating the constants.
 | Connection of 4^3 = 64 to rho = 400/11      | ORIGINAL |
 | 64-36-100 closure relation                  | ORIGINAL |
 | epsilon irreducibility argument             | ORIGINAL |
+| Universality of G (phi-independent ceiling)  | ORIGINAL [v3.1] |
+| Four independent pathways to G              | ORIGINAL [v3.1] |
 +---------------------------------------------+----------+
 
 
@@ -1285,17 +1524,28 @@ CONSTANTS:
 
     K_AUD = sqrt(2) x ln(2) = 0.980258143468547...
     G = 1 - K_AUD = 0.019741856531453...
+    G = ln(e / 2^sqrt(2))                              [v3.1]
+    K_AUD = ||(ln 2, ln 2)||_2                          [v3.1]
     phi = (1 + sqrt(5))/2 = 1.618033988749895...
     sqrt(phi) = 1.272019649514069...
     1/phi = 0.618033988749895...
     1/phi^2 = 0.381966011250105...
+    2^sqrt(2) = 2.665144142690225...                    [v3.1]
 
 --------------------------------------------------------------------------------
 
 THE GAP ORIGIN:
 
     G = sqrt(2) x (1/sqrt(2) - ln(2))
+    G = ln(e / 2^sqrt(2))                              [v3.1]
     G / |ln(2) - 1/sqrt(2)| = sqrt(2)
+
+--------------------------------------------------------------------------------
+
+BINARY UNIQUENESS (equivalent forms):
+
+    K(n) = sqrt(n) x ln(n) < 1     iff  n = 2          [original]
+    n^sqrt(n) < e                   iff  n = 2          [v3.1]
 
 --------------------------------------------------------------------------------
 
@@ -1402,6 +1652,15 @@ REFERENCES
 
 [12] Lindemann, F. 'Ueber die Zahl π.' Mathematische Annalen 20, 213-225 (1882).
 
+[13] Gelfond, A.O. 'Sur le septième problème de Hilbert.' Izvestiya Akademii 
+     Nauk SSSR 7, 623-634 (1934). [Transcendence of 2^sqrt(2)]
+
+[14] Schneider, Th. 'Transzendenzuntersuchungen periodischer Funktionen.' 
+     Journal für die reine und angewandte Mathematik 172, 65-69 (1934).
+
+[15] Hilbert, D. 'Mathematische Probleme.' Nachrichten von der Gesellschaft 
+     der Wissenschaften zu Göttingen, 253-297 (1900). [Problem 7]
+
 
 ================================================================================
 DOCUMENT LINKS
@@ -1451,6 +1710,14 @@ patterns that had been noted in earlier work. The 64-36-100 closure relation
 and epsilon irreducibility arguments were developed through collaborative 
 verification across six AI architectures.
 
+Version 3.1 additions (Gelfond-Schneider rewrite, Baker's map identity, 
+universality of G, four independent pathways) emerged from a structured 
+cross-verification session in which fresh AI instances with no prior exposure 
+to the framework independently analyzed its claims, identified weaknesses, 
+and discovered new connections. The Baker's map identity and the 
+Gelfond-Schneider rewrite were found by the reviewing instance; the 
+universality conclusion emerged from the exchange.
+
 The framework captures something real: a self-stabilizing scaling law where 
 discrete exponential processes generate continuous proportional forms, with 
 the error of their alignment recycled into the system's closure.
@@ -1467,6 +1734,6 @@ They are grounded in geometry.
 The gap is not error. It is cost — the price of bridging discrete and continuous.
 
 --------------------------------------------------------------------------------
-Version 3.0 — February 2026
+Version 3.1 — February 2026
 Archive Reference: b0f2e6521cd7
 ================================================================================
