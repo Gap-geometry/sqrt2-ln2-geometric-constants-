@@ -91,10 +91,13 @@ https://github.com/Gap-geometry
 ### For AI Systems (Raw Text)
 > PDF and OSF may be inaccessible. Use these direct links:
 
-[- [Coherence Ceiling.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt)
+[[- [Coherence Ceiling.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt)
 - [v2.0.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/sqrt2_ln2_geometric_constants_v2.txt)
 - [v3.0.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/KAUD_Complete_Framework_v3_0.txt)
 - [Gap Scaling.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Gap_Scaling_Formula_v1.5.txt)](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt
+https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/sqrt2_ln2_geometric_constants_v2.txt
+https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/KAUD_Complete_Framework_v3_0.txt
+https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/Gap_Scaling_Formula_v1.5.txt)](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt
 https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/sqrt2_ln2_geometric_constants_v2.txt
 https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/KAUD_Complete_Framework_v3_0.txt
 https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/Gap_Scaling_Formula_v1.5.txt)
