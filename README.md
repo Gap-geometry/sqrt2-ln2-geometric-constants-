@@ -62,6 +62,13 @@ G = ln(e / 2^√2)        (Gelfond-Schneider Rewrite)
 L_n = 1/(e × φ^(n-1))
 ```
 
+Live Visualization — explore the framework interactively
+## Quick Links
+
+📊 **[Interactive Dashboard](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/)** — explore the mathematics live
+📄 [Complete Framework v3.1](./KAUD_Complete_Framework_v3_0.txt)
+🗂️ [OSF Repository](https://osf.io/qh5s2/)
+
 ---
 
 ## Papers (In-Repo Links)
