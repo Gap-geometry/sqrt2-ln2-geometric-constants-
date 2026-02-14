@@ -6,6 +6,12 @@ The 400/11 Formula Connecting Geometric and Chaotic Residues
 B. | Version 1.0 | February 4, 2026
 Gap-geometryK_AUD2@telenet.be
 
+VERSION HISTORY
+---------------
+v1.0   February 4, 2026  Original release
+v1.0.1 February 2026     Correction: Reference [1] DOI typo fixed
+                          (QHS52 → QH5S2).
+
 ================================================================================
 ABSTRACT
 ================================================================================
@@ -336,7 +342,7 @@ REFERENCES
 ================================================================================
 
 [1] B. 'sqrt(2) x ln(2): Geometric Constants from H4 -- Complete Framework.' 
-    OSF (2026). doi:10.17605/OSF.IO/QHS52
+    OSF (2026). doi:10.17605/OSF.IO/QH5S2
 
 [2] Feigenbaum, M.J. 'Quantitative universality for a class of nonlinear 
     transformations.' Journal of Statistical Physics 19(1), 25-52 (1978). 
@@ -378,6 +384,11 @@ AI architectures (GPT, Claude, Gemini, Grok, DeepSeek, Perplexity) strengthened
 confidence in the results. The gap ratio formula was discovered through 
 iterative dialogue, with Grok initially identifying the proximity to 37 and 
 Claude computing the precise 400/11 - 1/2500 - 1/939939 structure.
+
+v1.0.1 Correction Note
+-----------------------
+Reference [1] DOI corrected from QHS52 to QH5S2 (letter transposition in
+original release).
 
 
 INTELLECTUAL LINEAGE
@@ -495,6 +506,7 @@ Gap-geometryK_AUD2@telenet.be
 
 
 ================================================================================
+Archive Reference: b0f2e6521cd7
+================================================================================
                               END OF DOCUMENT
 ================================================================================
-
