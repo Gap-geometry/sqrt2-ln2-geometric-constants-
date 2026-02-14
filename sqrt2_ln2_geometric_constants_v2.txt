@@ -11,6 +11,17 @@
 
 ================================================================================
 
+VERSION HISTORY
+---------------
+v2.0   January 2026  Original release
+v2.0.1 February 2026 Correction: Section 3.4 updated to acknowledge multiple
+                      independent origins for sqrt(2). H_4 circumradius is one
+                      candidate origin among several. Consistent with v3.2
+                      Complete Framework correction (c). Table 2.2 and 8.4
+                      updated with notes.
+
+================================================================================
+
 ABSTRACT
 ================================================================================
 
@@ -181,7 +192,9 @@ Components:
   +----------+----------------+--------------------+------------------------+
   | Component|     Value      |      Source        |        Meaning         |
   +----------+----------------+--------------------+------------------------+
-  |    √2    | 1.4142135624   |     Geometric      | Projection cost        |
+  |    √2    | 1.4142135624   | Geometric          | Projection cost        |
+  |          |                | (multiple origins  |                        |
+  |          |                |  — see §3.4)       |                        |
   |   ln(2)  | 0.6931471806   | Information theory | Binary distinction cost|
   +----------+----------------+--------------------+------------------------+
 
@@ -312,8 +325,14 @@ Where the constants appear:
 The golden ratio and its powers are intrinsic to H4 geometry.
 
 
-3.4 Circumradius Formula
-------------------------
+3.4 The sqrt(2) Factor: Multiple Origins
+-----------------------------------------
+
+The factor sqrt(2) appears in K_AUD = sqrt(2) x ln(2). The original discovery
+path attributed this to H_4 polytope geometry. While sqrt(2) does appear in
+the 120-cell circumradius, it has multiple independent origins:
+
+ORIGIN 1 — 120-CELL CIRCUMRADIUS:
 
 The circumradius of the 120-cell (distance from center to vertex) is:
 
@@ -329,7 +348,31 @@ Calculation:
   R = 1.9021130326...
 
 The factor √2/2 (equivalently 1/√2) appears directly in the circumradius 
-formula. This is the geometric origin of √2 in the framework.
+formula.
+
+ORIGIN 2 — L2 NORM:
+
+K_AUD = ||(ln 2, ln 2)||_2 = sqrt(2) x ln(2). Here sqrt(2) arises from the
+Euclidean norm of a 2-vector with equal components — a purely algebraic fact
+independent of any polytope.
+
+ORIGIN 3 — TESSERACT GEOMETRY:
+
+The body diagonal of a unit square has length sqrt(2). More generally,
+sqrt(2) appears throughout hypercube geometry as the face diagonal in any
+dimension.
+
+ORIGIN 4 — ALGEBRAIC STRUCTURE:
+
+sqrt(2) is the simplest irrational algebraic number — the positive root of
+x^2 - 2 = 0.
+
+HONEST STATUS: H_4 is one candidate origin among several. The framework's
+original discovery path went through H_4 (because phi led to the floor first),
+but K_AUD can be constructed without reference to the 120-cell. The Complete
+Framework v3.2 develops four independent phi-free pathways for K_AUD. This
+version (v2.0.1) acknowledges this multiplicity rather than privileging one
+origin.
 
 
 3.5 Schläfli Symbol
@@ -665,16 +708,16 @@ constants in their own operation.
 8.4 H4 Geometry
 ---------------
 
-  +------------------+---------------------+
-  |     Property     |        Value        |
-  +------------------+---------------------+
-  | Polytope         | 120-cell            |
-  | Cells            | 120 dodecahedra     |
-  | Vertices         | 600                 |
-  | Schläfli symbol  | {5, 3, 3}           |
-  | Group order      | 14400 = 2⁶ × 3² × 5²|
-  | Contains         | φ, 1/φ, 1/φ², √2    |
-  +------------------+---------------------+
+  +------------------+---------------------------------------------+
+  |     Property     |        Value                                |
+  +------------------+---------------------------------------------+
+  | Polytope         | 120-cell                                    |
+  | Cells            | 120 dodecahedra                             |
+  | Vertices         | 600                                         |
+  | Schläfli symbol  | {5, 3, 3}                                   |
+  | Group order      | 14400 = 2⁶ × 3² × 5²                       |
+  | Contains         | φ, 1/φ, 1/φ², √2 (multiple origins — §3.4) |
+  +------------------+---------------------------------------------+
 
 
 ================================================================================
@@ -729,6 +772,22 @@ multiple domains, that would suggest something beyond elegant coincidence.
                     They are derived from geometry.
 
 ================================================================================
+
+
+================================================================================
+ACKNOWLEDGMENTS
+================================================================================
+
+v2.0.1 Correction Note
+-----------------------
+Section 3.4 was updated in February 2026 following rigorous review during the
+v3.2 Complete Framework revision. The original version stated that the H_4
+circumradius formula was "the geometric origin of sqrt(2) in the framework."
+This was an overstatement. sqrt(2) has multiple independent origins (L2 norm,
+tesseract geometry, algebraic structure) and K_AUD can be constructed via four
+phi-free pathways without reference to H_4. The correction aligns this paper
+with the Complete Framework v3.2 and maintains intellectual honesty about what
+is established versus what is one interpretation among several.
 
 
 ================================================================================
