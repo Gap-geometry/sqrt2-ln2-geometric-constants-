@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Geometric Staircase v2 — Chladni Frequency Explorer</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #08080f; color: #dde; font-family: 'Georgia', serif; }
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+  .mono { font-family: 'JetBrains Mono', 'Courier New', monospace; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.9/babel.min.js"></script>
+
+<script type="text/babel">
+const { useState, useEffect, useMemo, useCallback, useRef } = React;
+
+// ═══════════════════════════════════════════════════════════════
+// GEOMETRIC STAIRCASE v2
+// Merged: Claude's multi-mode comparison + Grok's sound & primes
+// Bee × Claude × Grok, February 2026
+// ═══════════════════════════════════════════════════════════════
+
+const GRID = 96;
+const CELL_PX = 110;
+
+const RATIO_STEPS = [
+  { n: 1,  d: 1,  label: "1/1",   name: "Unison",        type: "resonance",   color: "#FFD700" },
+  { n: 9,  d: 8,  label: "9/8",   name: "Major 2nd",     type: "pythagorean", color: "#8899AA" },
+  { n: 8,  d: 7,  label: "8/7",   name: "Septimal 2nd",  type: "septimal",    color: "#FF6B35" },
+  { n: 7,  d: 6,  label: "7/6",   name: "Septimal m3",   type: "septimal",    color: "#FF6B35" },
+  { n: 6,  d: 5,  label: "6/5",   name: "Minor 3rd",     type: "just",        color: "#66BBAA" },
+  { n: 5,  d: 4,  label: "5/4",   name: "Major 3rd",     type: "just",        color: "#66BBAA" },
+  { n: 9,  d: 7,  label: "9/7",   name: "Blue ♭3",       type: "blue",        color: "#FF3366" },
+  { n: 4,  d: 3,  label: "4/3",   name: "Perfect 4th",   type: "pythagorean", color: "#8899AA" },
+  { n: 7,  d: 5,  label: "7/5",   name: "Blue ♭5",       type: "blue",        color: "#FF3366" },
+  { n: 10, d: 7,  label: "10/7",  name: "Euler tritone",  type: "septimal",   color: "#FF6B35" },
+  { n: 3,  d: 2,  label: "3/2",   name: "Perfect 5th",   type: "pythagorean", color: "#8899AA" },
+  { n: 14, d: 9,  label: "14/9",  name: "Septimal m6",   type: "septimal",    color: "#FF6B35" },
+  { n: 8,  d: 5,  label: "8/5",   name: "Minor 6th",     type: "just",        color: "#66BBAA" },
+  { n: 5,  d: 3,  label: "5/3",   name: "Major 6th",     type: "just",        color: "#66BBAA" },
+  { n: 7,  d: 4,  label: "7/4",   name: "Blue ♭7",       type: "blue",        color: "#FF3366" },
+  { n: 16, d: 9,  label: "16/9",  name: "Pyth m7",       type: "pythagorean", color: "#8899AA" },
+  { n: 15, d: 8,  label: "15/8",  name: "Major 7th",     type: "just",        color: "#66BBAA" },
+  { n: 2,  d: 1,  label: "2/1",   name: "Octave",        type: "resonance",   color: "#FFD700" },
+  { n: 9,  d: 4,  label: "9/4",   name: "9th",           type: "pythagorean", color: "#8899AA" },
+  { n: 18, d: 7,  label: "18/7",  name: "2× Blue ♭3",    type: "blue",        color: "#FF3366" },
+  { n: 3,  d: 1,  label: "3/1",   name: "Tritave",       type: "resonance",   color: "#FFD700" },
+];
+
+RATIO_STEPS.forEach(s => { s.ratio = s.n / s.d; });
+
+const MODES = [];
+for (let m = 1; m <= 7; m++) {
+  for (let nn = m; nn <= 7; nn++) {
+    MODES.push({ m, n: nn, freq: m * m + nn * nn, label: `(${m},${nn})` });
+  }
+}
+MODES.sort((a, b) => a.freq - b.freq);
+
+function gcd(a, b) { return b === 0 ? a : gcd(b, a % b); }
+function isCoprime(m, n) { return gcd(m, n) === 1; }
+
+function primeFactors(num) {
+  if (num <= 1) return "1";
+  let n = num;
+  const factors = [];
+  const sup = { 2: "²", 3: "³", 4: "⁴", 5: "⁵" };
+  for (let i = 2; i * i <= n; i++) {
+    let count = 0;
+    while (n % i === 0) { n /= i; count++; }
+    if (count > 0) factors.push(count > 1 ? `${i}${sup[count] || "^"+count}` : `${i}`);
+  }
+  if (n > 1) factors.push(`${n}`);
+  return factors.join("·");
+}
+
+function primeLimit(step) {
+  const allFactors = new Set();
+  let n = step.n, d = step.d;
+  for (let i = 2; i <= Math.max(n, d); i++) {
+    while (n % i === 0) { allFactors.add(i); n /= i; }
+    while (d % i === 0) { allFactors.add(i); d /= i; }
+  }
+  return Math.max(...allFactors, 1);
+}
+
+function computePattern(refM, refN, freqRatio, Q) {
+  const targetFreq = (refM * refM + refN * refN) * freqRatio;
+  const pixels = new Float32Array(GRID * GRID);
+  let maxVal = 0;
+
+  for (let mMode = 1; mMode <= 10; mMode++) {
+    for (let nMode = 1; nMode <= 10; nMode++) {
+      const modeFreq = mMode * mMode + nMode * nMode;
+      const delta = (targetFreq - modeFreq) / modeFreq;
+      const weight = 1.0 / (1.0 + (delta * Q) * (delta * Q));
+      if (weight < 0.004) continue;
+
+      for (let iy = 0; iy < GRID; iy++) {
+        const y = (iy + 0.5) / GRID;
+        const sinMY = Math.sin(Math.PI * mMode * y);
+        const sinNY = Math.sin(Math.PI * nMode * y);
+        for (let ix = 0; ix < GRID; ix++) {
+          const x = (ix + 0.5) / GRID;
+          const sinMX = Math.sin(Math.PI * mMode * x);
+          const sinNX = Math.sin(Math.PI * nMode * x);
+          pixels[iy * GRID + ix] += weight * (sinMX * sinNY + sinNX * sinMY);
+        }
+      }
+    }
+  }
+
+  for (let i = 0; i < pixels.length; i++) {
+    const v = Math.abs(pixels[i]);
+    if (v > maxVal) maxVal = v;
+  }
+  return { pixels, maxVal };
+}
+
+function renderToCanvas(canvas, pixels, maxVal, scheme) {
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
+  canvas.width = GRID;
+  canvas.height = GRID;
+  const img = ctx.createImageData(GRID, GRID);
+
+  for (let i = 0; i < pixels.length; i++) {
+    const v = maxVal > 0 ? Math.pow(Math.abs(pixels[i]) / maxVal, 0.7) : 0;
+    const idx = i * 4;
+
+    if (scheme === "cyan") {
+      img.data[idx] = Math.floor(v * 80);
+      img.data[idx + 1] = Math.floor(v * 255);
+      img.data[idx + 2] = Math.floor(100 + v * 155);
+    } else {
+      if (v < 0.25) {
+        const s = v * 4;
+        img.data[idx] = Math.floor(s * 80);
+        img.data[idx + 1] = 0;
+        img.data[idx + 2] = Math.floor(s * 120);
+      } else if (v < 0.5) {
+        const s = (v - 0.25) * 4;
+        img.data[idx] = Math.floor(80 + s * 150);
+        img.data[idx + 1] = Math.floor(s * 30);
+        img.data[idx + 2] = Math.floor(120 - s * 80);
+      } else if (v < 0.75) {
+        const s = (v - 0.5) * 4;
+        img.data[idx] = Math.floor(230 + s * 25);
+        img.data[idx + 1] = Math.floor(30 + s * 120);
+        img.data[idx + 2] = Math.floor(40 - s * 40);
+      } else {
+        const s = (v - 0.75) * 4;
+        img.data[idx] = 255;
+        img.data[idx + 1] = Math.floor(150 + s * 105);
+        img.data[idx + 2] = Math.floor(s * 80);
+      }
+    }
+    img.data[idx + 3] = 255;
+  }
+  ctx.putImageData(img, 0, 0);
+}
+
+function useSound() {
+  const ctxRef = useRef(null);
+  const oscRef = useRef(null);
+
+  const play = useCallback((freq, duration = 700) => {
+    try {
+      if (!ctxRef.current) {
+        ctxRef.current = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      const ctx = ctxRef.current;
+      if (ctx.state === "suspended") ctx.resume();
+      if (oscRef.current) { try { oscRef.current.stop(); } catch(e) {} }
+
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+      osc.type = "sine";
+      osc.frequency.setValueAtTime(freq, ctx.currentTime);
+      gain.gain.setValueAtTime(0.15, ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration / 1000);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+      osc.start();
+      osc.stop(ctx.currentTime + duration / 1000);
+      oscRef.current = osc;
+    } catch (e) {}
+  }, []);
+
+  const stop = useCallback(() => {
+    if (oscRef.current) { try { oscRef.current.stop(); } catch(e) {} }
+  }, []);
+
+  return { play, stop };
+}
+
+function PatternCell({ refM, refN, step, Q, scheme, size, isActive, onClick }) {
+  const canvasRef = useRef(null);
+
+  const pattern = useMemo(
+    () => computePattern(refM, refN, step.ratio, Q),
+    [refM, refN, step.ratio, Q]
+  );
+
+  useEffect(() => {
+    renderToCanvas(canvasRef.current, pattern.pixels, pattern.maxVal, scheme);
+  }, [pattern, scheme]);
+
+  return (
+    <div onClick={onClick} style={{
+      display: "flex", flexDirection: "column", alignItems: "center",
+      cursor: "pointer", transition: "transform 0.15s",
+      transform: isActive ? "scale(1.06)" : "scale(1)",
+    }}>
+      <canvas ref={canvasRef} style={{
+        width: size, height: size, borderRadius: 6,
+        border: `2px solid ${isActive ? "#fff" : step.color + "50"}`,
+        boxShadow: isActive ? `0 0 24px ${step.color}40` : "none",
+      }} />
+      <div className="mono" style={{
+        marginTop: 4, fontSize: 11, color: step.color,
+        fontWeight: step.type === "blue" || step.type === "resonance" ? 700 : 400,
+      }}>
+        {step.label}
+      </div>
+      <div className="mono" style={{ fontSize: 8.5, color: step.color + "99" }}>
+        {step.name}
+      </div>
+    </div>
+  );
+}
+
+function DetailView({ refM, refN, step, Q, scheme, soundEnabled, playSound }) {
+  const canvasRef = useRef(null);
+
+  const pattern = useMemo(
+    () => computePattern(refM, refN, step.ratio, Q),
+    [refM, refN, step.ratio, Q]
+  );
+
+  useEffect(() => {
+    renderToCanvas(canvasRef.current, pattern.pixels, pattern.maxVal, scheme);
+  }, [pattern, scheme]);
+
+  const cop = isCoprime(refM, refN);
+  const limit = primeLimit(step);
+  const baseFreq = 110;
+  const freq = baseFreq * (refM * refM + refN * refN) * step.ratio;
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+      <canvas ref={canvasRef} style={{
+        width: 260, height: 260, borderRadius: 10,
+        border: `3px solid ${step.color}`,
+        boxShadow: `0 0 40px ${step.color}25`,
+      }} />
+
+      <div style={{ marginTop: 14, textAlign: "center" }}>
+        <span className="mono" style={{ fontSize: 24, color: step.color, fontWeight: 700 }}>
+          {step.label}
+        </span>
+        <span style={{ fontSize: 15, color: "#aab", marginLeft: 10 }}>{step.name}</span>
+      </div>
+
+      <div className="mono" style={{
+        marginTop: 8, padding: "5px 14px", borderRadius: 8,
+        background: "#111118", border: "1px solid #222", fontSize: 13, color: "#aab",
+      }}>
+        <span style={{ color: step.color }}>{primeFactors(step.n)}</span>
+        <span style={{ color: "#556" }}> / </span>
+        <span style={{ color: step.color + "bb" }}>{primeFactors(step.d)}</span>
+        <span style={{ color: "#445", marginLeft: 10, fontSize: 10 }}>{limit}-limit</span>
+      </div>
+
+      <div style={{ fontSize: 11, color: "#667", marginTop: 6 }}>
+        Mode ({refM},{refN}) × {step.ratio.toFixed(4)}
+        {" · "}
+        <span style={{ color: cop ? "#6b9" : "#f66" }}>
+          {cop ? "coprime ✓" : refM === refN ? "m=n locked" : `GCD=${gcd(refM, refN)}`}
+        </span>
+      </div>
+
+      <div style={{
+        marginTop: 6, padding: "4px 14px", borderRadius: 14,
+        fontSize: 11, fontWeight: 600,
+        background: step.color + "15", color: step.color,
+      }}>
+        {step.type === "blue" ? "⬥ SEPTIMAL CORRIDOR" :
+         step.type === "resonance" ? "◆ RESONANCE LANDING" :
+         step.type === "septimal" ? "◇ 7-LIMIT" :
+         step.type === "just" ? "○ 5-LIMIT (JUST)" :
+         "□ 3-LIMIT (PYTHAGOREAN)"}
+      </div>
+
+      <button
+        onClick={() => playSound(freq)}
+        style={{
+          marginTop: 10, padding: "6px 22px", borderRadius: 20,
+          background: soundEnabled ? step.color : "#333",
+          color: soundEnabled ? "#000" : "#666",
+          border: "none", cursor: "pointer", fontSize: 12, fontWeight: 700,
+        }}
+      >
+        ♪ Play {freq.toFixed(0)} Hz
+      </button>
+    </div>
+  );
+}
+
+function AnimatedSweep({ refM, refN, Q, scheme, soundEnabled, playSound }) {
+  const canvasRef = useRef(null);
+  const [sweepPos, setSweepPos] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const animRef = useRef(null);
+  const startRef = useRef(null);
+  const DURATION = 24000;
+
+  const currentRatio = 1.0 + sweepPos * 2.0;
+
+  const pattern = useMemo(
+    () => computePattern(refM, refN, currentRatio, Q),
+    [refM, refN, currentRatio, Q]
+  );
+
+  useEffect(() => {
+    renderToCanvas(canvasRef.current, pattern.pixels, pattern.maxVal, scheme);
+  }, [pattern, scheme]);
+
+  const animate = useCallback((ts) => {
+    if (!startRef.current) startRef.current = ts;
+    const t = Math.min((ts - startRef.current) / DURATION, 1);
+    setSweepPos(t);
+    if (t < 1) animRef.current = requestAnimationFrame(animate);
+    else setIsPlaying(false);
+  }, []);
+
+  const toggle = () => {
+    if (isPlaying) {
+      cancelAnimationFrame(animRef.current);
+      setIsPlaying(false);
+    } else {
+      startRef.current = null;
+      if (sweepPos >= 1) setSweepPos(0);
+      setIsPlaying(true);
+      animRef.current = requestAnimationFrame(animate);
+    }
+  };
+
+  useEffect(() => () => { if (animRef.current) cancelAnimationFrame(animRef.current); }, []);
+
+  const nearest = RATIO_STEPS.reduce((best, s) =>
+    Math.abs(s.ratio - currentRatio) < Math.abs(best.ratio - currentRatio) ? s : best
+  , RATIO_STEPS[0]);
+  const isNear = Math.abs(nearest.ratio - currentRatio) < 0.025;
+
+  return (
+    <div style={{
+      display: "flex", flexDirection: "column", alignItems: "center",
+      background: "#0a0a14", borderRadius: 12, padding: 16,
+      border: "1px solid #1a1a2a",
+    }}>
+      <div style={{ fontSize: 11, color: "#667", marginBottom: 8, fontWeight: 600, letterSpacing: 1 }}>
+        CONTINUOUS SWEEP
+      </div>
+      <canvas ref={canvasRef} style={{
+        width: 220, height: 220, borderRadius: 10,
+        border: `2px solid ${isNear ? nearest.color : "#333"}`,
+        boxShadow: isNear ? `0 0 24px ${nearest.color}25` : "none",
+        transition: "border-color 0.2s, box-shadow 0.2s",
+      }} />
+      <div className="mono" style={{
+        marginTop: 8, fontSize: 20, fontWeight: 700,
+        color: isNear ? nearest.color : "#889",
+      }}>
+        ×{currentRatio.toFixed(3)}
+        {isNear && (
+          <span style={{ fontSize: 11, marginLeft: 8, opacity: 0.8 }}>
+            ≈ {nearest.label} {nearest.name}
+          </span>
+        )}
+      </div>
+
+      <div style={{ width: "100%", position: "relative", marginTop: 10, paddingBottom: 18 }}>
+        <input type="range" min="0" max="1" step="0.001" value={sweepPos}
+          onChange={(e) => setSweepPos(parseFloat(e.target.value))}
+          style={{ width: "100%", accentColor: "#FF3366" }}
+        />
+        <div style={{ position: "relative", width: "100%", height: 16, marginTop: -2 }}>
+          {RATIO_STEPS.map((s, i) => {
+            const pos = (s.ratio - 1.0) / 2.0;
+            if (pos < 0 || pos > 1) return null;
+            return (
+              <div key={i} style={{
+                position: "absolute", left: `${pos * 100}%`,
+                transform: "translateX(-50%)",
+                width: s.type === "blue" ? 3 : s.type === "resonance" ? 3 : 1,
+                height: s.type === "blue" ? 12 : s.type === "resonance" ? 14 : 7,
+                background: s.color, opacity: 0.6, borderRadius: 1,
+              }} />
+            );
+          })}
+        </div>
+      </div>
+
+      <button onClick={toggle} style={{
+        padding: "7px 22px", borderRadius: 20,
+        background: isPlaying ? "#FF336625" : "#FF3366",
+        color: isPlaying ? "#FF3366" : "#fff",
+        border: isPlaying ? "1px solid #FF3366" : "none",
+        cursor: "pointer", fontSize: 12, fontWeight: 600,
+      }}>
+        {isPlaying ? "⏸ Pause" : sweepPos >= 1 ? "↺ Replay" : "▶ Sweep 1× → 3×"}
+      </button>
+    </div>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MAIN
+// ═══════════════════════════════════════════════════════════════
+function ChladniStaircase() {
+  const [refMode, setRefMode] = useState({ m: 1, n: 3 });
+  const [selectedStep, setSelectedStep] = useState(0);
+  const [Q, setQ] = useState(12);
+  const [scheme, setScheme] = useState("heat");
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const { play: playSound, stop: stopSound } = useSound();
+
+  const handleStepClick = (i) => {
+    setSelectedStep(i);
+    if (soundEnabled) {
+      const step = RATIO_STEPS[i];
+      const freq = 110 * (refMode.m ** 2 + refMode.n ** 2) * step.ratio;
+      playSound(freq);
+    }
+  };
+
+  const cop = isCoprime(refMode.m, refMode.n);
+  const displayModes = MODES.filter(m => m.m <= 5 && m.n <= 5);
+
+  return (
+    <div style={{
+      minHeight: "100vh", background: "#08080f", color: "#dde",
+      fontFamily: "'Georgia', serif",
+      padding: "20px 14px", maxWidth: 920, margin: "0 auto",
+    }}>
+      {/* Header */}
+      <div style={{ textAlign: "center", marginBottom: 20 }}>
+        <h1 className="mono" style={{
+          fontSize: 28, fontWeight: 300, letterSpacing: "0.05em",
+          color: "#FFD700", margin: 0,
+        }}>
+          GEOMETRIC STAIRCASE
+        </h1>
+        <p style={{ fontSize: 13, color: "#667", marginTop: 6 }}>
+          How geometry evolves through the full ratio landscape · sound + primes + corridors
+        </p>
+      </div>
+
+      {/* Controls */}
+      <div style={{
+        display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center",
+        marginBottom: 18, padding: "12px 14px",
+        background: "#0c0c16", borderRadius: 10, border: "1px solid #1a1a2a",
+      }}>
+        <div>
+          <div style={{ fontSize: 10, color: "#556", marginBottom: 4, letterSpacing: 1.2, textTransform: "uppercase" }}>
+            Reference Mode
+          </div>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: 3, maxWidth: 440 }}>
+            {MODES.filter(m => m.m <= 6 && m.n <= 6).map((mode, i) => {
+              const sel = mode.m === refMode.m && mode.n === refMode.n;
+              const c = isCoprime(mode.m, mode.n);
+              return (
+                <button key={i} onClick={() => setRefMode({ m: mode.m, n: mode.n })}
+                  className="mono"
+                  style={{
+                    padding: "3px 7px", borderRadius: 4, fontSize: 10.5,
+                    background: sel ? "#FFD70025" : "#0f0f18",
+                    color: sel ? "#FFD700" : c ? "#6b9" : mode.m === mode.n ? "#f66" : "#778",
+                    border: sel ? "1px solid #FFD700" : "1px solid #1a1a2a",
+                    cursor: "pointer", fontFamily: "'JetBrains Mono', 'Courier New', monospace",
+                    fontWeight: sel ? 700 : 400,
+                  }}>
+                  {mode.label}
+                </button>
+              );
+            })}
+          </div>
+          <div style={{ fontSize: 8.5, color: "#445", marginTop: 3 }}>
+            <span style={{ color: "#6b9" }}>■</span> coprime{" "}
+            <span style={{ color: "#f66", marginLeft: 6 }}>■</span> m=n{" "}
+            <span style={{ color: "#778", marginLeft: 6 }}>■</span> shared factor
+          </div>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+          <div>
+            <div style={{ fontSize: 10, color: "#556", letterSpacing: 1, textTransform: "uppercase" }}>
+              Sharpness Q={Q}
+            </div>
+            <input type="range" min="3" max="30" value={Q}
+              onChange={(e) => setQ(parseInt(e.target.value))}
+              style={{ width: 130, accentColor: "#FFD700" }} />
+          </div>
+          <div style={{ display: "flex", gap: 5, flexWrap: "wrap" }}>
+            {["heat", "cyan"].map(s => (
+              <button key={s} onClick={() => setScheme(s)} style={{
+                padding: "3px 10px", borderRadius: 4, fontSize: 10,
+                background: scheme === s ? "#333" : "#111",
+                color: scheme === s ? "#fff" : "#556",
+                border: "1px solid #2a2a3a", cursor: "pointer", textTransform: "uppercase",
+              }}>{s}</button>
+            ))}
+            <button onClick={() => setSoundEnabled(!soundEnabled)} style={{
+              padding: "3px 10px", borderRadius: 4, fontSize: 10,
+              background: soundEnabled ? "#FF336620" : "#111",
+              color: soundEnabled ? "#FF3366" : "#556",
+              border: soundEnabled ? "1px solid #FF3366" : "1px solid #2a2a3a",
+              cursor: "pointer",
+            }}>
+              {soundEnabled ? "♪ ON" : "♪ OFF"}
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* Current mode banner */}
+      <div style={{
+        textAlign: "center", marginBottom: 14, padding: "7px 14px",
+        background: "#0c0c16", borderRadius: 8,
+        border: `1px solid ${cop ? "#6b9" : "#f66"}30`,
+      }}>
+        <span className="mono" style={{ fontSize: 20, fontWeight: 700, color: "#FFD700" }}>
+          Mode ({refMode.m},{refMode.n})
+        </span>
+        <span style={{ fontSize: 12, color: cop ? "#6b9" : "#f66", marginLeft: 12 }}>
+          {cop ? "coprime — corridors should open" :
+           refMode.m === refMode.n ? "m = n — locked symmetry, expect shattering" :
+           `GCD = ${gcd(refMode.m, refMode.n)} — partial symmetry lock`}
+        </span>
+        <span style={{ fontSize: 11, color: "#445", marginLeft: 10 }}>
+          f₀ ∝ {refMode.m}²+{refMode.n}² = {refMode.m ** 2 + refMode.n ** 2}
+        </span>
+      </div>
+
+      {/* THE STAIRCASE */}
+      <div style={{
+        background: "#0a0a14", borderRadius: 12, padding: "14px 6px",
+        border: "1px solid #1a1a2a", marginBottom: 18,
+      }}>
+        <div style={{
+          fontSize: 10, color: "#556", textAlign: "center", marginBottom: 10,
+          textTransform: "uppercase", letterSpacing: 2,
+        }}>
+          Ratio Staircase — click to hear & inspect
+        </div>
+
+        <div style={{
+          display: "flex", overflowX: "auto", gap: 8,
+          padding: "6px 4px 10px",
+          scrollbarWidth: "thin", scrollbarColor: "#333 #0a0a14",
+        }}>
+          {RATIO_STEPS.map((step, i) => (
+            <div key={i} style={{ flexShrink: 0 }}>
+              <PatternCell
+                refM={refMode.m} refN={refMode.n}
+                step={step} Q={Q} scheme={scheme}
+                size={CELL_PX} isActive={selectedStep === i}
+                onClick={() => handleStepClick(i)}
+              />
+            </div>
+          ))}
+        </div>
+
+        <div style={{ display: "flex", justifyContent: "center", gap: 14, marginTop: 8, flexWrap: "wrap" }}>
+          {[
+            { color: "#FFD700", label: "Resonance" },
+            { color: "#FF3366", label: "Blue (septimal)" },
+            { color: "#FF6B35", label: "7-limit" },
+            { color: "#66BBAA", label: "5-limit (just)" },
+            { color: "#8899AA", label: "3-limit (Pyth)" },
+          ].map((it, i) => (
+            <div key={i} style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 9.5, color: it.color }}>
+              <div style={{ width: 7, height: 7, borderRadius: 2, background: it.color }} />
+              {it.label}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Detail + Sweep */}
+      <div style={{
+        display: "flex", gap: 18, flexWrap: "wrap",
+        justifyContent: "center", marginBottom: 18,
+      }}>
+        <div style={{
+          background: "#0a0a14", borderRadius: 12, padding: 18,
+          border: "1px solid #1a1a2a", flex: "1 1 310px", maxWidth: 420,
+          display: "flex", justifyContent: "center",
+        }}>
+          <DetailView
+            refM={refMode.m} refN={refMode.n}
+            step={RATIO_STEPS[selectedStep]}
+            Q={Q} scheme={scheme}
+            soundEnabled={soundEnabled} playSound={playSound}
+          />
+        </div>
+
+        <div style={{ flex: "1 1 260px", maxWidth: 330 }}>
+          <AnimatedSweep
+            refM={refMode.m} refN={refMode.n}
+            Q={Q} scheme={scheme}
+            soundEnabled={soundEnabled} playSound={playSound}
+          />
+        </div>
+      </div>
+
+      {/* Multi-mode comparison */}
+      <div style={{
+        background: "#0a0a14", borderRadius: 12, padding: 14,
+        border: "1px solid #1a1a2a", marginBottom: 18,
+      }}>
+        <div style={{
+          fontSize: 10, color: "#556", textAlign: "center", marginBottom: 6,
+          textTransform: "uppercase", letterSpacing: 2,
+        }}>
+          Same ratio × every mode — coprime vs locked
+        </div>
+        <div style={{
+          fontSize: 12, color: RATIO_STEPS[selectedStep].color,
+          textAlign: "center", marginBottom: 10,
+        }}>
+          {RATIO_STEPS[selectedStep].label} ({RATIO_STEPS[selectedStep].name})
+          <span style={{ color: "#556", marginLeft: 8, fontSize: 10 }}>
+            {primeFactors(RATIO_STEPS[selectedStep].n)}/{primeFactors(RATIO_STEPS[selectedStep].d)} · {primeLimit(RATIO_STEPS[selectedStep])}-limit
+          </span>
+        </div>
+        <div style={{
+          display: "flex", overflowX: "auto", gap: 6, padding: "4px 2px 8px",
+        }}>
+          {displayModes.map((mode, i) => {
+            const c = isCoprime(mode.m, mode.n);
+            const isCurrent = mode.m === refMode.m && mode.n === refMode.n;
+            return (
+              <div key={i} style={{ flexShrink: 0, textAlign: "center" }}>
+                <PatternCell
+                  refM={mode.m} refN={mode.n}
+                  step={RATIO_STEPS[selectedStep]}
+                  Q={Q} scheme={scheme} size={88}
+                  isActive={isCurrent}
+                  onClick={() => setRefMode({ m: mode.m, n: mode.n })}
+                />
+                <div className="mono" style={{
+                  fontSize: 9.5, fontWeight: 700, marginTop: 2,
+                  color: c ? "#6b9" : mode.m === mode.n ? "#f66" : "#778",
+                }}>
+                  ({mode.m},{mode.n})
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Footer */}
+      <div style={{
+        textAlign: "center", padding: "18px 10px",
+        fontSize: 12, color: "#445", lineHeight: 1.7,
+        borderTop: "1px solid #1a1a2a",
+      }}>
+        Each resonance is a landing. Each ratio is a step. The geometry transforms continuously.
+        <br />
+        Blue notes open corridors. Primes reveal structure. The staircase has no top.
+        <br />
+        <span style={{ fontSize: 10, color: "#334" }}>
+          Jenny (1967) · Chladni (1787) · Bee (2026)
+        </span>
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<ChladniStaircase />);
+</script>
+</body>
+</html>
