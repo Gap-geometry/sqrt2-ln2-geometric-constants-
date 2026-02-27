@@ -1,8 +1,9 @@
+
 # √2 × ln(2): Geometric Constants from H₄
 
 **February 2026** 🚀
 
-This is the complete current framework, including the Binary Tower extension and v3.2 corrections (Gelfond-Schneider rewrite, Baker's map identity, universality of G, multiple √2 origins, √φ/2 vs 1/φ distinction).
+This is the complete current framework, including the Binary Tower extension and v3.3 corrections (Gelfond-Schneider rewrite, Baker's map identity, universality of G, multiple √2 origins, √φ/2 vs 1/φ distinction, Shannon information-theory connection restored).
 
 **Project DOI:** [10.17605/OSF.IO/QH5S2](https://doi.org/10.17605/OSF.IO/QH5S2)
 
@@ -23,8 +24,8 @@ This is the complete current framework, including the Binary Tower extension and
 
 **K_AUD = √2 × ln(2) = 0.9802581435...**
 
-- **√2:** Geometric factor with multiple independent origins (H₄ circumradius, L2 norm, tesseract geometry, algebraic structure) — H₄ is one candidate among several
-- **ln(2):** Information-theoretic selection (Shannon entropy)
+- **√2:** Geometric embedding cost with multiple independent origins (H₄ circumradius, L2 norm, tesseract geometry, algebraic structure) — H₄ is one candidate among several
+- **ln(2):** Information-theoretic binary distinction cost (Shannon's fundamental unit). K_AUD exceeds Shannon's bound for a single binary decision by exactly √2 — the geometric factor that takes a line into a plane. The connection to information theory is unmapped, not absent.
 - **Binary (n=2):** The unique base producing a sub-unity ceiling
 - Equivalently: n^√n < e has unique integer solution n = 2
 - **Baker's map:** K_AUD = ‖(ln 2, ln 2)‖₂ — L2 Lyapunov norm of the 2D Baker's map
@@ -41,7 +42,7 @@ Corridor = 1/φ² − G     (Corridor Identity)
 G = ln(e / 2^√2)        (Gelfond-Schneider Rewrite)
 ```
 
-### The Binary Tower (v3.2)
+### The Binary Tower (v3.3)
 
 ```
 2^k × G = 2^(k-6) × √φ × (1 - ε)
@@ -53,7 +54,7 @@ This is algebraic: 2^k cancels on both sides, so the entire tower reduces to the
 - **k = 5 (32):** 32 × G ≈ √φ/2 ≈ 0.636 (nearby but distinct from 1/φ ≈ 0.618, differing by 2.9%)
 - **k = 6 (64):** Pivot — 64 × G ≈ √φ
 
-### Universality of G (v3.2)
+### Universality of G (v3.3)
 
 - **G is φ-independent:** four independent pathways construct G without the golden ratio
 - **The ceiling is universal:** G = 1 − √2·ln(2) applies to all binary-encoded systems
@@ -82,7 +83,7 @@ Interactive tool showing how Chladni plate geometry evolves through 21 frequency
 |---|-------|-------------|
 | 1 | [Coherence Ceiling](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt) | Original discovery: the constants and binary uniqueness |
 | 2 | [Geometric Constants v2](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/sqrt2_ln2_geometric_constants_v2.txt) | Corridor identity, golden partition, depth scaling |
-| 3 | [Complete Framework v3](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/KAUD_Complete_Framework_v3_0.txt) | Full framework incl. binary tower, Gelfond-Schneider, Baker's map, universality |
+| 3 | [Complete Framework v3](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/KAUD_Complete_Framework_v3_0.txt) | Full framework incl. binary tower, Gelfond-Schneider, Baker's map, universality, Shannon connection restored |
 | 4 | [Gap Scaling 400/11](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Gap_Scaling_Formula_v1.5.txt) | ρ = 400/11 − 1/2500 − 1/939939 (error: 4 × 10⁻¹⁴) |
 
 **Reading order:** 1 → 2 → 3 → 4
