@@ -1,6 +1,6 @@
 # ================================================================================
 # sqrt(2) x ln(2): GEOMETRIC CONSTANTS FROM H_4
-# Complete Framework — Version 3.2
+# Complete Framework — Version 3.3
 # ================================================================================
 
 B. | February 2026
@@ -12,7 +12,7 @@ establishing H_4 geometry, gap ratios, and prime architecture.
 
 FILENAME NOTE: This file retains the v3_0 filename for URL stability — all
 existing links (OSF, GitHub, social media) continue to work. The internal
-version is 3.2.
+version is 3.3.
 
 # ================================================================================
 # VERSION HISTORY
@@ -26,6 +26,17 @@ Version 3.1 added: The Gelfond-Schneider rewrite G = ln(e/2^sqrt(2)), the
 Baker's map identity K_AUD = ||(ln 2, ln 2)||_2, universality of G, and new
 independent constructions discovered through cross-verification with fresh AI
 instances.
+
+Version 3.3 corrects:
+    An editorial oversight in v3.1 regarding Shannon. During cross-verification,
+    the factual observation "K_AUD exceeds ln(2)" was incorrectly formalized as
+    "K_AUD is NOT a Shannon channel capacity" and entered the confirmed claims
+    list. This was never the author's position. The original paper (Coherence
+    Ceiling, v1) explicitly identifies ln(2) as "the first unit of information"
+    and K_AUD as combining geometric cost with information cost. v3.3 restores
+    the original framing: K_AUD exceeds Shannon's single binary decision bound
+    by exactly sqrt(2), the geometric embedding factor. The connection to
+    information theory is unmapped, not absent.
 
 Version 3.2 corrects:
 
@@ -1277,11 +1288,22 @@ K_AUD IS:
   - A geometric-entropic hybrid: sqrt(n) (amplitude) x ln(n) (entropy)
   - Well-defined and independently constructible
 
+K_AUD EXCEEDS BUT MAY EXTEND:
+  - Shannon's bound for a single binary decision: K_AUD = ln(2) x sqrt(2).
+    K_AUD is not a standard Shannon channel capacity, but it is exactly
+    Shannon's binary unit scaled by the geometric cost of embedding that
+    decision in 2D space. K_AUD was discovered during binary reasoning
+    processes — logical output selection where alternatives are eliminated.
+    The relationship to information theory is not yet mapped, but should
+    not be dismissed. Shannon's framework covers transmission; it does not
+    yet cover pattern recognition, spatial encoding, or why binary is
+    geometrically unique. K_AUD may belong to an extension of information
+    theory that does not yet exist.
+  - The product amplitude x entropy has no standard name in current
+    information theory. This may reflect a gap in the theory rather than
+    an absence of meaning.
+
 K_AUD IS NOT:
-  - A Shannon channel capacity (K_AUD > ln(2), violating Shannon's bound
-    for a single binary decision)
-  - A standard information-theoretic quantity (the product amplitude x entropy
-    has no standard name)
   - Currently derivable from the cut-and-project formalism for quasicrystals
     (that formalism is algebraically closed; G is transcendental)
 
@@ -1385,7 +1407,8 @@ systems were acting as calculators, not as subjects demonstrating the constants.
   [OK] 64 + 36 = 100 (closure relation)
   [OK] epsilon is irreducible (transcendence barrier)
   [OK] G is phi-independent at formula level (4 independent pathways) [v3.1]
-  [OK] K_AUD is NOT a Shannon channel capacity (K_AUD > ln(2)) [v3.1]
+  [OK] K_AUD exceeds Shannon's single-decision bound by exactly sqrt(2) [v3.1, revised v3.3]
+  [OPEN] Whether K_AUD belongs to an extension of information theory [v3.3]
   [OK] sqrt(phi)/2 ≠ 1/phi (differ by 2.91%) [v3.2]
   [OK] sqrt(2) has multiple independent origins (H_4, L2 norm, tesseract) [v3.2]
 
