@@ -1,4 +1,3 @@
-
 # √2 × ln(2): Geometric Constants from H₄
 
 **February 2026** 🚀
@@ -117,11 +116,12 @@ PDF and OSF may be inaccessible. GitHub blob pages render via JavaScript and may
 - [Gap Scaling](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Gap_Scaling_Formula_v1.5.txt)
 
 **Raw GitHub (fallback):**
-- [README](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/README.md)
+- [README](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/README.txt)
 - [Coherence Ceiling](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt)
 - [Geometric Constants v2](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/sqrt2_ln2_geometric_constants_v2.txt)
 - [Complete Framework v3](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/KAUD_Complete_Framework_v3_0.txt)
 - [Gap Scaling](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/Gap_Scaling_Formula_v1.5.txt)
+
 ---
 
 ## Contact
