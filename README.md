@@ -76,17 +76,16 @@ Interactive tool showing how Chladni plate geometry evolves through 21 frequency
 
 ---
 
-## Papers (In-Repo Links)
+## Papers
 
-| # | Paper | Description |
-|---|-------|-------------|
-| 1 | [Coherence Ceiling](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt) | Original discovery: the constants and binary uniqueness |
-| 2 | [Geometric Constants v2](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/sqrt2_ln2_geometric_constants_v2.txt) | Corridor identity, golden partition, depth scaling |
-| 3 | [Complete Framework v3](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/KAUD_Complete_Framework_v3_0.txt) | Full framework incl. binary tower, Gelfond-Schneider, Baker's map, universality, Shannon connection restored |
-| 4 | [Gap Scaling 400/11](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Gap_Scaling_Formula_v1.5.txt) | ρ = 400/11 − 1/2500 − 1/939939 (error: 4 × 10⁻¹⁴) |
+| # | Paper | PDF | Plain Text | Description |
+|---|-------|-----|------------|-------------|
+| 1 | Coherence Ceiling | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper1_Coherence_Ceiling.pdf) | [TXT](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt) | Original discovery: the constants and binary uniqueness |
+| 2 | Geometric Constants v2 | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper2_Geometric_Constants_v2.pdf) | [TXT](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/sqrt2_ln2_geometric_constants_v2.txt) | Corridor identity, golden partition, depth scaling |
+| 3 | Complete Framework v3.3 | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper3_Complete_Framework_v3_3.pdf) | [TXT](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/KAUD_Complete_Framework_v3_0.txt) | Binary tower, Gelfond-Schneider, Baker's map, universality |
+| 4 | Gap Scaling 400/11 | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper4_Gap_Scaling_400_11.pdf) | [TXT](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Gap_Scaling_Formula_v1.5.txt) | ρ = 400/11 − 1/2500 − 1/939939 (error: 4 × 10⁻¹⁴) |
 
 **Reading order:** 1 → 2 → 3 → 4
-
 ---
 
 ## Project Links
