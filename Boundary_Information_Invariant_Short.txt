@@ -1,0 +1,290 @@
+================================================================================
+
+                    THE BOUNDARY INFORMATION INVARIANT
+                         OF QUADRATIC SYSTEMS
+
+              √2 × ln(2) across atoms, chaos, and cosmic distances
+
+              D. B. — Gap Geometry Project — March 2026
+
+================================================================================
+
+================================================================================
+Abstract
+
+Three mathematical ingredients — Gaussian smoothing (√2), binary distinction (ln 2), and quadratic curvature — produce a sub-unity ceiling K_AUD = √2 × ln(2) ≈ 0.980 (the “Auditor Key” — a dimensionless bound on binary information density in quadratic systems, introduced in [3]). This document presents published data and exact algebraic relations that converge on the same three ingredients across independent domains: (1) cosmological distance ratios from the DESI DR2 survey; (2) the algebraic framework connecting these constants; (3) atomic electron shell structure reproducing the framework’s landmarks through textbook quantum mechanics; (4) a condensed map of domains where the same pattern appears. All data is from published sources. All algebra is independently verifiable. The framework makes testable predictions for DESI DR3.
+
+================================================================================
+1. Cosmic Distance Ratios Land on Framework Constants
+
+The Dark Energy Spectroscopic Instrument (DESI) Collaboration published baryon acoustic oscillation (BAO) measurements from 14+ million galaxies and quasars across seven redshift bins in Phys. Rev. D 112, 083514 (2025); arXiv:2503.14738, Table IV. When ratios of transverse comoving distances (D_M/r_d) and isotropic distances (D_V/r_d) are computed between redshift bins using DESI’s published values, the following numerical patterns emerge. These ratios are constructed by the present authors from the published table; DESI did not report them.
+
+1.1 Two Independent √2 Hits in Transverse Distances
+
+  Redshift Pair                         Measured Ratio     √2 = 1.41421   Difference         ΛCDM Prediction
+
+  QSO (z=1.484) / LRG3+ELG1 (z=0.934)   1.41462 ± 0.0365   1.41421        +0.00041 (0.03%)   1.37651 (2.7% from √2)
+
+  Lyα (z=2.330) / ELG2 (z=1.321)        1.41235 ± 0.0253   1.41421        −0.00186 (0.13%)   1.39534 (1.3% from √2)
+
+The standard cosmological model (ΛCDM with Planck parameters) predicts these ratios at 1.377 and 1.395 — not √2. The DESI data deviates from ΛCDM specifically in the direction of √2, landing within 0.03% and 0.13% of the geometric constant. Two independent tracer populations, two independent redshift ranges, same constant. (Recipe: 30.519/21.574 and 38.988/27.605, from Table IV rows for QSO, LRG3+ELG1, Lyα, ELG2.)
+
+  Statistical caution: ~30 pairwise ratios × ~6 target constants = ~180 comparisons. Finding one close match in 180 tries at 0.03% is unusual but not definitive. However, finding √2 twice independently in the same observable (D_M) substantially reduces the look-elsewhere concern. ΛCDM does not predict √2 at these redshifts — it predicts 1.377 and 1.395. The data deviates from the standard model in a specific direction toward a specific constant. Testable prediction: DESI DR3 (smaller error bars) should preserve the √2 ratio within 0.1%. If it scatters away, the cosmic connection is noise.
+
+1.2 Additional Framework Constants in DESI Ratios
+
+  Observable                                   Measured     Framework Target   Difference
+
+  D_V(LRG2) / D_V(BGS, Bright Galaxy Survey)   2.02014      2 + G = 2.01974    +0.00040 (0.02%)
+
+  D_V(QSO) / D_V(LRG2)                         1.62382      φ = 1.61803        +0.00578 (0.36%)
+
+  D_M/D_H at z = 0.510                         0.62146      1/φ = 0.61803      +0.00343 (0.55%)
+
+Five numerical near-matches. Four framework constants (√2, φ, 1/φ, G). The constants appear not in the distance values themselves but in the ratios — in how distances at different cosmic epochs relate to each other. These are post-hoc observations from constructed ratios and require dedicated statistical testing to assess significance.
+
+1.3 The 1/2500 Correction Echoes Across Scales
+
+The residual of the D_V ratio after subtracting (2 + G) is +0.000399 — which equals 1/2500 to 0.9 parts per million. The residual of the D_M ratio after subtracting √2 is +0.000406 ≈ 1/2464 = 1/(2⁵ × 7 × 11). The same correction scale (4×10⁻⁴) appears independently in the gap scaling formula ρ = 400/11 − 1/2500 − 1/939939, where 1/2500 = 1/50² is the leading H₄-interior correction term. Three domains, same scale, same structure. The ratio of the two DESI residuals is 0.000399/0.000406 ≈ 0.983, within 0.26% of K_AUD itself.
+
+================================================================================
+2. The Algebraic Framework
+
+The constants appearing in DESI ratios are connected by exact algebraic identities. The central constant K_AUD (“Auditor Key” [3]) combines the geometric embedding factor √2 with Shannon’s binary information unit ln(2):
+
+  K_AUD = √2 × ln(2) = 0.980258143468547... (the ceiling)
+
+  G = 1 − K_AUD = ln(e / 2^{√2}) = 0.019741856531452... (the gap, ~2%)
+
+  Floor = 1/φ = 0.618033988749894... (φ = golden ratio)
+
+  Corridor = K_AUD − 1/φ = 1/φ² − G = 0.362224...
+
+The ceiling decomposes into a local boundary invariant and a global normalization (identified independently by GPT during cross-architecture review):
+
+  K_AUD = (ln(2)/√(2π)) × 2√π = 0.2765... × 3.5449...
+
+where ln(2)/√(2π) ≈ 0.276 is the information density at any Gaussian-smoothed binary boundary and 2√π is the Gaussian normalization converting boundary density to total capacity.
+
+2.1 Binary Uniqueness
+
+For K(n) = √n × ln(n), the value n = 2 is the ONLY integer base n ≥ 2 for which K(n) < 1. For n = 3: K = 1.903. For n = 4: K = 2.773. Binary is the unique non-trivial base where the information-geometric product stays below unity. This is geometric singularity, not convention.
+
+2.2 The Gap Scaling Formula
+
+Let δ ≈ 4.6692 denote Feigenbaum’s universal period-doubling constant. The ratio ρ bridges the geometric gap G and the chaotic gap (δ − 14/3):
+
+  ρ = δ × G / (δ − 14/3) = 400/11 − 1/2500 − 1/939939
+
+The denominators encode the framework’s prime hierarchy: 400 = 4² × 5² and 11 is the first prime outside H₄ closure. The correction terms: 2500 = 2² × 5⁴ = 50² (H₄-interior primes only); 939939 = 3 × 7 × 11 × 13 × 313 (the full prime chain including boundary and intruder primes). The correction scale 1/2500 = 4×10⁻⁴ reappears independently in DESI BAO residuals (Section 1.3).
+
+The formula agrees with the definition to 4×10⁻¹⁴. The convergents of ρ’s continued fraction are 36/1, 73/2, 109/3, 400/11 — with the mirror prime 73 structurally stable under perturbation of δ by ±10⁻⁵.
+
+2.3 The 50² Hinge
+
+The gap G’s continued fraction begins [0; 50, 1, 1, 1, 7, ...]. The integer 50 is simultaneously: (a) the first CF denominator of G, (b) the electron shell capacity at n = 5 (quantum mechanics: 2 × 5² = 50), and (c) the square root of the first correction term denominator (1/2500 = 1/50²) in the gap scaling formula.
+
+Three independent mathematical objects — the gap’s own fractional structure, the quantum mechanical shell formula, and the correction hierarchy of the gap scaling ratio — converge on the same integer. The same correction scale (≈ 4×10⁻⁴) appears in DESI BAO residuals (Section 1.3). No fitting was applied.
+
+2.4 The Landauer Crossing
+
+The tower’s energetic staircase has a decisive step at its center. At step 36, the accumulated cost 36G ≈ 1/√2 (pure geometry). At step 37, the accumulated cost 37G ≈ 1/(2 ln 2) (the Landauer information penalty). The crossing between them is algebraically exact:
+
+  1/(2 ln 2) − 1/√2 = G/(2 ln 2) [exact identity]
+
+The cost of crossing from pure geometry to geometry carrying information is exactly one gap G denominated in Landauer bit-erasure units (2 ln 2 = the thermodynamic cost of erasing two bits). This is not a near-miss — it is an identity. It means the gap is not merely a mathematical curiosity: it is the thermodynamic price of encoding binary information into geometric structure. Every act of binary distinction costs G in Landauer units, and the tower’s staircase is the accounting of those costs.
+
+The gap itself has a deeper algebraic identity in transcendence theory:
+
+  G = 1 − √2 × ln(2) = ln(e / 2^{√2}) [exact]
+
+G is the natural logarithm of the ratio e / 2^{√2}. The number 2^{√2} is proven transcendental by the Gelfond–Schneider theorem (1934). The gap measures the logarithmic distance between two of the most fundamental constants in number theory. It is not an arbitrary construction.
+
+2.5 Reading the Tower in Physical Units
+
+The tower is dimensionless because the three ingredients are dimensionless: √2 is a geometric ratio, ln(2) is an information measure, and quadratic curvature is a shape. The framework has no native units. When applied to a specific physical system, the appropriate physical constant provides the conversion. The RATIOS remain identical in every unit system — that is why the same framework appears across domains.
+
+  Tower Quantity      × Physical Constant          = Physical Quantity              Example
+
+  G (one gap)         kT ln(2)                     Landauer cost per gap            0.354 meV at 300K
+
+  nG (tower height)   (dimensionless)              Approach to framework constant   50G ≈ K_AUD
+
+  Δ / kT ln(2)        (crystal field / Landauer)   Bit cost of d-transition         55 bits (hemoglobin)
+
+  D_M(z₂)/D_M(z₁)     (BAO distance ratio)         Cosmic ratio                     √2 (DESI)
+
+Binary is not a choice of convention. It is the unique integer base where K(n) = √n × ln(n) < 1. The framework works in binary because binary is where the sub-unity ceiling exists. Other bases produce K(n) > 1 and no bounded organizational structure appears. The tower describes the structure of relationships; the units describe which system you are looking at.
+
+================================================================================
+3. Atomic Structure Reproduces the Tower
+
+The Schrödinger equation with Pauli exclusion gives electron shell capacities of 2n². These standard quantum mechanical results land on the framework’s landmarks:
+
+  Shell (n)   Capacity 2n²   Tower Value nG   Framework Landmark              Relative Difference
+
+  3           18             18G = 0.3554     √2/4 = 0.3536 (Romeo optimum)   +0.51%
+
+  4           32             32G = 0.6317     1/φ = 0.6180 (Floor)            +2.22%
+
+  5           50             50G = 0.9871     K_AUD = 0.9803 (Ceiling)        +0.70%
+
+Shell transition gaps Δ = 4n + 2 produce the framework’s primes in sequence: Δ(1→2) = 6 = 2×3, Δ(2→3) = 10 = 2×5, Δ(3→4) = 14 = 2×7, Δ(4→5) = 18 = 2×3², Δ(5→6) = 22 = 2×11, Δ(6→7) = 26 = 2×13. The primes 3, 5, 7, 11, 13 emerge from the shell transition formula without framework input.
+
+3.1 The Orbital Hierarchy: Where √2 Enters Physics
+
+Every electron orbital has angular momentum L = ħ√(ℓ(ℓ+1)), where ℓ is the orbital quantum number. This is textbook quantum mechanics (Schrödinger 1926). The exact values are:
+
+  Orbital   ℓ    L = ħ√(ℓ(ℓ+1))   Decomposition             Role in Framework
+
+  s         0    0                — (no angular momentum)   No barrier. Electron touches nucleus.
+
+  p         1    ħ√2              √2 alone                  THE geometric ingredient, exact.
+
+  d         2    ħ√6 = ħ√2×√3     geometry × structure      Both ingredients combined.
+
+  f         3    ħ√12 = 2ħ√3      2 × structure             Binary × structure, √2 absent.
+
+The p-electron carries exactly ħ√2 — the geometric ingredient, pure. The d-electron carries ħ√2×√3 — geometry multiplied by structure. The f-electron carries 2ħ√3 — binary times structure, with √2 absent. The ratio L_f / L_d = √2 exactly. Each orbital type is a different combination of the framework’s ingredients, expressed in the angular momentum that every electron of that type carries.
+
+This is not interpretation. These are the eigenvalues of the angular momentum operator in standard quantum mechanics, measured in every spectroscopy laboratory on Earth since the 1920s.
+
+3.2 The Self-Generated Gap
+
+Each electron with ℓ > 0 generates a centrifugal barrier: V_cf = ħ²ℓ(ℓ+1) / (2mr²). This barrier creates a region of space near the nucleus that the electron cannot access — a gap. The gap is not imposed from outside. It is created by the electron’s own angular momentum. The act of being organized (having angular momentum) produces the breathing room.
+
+For the s-electron (ℓ = 0): no barrier. The electron touches the nucleus. No gap. For the p-electron (ℓ = 1): barrier proportional to √2. For the d-electron (ℓ = 2): barrier proportional to √6 = √2×√3. The d-electron gap is exactly 3× the p-electron gap at the same radius. More organization → larger gap. The system makes its own breathing room by the act of being organized.
+
+This is the physical mechanism behind the abstract framework: the gap is not a mathematical curiosity. It is the centrifugal barrier generated by organized angular momentum. It exists in every atom with d-electrons — every transition metal, every biological metalloprotein, every catalytic center in chemistry.
+
+3.3 Why d-Electrons Are the Window
+
+The theoretical gap generated by angular momentum becomes directly measurable when d-electrons interact with their chemical environment. Crystal field splitting separates the five d-orbitals into energy levels whose difference Δ can be observed spectroscopically — converting the self-generated gap from an abstract barrier into a number in a spectrometer. The d-block (elements 21–30, 39–48, 72–80) is where this measurement is cleanest, for specific physical reasons.
+
+In contrast: s-electrons have no angular momentum and no splitting. p-electrons split but weakly (their ħ√2 angular momentum is smaller). f-electrons are deeply buried and shielded from external fields. The d-electron is the orbital where angular momentum is large enough to create a significant gap, exposed enough to respond to its environment, and measurable enough to produce tabulated crystal field splittings across hundreds of compounds.
+
+The d-electron is not special because of the framework. The framework is VISIBLE because of the d-electron. It is the window through which the self-generated gap can be measured in real chemistry.
+
+3.4 Biological d-Electrons in Landauer Units
+
+Crystal field splittings of d-electrons in metalloproteins, converted to Landauer bit costs at biological temperature (kT ln 2 at 300 K ≈ 0.01792 eV; conversion: 1 cm⁻¹ = 1.2398 × 10⁻⁴ eV; bits = Δ / kT ln 2):
+
+  System                 Measured Δ (cm⁻¹)   Δ (eV)     Landauer Bits   Factorization
+
+  Fe²⁺ in water (lab)    ~10,400             ~1.289     ~72             2³ × 3²
+
+  Fe²⁺ in hemoglobin     ~8,000              ~0.992     ~55             5 × 11
+
+  Cu²⁺ in plastocyanin   ~5,000              ~0.620     ~35             5 × 7
+
+Biological environments consistently produce Landauer costs that factorize into the framework’s primes {5, 7, 11}; the non-biological lab case does not. The value 55 = F₁₀ (the 10th Fibonacci number, converging to φ). These values carry ±10% experimental uncertainty typical of crystal-field spectroscopy and are presented as a documented pattern, not an exact result. The numbers 72 and 35 were independently confirmed by GPT and Grok without prior knowledge of the framework’s expected values.
+
+The chain is: angular momentum (ħ√2×√3, exact) → centrifugal barrier (self-generated gap, exact) → crystal field splitting (measurable, ±10%) → Landauer cost (55 = 5×11, 35 = 5×7, approximate but structured). The exact parts are exact. The approximate parts are approximate. The connection runs through standard quantum mechanics at every step.
+
+================================================================================
+4. The Map: Same Invariant Across Domains
+
+The following table shows six additional domains (beyond the DESI cosmological data in Section 1) where the three ingredients produce identifiable gaps, ceilings, or irreducible penalties. A full catalog covering 40+ domains has been compiled and is available upon request.
+
+  Domain               What They Call It         The Gap/Ceiling                                   Three Ingredients
+
+  Information Theory   PI bound (Romeo 2025)     PI ≤ 1 − 1/(2 ln 2)                               Binary + Gaussian blur
+
+  Quantum Mechanics    Zero-point energy         ħ/2, ΔxΔp ≥ ħ/2                                   Binary qubit + quadratic
+
+  Atomic Shells        Shell capacity 2n²        18, 32, 50 = tower landmarks                      Binary occupation + √2
+
+  Nuclear Physics      Base-2 node correlation   r_s = −0.673 (d-block, p<0.0001) [own analysis]   Binary density + √2
+
+  Chaos Theory         Feigenbaum universality   δ gap bridged by ρ = 400/11                       Binary doubling + quadratic
+
+  Chladni Acoustics    Nodal line geometry       Coprime vs locked modes                           Binary classification + √2
+
+Together with the DESI BAO data in Section 1, these domains span 40 orders of magnitude in scale (quantum vacuum to cosmic distances) and originate from independent research communities with no knowledge of each other’s results. The same three ingredients appear because they describe a structural fact: the boundary information invariant of quadratic systems.
+
+4.1 The Romeo Connection
+
+Romeo, N. et al. (2025), “Information bounds the robustness of self-organized systems” (arXiv:2511.01682). This independent theoretical work proves that positional information in self-organized binary systems with short-range correlations is bounded below its maximum — a sub-unity ceiling exists, the optimum is at intermediate coupling, and the bound is geometric (interface-based, not noise-dependent). Their optimal domain wall involves the factors √2/4 and ln(2) independently. Our observation: the product of these factors yields an exact identity with the framework’s organizing scale:
+
+  √2/4 × ln(2) = K_AUD/4 [algebraically exact — our interpretation of their result]
+
+Neither framework references the other. Romeo et al. do not state this identity in their paper. The connecting identity is an algebraic fact about the product of their optimal width and the binary information unit, observed by the present authors.
+
+================================================================================
+5. Method, Credits, and Falsifiability
+
+5.1 Collaborative Method
+
+This work was developed through structured collaboration between a human researcher and multiple AI architectures. Each instance worked independently; no instance was shown another’s results before producing its own (the “Giant Principle”: cross-architecture vocabulary divergence strengthens rather than weakens validation). Key contributions:
+
+D. B. — Framework originator, pattern recognition, experimental design, cross-domain mapping. Published under DOI: 10.17605/OSF.IO/QH5S2.
+
+Claude (Opus, Anthropic) — Primary architectural partner. Energetic staircase, atomic angular momentum analysis, Landauer connection, document architecture.
+
+Grok (xAI) — Independent verification at 150-digit precision. 50² hinge discovery, DESI BAO residual match, CF convergent verification, 73/2 stability testing.
+
+GPT (OpenAI) — Local-global K_AUD decomposition (ln(2)/√(2π) × 2√π), formal name “Boundary Information Invariant of Quadratic Systems,” independent Landauer bit cost confirmation (72 and 35), H₄ prime boundary analysis.
+
+Gemini (Google) — KAM framework for ρ as mode-locking winding number, correction hierarchy analysis, topological interpretation of 400/11 convergent structure.
+
+Sonnet (Anthropic) — Bridge depth of 55, independently matching Fe²⁺ hemoglobin Landauer cost.
+
+5.2 Falsifiability
+
+The framework makes specific, testable predictions:
+
+1. DESI DR3 prediction: the ratio D_M(QSO)/D_M(LRG3+ELG1) should remain within 0.1% of √2 as statistical errors shrink by ~30%. If it scatters away from √2, the cosmic connection is noise.
+
+2. Crystal field prediction: higher-precision measurements of Fe²⁺ hemoglobin splitting should yield a Landauer cost near 55 (not 56). The distinction matters because 55 = 5 × 11 (framework primes) while 56 = 2³ × 7 (different structure).
+
+3. Binary uniqueness prediction: repeating Romeo et al.’s DIM simulation with ternary states (Z=3) should produce PI_max > 1, losing the sub-unity ceiling.
+
+4. The gap scaling formula predicts that if a fourth correction term exists beyond 1/939939, its denominator should factorize into primes from the same hierarchy {2, 3, 5, 7, 11, 13, ...}.
+
+5.3 What This Is And Isn’t
+
+This is a MAP, not a theory. It documents where the same three mathematical ingredients produce the same invariant across independent domains. It does not explain WHY these ingredients are universal — it shows WHERE they appear. The algebraic identities are exact. The atomic shell mappings use published textbook physics. The DESI data is published and peer-reviewed. The interpretation is the authors’; the data is not. Published papers and interactive tools are available at: gap-geometry.github.io
+
+5.4 Confidence Hierarchy
+
+  Layer               Content                                                 Confidence            Status
+
+  1. Mathematics      K_AUD identities, binary uniqueness, gap scaling        Proven                Published (4 DOIs)
+
+  2. Atomic/Nuclear   Shell mappings, d-electron analysis, FOM correlations   Statistical           Draft
+
+  3. Connections      Romeo bridge, Landauer costs, prime-element map         Structural parallel   Documented
+
+  4. Cosmic           DESI BAO ratio hits                                     Provisional (~1σ)     Awaiting DR3
+
+Each layer references the one below it. No layer carries weight it shouldn’t. The stack protects strong findings from being diluted by provisional ones.
+
+The same three ingredients appear across independent domains because they describe a structural fact about binary information at quadratic boundaries. This document traces where that fact has already been measured.
+
+================================================================================
+References
+
+[1] DESI Collaboration. “DESI DR2 results I: Baryon acoustic oscillations from galaxy, quasar, and Lyman-α forest tracers.” Phys. Rev. D 112, 083514 (2025). arXiv:2503.14738. Table IV.
+
+[2] Romeo, N., Bhatt, K., Bhaya-Grossman, I. et al. “Information bounds the robustness of self-organized systems.” arXiv:2511.01682v2 (2025). Sub-unity PI ceiling in binary systems; optimal domain wall involves √2/4 and ln(2).
+
+[3] D. B. “Coherence Ceiling.” OSF, DOI: 10.17605/OSF.IO/5VZ2R (2026). K_AUD = √2 × ln(2), binary uniqueness proof.
+
+[4] D. B. “Geometric Constants v2.” OSF, DOI: 10.17605/OSF.IO/SJBE9 (2026). Floor, ceiling, corridor, depth scaling.
+
+[5] D. B. “Complete Framework v3.” OSF, DOI: 10.17605/OSF.IO/QH5S2 (2026). Binary Tower, pivot at 64.
+
+[6] D. B. “Gap Scaling 400/11.” OSF, DOI: 10.17605/OSF.IO/C4GK5 (2026). ρ = 400/11 − 1/2500 − 1/939939, precision 4×10⁻¹⁴.
+
+[7] Feigenbaum, M. J. “Universal behavior in nonlinear systems.” Los Alamos Science 1(1), 4–27 (1980). δ = 4.6692016...
+
+[8] Gelfond, A. O. “Sur le septième problème de Hilbert.” Izv. Akad. Nauk SSSR 7, 623–634 (1934). 2^{√2} transcendental.
+
+[9] Mayer, M. G. & Jensen, J. H. D. “Elementary Theory of Nuclear Shell Structure.” Wiley (1955). Nuclear magic number 50 via 1g₉/₂ spin-orbit.
+
+[10] Landauer, R. “Irreversibility and heat generation in the computing process.” IBM J. Res. Dev. 5(3), 183–191 (1961). Bit erasure cost kT ln 2.
+
+Published papers, plain-text versions, and interactive tools available at: gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
+
+================================================================================
+Gap Geometry — github.com/Gap-geometry/sqrt2-ln2-geometric-constants-
