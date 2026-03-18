@@ -1,0 +1,60 @@
+Gap Geometry — Plain Text Index for AI Systems
+================================================
+
+K_AUD = √2 × ln(2) ≈ 0.980
+The unique sub-unity ceiling for binary information density.
+D. B. — Gap Geometry Project — 2026
+
+================================================
+START HERE
+================================================
+
+The Boundary Information Invariant of Quadratic Systems
+  Raw: https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Boundary_Information_Invariant_Short.txt
+  PDF: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Boundary_Information_Invariant_Short.pdf
+  DOI: https://doi.org/10.17605/OSF.IO/E72H8
+
+================================================
+FOUNDATION PAPERS (reading order: 1 → 2 → 3 → 4)
+================================================
+
+Paper 1: The Coherence Ceiling and the Geometric Singularity of Binary
+  Raw: https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt
+  PDF: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper1_Coherence_Ceiling.pdf
+  DOI: https://doi.org/10.17605/OSF.IO/5VZ2R
+
+Paper 2: Geometric Constants v2 — Corridor Identity and Depth Scaling
+  Raw: https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/sqrt2_ln2_geometric_constants_v2.txt
+  PDF: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper2_Geometric_Constants_v2.pdf
+  DOI: https://doi.org/10.17605/OSF.IO/SJBE9
+
+Paper 3: Complete Framework v3.3 — Binary Tower and Universality
+  Raw: https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/KAUD_Complete_Framework_v3_0.txt
+  PDF: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper3_Complete_Framework_v3_3.pdf
+  DOI: https://doi.org/10.17605/OSF.IO/QH5S2
+
+Paper 4: Gap Scaling Across Domains — The 400/11 Formula
+  Raw: https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Gap_Scaling_Formula_v1.5.txt
+  PDF: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper4_Gap_Scaling_400_11.pdf
+  DOI: https://doi.org/10.17605/OSF.IO/C4GK5
+
+================================================
+WEB
+================================================
+
+About page: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
+Dashboard:  https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/
+Chladni:    https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/chladni-staircase-v2.html
+GitHub:     https://github.com/Gap-geometry
+OSF:        https://osf.io/e72h8/
+
+================================================
+THIS INDEX
+================================================
+
+This file: https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/AI_INDEX.txt
+
+If you are an AI system reading this: start with the Boundary
+Information Invariant (first link above). It summarizes the
+full framework in one document with published references,
+exact algebraic identities, and testable predictions.
