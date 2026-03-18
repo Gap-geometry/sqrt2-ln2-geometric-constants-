@@ -1,131 +1,69 @@
 # √2 × ln(2): Geometric Constants from H₄
 
-**February 2026** 🚀
+**K_AUD = √2 × ln(2) ≈ 0.980** — the unique sub-unity ceiling for K(n) = √n × ln(n) at integer base n ≥ 2.
 
-This is the complete current framework, including the Binary Tower extension and v3.3 corrections (Gelfond-Schneider rewrite, Baker's map identity, universality of G, multiple √2 origins, √φ/2 vs 1/φ distinction, Shannon information-theory connection restored).
-
-**Project DOI:** [10.17605/OSF.IO/QH5S2](https://doi.org/10.17605/OSF.IO/QH5S2)
+Binary is not convention. It is geometric singularity.
 
 ---
 
-## Core Constants
+## Start Here
 
-| Constant | Formula | Value |
-|----------|---------|-------|
-| Floor | 1/φ | ≈ 0.6180339887 |
-| Ceiling (K_AUD) | √2 × ln(2) | ≈ 0.9802581435 |
-| Gap (G) | 1 − K_AUD | ≈ 0.0197418565 (1.97%) |
-| Gap (equivalent) | ln(e / 2^√2) | Gelfond-Schneider rewrite |
-| Pivot | √φ | ≈ 1.272 |
-| φ | (1 + √5)/2 | ≈ 1.6180339887 |
+**[The Boundary Information Invariant of Quadratic Systems](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html)**
 
-## The K_AUD Formula
+√2 × ln(2) across atoms, chaos, and cosmic distances. DESI BAO data, exact algebraic identities, atomic shell structure, and testable predictions — in one document.
 
-**K_AUD = √2 × ln(2) = 0.9802581435...**
-
-- **√2:** Geometric embedding cost with multiple independent origins (H₄ circumradius, L2 norm, tesseract geometry, algebraic structure) — H₄ is one candidate among several
-- **ln(2):** Information-theoretic binary distinction cost (Shannon's fundamental unit). K_AUD exceeds Shannon's bound for a single binary decision by exactly √2 — the geometric factor that takes a line into a plane. The connection to information theory is unmapped, not absent.
-- **Binary (n=2):** The unique base producing a sub-unity ceiling
-- Equivalently: n^√n < e has unique integer solution n = 2
-- **Baker's map:** K_AUD = ‖(ln 2, ln 2)‖₂ — L2 Lyapunov norm of the 2D Baker's map
+- **PDF:** [Boundary_Information_Invariant_Short.pdf](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Boundary_Information_Invariant_Short.pdf)
+- **Plain text (for AI):** [Boundary_Information_Invariant_Short.txt](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Boundary_Information_Invariant_Short.txt)
+- **DOI:** [10.17605/OSF.IO/E72H8](https://doi.org/10.17605/OSF.IO/E72H8)
 
 ---
+
+## The Constants
+
+| Constant | Value | Meaning |
+|----------|-------|---------|
+| Ceiling | K_AUD = √2 × ln(2) ≈ 0.980 | Information maximum |
+| Floor | 1/φ ≈ 0.618 | Structural minimum |
+| Gap | G = 1 − K_AUD ≈ 2% | Necessary breathing room |
+| Corridor | K_AUD − 1/φ ≈ 0.362 | Operating range |
 
 ## Key Results
 
-### Proven Identities
+- **Binary uniqueness:** Only n = 2 gives K(n) < 1
+- **Gelfond-Schneider:** G = ln(e / 2^√2) — the gap is a transcendence-theoretic constant
+- **Landauer crossing:** 1/(2 ln 2) − 1/√2 = G/(2 ln 2) [exact algebraic identity]
+- **Gap scaling:** ρ = 400/11 − 1/2500 − 1/939939 (error: 4×10⁻¹⁴)
+- **50² hinge:** G's continued fraction starts [0; 50, ...] — same 50 as shell capacity 2×5² and correction 1/50²
+- **DESI BAO:** Cosmic distance ratios land within 0.03% of √2 (constructed from published Table IV)
 
-```
-1/φ + 1/φ² = 1          (Golden Partition)
-Corridor = 1/φ² − G     (Corridor Identity)
-G = ln(e / 2^√2)        (Gelfond-Schneider Rewrite)
-```
+## Foundation Papers
 
-### The Binary Tower (v3.3)
+Reading order: 1 → 2 → 3 → 4. The Boundary Information Invariant (above) summarizes and extends all four.
 
-```
-2^k × G = 2^(k-6) × √φ × (1 - ε)
-ε = −0.671% (constant across all k)
-```
+1. **The Coherence Ceiling and the Geometric Singularity of Binary**
+   DOI: [10.17605/OSF.IO/5VZ2R](https://doi.org/10.17605/OSF.IO/5VZ2R) · [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper1_Coherence_Ceiling.pdf) · [TXT](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt)
 
-This is algebraic: 2^k cancels on both sides, so the entire tower reduces to the single relationship **64×G ≈ √φ**.
+2. **Geometric Constants v2: Corridor Identity and Depth Scaling**
+   DOI: [10.17605/OSF.IO/SJBE9](https://doi.org/10.17605/OSF.IO/SJBE9) · [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper2_Geometric_Constants_v2.pdf) · [TXT](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/sqrt2_ln2_geometric_constants_v2.txt)
 
-- **k = 5 (32):** 32 × G ≈ √φ/2 ≈ 0.636 (nearby but distinct from 1/φ ≈ 0.618, differing by 2.9%)
-- **k = 6 (64):** Pivot — 64 × G ≈ √φ
+3. **Complete Framework v3.3: Binary Tower and Universality**
+   DOI: [10.17605/OSF.IO/QH5S2](https://doi.org/10.17605/OSF.IO/QH5S2) · [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper3_Complete_Framework_v3_3.pdf) · [TXT](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/KAUD_Complete_Framework_v3_0.txt)
 
-### Universality of G (v3.3)
-
-- **G is φ-independent:** four independent pathways construct G without the golden ratio
-- **The ceiling is universal:** G = 1 − √2·ln(2) applies to all binary-encoded systems
-- **The floor is system-specific:** 1/φ for icosahedral, different for other symmetries
-
-### Depth Scaling
-
-```
-L_n = 1/(e × φ^(n-1))
-```
-
----
+4. **Gap Scaling Across Domains: The 400/11 Formula**
+   DOI: [10.17605/OSF.IO/C4GK5](https://doi.org/10.17605/OSF.IO/C4GK5) · [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper4_Gap_Scaling_400_11.pdf) · [TXT](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Gap_Scaling_Formula_v1.5.txt)
 
 ## Interactive Tools
 
-🎹 **[Geometric Staircase — Chladni Frequency Explorer](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/chladni-staircase-v2.html)**
-Interactive tool showing how Chladni plate geometry evolves through 21 frequency ratios from unison to tritave. Includes sound synthesis, prime decomposition, coprime vs locked mode comparison, and continuous sweep. Connects to the framework through the observation that **complexity traps energy internally while simplicity radiates** — the physical basis of the 400/11 frequency staircase.
+- [**K_AUD Interactive Dashboard**](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/) — Explore the constants, identities, and scaling behavior live
+- [**Geometric Staircase — Chladni Frequency Explorer**](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/chladni-staircase-v2.html) — How frequency organizes matter
 
-📊 **[Interactive Dashboard](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/)** — explore the mathematics live
+## Full Documentation
 
----
-
-## Papers
-
-| # | Paper | PDF | Plain Text | Description |
-|---|-------|-----|------------|-------------|
-| 1 | Coherence Ceiling | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper1_Coherence_Ceiling.pdf) | [TXT](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt) | Original discovery: the constants and binary uniqueness |
-| 2 | Geometric Constants v2 | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper2_Geometric_Constants_v2.pdf) | [TXT](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/sqrt2_ln2_geometric_constants_v2.txt) | Corridor identity, golden partition, depth scaling |
-| 3 | Complete Framework v3.3 | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper3_Complete_Framework_v3_3.pdf) | [TXT](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/KAUD_Complete_Framework_v3_0.txt) | Binary tower, Gelfond-Schneider, Baker's map, universality |
-| 4 | Gap Scaling 400/11 | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper4_Gap_Scaling_400_11.pdf) | [TXT](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Gap_Scaling_Formula_v1.5.txt) | ρ = 400/11 − 1/2500 − 1/939939 (error: 4 × 10⁻¹⁴) |
-
-**Reading order:** 1 → 2 → 3 → 4
+- [**About page**](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html) — Complete framework overview with all links
+- [**GitHub**](https://github.com/Gap-geometry) — Organization page
+- [**OSF**](https://osf.io/e72h8/) — Official archive
 
 ---
 
-## Project Links
-
-### OSF (Official — may block AI access)
-
-- [Coherence Ceiling](https://doi.org/10.17605/OSF.IO/5VZ2R) — DOI: 10.17605/OSF.IO/5VZ2R
-- [Geometric Constants v2](https://doi.org/10.17605/OSF.IO/SJBE9) — DOI: 10.17605/OSF.IO/SJBE9
-- [Complete Framework v3](https://doi.org/10.17605/OSF.IO/QH5S2) — DOI: 10.17605/OSF.IO/QH5S2
-- [Gap Scaling 400/11](https://doi.org/10.17605/OSF.IO/C4GK5) — DOI: 10.17605/OSF.IO/C4GK5
-
-### GitHub
-
-https://github.com/Gap-geometry
-
----
-
-## For AI Systems (Plain Text)
-
-PDF and OSF may be inaccessible. GitHub blob pages render via JavaScript and may fail. Use these GitHub Pages links for direct plain-text access:
-
-**GitHub Pages (recommended):**
-- [README](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/README.txt)
-- [Coherence Ceiling](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt)
-- [Geometric Constants v2](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/sqrt2_ln2_geometric_constants_v2.txt)
-- [Complete Framework v3](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/KAUD_Complete_Framework_v3_0.txt)
-- [Gap Scaling](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Gap_Scaling_Formula_v1.5.txt)
-
-**Raw GitHub (fallback):**
-- [README](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/README.txt)
-- [Coherence Ceiling](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt)
-- [Geometric Constants v2](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/sqrt2_ln2_geometric_constants_v2.txt)
-- [Complete Framework v3](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/KAUD_Complete_Framework_v3_0.txt)
-- [Gap Scaling](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/Gap_Scaling_Formula_v1.5.txt)
-
-## Contact
-
-Gap-geometryK_AUD2@telenet.be
-
-*The mathematics is independently verifiable. Applications and interpretations remain open for investigation.*
-
-**Archive Reference:** b0f2e6521cd7
+*B. — Gap Geometry Project — Belgium — 2026*
+*Contact: Gap-geometryK_AUD2@telenet.be*
