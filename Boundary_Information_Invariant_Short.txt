@@ -287,4 +287,4 @@ References
 Published papers, plain-text versions, and interactive tools available at: gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
 
 ================================================================================
-Gap Geometry — github.com/Gap-geometry/sqrt2-ln2-geometric-constants-
+https://github.com/Gap-geometry
