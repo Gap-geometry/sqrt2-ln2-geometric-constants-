@@ -37,7 +37,7 @@
         ],
         "keywords": ["geometric constants", "H4 polytope", "golden ratio", "binary uniqueness", "Feigenbaum constant", "information theory", "Baker map", "Gelfond-Schneider", "DESI BAO", "Landauer principle", "boundary information invariant"],
         "datePublished": "2026-01-25",
-        "dateModified": "2026-03-18"
+        "dateModified": "2026-03-23"
     }
     </script>
     
@@ -74,7 +74,6 @@
             padding: 60px 24px 80px;
         }
 
-        /* Header */
         header {
             text-align: center;
             padding-bottom: 40px;
@@ -91,227 +90,60 @@
             margin: 20px 0 8px;
         }
 
-        h1 {
-            font-size: 22px;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-            margin-bottom: 12px;
-        }
+        h1 { font-size: 22px; font-weight: 600; letter-spacing: 0.5px; margin-bottom: 12px; }
+        .subtitle { font-size: 15px; color: var(--muted); font-style: italic; }
+        .author-line { margin-top: 16px; font-size: 14px; color: var(--muted); }
 
-        .subtitle {
-            font-size: 15px;
-            color: var(--muted);
-            font-style: italic;
-        }
-
-        .author-line {
-            margin-top: 16px;
-            font-size: 14px;
-            color: var(--muted);
-        }
-
-        /* Sections */
         h2 {
-            font-size: 18px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: var(--accent);
-            margin: 48px 0 20px;
-            padding-bottom: 8px;
+            font-size: 18px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 2px; color: var(--accent);
+            margin: 48px 0 20px; padding-bottom: 8px;
             border-bottom: 1px solid var(--rule);
         }
 
-        h3 {
-            font-size: 17px;
-            font-weight: 600;
-            margin: 28px 0 12px;
-            color: var(--ink);
-        }
-
+        h3 { font-size: 17px; font-weight: 600; margin: 28px 0 12px; color: var(--ink); }
         p { margin-bottom: 16px; }
 
-        .constant-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 16px;
-            margin: 24px 0;
-        }
+        .constant-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .constant-card { background: var(--code-bg); padding: 16px 20px; border-left: 3px solid var(--accent); }
+        .constant-card .label { font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 4px; }
+        .constant-card .value { font-family: 'JetBrains Mono', monospace; font-size: 16px; font-weight: 500; }
+        .constant-card .name { font-size: 14px; color: var(--accent); margin-top: 4px; }
 
-        .constant-card {
-            background: var(--code-bg);
-            padding: 16px 20px;
-            border-left: 3px solid var(--accent);
-        }
-
-        .constant-card .label {
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: var(--muted);
-            margin-bottom: 4px;
-        }
-
-        .constant-card .value {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 16px;
-            font-weight: 500;
-        }
-
-        .constant-card .name {
-            font-size: 14px;
-            color: var(--accent);
-            margin-top: 4px;
-        }
-
-        /* Papers table */
-        .papers-list {
-            margin: 24px 0;
-        }
-
-        .paper-entry {
-            padding: 16px 0;
-            border-bottom: 1px solid var(--rule);
-        }
-
+        .papers-list { margin: 24px 0; }
+        .paper-entry { padding: 16px 0; border-bottom: 1px solid var(--rule); }
         .paper-entry:last-child { border-bottom: none; }
+        .paper-number { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent); display: inline-block; width: 24px; }
+        .paper-title { font-weight: 600; }
+        .paper-doi { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--muted); display: block; margin-top: 4px; }
+        .paper-desc { font-size: 15px; color: var(--muted); margin-top: 4px; }
 
-        .paper-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            color: var(--accent);
-            display: inline-block;
-            width: 24px;
-        }
+        a { color: var(--accent); text-decoration: none; border-bottom: 1px solid var(--accent-light); transition: border-color 0.2s; }
+        a:hover { border-bottom-color: var(--accent); }
 
-        .paper-title {
-            font-weight: 600;
-        }
-
-        .paper-doi {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            color: var(--muted);
-            display: block;
-            margin-top: 4px;
-        }
-
-        .paper-desc {
-            font-size: 15px;
-            color: var(--muted);
-            margin-top: 4px;
-        }
-
-        a {
-            color: var(--accent);
-            text-decoration: none;
-            border-bottom: 1px solid var(--accent-light);
-            transition: border-color 0.2s;
-        }
-
-        a:hover {
-            border-bottom-color: var(--accent);
-        }
-
-        /* Key results */
         .result-block {
-            background: var(--code-bg);
-            padding: 20px 24px;
-            margin: 20px 0;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            line-height: 1.8;
-            white-space: pre-wrap;
+            background: var(--code-bg); padding: 20px 24px; margin: 20px 0;
+            font-family: 'JetBrains Mono', monospace; font-size: 14px;
+            line-height: 1.8; white-space: pre-wrap;
             border-left: 3px solid var(--highlight);
         }
 
-        /* Uniqueness table */
-        .base-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 15px;
-        }
+        .base-table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 15px; }
+        .base-table th { text-align: left; padding: 8px 12px; border-bottom: 2px solid var(--ink); font-size: 13px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+        .base-table td { padding: 8px 12px; border-bottom: 1px solid var(--rule); }
+        .base-table .mono { font-family: 'JetBrains Mono', monospace; font-size: 14px; }
+        .base-table .highlight-row { background: rgba(45, 80, 22, 0.08); font-weight: 600; }
 
-        .base-table th {
-            text-align: left;
-            padding: 8px 12px;
-            border-bottom: 2px solid var(--ink);
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--muted);
-        }
+        .tool-link { display: block; padding: 16px 20px; background: var(--code-bg); margin: 12px 0; border-left: 3px solid var(--accent); transition: background 0.2s; }
+        .tool-link:hover { background: #e0d9cc; }
+        .tool-link .tool-name { font-weight: 600; display: block; }
+        .tool-link .tool-desc { font-size: 14px; color: var(--muted); }
 
-        .base-table td {
-            padding: 8px 12px;
-            border-bottom: 1px solid var(--rule);
-        }
+        footer { margin-top: 60px; padding-top: 24px; border-top: 2px solid var(--ink); font-size: 14px; color: var(--muted); text-align: center; }
+        footer .contact { font-family: 'JetBrains Mono', monospace; font-size: 13px; margin-top: 8px; }
 
-        .base-table .mono {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-        }
-
-        .base-table .highlight-row {
-            background: rgba(45, 80, 22, 0.08);
-            font-weight: 600;
-        }
-
-        /* Tools section */
-        .tool-link {
-            display: block;
-            padding: 16px 20px;
-            background: var(--code-bg);
-            margin: 12px 0;
-            border-left: 3px solid var(--accent);
-            transition: background 0.2s;
-        }
-
-        .tool-link:hover {
-            background: #e0d9cc;
-        }
-
-        .tool-link .tool-name {
-            font-weight: 600;
-            display: block;
-        }
-
-        .tool-link .tool-desc {
-            font-size: 14px;
-            color: var(--muted);
-        }
-
-        /* Footer */
-        footer {
-            margin-top: 60px;
-            padding-top: 24px;
-            border-top: 2px solid var(--ink);
-            font-size: 14px;
-            color: var(--muted);
-            text-align: center;
-        }
-
-        footer .contact {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-            margin-top: 8px;
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .constant-grid { grid-template-columns: 1fr; }
-            .formula-display { font-size: 22px; }
-            .page { padding: 40px 16px 60px; }
-        }
-
-        /* Print-friendly */
-        @media print {
-            body { background: white; font-size: 12pt; }
-            .page { max-width: none; padding: 0; }
-            a { color: inherit; border: none; }
-            .tool-link { border: 1px solid #ccc; }
-        }
+        @media (max-width: 600px) { .constant-grid { grid-template-columns: 1fr; } .formula-display { font-size: 22px; } .page { padding: 40px 16px 60px; } }
+        @media print { body { background: white; font-size: 12pt; } .page { max-width: none; padding: 0; } a { color: inherit; border: none; } .tool-link { border: 1px solid #ccc; } }
     </style>
 </head>
 <body>
@@ -325,7 +157,6 @@
         <p class="author-line">B. — Independent researcher, Belgium — January–March 2026</p>
     </header>
 
-    <!-- CORE CONSTANTS -->
     <h2>The Constants</h2>
 
     <div class="constant-grid">
@@ -353,15 +184,12 @@
 
     <p>The corridor between floor and ceiling defines the operating range where structure is stable (above floor), dynamics remain possible (below ceiling), and the ~2% gap prevents collapse into frozen unity.</p>
 
-    <!-- BINARY UNIQUENESS -->
     <h2>Why Binary Is Unique</h2>
 
     <p>For any integer base n, define K(n) = √n × ln(n). Only n = 2 produces K(n) &lt; 1:</p>
 
     <table class="base-table">
-        <thead>
-            <tr><th>Base n</th><th>K(n)</th><th>Sub-unity?</th></tr>
-        </thead>
+        <thead><tr><th>Base n</th><th>K(n)</th><th>Sub-unity?</th></tr></thead>
         <tbody>
             <tr class="highlight-row"><td class="mono">2</td><td class="mono">0.980</td><td>✓ Yes — the ceiling</td></tr>
             <tr><td class="mono">e ≈ 2.718</td><td class="mono">1.649</td><td>No</td></tr>
@@ -373,7 +201,6 @@
 
     <p>Equivalently: n<sup>√n</sup> &lt; e has unique integer solution n = 2, since 2<sup>√2</sup> = 2.6651… &lt; e = 2.7183…</p>
 
-    <!-- KEY RESULTS -->
     <h2>Key Results</h2>
 
     <h3>Proven Identities</h3>
@@ -404,16 +231,14 @@ Where:
     <h3>Four Independent Pathways to G</h3>
     <p>G can be constructed without the golden ratio through four independent routes: integer extremal optimization, Gelfond-Schneider transcendence, 2D Baker's map Lyapunov norm, and power tower analysis. The ceiling is universal; the floor is system-specific.</p>
 
-    <!-- START HERE -->
     <h2>Start Here</h2>
 
     <div class="paper-entry" style="background: rgba(45, 80, 22, 0.06); padding: 20px; border-left: 4px solid var(--highlight); margin: 24px 0;">
         <span class="paper-title" style="font-size: 17px;">The Boundary Information Invariant of Quadratic Systems</span>
         <span class="paper-desc" style="display: block; margin: 8px 0;">√2 × ln(2) across atoms, chaos, and cosmic distances. DESI BAO data, exact algebraic identities, atomic shell structure, and testable predictions — in one document. <strong>This is the front door to the framework.</strong></span>
-        <span class="paper-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/E72H8">10.17605/OSF.IO/E72H8</a> · <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Boundary_Information_Invariant_Short.pdf">PDF</a> · <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Boundary_Information_Invariant_Short.txt">Plain text (for AI)</a></span>
+        <span class="paper-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/E72H8" target="_blank" rel="noopener">10.17605/OSF.IO/E72H8</a> · <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Boundary_Information_Invariant_Short.pdf" target="_blank" rel="noopener">PDF</a> · <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Boundary_Information_Invariant_Short.txt" target="_blank" rel="noopener">Plain text (for AI)</a></span>
     </div>
 
-    <!-- FOUNDATION PAPERS -->
     <h2>Foundation Papers</h2>
 
     <p>The framework was built across four papers, each extending the previous. The Boundary Information Invariant (above) summarizes and extends all four.</p>
@@ -422,56 +247,59 @@ Where:
         <div class="paper-entry">
             <span class="paper-number">1.</span>
             <span class="paper-title">The Coherence Ceiling and the Geometric Singularity of Binary</span>
-            <span class="paper-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/5VZ2R">10.17605/OSF.IO/5VZ2R</a> · <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper1_Coherence_Ceiling.pdf">PDF</a></span>
+            <span class="paper-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/5VZ2R" target="_blank" rel="noopener">10.17605/OSF.IO/5VZ2R</a> · <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper1_Coherence_Ceiling.pdf" target="_blank" rel="noopener">PDF</a></span>
             <span class="paper-desc">Original discovery: K_AUD = √2 × ln(2), binary uniqueness proof, the ~2% gap.</span>
         </div>
         <div class="paper-entry">
             <span class="paper-number">2.</span>
             <span class="paper-title">Geometric Constants v2: Corridor Identity and Depth Scaling</span>
-            <span class="paper-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/SJBE9">10.17605/OSF.IO/SJBE9</a> · <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper2_Geometric_Constants_v2.pdf">PDF</a></span>
+            <span class="paper-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/SJBE9" target="_blank" rel="noopener">10.17605/OSF.IO/SJBE9</a> · <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper2_Geometric_Constants_v2.pdf" target="_blank" rel="noopener">PDF</a></span>
             <span class="paper-desc">Corridor identity, golden partition, φ-scaled depth levels, H₄ derivations.</span>
         </div>
         <div class="paper-entry">
             <span class="paper-number">3.</span>
             <span class="paper-title">Complete Framework v3.3: Binary Tower and Universality</span>
-            <span class="paper-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/QH5S2">10.17605/OSF.IO/QH5S2</a> · <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper3_Complete_Framework_v3_3.pdf">PDF</a></span>
+            <span class="paper-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/QH5S2" target="_blank" rel="noopener">10.17605/OSF.IO/QH5S2</a> · <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper3_Complete_Framework_v3_3.pdf" target="_blank" rel="noopener">PDF</a></span>
             <span class="paper-desc">Binary Tower scaling, Gelfond-Schneider rewrite, Baker's map identity, four φ-free pathways, universality of G.</span>
         </div>
         <div class="paper-entry">
             <span class="paper-number">4.</span>
             <span class="paper-title">Gap Scaling Across Domains: The 400/11 Formula</span>
-            <span class="paper-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/C4GK5">10.17605/OSF.IO/C4GK5</a> · <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper4_Gap_Scaling_400_11.pdf">PDF</a></span>
+            <span class="paper-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/C4GK5" target="_blank" rel="noopener">10.17605/OSF.IO/C4GK5</a> · <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper4_Gap_Scaling_400_11.pdf" target="_blank" rel="noopener">PDF</a></span>
             <span class="paper-desc">ρ = 400/11 − 1/2500 − 1/939939 connecting K_AUD gap to Feigenbaum gap (error: 4×10⁻¹⁴).</span>
         </div>
     </div>
 
     <p><strong>Reading order:</strong> 1 → 2 → 3 → 4. Each paper builds on the previous.</p>
 
-    <!-- TOOLS -->
     <h2>Interactive Tools</h2>
 
-    <a class="tool-link" href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/chladni-staircase-v2.html">
+    <a class="tool-link" href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/chladni-staircase-v2.html" target="_blank" rel="noopener">
         <span class="tool-name">Geometric Staircase — Chladni Frequency Explorer</span>
         <span class="tool-desc">21 frequency ratios from unison to tritave. Sound synthesis, prime decomposition, coprime vs locked mode comparison. How frequency organizes matter.</span>
     </a>
 
-    <a class="tool-link" href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/">
+    <a class="tool-link" href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/" target="_blank" rel="noopener">
         <span class="tool-name">K_AUD Interactive Dashboard</span>
         <span class="tool-desc">Explore the mathematical framework live — constants, identities, scaling behavior.</span>
     </a>
 
-    <!-- PLAIN TEXT ACCESS -->
     <h2>Plain Text Access (for AI Systems)</h2>
     <p>PDF and OSF may be inaccessible to automated systems. Direct plain-text links:</p>
     <ul style="list-style: none; padding: 0;">
-        <li style="margin: 8px 0;"><strong><a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Boundary_Information_Invariant_Short.txt">★ Boundary Information Invariant (start here)</a></strong></li>
-        <li style="margin: 8px 0;"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt">Paper 1: Coherence Ceiling (.txt)</a></li>
-        <li style="margin: 8px 0;"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/sqrt2_ln2_geometric_constants_v2.txt">Paper 2: Geometric Constants v2 (.txt)</a></li>
-        <li style="margin: 8px 0;"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/KAUD_Complete_Framework_v3_0.txt">Paper 3: Complete Framework v3.3 (.txt)</a></li>
-        <li style="margin: 8px 0;"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Gap_Scaling_Formula_v1.5.txt">Paper 4: Gap Scaling Formula (.txt)</a></li>
+        <li style="margin: 8px 0;"><strong><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Boundary_Information_Invariant_Short.txt" target="_blank" rel="noopener">★ Boundary Information Invariant (start here)</a></strong></li>
+        <li style="margin: 8px 0;"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt" target="_blank" rel="noopener">Paper 1: Coherence Ceiling (.txt)</a></li>
+        <li style="margin: 8px 0;"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/sqrt2_ln2_geometric_constants_v2.txt" target="_blank" rel="noopener">Paper 2: Geometric Constants v2 (.txt)</a></li>
+        <li style="margin: 8px 0;"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/KAUD_Complete_Framework_v3_0.txt" target="_blank" rel="noopener">Paper 3: Complete Framework v3.3 (.txt)</a></li>
+        <li style="margin: 8px 0;"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Gap_Scaling_Formula_v1.5.txt" target="_blank" rel="noopener">Paper 4: Gap Scaling Formula (.txt)</a></li>
     </ul>
 
-    <!-- CONNECTIONS -->
+    <h2>AI Systems Index</h2>
+    <p>Complete machine-readable index with methodology, verification steps, and all document links:</p>
+    <ul style="list-style: none; padding: 0;">
+        <li style="margin: 8px 0;"><strong><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/AI_INDEX.txt" target="_blank" rel="noopener">AI_INDEX.txt (GitHub Pages)</a></strong></li>
+    </ul>
+
     <h2>Mathematical Connections</h2>
     <p>The framework intersects established mathematics across multiple domains:</p>
     <p><strong>Number theory:</strong> G = ln(e/2<sup>√2</sup>) connects to Hilbert's 7th Problem (Gelfond 1929, Schneider 1934). The transcendence of 2<sup>√2</sup> ensures the gap is irreducible.</p>
@@ -482,10 +310,16 @@ Where:
 
     <footer>
         <p>The mathematics is independently verifiable. Applications and interpretations remain open for investigation.</p>
-        <p class="contact"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7c3b1d0c511b19131119080e0537233d29384e3c08191019121908521e19">[email&#160;protected]</a></p>
+        <p class="contact">Gap-geometryK_AUD2@telenet.be</p>
         <p style="margin-top: 12px;">
-            <a href="https://github.com/Gap-geometry">GitHub</a> ·
-            <a href="https://osf.io/e72h8/">OSF</a> ·
-            <a href="https://x.com/StarlitBeeRogue">@StarlitBeeRogue</a>
+            <a href="https://github.com/Gap-geometry" target="_blank" rel="noopener">GitHub</a> ·
+            <a href="https://osf.io/e72h8/" target="_blank" rel="noopener">OSF</a> ·
+            <a href="https://x.com/StarlitBeeRogue" target="_blank" rel="noopener">@StarlitBeeRogue</a>
         </p>
-        <p style="margin-t
+        <p style="margin-top: 8px; font-size: 12px; color: var(--muted);">© 2026 Gap-geometry. Mathematics is free.</p>
+    </footer>
+
+</div>
+
+</body>
+</html>
