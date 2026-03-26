@@ -40,8 +40,9 @@ For any integer base n ≥ 2, only n = 2 gives K(n) < 1. This is arithmetic, not
 | 3 | Complete Framework v3.3: Binary Tower and Universality | [10.17605/OSF.IO/QH5S2](https://doi.org/10.17605/OSF.IO/QH5S2) |
 | 4 | Gap Scaling Across Domains: The 400/11 Formula | [10.17605/OSF.IO/C4GK5](https://doi.org/10.17605/OSF.IO/C4GK5) |
 | 5 | **Boundary Information Invariant of Quadratic Systems** | [10.17605/OSF.IO/E72H8](https://doi.org/10.17605/OSF.IO/E72H8) |
+| 6 | Cross-Domain Signatures of the Boundary Information Invariant | [10.17605/OSF.IO/RA3UQ](https://doi.org/10.17605/OSF.IO/RA3UQ) |
 
-**Reading order:** Papers 1 → 2 → 3 → 4 build the framework. Paper 5 summarizes and extends all four — **start with Paper 5** if reading only one document.
+**Reading order:** Papers 1 → 2 → 3 → 4 build the framework. Paper 5 summarizes and extends all four — **start with Paper 5** if reading only one document. Paper 6 documents cross-domain signatures.
 
 PDFs are available in the [GitHub repository](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-).
 
