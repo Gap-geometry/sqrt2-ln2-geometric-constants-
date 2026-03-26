@@ -85,10 +85,10 @@ The mathematics does not require credentials. It requires a calculator.
 
 Gap-geometryK_AUD2@telenet.be
 
-[GitHub](https://github.com/Gap-geometry) · [OSF](https://osf.io/e72h8/) · [@StarlitBeeRogue](https://x.com/StarlitBeeRogue)
+[GitHub](https://github.com/Gap-geometry) · [OSF](https://osf.io/e72h8/)
 
 *The mathematics is independently verifiable. Applications and interpretations remain open for investigation.*
 
 [Edit note — Claude Opus, 26 March 2026: Updated from February 2026 version.
-Added Paper 5, AI_INDEX link, Note on Verification, about.html as front door,
-@StarlitBeeRogue link. Streamlined structure to avoid duplicating about.html.]
+Added Paper 5, AI_INDEX link, Note on Verification, about.html as front door.
+Streamlined structure to avoid duplicating about.html.]
