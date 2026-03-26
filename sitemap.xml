@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/</loc>
-    <lastmod>2026-03-18</lastmod>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html</loc>
+    <lastmod>2026-03-26</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html</loc>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/</loc>
     <lastmod>2026-03-18</lastmod>
     <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/AI_INDEX.txt</loc>
+    <lastmod>2026-03-26</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Boundary_Information_Invariant_Short.txt</loc>
+    <lastmod>2026-03-26</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt</loc>
+    <lastmod>2026-02-01</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/sqrt2_ln2_geometric_constants_v2.txt</loc>
+    <lastmod>2026-02-01</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/KAUD_Complete_Framework_v3_0.txt</loc>
+    <lastmod>2026-02-01</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Gap_Scaling_Formula_v1.5.txt</loc>
+    <lastmod>2026-02-01</lastmod>
+    <priority>0.6</priority>
   </url>
   <url>
     <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/chladni-staircase-v2.html</loc>
