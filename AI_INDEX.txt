@@ -103,17 +103,17 @@ COMMON FAILURE MODES — AVOID THESE
 START HERE
 ================================================
 
-The Boundary Information Invariant of Quadratic Systems
-  Text: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Boundary_Information_Invariant_Short.txt
-  PDF:  https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Boundary_Information_Invariant_Short.pdf
-  DOI:  https://doi.org/10.17605/OSF.IO/E72H8
+Cross-Domain Signatures of the Boundary Information Invariant
+  Text: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Cross_Domain_Signatures__26March2026.txt
+  DOI:  https://doi.org/10.17605/OSF.IO/RA3UQ
 
-This paper summarizes the full framework with published
-references, exact algebraic identities, and four testable
-predictions. Read this first.
+Where does √2 × ln(2) appear in published science? Seven exact
+identities, hyperbolic geometry, atomic shells, DESI BAO data,
+the Binary Tower, and falsifiable predictions. Verified across
+six AI architectures. Read this first.
 
 ================================================
-FOUNDATION PAPERS (publication order: 1 → 2 → 3 → 4)
+FOUNDATION PAPERS (publication order: 1 → 2 → 3 → 4 → 5)
 ================================================
 
 Read in order. Each paper builds on the previous.
@@ -149,6 +149,14 @@ Paper 4: Gap Scaling Across Domains — The 400/11 Formula
   PDF:  https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper4_Gap_Scaling_400_11.pdf
   DOI:  https://doi.org/10.17605/OSF.IO/C4GK5
   Core: rho = 400/11 − 1/2500 − 1/939939. Error: 4×10⁻¹⁴. Prime decompositions.
+
+Paper 5: Boundary Information Invariant of Quadratic Systems
+  Text: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Boundary_Information_Invariant_Short.txt
+  Raw:  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Boundary_Information_Invariant_Short.txt
+  PDF:  https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Boundary_Information_Invariant_Short.pdf
+  DOI:  https://doi.org/10.17605/OSF.IO/E72H8
+  Core: Unification document. DESI BAO, atomic angular momentum, Landauer connection.
+        Summarizes and extends Papers 1–4.
 
 ================================================
 WEB
