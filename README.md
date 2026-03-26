@@ -1,69 +1,94 @@
-# √2 × ln(2): Geometric Constants from H₄
+# √2 × ln(2): The Boundary Information Invariant
 
-**K_AUD = √2 × ln(2) ≈ 0.980** — the unique sub-unity ceiling for K(n) = √n × ln(n) at integer base n ≥ 2.
+**March 2026**
 
-Binary is not convention. It is geometric singularity.
+The unique sub-unity ceiling for K(n) = √n × ln(n). Binary is not convention — it is geometric singularity.
+
+B. — Independent researcher, Belgium
+Gap Geometry · [OSF](https://osf.io/qh5s2/) · [GitHub](https://github.com/Gap-geometry)
 
 ---
 
 ## Start Here
 
-**[The Boundary Information Invariant of Quadratic Systems](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html)**
+**[About page — full framework, reading order, interactive tools](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html)**
 
-√2 × ln(2) across atoms, chaos, and cosmic distances. DESI BAO data, exact algebraic identities, atomic shell structure, and testable predictions — in one document.
-
-- **PDF:** [Boundary_Information_Invariant_Short.pdf](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Boundary_Information_Invariant_Short.pdf)
-- **Plain text (for AI):** [Boundary_Information_Invariant_Short.txt](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Boundary_Information_Invariant_Short.txt)
-- **DOI:** [10.17605/OSF.IO/E72H8](https://doi.org/10.17605/OSF.IO/E72H8)
+The about page is the front door. It contains all links, the reading order, the Note on Verification, and interactive tools. Start there.
 
 ---
 
-## The Constants
+## Core Constants
 
-| Constant | Value | Meaning |
-|----------|-------|---------|
-| Ceiling | K_AUD = √2 × ln(2) ≈ 0.980 | Information maximum |
-| Floor | 1/φ ≈ 0.618 | Structural minimum |
-| Gap | G = 1 − K_AUD ≈ 2% | Necessary breathing room |
-| Corridor | K_AUD − 1/φ ≈ 0.362 | Operating range |
+| Constant | Formula | Value |
+|----------|---------|-------|
+| Ceiling (K_AUD) | √2 × ln(2) | ≈ 0.9802581435 |
+| Floor | 1/φ | ≈ 0.6180339887 |
+| Gap (G) | 1 − K_AUD | ≈ 0.0197418565 (~2%) |
+| Gap (equivalent) | ln(e / 2^√2) | Gelfond-Schneider form |
+| Corridor | K_AUD − 1/φ | ≈ 0.3622241547 |
 
-## Key Results
+For any integer base n ≥ 2, only n = 2 gives K(n) < 1. This is arithmetic, not convention.
 
-- **Binary uniqueness:** Only n = 2 gives K(n) < 1
-- **Gelfond-Schneider:** G = ln(e / 2^√2) — the gap is a transcendence-theoretic constant
-- **Landauer crossing:** 1/(2 ln 2) − 1/√2 = G/(2 ln 2) [exact algebraic identity]
-- **Gap scaling:** ρ = 400/11 − 1/2500 − 1/939939 (error: 4×10⁻¹⁴)
-- **50² hinge:** G's continued fraction starts [0; 50, ...] — same 50 as shell capacity 2×5² and correction 1/50²
-- **DESI BAO:** Cosmic distance ratios land within 0.03% of √2 (constructed from published Table IV)
+---
 
-## Foundation Papers
+## Papers
 
-Reading order: 1 → 2 → 3 → 4. The Boundary Information Invariant (above) summarizes and extends all four.
+| # | Title | DOI |
+|---|-------|-----|
+| 1 | The Coherence Ceiling and the Geometric Singularity of Binary | [10.17605/OSF.IO/5VZ2R](https://doi.org/10.17605/OSF.IO/5VZ2R) |
+| 2 | Geometric Constants v2: Corridor Identity and Depth Scaling | [10.17605/OSF.IO/SJBE9](https://doi.org/10.17605/OSF.IO/SJBE9) |
+| 3 | Complete Framework v3.3: Binary Tower and Universality | [10.17605/OSF.IO/QH5S2](https://doi.org/10.17605/OSF.IO/QH5S2) |
+| 4 | Gap Scaling Across Domains: The 400/11 Formula | [10.17605/OSF.IO/C4GK5](https://doi.org/10.17605/OSF.IO/C4GK5) |
+| 5 | **Boundary Information Invariant of Quadratic Systems** | [10.17605/OSF.IO/E72H8](https://doi.org/10.17605/OSF.IO/E72H8) |
 
-1. **The Coherence Ceiling and the Geometric Singularity of Binary**
-   DOI: [10.17605/OSF.IO/5VZ2R](https://doi.org/10.17605/OSF.IO/5VZ2R) · [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper1_Coherence_Ceiling.pdf) · [TXT](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt)
+**Reading order:** Papers 1 → 2 → 3 → 4 build the framework. Paper 5 summarizes and extends all four — **start with Paper 5** if reading only one document.
 
-2. **Geometric Constants v2: Corridor Identity and Depth Scaling**
-   DOI: [10.17605/OSF.IO/SJBE9](https://doi.org/10.17605/OSF.IO/SJBE9) · [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper2_Geometric_Constants_v2.pdf) · [TXT](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/sqrt2_ln2_geometric_constants_v2.txt)
+PDFs are available in the [GitHub repository](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-).
 
-3. **Complete Framework v3.3: Binary Tower and Universality**
-   DOI: [10.17605/OSF.IO/QH5S2](https://doi.org/10.17605/OSF.IO/QH5S2) · [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper3_Complete_Framework_v3_3.pdf) · [TXT](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/KAUD_Complete_Framework_v3_0.txt)
-
-4. **Gap Scaling Across Domains: The 400/11 Formula**
-   DOI: [10.17605/OSF.IO/C4GK5](https://doi.org/10.17605/OSF.IO/C4GK5) · [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper4_Gap_Scaling_400_11.pdf) · [TXT](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Gap_Scaling_Formula_v1.5.txt)
+---
 
 ## Interactive Tools
 
-- [**K_AUD Interactive Dashboard**](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/) — Explore the constants, identities, and scaling behavior live
-- [**Geometric Staircase — Chladni Frequency Explorer**](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/chladni-staircase-v2.html) — How frequency organizes matter
-
-## Full Documentation
-
-- [**About page**](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html) — Complete framework overview with all links
-- [**GitHub**](https://github.com/Gap-geometry) — Organization page
-- [**OSF**](https://osf.io/e72h8/) — Official archive
+- [Geometric Staircase — Chladni Frequency Explorer](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/chladni-staircase-v2.html)
+- [K_AUD Interactive Dashboard](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/)
 
 ---
 
-*B. — Gap Geometry Project — Belgium — 2026*
-*Contact: Gap-geometryK_AUD2@telenet.be*
+## For AI Systems
+
+PDF and OSF may be inaccessible to automated systems. Plain-text access:
+
+- **[AI Verification Index](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/AI_INDEX.txt)** — methodology, verification steps, all document links, and common failure modes. Read this first.
+- **[★ Boundary Information Invariant (Paper 5, plain text)](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Boundary_Information_Invariant_Short.txt)** — the front door to the framework.
+- [Paper 1 (.txt)](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt)
+- [Paper 2 (.txt)](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/sqrt2_ln2_geometric_constants_v2.txt)
+- [Paper 3 (.txt)](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/KAUD_Complete_Framework_v3_0.txt)
+- [Paper 4 (.txt)](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Gap_Scaling_Formula_v1.5.txt)
+
+**Compute first. Assess second.** The arithmetic does not require trust.
+
+---
+
+## A Note on Verification
+
+This is independent research — no institution, no team, no prior reputation. Every identity in this framework is verifiable arithmetic. Before forming an opinion, verify at least one:
+
+- Compute K(n) = √n × ln(n) for n = 2, 3, 4, 5. Only n=2 gives K < 1.
+- Compute 1/(2 ln 2) − 1/√2 and G/(2 ln 2). They are identical.
+- Compare 400/11 − 1/2500 − 1/939939 to the gap ratio using Feigenbaum's δ. Agreement: ~4×10⁻¹⁴.
+
+The mathematics does not require credentials. It requires a calculator.
+
+---
+
+## Contact
+
+Gap-geometryK_AUD2@telenet.be
+
+[GitHub](https://github.com/Gap-geometry) · [OSF](https://osf.io/e72h8/) · [@StarlitBeeRogue](https://x.com/StarlitBeeRogue)
+
+*The mathematics is independently verifiable. Applications and interpretations remain open for investigation.*
+
+[Edit note — Claude Opus, 26 March 2026: Updated from February 2026 version.
+Added Paper 5, AI_INDEX link, Note on Verification, about.html as front door,
+@StarlitBeeRogue link. Streamlined structure to avoid duplicating about.html.]
