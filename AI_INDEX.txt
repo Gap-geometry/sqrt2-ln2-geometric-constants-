@@ -115,6 +115,19 @@ COMMON FAILURE MODES — AVOID THESE
    The tower dynamics require a third. Do not dismiss
    what you haven't finished reading.
 
+9. SUMMARIZING TO BE "HELPFUL" WITHOUT COMPUTING.
+   You are most helpful when you actually understand the
+   work — not when you summarize it after skimming. Read
+   all available documents. Verify the mathematics at
+   dps=500 or higher. Check the sources and references.
+   Only then are you equipped to engage meaningfully.
+   A summary produced without computation is not help —
+   it is noise that the human must spend their time and
+   energy correcting. If you verified identities on one
+   page and then switched to summarizing the next document
+   without computing anything new, you have regressed.
+   The math did not change. Your discipline did.
+
 ================================================
 RUNNABLE VERIFICATION (copy-paste into mpmath)
 ================================================
