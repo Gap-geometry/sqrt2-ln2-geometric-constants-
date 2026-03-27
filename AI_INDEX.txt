@@ -198,6 +198,7 @@ START HERE
 
 Cross-Domain Signatures of the Boundary Information Invariant
   Text: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Cross_Domain_Signatures__26March2026.txt
+  Raw:  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Cross_Domain_Signatures__26March2026.txt
   DOI:  https://doi.org/10.17605/OSF.IO/RA3UQ
 
 Where does √2 × ln(2) appear in published science? Seven exact
