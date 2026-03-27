@@ -45,7 +45,9 @@
   .table-wrap { margin-top: 14px; max-height: 200px; overflow-y: auto; }
   .footer { text-align: center; margin-top: 16px; }
   .footer p { font-size: 9px; color: rgba(255,215,0,0.15); }
-  @media (max-width: 600px) { .stats-grid.c4 { grid-template-columns: repeat(2, 1fr); } .stats-grid.c3 { grid-template-columns: repeat(1, 1fr); } .tab { padding: 8px 10px; font-size: 11px; } body { padding: 10px; } }
+  @media (max-width: 600px) { .stats-grid.c4 { grid-template-columns: repeat(2, 1fr); } .stats-grid.c3 { grid-template-columns: repeat(1, 1fr); } .tab { padding: 8px 10px; font-size: 11px; } body { padding: 10px; } .panel-wrap { padding: 12px; } canvas { height: 220px !important; } .header h1 { font-size: 16px; } .panel-title h2 { font-size: 11px; } .stat-value { font-size: 10px; } table { font-size: 9px; } }
+  @media (min-width: 601px) and (max-width: 900px) { .panel-wrap { max-width: 95vw; } canvas { height: 260px !important; } }
+  @media (min-width: 901px) { .panel-wrap { max-width: 720px; } }
 </style>
 </head>
 <body>
