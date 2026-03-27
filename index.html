@@ -60,7 +60,7 @@
 <div class="tabs" id="tabBar"></div>
 <div class="panel-wrap">
   <div class="panel active" id="panel0">
-    <div class="panel-title"><h2>2<sup>k</sup> × G = 2<sup>k−6</sup> × √φ × (1 − ε)</h2><p id="towerSub"></p></div>
+    <div class="panel-title"><h2>Gap Stacking: 2<sup>k</sup> × G = 2<sup>k−6</sup> × √φ × (1 − ε)</h2><p id="towerSub">ε = −0.671% — constant across all k, by algebra</p></div>
     <canvas id="towerCanvas" height="300"></canvas>
     <div class="controls"><span>k=0</span><input type="range" min="0" max="12" value="6" id="towerSlider"><span>k=12</span><button class="btn" id="towerPlay">▶ Play</button><button class="btn dim" id="towerReset">↺</button></div>
     <div class="stats-grid c4" id="towerStats"></div>
@@ -78,11 +78,11 @@
     <div class="stats-grid c3" id="decayStats"></div>
   </div>
   <div class="panel" id="panel3">
-    <div class="panel-title"><h2>The Architecture: How Everything Connects</h2><p>Constants, identities, and their relationships</p></div>
+    <div class="panel-title"><h2>The Architecture</h2><p>Constants, tower landmarks, and their relationships — hover or tap for details</p></div>
     <div id="connectionSvg"></div>
   </div>
   <div class="panel" id="panel4">
-    <div class="panel-title"><h2>n × G — The Cost of Binary Organization</h2><p>Each step adds one gap. The landmarks are not fitted — they are found.</p></div>
+    <div class="panel-title"><h2>The Binary Tower — n × G</h2><p>The cost function of binary organization. Each step adds one gap.</p></div>
     <canvas id="staircaseCanvas" height="340"></canvas>
     <div class="controls"><span>n=1</span><input type="range" min="1" max="64" value="64" id="staircaseSlider"><span>n=64</span><button class="btn" id="staircasePlay">▶ Climb</button><button class="btn dim" id="staircaseReset">↺</button></div>
     <div class="stats-grid c3" id="staircaseStats"></div>
@@ -94,7 +94,7 @@
 const PHI=(1+Math.sqrt(5))/2,SQRT_PHI=Math.sqrt(PHI),K_AUD=Math.sqrt(2)*Math.log(2),G=1-K_AUD,FLOOR=1/PHI,CORRIDOR=K_AUD-FLOOR,EPSILON=1-(64*G)/SQRT_PHI,FEIGENBAUM=4.6692016091029906718532038,GAP_F=(FEIGENBAUM-14/3)/FEIGENBAUM,RHO_EXACT=G/GAP_F,RHO_FORMULA=400/11-1/2500-1/939939;
 const binaryTower=(k)=>Math.pow(2,k)*G,goldenPower=(k)=>Math.pow(2,k-6)*SQRT_PHI;
 document.getElementById('headerSub').textContent=`√2 × ln(2) = ${K_AUD.toFixed(10)} — G = ${G.toFixed(10)} — The gap is the architecture`;
-const tabNames=['🗼 Tower','📐 Corridor','⚡ 400/11','🔗 Map','🪜 Staircase'];let activeTab=0;
+const tabNames=['📐 Gap Stacking','🏛 Corridor','⚡ 400/11','🔗 Architecture','🪜 Tower'];let activeTab=0;
 function renderTabs(){const bar=document.getElementById('tabBar');bar.innerHTML=tabNames.map((name,i)=>`<button class="tab ${i===activeTab?'active':''}" onclick="switchTab(${i})">${name}</button>`).join('');}
 function switchTab(i){activeTab=i;renderTabs();document.querySelectorAll('.panel').forEach((p,j)=>{p.classList.toggle('active',j===i);});if(i===0)drawTower();if(i===1)drawCorridor();if(i===2)drawDecay();if(i===3)drawConnections();if(i===4)drawStaircase();}
 renderTabs();
@@ -177,8 +177,11 @@ function drawConnections(){document.getElementById('connectionSvg').innerHTML=`<
 <text x="200" y="440" text-anchor="middle" fill="rgba(100,255,180,0.2)" font-size="6" font-family="monospace">Shell 4</text>
 <text x="400" y="440" text-anchor="middle" fill="rgba(100,255,180,0.2)" font-size="6" font-family="monospace">Shell 5</text>
 <!-- Spans -->
-<text x="165" y="370" text-anchor="middle" fill="rgba(255,255,255,0.15)" font-size="7" font-family="monospace">14</text>
-<text x="350" y="370" text-anchor="middle" fill="rgba(255,255,255,0.15)" font-size="7" font-family="monospace">14</text>
+<text x="165" y="370" text-anchor="middle" fill="rgba(255,255,255,0.15)" font-size="7" font-family="monospace" style="pointer-events:none">14</text>
+<text x="350" y="370" text-anchor="middle" fill="rgba(255,255,255,0.15)" font-size="7" font-family="monospace" style="pointer-events:none">14</text>
+<rect class="map-node" x="150" y="358" width="30" height="20" fill="transparent" cursor="pointer" data-title="Span = 14 = 2 × 7" data-formula="Steps 18→32: gap of 14 steps" data-desc="The boundary prime 7 locks the mirror. Both sides of the tower have symmetric spans of 14 = 2×7. This is forced by 2⁵ − 5² = 4² − 3² = 7."/>
+<rect class="map-node" x="335" y="358" width="30" height="20" fill="transparent" cursor="pointer" data-title="Span = 14 = 2 × 7" data-formula="Steps 50→64: gap of 14 steps" data-desc="The same 14-step span appears on the inbound side. The tower breathes symmetrically: 14 out, 14 in. The boundary prime forces the mirror."/>
+<rect class="map-node" x="20" y="15" width="140" height="30" fill="transparent" cursor="pointer" data-title="Two Kinds of Constant" data-formula="K_AUD (ceiling) is universal. 1/φ (floor) is system-specific." data-desc="The ceiling √2×ln(2) < 1 holds for ALL binary systems — it is a property of the number 2. The floor 1/φ appears in systems with golden-ratio structure (H₄, quasicrystals, phyllotaxis) but is not universal."/>
 <text x="280" y="460" text-anchor="middle" fill="rgba(255,255,255,0.12)" font-size="7" font-family="monospace">14 + 4 + 1 + 13 + 14 = 64 — both sides sum to 2×7</text>
 <!-- Hover zones -->
 <rect class="map-node" x="270" y="40" width="60" height="60" fill="transparent" cursor="pointer" data-title="The Gap G" data-formula="G = 1 − √2·ln(2) = ln(e/2^√2)" data-desc="The irreducible ~2% cost of binary existence. No integer multiple of G equals any algebraic number (Lindemann-Weierstrass)."/>
