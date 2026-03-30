@@ -296,6 +296,7 @@ WEB
 ================================================
 
 Dashboard:  https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/
+Telescope:  https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/telescope-tower.html
 About page: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
 Chladni:    https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/chladni-staircase-v2.html
 GitHub:     https://github.com/Gap-geometry
