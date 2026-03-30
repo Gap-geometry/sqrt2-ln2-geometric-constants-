@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<title>Telescope Tower — Where Does Your Number Live?</title>
+<meta name="description" content="Feed a dimensionless ratio to the Binary Tower and see where it lands. Part of the K_AUD = √2 × ln(2) Gap Geometry Framework.">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a12; color: #e0e0e0; font-family: 'JetBrains Mono', 'Fira Code', monospace; min-height: 100vh; padding: 20px; }
+  .container { max-width: 800px; margin: 0 auto; }
+  .header { text-align: center; margin-bottom: 24px; }
+  .header h1 { font-size: 22px; color: #ffd700; font-weight: 700; letter-spacing: 1px; }
+  .header p { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 6px; }
+
+  .input-section { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+  .input-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .input-label { font-size: 11px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  input[type="number"], input[type="text"] { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,215,0,0.2); border-radius: 4px; padding: 10px 14px; color: #ffd700; font-family: inherit; font-size: 16px; width: 100%; outline: none; }
+  input:focus { border-color: rgba(255,215,0,0.5); }
+  .desc-input { font-size: 12px !important; color: rgba(255,255,255,0.6) !important; }
+  .btn { background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.3); color: #ffd700; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: 13px; transition: all 0.2s; }
+  .btn:hover { background: rgba(255,215,0,0.2); }
+
+  .presets { margin-top: 14px; }
+  .presets-label { font-size: 10px; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .preset-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+  .preset { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 4px; padding: 5px 10px; font-size: 10px; color: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.2s; }
+  .preset:hover { border-color: rgba(255,215,0,0.3); color: rgba(255,215,0,0.7); }
+  .preset .preset-val { color: rgba(255,215,0,0.5); font-weight: 600; }
+
+  .results { display: none; }
+  .results.show { display: block; }
+
+  .result-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 16px; margin-bottom: 14px; }
+  .result-title { font-size: 10px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .result-big { font-size: 20px; font-weight: 700; color: #ffd700; }
+  .result-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 4px; }
+
+  .tower-visual { position: relative; height: 300px; margin: 16px 0; }
+  .tower-canvas { width: 100%; height: 100%; }
+
+  .landmark-list { margin-top: 10px; }
+  .landmark-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 11px; }
+  .landmark-row:last-child { border-bottom: none; }
+  .lm-step { color: rgba(255,255,255,0.4); width: 40px; }
+  .lm-name { color: rgba(255,255,255,0.6); flex: 1; }
+  .lm-val { color: rgba(255,215,0,0.5); width: 90px; text-align: right; }
+  .lm-dist { width: 100px; text-align: right; font-size: 10px; }
+  .lm-dist.close { color: rgba(100,255,180,0.8); }
+  .lm-dist.near { color: rgba(255,200,100,0.7); }
+  .lm-dist.far { color: rgba(255,255,255,0.2); }
+  .lm-row-highlight { background: rgba(255,215,0,0.05); border-radius: 4px; padding: 6px 8px !important; }
+
+  .deviation-card { background: rgba(255,215,0,0.03); border: 1px solid rgba(255,215,0,0.1); border-radius: 8px; padding: 16px; margin-bottom: 14px; }
+  .dev-match { padding: 8px 12px; background: rgba(100,255,180,0.05); border-left: 3px solid rgba(100,255,180,0.4); margin-top: 8px; border-radius: 0 4px 4px 0; font-size: 11px; color: rgba(100,255,180,0.8); }
+  .dev-nomatch { padding: 8px 12px; background: rgba(255,255,255,0.02); border-left: 3px solid rgba(255,255,255,0.1); margin-top: 8px; border-radius: 0 4px 4px 0; font-size: 11px; color: rgba(255,255,255,0.3); }
+
+  .history { margin-top: 20px; }
+  .history-title { font-size: 10px; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .history-row { display: flex; justify-content: space-between; font-size: 10px; padding: 4px 0; color: rgba(255,255,255,0.25); border-bottom: 1px solid rgba(255,255,255,0.02); cursor: pointer; }
+  .history-row:hover { color: rgba(255,215,0,0.5); }
+
+  .footer { text-align: center; margin-top: 30px; font-size: 10px; color: rgba(255,255,255,0.15); }
+  .footer a { color: rgba(255,215,0,0.25); text-decoration: none; }
+
+  @media (max-width: 600px) { body { padding: 10px; } .header h1 { font-size: 17px; } .result-big { font-size: 16px; } input { font-size: 14px; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🔭 TELESCOPE TOWER</h1>
+    <p>Feed a dimensionless ratio. See where it lives on the Binary Tower.</p>
+    <p style="margin-top:4px;">G = 1 − √2·ln(2) ≈ 0.019741856531452 — the cost of one binary distinction</p>
+  </div>
+
+  <div class="input-section">
+    <div class="input-label">Your dimensionless ratio</div>
+    <div class="input-row">
+      <input type="text" id="numInput" placeholder="e.g. 2.4495 or 1/phi or sqrt(6)" oninput="parseAndCompute()" />
+      <button class="btn" onclick="compute()">Find</button>
+    </div>
+    <div style="margin-top:8px;">
+      <div class="input-label">Label (optional)</div>
+      <input type="text" id="descInput" class="desc-input" placeholder="e.g. Λc⁺/proton mass ratio" />
+    </div>
+
+    <div class="presets">
+      <div class="presets-label">Try these published ratios</div>
+      <div class="preset-grid" id="presetGrid"></div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="result-card">
+      <div class="result-title">Your number on the tower</div>
+      <div class="result-big" id="mainResult"></div>
+      <div class="result-sub" id="mainSub"></div>
+    </div>
+
+    <div class="result-card">
+      <div class="result-title">Tower position</div>
+      <canvas id="towerCanvas" class="tower-canvas" height="280"></canvas>
+    </div>
+
+    <div class="deviation-card" id="devCard">
+      <div class="result-title">Deviation analysis</div>
+      <div id="devContent"></div>
+    </div>
+
+    <div class="result-card">
+      <div class="result-title">Nearby landmarks</div>
+      <div class="landmark-list" id="landmarkList"></div>
+    </div>
+
+    <div class="result-card" id="historyCard" style="display:none;">
+      <div class="result-title">Search history</div>
+      <div class="history" id="historyList"></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <p>D. B. | Gap-geometry |
+      <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html">About</a> ·
+      <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/">Dashboard</a> ·
+      <a href="https://doi.org/10.17605/OSF.IO/RA3UQ">OSF</a> ·
+      <a href="https://github.com/Gap-geometry">GitHub</a>
+    </p>
+  </div>
+</div>
+
+<script>
+const SQRT2 = Math.sqrt(2);
+const LN2 = Math.log(2);
+const PHI = (1+Math.sqrt(5))/2;
+const K_AUD = SQRT2*LN2;
+const G = 1-K_AUD;
+const SQRT_PHI = Math.sqrt(PHI);
+const FEIGENBAUM = 4.669201609102990671853203820466;
+
+const landmarks = [
+  { n:18, name:'√2/4', target:SQRT2/4, shell:3, color:'rgba(100,180,255,0.8)' },
+  { n:32, name:'1/φ', target:1/PHI, shell:4, color:'rgba(100,180,255,0.9)' },
+  { n:36, name:'1/√2', target:1/SQRT2, shell:null, color:'rgba(200,200,255,0.7)' },
+  { n:37, name:'1/(2ln2)', target:1/(2*LN2), shell:null, color:'rgba(255,200,100,0.9)' },
+  { n:50, name:'K_AUD', target:K_AUD, shell:5, color:'rgba(255,215,0,0.9)' },
+  { n:64, name:'√φ', target:SQRT_PHI, shell:null, color:'rgba(255,180,100,0.9)' },
+  { n:82, name:'φ', target:PHI, shell:null, color:'rgba(100,255,180,0.7)' }
+];
+
+const knownDevs = [
+  { name:'Tower doubling invariant', val:0.5087, tol:0.05 },
+  { name:'Gap stacking ε', val:0.6714, tol:0.05 },
+  { name:'G/(2ln2) Landauer cost', val:G/(2*LN2)*100, tol:0.1 },
+  { name:'1/2500 cosmological', val:0.04, tol:0.01 },
+  { name:'82G ≈ φ precision', val:0.049, tol:0.02 }
+];
+
+const presets = [
+  { label:'Λc⁺ / proton', val:2286.46/938.272, desc:'Charm baryon / proton mass ratio', source:'PDG' },
+  { label:'Ξcc⁺ / proton', val:3619.97/938.272, desc:'Doubly charmed baryon / proton (CERN 2026)', source:'LHCb' },
+  { label:'Ξcc⁺ / 3×proton', val:3619.97/(3*938.272), desc:'Ξcc⁺ mass / 3 protons', source:'LHCb' },
+  { label:'proton / pion', val:938.272/139.570, desc:'Proton / pion mass ratio', source:'PDG' },
+  { label:'√6', val:Math.sqrt(6), desc:'√2 × √3 (geometry × structure)', source:'Math' },
+  { label:'√φ', val:SQRT_PHI, desc:'Golden ratio square root (pivot target)', source:'Math' },
+  { label:'φ', val:PHI, desc:'Golden ratio', source:'Math' },
+  { label:'1/φ', val:1/PHI, desc:'Golden ratio reciprocal (floor)', source:'Math' },
+  { label:'K_AUD', val:K_AUD, desc:'The ceiling √2·ln(2)', source:'Framework' },
+  { label:'1/(2ln2)', val:1/(2*LN2), desc:'Landauer threshold', source:'Info theory' },
+  { label:'π', val:Math.PI, desc:'Pi', source:'Math' },
+  { label:'e', val:Math.E, desc:"Euler's number", source:'Math' },
+  { label:'δ_Feig/4', val:FEIGENBAUM/4, desc:'Feigenbaum / 4', source:'Chaos theory' },
+  { label:'charm GeV', val:1.270, desc:'Charm quark mass in GeV', source:'PDG' },
+  { label:'W/Z ratio', val:80.377/91.1876, desc:'W boson / Z boson mass ratio', source:'PDG' }
+];
+
+let history = [];
+
+function buildPresets(){
+  const grid = document.getElementById('presetGrid');
+  grid.innerHTML = presets.map((p,i)=>`<div class="preset" onclick="usePreset(${i})"><span class="preset-val">${p.label}</span> <span style="color:rgba(255,255,255,0.2)">${p.val.toFixed(4)}</span></div>`).join('');
+}
+
+function usePreset(i){
+  const p = presets[i];
+  document.getElementById('numInput').value = p.val.toString();
+  document.getElementById('descInput').value = p.desc + ' [' + p.source + ']';
+  compute();
+}
+
+function parseInput(str){
+  str = str.trim().toLowerCase();
+  if(!str) return NaN;
+  // Handle special expressions
+  str = str.replace(/sqrt\((\d+\.?\d*)\)/g, (m,n)=>Math.sqrt(parseFloat(n)).toString());
+  str = str.replace(/phi/g, PHI.toString());
+  str = str.replace(/pi/g, Math.PI.toString());
+  str = str.replace(/\be\b/g, Math.E.toString());
+  str = str.replace(/ln2/g, LN2.toString());
+  str = str.replace(/sqrt2/g, SQRT2.toString());
+  str = str.replace(/k_aud/g, K_AUD.toString());
+  try { return Function('"use strict"; return (' + str + ')')(); } catch(e) { return NaN; }
+}
+
+function parseAndCompute(){
+  const val = parseInput(document.getElementById('numInput').value);
+  if(!isNaN(val) && val > 0) compute();
+}
+
+function compute(){
+  const val = parseInput(document.getElementById('numInput').value);
+  if(isNaN(val) || val <= 0) return;
+
+  const desc = document.getElementById('descInput').value || '';
+  const nExact = val / G;
+  const nNearest = Math.round(nExact);
+  const nG = nNearest * G;
+  const devPercent = ((nG - val)/val)*100;
+  const absDevPercent = Math.abs(devPercent);
+
+  // Show results
+  document.getElementById('results').classList.add('show');
+
+  // Main result
+  document.getElementById('mainResult').innerHTML =
+    `Step n = ${nNearest} <span style="font-size:14px;color:rgba(255,255,255,0.3);">(exact: ${nExact.toFixed(4)})</span>`;
+  document.getElementById('mainSub').innerHTML =
+    `${nNearest} × G = ${nG.toFixed(10)} | Your value: ${val.toFixed(10)} | Deviation: ${devPercent>=0?'+':''}${devPercent.toFixed(4)}%` +
+    (desc ? `<br><span style="color:rgba(255,215,0,0.4)">${desc}</span>` : '');
+
+  // Landmarks
+  const landmarkHTML = landmarks.map(lm => {
+    const lmVal = lm.n * G;
+    const dist = val - lm.target;
+    const distPercent = (dist/lm.target)*100;
+    const absDist = Math.abs(distPercent);
+    const cls = absDist < 1 ? 'close' : absDist < 5 ? 'near' : 'far';
+    const highlight = absDist < 2 ? ' lm-row-highlight' : '';
+    return `<div class="landmark-row${highlight}">
+      <span class="lm-step">n=${lm.n}</span>
+      <span class="lm-name">${lm.name}${lm.shell ? ' (shell '+lm.shell+')' : ''}</span>
+      <span class="lm-val">${lm.target.toFixed(6)}</span>
+      <span class="lm-dist ${cls}">${distPercent>=0?'+':''}${distPercent.toFixed(3)}%</span>
+    </div>`;
+  }).join('');
+  document.getElementById('landmarkList').innerHTML = landmarkHTML;
+
+  // Deviation analysis
+  let devHTML = `<div style="font-size:12px;color:rgba(255,255,255,0.5);">
+    Deviation from nearest step: <strong style="color:${absDevPercent<1?'rgba(100,255,180,0.9)':'rgba(255,200,100,0.8)'}">${devPercent>=0?'+':''}${devPercent.toFixed(4)}%</strong>
+  </div>`;
+
+  // Check against known tower constants
+  let foundMatch = false;
+  for(const kd of knownDevs){
+    if(Math.abs(absDevPercent - kd.val) < kd.tol){
+      devHTML += `<div class="dev-match">≈ ${kd.name} (${kd.val.toFixed(3)}%) — this deviation is a known tower constant.</div>`;
+      foundMatch = true;
+    }
+  }
+
+  // Check against landmark deviations
+  const nearestLM = landmarks.reduce((best,lm) => {
+    const d = Math.abs(val - lm.target);
+    return d < best.d ? {lm, d} : best;
+  }, {d:Infinity, lm:null});
+
+  if(nearestLM.lm){
+    const lmDev = ((val - nearestLM.lm.target)/nearestLM.lm.target*100);
+    devHTML += `<div style="margin-top:8px;font-size:11px;color:rgba(255,255,255,0.35);">
+      Nearest landmark: <strong style="color:${nearestLM.lm.color}">${nearestLM.lm.name}</strong> at step ${nearestLM.lm.n}
+      — your value is ${lmDev>=0?'+':''}${lmDev.toFixed(4)}% away.
+    </div>`;
+  }
+
+  // Check if value IS a known constant
+  const constChecks = [
+    {name:'√2', val:SQRT2}, {name:'√3', val:Math.sqrt(3)}, {name:'√5', val:Math.sqrt(5)},
+    {name:'√6', val:Math.sqrt(6)}, {name:'√7', val:Math.sqrt(7)},
+    {name:'φ', val:PHI}, {name:'1/φ', val:1/PHI}, {name:'√φ', val:SQRT_PHI},
+    {name:'π', val:Math.PI}, {name:'e', val:Math.E},
+    {name:'K_AUD', val:K_AUD}, {name:'2ln2', val:2*LN2},
+    {name:'1/(2ln2)', val:1/(2*LN2)}, {name:'√2/4', val:SQRT2/4},
+    {name:'1/√2', val:1/SQRT2}, {name:'ln2', val:LN2},
+    {name:'2+G', val:2+G}, {name:'3', val:3}, {name:'2', val:2},
+    {name:'7/2', val:3.5}, {name:'δ/4', val:FEIGENBAUM/4},
+  ];
+  const nearestConst = constChecks.reduce((best,c) => {
+    const d = Math.abs(val - c.val)/c.val;
+    return d < best.d ? {c, d} : best;
+  }, {d:Infinity, c:null});
+  if(nearestConst.d < 0.03){
+    devHTML += `<div style="margin-top:8px;font-size:11px;color:rgba(255,215,0,0.6);">
+      Your value is within ${(nearestConst.d*100).toFixed(2)}% of <strong>${nearestConst.c.name}</strong> = ${nearestConst.c.val.toFixed(8)}
+    </div>`;
+  }
+
+  if(!foundMatch && absDevPercent > 2){
+    devHTML += `<div class="dev-nomatch">Deviation does not match a known tower constant. This may be a new observation or simply noise.</div>`;
+  }
+
+  document.getElementById('devContent').innerHTML = devHTML;
+
+  // Draw tower visual
+  drawTower(val, nExact, nNearest);
+
+  // Add to history
+  history.unshift({ val, desc, n:nNearest, dev:devPercent, time:new Date() });
+  if(history.length > 20) history.pop();
+  updateHistory();
+}
+
+function drawTower(val, nExact, nNearest){
+  const canvas = document.getElementById('towerCanvas');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio||1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width*dpr;
+  canvas.height = 280*dpr;
+  ctx.scale(dpr,dpr);
+  const W = rect.width, H = 280;
+
+  ctx.fillStyle = '#0a0a12';
+  ctx.fillRect(0,0,W,H);
+
+  const padL=50, padR=20, padT=30, padB=30;
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+
+  // Determine range
+  const viewMin = Math.max(0, nExact - 15);
+  const viewMax = nExact + 15;
+  const xN = (n)=> padL + ((n-viewMin)/(viewMax-viewMin))*plotW;
+  const maxVal = Math.max(val*1.1, (Math.ceil(viewMax))*G*1.1);
+  const minVal = Math.max(0, Math.min(val*0.5, (Math.floor(viewMin))*G*0.9));
+  const yV = (v)=> padT + plotH - ((v-minVal)/(maxVal-minVal))*plotH;
+
+  // Grid lines
+  ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+  ctx.lineWidth = 1;
+  for(let n=Math.floor(viewMin); n<=Math.ceil(viewMax); n+=5){
+    const x = xN(n);
+    ctx.beginPath(); ctx.moveTo(x,padT); ctx.lineTo(x,padT+plotH); ctx.stroke();
+    ctx.fillStyle = 'rgba(255,255,255,0.15)';
+    ctx.font = '9px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(n, x, padT+plotH+14);
+  }
+
+  // Landmark lines
+  landmarks.forEach(lm => {
+    if(lm.target >= minVal && lm.target <= maxVal){
+      const y = yV(lm.target);
+      ctx.strokeStyle = lm.color.replace('0.9','0.15').replace('0.8','0.12').replace('0.7','0.1');
+      ctx.setLineDash([3,5]);
+      ctx.beginPath(); ctx.moveTo(padL,y); ctx.lineTo(padL+plotW,y); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = lm.color.replace('0.9','0.4').replace('0.8','0.35').replace('0.7','0.3');
+      ctx.font = '9px monospace';
+      ctx.textAlign = 'right';
+      ctx.fillText(lm.name, padL-4, y+3);
+    }
+  });
+
+  // Tower staircase in view range
+  ctx.strokeStyle = 'rgba(255,215,0,0.3)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  for(let n=Math.max(1,Math.floor(viewMin)); n<=Math.ceil(viewMax); n++){
+    const x = xN(n), y = yV(n*G);
+    n===Math.max(1,Math.floor(viewMin)) ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+
+  // Tower step dots
+  for(let n=Math.max(1,Math.floor(viewMin)); n<=Math.ceil(viewMax); n++){
+    const x = xN(n), y = yV(n*G);
+    const isLM = landmarks.find(l=>l.n===n);
+    ctx.beginPath();
+    ctx.arc(x, y, isLM?4:2, 0, Math.PI*2);
+    ctx.fillStyle = isLM ? isLM.color : 'rgba(255,215,0,0.25)';
+    ctx.fill();
+  }
+
+  // Your value — horizontal line
+  const yVal = yV(val);
+  ctx.strokeStyle = 'rgba(255,100,100,0.6)';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([6,4]);
+  ctx.beginPath(); ctx.moveTo(padL,yVal); ctx.lineTo(padL+plotW,yVal); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Your value — marker at nearest step
+  const xNearest = xN(nNearest);
+  const yNearest = yV(nNearest*G);
+
+  // Connection line from your value to nearest step
+  ctx.strokeStyle = 'rgba(255,100,100,0.3)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([2,3]);
+  ctx.beginPath(); ctx.moveTo(xNearest,yVal); ctx.lineTo(xNearest,yNearest); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Your value dot
+  ctx.beginPath();
+  ctx.arc(xN(nExact), yVal, 7, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(255,100,100,0.15)';
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(xN(nExact), yVal, 4, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(255,100,100,0.9)';
+  ctx.fill();
+
+  // Labels
+  ctx.fillStyle = 'rgba(255,100,100,0.8)';
+  ctx.font = 'bold 10px monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText('YOUR VALUE', xN(nExact)+10, yVal-6);
+  ctx.font = '9px monospace';
+  ctx.fillText(val.toFixed(6), xN(nExact)+10, yVal+8);
+
+  ctx.fillStyle = 'rgba(255,215,0,0.6)';
+  ctx.font = '9px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText(`n=${nNearest}`, xNearest, yNearest-10);
+
+  // Axis labels
+  ctx.fillStyle = 'rgba(255,255,255,0.2)';
+  ctx.font = '10px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('Tower step n', padL+plotW/2, H-4);
+}
+
+function updateHistory(){
+  if(history.length === 0) return;
+  document.getElementById('historyCard').style.display = 'block';
+  document.getElementById('historyList').innerHTML = history.map((h,i) =>
+    `<div class="history-row" onclick="replayHistory(${i})">
+      <span>${h.val.toFixed(6)}${h.desc?' — '+h.desc:''}</span>
+      <span>n=${h.n} (${h.dev>=0?'+':''}${h.dev.toFixed(3)}%)</span>
+    </div>`
+  ).join('');
+}
+
+function replayHistory(i){
+  const h = history[i];
+  document.getElementById('numInput').value = h.val.toString();
+  document.getElementById('descInput').value = h.desc;
+  compute();
+}
+
+buildPresets();
+</script>
+</body>
+</html>
