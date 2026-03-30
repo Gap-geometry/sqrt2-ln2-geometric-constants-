@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/sitemap.xml
