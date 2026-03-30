@@ -46,6 +46,11 @@
     <priority>0.6</priority>
   </url>
   <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/telescope-tower.html</loc>
+    <lastmod>2026-03-31</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/chladni-staircase-v2.html</loc>
     <lastmod>2026-03-18</lastmod>
     <priority>0.5</priority>
