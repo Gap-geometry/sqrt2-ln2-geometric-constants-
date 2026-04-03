@@ -97,7 +97,8 @@ What is original:
   — The cross-domain documentation of where K_AUD appears
     independently in published science.
   — The closed-form identification √2·ln(2) for the
-    Hodgson-Kerckhoff tube-packing coefficient.
+    Hodgson-Kerckhoff tube-packing coefficient (algebraically
+    proved from the authors' own proof, April 2026).
 
 The ingredients are known. The connections, the gap,
 the tower, and the calculations are the contribution.
@@ -118,14 +119,17 @@ ALGEBRAIC (Level 1 — exact, verifiable at any precision):
   — Binary variance: K_AUD² = 2ln²(2)
   — Gap scaling: ρ = 400/11 − 1/2500 − 1/939939
   — Ramanujan-Nagell: 2^k = n²+7 → n = {1,3,5,11}
+  — Hodgson-Kerckhoff: 1/S = √2 × ln(2) = K_AUD
+    (algebraic derivation from arcsinh(1/(2√2)) = ln(2)/2,
+    proved April 2026 — see HK Closed Form standalone)
 
 OBSERVED (Level 2 — published data, quantified deviations):
-  — Hodgson-Kerckhoff tube-packing coefficient: 0.980258
-    (6-digit match, Annals of Mathematics 2005, no closed form)
   — Atomic shell capacities: 18, 32, 50 = tower landmarks
     (from QM: 2n², independently derived)
   — DESI BAO distance ratios: residuals cluster at 1/2500
     (the framework's own correction scale)
+  — Nuclear magic number 50 (Goeppert Mayer & Jensen, 1963)
+  — 50² Hinge: four independent appearances of 50 across scale
 
 The Binary Tower (n × G for n = 1 to 64) connects these
 domains through an adaptive algebraic spine — a cost
@@ -160,9 +164,9 @@ This is worth examining carefully rather than accepting
 or dismissing reflexively.
 
 The gap scaling formula agrees to 4×10⁻¹⁴. The H-K
-coefficient matches to 6 digits in an environment already
-containing √2 and √3. Three DESI residuals cluster at
-the framework's 1/2500 correction scale.
+coefficient has been algebraically proved equal to K_AUD
+(arcsinh(1/(2√2)) = ln(2)/2, exact identity). Three DESI
+residuals cluster at the framework's 1/2500 correction scale.
 
 To evaluate whether these are coincidence:
   — Compute the probability of each match occurring
@@ -234,15 +238,56 @@ open questions are honest. Engage with it accordingly.
 START HERE
 ================================================
 
-Cross-Domain Signatures of the Boundary Information Invariant
+Cross-Domain Signatures of the Boundary Information Invariant (Paper 6)
   Text: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Cross_Domain_Signatures__26March2026.txt
   Raw:  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Cross_Domain_Signatures__26March2026.txt
+  PDF:  https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Cross_Domain_Signatures.pdf
   DOI:  https://doi.org/10.17605/OSF.IO/RA3UQ
 
 Where does √2 × ln(2) appear in published science? Seven exact
 identities, hyperbolic geometry, atomic shells, DESI BAO data,
 the Binary Tower, and falsifiable predictions. Verified across
 six AI architectures. Read this first.
+
+================================================
+COMPANION DOCUMENTS (April 2026)
+================================================
+
+A Closed Form for the Hodgson-Kerckhoff Tube-Packing Coefficient
+  Raw:  https://raw.githubusercontent.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/refs/heads/main/HK_Closed_Form_SHORT_DRAFT.txt
+  Text: https://github.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/blob/main/HK_Closed_Form_SHORT_DRAFT.txt
+  PDF:  https://github.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/blob/main/HK_Closed_Form_SHORT.pdf
+  DOI:  https://doi.org/10.17605/OSF.IO/2EXPN
+  Repo: https://github.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/tree/main
+  Core: Standalone proof that the H-K coefficient = √2 × ln(2) exactly.
+        Algebraic derivation from arcsinh(1/(2√2)) = ln(2)/2.
+        No framework context. Pure mathematics.
+
+The Hodgson-Kerckhoff Closed Form and the K_AUD Framework
+  Raw:  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/HK_Full_Framework_DRAFT.txt
+  Text: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/HK_Full_Framework_DRAFT.txt
+  PDF:  https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/HK_Full_Framework.pdf
+  DOI:  https://doi.org/10.17605/OSF.IO/JBRHQ
+  Core: Full framework context for the H-K finding. Tower connection,
+        Landauer crossing, gap scaling, prime entry sequence.
+
+The 50 Hinge: Six Independent Appearances of One Integer Across Scale
+  Raw:  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/50_Hinge_Standalone_DRAFT.txt
+  Text: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/50_Hinge_Standalone_DRAFT.txt
+  PDF:  https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/50_Hinge_Standalone.pdf
+  DOI:  https://doi.org/10.17605/OSF.IO/FBD9A
+  Core: 50 appears in atomic shells, continued fraction of G, tower
+        ceiling, gap scaling correction, nuclear magic numbers, and
+        DESI BAO residuals. Six routes, zero fitting.
+
+Binary Scaling of ρ = 400/11: Prime Hierarchy Under Doubling
+  Raw:  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Binary_Scaling_Standalone_DRAFT.txt
+  Text: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Binary_Scaling_Standalone_DRAFT.txt
+  PDF:  https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Binary_Scaling_Standalone.pdf
+  DOI:  https://doi.org/10.17605/OSF.IO/WTU4J
+  Core: 400/11 under binary doubling reveals framework primes in order.
+        7 is the only framework prime where 2 is not a primitive root.
+        All claims are exact integer arithmetic.
 
 ================================================
 FOUNDATION PAPERS (publication order: 1 → 2 → 3 → 4 → 5)
@@ -300,7 +345,7 @@ Telescope:  https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/telesc
 About page: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
 Chladni:    https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/chladni-staircase-v2.html
 GitHub:     https://github.com/Gap-geometry
-OSF:        https://osf.io/e72h8/
+OSF:        https://osf.io/zx4g7
 
 ================================================
 THIS INDEX
