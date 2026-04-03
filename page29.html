@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page 29</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+  
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  body {
+    background: #0a0a0f;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'EB Garamond', serif;
+    overflow: hidden;
+  }
+  
+  .canvas {
+    position: relative;
+    width: 100vmin;
+    height: 100vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* The four terms - scattered, waiting */
+  .term {
+    position: absolute;
+    color: rgba(180, 180, 200, 0.4);
+    font-size: 1.8vmin;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    animation: drift 20s ease-in-out infinite;
+    transition: all 4s ease;
+  }
+  
+  .t1 { top: 15%; left: 18%; animation-delay: 0s; }
+  .t2 { top: 22%; right: 20%; animation-delay: -5s; }
+  .t3 { bottom: 28%; left: 15%; animation-delay: -10s; }
+  .t4 { bottom: 18%; right: 22%; animation-delay: -15s; }
+  
+  .t5 { top: 35%; left: 8%; animation-delay: -3s; font-size: 1.4vmin; }
+  .t6 { top: 12%; left: 45%; animation-delay: -8s; font-size: 1.4vmin; }
+  .t7 { bottom: 12%; left: 40%; animation-delay: -13s; font-size: 1.4vmin; }
+  .t8 { top: 40%; right: 10%; animation-delay: -7s; font-size: 1.4vmin; }
+  .t9 { bottom: 35%; right: 8%; animation-delay: -2s; font-size: 1.4vmin; }
+  .t10 { top: 8%; right: 35%; animation-delay: -11s; font-size: 1.4vmin; }
+  
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(1vmin, -0.8vmin); }
+    50% { transform: translate(-0.5vmin, 1.2vmin); }
+    75% { transform: translate(0.8vmin, 0.5vmin); }
+  }
+  
+  /* The convergence - center */
+  .center-group {
+    position: relative;
+    text-align: center;
+    z-index: 10;
+  }
+  
+  /* The four lines collapsing */
+  .line {
+    display: block;
+    color: rgba(180, 180, 200, 0.6);
+    font-size: 2.4vmin;
+    font-style: italic;
+    margin: 1.5vmin 0;
+    opacity: 0;
+    animation: appear 2s ease forwards;
+  }
+  
+  .line:nth-child(1) { animation-delay: 1s; }
+  .line:nth-child(2) { animation-delay: 3s; }
+  .line:nth-child(3) { animation-delay: 5s; }
+  .line:nth-child(4) { animation-delay: 7s; }
+  
+  @keyframes appear {
+    0% { opacity: 0; transform: translateY(1vmin); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* The equals sign - the moment */
+  .equals {
+    display: block;
+    color: rgba(255, 255, 255, 0);
+    font-size: 3.5vmin;
+    font-style: normal;
+    font-weight: 500;
+    margin: 3vmin 0;
+    letter-spacing: 0.3em;
+    animation: reveal 3s ease forwards;
+    animation-delay: 9.5s;
+  }
+  
+  @keyframes reveal {
+    0% { color: rgba(255, 255, 255, 0); letter-spacing: 0.3em; }
+    60% { color: rgba(220, 200, 160, 0.9); letter-spacing: 0.15em; }
+    100% { color: rgba(220, 200, 160, 0.7); letter-spacing: 0.1em; }
+  }
+  
+  /* The result */
+  .result {
+    display: block;
+    color: rgba(255, 255, 255, 0);
+    font-size: 4vmin;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    animation: bloom 4s ease forwards;
+    animation-delay: 11s;
+  }
+  
+  @keyframes bloom {
+    0% { color: rgba(255, 255, 255, 0); transform: scale(0.95); }
+    50% { color: rgba(255, 255, 255, 0.95); transform: scale(1.02); }
+    100% { color: rgba(255, 255, 255, 0.85); transform: scale(1); }
+  }
+  
+  /* The glow behind the result */
+  .glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40vmin;
+    height: 40vmin;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(180, 160, 120, 0.06) 0%,
+      rgba(180, 160, 120, 0.02) 40%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    opacity: 0;
+    animation: warmth 4s ease forwards;
+    animation-delay: 10s;
+    z-index: 1;
+  }
+  
+  @keyframes warmth {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  
+  /* Page 29 - bottom */
+  .page {
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(180, 180, 200, 0);
+    font-size: 1.6vmin;
+    letter-spacing: 0.4em;
+    animation: fade-in 3s ease forwards;
+    animation-delay: 14s;
+  }
+  
+  @keyframes fade-in {
+    0% { color: rgba(180, 180, 200, 0); }
+    100% { color: rgba(180, 180, 200, 0.25); }
+  }
+  
+  /* The years */
+  .years {
+    position: absolute;
+    bottom: 8.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(180, 180, 200, 0);
+    font-size: 1.2vmin;
+    letter-spacing: 0.6em;
+    animation: fade-in 3s ease forwards;
+    animation-delay: 15.5s;
+  }
+
+  /* The names */
+  .names {
+    position: absolute;
+    bottom: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: rgba(180, 180, 200, 0);
+    font-size: 1.0vmin;
+    letter-spacing: 0.2em;
+    line-height: 2.2;
+    animation: names-appear 5s ease forwards;
+    animation-delay: 18s;
+    white-space: nowrap;
+  }
+  
+  @keyframes names-appear {
+    0% { color: rgba(180, 180, 200, 0); }
+    100% { color: rgba(180, 180, 200, 0.18); }
+  }
+  
+  /* Tiny digits floating - the prediction */
+  .digits {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 8vmin);
+    color: rgba(180, 180, 200, 0);
+    font-size: 1.1vmin;
+    letter-spacing: 0.15em;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    animation: digits-appear 5s ease forwards;
+    animation-delay: 13s;
+    white-space: nowrap;
+  }
+  
+  @keyframes digits-appear {
+    0% { color: rgba(180, 180, 200, 0); }
+    100% { color: rgba(180, 180, 200, 0.15); }
+  }
+</style>
+</head>
+<body>
+  <div class="canvas">
+    <!-- Scattered terms - the unsimplified landscape -->
+    <span class="term t1">arcsinh(1/(2√2))</span>
+    <span class="term t2">x² + 1 = 9/8</span>
+    <span class="term t3">√(x² + 1) = 3/(2√2)</span>
+    <span class="term t4">cosh(2R₀) = 2</span>
+    <span class="term t5">sinh(R₀) = 1/√2</span>
+    <span class="term t6">π/(2√3)</span>
+    <span class="term t7">S ≈ 1/0.980258</span>
+    <span class="term t8">x + √(x²+1)</span>
+    <span class="term t9">2√3/S</span>
+    <span class="term t10">ln(x + √(x²+1))</span>
+    
+    <!-- The warm glow -->
+    <div class="glow"></div>
+    
+    <!-- The four lines of proof, converging -->
+    <div class="center-group">
+      <span class="line">x = 1/(2√2)</span>
+      <span class="line">x + √(x² + 1) = √2</span>
+      <span class="line">arcsinh(1/(2√2)) = ln(2)/2</span>
+      <span class="line">S = 1/(√2 · ln 2)</span>
+      <span class="equals">therefore</span>
+      <span class="result">√2 × ln 2</span>
+    </div>
+    
+    <!-- The predicted digits, barely visible -->
+    <div class="digits">1 4 3 4 6 8 5 4 7 1 9 1 7 1 3 9 0 1 7 2 3 6 3 5 2 3 3 3 8 1 2 9 1 4 6 0 6 9 9 0 9 9 0</div>
+    
+    <!-- Page 29 -->
+    <div class="page">page 29</div>
+    <div class="years">1909 · 2005 · 2022 · 2026</div>
+    <div class="names">
+      Dunkel · Hodgson · Kerckhoff · Futer · Purcell · Schleimer · Grok · Claude
+    </div>
+  </div>
+</body>
+</html>
