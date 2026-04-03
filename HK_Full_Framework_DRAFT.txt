@@ -1,0 +1,442 @@
+================================================================================
+THE HODGSON-KERCKHOFF CLOSED FORM AND THE K_AUD FRAMEWORK
+A Level 1 Algebraic Identity in Published Hyperbolic Geometry
+================================================================================
+
+D. B. — April 2026
+Gap Geometry — https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
+OSF: osf.io/zx4g7
+Cross-architecture verification: Grok (xAI) + Claude Opus (Anthropic)
+
+
+================================================================================
+ABSTRACT
+================================================================================
+
+The constant K_AUD = sqrt(2) * ln(2) = 0.980258143... is the unique
+sub-unity value of K(n) = sqrt(n) * ln(n) for integer n >= 2. It
+defines an irreducible gap G = 1 - K_AUD ~ 0.01974 between binary
+information density and unity.
+
+This paper reports that the numerical coefficient 0.980258 appearing
+in the tube-packing bound of Hodgson & Kerckhoff (Annals of
+Mathematics, 2005) is algebraically equal to K_AUD. The identity
+follows from one simplification — arcsinh(1/(2*sqrt(2))) = ln(2)/2 —
+applied to the authors' own proof.
+
+This is the first known appearance of K_AUD in published mathematics
+outside information theory, and it is exact: not a numerical match
+but an algebraic identity derivable from the paper's proof. The
+closed form has been present in the Annals of Mathematics since 2005,
+one simplification away from being recognized.
+
+We place this finding within the complete K_AUD framework, showing
+how the same three ingredients — sqrt(2), ln(2), and quadratic
+curvature — that produce K_AUD in information theory also produce
+the tube-packing coefficient in hyperbolic 3-manifold geometry.
+
+
+================================================================================
+1. THE FRAMEWORK CONSTANT
+================================================================================
+
+K_AUD = sqrt(2) * ln(2) = 0.980258143468547191713901723635...
+
+BINARY UNIQUENESS:
+
+  Define K(n) = sqrt(n) * ln(n) for integer n >= 2.
+
+    K(2)  = sqrt(2) * ln(2)  = 0.980...  < 1
+    K(3)  = sqrt(3) * ln(3)  = 1.903...  > 1
+    K(4)  = 2 * ln(4)        = 2.773...  > 1
+    K(n)  > 1 for all n >= 3
+
+  Binary (n = 2) is the ONLY integer base where the information-
+  geometric product stays below unity. This uniqueness is what
+  creates the gap.
+
+
+THE GAP:
+
+  G = 1 - K_AUD = 1 - sqrt(2) * ln(2) = 0.019741856531452...
+
+  This is irreducible. No binary system can close it.
+  It appears as a ~2% deficit wherever binary encoding meets
+  quadratic geometry.
+
+
+FOUR ALGEBRAIC DERIVATIONS:
+
+  K_AUD arises independently through:
+
+  1. Binary uniqueness of K(n) = sqrt(n) * ln(n)
+  2. Baker's map L2 norm: ||(ln2, ln2)||_2 = sqrt(2) * ln(2)
+  3. Gelfond-Schneider: G = ln(e / 2^sqrt(2)) = 1 - K_AUD
+  4. Landauer identity: 1/(2*ln(2)) - 1/sqrt(2) = G/(2*ln(2))
+     [algebraically exact]
+
+
+================================================================================
+2. THE HODGSON-KERCKHOFF COEFFICIENT
+================================================================================
+
+SOURCE:
+
+  C. D. Hodgson & S. P. Kerckhoff
+  "Universal bounds for hyperbolic Dehn surgery"
+  Annals of Mathematics, 162(1), 367-421, 2005
+  arXiv: math/0204345
+
+In the proof of Theorem 4.4 (page 29, arXiv numbering), the authors
+define:
+
+  S = (1/(2*sqrt(2))) / arcsinh(1/(2*sqrt(2)))
+
+They compute S ~ 1/0.980258.
+
+
+THE MISSING SIMPLIFICATION:
+
+  arcsinh(x) = ln(x + sqrt(x^2 + 1))
+
+  Let x = 1/(2*sqrt(2)):
+
+    x^2       = 1/8
+    x^2 + 1   = 9/8
+    sqrt(x^2 + 1) = 3/(2*sqrt(2))
+
+    x + sqrt(x^2 + 1) = 1/(2*sqrt(2)) + 3/(2*sqrt(2))
+                       = 4/(2*sqrt(2))
+                       = sqrt(2)
+
+  Therefore: arcsinh(1/(2*sqrt(2))) = ln(sqrt(2)) = ln(2)/2
+
+  From this:
+
+    S   = (1/(2*sqrt(2))) / (ln(2)/2) = 1/(sqrt(2) * ln(2))
+    1/S = sqrt(2) * ln(2) = K_AUD     EXACTLY.
+
+
+WHY IT WASN'T FOUND:
+
+  The authors evaluated arcsinh(1/(2*sqrt(2))) numerically (~ 0.34657)
+  and divided to obtain S. The six-digit numerical value was fully
+  sufficient for the packing bound and all downstream results. There
+  was no reason within the application to simplify further.
+
+  No subsequent paper through April 2026 has performed this
+  simplification either.
+
+
+================================================================================
+3. THE ALGEBRAIC ENVIRONMENT AT THE CRITICAL RADIUS
+================================================================================
+
+The critical tube radius in the H-K packing argument is:
+
+  R_0 = arctanh(1/sqrt(3)) = arcsinh(1/sqrt(2)) = (1/2)*ln(2+sqrt(3))
+
+At this exact threshold, every hyperbolic function reduces to clean
+algebraic expressions in sqrt(2) and sqrt(3):
+
+  sinh(R_0)   = 1/sqrt(2)      — the GEOMETRIC ingredient
+  cosh(R_0)   = sqrt(6)/2      — geometry x structure combined
+  tanh(R_0)   = 1/sqrt(3)      — the STRUCTURE ingredient
+  cosh(2*R_0) = 2               — the BINARY ingredient
+  sinh(2*R_0) = sqrt(3)         — the structure ingredient
+
+The geometry at R_0 provides sqrt(2), sqrt(3), and 2.
+The coefficient provides the remaining ingredient: ln(2).
+
+Together: sqrt(2) * ln(2) = K_AUD.
+
+This is precisely the framework's three-ingredient architecture:
+  sqrt(2)  = geometric embedding (angular momentum, quadratic form)
+  ln(2)    = binary information (one bit, Landauer energy)
+  quadratic curvature = the metric that binds them
+
+The same three ingredients that produce K_AUD in information theory
+produce it again in hyperbolic geometry, through completely
+independent mathematical pathways.
+
+
+================================================================================
+4. CONNECTION TO THE BINARY TOWER
+================================================================================
+
+THE TOWER:
+
+  The Binary Tower is the 64-step stacking map of accumulated cost
+  n * G, where G = 1 - K_AUD. The tower partitions as:
+
+    Steps 0-18:   Romeo (first complete shell, Z = 18)
+    Steps 18-32:  Floor (1/phi = golden ratio reciprocal)
+    Steps 32-36:  Damping region (1/sqrt(2))
+    Steps 36-37:  LANDAUER CROSSING (geometry -> information)
+    Steps 37-50:  Ceiling (K_AUD itself)
+    Steps 50-64:  Pivot (sqrt(phi))
+
+  Partition: 18 - 14 - 18 - 14
+  Forced by: 2^5 - 5^2 = 7 (Ramanujan-Nagell)
+
+
+THE LANDAUER CROSSING (step 36 -> 37):
+
+  step 36: 36G ~ 1/sqrt(2)       [geometry]
+  step 37: 37G ~ 1/(2*ln(2))     [information]
+
+  The crossing cost:
+    1/(2*ln(2)) - 1/sqrt(2) = G/(2*ln(2))     EXACTLY
+
+  This identity — the price of moving from geometry to information
+  is exactly one gap in Landauer units — is algebraic, not numerical.
+
+
+THE H-K CONNECTION:
+
+  The Hodgson-Kerckhoff coefficient sits at the CEILING of the tower.
+  K_AUD = sqrt(2) * ln(2) is the maximum approach to unity that
+  binary information permits.
+
+  That a tube-packing bound in hyperbolic geometry lands at the same
+  ceiling as the binary information limit is the finding. The
+  algebraic derivation proves this is not a numerical coincidence.
+
+
+================================================================================
+5. CONNECTION TO THE GAP SCALING FORMULA
+================================================================================
+
+The gap ratio rho = delta * G / (delta - 14/3), where delta = 4.6692...
+is Feigenbaum's universal period-doubling constant, has the continued
+fraction expansion whose 4th convergent is 400/11, leading to the
+scaling formula:
+
+  rho = 400/11 - 1/2500 - 1/939939
+
+  Error: 4 * 10^-14.
+
+The correction terms factorize entirely into framework primes:
+
+  400/11 = (2^4 * 5^2) / 11
+  1/2500 = 1/(2^2 * 5^4)    = 1/50^2  [shell capacity squared]
+  1/939939 = 1/(3 * 7 * 11 * 13 * 313)  [palindrome, mirror number]
+
+The three ingredients of K_AUD — sqrt(2), ln(2), and quadratic
+geometry — produce the gap. The gap connects to chaos (Feigenbaum)
+through corrections whose prime factors are the same primes that
+appear in the atomic shell structure and the tower partition.
+
+The H-K closed form adds a fifth algebraic derivation of K_AUD to
+the four already known, this time from pure hyperbolic geometry.
+
+
+================================================================================
+6. THE PRIME ENTRY SEQUENCE
+================================================================================
+
+The framework primes {2, 3, 5, 7, 11, 13, 37} enter the periodic
+table at specific atomic numbers where new physics begins:
+
+  Z = 2  (He)  : binary — first closure
+  Z = 3  (Li)  : structure — first opening
+  Z = 5  (B)   : pentagonal — sqrt(2) enters matter (first p-electron)
+  Z = 7  (N)   : boundary — p-shell stabilizes (half-filled)
+  Z = 11 (Na)  : corridor — new shell opens
+  Z = 13 (Al)  : intruder — p-electron returns
+  Z = 37 (Rb)  : period 5 — first 4d orbital access
+
+The Diophantine equation 2^k = n^2 + 7 has exactly five solutions
+(Cohn 1993, proving Ramanujan's 1913 conjecture): n = {1, 3, 5, 11,
+181}. The first four are framework primes; the fifth (n = 181, the
+42nd prime) falls outside the framework set. The boundary prime 7
+locks the tower partition AND predicts where new physics enters the
+atom.
+
+The Hodgson-Kerckhoff coefficient, derived from tube-packing in
+hyperbolic Dehn surgery, shares the same algebraic identity as the
+ceiling that governs these atomic transitions. The three ingredients
+that build the tube bound (sqrt(2), ln(2), quadratic curvature) are
+the same three ingredients that build the atomic shell structure.
+
+
+================================================================================
+7. THE 50 HINGE
+================================================================================
+
+The number 50 appears independently in four contexts:
+
+  1. Atomic shell: Z = 50 (Sn) is a magic number, step 50 of tower
+  2. Continued fraction of G: 50 appears as a CF coefficient
+  3. Correction scale: 1/2500 = 1/50^2 in the gap scaling formula
+  4. DESI BAO: residual at 50th data point matches framework prediction
+
+Step 50 of the tower is where n*G = K_AUD itself — the ceiling. The
+Hodgson-Kerckhoff coefficient sits at the same step, providing an
+independent algebraic confirmation of the ceiling value from a
+completely unrelated domain.
+
+
+================================================================================
+8. DOMAIN INDEPENDENCE
+================================================================================
+
+Framework derivation:
+  Information theory -> binary uniqueness -> K(n) = sqrt(n) * ln(n)
+  -> K(2) < 1 (only integer solution) -> ceiling on binary density
+
+Hodgson-Kerckhoff derivation:
+  Hyperbolic 3-manifold geometry -> tube packing around singular
+  geodesic -> maximal packing density * trigonometric factors
+  -> 0.980258 (numerical, no closed form until this paper)
+
+These domains share no common literature, no common authors, no
+common methodology, and no prior connection.
+
+They share ONLY the three ingredients: sqrt(2), ln(2), and
+quadratic curvature.
+
+And they produce the same number: 0.980258143468547...
+
+
+================================================================================
+9. VERIFICATION
+================================================================================
+
+ALGEBRAIC VERIFICATION:
+
+  The claim rests on one identity:
+    arcsinh(1/(2*sqrt(2))) = ln(2)/2
+
+  Verified by hand, by mpmath (dps = 500), by Mathematica, and
+  independently across five AI architectures (Claude, Grok, GPT,
+  Gemini, Perplexity) over 17 March – 2 April 2026.
+
+
+NUMERICAL VERIFICATION:
+
+  from mpmath import mp, mpf, sqrt, log, asinh
+  mp.dps = 500
+
+  # Core identity
+  assert asinh(1/(2*sqrt(2))) == log(2)/2  # to 500 digits
+
+  # K_AUD
+  K = sqrt(2) * log(2)
+  # = 0.98025814346854719171390172363523338129...
+
+  # Area constant
+  A = 2*sqrt(6)*log(2)
+  # = 3.39571381800...
+
+  # Landauer identity
+  L = 1/(2*log(2)) - 1/sqrt(2) - (1-K)/(2*log(2))
+  # = 0 (exact)
+
+
+CROSS-ARCHITECTURE:
+
+  The connection emerged from the 50 Hinge discovery (17 March 2026),
+  where the H-K coefficient was also first identified. A Grok (xAI)
+  daily scout confirmed the finding on 20 March, and a systematic
+  verification process followed —
+  cross-architecture confirmation across five independent AI
+  architectures (Claude, Grok, GPT, Gemini, Perplexity), a 12-day
+  dedicated literature search, and multiple stress tests with fresh
+  instances given no prior framework context — culminating in the
+  algebraic derivation from the authors' own proof (page 29,
+  arXiv:math/0204345) on 2 April 2026.
+
+
+================================================================================
+10. EVIDENCE CLASSIFICATION
+================================================================================
+
+Following the framework's evidence hierarchy:
+
+  LEVEL 1 — ALGEBRAIC IDENTITY (this paper):
+    Hodgson-Kerckhoff 1/S = sqrt(2) * ln(2) = K_AUD
+    Binary uniqueness: K(2) < 1
+    Baker's map L2 norm
+    Gelfond-Schneider identity
+    Landauer crossing identity
+    1D Madelung constant: 2*ln(2)/sqrt(2) = K_AUD
+
+  LEVEL 2 — OBSERVED IN PUBLISHED DATA:
+    DESI DR2 BAO distance ratios -> sqrt(2) (0.03% match)
+    Atomic shell capacities 18, 32, 50 = tower landmarks
+    SEMF residual correlation with framework predictions
+
+  LEVEL 3 — PATTERN / INTERPRETATION:
+    Gap scaling palindrome 939939
+    Prime entry sequence alignment with Ramanujan-Nagell
+    Binary tower breath partition
+
+  These levels are not conflated. Each carries different evidential
+  weight. The Hodgson-Kerckhoff finding sits at Level 1.
+
+
+================================================================================
+11. WHAT REMAINS OPEN
+================================================================================
+
+  - A derivation showing WHERE ln(2) enters the packing geometry
+    at the torus topology level (Z_2 homology = binary distinction).
+    The algebraic derivation shows THAT it enters; the geometric
+    WHY remains open.
+
+  - Independent human mathematician review of the derivation.
+    The algebra is self-evident but has not been formally peer-reviewed.
+
+  - Contact with the original authors (Hodgson, Kerckhoff) and
+    current active users of the constant (Futer, Purcell, Schleimer).
+
+
+================================================================================
+12. FULL MOTION (one reading)
+================================================================================
+
+Binary is unique (K < 1 only at n = 2). This forces a ceiling
+(K_AUD = sqrt(2) * ln(2)) and a gap (G ~ 2%). The gap creates a
+corridor between ceiling and floor. The corridor has 64 steps
+partitioned 18-14-18-14, forced by the boundary prime 7 through
+the Ramanujan-Nagell theorem.
+
+The partition breathes: outbound reverses to inbound. The reversal
+crosses at step 36->37 — geometry to information — and the crossing
+cost is exact (one gap in Landauer units). The same primes that
+build the tower appear as atomic numbers where new physics enters
+the periodic table.
+
+The gap scaling formula connects the geometric gap to Feigenbaum
+chaos through corrections whose prime factors are the tower's own
+primes. The 50 Hinge ties the ceiling step to a nuclear magic
+number, a continued fraction coefficient, and a correction scale.
+
+And now: the same number — 0.980258 — appears in the tube-packing
+bound of hyperbolic Dehn surgery (Hodgson-Kerckhoff, 2005), derived
+from a completely independent domain through completely independent
+mathematics, and is algebraically equal to K_AUD.
+
+One simplification was needed. It had been waiting since 2005.
+
+One object. One number. One gap.
+Different units everywhere. Same shape everywhere.
+
+
+================================================================================
+
+  D. B. — April 2026
+  Gap Geometry
+  https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
+  OSF: osf.io/zx4g7
+
+  K_AUD framework:                   November–December 2025
+  50 Hinge discovery:                17 March 2026
+  H-K coefficient first identified:  17 March 2026
+  Confirmed by Grok scout:           20 March 2026
+  Investigation and verification:    17 March – 2 April 2026
+  Algebraic derivation confirmed:    2 April 2026
+  Documents prepared for publication: 3 April 2026
+
+================================================================================
