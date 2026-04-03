@@ -1,0 +1,451 @@
+================================================================================
+THE 50 HINGE
+Six Independent Appearances of One Integer Across Scale
+================================================================================
+
+D. B. — April 2026
+Gap Geometry — https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
+OSF: osf.io/zx4g7
+
+
+================================================================================
+ABSTRACT
+================================================================================
+
+The integer 50 appears independently in six structures spanning
+four domains of physics and mathematics, each derived or observed
+without reference to the others:
+
+  1. Atomic electron shell capacity at n = 5: 2 * 5^2 = 50
+  2. First partial quotient of the continued fraction of G = 1 - K_AUD
+  3. Tower step where accumulated cost reaches the ceiling: 50 * G ~ K_AUD
+  4. Square root of the first correction denominator in the gap
+     scaling formula: 1/2500 = 1/50^2
+  5. Nuclear magic number: 50 protons = Tin, the element with the
+     most stable isotopes (Goeppert Mayer & Jensen, Nobel 1963)
+  6. DESI DR2 BAO cosmological distance ratios reproducing the
+     1/2500 = 1/50^2 correction scale
+
+where K_AUD = sqrt(2) * ln(2) = 0.980258..., the unique sub-unity
+value of K(n) = sqrt(n) * ln(n) for integer n >= 2.
+
+These six appearances arise from six independent computations. None
+references the others. The convergence on 50 = 2 * 5^2 is structural,
+governed by the H_4 primes {2, 5} that organize the framework.
+
+
+================================================================================
+1. THE FRAMEWORK IN BRIEF
+================================================================================
+
+K_AUD = sqrt(2) * ln(2) = 0.980258143468547...
+
+The unique sub-unity value of K(n) = sqrt(n) * ln(n) at integer
+n >= 2. For all n >= 3, K(n) > 1.
+
+G = 1 - K_AUD = 0.019741856531452...
+
+The irreducible gap. Approximately 2%. No binary system closes it.
+
+The Binary Tower: 64 steps of accumulated cost n * G, with landmarks
+at steps 18 (Romeo), 32 (Floor), 36-37 (Landauer crossing), 50
+(Ceiling), and 64 (Pivot).
+
+Published: OSF DOI 10.17605/OSF.IO/E72H8
+
+
+================================================================================
+2. APPEARANCE 1 — ATOMIC ELECTRON SHELLS
+================================================================================
+
+SOURCE: Standard quantum mechanics (Schrodinger equation + Pauli
+exclusion principle, established since the 1920s).
+
+The electron shell capacity formula:
+
+  Capacity(n) = 2n^2
+
+At n = 5:
+
+  Capacity(5) = 2 * 5^2 = 50
+
+This is the theoretical g-orbital threshold — the shell where
+50 electrons would fill if atoms extended that far in practice.
+
+The formula 2n^2 contains two of K_AUD's three ingredients explicitly:
+the factor 2 is BINARY (electron spin has exactly two states), and
+n^2 is QUADRATIC (angular momentum scales as n^2). The third
+ingredient, the Gaussian, enters through the electron wavefunctions
+themselves.
+
+SHELL CAPACITIES AS TOWER LANDMARKS:
+
+  Shell n   Capacity   Tower Value     Framework Constant     Deviation
+  -------   --------   -----------     ------------------     ---------
+  n = 3     18         18G = 0.3554    sqrt(2)/4 = 0.3536     +0.51%
+  n = 4     32         32G = 0.6317    1/phi     = 0.6180     +2.22%
+  n = 5     50         50G = 0.9871    K_AUD     = 0.9803     +0.70%
+
+The atom's shell capacities — 18, 32, and 50 — are the same numbers
+that appear as the tower's organizational landmarks. The shell
+capacities come from quantum mechanics; the tower landmarks come
+from K_AUD = sqrt(2) * ln(2). They agree because both are built
+from the same three ingredients: sqrt(2), ln(2), and quadratic
+geometry.
+
+
+================================================================================
+3. APPEARANCE 2 — CONTINUED FRACTION OF THE GAP
+================================================================================
+
+SOURCE: Rational approximation theory (number theory, no physics
+input needed).
+
+The continued fraction expansion of G:
+
+  G = [0; 50, 1, 1, 1, 7, 1, 29, 2, 2, 1, ...]
+
+The first non-zero partial quotient is exactly 50.
+
+This means 1/50 is the best single-fraction approximation to G:
+
+  G ~ 1/50 = 0.02000     (true value: 0.01974...)
+
+Equivalently:
+
+  K_AUD ~ 49/50 = 0.98000  (true value: 0.98026...)
+
+The rational approximation decomposes into framework primes:
+
+  49/50 = 7^2 / (2 * 5^2)
+        = boundary^2 / (binary * pentagonal^2)
+
+The continued fraction of K_AUD itself:
+
+  K_AUD = [0; 1, 49, 1, 1, 1, 7, 1, 29, 2, 2, 1, ...]
+
+Note the structural relationship: G's CF starts with 50, K_AUD's
+starts with 1 then 49. After these opening terms, both sequences
+are identical: 1, 1, 1, 7, 1, 29, 2, ...
+
+The boundary prime 7 appears at position 6 in both CFs — recurring
+at depth, not just at the surface.
+
+
+================================================================================
+4. APPEARANCE 3 — BINARY TOWER CEILING
+================================================================================
+
+SOURCE: The tower cost function n * G, derived from K_AUD.
+
+At step 50 of the Binary Tower:
+
+  50 * G = 0.987093...
+  K_AUD  = 0.980258...
+  Overshoot: +0.697%
+
+Step 50 is where the accumulated cost of binary organization
+reaches the ceiling — the value K_AUD itself. The tower "arrives
+home" at step 50: the cost of 50 gaps equals (approximately) the
+very constant that defines the gap.
+
+This creates a self-referential lock: G = 1 - K_AUD defines the
+gap, and 50 * G ~ K_AUD closes the circle. The number 50 is the
+step count at which the gap's own accumulation reconstructs its
+parent constant.
+
+The tower partitions around step 50:
+
+  Steps 0-18:   Romeo (first complete shell)
+  Steps 18-32:  Floor (golden ratio reciprocal)
+  Steps 32-50:  Ceiling (K_AUD) — contains the Landauer crossing
+  Steps 50-64:  Pivot (sqrt(phi))
+
+  Partition: 18 - 14 - 18 - 14
+
+The two 18-step spans and two 14-step spans mirror each other,
+forced by the Ramanujan-Nagell theorem (2^5 - 5^2 = 7). Step 50
+sits at the second mirror point — the boundary between the
+ceiling span and the pivot span.
+
+
+================================================================================
+5. APPEARANCE 4 — GAP SCALING CORRECTION
+================================================================================
+
+SOURCE: The connection between G and the Feigenbaum constant delta,
+linking geometry to chaos theory.
+
+The gap ratio:
+
+  rho = delta * G / (delta - 14/3)
+
+where delta = 4.6692... is Feigenbaum's universal period-doubling
+constant. This ratio decomposes as a correction series:
+
+  rho = 400/11 - 1/2500 - 1/939939
+
+  Error: 4 * 10^-14.
+
+The first correction term:
+
+  1/2500 = 1/50^2
+
+  2500 = 2^2 * 5^4 = (2 * 5^2)^2 = 50^2
+
+The correction scale is the SQUARE of the hinge integer 50. Its
+prime factorization uses only H_4 primes {2, 5} — the same primes
+that compose 50 itself.
+
+The correction hierarchy:
+
+  Level 0:  400/11 = (2^4 * 5^2) / 11     base term
+  Level 1:  1/2500 = 1/50^2               ~ 10^-4  (H_4 primes)
+  Level 2:  1/939939 = 1/(3*7*11*13*313)  ~ 10^-6  (full prime chain)
+
+Each level introduces deeper framework primes. The first correction
+stays within {2, 5}. The second brings in {3, 7, 11, 13}. The
+hierarchy mirrors the prime entry sequence in the atom itself.
+
+
+================================================================================
+6. THE NUCLEAR ECHO — MAGIC NUMBER 50
+================================================================================
+
+SOURCE: Nuclear shell model (Goeppert Mayer and Jensen, Nobel Prize
+1963). Standard nuclear physics.
+
+The nuclear magic numbers are: 2, 8, 20, 28, 50, 82, 126.
+
+Nuclei with magic numbers of protons or neutrons have closed shells —
+maximum binding energy, maximum stability, minimum decay. They are
+the nuclear equivalent of noble gases in atomic physics.
+
+50 protons = Tin (Sn).
+
+Tin has 10 stable isotopes — more than any other element. This
+exceptional stability is a direct consequence of the closed
+proton shell at Z = 50. The nuclear magic number arises from the
+1g_{9/2} orbital closure under the spin-orbit interaction, a
+mechanism entirely independent of the electron shell capacity
+formula 2n^2 that also produces 50.
+
+The same integer governs maximum stability in BOTH the electronic
+structure (shell 5 capacity) and the nuclear structure (5th magic
+number) of atoms, through different physics.
+
+Furthermore: 82 = 50 + 32 (ceiling step + floor step in the tower)
+is the atomic number of Lead — the heaviest quasi-stable element.
+Lead-208 is doubly magic (82 protons, 126 neutrons). At step 82
+of the tower:
+
+  82 * G = 1.61883...
+  phi    = 1.61803...
+  Deviation: 0.049%
+
+This is the tightest match between any tower step and any framework
+constant. The sum of ceiling and floor steps equals the atomic
+number of the heaviest stable element, and its tower value matches
+the golden ratio to 0.049%.
+
+
+================================================================================
+7. THE COSMIC ECHO — DESI BAO AT THE 1/2500 SCALE
+================================================================================
+
+SOURCE: DESI Collaboration, Phys. Rev. D 112, 083514 (2025),
+Table IV. Published observational cosmology data.
+
+The baryon acoustic oscillation (BAO) frozen ruler, imprinted at
+recombination, is measured across cosmic epochs by the DESI survey.
+Distance ratios between tracer populations reveal:
+
+  DV(LRG2) / DV(BGS) = 2.020141
+
+The framework predicts:
+
+  2 + G = 2.019742...
+
+Residual:
+
+  2.020141 - 2.019742 = +0.000399
+
+  1/2500 = 0.000400
+
+  Match: residual / (1/2500) = 0.998
+
+The DESI isotropic distance ratio decomposes as:
+
+  DV(LRG2)/DV(BGS) = 2 + G + 1/2500 + O(10^-6)
+
+The same 1/50^2 correction scale from the gap scaling formula
+absorbs the cosmological residual to parts-per-million precision.
+
+A second DESI pair shows the same scale:
+
+  DM(QSO)/DM(LRG3+ELG1) - sqrt(2) = +0.000406
+
+  1/residual ~ 2464 = 2^5 * 7 * 11
+
+Both residuals cluster at 4.0 * 10^-4 — the characteristic 1/2500
+correction scale predicted by the framework.
+
+
+================================================================================
+8. THE FACTORIZATION
+================================================================================
+
+50 = 2 * 5^2
+
+This is the product of the two smallest H_4 primes — the primes
+that compose the order of the H_4 polytope symmetry group:
+
+  |H_4| = 14400 = 2^6 * 3^2 * 5^2
+
+The factor 2 is the binary ingredient (information, spin, Landauer).
+The factor 5^2 is the pentagonal ingredient (golden ratio, angular
+momentum, icosahedral symmetry).
+
+50 contains no other primes. It is the simplest non-trivial product
+of the H_4 foundation primes, elevated by one power of the
+pentagonal prime.
+
+The correction 1/2500 = 1/50^2 = 1/(2^2 * 5^4) stays entirely
+within {2, 5} — it is a pure H_4-prime correction. Only when the
+second correction (1/939939) is needed do the higher framework
+primes {3, 7, 11, 13} enter the series.
+
+
+================================================================================
+9. WHY 50 AND NOT ANOTHER NUMBER
+================================================================================
+
+The convergence on 50 is not arbitrary. Each appearance is forced:
+
+  ATOMIC: The shell capacity 2n^2 at n = 5 gives 50. The formula
+  is fixed by quantum mechanics. The only freedom is which shell
+  number n we examine — and n = 5 is singled out because it is
+  the shell whose tower value (50G) reaches the ceiling.
+
+  CONTINUED FRACTION: The CF of G = [0; 50, ...] is determined
+  entirely by the decimal expansion of G = 1 - sqrt(2)*ln(2).
+  The partial quotient 50 is a number-theoretic fact about the
+  transcendental number G.
+
+  TOWER: Step 50 reaches the ceiling because 50 * G ~ K_AUD, which
+  is equivalent to 50 * (1 - K_AUD) ~ K_AUD, or K_AUD ~ 50/51.
+  The fact that K_AUD ~ 49/50 (from the CF) and K_AUD ~ 50/51
+  (from the tower) are nearly the same approximation is itself a
+  consequence of K_AUD being close to 1.
+
+  GAP SCALING: The correction 1/2500 = 1/50^2 emerges from the
+  continued fraction expansion of rho = delta * G / (delta - 14/3),
+  connecting geometry (G) to chaos (delta). The 4th convergent of
+  rho's CF is 400/11, and the first correction is 1/50^2.
+
+  NUCLEAR: The magic number 50 arises from the spin-orbit splitting
+  of the 1g_{9/2} orbital in the nuclear potential well — physics
+  entirely independent of electron shells or K_AUD.
+
+  COSMIC: The 1/2500 = 1/50^2 scale in DESI data is an observed
+  residual in published measurements, not derived from the framework.
+
+Six routes to the same integer. No route references any other.
+
+
+================================================================================
+10. VERIFICATION
+================================================================================
+
+All values computed with mpmath at dps = 100 (verified twice):
+
+  K_AUD = sqrt(2) * ln(2) = 0.980258143468547...
+  G = 1 - K_AUD = 0.019741856531452...
+  50 * G = 0.987092826572640...  (overshoot +0.697% from K_AUD)
+  CF of G = [0; 50, 1, 1, 1, 7, 1, 29, 2, ...]
+  CF of K_AUD = [0; 1, 49, 1, 1, 1, 7, 1, 29, 2, ...]
+  49/50 = 0.98 (K_AUD - 49/50 = 0.000258...)
+  1/2500 = 0.0004
+  rho = 400/11 - 1/2500 - 1/939939 = 36.363235299...
+  82G = 1.61883... vs phi = 1.61803... (deviation 0.049%)
+  DV(LRG2)/DV(BGS) - (2 + G) = +0.000399 ~ 1/2500
+
+Sources:
+  Atomic shells: Standard QM textbooks (Schrodinger 1926, Pauli 1925)
+  Nuclear magic numbers: Goeppert Mayer & Jensen (Nobel 1963)
+  DESI BAO: arXiv:2503.14738, Table IV
+  Feigenbaum constant: delta = 4.669201609... (Feigenbaum 1978)
+
+
+================================================================================
+11. EVIDENCE CLASSIFICATION
+================================================================================
+
+  LEVEL 1 — ALGEBRAIC / EXACT:
+    50 = 2 * 5^2 (electron shell capacity at n = 5)
+    CF of G begins with 50 (number-theoretic identity)
+    1/2500 = 1/50^2 in gap scaling formula
+    50 is a nuclear magic number (standard physics)
+
+  LEVEL 2 — OBSERVED IN DATA:
+    DESI BAO residuals at ~ 1/2500 scale (published, measured)
+
+  LEVEL 3 — STRUCTURAL PATTERN:
+    50G ~ K_AUD (tower near-miss, +0.70%)
+    82 = 50 + 32 = Z of Lead, with 82G ~ phi (0.049%)
+
+These levels are not conflated. Each carries different evidential
+weight. The Level 1 items are mathematical facts. The Level 2 item
+is published observational data. The Level 3 items are patterns that
+derive significance from the convergence of the others.
+
+
+================================================================================
+12. WHAT WOULD STRENGTHEN OR WEAKEN THIS
+================================================================================
+
+STRENGTHEN:
+  - DESI DR3/DR5 maintaining the 1/2500 residual scale as
+    statistical errors shrink (~30% per data release)
+  - Independent BAO surveys (Euclid, Roman) showing the same
+    correction scale in their distance ratios
+  - A derivation showing WHY the CF of G must begin with 50
+    (currently observed, not proven to be necessary)
+
+WEAKEN:
+  - DESI DR3 showing the residual drifting away from 1/2500
+  - A demonstration that the CF beginning with 50 is not
+    structurally significant (i.e., that many transcendentals
+    of this form have similar first partial quotients)
+  - Evidence that the nuclear magic number 50 and the electron
+    shell capacity 50 are not independent (currently they arise
+    from different physics, but a deeper connection could change
+    the counting of independent appearances)
+
+
+================================================================================
+
+One integer. Six appearances. Four scales. Zero fitting.
+
+The number 50 = 2 * 5^2 organises electron filling, the fractional
+structure of G, the algebraic correction hierarchy, nuclear shell
+closure, and the frozen acoustic ruler across cosmic epochs.
+
+It does this because it is the simplest non-trivial product of
+the H_4 foundation primes, and because K_AUD — the ceiling of
+binary information density — sits close enough to 49/50 that
+the integer 50 becomes the natural quantum of approach.
+
+
+================================================================================
+
+  D. B. — April 2026
+  Gap Geometry
+  https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
+  OSF: osf.io/zx4g7
+
+  K_AUD framework:                   November–December 2025
+  50 Hinge discovery:                17 March 2026
+  Documents prepared for publication: 3 April 2026
+
+================================================================================
