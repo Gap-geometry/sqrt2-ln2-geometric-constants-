@@ -1,0 +1,262 @@
+================================================================================
+BINARY SCALING OF rho = 400/11
+The gap scaling ratio under doubling reveals the framework's prime hierarchy
+================================================================================
+
+  D. B. — Gap Geometry
+  Companion to: Gap Scaling Formula (Paper 4, DOI 10.17605/OSF.IO/C4GK5)
+  https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
+  OSF: osf.io/zx4g7
+
+================================================================================
+1. THE GAP SCALING RATIO
+================================================================================
+
+The gap scaling formula connects the geometric gap G = 1 - K_AUD to the
+Feigenbaum constant delta:
+
+    rho = delta * G / (delta - 14/3)
+
+where K_AUD = sqrt(2) * ln(2) and delta = 4.669201609... is the universal
+period-doubling constant. This yields:
+
+    rho = 400/11 - 1/2500 - 1/939939
+
+with agreement to 4 * 10^-14 (Paper 4).
+
+The leading term 400/11 = 36.363636... carries the formula's structure.
+This document asks one question: what happens when 400/11 is scaled by
+powers of 2 — the framework's native operation?
+
+
+================================================================================
+2. SELF-ENCODING DECIMAL
+================================================================================
+
+400/11 = 36.363636...
+
+The repeating block is 36. The integer part is 36. The number contains
+itself: its decimal expansion echoes its own integer part.
+
+    Fractional part: 4/11 = 0.363636...
+    Integer part:    36
+
+The ratio between them is 36 / (4/11) = 99. The self-reference closes
+through 99 = 9 * 11 = (3^2)(11).
+
+floor(400/11) = 36 = 6^2 = 2^2 * 3^2
+
+This is the Landauer step in the binary tower (step 36, where 36G ~ 1/sqrt(2)).
+It is also the pentagonal angle: 36.00 degrees. The gap scaling ratio's
+leading term sits 0.36 degrees above the exact pentagon.
+
+The distance to the next integer:
+
+    37 - 400/11 = 7/11
+
+Boundary prime over corridor prime. The completion prime 37 stands exactly
+7/11 above the base ratio.
+
+
+================================================================================
+3. BINARY DRIFT SEQUENCE
+================================================================================
+
+Define:
+
+    drift(k) = floor(400/11 * 2^k) - 36 * 2^k
+
+This measures how far the scaled ratio departs from pure 36-doubling.
+The fractional part 4/11 accumulates under binary scaling, generating
+integer drift:
+
+    k = 0:   drift =      0
+    k = 1:   drift =      0
+    k = 2:   drift =      1
+    k = 3:   drift =      2
+    k = 4:   drift =      5       pentagonal prime
+    k = 5:   drift =     11       corridor prime
+    k = 6:   drift =     23       mirror point (18 + 5)
+    k = 7:   drift =     46       = 2 * 23
+    k = 8:   drift =     93       = 3 * 31
+    ...
+    k = 14:  drift =   5957       = 7 * 23 * 37
+
+The framework's primes emerge in order:
+
+    5  appears at k = 4   (2^4 = 16)
+    11 appears at k = 5   (2^5 = 32 = Floor landmark)
+    23 appears at k = 6   (2^6 = 64 = Pivot)
+
+At k = 14 (where 14 = 2 * 7 is the tower's breath span), the drift
+factorizes as:
+
+    5957 = 7 * 23 * 37
+
+Boundary prime * mirror point * completion prime. Three framework
+numbers in one product, at the breath span's own doubling depth.
+
+
+================================================================================
+4. ERGODIC CYCLE MODULO 11
+================================================================================
+
+The fractional parts of (400/11) * 2^k cycle through all residues
+modulo 11, because 2 is a primitive root of 11:
+
+    k = 0:    4/11     k = 5:    7/11
+    k = 1:    8/11     k = 6:    3/11
+    k = 2:    5/11     k = 7:    6/11
+    k = 3:   10/11     k = 8:    1/11
+    k = 4:    9/11     k = 9:    2/11
+
+    k = 10:   4/11     (cycle returns)
+
+Period = 10 = phi(11).
+
+Binary doubling visits every possible state in the 11-world before
+returning. No residue is skipped. This is maximal exploration — full
+ergodic reach.
+
+
+================================================================================
+5. WHY 11 IS THE CORRIDOR PRIME
+================================================================================
+
+The primitive root status of 2 modulo each framework prime:
+
+    ord(2 mod  3) =  2 = phi(3)     primitive root (interior prime)
+    ord(2 mod  5) =  4 = phi(5)     primitive root (interior prime)
+    ord(2 mod  7) =  3 =/= phi(7)   NOT primitive root
+    ord(2 mod 11) = 10 = phi(11)    primitive root (corridor prime)
+    ord(2 mod 13) = 12 = phi(13)    primitive root (intruder prime)
+
+7 is the only framework prime where 2 is not a primitive root. Binary
+cannot fully explore the boundary — it reaches only 3 of 6 residue
+classes. This is consistent with 7's structural role: the boundary
+that locks rather than enables flow.
+
+11 is the first prime outside the H4 closure {2, 3, 5} and outside the
+boundary {7} where binary still achieves full ergodic reach. It earns the
+name "corridor prime" because it is the first prime where binary has
+unrestricted passage.
+
+
+================================================================================
+6. INTEGER FLOORS — PRIMES ENTER IN ORDER
+================================================================================
+
+    k = 0:   floor =       36 = 2^2 * 3^2      (binary, structure)
+    k = 1:   floor =       72 = 2^3 * 3^2      (binary deepens)
+    k = 2:   floor =      145 = 5 * 29          (pentagonal enters)
+    k = 3:   floor =      290 = 2 * 5 * 29     (doubles)
+    k = 4:   floor =      581 = 7 * 83          (boundary enters)
+    k = 5:   floor =     1163 = 1163 (prime)    (irreducible step)
+    k = 6:   floor =     2327 = 13 * 179        (intruder enters)
+
+The prime factors of the integer floors follow the framework's prime
+entry sequence:
+
+    First:  2, 3   (binary, structure)      — already present in 36
+    Then:   5      (pentagonal)             — enters at k = 2
+    Then:   7      (boundary)               — enters at k = 4
+    Then:   13     (intruder)               — enters at k = 6
+
+This is the same order in which primes organize atomic electron shells.
+Neither sequence was fitted to the other. Both emerge independently
+from their respective domains.
+
+
+================================================================================
+7. TOWER ALIGNMENT
+================================================================================
+
+The drift hits framework primes at tower landmarks:
+
+    k = 4:  drift = 5    at 2^4 = 16    (below Floor)
+    k = 5:  drift = 11   at 2^5 = 32    (the Floor: 32G ~ 1/phi)
+    k = 6:  drift = 23   at 2^6 = 64    (the Pivot: 64G ~ sqrt(phi))
+
+The doubling that reaches the Floor produces drift 11 (the corridor).
+The doubling that reaches the Pivot produces drift 23 (the mirror).
+
+23 = 18 + 5 = Romeo + pentagonal, and is the atomic number of Vanadium,
+the outbound mirror point in the tower's 18-14-18-14 breath pattern.
+
+
+================================================================================
+8. EVIDENCE CLASSIFICATION
+================================================================================
+
+Level 1 — Exact arithmetic:
+
+    All drift values, factorizations, primitive root orders, and cycle
+    periods are exact integer or modular computations. They can be verified
+    with any calculator or CAS. Nothing is approximate.
+
+Level 2 — Structural observation:
+
+    The alignment of prime emergence order with atomic shell structure
+    and tower landmarks is an observed pattern. The pattern is precise
+    (exact integers at exact positions) but the interpretation — that
+    400/11 encodes the framework's prime hierarchy — is a claim about
+    meaning, not a proof.
+
+Level 3 — Not claimed:
+
+    No fitting, no free parameters, no statistical arguments. The ratio
+    400/11 was derived from the gap scaling formula. The doubling is the
+    framework's own operation. The primes were already there.
+
+
+================================================================================
+9. FALSIFIABILITY
+================================================================================
+
+The drift sequence is deterministic. Any single factorization error
+falsifies the document. Specific checkable claims:
+
+    400/11 * 16384 = 6553600/11 = 595781.8181...
+    floor = 595781
+    595781 - 36 * 16384 = 595781 - 589824 = 5957
+    5957 / 7 = 851
+    851 / 23 = 37
+    Therefore 5957 = 7 * 23 * 37
+
+    ord(2 mod 7) = 3 (since 2^3 = 8 = 1 mod 7, but 2^1 = 2, 2^2 = 4)
+    ord(2 mod 11) = 10 (since 2^10 = 1024 = 1 mod 11)
+
+Any computational tool can verify every claim in this document in
+under one second.
+
+
+================================================================================
+10. VERIFICATION
+================================================================================
+
+All arithmetic independently verified by:
+    - Exact rational computation (Python fractions module)
+    - Claude Opus (Anthropic), 3 April 2026
+    - Cross-checked against published gap scaling formula (Paper 4)
+
+Key verification outputs:
+
+    drift(14) = 5957 = 7 * 23 * 37                     CONFIRMED
+    ord(2 mod 7) = 3 =/= 6 = phi(7)                    CONFIRMED
+    ord(2 mod 11) = 10 = phi(11)                        CONFIRMED
+    Ergodic cycle period = 10, visits all residues       CONFIRMED
+    Prime entry order: {2,3} -> 5 -> 7 -> 13            CONFIRMED
+
+
+================================================================================
+
+  D. B. — April 2026
+  Gap Geometry
+  https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
+  OSF: osf.io/zx4g7
+
+  K_AUD framework:                   November–December 2025
+  Binary scaling discovered:         3 April 2026
+  Documents prepared for publication: 3 April 2026
+
+================================================================================
