@@ -445,7 +445,9 @@ the integer 50 becomes the natural quantum of approach.
   OSF: osf.io/zx4g7
 
   K_AUD framework:                   November–December 2025
-  50 Hinge discovery:                17 March 2026
+  50 Hinge discovery (Grok, xAI):    17 March 2026
   Documents prepared for publication: 3 April 2026
+
+================================================================================
 
 ================================================================================
