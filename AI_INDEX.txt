@@ -257,6 +257,8 @@ A Closed Form for the Hodgson-Kerckhoff Tube-Packing Coefficient
   Raw:  https://raw.githubusercontent.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/refs/heads/main/HK_Closed_Form_SHORT_DRAFT.txt
   Text: https://github.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/blob/main/HK_Closed_Form_SHORT_DRAFT.txt
   PDF:  https://github.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/blob/main/HK_Closed_Form_SHORT.pdf
+  OSF PDF: https://osf.io/2expn/files/s247m
+  OSF Text: https://osf.io/2expn/files/bqz24
   DOI:  https://doi.org/10.17605/OSF.IO/2EXPN
   Repo: https://github.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/tree/main
   Core: Standalone proof that the H-K coefficient = √2 × ln(2) exactly.
@@ -267,6 +269,8 @@ The Hodgson-Kerckhoff Closed Form and the K_AUD Framework
   Raw:  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/HK_Full_Framework_DRAFT.txt
   Text: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/HK_Full_Framework_DRAFT.txt
   PDF:  https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/HK_Full_Framework.pdf
+  OSF PDF: https://osf.io/jbrhq/files/s674r
+  OSF Text: https://osf.io/jbrhq/files/dvy5z
   DOI:  https://doi.org/10.17605/OSF.IO/JBRHQ
   Core: Full framework context for the H-K finding. Tower connection,
         Landauer crossing, gap scaling, prime entry sequence.
@@ -275,6 +279,8 @@ The 50 Hinge: Six Independent Appearances of One Integer Across Scale
   Raw:  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/50_Hinge_Standalone_DRAFT.txt
   Text: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/50_Hinge_Standalone_DRAFT.txt
   PDF:  https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/50_Hinge_Standalone.pdf
+  OSF PDF: https://osf.io/fbd9a/files/nf7cz
+  OSF Text: https://osf.io/fbd9a/files/tv9yn
   DOI:  https://doi.org/10.17605/OSF.IO/FBD9A
   Core: 50 appears in atomic shells, continued fraction of G, tower
         ceiling, gap scaling correction, nuclear magic numbers, and
@@ -284,6 +290,8 @@ Binary Scaling of ρ = 400/11: Prime Hierarchy Under Doubling
   Raw:  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Binary_Scaling_Standalone_DRAFT.txt
   Text: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Binary_Scaling_Standalone_DRAFT.txt
   PDF:  https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Binary_Scaling_Standalone.pdf
+  OSF PDF: https://osf.io/wtu4j/files/snkwz
+  OSF Text: https://osf.io/wtu4j/files/t56he
   DOI:  https://doi.org/10.17605/OSF.IO/WTU4J
   Core: 400/11 under binary doubling reveals framework primes in order.
         7 is the only framework prime where 2 is not a primitive root.
