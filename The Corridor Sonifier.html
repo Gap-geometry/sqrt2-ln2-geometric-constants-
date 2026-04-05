@@ -514,6 +514,7 @@ function stopCorridor() {
   }
 }
 
+// Desktop: mouse events
 corridorBar.addEventListener('mousedown', (e) => {
   handleCorridor(e);
   const move = (ev) => handleCorridor(ev);
@@ -525,6 +526,24 @@ corridorBar.addEventListener('mousedown', (e) => {
   document.addEventListener('mousemove', move);
   document.addEventListener('mouseup', up);
 });
+
+// Touch: iPad / mobile — same corridor, different hand
+function handleCorridorTouch(e) {
+  e.preventDefault();
+  const touch = e.touches[0];
+  handleCorridor({ clientX: touch.clientX });
+}
+corridorBar.addEventListener('touchstart', (e) => {
+  handleCorridorTouch(e);
+  const move = (ev) => handleCorridorTouch(ev);
+  const end = () => {
+    stopCorridor();
+    document.removeEventListener('touchmove', move);
+    document.removeEventListener('touchend', end);
+  };
+  document.addEventListener('touchmove', move, { passive: false });
+  document.addEventListener('touchend', end);
+}, { passive: false });
 
 // ============================================================
 // II. BINARY TOWER
