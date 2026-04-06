@@ -183,6 +183,45 @@
   STRUCTURAL rather than NOISE, to make this explicit.
 
   ---------------------------------------------------------------------------
+  ALGEBRAIC DEPENDENCE BETWEEN RELATED RATIOS (CRITICAL)
+  ---------------------------------------------------------------------------
+
+  The telescope is a SINGLE-VALUE tool. Each query is independent. It
+  has no memory of previous queries and cannot detect when multiple
+  ratios are algebraically related.
+
+  When a researcher runs several ratios from the same underlying
+  system (for example: N/Z, Z/N, N/A, Z/A for a specific nucleus),
+  apparent "convergence" on related landmarks may be the same fact
+  written in different coordinates, not multiple independent
+  observations.
+
+  Canonical example: for Sn-132 (Z=50, N=82, A=132),
+
+      N/Z = 82/50 = 1.6400  lands near φ ≈ 1.6180 (1.36% off)
+      Z/N = 50/82 = 0.6098  lands near 1/φ ≈ 0.6180 (1.34% off)
+      N/A = 82/132 = 0.6212 lands near 1/φ ≈ 0.6180 (0.51% off)
+
+  These look like three independent landmark proximities. They are
+  ONE observation. Via the golden ratio identity 1 + φ = φ²:
+
+      IF N/Z ≈ φ, THEN A = Z(1+N/Z) = Z(1+φ) = Z·φ²
+      AND      N/A = (N/Z)/(1+N/Z) = φ/(1+φ) = 1/φ exactly.
+
+  The 1/φ proximity of N/A is the algebraic consequence of N/Z being
+  near φ, not an independent signal. The three ratios collapse to one.
+
+  When you (as an AI describing telescope results to a user) encounter
+  several tight-landmark hits on related ratios from the same system,
+  ALWAYS check for algebraic dependence before describing them as
+  "multiple converging signals." Ask: are these ratios expressible as
+  rational functions of each other? If yes, they are the same
+  observation in different coordinates.
+
+  The telescope itself cannot detect this. The dependence check is a
+  researcher-layer responsibility.
+
+  ---------------------------------------------------------------------------
   HOW TO INTERPRET A RESULT
   ---------------------------------------------------------------------------
 
@@ -515,6 +554,12 @@
       <li>The landmark must be <strong>physically relevant</strong> to the system being studied.</li>
       <li>The fit should be <strong>stable or improving</strong> as input precision increases. Fits
       that get worse with better data are coincidence.</li>
+      <li><strong>Check for algebraic dependence</strong> when running multiple related ratios from the
+      same system. The telescope is a single-value tool and cannot detect when two queries are
+      mathematically linked (example: for a nucleus with N, Z, A, the ratios N/Z, Z/N, N/A, Z/A are
+      not independent — the golden ratio identity 1+φ=φ² can make them all hit related landmarks from
+      one underlying fact). Before calling it "multiple converging signals," check if the ratios can
+      be derived from each other.</li>
     </ul>
     <p>
       A miss is also a result. If a number that should land on the tower doesn't, that is evidence.
@@ -612,7 +657,10 @@ const presets = [
   { label:'δ_Feig/4',       val:FEIGENBAUM/4,              desc:'Feigenbaum constant / 4',                         source:'Chaos theory' },
   { label:'charm GeV',      val:1.270,                     desc:'Charm quark mass in GeV',                         source:'PDG' },
   { label:'W/Z ratio',      val:80.377/91.1876,            desc:'W boson / Z boson mass ratio',                    source:'PDG' },
-  { label:'Ω_m (DESI FS)',  val:0.2962,                    desc:'Matter density, DESI 2024 FS+BAO',                source:'arXiv:2411.12022' }
+  { label:'Ω_m (DESI FS)',  val:0.2962,                    desc:'Matter density, DESI 2024 FS+BAO',                source:'arXiv:2411.12022' },
+  // Claim tests: expressions that should land at a specific value if a framework claim holds
+  { label:'Sn-132 φ-consistency', val:((49+1)*PHI*PHI)/(11*12), desc:'(7²+1)·φ² / (11·12) — tests whether Ceiling and prime-11 pivot are φ²-consistent', source:'Claim test' },
+  { label:'Fe-56 / Ceiling',      val:56/50,                    desc:'7·(7+1) / (7²+1) — Fe-56 mass number vs Ceiling',                                  source:'Claim test' }
 ];
 
 let history = [];
