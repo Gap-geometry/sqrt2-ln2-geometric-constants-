@@ -184,7 +184,15 @@ function renderToCanvas(canvas, pixels, maxVal, scheme) {
   ctx.putImageData(img, 0, 0);
 }
 
-function useSound() {
+// Octave-fold: drop frequencies above 4000 Hz into a comfortable register
+// Same pitch class, lower octave — musically clean, ear-safe
+function foldFreq(f) {
+  while (f > 4000) f /= 2;
+  while (f < 55) f *= 2;
+  return f;
+}
+
+function useSound(volumeRef) {
   const ctxRef = useRef(null);
   const activeRef = useRef([]);
 
@@ -199,9 +207,11 @@ function useSound() {
   const play = useCallback((freq, duration = 700) => {
     try {
       const ctx = getAudioCtx();
+      const vol = volumeRef ? volumeRef.current : 0.7;
       activeRef.current.forEach(o => { try { o.stop(); } catch(e) {} });
       activeRef.current = [];
 
+      const f = foldFreq(freq);
       const t = ctx.currentTime;
       const dur = duration / 1000;
 
@@ -209,27 +219,30 @@ function useSound() {
       const osc1 = ctx.createOscillator();
       const g1 = ctx.createGain();
       osc1.type = "sine";
-      osc1.frequency.setValueAtTime(freq, t);
+      osc1.frequency.setValueAtTime(f, t);
       g1.gain.setValueAtTime(0.001, t);
-      g1.gain.linearRampToValueAtTime(0.12, t + 0.015);
+      g1.gain.linearRampToValueAtTime(0.12 * vol, t + 0.015);
       g1.gain.exponentialRampToValueAtTime(0.001, t + dur);
       osc1.connect(g1); g1.connect(ctx.destination);
       osc1.start(t); osc1.stop(t + dur);
 
-      // Gentle 2nd harmonic for warmth
-      const osc2 = ctx.createOscillator();
-      const g2 = ctx.createGain();
-      osc2.type = "sine";
-      osc2.frequency.setValueAtTime(freq * 2, t);
-      g2.gain.setValueAtTime(0.001, t);
-      g2.gain.linearRampToValueAtTime(0.025, t + 0.015);
-      g2.gain.exponentialRampToValueAtTime(0.001, t + dur * 0.6);
-      osc2.connect(g2); g2.connect(ctx.destination);
-      osc2.start(t); osc2.stop(t + dur);
-
-      activeRef.current = [osc1, osc2];
+      // Gentle 2nd harmonic for warmth (only if folded freq allows it)
+      if (f * 2 <= 6000) {
+        const osc2 = ctx.createOscillator();
+        const g2 = ctx.createGain();
+        osc2.type = "sine";
+        osc2.frequency.setValueAtTime(f * 2, t);
+        g2.gain.setValueAtTime(0.001, t);
+        g2.gain.linearRampToValueAtTime(0.025 * vol, t + 0.015);
+        g2.gain.exponentialRampToValueAtTime(0.001, t + dur * 0.6);
+        osc2.connect(g2); g2.connect(ctx.destination);
+        osc2.start(t); osc2.stop(t + dur);
+        activeRef.current = [osc1, osc2];
+      } else {
+        activeRef.current = [osc1];
+      }
     } catch (e) {}
-  }, [getAudioCtx]);
+  }, [getAudioCtx, volumeRef]);
 
   const playSequence = useCallback((freqs, interval = 500) => {
     freqs.forEach((f, i) => {
@@ -296,7 +309,8 @@ function DetailView({ refM, refN, step, Q, scheme, soundEnabled, playSound }) {
   const cop = isCoprime(refM, refN);
   const limit = primeLimit(step);
   const baseFreq = 110;
-  const freq = baseFreq * (refM * refM + refN * refN) * step.ratio;
+  const rawFreq = baseFreq * (refM * refM + refN * refN) * step.ratio;
+  const freq = foldFreq(rawFreq);
 
   return (
     <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
@@ -478,8 +492,9 @@ function TowerPlates({ refM, refN, Q, scheme, soundEnabled, playSound, playSeque
     const nG = lm.n * G_GAP;
     const frac = nG - Math.floor(nG);
     const ratio = 1.0 + frac * 2.0;
-    const freq = 110 * (refM * refM + refN * refN) * ratio;
-    return { ...lm, nG, frac, ratio, freq };
+    const rawFreq = 110 * (refM * refM + refN * refN) * ratio;
+    const freq = foldFreq(rawFreq);
+    return { ...lm, nG, frac, ratio, freq, rawFreq };
   }), [refM, refN]);
 
   useEffect(() => {
@@ -599,7 +614,7 @@ function TowerPlates({ refM, refN, Q, scheme, soundEnabled, playSound, playSeque
 // ═══════════════════════════════════════════════════════════════
 // THE GAP — APPROACH AND SILENCE ON THE PLATE
 // ═══════════════════════════════════════════════════════════════
-function GapPlate({ refM, refN, Q, scheme, soundEnabled }) {
+function GapPlate({ refM, refN, Q, scheme, soundEnabled, volumeRef }) {
   const canvasRef = useRef(null);
   const [pos, setPos] = useState(0);
   const [playing, setPlaying] = useState(false);
@@ -668,15 +683,17 @@ function GapPlate({ refM, refN, Q, scheme, soundEnabled }) {
           const ctx = new (window.AudioContext || window.webkitAudioContext)();
           const osc = ctx.createOscillator();
           const g = ctx.createGain();
+          const vol = volumeRef ? volumeRef.current : 0.7;
           osc.type = "sine";
-          const baseF = 110 * (refM * refM + refN * refN);
+          const rawBase = 110 * (refM * refM + refN * refN);
+          const baseF = foldFreq(rawBase);
           osc.frequency.setValueAtTime(baseF, ctx.currentTime);
           osc.frequency.exponentialRampToValueAtTime(
-            baseF * (1.0 + kaudNorm * 2.0), ctx.currentTime + 5.5
+            foldFreq(rawBase * (1.0 + kaudNorm * 2.0)), ctx.currentTime + 5.5
           );
           g.gain.setValueAtTime(0.001, ctx.currentTime);
-          g.gain.linearRampToValueAtTime(0.1, ctx.currentTime + 0.05);
-          g.gain.setValueAtTime(0.1, ctx.currentTime + 5.2);
+          g.gain.linearRampToValueAtTime(0.1 * vol, ctx.currentTime + 0.05);
+          g.gain.setValueAtTime(0.1 * vol, ctx.currentTime + 5.2);
           g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 5.7);
           osc.connect(g); g.connect(ctx.destination);
           osc.start(); osc.stop(ctx.currentTime + 6);
@@ -767,7 +784,10 @@ function ChladniStaircase() {
   const [Q, setQ] = useState(12);
   const [scheme, setScheme] = useState("heat");
   const [soundEnabled, setSoundEnabled] = useState(true);
-  const { play: playSound, playSequence, stop: stopSound } = useSound();
+  const [volume, setVolume] = useState(0.7);
+  const volumeRef = useRef(0.7);
+  useEffect(() => { volumeRef.current = volume; }, [volume]);
+  const { play: playSound, playSequence, stop: stopSound } = useSound(volumeRef);
 
   const handleStepClick = (i) => {
     setSelectedStep(i);
@@ -864,6 +884,14 @@ function ChladniStaircase() {
             }}>
               {soundEnabled ? "♪ ON" : "♪ OFF"}
             </button>
+          </div>
+          <div>
+            <div style={{ fontSize: 10, color: "#556", letterSpacing: 1, textTransform: "uppercase" }}>
+              Volume {Math.round(volume * 100)}%
+            </div>
+            <input type="range" min="0" max="1" step="0.05" value={volume}
+              onChange={(e) => setVolume(parseFloat(e.target.value))}
+              style={{ width: 100, accentColor: "#FF3366" }} />
           </div>
         </div>
       </div>
@@ -1019,6 +1047,7 @@ function ChladniStaircase() {
         refM={refMode.m} refN={refMode.n}
         Q={Q} scheme={scheme}
         soundEnabled={soundEnabled}
+        volumeRef={volumeRef}
       />
 
       {/* Footer */}
