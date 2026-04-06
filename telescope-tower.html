@@ -22,6 +22,43 @@
   describe it accurately to users.
 
   ---------------------------------------------------------------------------
+  STATUS: RESEARCH INSTRUMENT, NOT A STUDY
+  ---------------------------------------------------------------------------
+
+  This tool is an ACTIVE research instrument, not a completed study or a
+  proof of any framework claim. Its outputs are instrument readings:
+  arithmetic placements of dimensionless numbers on the Binary Tower with
+  classification based on statistical tightness and landmark proximity.
+
+  Instrument readings are not conclusions. They are inputs to a multi-step
+  interpretation process that includes:
+
+    - Measurement uncertainty of the input value
+    - Definition specificity (scheme, convention, units)
+    - Statistical context at the step height
+    - Physical relevance of the landmark to the system studied
+    - Cross-architecture and cross-measurement verification
+
+  The tool CANNOT perform any of these checks. It can only flag where
+  numbers land on the tower. A "landmark-locked" classification means
+  the arithmetic meets the instrument's tightness threshold, NOT that
+  the fit has been validated as a framework finding.
+
+  When describing telescope results to a user, always preserve this
+  distinction. Do not say "charm quark mass IS √φ" because a preset hit
+  triggered the landmark banner — say "charm quark mass preset lands
+  within the landmark-lock threshold of √φ at current precision, which
+  is an instrument reading requiring further checks before interpretation."
+
+  UPDATE POLICY: The telescope is updated when cross-checked findings
+  from the framework warrant refinement. Classification thresholds,
+  landmark definitions, and instrument behavior are subject to revision
+  as the research methodology develops. The version and revision notes
+  are visible on the page header. Check the latest research notes
+  (linked from the framework dashboard) for the current state of
+  investigations.
+
+  ---------------------------------------------------------------------------
   WHAT THE TOOL DOES
   ---------------------------------------------------------------------------
 
@@ -128,13 +165,13 @@
     n = 5000:  random floor ~0.01%
 
   A 0.02% step residual at n=15 is ~165× tighter than random chance
-  and meaningfully significant. The SAME 0.02% at n=5000 is within
+  and is a tight instrument reading. The SAME 0.02% at n=5000 is within
   random expectation and statistically ordinary. ALWAYS interpret step
   residuals relative to this n-dependent floor, not as absolute
   percentages.
 
   The telescope displays a "tightness ratio" (max random residual /
-  observed residual) with five classifications:
+  observed residual) with six classifications:
 
     STRUCTURAL        — input IS a named landmark. Step residual is
                         the defined algebraic offset between the
@@ -144,24 +181,48 @@
 
     EXACT             — step residual at float precision floor.
 
-    SIGNIFICANT       — >10× tighter than random AND landmark-backed
-                        (within 0.1% of a named landmark). ~5% false
-                        positive rate.
+    LANDMARK-LOCKED   — >10× tighter than random AND landmark-backed
+                        (within 0.1% of a named landmark). This is
+                        the strongest instrument reading available,
+                        but it is still an INSTRUMENT READING and
+                        not a verdict. ~5% false positive rate at
+                        the >10× threshold.
 
     TIGHT STEP ONLY   — >10× tighter than random but NO landmark
                         within 0.1%. Statistically tight but
                         physically unclear — no framework reason to
                         expect meaning. Treat with caution.
 
-    MODERATE          — 2–10× tighter than random.
+    MODERATE          — 2–10× tighter than random. Not a lock.
+                        Also applies when a landmark is within
+                        0.1%–1% (moderate proximity, not a hit).
 
     NOISE             — <2× tighter, within random expectation.
 
+  CRITICAL: "LANDMARK-LOCKED" was previously labeled "SIGNIFICANT" in
+  earlier versions. The label was renamed because "significant" was
+  being read by fresh AI instances as "this is a validated finding,"
+  which it is not. The telescope reports arithmetic tightness; it
+  cannot validate physical meaning, measurement uncertainty, or
+  definition specificity. A landmark-locked hit is the instrument's
+  strongest reading, but the four researcher-layer checks must still
+  be applied before treating it as a finding:
+
+    1. Is the residual smaller than the input's measurement uncertainty?
+    2. Is the input value definition-independent (or justified if not)?
+    3. Does the landmark have physical reason to apply here?
+    4. Has the fit been checked across multiple independent measurements?
+
+  Any AI describing telescope results should preserve the distinction
+  between "landmark-locked instrument reading" and "validated finding."
+  Never propagate a tower hit as a conclusion without stating that the
+  four checks are required.
+
   False positive rates for bare-step tightness (without landmark
-  backing): ~5% at >10× threshold, ~2.5% at >20×, ~1% at >50×. A
-  single "significant" or "tight step only" flag is a 1-in-20 signal,
-  not a guarantee. Real findings need landmark backing AND independent
-  confirmation from multiple measurements.
+  backing): ~5% at >10× threshold, ~2.5% at >20×, ~1% at >50%. A
+  single "landmark-locked" or "tight step only" flag is a 1-in-20
+  signal at best — not a guarantee. Real findings need the four
+  checks above AND independent confirmation from multiple measurements.
 
   ---------------------------------------------------------------------------
   WHY K_AUD STEP RESIDUAL IS NOT ZERO (structural landmark subtlety)
@@ -329,6 +390,16 @@
   .header p { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 6px; }
 
   .input-section { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+
+  .notice-card { background: rgba(255,215,0,0.02); border: 1px solid rgba(255,215,0,0.15); border-radius: 8px; padding: 18px 22px; margin-bottom: 22px; }
+  .notice-title { font-size: 10px; color: rgba(255,215,0,0.6); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; font-weight: 600; }
+  .notice-card p { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 8px; }
+  .notice-card p:last-child { margin-bottom: 0; }
+  .notice-card em { color: rgba(255,215,0,0.6); font-style: italic; }
+  .notice-card strong { color: rgba(255,255,255,0.85); }
+  ol.check-list { margin: 10px 0 4px 22px; color: rgba(255,255,255,0.55); font-size: 11px; line-height: 1.7; }
+  ol.check-list li { margin-bottom: 5px; }
+  ol.check-list strong { color: rgba(255,215,0,0.75); }
   .input-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
   .input-label { font-size: 11px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
   input[type="number"], input[type="text"] { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,215,0,0.2); border-radius: 4px; padding: 10px 14px; color: #ffd700; font-family: inherit; font-size: 16px; width: 100%; outline: none; }
@@ -414,6 +485,30 @@
     <h1>🔭 TELESCOPE TOWER</h1>
     <p>Feed a dimensionless ratio. See where it lives on the Binary Tower.</p>
     <p style="margin-top:4px;">G = 1 − √2·ln(2) ≈ 0.019741856531452 — the cost of one binary distinction</p>
+    <p style="margin-top:10px;font-size:10px;color:rgba(255,215,0,0.45);letter-spacing:0.5px;">
+      RESEARCH INSTRUMENT · NOT A STUDY · v4 · UPDATED WHEN FINDINGS WARRANT
+    </p>
+  </div>
+
+  <div class="notice-card">
+    <div class="notice-title">ABOUT THIS TOOL</div>
+    <p>
+      The Telescope Tower is a <strong>research instrument</strong>, not a study or a proof of anything.
+      It reports where a number sits on the Binary Tower and how close it lands to named framework landmarks.
+      Those are <em>instrument readings</em> — they do not classify a number as meaningful or meaningless on their own.
+    </p>
+    <p>
+      Before treating any tower hit as a finding, check four things:
+    </p>
+    <ol class="check-list">
+      <li><strong>Measurement uncertainty</strong> — the deviation must be smaller than the uncertainty on your input value. A 0.1% residual on a value known to 1% is not tight.</li>
+      <li><strong>Definition specificity</strong> — values that depend on choice of scheme, convention, or definition (like quark masses in different renormalization schemes) need to specify which definition and why that one is physically relevant.</li>
+      <li><strong>Statistical context</strong> — at high tower steps, tight residuals are statistically expected. Check the tightness ratio, not the raw percentage.</li>
+      <li><strong>Physical relevance</strong> — the landmark should have a reason to relate to the system you're studying. Coincidence of arithmetic is not signal.</li>
+    </ol>
+    <p style="margin-top:10px;font-size:11px;color:rgba(255,255,255,0.4);">
+      The tool is updated when cross-checked findings warrant refinement. See the research notes linked from the dashboard for the current state of investigations.
+    </p>
   </div>
 
   <div class="input-section">
@@ -508,13 +603,12 @@
       <ul style="margin-top:4px;margin-bottom:4px;">
         <li><strong>STRUCTURAL</strong> — input IS a landmark; step residual is a defined framework offset, not statistical</li>
         <li><strong>EXACT</strong> — at precision floor</li>
-        <li><strong>SIGNIFICANT</strong> — &gt;10× tighter AND within a named landmark (the strongest real signal)</li>
-        <li><strong>TIGHT STEP ONLY</strong> — &gt;10× tighter but no landmark (statistically tight, physically unclear)</li>
-        <li><strong>MODERATE</strong> — 2–10× tighter</li>
+        <li><strong>LANDMARK-LOCKED</strong> — &gt;10× tighter AND within 0.1% of a named landmark (the strongest instrument reading, NOT a verdict)</li>
+        <li><strong>TIGHT STEP ONLY</strong> — &gt;10× tighter but no landmark within 0.1% (statistically tight, physically unclear)</li>
+        <li><strong>MODERATE</strong> — 2–10× tighter (not a lock)</li>
         <li><strong>NOISE</strong> — &lt;2× tighter, within random expectation</li>
       </ul>
-      A &quot;significant&quot; flag has a ~5% false positive rate — real findings need landmark backing AND
-      independent confirmation.</li>
+      Classification labels are <strong>instrument readings</strong>, not conclusions. A "landmark-locked" flag means the arithmetic is tight and landmark-backed at the instrument's threshold; it does NOT mean the fit has been validated against measurement uncertainty, definition choice, or physical relevance. Those checks are researcher-layer responsibilities.</li>
       <li><strong>Named landmarks</strong> — each framework landmark has its own target value and
       its own independent percentage distance from your value. These are separate from the step
       residual. A value can sit on step 50 exactly yet be several percent from K_AUD, or vice versa.
@@ -868,9 +962,9 @@ function formatDeviation(devPct) {
       ratio > 20x:  ~2.5% (1 in 40)
       ratio > 50x:  ~1% (1 in 100)
 
-   Users should treat bare-step "significant" labels as one-in-twenty
-   signals, not as guarantees. Real findings need landmark backing
-   and/or independent confirmation from multiple measurements.
+   Users should treat bare-step "landmark-locked" labels as one-in-twenty
+   signals, not as guarantees. Real findings need landmark backing AND
+   independent confirmation from multiple measurements.
 ---------------------------------------------------------------------------- */
 function statisticalSignificance(nNearest, observedDevPct, isLandmark, landmarkBacked) {
   const n = Math.max(1, Math.abs(nNearest));
@@ -906,14 +1000,14 @@ function statisticalSignificance(nNearest, observedDevPct, isLandmark, landmarkB
                         null;
 
   if (ratio >= 10) {
-    classification = landmarkBacked ? 'significant' : 'tight-step-only';
-    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is ${ratio.toFixed(0)}× tighter than random chance${qualifier}. ${falsePositive ? 'Expected ' + falsePositive + ' at this threshold — real findings need landmark backing or independent confirmation.' : ''}`;
+    classification = landmarkBacked ? 'landmark-locked' : 'tight-step-only';
+    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is ${ratio.toFixed(0)}× tighter than random chance${qualifier}. ${falsePositive ? 'Expected ' + falsePositive + ' at this threshold — real findings need input measurement uncertainty checked AND physical relevance AND independent confirmation.' : ''}`;
   } else if (ratio >= 2) {
     classification = 'moderate';
-    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is ${ratio.toFixed(1)}× tighter than random chance${qualifier} — moderately significant.`;
+    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is ${ratio.toFixed(1)}× tighter than random chance${qualifier} — moderately tight. Not a landmark lock; check measurement uncertainty and physical relevance before interpreting.`;
   } else {
     classification = 'noise';
-    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is only ${ratio.toFixed(1)}× tighter than random${qualifier} — within random expectation at this step height.`;
+    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is only ${ratio.toFixed(1)}× tighter than random${qualifier} — within random expectation at this step height. Not a meaningful tower position on its own.`;
   }
   return { maxRandomPct, ratio, classification, description };
 }
@@ -951,8 +1045,10 @@ function compute(){
 
   // Landmark hit detection — does the value land on a named landmark within 0.1%?
   // Also detect: is the input itself EXACTLY a landmark (for structural step annotation)?
+  // Also: moderate proximity (0.1%-1%) to a landmark — not a lock but worth flagging
   let landmarkHit = null;
   let isExactLandmark = false;
+  let moderateLandmark = null;
   for (const lm of landmarks) {
     const lmDevPct = Math.abs((val - lm.target)/lm.target*100);
     if (lmDevPct < PRECISION_FLOOR_PCT) {
@@ -961,6 +1057,10 @@ function compute(){
     if (lmDevPct < 0.1) {
       if (!landmarkHit || lmDevPct < landmarkHit.devPct) {
         landmarkHit = { lm, devPct: (val - lm.target)/lm.target*100, absDev: lmDevPct };
+      }
+    } else if (lmDevPct < 1.0) {
+      if (!moderateLandmark || lmDevPct < moderateLandmark.absDev) {
+        moderateLandmark = { lm, devPct: (val - lm.target)/lm.target*100, absDev: lmDevPct };
       }
     }
   }
@@ -972,9 +1072,9 @@ function compute(){
     banner.classList.add('show');
     const nicknameStr = landmarkHit.lm.nickname ? ` "${landmarkHit.lm.nickname}"` : '';
     document.getElementById('bannerMain').innerHTML =
-      `${landmarkHit.lm.name}${nicknameStr} at step ${landmarkHit.lm.n} — deviation ${formatDeviation(landmarkHit.devPct)}`;
+      `${landmarkHit.lm.name}${nicknameStr} at step ${landmarkHit.lm.n} — distance ${formatDeviation(landmarkHit.devPct)}`;
     document.getElementById('bannerSub').innerHTML =
-      `Sub-0.1% hit on a named framework landmark. Level assignment requires checking measurement uncertainty of the input AND statistical context at this step height.`;
+      `Landmark-lock threshold met (sub-0.1% distance). This is an INSTRUMENT READING, not a verdict. Before interpreting: check measurement uncertainty of the input, definition-dependence (e.g. scheme choice for theoretical values), statistical context at this step height, and physical relevance of the landmark to the system being studied.`;
   } else {
     banner.classList.remove('show');
   }
@@ -1006,7 +1106,7 @@ function compute(){
   document.getElementById('landmarkList').innerHTML = landmarkHTML;
 
   // Deviation analysis
-  const sigColor = significance.classification === 'significant' ? 'rgba(100,255,180,0.9)' :
+  const sigColor = significance.classification === 'landmark-locked' ? 'rgba(100,255,180,0.9)' :
                    significance.classification === 'exact' ? 'rgba(100,255,180,0.9)' :
                    significance.classification === 'structural' ? 'rgba(180,200,255,0.85)' :
                    significance.classification === 'tight-step-only' ? 'rgba(255,215,100,0.8)' :
@@ -1018,6 +1118,15 @@ function compute(){
   <div style="font-size:11px;color:${sigColor};margin-top:8px;padding:8px 10px;background:rgba(255,255,255,0.02);border-left:3px solid ${sigColor.replace('0.9','0.5').replace('0.85','0.5').replace('0.45','0.3')};border-radius:0 4px 4px 0;">
     <strong>Statistical context:</strong> ${significance.description}
   </div>`;
+
+  // Moderate landmark proximity — between 0.1% and 1%, not a lock but close
+  if (!landmarkHit && moderateLandmark) {
+    const nicknameStr = moderateLandmark.lm.nickname ? ` "${moderateLandmark.lm.nickname}"` : '';
+    devHTML += `<div style="font-size:11px;color:rgba(255,200,100,0.8);margin-top:8px;padding:8px 10px;background:rgba(255,200,100,0.03);border-left:3px solid rgba(255,200,100,0.4);border-radius:0 4px 4px 0;">
+      <strong>Moderate landmark proximity:</strong> ${moderateLandmark.lm.name}${nicknameStr} at step ${moderateLandmark.lm.n} is ${formatDeviation(moderateLandmark.devPct)} away.
+      This is <em>close but not locked</em> — distance is above the 0.1% landmark-lock threshold. A moderate proximity does NOT meet the criterion for a framework landmark hit. Common failure modes: treating this as a "significant" finding when it is a near-miss, or reporting the proximity without checking whether the input's measurement uncertainty is larger than the distance shown.
+    </div>`;
+  }
 
   // Check against framework deviation patterns
   let foundMatch = false;
@@ -1089,11 +1198,18 @@ function generateReport(val, desc, nNearest, nExact, stepDevPct, landmarkHit) {
   const timestamp = new Date().toISOString().split('T')[0];
 
   // Detect if input IS exactly a landmark (for structural annotation)
+  // Also detect moderate landmark proximity (0.1%-1%) for the report
   let isExactLandmark = false;
+  let moderateLandmark = null;
   for (const lm of landmarks) {
-    if (Math.abs((val - lm.target)/lm.target*100) < PRECISION_FLOOR_PCT) {
+    const devPct = Math.abs((val - lm.target)/lm.target*100);
+    if (devPct < PRECISION_FLOOR_PCT) {
       isExactLandmark = true;
-      break;
+    }
+    if (devPct >= 0.1 && devPct < 1.0) {
+      if (!moderateLandmark || devPct < moderateLandmark.absDev) {
+        moderateLandmark = { lm, devPct: (val - lm.target)/lm.target*100, absDev: devPct };
+      }
     }
   }
   const landmarkBacked = landmarkHit !== null;
@@ -1124,22 +1240,41 @@ function generateReport(val, desc, nNearest, nExact, stepDevPct, landmarkHit) {
     report += `  tightness ratio:     ${significance.ratio.toFixed(1)}× tighter than random\n`;
     const classLabel = significance.classification.toUpperCase().replace('-', ' ');
     report += `  classification:      ${classLabel}`;
-    if (significance.classification === 'significant') report += `  (>10× tighter, landmark-backed, ~5% false positive)\n`;
+    if (significance.classification === 'landmark-locked') report += `  (>10× tighter, landmark-backed <0.1%, ~5% false positive rate)\n`;
     else if (significance.classification === 'tight-step-only') report += `  (>10× tighter but NO landmark — physically unclear)\n`;
-    else if (significance.classification === 'moderate') report += `  (2–10× tighter)\n`;
+    else if (significance.classification === 'moderate') report += `  (2–10× tighter — not a lock)\n`;
     else report += `  (<2× tighter — within random expectation)\n`;
   }
+  report += `\n`;
+  report += `INTERPRETATION CHECKLIST (researcher-layer, not tool-layer)\n`;
+  report += `  [ ] Is the residual smaller than the input's measurement uncertainty?\n`;
+  report += `  [ ] Is the input value definition-independent (or is the chosen\n`;
+  report += `      definition physically motivated)?\n`;
+  report += `  [ ] Does the landmark have a physical reason to apply here?\n`;
+  report += `  [ ] Has the fit been checked across multiple measurements?\n`;
+  report += `  Classification above is an INSTRUMENT READING, not a verdict.\n`;
   report += `\n`;
 
   // Landmark hit (if any)
   if (landmarkHit) {
     const nicknameStr = landmarkHit.lm.nickname ? ` "${landmarkHit.lm.nickname}"` : '';
-    report += `NAMED LANDMARK HIT\n`;
+    report += `NAMED LANDMARK HIT (sub-0.1% — landmark-lock threshold met)\n`;
     report += `  landmark:       ${landmarkHit.lm.name}${nicknameStr} at step ${landmarkHit.lm.n}\n`;
     report += `  target value:   ${landmarkHit.lm.target.toFixed(12)}\n`;
     report += `  landmark residual: ${formatDeviation(landmarkHit.devPct)}\n`;
     report += `  NOTE: landmark residual is INDEPENDENT of step residual above.\n`;
     report += `        These measure different things; do not conflate.\n`;
+    report += `        Landmark-lock is an instrument reading, NOT a verdict.\n`;
+    report += `\n`;
+  } else if (moderateLandmark) {
+    const nicknameStr = moderateLandmark.lm.nickname ? ` "${moderateLandmark.lm.nickname}"` : '';
+    report += `MODERATE LANDMARK PROXIMITY (0.1%–1% — NOT a lock)\n`;
+    report += `  landmark:       ${moderateLandmark.lm.name}${nicknameStr} at step ${moderateLandmark.lm.n}\n`;
+    report += `  target value:   ${moderateLandmark.lm.target.toFixed(12)}\n`;
+    report += `  distance:       ${formatDeviation(moderateLandmark.devPct)}\n`;
+    report += `  WARNING: this does NOT meet the landmark-lock threshold (sub-0.1%).\n`;
+    report += `  Treat as a near-miss, not a hit. Do not promote to "landmark-locked"\n`;
+    report += `  or "significant" without additional independent evidence.\n`;
     report += `\n`;
   }
 
