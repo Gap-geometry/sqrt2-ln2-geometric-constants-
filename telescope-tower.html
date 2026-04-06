@@ -91,6 +91,55 @@
   use mpmath or similar arbitrary-precision libraries.
 
   ---------------------------------------------------------------------------
+  STEP-RESIDUAL vs LANDMARK-RESIDUAL (CRITICAL — DO NOT CONFLATE)
+  ---------------------------------------------------------------------------
+
+  These are TWO INDEPENDENT MEASUREMENTS computed separately:
+
+    STEP-RESIDUAL     = distance from the nearest integer multiple of G
+                      = (n_nearest × G − value) / value × 100 %
+                      Measures: "how well does this value fit a tower step?"
+
+    LANDMARK-RESIDUAL = distance from a named framework constant (K_AUD,
+                        1/φ, √2/4, etc.) computed from the constant's own
+                        value, not from its step position.
+                      Measures: "how close is this value to this named
+                        constant?"
+
+  These can disagree substantially. K_AUD for example IS the K_AUD
+  landmark by definition (landmark residual = 0 exactly), but its
+  nearest integer step is n=50 and 50×G is 0.69% away from K_AUD's
+  actual value — so step residual = 0.69% while landmark residual = 0.
+  When reporting results, always state both numbers explicitly if the
+  value is near a landmark. Never average them, never conflate them,
+  never use one as a substitute for the other.
+
+  ---------------------------------------------------------------------------
+  STATISTICAL FLOOR (n-SCALING)
+  ---------------------------------------------------------------------------
+
+  At step n, the maximum possible step residual (as a percentage) is
+  approximately 1/(2n) × 100%, because the worst-case absolute residual
+  is G/2 and the step value is n×G. This gives:
+
+    n =   15:  random floor ~3.33%
+    n =  100:  random floor ~0.50%
+    n = 1000:  random floor ~0.05%
+    n = 5000:  random floor ~0.01%
+
+  A 0.02% step residual at n=15 is ~165× tighter than random chance
+  and meaningfully significant. The SAME 0.02% at n=5000 is within
+  random expectation and statistically ordinary. ALWAYS interpret step
+  residuals relative to this n-dependent floor, not as absolute
+  percentages.
+
+  The telescope displays a "tightness ratio" (max random residual /
+  observed residual) with:
+    ratio > 10×  — significant (real signal)
+    ratio 2–10×  — moderate
+    ratio < 2×   — within random expectation (probably noise)
+
+  ---------------------------------------------------------------------------
   HOW TO INTERPRET A RESULT
   ---------------------------------------------------------------------------
 
@@ -371,14 +420,22 @@
     <ul>
       <li><strong>Step n and step residual</strong> — the nearest integer step and the percentage
       distance from your value to that step. This is the primary "tower position" readout.</li>
+      <li><strong>Statistical context (n-scaling)</strong> — at step n, a random value can have step
+      residual up to ±50/n percent just by chance. The telescope reports a "tightness ratio" showing
+      how many times tighter your hit is than random expectation. Ratios >10× mean real signal;
+      2–10× is moderate; &lt;2× is within random noise at that step height. This is critical for
+      interpreting hits at high n, where small residuals are statistically expected.</li>
       <li><strong>Named landmarks</strong> — each framework landmark has its own target value and
       its own independent percentage distance from your value. These are separate from the step
-      residual. A value can sit on step 50 exactly yet be several percent from K_AUD, or vice versa.</li>
+      residual. A value can sit on step 50 exactly yet be several percent from K_AUD, or vice versa.
+      Landmarks carry canonical nicknames: Romeo (√2/4), Floor (1/φ), Landauer Crossing (1/(2ln2)),
+      Ceiling (K_AUD), Pivot (√φ).</li>
       <li><strong>Named landmark hit banner</strong> — appears only when your value lands within
-      0.1% of a named landmark. This is the strongest kind of tower hit.</li>
+      0.1% of a named landmark. This is the strongest kind of tower hit, but must still be checked
+      against measurement uncertainty and statistical context before assigning a level.</li>
       <li><strong>Canonical report</strong> — a copy-paste ready block with all numbers separated
-      clearly, for inclusion in research notes. Using this format prevents the common clerical
-      error of conflating step-residual with landmark-residual.</li>
+      clearly, including statistical context, for inclusion in research notes. Using this format
+      prevents the common clerical error of conflating step-residual with landmark-residual.</li>
     </ul>
 
     <h3>Level classification (framework convention)</h3>
@@ -465,15 +522,15 @@ const FEIGENBAUM = 4.669201609102990671853203820466;
 const PRECISION_FLOOR_PCT = 1e-13;
 
 // Framework landmarks: physical targets with their own values,
-// each carrying a tower-step annotation.
+// each carrying a tower-step annotation and canonical nickname.
 const landmarks = [
-  { n:18, name:'√2/4',     target:SQRT2/4,       shell:3,    color:'rgba(100,180,255,0.8)' },
-  { n:32, name:'1/φ',      target:1/PHI,         shell:4,    color:'rgba(100,180,255,0.9)' },
-  { n:36, name:'1/√2',     target:1/SQRT2,       shell:null, color:'rgba(200,200,255,0.7)' },
-  { n:37, name:'1/(2ln2)', target:1/(2*LN2),     shell:null, color:'rgba(255,200,100,0.9)' },
-  { n:50, name:'K_AUD',    target:K_AUD,         shell:5,    color:'rgba(255,215,0,0.9)'   },
-  { n:64, name:'√φ',       target:SQRT_PHI,      shell:null, color:'rgba(255,180,100,0.9)' },
-  { n:82, name:'φ',        target:PHI,           shell:null, color:'rgba(100,255,180,0.7)' }
+  { n:18, name:'√2/4',     nickname:'Romeo',             target:SQRT2/4,       shell:3,    color:'rgba(100,180,255,0.8)' },
+  { n:32, name:'1/φ',      nickname:'Floor',             target:1/PHI,         shell:4,    color:'rgba(100,180,255,0.9)' },
+  { n:36, name:'1/√2',     nickname:'Geometry crossing', target:1/SQRT2,       shell:null, color:'rgba(200,200,255,0.7)' },
+  { n:37, name:'1/(2ln2)', nickname:'Landauer Crossing', target:1/(2*LN2),     shell:null, color:'rgba(255,200,100,0.9)' },
+  { n:50, name:'K_AUD',    nickname:'Ceiling',           target:K_AUD,         shell:5,    color:'rgba(255,215,0,0.9)'   },
+  { n:64, name:'√φ',       nickname:'Pivot',             target:SQRT_PHI,      shell:null, color:'rgba(255,180,100,0.9)' },
+  { n:82, name:'φ',        nickname:'Golden ratio',      target:PHI,           shell:null, color:'rgba(100,255,180,0.7)' }
 ];
 
 // Deviation patterns: characteristic residual SIZES observed elsewhere
@@ -481,11 +538,11 @@ const landmarks = [
 // A match here flags that a user's residual has the same SHAPE as a
 // framework-internal residual, which may or may not be meaningful.
 const deviationPatterns = [
-  { name:'Tower doubling invariant residual', pct:0.5087, tol:0.05 },
-  { name:'Gap stacking ε residual',           pct:0.6714, tol:0.05 },
-  { name:'G/(2ln2) Landauer-cost-sized residual', pct:G/(2*LN2)*100, tol:0.1 },
-  { name:'1/2500 cosmological correction',    pct:0.04,   tol:0.01 },
-  { name:'82G ≈ φ precision residual',        pct:0.049,  tol:0.02 }
+  { name:'Tower doubling invariant residual', pct:0.5087, tol:0.03 },
+  { name:'Gap stacking ε residual',           pct:0.6714, tol:0.03 },
+  { name:'G/(2ln2) Landauer-cost-sized residual', pct:G/(2*LN2)*100, tol:0.05 },
+  { name:'1/2500 cosmological correction',    pct:0.04,   tol:0.005 },
+  { name:'82G ≈ φ precision residual',        pct:0.049,  tol:0.01 }
 ];
 
 // Preset ratios with physical descriptions and sources.
@@ -681,6 +738,43 @@ function formatDeviation(devPct) {
   return (devPct >= 0 ? '+' : '') + devPct.toFixed(4) + '%';
 }
 
+/* ----------------------------------------------------------------------------
+   Statistical significance at step n.
+
+   At step n, max possible absolute residual = G/2, so max possible
+   percentage residual = (G/2)/(nG) * 100 = 100/(2n) = 50/n percent.
+
+   Tightness ratio = max_random_pct / observed_pct. Ratios >10x mean the
+   hit is 10x tighter than random chance at that step and is meaningfully
+   significant. Ratios <2x mean the hit is within random expectation.
+---------------------------------------------------------------------------- */
+function statisticalSignificance(nNearest, observedDevPct) {
+  const n = Math.max(1, Math.abs(nNearest));
+  const maxRandomPct = 50 / n;  // = 1/(2n) * 100
+  const absDev = Math.abs(observedDevPct);
+  if (absDev < PRECISION_FLOOR_PCT) {
+    return {
+      maxRandomPct,
+      ratio: Infinity,
+      classification: 'exact',
+      description: `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is at the precision floor — exact to float resolution.`
+    };
+  }
+  const ratio = maxRandomPct / absDev;
+  let classification, description;
+  if (ratio >= 10) {
+    classification = 'significant';
+    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is ${ratio.toFixed(0)}× tighter than random chance — statistically significant.`;
+  } else if (ratio >= 2) {
+    classification = 'moderate';
+    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is ${ratio.toFixed(1)}× tighter than random chance — moderately significant.`;
+  } else {
+    classification = 'noise';
+    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is only ${ratio.toFixed(1)}× tighter than random — within random expectation at this step height.`;
+  }
+  return { maxRandomPct, ratio, classification, description };
+}
+
 function buildPresets(){
   const grid = document.getElementById('presetGrid');
   grid.innerHTML = presets.map((p,i)=>`<div class="preset" onclick="usePreset(${i})"><span class="preset-val">${p.label}</span> <span style="color:rgba(255,255,255,0.2)">${p.val.toFixed(4)}</span></div>`).join('');
@@ -726,31 +820,35 @@ function compute(){
   const banner = document.getElementById('landmarkBanner');
   if (landmarkHit) {
     banner.classList.add('show');
+    const nicknameStr = landmarkHit.lm.nickname ? ` "${landmarkHit.lm.nickname}"` : '';
     document.getElementById('bannerMain').innerHTML =
-      `${landmarkHit.lm.name} at step ${landmarkHit.lm.n} — deviation ${formatDeviation(landmarkHit.devPct)}`;
+      `${landmarkHit.lm.name}${nicknameStr} at step ${landmarkHit.lm.n} — deviation ${formatDeviation(landmarkHit.devPct)}`;
     document.getElementById('bannerSub').innerHTML =
-      `Sub-0.1% hit on a named framework landmark. Level assignment requires checking measurement uncertainty of the input.`;
+      `Sub-0.1% hit on a named framework landmark. Level assignment requires checking measurement uncertainty of the input AND statistical context at this step height.`;
   } else {
     banner.classList.remove('show');
   }
 
   // Main result
+  const significance = statisticalSignificance(nNearest, devPercent);
   document.getElementById('mainResult').innerHTML =
     `Step n = ${nNearest} <span style="font-size:14px;color:rgba(255,255,255,0.3);">(exact: ${nExact.toFixed(4)})</span>`;
   document.getElementById('mainSub').innerHTML =
     `${nNearest} × G = ${nG.toFixed(10)} | Your value: ${val.toFixed(10)} | Step deviation: ${formatDeviation(devPercent)}` +
     (desc ? `<br><span style="color:rgba(255,215,0,0.4)">${desc}</span>` : '');
 
-  // Landmarks — each with its own independent deviation
+  // Landmarks — each with its own independent deviation (now with nicknames)
   const landmarkHTML = landmarks.map(lm => {
     const dist = val - lm.target;
     const distPercent = (dist/lm.target)*100;
     const absDist = Math.abs(distPercent);
     const cls = absDist < 1 ? 'close' : absDist < 5 ? 'near' : 'far';
     const highlight = absDist < 2 ? ' lm-row-highlight' : '';
+    const nicknameStr = lm.nickname ? ` — ${lm.nickname}` : '';
+    const shellStr = lm.shell ? ` (shell ${lm.shell})` : '';
     return `<div class="landmark-row${highlight}">
       <span class="lm-step">n=${lm.n}</span>
-      <span class="lm-name">${lm.name}${lm.shell ? ' (shell '+lm.shell+')' : ''}</span>
+      <span class="lm-name">${lm.name}${nicknameStr}${shellStr}</span>
       <span class="lm-val">${lm.target.toFixed(6)}</span>
       <span class="lm-dist ${cls}">${formatDeviation(distPercent)}</span>
     </div>`;
@@ -758,8 +856,15 @@ function compute(){
   document.getElementById('landmarkList').innerHTML = landmarkHTML;
 
   // Deviation analysis
+  const sigColor = significance.classification === 'significant' ? 'rgba(100,255,180,0.9)' :
+                   significance.classification === 'exact' ? 'rgba(100,255,180,0.9)' :
+                   significance.classification === 'moderate' ? 'rgba(255,200,100,0.85)' :
+                   'rgba(255,255,255,0.45)';
   let devHTML = `<div style="font-size:12px;color:rgba(255,255,255,0.5);">
     Deviation from nearest integer step: <strong style="color:${absDevPercent<1?'rgba(100,255,180,0.9)':'rgba(255,200,100,0.8)'}">${formatDeviation(devPercent)}</strong>
+  </div>
+  <div style="font-size:11px;color:${sigColor};margin-top:8px;padding:8px 10px;background:rgba(255,255,255,0.02);border-left:3px solid ${sigColor.replace('0.9','0.5').replace('0.85','0.5').replace('0.45','0.3')};border-radius:0 4px 4px 0;">
+    <strong>Statistical context:</strong> ${significance.description}
   </div>`;
 
   // Check against framework deviation patterns
@@ -830,6 +935,7 @@ function compute(){
 function generateReport(val, desc, nNearest, nExact, stepDevPct, landmarkHit) {
   const nG = nNearest * G;
   const timestamp = new Date().toISOString().split('T')[0];
+  const significance = statisticalSignificance(nNearest, stepDevPct);
 
   let report = `TELESCOPE TOWER REPORT — ${timestamp}\n`;
   report += `${'─'.repeat(56)}\n`;
@@ -842,14 +948,29 @@ function generateReport(val, desc, nNearest, nExact, stepDevPct, landmarkHit) {
   report += `  n × G:          ${nG.toFixed(12)}\n`;
   report += `  step residual:  ${formatDeviation(stepDevPct)}\n`;
   report += `\n`;
+  report += `STATISTICAL CONTEXT (n-scaling)\n`;
+  report += `  max random residual at n=${nNearest}:  ±${significance.maxRandomPct.toFixed(4)}%\n`;
+  if (significance.ratio === Infinity) {
+    report += `  tightness ratio:     exact (precision floor)\n`;
+    report += `  classification:      ${significance.classification.toUpperCase()}\n`;
+  } else {
+    report += `  tightness ratio:     ${significance.ratio.toFixed(1)}× tighter than random\n`;
+    report += `  classification:      ${significance.classification.toUpperCase()}`;
+    if (significance.classification === 'significant') report += `  (>10× tighter)\n`;
+    else if (significance.classification === 'moderate') report += `  (2–10× tighter)\n`;
+    else report += `  (<2× tighter — within random expectation)\n`;
+  }
+  report += `\n`;
 
   // Landmark hit (if any)
   if (landmarkHit) {
+    const nicknameStr = landmarkHit.lm.nickname ? ` "${landmarkHit.lm.nickname}"` : '';
     report += `NAMED LANDMARK HIT\n`;
-    report += `  landmark:       ${landmarkHit.lm.name} at step ${landmarkHit.lm.n}\n`;
+    report += `  landmark:       ${landmarkHit.lm.name}${nicknameStr} at step ${landmarkHit.lm.n}\n`;
     report += `  target value:   ${landmarkHit.lm.target.toFixed(12)}\n`;
     report += `  landmark residual: ${formatDeviation(landmarkHit.devPct)}\n`;
-    report += `  NOTE: landmark residual is independent of step residual above.\n`;
+    report += `  NOTE: landmark residual is INDEPENDENT of step residual above.\n`;
+    report += `        These measure different things; do not conflate.\n`;
     report += `\n`;
   }
 
@@ -862,7 +983,9 @@ function generateReport(val, desc, nNearest, nExact, stepDevPct, landmarkHit) {
 
   report += `NEAREST 3 LANDMARKS (each with independent residual)\n`;
   for (const nl of nearestLms) {
-    report += `  n=${nl.lm.n.toString().padStart(3)}  ${nl.lm.name.padEnd(10)} = ${nl.lm.target.toFixed(10)}  →  ${formatDeviation(nl.devPct)}\n`;
+    const nicknameStr = nl.lm.nickname ? ` "${nl.lm.nickname}"` : '';
+    const labelStr = `${nl.lm.name}${nicknameStr}`;
+    report += `  n=${nl.lm.n.toString().padStart(3)}  ${labelStr.padEnd(26)} = ${nl.lm.target.toFixed(10)}  →  ${formatDeviation(nl.devPct)}\n`;
   }
   report += `\n`;
 
