@@ -134,10 +134,53 @@
   percentages.
 
   The telescope displays a "tightness ratio" (max random residual /
-  observed residual) with:
-    ratio > 10×  — significant (real signal)
-    ratio 2–10×  — moderate
-    ratio < 2×   — within random expectation (probably noise)
+  observed residual) with five classifications:
+
+    STRUCTURAL        — input IS a named landmark. Step residual is
+                        the defined algebraic offset between the
+                        landmark's transcendental value and its
+                        integer step. Not statistical. Significance
+                        lives in landmark residual, not step residual.
+
+    EXACT             — step residual at float precision floor.
+
+    SIGNIFICANT       — >10× tighter than random AND landmark-backed
+                        (within 0.1% of a named landmark). ~5% false
+                        positive rate.
+
+    TIGHT STEP ONLY   — >10× tighter than random but NO landmark
+                        within 0.1%. Statistically tight but
+                        physically unclear — no framework reason to
+                        expect meaning. Treat with caution.
+
+    MODERATE          — 2–10× tighter than random.
+
+    NOISE             — <2× tighter, within random expectation.
+
+  False positive rates for bare-step tightness (without landmark
+  backing): ~5% at >10× threshold, ~2.5% at >20×, ~1% at >50×. A
+  single "significant" or "tight step only" flag is a 1-in-20 signal,
+  not a guarantee. Real findings need landmark backing AND independent
+  confirmation from multiple measurements.
+
+  ---------------------------------------------------------------------------
+  WHY K_AUD STEP RESIDUAL IS NOT ZERO (structural landmark subtlety)
+  ---------------------------------------------------------------------------
+
+  K_AUD = √2·ln(2) ≈ 0.9803 is a transcendental constant. Step 50 of
+  the Binary Tower is 50×G = 50×(1 − K_AUD) ≈ 0.9871. These differ by
+  0.69%. This is NOT an error — it is the framework's defining
+  architectural feature: the tower is built on integer multiples of G,
+  but it tracks landmarks that are transcendental constants which do
+  not sit at integer multiples of G. The two coordinate systems (tower
+  steps and landmark values) are overlaid, and the difference between
+  them at each landmark is a structural framework constant. For K_AUD
+  specifically, the step residual of 0.69% at step 50 equals the
+  algebraic quantity 50 − 51·K_AUD (since 50G − K_AUD = 50(1−K_AUD) −
+  K_AUD = 50 − 51·K_AUD).
+
+  The telescope marks all landmark inputs with classification
+  STRUCTURAL rather than NOISE, to make this explicit.
 
   ---------------------------------------------------------------------------
   HOW TO INTERPRET A RESULT
@@ -422,9 +465,17 @@
       distance from your value to that step. This is the primary "tower position" readout.</li>
       <li><strong>Statistical context (n-scaling)</strong> — at step n, a random value can have step
       residual up to ±50/n percent just by chance. The telescope reports a "tightness ratio" showing
-      how many times tighter your hit is than random expectation. Ratios >10× mean real signal;
-      2–10× is moderate; &lt;2× is within random noise at that step height. This is critical for
-      interpreting hits at high n, where small residuals are statistically expected.</li>
+      how many times tighter your hit is than random expectation, and classifies as:
+      <ul style="margin-top:4px;margin-bottom:4px;">
+        <li><strong>STRUCTURAL</strong> — input IS a landmark; step residual is a defined framework offset, not statistical</li>
+        <li><strong>EXACT</strong> — at precision floor</li>
+        <li><strong>SIGNIFICANT</strong> — &gt;10× tighter AND within a named landmark (the strongest real signal)</li>
+        <li><strong>TIGHT STEP ONLY</strong> — &gt;10× tighter but no landmark (statistically tight, physically unclear)</li>
+        <li><strong>MODERATE</strong> — 2–10× tighter</li>
+        <li><strong>NOISE</strong> — &lt;2× tighter, within random expectation</li>
+      </ul>
+      A &quot;significant&quot; flag has a ~5% false positive rate — real findings need landmark backing AND
+      independent confirmation.</li>
       <li><strong>Named landmarks</strong> — each framework landmark has its own target value and
       its own independent percentage distance from your value. These are separate from the step
       residual. A value can sit on step 50 exactly yet be several percent from K_AUD, or vice versa.
@@ -742,16 +793,52 @@ function formatDeviation(devPct) {
    Statistical significance at step n.
 
    At step n, max possible absolute residual = G/2, so max possible
-   percentage residual = (G/2)/(nG) * 100 = 100/(2n) = 50/n percent.
+   percentage residual = (G/2)/(nG) * 100 = 50/n percent.
 
-   Tightness ratio = max_random_pct / observed_pct. Ratios >10x mean the
-   hit is 10x tighter than random chance at that step and is meaningfully
-   significant. Ratios <2x mean the hit is within random expectation.
+   Tightness ratio = max_random_pct / observed_pct.
+
+   Two important subtleties:
+
+   1) LANDMARK STRUCTURAL CASE: if the input value IS a named framework
+      landmark (landmark_residual at precision floor), the step residual
+      is NOT a random quantity — it equals the framework's defined
+      offset between the landmark's transcendental value and its
+      assigned integer step. For K_AUD at step 50, for example, the
+      step residual of ~0.69% is the exact algebraic quantity
+      50G - K_AUD, which is structural, not statistical. The tool
+      should annotate this rather than classify as "noise".
+
+   2) NON-LANDMARK TIGHT FITS: a number that lands tight on a bare
+      integer step without being near any named landmark is
+      statistically notable but not physically meaningful — there's no
+      framework reason to expect random values to prefer integer step
+      positions. These are labeled "tight step fit (no landmark)" to
+      distinguish from landmark-backed significance.
+
+   False positive rates for random values:
+      ratio > 10x:  ~5% (1 in 20)
+      ratio > 20x:  ~2.5% (1 in 40)
+      ratio > 50x:  ~1% (1 in 100)
+
+   Users should treat bare-step "significant" labels as one-in-twenty
+   signals, not as guarantees. Real findings need landmark backing
+   and/or independent confirmation from multiple measurements.
 ---------------------------------------------------------------------------- */
-function statisticalSignificance(nNearest, observedDevPct) {
+function statisticalSignificance(nNearest, observedDevPct, isLandmark, landmarkBacked) {
   const n = Math.max(1, Math.abs(nNearest));
-  const maxRandomPct = 50 / n;  // = 1/(2n) * 100
+  const maxRandomPct = 50 / n;
   const absDev = Math.abs(observedDevPct);
+
+  // Landmark structural case: step residual is a defined framework quantity, not noise
+  if (isLandmark) {
+    return {
+      maxRandomPct,
+      ratio: null,
+      classification: 'structural',
+      description: `Input value IS a named framework landmark. Step residual of ${formatDeviation(observedDevPct)} at n=${n} is the structural offset between the landmark's transcendental value and its integer step — it is a defined framework quantity, not a statistical deviation. Significance lives in the landmark residual (at precision floor), not the step residual.`
+    };
+  }
+
   if (absDev < PRECISION_FLOOR_PCT) {
     return {
       maxRandomPct,
@@ -762,15 +849,23 @@ function statisticalSignificance(nNearest, observedDevPct) {
   }
   const ratio = maxRandomPct / absDev;
   let classification, description;
+
+  // Append "landmark-backed" vs "bare-step" qualifier
+  const qualifier = landmarkBacked ? ' (landmark-backed)' : ' (bare step — no landmark)';
+  const falsePositive = ratio >= 50 ? '~1% false positive rate' :
+                        ratio >= 20 ? '~2.5% false positive rate' :
+                        ratio >= 10 ? '~5% false positive rate' :
+                        null;
+
   if (ratio >= 10) {
-    classification = 'significant';
-    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is ${ratio.toFixed(0)}× tighter than random chance — statistically significant.`;
+    classification = landmarkBacked ? 'significant' : 'tight-step-only';
+    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is ${ratio.toFixed(0)}× tighter than random chance${qualifier}. ${falsePositive ? 'Expected ' + falsePositive + ' at this threshold — real findings need landmark backing or independent confirmation.' : ''}`;
   } else if (ratio >= 2) {
     classification = 'moderate';
-    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is ${ratio.toFixed(1)}× tighter than random chance — moderately significant.`;
+    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is ${ratio.toFixed(1)}× tighter than random chance${qualifier} — moderately significant.`;
   } else {
     classification = 'noise';
-    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is only ${ratio.toFixed(1)}× tighter than random — within random expectation at this step height.`;
+    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is only ${ratio.toFixed(1)}× tighter than random${qualifier} — within random expectation at this step height.`;
   }
   return { maxRandomPct, ratio, classification, description };
 }
@@ -807,15 +902,22 @@ function compute(){
   document.getElementById('results').classList.add('show');
 
   // Landmark hit detection — does the value land on a named landmark within 0.1%?
+  // Also detect: is the input itself EXACTLY a landmark (for structural step annotation)?
   let landmarkHit = null;
+  let isExactLandmark = false;
   for (const lm of landmarks) {
     const lmDevPct = Math.abs((val - lm.target)/lm.target*100);
+    if (lmDevPct < PRECISION_FLOOR_PCT) {
+      isExactLandmark = true;
+    }
     if (lmDevPct < 0.1) {
       if (!landmarkHit || lmDevPct < landmarkHit.devPct) {
         landmarkHit = { lm, devPct: (val - lm.target)/lm.target*100, absDev: lmDevPct };
       }
     }
   }
+  // landmarkBacked = there's a landmark within 0.1% (used to qualify significance)
+  const landmarkBacked = landmarkHit !== null;
 
   const banner = document.getElementById('landmarkBanner');
   if (landmarkHit) {
@@ -830,7 +932,7 @@ function compute(){
   }
 
   // Main result
-  const significance = statisticalSignificance(nNearest, devPercent);
+  const significance = statisticalSignificance(nNearest, devPercent, isExactLandmark, landmarkBacked);
   document.getElementById('mainResult').innerHTML =
     `Step n = ${nNearest} <span style="font-size:14px;color:rgba(255,255,255,0.3);">(exact: ${nExact.toFixed(4)})</span>`;
   document.getElementById('mainSub').innerHTML =
@@ -858,6 +960,8 @@ function compute(){
   // Deviation analysis
   const sigColor = significance.classification === 'significant' ? 'rgba(100,255,180,0.9)' :
                    significance.classification === 'exact' ? 'rgba(100,255,180,0.9)' :
+                   significance.classification === 'structural' ? 'rgba(180,200,255,0.85)' :
+                   significance.classification === 'tight-step-only' ? 'rgba(255,215,100,0.8)' :
                    significance.classification === 'moderate' ? 'rgba(255,200,100,0.85)' :
                    'rgba(255,255,255,0.45)';
   let devHTML = `<div style="font-size:12px;color:rgba(255,255,255,0.5);">
@@ -935,7 +1039,17 @@ function compute(){
 function generateReport(val, desc, nNearest, nExact, stepDevPct, landmarkHit) {
   const nG = nNearest * G;
   const timestamp = new Date().toISOString().split('T')[0];
-  const significance = statisticalSignificance(nNearest, stepDevPct);
+
+  // Detect if input IS exactly a landmark (for structural annotation)
+  let isExactLandmark = false;
+  for (const lm of landmarks) {
+    if (Math.abs((val - lm.target)/lm.target*100) < PRECISION_FLOOR_PCT) {
+      isExactLandmark = true;
+      break;
+    }
+  }
+  const landmarkBacked = landmarkHit !== null;
+  const significance = statisticalSignificance(nNearest, stepDevPct, isExactLandmark, landmarkBacked);
 
   let report = `TELESCOPE TOWER REPORT — ${timestamp}\n`;
   report += `${'─'.repeat(56)}\n`;
@@ -950,13 +1064,20 @@ function generateReport(val, desc, nNearest, nExact, stepDevPct, landmarkHit) {
   report += `\n`;
   report += `STATISTICAL CONTEXT (n-scaling)\n`;
   report += `  max random residual at n=${nNearest}:  ±${significance.maxRandomPct.toFixed(4)}%\n`;
-  if (significance.ratio === Infinity) {
+  if (significance.classification === 'structural') {
+    report += `  classification:      STRUCTURAL\n`;
+    report += `  NOTE: input IS a named landmark. Step residual is a defined\n`;
+    report += `        framework quantity, not a statistical deviation.\n`;
+    report += `        Significance lives in landmark residual (below), not step residual.\n`;
+  } else if (significance.ratio === Infinity) {
     report += `  tightness ratio:     exact (precision floor)\n`;
-    report += `  classification:      ${significance.classification.toUpperCase()}\n`;
+    report += `  classification:      EXACT\n`;
   } else {
     report += `  tightness ratio:     ${significance.ratio.toFixed(1)}× tighter than random\n`;
-    report += `  classification:      ${significance.classification.toUpperCase()}`;
-    if (significance.classification === 'significant') report += `  (>10× tighter)\n`;
+    const classLabel = significance.classification.toUpperCase().replace('-', ' ');
+    report += `  classification:      ${classLabel}`;
+    if (significance.classification === 'significant') report += `  (>10× tighter, landmark-backed, ~5% false positive)\n`;
+    else if (significance.classification === 'tight-step-only') report += `  (>10× tighter but NO landmark — physically unclear)\n`;
     else if (significance.classification === 'moderate') report += `  (2–10× tighter)\n`;
     else report += `  (<2× tighter — within random expectation)\n`;
   }
