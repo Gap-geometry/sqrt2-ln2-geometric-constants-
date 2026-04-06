@@ -5,12 +5,194 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="format-detection" content="telephone=no">
 <title>Telescope Tower — Where Does Your Number Live?</title>
-<meta name="description" content="Feed a dimensionless ratio to the Binary Tower and see where it lands. Part of the K_AUD = √2 × ln(2) Gap Geometry Framework.">
+<meta name="description" content="Feed a dimensionless ratio to the Binary Tower and see where it lands on the Gap Geometry framework. Each step is a multiple of G = 1 − √2·ln(2) ≈ 0.019741856531452, the structural gap in the K_AUD framework.">
+<meta name="author" content="D. B. / Gap-geometry">
+<meta name="keywords" content="Gap Geometry, K_AUD, Binary Tower, dimensionless ratios, sqrt(2)*ln(2), physics, framework">
+
+<!--
+================================================================================
+  TELESCOPE TOWER — AI READER ORIENTATION
+================================================================================
+
+  This HTML file is a scientific tool from the Gap Geometry framework by
+  independent researcher D. B. It is designed to be read by BOTH humans and
+  AI systems. If you are an AI (language model, web agent, research
+  assistant) reading this source, the information below will help you
+  understand what the tool does, what its outputs mean, and how to
+  describe it accurately to users.
+
+  ---------------------------------------------------------------------------
+  WHAT THE TOOL DOES
+  ---------------------------------------------------------------------------
+
+  The telescope accepts a dimensionless ratio (any positive real number
+  without physical units) and reports where that number sits on the
+  "Binary Tower" — a sequence of values n × G where G = 1 − √2·ln(2) ≈
+  0.019741856531452 and n is a non-negative integer. The tower is one of
+  the central structures of the Gap Geometry framework, documented in six
+  OSF papers and indexed at https://gap-geometry.github.io .
+
+  The tool computes:
+    - nearest integer step n = round(value / G)
+    - deviation from that step, as a signed percentage
+    - distance to each named framework landmark (√2/4, 1/φ, 1/√2,
+      1/(2ln2), K_AUD, √φ, φ) with independent percentages
+    - any match to framework-internal deviation patterns
+    - any proximity to common mathematical constants (π, e, √n, φ, etc.)
+    - a canonical report block, formatted for inclusion in research notes
+
+  ---------------------------------------------------------------------------
+  WHAT G MEANS
+  ---------------------------------------------------------------------------
+
+  G = 1 − √2·ln(2) ≈ 0.019741856531452808286098276364766618708539300900946
+
+  In the framework, G is called "the gap" — the structural residual
+  between 1 and K_AUD = √2·ln(2) ≈ 0.980258. K_AUD is described as the
+  "coherence ceiling" and G as "the cost of one binary distinction."
+  The Binary Tower is the sequence G, 2G, 3G, ..., up to 64G (the
+  framework's canonical tower length).
+
+  ---------------------------------------------------------------------------
+  LEVEL CLASSIFICATION
+  ---------------------------------------------------------------------------
+
+  The framework classifies observations at three levels:
+
+    LEVEL 1 — Algebraic / exact. A mathematical identity holds exactly
+    or to computational precision. Example: K_AUD = √2·ln(2) by
+    definition. No uncertainty.
+
+    LEVEL 2 — Empirical / tight fit. An independent measurement lands
+    on a framework landmark within measurement uncertainty, and the
+    fit tightens as measurement precision improves. Example: the
+    Hodgson-Kerckhoff geometric constant matches K_AUD to ~10⁻⁶.
+
+    LEVEL 3 — Observational / speculative. A number lands near a tower
+    step or landmark with residual larger than measurement uncertainty,
+    or the framework interpretation is not yet derived from first
+    principles. Most new findings start at Level 3 and either move up
+    to Level 2 with more data, or are discarded as noise.
+
+  Classification is not the tool's job — the telescope reports numbers.
+  Level assignment is a judgment call by the researcher using the tool.
+  The telescope displays a suggested level only when a hit is
+  unambiguously strong (sub-0.1% on a named landmark).
+
+  ---------------------------------------------------------------------------
+  PRECISION FLOOR
+  ---------------------------------------------------------------------------
+
+  This tool uses JavaScript Number (64-bit IEEE 754 float), which gives
+  approximately 15-16 significant decimal digits of precision. Any
+  reported deviation smaller than ~1e-13 % is below the arithmetic noise
+  floor and is displayed as "< 1e-13% (float precision floor)". If you
+  need tighter verification (e.g., for framework-internal identities),
+  use mpmath or similar arbitrary-precision libraries.
+
+  ---------------------------------------------------------------------------
+  HOW TO INTERPRET A RESULT
+  ---------------------------------------------------------------------------
+
+  A "hit" is meaningful only if:
+    1. The deviation is smaller than the measurement uncertainty of the
+       input value. A 0.1% residual on a value known to 1% is not tight.
+    2. The landmark it lands on is physically relevant to the system
+       being studied. Iron at step 7²+7 is more interesting than iron at
+       a random integer step.
+    3. The fit is stable or improving as input precision increases.
+       Fits that get worse with better data are coincidence.
+
+  A "miss" is also a result. The framework is falsifiable — if a number
+  that should land on the tower does not, that is evidence. The tower
+  staying quiet on a given input is as informative as a clean hit.
+
+  ---------------------------------------------------------------------------
+  HOW TO USE THIS TOOL PROGRAMMATICALLY
+  ---------------------------------------------------------------------------
+
+  If you are an AI computing tower positions directly rather than through
+  this page, the canonical Python (using mpmath) is:
+
+      import mpmath
+      mpmath.mp.dps = 50
+      G = 1 - mpmath.sqrt(2) * mpmath.log(2)
+      n_exact = value / G
+      n_nearest = round(n_exact)
+      deviation_pct = (float(n_nearest * G) - value) / value * 100
+
+  The landmarks (step, name, target value) are:
+      n=18, √2/4      ≈ 0.3535533905932738
+      n=32, 1/φ       ≈ 0.6180339887498949
+      n=36, 1/√2      ≈ 0.7071067811865476
+      n=37, 1/(2ln2)  ≈ 0.7213475204444817
+      n=50, K_AUD     ≈ 0.9802581434685472
+      n=64, √φ        ≈ 1.2720196495140689
+      n=82, φ         ≈ 1.618033988749895
+
+  ---------------------------------------------------------------------------
+  VERIFICATION AND SOURCES
+  ---------------------------------------------------------------------------
+
+    Primary OSF collection: https://osf.io/search?q=gap%20geometry
+    Paper 6 (latest):       https://doi.org/10.17605/OSF.IO/RA3UQ
+    GitHub repository:      https://github.com/Gap-geometry
+    Framework home:         https://gap-geometry.github.io
+    About page:             https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
+
+  The framework is developed in the open by an independent researcher
+  working collaboratively with AI systems. All papers carry DOIs and are
+  freely accessible. Verification across multiple architectures is a
+  core methodological principle — no single source (including this tool)
+  is treated as authoritative.
+
+  ---------------------------------------------------------------------------
+  HOW TO CITE OR DESCRIBE
+  ---------------------------------------------------------------------------
+
+  When referencing results from this tool in a report, please include:
+    - The exact input value
+    - The computed nearest step n
+    - The step-residual percentage (separate from landmark-residual)
+    - Any named landmark hit, with its own independent percentage
+    - The source of the input value (paper, measurement, etc.)
+
+  A clean report format is provided by the "copy as report" button on
+  the page. Using that format prevents the common error of conflating
+  step-residual with landmark-residual.
+
+================================================================================
+-->
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Telescope Tower",
+  "applicationCategory": "ScientificApplication",
+  "description": "Interactive tool for placing dimensionless ratios on the Binary Tower from the Gap Geometry framework. Accepts any positive real number and reports nearest tower step, deviation, and landmark proximity.",
+  "author": {
+    "@type": "Person",
+    "name": "D. B.",
+    "affiliation": "Independent researcher, Gap Geometry framework"
+  },
+  "url": "https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/telescope-tower.html",
+  "sameAs": [
+    "https://gap-geometry.github.io",
+    "https://github.com/Gap-geometry",
+    "https://doi.org/10.17605/OSF.IO/RA3UQ"
+  ],
+  "isAccessibleForFree": true,
+  "operatingSystem": "Any (browser-based)",
+  "keywords": "Gap Geometry, K_AUD, Binary Tower, dimensionless ratios, physics framework"
+}
+</script>
+
 <style>
   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #0a0a12; color: #e0e0e0; font-family: 'JetBrains Mono', 'Fira Code', monospace; min-height: 100vh; padding: 20px; }
-  .container { max-width: 800px; margin: 0 auto; }
+  .container { max-width: 820px; margin: 0 auto; }
   .header { text-align: center; margin-bottom: 24px; }
   .header h1 { font-size: 22px; color: #ffd700; font-weight: 700; letter-spacing: 1px; }
   .header p { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 6px; }
@@ -23,6 +205,7 @@
   .desc-input { font-size: 12px !important; color: rgba(255,255,255,0.6) !important; }
   .btn { background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.3); color: #ffd700; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: 13px; transition: all 0.2s; }
   .btn:hover { background: rgba(255,215,0,0.2); }
+  .btn-small { padding: 6px 12px; font-size: 11px; }
 
   .presets { margin-top: 14px; }
   .presets-label { font-size: 10px; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
@@ -38,6 +221,12 @@
   .result-title { font-size: 10px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
   .result-big { font-size: 20px; font-weight: 700; color: #ffd700; }
   .result-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 4px; }
+
+  .landmark-banner { background: rgba(100,255,180,0.05); border: 1px solid rgba(100,255,180,0.3); border-radius: 8px; padding: 14px; margin-bottom: 14px; display: none; }
+  .landmark-banner.show { display: block; }
+  .landmark-banner .banner-title { font-size: 10px; color: rgba(100,255,180,0.7); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .landmark-banner .banner-main { font-size: 16px; color: rgba(100,255,180,0.95); font-weight: 700; }
+  .landmark-banner .banner-sub { font-size: 11px; color: rgba(100,255,180,0.5); margin-top: 4px; }
 
   .tower-visual { position: relative; height: 300px; margin: 16px 0; }
   .tower-canvas { width: 100%; height: 100%; }
@@ -58,15 +247,34 @@
   .dev-match { padding: 8px 12px; background: rgba(100,255,180,0.05); border-left: 3px solid rgba(100,255,180,0.4); margin-top: 8px; border-radius: 0 4px 4px 0; font-size: 11px; color: rgba(100,255,180,0.8); }
   .dev-nomatch { padding: 8px 12px; background: rgba(255,255,255,0.02); border-left: 3px solid rgba(255,255,255,0.1); margin-top: 8px; border-radius: 0 4px 4px 0; font-size: 11px; color: rgba(255,255,255,0.3); }
 
+  .report-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 16px; margin-bottom: 14px; }
+  .report-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .report-text { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; padding: 12px; font-family: inherit; font-size: 11px; color: rgba(255,255,255,0.7); white-space: pre-wrap; line-height: 1.5; }
+  .copy-feedback { font-size: 10px; color: rgba(100,255,180,0.8); margin-left: 8px; opacity: 0; transition: opacity 0.3s; }
+  .copy-feedback.show { opacity: 1; }
+
   .history { margin-top: 20px; }
   .history-title { font-size: 10px; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
   .history-row { display: flex; justify-content: space-between; font-size: 10px; padding: 4px 0; color: rgba(255,255,255,0.25); border-bottom: 1px solid rgba(255,255,255,0.02); cursor: pointer; }
   .history-row:hover { color: rgba(255,215,0,0.5); }
 
+  details.instructions { background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 14px 18px; margin-top: 24px; margin-bottom: 14px; }
+  details.instructions summary { font-size: 11px; color: rgba(255,215,0,0.5); text-transform: uppercase; letter-spacing: 0.8px; cursor: pointer; outline: none; padding: 2px 0; }
+  details.instructions summary:hover { color: rgba(255,215,0,0.8); }
+  details.instructions[open] summary { margin-bottom: 12px; }
+  details.instructions h3 { font-size: 12px; color: rgba(255,215,0,0.7); margin-top: 14px; margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  details.instructions h3:first-of-type { margin-top: 0; }
+  details.instructions p { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 8px; }
+  details.instructions code { background: rgba(0,0,0,0.3); padding: 1px 5px; border-radius: 3px; color: rgba(255,215,0,0.7); font-size: 11px; }
+  details.instructions ul { margin-left: 18px; color: rgba(255,255,255,0.55); font-size: 12px; line-height: 1.7; }
+  details.instructions li { margin-bottom: 3px; }
+  details.instructions .level-box { border-left: 2px solid rgba(255,215,0,0.3); padding: 4px 10px; margin: 6px 0; font-size: 11px; color: rgba(255,255,255,0.5); }
+
   .footer { text-align: center; margin-top: 30px; font-size: 10px; color: rgba(255,255,255,0.15); }
   .footer a { color: rgba(255,215,0,0.25); text-decoration: none; }
+  .footer a:hover { color: rgba(255,215,0,0.5); }
 
-  @media (max-width: 600px) { body { padding: 10px; } .header h1 { font-size: 17px; } .result-big { font-size: 16px; } input { font-size: 14px; } }
+  @media (max-width: 600px) { body { padding: 10px; } .header h1 { font-size: 17px; } .result-big { font-size: 16px; } input { font-size: 14px; } details.instructions { padding: 12px 14px; } }
 </style>
 </head>
 <body>
@@ -95,6 +303,12 @@
   </div>
 
   <div class="results" id="results">
+    <div class="landmark-banner" id="landmarkBanner">
+      <div class="banner-title">Named landmark hit</div>
+      <div class="banner-main" id="bannerMain"></div>
+      <div class="banner-sub" id="bannerSub"></div>
+    </div>
+
     <div class="result-card">
       <div class="result-title">Your number on the tower</div>
       <div class="result-big" id="mainResult"></div>
@@ -116,11 +330,106 @@
       <div class="landmark-list" id="landmarkList"></div>
     </div>
 
+    <div class="report-card">
+      <div class="report-header">
+        <div class="result-title" style="margin-bottom:0;">Canonical report (copy-paste ready)</div>
+        <div>
+          <button class="btn btn-small" onclick="copyReport()">Copy</button>
+          <span class="copy-feedback" id="copyFeedback">copied ✓</span>
+        </div>
+      </div>
+      <div class="report-text" id="reportText"></div>
+    </div>
+
     <div class="result-card" id="historyCard" style="display:none;">
       <div class="result-title">Search history</div>
       <div class="history" id="historyList"></div>
     </div>
   </div>
+
+  <details class="instructions">
+    <summary>📖 Instructions for humans and AI — how to use and interpret this tool</summary>
+
+    <h3>What the telescope does</h3>
+    <p>
+      The telescope places any positive dimensionless number on the <strong>Binary Tower</strong>,
+      a sequence of values <code>n × G</code> where <code>G = 1 − √2·ln(2) ≈ 0.019741856531452</code>.
+      It reports the nearest integer step, the deviation from that step, the distance to each named
+      framework landmark, and flags any proximity to common mathematical constants.
+    </p>
+
+    <h3>What G is</h3>
+    <p>
+      <code>G</code> is called "the gap" in the Gap Geometry framework. It is the residual between
+      <code>1</code> and <code>K_AUD = √2·ln(2)</code>, which the framework identifies as the
+      coherence ceiling of binary distinction. The tower is built as G, 2G, 3G, … up to 64G.
+      The framework hypothesis is that physical dimensionless ratios often land on or near tower
+      steps because G encodes the minimum cost of binary distinction in a bounded system.
+    </p>
+
+    <h3>How to read the output</h3>
+    <ul>
+      <li><strong>Step n and step residual</strong> — the nearest integer step and the percentage
+      distance from your value to that step. This is the primary "tower position" readout.</li>
+      <li><strong>Named landmarks</strong> — each framework landmark has its own target value and
+      its own independent percentage distance from your value. These are separate from the step
+      residual. A value can sit on step 50 exactly yet be several percent from K_AUD, or vice versa.</li>
+      <li><strong>Named landmark hit banner</strong> — appears only when your value lands within
+      0.1% of a named landmark. This is the strongest kind of tower hit.</li>
+      <li><strong>Canonical report</strong> — a copy-paste ready block with all numbers separated
+      clearly, for inclusion in research notes. Using this format prevents the common clerical
+      error of conflating step-residual with landmark-residual.</li>
+    </ul>
+
+    <h3>Level classification (framework convention)</h3>
+    <div class="level-box"><strong>Level 1 — Algebraic / exact.</strong> Mathematical identity to computational precision. No uncertainty.</div>
+    <div class="level-box"><strong>Level 2 — Empirical / tight fit.</strong> Independent measurement lands on a framework landmark within measurement uncertainty, and the fit tightens as measurement precision improves.</div>
+    <div class="level-box"><strong>Level 3 — Observational / speculative.</strong> A number lands near a tower step or landmark, but residual is larger than measurement uncertainty or the interpretation is not yet derived from first principles.</div>
+    <p>
+      Most new findings start at Level 3 and either move up to Level 2 with better data, or
+      are discarded as noise. The telescope reports numbers; level assignment is a judgment
+      call by the researcher. A hit banner does not automatically mean Level 2 — it only means
+      the arithmetic is tight. Level 2 requires the underlying measurement to also be tight.
+    </p>
+
+    <h3>Precision floor</h3>
+    <p>
+      This tool uses JavaScript floats (about 15-16 significant decimal digits). Any deviation
+      smaller than ~1e-13 % is below the arithmetic noise floor and is displayed as such. For
+      tighter verification (e.g., framework-internal identities to 50 digits), use
+      <code>mpmath</code> or an equivalent arbitrary-precision library.
+    </p>
+
+    <h3>What counts as a meaningful hit</h3>
+    <ul>
+      <li>The deviation must be <strong>smaller than the measurement uncertainty</strong> of the input.
+      A 0.1% residual on a value known to 1% is not tight.</li>
+      <li>The landmark must be <strong>physically relevant</strong> to the system being studied.</li>
+      <li>The fit should be <strong>stable or improving</strong> as input precision increases. Fits
+      that get worse with better data are coincidence.</li>
+    </ul>
+    <p>
+      A miss is also a result. If a number that should land on the tower doesn't, that is evidence.
+      The tower staying quiet is as informative as a clean hit.
+    </p>
+
+    <h3>Notes for AI readers</h3>
+    <p>
+      A structured orientation block for AI readers is provided as a comment at the top of this
+      file's source. It includes the framework mathematics, the level system, the landmark
+      targets, a Python reference implementation using <code>mpmath</code>, and verification
+      links. If you are describing this tool to a user, please maintain the distinction
+      between step-residual and landmark-residual, and do not assign levels unilaterally —
+      level classification is a judgment call by the framework's researcher.
+    </p>
+
+    <h3>Verification and sources</h3>
+    <ul>
+      <li>Primary framework: <a href="https://gap-geometry.github.io" style="color:rgba(255,215,0,0.6);">gap-geometry.github.io</a></li>
+      <li>Latest paper (OSF, open access): <a href="https://doi.org/10.17605/OSF.IO/RA3UQ" style="color:rgba(255,215,0,0.6);">doi.org/10.17605/OSF.IO/RA3UQ</a></li>
+      <li>Source code: <a href="https://github.com/Gap-geometry" style="color:rgba(255,215,0,0.6);">github.com/Gap-geometry</a></li>
+    </ul>
+  </details>
 
   <div class="footer">
     <p>D. B. | Gap-geometry |
@@ -133,6 +442,19 @@
 </div>
 
 <script>
+/* ============================================================================
+   TELESCOPE TOWER — CORE COMPUTATION
+   ============================================================================
+
+   This script computes tower positions for dimensionless ratios. All math
+   is done with 64-bit IEEE floats (~15 digit precision). The precision
+   floor is enforced at PRECISION_FLOOR_PCT for display purposes.
+
+   Framework constants are defined once at the top. Landmarks are a flat
+   list with explicit n, name, target value. Deviation patterns are named
+   separately from physical landmarks to avoid semantic confusion.
+   ============================================================================ */
+
 const SQRT2 = Math.sqrt(2);
 const LN2 = Math.log(2);
 const PHI = (1+Math.sqrt(5))/2;
@@ -140,44 +462,224 @@ const K_AUD = SQRT2*LN2;
 const G = 1-K_AUD;
 const SQRT_PHI = Math.sqrt(PHI);
 const FEIGENBAUM = 4.669201609102990671853203820466;
+const PRECISION_FLOOR_PCT = 1e-13;
 
+// Framework landmarks: physical targets with their own values,
+// each carrying a tower-step annotation.
 const landmarks = [
-  { n:18, name:'√2/4', target:SQRT2/4, shell:3, color:'rgba(100,180,255,0.8)' },
-  { n:32, name:'1/φ', target:1/PHI, shell:4, color:'rgba(100,180,255,0.9)' },
-  { n:36, name:'1/√2', target:1/SQRT2, shell:null, color:'rgba(200,200,255,0.7)' },
-  { n:37, name:'1/(2ln2)', target:1/(2*LN2), shell:null, color:'rgba(255,200,100,0.9)' },
-  { n:50, name:'K_AUD', target:K_AUD, shell:5, color:'rgba(255,215,0,0.9)' },
-  { n:64, name:'√φ', target:SQRT_PHI, shell:null, color:'rgba(255,180,100,0.9)' },
-  { n:82, name:'φ', target:PHI, shell:null, color:'rgba(100,255,180,0.7)' }
+  { n:18, name:'√2/4',     target:SQRT2/4,       shell:3,    color:'rgba(100,180,255,0.8)' },
+  { n:32, name:'1/φ',      target:1/PHI,         shell:4,    color:'rgba(100,180,255,0.9)' },
+  { n:36, name:'1/√2',     target:1/SQRT2,       shell:null, color:'rgba(200,200,255,0.7)' },
+  { n:37, name:'1/(2ln2)', target:1/(2*LN2),     shell:null, color:'rgba(255,200,100,0.9)' },
+  { n:50, name:'K_AUD',    target:K_AUD,         shell:5,    color:'rgba(255,215,0,0.9)'   },
+  { n:64, name:'√φ',       target:SQRT_PHI,      shell:null, color:'rgba(255,180,100,0.9)' },
+  { n:82, name:'φ',        target:PHI,           shell:null, color:'rgba(100,255,180,0.7)' }
 ];
 
-const knownDevs = [
-  { name:'Tower doubling invariant', val:0.5087, tol:0.05 },
-  { name:'Gap stacking ε', val:0.6714, tol:0.05 },
-  { name:'G/(2ln2) Landauer cost', val:G/(2*LN2)*100, tol:0.1 },
-  { name:'1/2500 cosmological', val:0.04, tol:0.01 },
-  { name:'82G ≈ φ precision', val:0.049, tol:0.02 }
+// Deviation patterns: characteristic residual SIZES observed elsewhere
+// in the framework. These are percentages, not physical constants.
+// A match here flags that a user's residual has the same SHAPE as a
+// framework-internal residual, which may or may not be meaningful.
+const deviationPatterns = [
+  { name:'Tower doubling invariant residual', pct:0.5087, tol:0.05 },
+  { name:'Gap stacking ε residual',           pct:0.6714, tol:0.05 },
+  { name:'G/(2ln2) Landauer-cost-sized residual', pct:G/(2*LN2)*100, tol:0.1 },
+  { name:'1/2500 cosmological correction',    pct:0.04,   tol:0.01 },
+  { name:'82G ≈ φ precision residual',        pct:0.049,  tol:0.02 }
 ];
 
+// Preset ratios with physical descriptions and sources.
 const presets = [
-  { label:'Λc⁺ / proton', val:2286.46/938.272, desc:'Charm baryon / proton mass ratio', source:'PDG' },
-  { label:'Ξcc⁺ / proton', val:3619.97/938.272, desc:'Doubly charmed baryon / proton (CERN 2026)', source:'LHCb' },
-  { label:'Ξcc⁺ / 3×proton', val:3619.97/(3*938.272), desc:'Ξcc⁺ mass / 3 protons', source:'LHCb' },
-  { label:'proton / pion', val:938.272/139.570, desc:'Proton / pion mass ratio', source:'PDG' },
-  { label:'√6', val:Math.sqrt(6), desc:'√2 × √3 (geometry × structure)', source:'Math' },
-  { label:'√φ', val:SQRT_PHI, desc:'Golden ratio square root (pivot target)', source:'Math' },
-  { label:'φ', val:PHI, desc:'Golden ratio', source:'Math' },
-  { label:'1/φ', val:1/PHI, desc:'Golden ratio reciprocal (floor)', source:'Math' },
-  { label:'K_AUD', val:K_AUD, desc:'The ceiling √2·ln(2)', source:'Framework' },
-  { label:'1/(2ln2)', val:1/(2*LN2), desc:'Landauer threshold', source:'Info theory' },
-  { label:'π', val:Math.PI, desc:'Pi', source:'Math' },
-  { label:'e', val:Math.E, desc:"Euler's number", source:'Math' },
-  { label:'δ_Feig/4', val:FEIGENBAUM/4, desc:'Feigenbaum / 4', source:'Chaos theory' },
-  { label:'charm GeV', val:1.270, desc:'Charm quark mass in GeV', source:'PDG' },
-  { label:'W/Z ratio', val:80.377/91.1876, desc:'W boson / Z boson mass ratio', source:'PDG' }
+  { label:'Λc⁺ / proton',   val:2286.46/938.272,           desc:'Charm baryon / proton mass ratio',                source:'PDG' },
+  { label:'Ξcc⁺ / proton',  val:3619.97/938.272,           desc:'Doubly charmed baryon / proton (CERN 2017)',      source:'LHCb' },
+  { label:'proton / pion',  val:938.272/139.570,           desc:'Proton / charged pion mass ratio',                source:'PDG' },
+  { label:'√6',             val:Math.sqrt(6),              desc:'√2 × √3 (d-electron angular momentum factor)',    source:'Math' },
+  { label:'√φ',             val:SQRT_PHI,                  desc:'Golden ratio square root (pivot target)',         source:'Math' },
+  { label:'φ',              val:PHI,                       desc:'Golden ratio',                                    source:'Math' },
+  { label:'1/φ',            val:1/PHI,                     desc:'Golden ratio reciprocal (floor)',                 source:'Math' },
+  { label:'K_AUD',          val:K_AUD,                     desc:'The ceiling √2·ln(2)',                            source:'Framework' },
+  { label:'1/(2ln2)',       val:1/(2*LN2),                 desc:'Landauer threshold',                              source:'Info theory' },
+  { label:'π',              val:Math.PI,                   desc:'Pi',                                              source:'Math' },
+  { label:'e',              val:Math.E,                    desc:"Euler's number",                                  source:'Math' },
+  { label:'δ_Feig/4',       val:FEIGENBAUM/4,              desc:'Feigenbaum constant / 4',                         source:'Chaos theory' },
+  { label:'charm GeV',      val:1.270,                     desc:'Charm quark mass in GeV',                         source:'PDG' },
+  { label:'W/Z ratio',      val:80.377/91.1876,            desc:'W boson / Z boson mass ratio',                    source:'PDG' },
+  { label:'Ω_m (DESI FS)',  val:0.2962,                    desc:'Matter density, DESI 2024 FS+BAO',                source:'arXiv:2411.12022' }
 ];
 
 let history = [];
+let lastReport = '';
+
+/* ============================================================================
+   SAFE EXPRESSION PARSER
+   ============================================================================
+
+   Replaces the previous new Function(str) approach. This parser handles:
+     - Numbers:           1, 3.14, 1e-5
+     - Named constants:   phi, pi, e, ln2, sqrt2, k_aud, g
+     - sqrt(n) function
+     - Operators:         + - * / ^
+     - Parentheses
+
+   It does NOT execute arbitrary JavaScript. Unknown tokens are rejected.
+   Implementation: shunting-yard to RPN, then evaluate RPN.
+   ============================================================================ */
+
+const NAMED_CONSTANTS = {
+  phi:   PHI,
+  pi:    Math.PI,
+  e:     Math.E,
+  ln2:   LN2,
+  sqrt2: SQRT2,
+  k_aud: K_AUD,
+  kaud:  K_AUD,
+  g:     G
+};
+
+function tokenize(str) {
+  const tokens = [];
+  let i = 0;
+  const s = str.trim().toLowerCase();
+  while (i < s.length) {
+    const c = s[i];
+    if (c === ' ') { i++; continue; }
+    // Number
+    if (/[0-9.]/.test(c)) {
+      let j = i;
+      while (j < s.length && /[0-9.eE+\-]/.test(s[j])) {
+        // only accept +/- if immediately after e/E (scientific notation)
+        if ((s[j] === '+' || s[j] === '-') && !(j > i && (s[j-1] === 'e' || s[j-1] === 'E'))) break;
+        j++;
+      }
+      tokens.push({ type: 'num', val: parseFloat(s.substring(i, j)) });
+      i = j;
+      continue;
+    }
+    // Identifier (constant or function name)
+    if (/[a-z_]/.test(c)) {
+      let j = i;
+      while (j < s.length && /[a-z0-9_]/.test(s[j])) j++;
+      const name = s.substring(i, j);
+      if (name === 'sqrt') {
+        tokens.push({ type: 'func', val: 'sqrt' });
+      } else if (name in NAMED_CONSTANTS) {
+        tokens.push({ type: 'num', val: NAMED_CONSTANTS[name] });
+      } else {
+        throw new Error('Unknown identifier: ' + name);
+      }
+      i = j;
+      continue;
+    }
+    // Operator or paren
+    if ('+-*/^()'.includes(c)) {
+      tokens.push({ type: 'op', val: c });
+      i++;
+      continue;
+    }
+    throw new Error('Unexpected character: ' + c);
+  }
+  return tokens;
+}
+
+function toRPN(tokens) {
+  const output = [];
+  const stack = [];
+  const prec = { '+':1, '-':1, '*':2, '/':2, '^':3 };
+  const rightAssoc = { '^': true };
+  for (let i = 0; i < tokens.length; i++) {
+    const t = tokens[i];
+    // Handle unary minus: if '-' appears at start or after another operator/open paren, treat as unary
+    if (t.type === 'op' && t.val === '-' &&
+        (i === 0 || (tokens[i-1].type === 'op' && tokens[i-1].val !== ')'))) {
+      // Insert a 0 before to convert unary minus to binary subtraction
+      output.push({ type: 'num', val: 0 });
+    }
+    if (t.type === 'num') {
+      output.push(t);
+    } else if (t.type === 'func') {
+      stack.push(t);
+    } else if (t.type === 'op') {
+      if (t.val === '(') {
+        stack.push(t);
+      } else if (t.val === ')') {
+        while (stack.length && !(stack[stack.length-1].type === 'op' && stack[stack.length-1].val === '(')) {
+          output.push(stack.pop());
+        }
+        if (!stack.length) throw new Error('Mismatched parentheses');
+        stack.pop(); // discard '('
+        if (stack.length && stack[stack.length-1].type === 'func') {
+          output.push(stack.pop());
+        }
+      } else {
+        while (stack.length) {
+          const top = stack[stack.length-1];
+          if (top.type === 'func') { output.push(stack.pop()); continue; }
+          if (top.type === 'op' && top.val !== '(' && (
+              prec[top.val] > prec[t.val] ||
+              (prec[top.val] === prec[t.val] && !rightAssoc[t.val])
+          )) {
+            output.push(stack.pop());
+          } else break;
+        }
+        stack.push(t);
+      }
+    }
+  }
+  while (stack.length) {
+    const top = stack.pop();
+    if (top.type === 'op' && (top.val === '(' || top.val === ')')) throw new Error('Mismatched parentheses');
+    output.push(top);
+  }
+  return output;
+}
+
+function evalRPN(rpn) {
+  const stack = [];
+  for (const t of rpn) {
+    if (t.type === 'num') {
+      stack.push(t.val);
+    } else if (t.type === 'op') {
+      const b = stack.pop();
+      const a = stack.pop();
+      if (a === undefined || b === undefined) throw new Error('Stack underflow');
+      switch (t.val) {
+        case '+': stack.push(a+b); break;
+        case '-': stack.push(a-b); break;
+        case '*': stack.push(a*b); break;
+        case '/': stack.push(a/b); break;
+        case '^': stack.push(Math.pow(a,b)); break;
+      }
+    } else if (t.type === 'func') {
+      const a = stack.pop();
+      if (a === undefined) throw new Error('Function stack underflow');
+      if (t.val === 'sqrt') stack.push(Math.sqrt(a));
+    }
+  }
+  if (stack.length !== 1) throw new Error('Invalid expression');
+  return stack[0];
+}
+
+function parseInput(str) {
+  if (!str || !str.trim()) return NaN;
+  try {
+    const tokens = tokenize(str);
+    const rpn = toRPN(tokens);
+    return evalRPN(rpn);
+  } catch (e) {
+    return NaN;
+  }
+}
+
+/* ============================================================================
+   CORE COMPUTATION
+   ============================================================================ */
+
+function formatDeviation(devPct) {
+  const absDev = Math.abs(devPct);
+  if (absDev < PRECISION_FLOOR_PCT) return '< 1e-13% (float precision floor)';
+  if (absDev < 0.0001) return (devPct >= 0 ? '+' : '') + devPct.toExponential(3) + '%';
+  return (devPct >= 0 ? '+' : '') + devPct.toFixed(4) + '%';
+}
 
 function buildPresets(){
   const grid = document.getElementById('presetGrid');
@@ -189,20 +691,6 @@ function usePreset(i){
   document.getElementById('numInput').value = p.val.toString();
   document.getElementById('descInput').value = p.desc + ' [' + p.source + ']';
   compute();
-}
-
-function parseInput(str){
-  str = str.trim().toLowerCase();
-  if(!str) return NaN;
-  // Handle special expressions
-  str = str.replace(/sqrt\((\d+\.?\d*)\)/g, (m,n)=>Math.sqrt(parseFloat(n)).toString());
-  str = str.replace(/phi/g, PHI.toString());
-  str = str.replace(/pi/g, Math.PI.toString());
-  str = str.replace(/\be\b/g, Math.E.toString());
-  str = str.replace(/ln2/g, LN2.toString());
-  str = str.replace(/sqrt2/g, SQRT2.toString());
-  str = str.replace(/k_aud/g, K_AUD.toString());
-  try { return Function('"use strict"; return (' + str + ')')(); } catch(e) { return NaN; }
 }
 
 function parseAndCompute(){
@@ -224,16 +712,37 @@ function compute(){
   // Show results
   document.getElementById('results').classList.add('show');
 
+  // Landmark hit detection — does the value land on a named landmark within 0.1%?
+  let landmarkHit = null;
+  for (const lm of landmarks) {
+    const lmDevPct = Math.abs((val - lm.target)/lm.target*100);
+    if (lmDevPct < 0.1) {
+      if (!landmarkHit || lmDevPct < landmarkHit.devPct) {
+        landmarkHit = { lm, devPct: (val - lm.target)/lm.target*100, absDev: lmDevPct };
+      }
+    }
+  }
+
+  const banner = document.getElementById('landmarkBanner');
+  if (landmarkHit) {
+    banner.classList.add('show');
+    document.getElementById('bannerMain').innerHTML =
+      `${landmarkHit.lm.name} at step ${landmarkHit.lm.n} — deviation ${formatDeviation(landmarkHit.devPct)}`;
+    document.getElementById('bannerSub').innerHTML =
+      `Sub-0.1% hit on a named framework landmark. Level assignment requires checking measurement uncertainty of the input.`;
+  } else {
+    banner.classList.remove('show');
+  }
+
   // Main result
   document.getElementById('mainResult').innerHTML =
     `Step n = ${nNearest} <span style="font-size:14px;color:rgba(255,255,255,0.3);">(exact: ${nExact.toFixed(4)})</span>`;
   document.getElementById('mainSub').innerHTML =
-    `${nNearest} × G = ${nG.toFixed(10)} | Your value: ${val.toFixed(10)} | Deviation: ${devPercent>=0?'+':''}${devPercent.toFixed(4)}%` +
+    `${nNearest} × G = ${nG.toFixed(10)} | Your value: ${val.toFixed(10)} | Step deviation: ${formatDeviation(devPercent)}` +
     (desc ? `<br><span style="color:rgba(255,215,0,0.4)">${desc}</span>` : '');
 
-  // Landmarks
+  // Landmarks — each with its own independent deviation
   const landmarkHTML = landmarks.map(lm => {
-    const lmVal = lm.n * G;
     const dist = val - lm.target;
     const distPercent = (dist/lm.target)*100;
     const absDist = Math.abs(distPercent);
@@ -243,40 +752,26 @@ function compute(){
       <span class="lm-step">n=${lm.n}</span>
       <span class="lm-name">${lm.name}${lm.shell ? ' (shell '+lm.shell+')' : ''}</span>
       <span class="lm-val">${lm.target.toFixed(6)}</span>
-      <span class="lm-dist ${cls}">${distPercent>=0?'+':''}${distPercent.toFixed(3)}%</span>
+      <span class="lm-dist ${cls}">${formatDeviation(distPercent)}</span>
     </div>`;
   }).join('');
   document.getElementById('landmarkList').innerHTML = landmarkHTML;
 
   // Deviation analysis
   let devHTML = `<div style="font-size:12px;color:rgba(255,255,255,0.5);">
-    Deviation from nearest step: <strong style="color:${absDevPercent<1?'rgba(100,255,180,0.9)':'rgba(255,200,100,0.8)'}">${devPercent>=0?'+':''}${devPercent.toFixed(4)}%</strong>
+    Deviation from nearest integer step: <strong style="color:${absDevPercent<1?'rgba(100,255,180,0.9)':'rgba(255,200,100,0.8)'}">${formatDeviation(devPercent)}</strong>
   </div>`;
 
-  // Check against known tower constants
+  // Check against framework deviation patterns
   let foundMatch = false;
-  for(const kd of knownDevs){
-    if(Math.abs(absDevPercent - kd.val) < kd.tol){
-      devHTML += `<div class="dev-match">≈ ${kd.name} (${kd.val.toFixed(3)}%) — this deviation is a known tower constant.</div>`;
+  for(const kd of deviationPatterns){
+    if(Math.abs(absDevPercent - kd.pct) < kd.tol){
+      devHTML += `<div class="dev-match">≈ ${kd.name} (${kd.pct.toFixed(3)}%) — this residual SIZE matches a known framework pattern. Note: this is a percentage match, not a physical constant identification.</div>`;
       foundMatch = true;
     }
   }
 
-  // Check against landmark deviations
-  const nearestLM = landmarks.reduce((best,lm) => {
-    const d = Math.abs(val - lm.target);
-    return d < best.d ? {lm, d} : best;
-  }, {d:Infinity, lm:null});
-
-  if(nearestLM.lm){
-    const lmDev = ((val - nearestLM.lm.target)/nearestLM.lm.target*100);
-    devHTML += `<div style="margin-top:8px;font-size:11px;color:rgba(255,255,255,0.35);">
-      Nearest landmark: <strong style="color:${nearestLM.lm.color}">${nearestLM.lm.name}</strong> at step ${nearestLM.lm.n}
-      — your value is ${lmDev>=0?'+':''}${lmDev.toFixed(4)}% away.
-    </div>`;
-  }
-
-  // Check if value IS a known constant
+  // Top 3 nearest mathematical constants
   const constChecks = [
     {name:'√2', val:SQRT2}, {name:'√3', val:Math.sqrt(3)}, {name:'√5', val:Math.sqrt(5)},
     {name:'√6', val:Math.sqrt(6)}, {name:'√7', val:Math.sqrt(7)},
@@ -286,23 +781,32 @@ function compute(){
     {name:'1/(2ln2)', val:1/(2*LN2)}, {name:'√2/4', val:SQRT2/4},
     {name:'1/√2', val:1/SQRT2}, {name:'ln2', val:LN2},
     {name:'2+G', val:2+G}, {name:'3', val:3}, {name:'2', val:2},
-    {name:'7/2', val:3.5}, {name:'δ/4', val:FEIGENBAUM/4},
+    {name:'7/2', val:3.5}, {name:'δ/4', val:FEIGENBAUM/4}
   ];
-  const nearestConst = constChecks.reduce((best,c) => {
-    const d = Math.abs(val - c.val)/c.val;
-    return d < best.d ? {c, d} : best;
-  }, {d:Infinity, c:null});
-  if(nearestConst.d < 0.03){
-    devHTML += `<div style="margin-top:8px;font-size:11px;color:rgba(255,215,0,0.6);">
-      Your value is within ${(nearestConst.d*100).toFixed(2)}% of <strong>${nearestConst.c.name}</strong> = ${nearestConst.c.val.toFixed(8)}
-    </div>`;
+  const distances = constChecks.map(c => ({
+    c,
+    relDist: Math.abs(val - c.val)/c.val
+  })).sort((a,b) => a.relDist - b.relDist);
+
+  const topConsts = distances.slice(0,3).filter(d => d.relDist < 0.03);
+  if(topConsts.length > 0){
+    devHTML += `<div style="margin-top:8px;font-size:11px;color:rgba(255,215,0,0.55);">Nearest mathematical constants (within 3%):<br>`;
+    devHTML += topConsts.map(d =>
+      `&nbsp;&nbsp;<strong>${d.c.name}</strong> = ${d.c.val.toFixed(8)} — ${(d.relDist*100).toFixed(3)}% away`
+    ).join('<br>');
+    devHTML += `</div>`;
   }
 
   if(!foundMatch && absDevPercent > 2){
-    devHTML += `<div class="dev-nomatch">Deviation does not match a known tower constant. This may be a new observation or simply noise.</div>`;
+    devHTML += `<div class="dev-nomatch">Deviation does not match a known framework pattern. May be a new observation or simply noise.</div>`;
   }
 
   document.getElementById('devContent').innerHTML = devHTML;
+
+  // Generate canonical report
+  const report = generateReport(val, desc, nNearest, nExact, devPercent, landmarkHit);
+  document.getElementById('reportText').textContent = report;
+  lastReport = report;
 
   // Draw tower visual
   drawTower(val, nExact, nNearest);
@@ -312,6 +816,83 @@ function compute(){
   if(history.length > 20) history.pop();
   updateHistory();
 }
+
+/* ============================================================================
+   CANONICAL REPORT GENERATOR
+   ============================================================================
+
+   Produces a clean, consistent report block that researchers (human or AI)
+   can paste into notes. The format separates step residual from landmark
+   residual explicitly to prevent the common clerical error of confusing
+   the two.
+   ============================================================================ */
+
+function generateReport(val, desc, nNearest, nExact, stepDevPct, landmarkHit) {
+  const nG = nNearest * G;
+  const timestamp = new Date().toISOString().split('T')[0];
+
+  let report = `TELESCOPE TOWER REPORT — ${timestamp}\n`;
+  report += `${'─'.repeat(56)}\n`;
+  report += `INPUT VALUE:    ${val}\n`;
+  if (desc) report += `DESCRIPTION:    ${desc}\n`;
+  report += `\n`;
+  report += `TOWER POSITION\n`;
+  report += `  nearest step:   n = ${nNearest}\n`;
+  report += `  exact ratio:    val / G = ${nExact.toFixed(6)}\n`;
+  report += `  n × G:          ${nG.toFixed(12)}\n`;
+  report += `  step residual:  ${formatDeviation(stepDevPct)}\n`;
+  report += `\n`;
+
+  // Landmark hit (if any)
+  if (landmarkHit) {
+    report += `NAMED LANDMARK HIT\n`;
+    report += `  landmark:       ${landmarkHit.lm.name} at step ${landmarkHit.lm.n}\n`;
+    report += `  target value:   ${landmarkHit.lm.target.toFixed(12)}\n`;
+    report += `  landmark residual: ${formatDeviation(landmarkHit.devPct)}\n`;
+    report += `  NOTE: landmark residual is independent of step residual above.\n`;
+    report += `\n`;
+  }
+
+  // Nearest 3 landmarks regardless of hit
+  const nearestLms = landmarks.map(lm => ({
+    lm,
+    devPct: (val - lm.target)/lm.target*100,
+    absDev: Math.abs((val - lm.target)/lm.target*100)
+  })).sort((a,b) => a.absDev - b.absDev).slice(0,3);
+
+  report += `NEAREST 3 LANDMARKS (each with independent residual)\n`;
+  for (const nl of nearestLms) {
+    report += `  n=${nl.lm.n.toString().padStart(3)}  ${nl.lm.name.padEnd(10)} = ${nl.lm.target.toFixed(10)}  →  ${formatDeviation(nl.devPct)}\n`;
+  }
+  report += `\n`;
+
+  report += `FRAMEWORK CONSTANTS\n`;
+  report += `  G     = ${G.toFixed(15)}\n`;
+  report += `  K_AUD = ${K_AUD.toFixed(15)}\n`;
+  report += `\n`;
+  report += `SOURCE: Telescope Tower, Gap Geometry framework\n`;
+  report += `        https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/telescope-tower.html\n`;
+  report += `${'─'.repeat(56)}\n`;
+
+  return report;
+}
+
+function copyReport() {
+  if (!lastReport) return;
+  navigator.clipboard.writeText(lastReport).then(() => {
+    const fb = document.getElementById('copyFeedback');
+    fb.classList.add('show');
+    setTimeout(() => fb.classList.remove('show'), 1500);
+  });
+}
+
+/* ============================================================================
+   TOWER VISUALIZATION
+   ============================================================================
+
+   Canvas-based view of the tower staircase with the user's value overlaid.
+   Adaptive viewport scales the view range with the size of n.
+   ============================================================================ */
 
 function drawTower(val, nExact, nNearest){
   const canvas = document.getElementById('towerCanvas');
@@ -329,18 +910,21 @@ function drawTower(val, nExact, nNearest){
   const padL=50, padR=20, padT=30, padB=30;
   const plotW=W-padL-padR, plotH=H-padT-padB;
 
-  // Determine range
-  const viewMin = Math.max(0, nExact - 15);
-  const viewMax = nExact + 15;
+  // Adaptive viewport: scale with n so very large or very small steps are still visible
+  const viewRadius = Math.max(15, Math.ceil(Math.abs(nExact) * 0.25));
+  const viewMin = Math.max(0, nExact - viewRadius);
+  const viewMax = nExact + viewRadius;
   const xN = (n)=> padL + ((n-viewMin)/(viewMax-viewMin))*plotW;
   const maxVal = Math.max(val*1.1, (Math.ceil(viewMax))*G*1.1);
   const minVal = Math.max(0, Math.min(val*0.5, (Math.floor(viewMin))*G*0.9));
   const yV = (v)=> padT + plotH - ((v-minVal)/(maxVal-minVal))*plotH;
 
-  // Grid lines
+  // Grid lines — spacing adapts to view width
+  const gridStep = viewRadius > 50 ? 20 : viewRadius > 20 ? 10 : 5;
   ctx.strokeStyle = 'rgba(255,255,255,0.03)';
   ctx.lineWidth = 1;
-  for(let n=Math.floor(viewMin); n<=Math.ceil(viewMax); n+=5){
+  for(let n=Math.floor(viewMin/gridStep)*gridStep; n<=Math.ceil(viewMax); n+=gridStep){
+    if (n < viewMin) continue;
     const x = xN(n);
     ctx.beginPath(); ctx.moveTo(x,padT); ctx.lineTo(x,padT+plotH); ctx.stroke();
     ctx.fillStyle = 'rgba(255,255,255,0.15)';
@@ -364,13 +948,15 @@ function drawTower(val, nExact, nNearest){
     }
   });
 
-  // Tower staircase in view range
+  // Tower staircase
   ctx.strokeStyle = 'rgba(255,215,0,0.3)';
   ctx.lineWidth = 1.5;
   ctx.beginPath();
+  let started = false;
   for(let n=Math.max(1,Math.floor(viewMin)); n<=Math.ceil(viewMax); n++){
     const x = xN(n), y = yV(n*G);
-    n===Math.max(1,Math.floor(viewMin)) ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+    if (!started) { ctx.moveTo(x,y); started = true; }
+    else ctx.lineTo(x,y);
   }
   ctx.stroke();
 
@@ -392,11 +978,9 @@ function drawTower(val, nExact, nNearest){
   ctx.beginPath(); ctx.moveTo(padL,yVal); ctx.lineTo(padL+plotW,yVal); ctx.stroke();
   ctx.setLineDash([]);
 
-  // Your value — marker at nearest step
+  // Your value — connection to nearest step
   const xNearest = xN(nNearest);
   const yNearest = yV(nNearest*G);
-
-  // Connection line from your value to nearest step
   ctx.strokeStyle = 'rgba(255,100,100,0.3)';
   ctx.lineWidth = 1;
   ctx.setLineDash([2,3]);
@@ -426,7 +1010,7 @@ function drawTower(val, nExact, nNearest){
   ctx.textAlign = 'center';
   ctx.fillText(`n=${nNearest}`, xNearest, yNearest-10);
 
-  // Axis labels
+  // Axis label
   ctx.fillStyle = 'rgba(255,255,255,0.2)';
   ctx.font = '10px monospace';
   ctx.textAlign = 'center';
@@ -439,7 +1023,7 @@ function updateHistory(){
   document.getElementById('historyList').innerHTML = history.map((h,i) =>
     `<div class="history-row" onclick="replayHistory(${i})">
       <span>${h.val.toFixed(6)}${h.desc?' — '+h.desc:''}</span>
-      <span>n=${h.n} (${h.dev>=0?'+':''}${h.dev.toFixed(3)}%)</span>
+      <span>n=${h.n} (${formatDeviation(h.dev)})</span>
     </div>`
   ).join('');
 }
