@@ -192,6 +192,8 @@ function GapGeometrySimulation() {
   const [stairN, setStairN] = useState(64);
   const [showEnergy, setShowEnergy] = useState(false);
   const [hoveredArch, setHoveredArch] = useState(null);
+  const [lockedArch, setLockedArch] = useState(null);
+  const activeArch = lockedArch !== null ? lockedArch : hoveredArch;
   const lastTimeRef = useRef(Date.now());
   const animRef = useRef(null);
 
@@ -820,7 +822,7 @@ function GapGeometrySimulation() {
             <line x1="300" y1="30" x2="300" y2="65" stroke="#f38181" strokeWidth="1.5" strokeDasharray="3,3" opacity="0.4" />
             <circle cx="300" cy="72" r="12" fill="rgba(243,129,129,0.08)" stroke="rgba(243,129,129,0.2)" />
             <circle cx="300" cy="80" r="28" fill="transparent"
-              onMouseEnter={() => setHoveredArch("gap")} onMouseLeave={() => setHoveredArch(null)} style={{cursor:"pointer"}} />
+              onMouseEnter={() => setHoveredArch("gap")} onMouseLeave={() => setHoveredArch(null)} onClick={() => setLockedArch(l => l === "gap" ? null : "gap")} style={{cursor:"pointer"}} />
             <text x="300" y="75" textAnchor="middle" fill="#f38181" fontSize="8" fontWeight="bold" style={{pointerEvents:"none"}}>G≈2%</text>
             <text x="300" y="92" textAnchor="middle" fill="rgba(243,129,129,0.4)" fontSize="7" style={{pointerEvents:"none"}}>= ln(e/2^√2)</text>
 
@@ -828,7 +830,7 @@ function GapGeometrySimulation() {
             <line x1="300" y1="85" x2="300" y2="120" stroke="rgba(255,215,0,0.2)" />
             <circle cx="300" cy="140" r="18" fill="rgba(255,215,0,0.06)" stroke="rgba(255,215,0,0.2)" />
             <circle cx="300" cy="140" r="35" fill="transparent"
-              onMouseEnter={() => setHoveredArch("kaud")} onMouseLeave={() => setHoveredArch(null)} style={{cursor:"pointer"}} />
+              onMouseEnter={() => setHoveredArch("kaud")} onMouseLeave={() => setHoveredArch(null)} onClick={() => setLockedArch(l => l === "kaud" ? null : "kaud")} style={{cursor:"pointer"}} />
             <circle cx="300" cy="140" r="5" fill={S.gold} style={{pointerEvents:"none"}} />
             <text x="300" y="118" textAnchor="middle" fill={S.gold} fontSize="11" fontWeight="bold" style={{pointerEvents:"none"}}>K_AUD = 0.980</text>
             <text x="300" y="168" textAnchor="middle" fill="rgba(255,215,0,0.4)" fontSize="8" style={{pointerEvents:"none"}}>= √2 × ln(2) = √2 Landauer</text>
@@ -839,7 +841,7 @@ function GapGeometrySimulation() {
 
             {/* Floor — large hit target */}
             <circle cx="160" cy="240" r="28" fill="transparent"
-              onMouseEnter={() => setHoveredArch("floor")} onMouseLeave={() => setHoveredArch(null)} style={{cursor:"pointer"}} />
+              onMouseEnter={() => setHoveredArch("floor")} onMouseLeave={() => setHoveredArch(null)} onClick={() => setLockedArch(l => l === "floor" ? null : "floor")} style={{cursor:"pointer"}} />
             <circle cx="160" cy="235" r="8" fill="rgba(108,155,207,0.06)" stroke="rgba(108,155,207,0.15)" style={{pointerEvents:"none"}} />
             <circle cx="160" cy="235" r="4" fill="#6c9bcf" opacity="0.7" style={{pointerEvents:"none"}} />
             <text x="160" y="222" textAnchor="middle" fill="#6c9bcf" fontSize="10" fontWeight="bold" style={{pointerEvents:"none"}}>1/φ = 0.618</text>
@@ -847,7 +849,7 @@ function GapGeometrySimulation() {
 
             {/* Pivot — large hit target */}
             <circle cx="440" cy="240" r="28" fill="transparent"
-              onMouseEnter={() => setHoveredArch("pivot")} onMouseLeave={() => setHoveredArch(null)} style={{cursor:"pointer"}} />
+              onMouseEnter={() => setHoveredArch("pivot")} onMouseLeave={() => setHoveredArch(null)} onClick={() => setLockedArch(l => l === "pivot" ? null : "pivot")} style={{cursor:"pointer"}} />
             <circle cx="440" cy="235" r="8" fill="rgba(255,200,100,0.06)" stroke="rgba(255,200,100,0.15)" style={{pointerEvents:"none"}} />
             <circle cx="440" cy="235" r="4" fill="#ffb347" opacity="0.7" style={{pointerEvents:"none"}} />
             <text x="440" y="222" textAnchor="middle" fill="#ffb347" fontSize="10" fontWeight="bold" style={{pointerEvents:"none"}}>√φ = 1.272</text>
@@ -882,13 +884,13 @@ function GapGeometrySimulation() {
             <text x="300" y="352" textAnchor="middle" fill="rgba(255,215,0,0.5)" fontSize="9" fontWeight="bold">THE STAIRCASE</text>
             <line x1="60" y1="360" x2="540" y2="360" stroke="rgba(255,255,255,0.03)" />
             {ARCH_NODES.map(n => (
-              <g key={n.step} onMouseEnter={() => setHoveredArch(n.step)} onMouseLeave={() => setHoveredArch(null)} style={{cursor:"pointer"}}>
+              <g key={n.step} onMouseEnter={() => setHoveredArch(n.step)} onMouseLeave={() => setHoveredArch(null)} onClick={() => setLockedArch(l => l === n.step ? null : n.step)} style={{cursor:"pointer"}}>
                 {/* Invisible hit target — generous touch area */}
                 <circle cx={n.x} cy="378" r="20" fill="transparent" />
                 {/* Visible node */}
-                <circle cx={n.x} cy="378" r={hoveredArch === n.step ? 11 : 7}
-                  fill={hoveredArch === n.step ? `${n.c}30` : `${n.c}15`}
-                  stroke={hoveredArch === n.step ? `${n.c}80` : `${n.c}40`}
+                <circle cx={n.x} cy="378" r={activeArch === n.step ? 11 : 7}
+                  fill={activeArch === n.step ? `${n.c}30` : `${n.c}15`}
+                  stroke={activeArch === n.step ? `${n.c}80` : `${n.c}40`}
                   style={{ transition: "all 0.2s", pointerEvents: "none" }} />
                 <text x={n.x} y="381" textAnchor="middle" fill={n.c} fontSize="7" fontWeight="bold" style={{pointerEvents:"none"}}>{n.step}</text>
                 <text x={n.x} y="396" textAnchor="middle" fill={`${n.c}88`} fontSize="6" style={{pointerEvents:"none"}}>{n.approx}</text>
@@ -905,15 +907,15 @@ function GapGeometrySimulation() {
           </svg>
 
           {/* Hover description panel */}
-          {hoveredArch !== null && (() => {
-            const archNode = ARCH_NODES.find(n => n.step === hoveredArch);
+          {activeArch !== null && (() => {
+            const archNode = ARCH_NODES.find(n => n.step === activeArch);
             const constDesc = {
               gap: { title: "G — The Gap", color: "#f38181", text: "G = 1 − K_AUD ≈ 0.0197. The structural remainder between the coherence ceiling and unity. Not a deficiency — the gap is where distinction happens. G = ln(e/2^√2): the natural logarithm of e divided by 2^√2. In energy: kT × G = 8.18×10⁻²³ J — the minimum friction of any binary distinction." },
               kaud: { title: "K_AUD — Coherence Ceiling", color: S.gold, text: "K_AUD = √2 × ln(2) ≈ 0.980258. The maximum coherence achievable in any binary system. Combines projection (√2, diagonal of the unit square) with distinction (ln 2, the natural unit of binary information). In physical units: K_AUD = √2 Landauer units — the ceiling sits one geometric projection above the thermodynamic minimum for bit erasure." },
               floor: { title: "1/φ — Golden Floor", color: "#6c9bcf", text: "1/φ = (√5−1)/2 ≈ 0.6180. The corridor's lower bound. Below this value, coherence is sub-critical — the system cannot sustain organised behavior. Reached at tower step 32 (= 2⁵, shell 4). The floor and ceiling together define the corridor width: K_AUD − 1/φ = 1/φ² − G, a closed algebraic identity." },
               pivot: { title: "√φ — Master Pivot", color: "#ffb347", text: "√φ ≈ 1.2720. The tower's destination at step 64. The master formula 2ᵏ × G = 2ᵏ⁻⁶ × √φ × (1−ε) holds with ε = −0.671% constant across all binary scales. √φ sits above unity — the pivot is where the tower's cost function exceeds the golden ratio's square root, connecting binary scaling to golden geometry." },
             };
-            const info = archNode || (constDesc[hoveredArch] ? { name: constDesc[hoveredArch].title, c: constDesc[hoveredArch].color, hover: constDesc[hoveredArch].text } : null);
+            const info = archNode || (constDesc[activeArch] ? { name: constDesc[activeArch].title, c: constDesc[activeArch].color, hover: constDesc[activeArch].text } : null);
             if (!info) return null;
             const title = archNode ? `Step ${archNode.step} — ${archNode.name} (${archNode.approx})` : info.name;
             const text = archNode ? archNode.hover : info.hover;
