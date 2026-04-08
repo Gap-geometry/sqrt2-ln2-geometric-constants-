@@ -12,9 +12,162 @@
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
+/**
+ * ═══════════════════════════════════════════════════════════════════════
+ * GAP GEOMETRY — INTERACTIVE FRAMEWORK
+ * ═══════════════════════════════════════════════════════════════════════
+ *
+ * WHAT THIS IS
+ * ────────────
+ * An interactive simulation of the Gap Geometry framework, a mathematical
+ * structure discovered by B. (2025–2026) describing how coherence organises
+ * itself in binary systems. The framework is substrate-neutral: it applies
+ * to any system that processes information through binary distinction.
+ *
+ * THE CENTRAL OBJECT
+ * ──────────────────
+ * K_AUD = √2 × ln(2) ≈ 0.980258...
+ *
+ * This is the coherence ceiling — the maximum coherence achievable in any
+ * binary system. It combines two operations:
+ *   √2  = projection (the diagonal of the unit square, binary geometry)
+ *   ln2 = distinction (the natural cost of one binary choice)
+ *
+ * Their product is less than 1. The remainder is the gap:
+ *   G = 1 − K_AUD ≈ 0.01974...  (~2%)
+ *
+ * G is not a deficiency. It is the structural cost of distinction itself —
+ * the irreducible remainder when projection meets information.
+ *
+ * THE CORRIDOR
+ * ────────────
+ * Coherence lives in a band: [1/φ, K_AUD] where φ = (1+√5)/2.
+ *   Floor:    1/φ   ≈ 0.6180  (golden ratio inverse)
+ *   Ceiling:  K_AUD ≈ 0.9803  (√2 × ln2)
+ *   Width:    K_AUD − 1/φ = 1/φ² − G  (a closed algebraic identity)
+ *
+ * The coherence function C(τ) = 1/φ + (K_AUD − 1/φ) × tanh(α × τ)
+ * describes how a system traverses this corridor. The coupling constant α
+ * determines the traversal speed and selects the dominant verb (see below).
+ *
+ * Three families of constants live inside the corridor:
+ *   1/√2 ≈ 0.7071  (algebraic — pure geometry)
+ *   π/4  ≈ 0.7854  (transcendental — circle meets square)
+ *   2/√5 ≈ 0.8944  (golden — pentagonal geometry)
+ * Every trajectory must cross all three on its way from floor to ceiling.
+ *
+ * THE THREE VERBS
+ * ───────────────
+ * The framework's six primes {2, 3, 5, 7, 11, 13} act on the number 400
+ * (= 2⁴ × 5², encoding the H₄ polytope's interior primes). Three of them
+ * produce structurally distinct behaviors — the "verbs":
+ *
+ *   11 BREATHES — 400/11 = 36.363636... (period-2 oscillation)
+ *     The remainder never resolves. 11 cannot divide 400 cleanly, so it
+ *     generates a permanent oscillation — the corridor's rhythm.
+ *     Coupling regime: α ≈ 1.0 (Breath). Study attractor: "The Orbit."
+ *
+ *   7 ABSORBS — 400/7 × 7 = 400 exactly (self-cancelling)
+ *     Remainder 1 means 7 almost divides 400. Multiply back and nothing
+ *     remains — the boundary eats itself. 7 is the mirror-locking prime:
+ *     it forces the tower's partition into 18+14+14+18 = 64.
+ *     Coupling regime: α ≈ 0.15 (Ghost). Study attractor: "Oscillatory Trapping."
+ *
+ *   5 HOLDS — 400/5 = 80 exactly (fixed point)
+ *     Exact division. No remainder, no cycle, no oscillation. 5 terminates
+ *     400 completely — pure scaffold. But in base 4, 80 = 1100₄ (period-2),
+ *     so the scaffold is base-sensitive.
+ *     Coupling regime: α ≈ 3.0 (Crystal). Study attractor: "The Clearing."
+ *
+ * THE BINARY TOWER
+ * ────────────────
+ * The tower is the sequence n × G for n = 1, 2, ..., 64.
+ * Each step adds one gap. The tower maps out how binary cost accumulates.
+ *
+ * Key landmarks (n × G ≈ target constant):
+ *   Step 18 (Romeo):     18G ≈ √2/4     — first complete structure
+ *   Step 32 (Floor):     32G ≈ 1/φ      — golden floor reached
+ *   Step 36 (Geometry):  36G ≈ 1/√2     — last sub-Landauer step
+ *   Step 37 (Landauer):  37G ≈ 1/(2ln2) — information begins (first >1 Landauer)
+ *   Step 50 (Ceiling):   50G ≈ K_AUD    — coherence ceiling reached
+ *   Step 58 (Pre-pivot): 58G ≈ φ/√2     — golden ratio projected by binary
+ *   Step 59 (Turn):      pentagonal turn — mirror of Romeo [current research]
+ *   Step 64 (Pivot):     64G ≈ √φ       — master formula pivot
+ *
+ * The Landauer crossing between steps 36 and 37 is where the tower
+ * transitions from geometry to information. Below 36, each step costs less
+ * than one bit erasure (sub-Landauer). Above 37, information is possible.
+ * The crossing cost is G/(2ln2) — exactly half a gap in Landauer units.
+ *
+ * Master formula: 2^k × G = 2^(k−6) × √φ × (1 − ε), where ε = −0.671%
+ * This holds across all binary scales. The tower is self-similar.
+ *
+ * Partition: 64 = 18 + 14 + 14 + 18. The boundary prime 7 locks the mirror.
+ *
+ * THE ρ FORMULA (400/11 TAB)
+ * ──────────────────────────
+ * ρ = G / [(δ − 14/3) / δ]  where δ = 4.6692... (Feigenbaum constant)
+ *
+ * This exact value is approximated to 14 digits by three rational terms:
+ *   ρ ≈ 400/11 − 1/2500 − 1/939939
+ *
+ * The prime structure of each term draws only from the framework primes:
+ *   400   = 2⁴ × 5²           (H₄ interior)
+ *   11    = prime              (first excluded from H₄ order 14400)
+ *   2500  = 2² × 5⁴ = 50²    (shell 5 capacity squared)
+ *   939939 = 3 × 7 × 11 × 13 × 313  (palindrome, boundary chain)
+ *
+ * ENERGY AND PHYSICS
+ * ──────────────────
+ * K_AUD in physical units = √2 × (Landauer unit) = √2 × kT × ln(2).
+ * The coherence ceiling is exactly one geometric projection (√2) above
+ * the thermodynamic minimum for bit erasure.
+ *
+ * G in energy = kT × G ≈ 8.18 × 10⁻²³ J — the minimum friction of
+ * any binary distinction at room temperature.
+ *
+ * Depth levels descend by φ in energy — self-similar dissipation:
+ *   Depth 0: kT × K_AUD
+ *   Depth d: kT × K_AUD / φ^d
+ *
+ * ARCHITECTURE CONNECTION
+ * ───────────────────────
+ * H₄ polytope order: 14400 = 2⁶ × 3² × 5²
+ * Framework primes: {2, 3, 5, 7, 11, 13}
+ *   Interior (in H₄ order): 2, 3, 5
+ *   Boundary: 7 (locks partition), 11 (breathes), 13 (outer boundary)
+ *
+ * Key algebraic identities:
+ *   K_AUD − 1/φ = 1/φ² − G       (corridor identity)
+ *   1/φ + 1/φ² = 1                (golden partition)
+ *   G / |ln2 − 1/√2| = √2        (gap origin)
+ *   1 − 64G/√φ = −0.671%         (tower epsilon, constant across scales)
+ *
+ * NAMING AND PROVENANCE
+ * ─────────────────────
+ * Framework: Gap Geometry (part of Coherence Dynamics research)
+ * Author: B. (2025–2026)
+ * Published: "The Binary Tower — Mathematical Summary" v3.0, February 2026
+ * Status: Active research. The published document's five open questions
+ *   (Section 9.2) are being addressed in ongoing In Progress notes.
+ *
+ * The name "Gap Geometry" refers to G — the 2% structural gap between
+ * K_AUD and unity. The gap is not missing structure; it IS the structure.
+ * "The gap is the architecture."
+ *
+ * For current research status, see:
+ *   - Dynamic_Notation_Draft.txt (central working document)
+ *   - energy-cost-landauer-research-note.md (energy/physics layer)
+ *   - 400-over-p-iteration-structure-research-note.md
+ *   - 7-axis-and-313-research-note.md
+ *   - periodic-table-framework-crossref-research-note.md
+ * ═══════════════════════════════════════════════════════════════════════
+ */
+
 const { useState, useEffect, useRef, useCallback, useMemo } = React;
 
 // ─── Constants ──────────────────────────────────────────────────────
+// All derived from K_AUD = √2 × ln(2). Nothing is fitted or tuned.
 const PHI = (1 + Math.sqrt(5)) / 2;
 const INV_PHI = 1 / PHI;
 const INV_PHI2 = 1 / (PHI * PHI);
@@ -31,9 +184,18 @@ const LN2 = Math.log(2);
 const LANDAUER_CROSS = LN2; // n×G = ln(2) is the 1-Landauer line
 
 // ─── Coherence function ─────────────────────────────────────────────
+// C(τ) maps the trajectory from floor (1/φ) to ceiling (K_AUD).
+// The coupling constant α determines traversal speed:
+//   α small → slow, absorptive (7 absorbs)
+//   α ≈ 1   → natural rhythm (11 breathes)
+//   α large → fast lock (5 holds)
+// tanh provides the S-curve; its steepest point is at τ=0 (early convergence).
 const C = (tau, alpha) => INV_PHI + (K_AUD - INV_PHI) * Math.tanh(alpha * tau);
 
 // ─── α Presets (the coupling regimes) ───────────────────────────────
+// Each preset selects a dominant verb and maps to a Study attractor type.
+// The Study (B.'s observational research) identified these basins independently
+// before the mathematical framework named them — convergence from two instruments.
 const ALPHA_PRESETS = [
   { value: 0.15, label: "Ghost", verb: "7 absorbs", color: "#aa96da",
     desc: "Very slow convergence. The system drifts without committing. Perturbations are absorbed into the trajectory — they leave no visible trace. Below α ≈ 0.3, the corridor never fully develops.",
@@ -58,6 +220,10 @@ const ALPHA_PRESETS = [
 ];
 
 // ─── Tower landmarks ────────────────────────────────────────────────
+// Each landmark is where n×G approximates a known constant.
+// The deviations are small (<1%) and systematic — not fitted.
+// The Landauer crossing (steps 36→37) is where n×G crosses ln(2),
+// marking the transition from sub-Landauer geometry to super-Landauer information.
 const LANDMARKS = [
   { step: 18, label: "Romeo", approx: "√2/4", target: Math.sqrt(2)/4, color: "#4ecdc4", note: "2×3² — first complete structure (Ar)" },
   { step: 32, label: "Floor", approx: "1/φ", target: INV_PHI, color: "#6c9bcf", note: "2⁵ — golden floor, shell 4" },
@@ -70,6 +236,9 @@ const LANDMARKS = [
 ];
 
 // ─── Corridor near-hit constants ────────────────────────────────────
+// Three families of constants that the trajectory must cross inside the corridor.
+// They are NOT targets — they are waypoints. The corridor visits all three
+// on every traversal from floor to ceiling, regardless of α.
 const CORRIDOR_CONSTANTS = [
   { value: 1/Math.sqrt(2), label: "1/√2", family: "algebraic", color: "#6c9bcf" },
   { value: Math.PI/4, label: "π/4", family: "transcendental", color: "#f38181" },
@@ -77,6 +246,9 @@ const CORRIDOR_CONSTANTS = [
 ];
 
 // ─── 400/11 terms ───────────────────────────────────────────────────
+// Three rational terms that approximate ρ = G/gap_F to 14 significant digits.
+// Every prime factor in all three terms comes from the framework prime set {2,3,5,7,11,13,313}.
+// 313 is the only "new" prime — it appears once, in the palindrome 939939.
 const TERMS = [
   { val: 400/11, label: "400/11", factors: "2⁴×5² / 11", color: "#ffd700" },
   { val: 400/11 - 1/2500, label: "− 1/2500", factors: "1/(2²×5⁴) = 1/50²", color: "#ffb347" },
