@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Gap Geometry — Interactive Framework</title>
-  <style>* { margin: 0; padding: 0; box-sizing: border-box; } body { margin: 0; padding: 0; background: #0a0a0f; }</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gap Geometry — Binary Tower Simulation</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #0a0a0a; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    #root { width: 100%; max-width: 720px; }
+  </style>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
   <div id="root"></div>
-  <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script type="text/babel">
 /**
  * ═══════════════════════════════════════════════════════════════════════
@@ -87,16 +91,16 @@
  * Key landmarks (n × G ≈ target constant):
  *   Step 18 (Romeo):     18G ≈ √2/4     — first complete structure
  *   Step 32 (Floor):     32G ≈ 1/φ      — golden floor reached
- *   Step 36 (Geometry):  36G ≈ 1/√2     — last sub-Landauer step
- *   Step 37 (Landauer):  37G ≈ 1/(2ln2) — information begins (first >1 Landauer)
+ *   Step 36 (Geometry):  36G ≈ 1/√2     — first super-Landauer geometric landmark
+ *   Step 37 (Post-cross): 37G ≈ 1/(2ln2) — first post-crossing structural prime
  *   Step 50 (Ceiling):   50G ≈ K_AUD    — coherence ceiling reached
  *   Step 58 (Pre-pivot): 58G ≈ φ/√2     — golden ratio projected by binary
  *   Step 59 (Turn):      pentagonal turn — mirror of Romeo [current research]
  *   Step 64 (Pivot):     64G ≈ √φ       — master formula pivot
  *
- * The Landauer crossing between steps 36 and 37 is where the tower
+ * The Landauer crossing between steps 35 and 36 is where the tower
  * transitions from geometry to information. Below 36, each step costs less
- * than one bit erasure (sub-Landauer). Above 37, information is possible.
+ * than one bit erasure (sub-Landauer). From step 36 onward, information is possible.
  * The crossing cost is G/(2ln2) — exactly half a gap in Landauer units.
  *
  * Master formula: 2^k × G = 2^(k−6) × √φ × (1 − ε), where ε = −0.671%
@@ -222,13 +226,13 @@ const ALPHA_PRESETS = [
 // ─── Tower landmarks ────────────────────────────────────────────────
 // Each landmark is where n×G approximates a known constant.
 // The deviations are small (<1%) and systematic — not fitted.
-// The Landauer crossing (steps 36→37) is where n×G crosses ln(2),
+// The Landauer crossing (steps 35→36) is where n×G crosses ln(2),
 // marking the transition from sub-Landauer geometry to super-Landauer information.
 const LANDMARKS = [
   { step: 18, label: "Romeo", approx: "√2/4", target: Math.sqrt(2)/4, color: "#4ecdc4", note: "2×3² — first complete structure (Ar)" },
   { step: 32, label: "Floor", approx: "1/φ", target: INV_PHI, color: "#6c9bcf", note: "2⁵ — golden floor, shell 4" },
-  { step: 36, label: "Geom", approx: "1/√2", target: 1/Math.sqrt(2), color: "#88b5dd", note: "6² — pure geometry, last before crossing" },
-  { step: 37, label: "Info", approx: "1/(2ln2)", target: 1/(2*LN2), color: "#f38181", note: "prime — information begins (Landauer)" },
+  { step: 36, label: "Geom", approx: "1/√2", target: 1/Math.sqrt(2), color: "#88b5dd", note: "6² — first super-Landauer geometric landmark (1.025 L)" },
+  { step: 37, label: "Post-cross", approx: "1/(2ln2)", target: 1/(2*LN2), color: "#f38181", note: "prime — first post-crossing structural prime (1.054 L)" },
   { step: 50, label: "Ceiling", approx: "K_AUD", target: K_AUD, color: "#ffd700", note: "2×5² — the ceiling reached, shell 5" },
   { step: 58, label: "Pre-pivot", approx: "φ/√2", target: PHI/Math.sqrt(2), color: "#dda0dd", note: "pre-pentagonal turn, φ projected by binary" },
   { step: 59, label: "Turn", approx: "—", target: null, color: "#ff9a76", note: "pentagonal turn (mirror of Romeo)" },
@@ -536,11 +540,11 @@ function GapGeometrySimulation() {
 
                 {/* Landauer crossing zone */}
                 {(() => {
+                  const y35 = 8 + (35/64)*380;
                   const y36 = 8 + (36/64)*380;
-                  const y37 = 8 + (37/64)*380;
                   return (<g>
-                    <rect x="36" y={y36} width="300" height={y37-y36} fill="rgba(243,129,129,0.12)" />
-                    <text x="186" y={y36+(y37-y36)/2+3} textAnchor="middle" fill="#f38181" fontSize="7" fontWeight="bold">
+                    <rect x="36" y={y35} width="300" height={y36-y35} fill="rgba(243,129,129,0.12)" />
+                    <text x="186" y={y35+(y36-y35)/2+3} textAnchor="middle" fill="#f38181" fontSize="7" fontWeight="bold">
                       ═══ LANDAUER CROSSING ═══
                     </text>
                   </g>);
@@ -776,7 +780,7 @@ function GapGeometrySimulation() {
             {showEnergy && (
               <div style={{ marginTop: "8px", padding: "8px 10px", background: "rgba(243,129,129,0.04)", border: "1px solid rgba(243,129,129,0.1)", borderRadius: "4px", fontSize: "9px", color: "#888", lineHeight: "1.6" }}>
                 Crossing cost: G/(2ln2) = {(G / (2*LN2)).toFixed(6)} — exactly half a gap in Landauer units.
-                Below step 36, every tower step costs less than one bit erasure. Above 37, information begins.
+                Below step 36, every tower step costs less than one bit erasure. From step 36 onward, each step exceeds one bit erasure.
                 K_AUD = √2 Landauer units — the ceiling is one geometric projection above the thermodynamic floor.
               </div>
             )}
@@ -967,9 +971,9 @@ function GapGeometrySimulation() {
           { x: 155, step: 32, name: "Floor", approx: "1/φ", c: "#6c9bcf",
             hover: "The golden floor. 32G ≈ 1/φ = 0.618... — the corridor's lower bound. Below this, coherence cannot sustain itself. 32 = 2⁵, shell 4 capacity. The floor is where exploration begins; everything below is sub-corridor." },
           { x: 220, step: 36, approx: "1/√2", name: "Geom", c: "#88b5dd",
-            hover: "Last geometric step. 36G ≈ 1/√2 — pure algebraic geometry. Step 36 costs less than 1 Landauer unit (1.025 L). This is the boundary: one more step and information begins. 36 = 6², the only perfect square among landmarks." },
-          { x: 270, step: 37, approx: "1/(2ln2)", name: "Landauer", c: "#f38181",
-            hover: "Information begins. 37G ≈ 1/(2ln2) — the first step above 1 Landauer unit (1.054 L). From here, every tower step costs more than one bit erasure. 37 is prime — the crossing happens at a prime, not a composite. The geometry/information boundary." },
+            hover: "First super-Landauer geometric landmark. 36G ≈ 1/√2 — pure algebraic geometry at 1.025 Landauer units. The Landauer crossing happens between steps 35 and 36: step 35 is the last sub-Landauer step (0.997 L). 36 = 6², the only perfect square among landmarks." },
+          { x: 270, step: 37, approx: "1/(2ln2)", name: "Post-cross", c: "#f38181",
+            hover: "First post-crossing structural prime. 37G ≈ 1/(2ln2) at 1.054 Landauer units. The second super-Landauer step. 37 is prime — a structural landmark beyond the crossing. The Landauer crossing itself is between steps 35 and 36." },
           { x: 345, step: 50, approx: "K_AUD", name: "Ceiling", c: "#ffd700",
             hover: "The ceiling. 50G ≈ K_AUD = √2 × ln(2) = 0.980... — maximum coherence. The corridor's upper bound. 50 = 2×5², shell 5. K_AUD = √2 Landauer units: the ceiling is exactly one geometric projection above the thermodynamic minimum." },
           { x: 405, step: 58, approx: "φ/√2", name: "Pre-pivot", c: "#dda0dd",
@@ -1031,7 +1035,7 @@ function GapGeometrySimulation() {
             <text x="220" y="195" textAnchor="middle" fill="rgba(255,215,0,0.25)" fontSize="8" transform="rotate(-30,220,195)">CORRIDOR = 0.362</text>
 
             {/* Energy annotation */}
-            <text x="440" y="195" textAnchor="middle" fill="rgba(243,129,129,0.2)" fontSize="7" transform="rotate(30,440,195)">Landauer crossing at step 36→37</text>
+            <text x="440" y="195" textAnchor="middle" fill="rgba(243,129,129,0.2)" fontSize="7" transform="rotate(30,440,195)">Landauer crossing at step 35→36</text>
 
             {/* ─── Three Verbs (action layer) ─── */}
             <text x="300" y="284" textAnchor="middle" fill="rgba(255,215,0,0.35)" fontSize="8" fontWeight="bold">THE THREE VERBS</text>
@@ -1141,8 +1145,7 @@ function GapGeometrySimulation() {
   );
 }
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(React.createElement(GapGeometrySimulation));
+ReactDOM.createRoot(document.getElementById('root')).render(<GapGeometrySimulation />);
   </script>
 </body>
 </html>
