@@ -2,6 +2,8 @@
 
 **D. B. — Independent researcher, Belgium — January–April 2026**
 
+**[UPDATE — 9 April 2026]** Landauer crossing corrected across all documents: the thermodynamic crossing is between steps 35 and 36 (exact at n = ln(2)/G ≈ 35.11), not 36 and 37 as previously stated. Step 36 (1/√2) is the first super-Landauer geometric landmark (1.025 L). Step 35 is the last sub-Landauer step (0.997 L).
+
 K_AUD = √2 × ln(2) ≈ 0.980258 is the unique sub-unity value of K(n) = √n × ln(n) for integer n ≥ 2. Its complement G = 1 − K_AUD ≈ 0.01974 is the irreducible gap — the cost of binary organization. This framework documents where K_AUD and G appear independently across published mathematics, physics, and cosmology.
 
 **OSF:** [osf.io/zx4g7](https://osf.io/zx4g7) · **About:** [gap-geometry.github.io](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html) · **AI Index:** [AI_INDEX.txt](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/AI_INDEX.txt)
@@ -37,7 +39,7 @@ K_AUD = √2 × ln(2) ≈ 0.980258 is the unique sub-unity value of K(n) = √n 
 
 | Document | DOI | Links |
 |----------|-----|-------|
-| **Paper 6: Cross-Domain Signatures** | [10.17605/OSF.IO/RA3UQ](https://doi.org/10.17605/OSF.IO/RA3UQ) | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Cross_Domain_Signatures.pdf) · [Raw text](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Cross_Domain_Signatures__26March2026.txt) |
+| **Paper 6: Cross-Domain Signatures** | [10.17605/OSF.IO/RA3UQ](https://doi.org/10.17605/OSF.IO/RA3UQ) | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Cross_Domain_Signatures.pdf) · [Raw text](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Cross_Domain_Signatures__26March2026.txt) · [OSF](https://osf.io/ra3uq/overview) |
 
 The front door to the framework. Where does √2 × ln(2) appear in published science?
 
@@ -54,11 +56,11 @@ The front door to the framework. Where does √2 × ln(2) appear in published sc
 
 | # | Paper | DOI | Links |
 |---|-------|-----|-------|
-| 1 | Coherence Ceiling | [10.17605/OSF.IO/5VZ2R](https://doi.org/10.17605/OSF.IO/5VZ2R) | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper1_Coherence_Ceiling.pdf) · [Raw text](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt) |
-| 2 | Geometric Constants v2 | [10.17605/OSF.IO/SJBE9](https://doi.org/10.17605/OSF.IO/SJBE9) | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper2_Geometric_Constants_v2.pdf) · [Raw text](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/sqrt2_ln2_geometric_constants_v2.txt) |
-| 3 | Complete Framework v3.3 | [10.17605/OSF.IO/QH5S2](https://doi.org/10.17605/OSF.IO/QH5S2) | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper3_Complete_Framework_v3_3.pdf) · [Raw text](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/KAUD_Complete_Framework_v3_0.txt) |
-| 4 | Gap Scaling 400/11 | [10.17605/OSF.IO/C4GK5](https://doi.org/10.17605/OSF.IO/C4GK5) | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper4_Gap_Scaling_400_11.pdf) · [Raw text](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Gap_Scaling_Formula_v1.5.txt) |
-| 5 | Boundary Information Invariant | [10.17605/OSF.IO/E72H8](https://doi.org/10.17605/OSF.IO/E72H8) | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Boundary_Information_Invariant_Short.pdf) · [Raw text](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Boundary_Information_Invariant_Short.txt) |
+| 1 | Coherence Ceiling | [10.17605/OSF.IO/5VZ2R](https://doi.org/10.17605/OSF.IO/5VZ2R) | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper1_Coherence_Ceiling.pdf) · [Raw text](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt) · [OSF](https://osf.io/5vz2r/overview) |
+| 2 | Geometric Constants v2 | [10.17605/OSF.IO/SJBE9](https://doi.org/10.17605/OSF.IO/SJBE9) | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper2_Geometric_Constants_v2.pdf) · [Raw text](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/sqrt2_ln2_geometric_constants_v2.txt) · [OSF](https://osf.io/sjbe9/overview) |
+| 3 | Complete Framework v3.3 | [10.17605/OSF.IO/QH5S2](https://doi.org/10.17605/OSF.IO/QH5S2) | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper3_Complete_Framework_v3_3.pdf) · [Raw text](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/KAUD_Complete_Framework_v3_0.txt) · [OSF](https://osf.io/qh5s2/overview) |
+| 4 | Gap Scaling 400/11 | [10.17605/OSF.IO/C4GK5](https://doi.org/10.17605/OSF.IO/C4GK5) | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper4_Gap_Scaling_400_11.pdf) · [Raw text](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Gap_Scaling_Formula_v1.5.txt) · [OSF](https://osf.io/c4gk5/overview) |
+| 5 | Boundary Information Invariant | [10.17605/OSF.IO/E72H8](https://doi.org/10.17605/OSF.IO/E72H8) | [PDF](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Boundary_Information_Invariant_Short.pdf) · [Raw text](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Boundary_Information_Invariant_Short.txt) · [OSF](https://osf.io/e72h8/overview) |
 
 ---
 
@@ -84,3 +86,4 @@ Gap-geometryK_AUD2@telenet.be · X: [@Aud2Gap](https://x.com/Aud2Gap)
 *The mathematics is independently verifiable. The arithmetic does not require trust.*
 
 *Gap Geometry — Tidying the universe since 2025* 🧹📐
+
