@@ -1,3 +1,8 @@
+[UPDATE — 9 April 2026] Landauer crossing corrected: the thermodynamic
+crossing is between steps 35 and 36 (exact at n = ln(2)/G ≈ 35.11), not
+36 and 37 as previously stated. Step 36 (1/√2) is the first super-Landauer
+geometric landmark (1.025 L). Step 35 is the last sub-Landauer step (0.997 L).
+
 ================================================================================
 THE 50 HINGE
 Six Independent Appearances of One Integer Across Scale
@@ -48,7 +53,7 @@ G = 1 - K_AUD = 0.019741856531452...
 The irreducible gap. Approximately 2%. No binary system closes it.
 
 The Binary Tower: 64 steps of accumulated cost n * G, with landmarks
-at steps 18 (Romeo), 32 (Floor), 36-37 (Landauer crossing), 50
+at steps 18 (Romeo), 32 (Floor), 35-36 (Landauer crossing), 50
 (Ceiling), and 64 (Pivot).
 
 Published: OSF DOI 10.17605/OSF.IO/E72H8
@@ -450,4 +455,3 @@ the integer 50 becomes the natural quantum of approach.
 
 ================================================================================
 
-================================================================================
