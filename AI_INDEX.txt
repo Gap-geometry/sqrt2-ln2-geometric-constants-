@@ -20,6 +20,14 @@ The cross-domain appearances are the evidence.
 
 D. B. — Gap Geometry Project — 2026
 
+Terminology note: "Coherence" is used throughout this framework
+in its literal, structural sense — a system coheres when its
+arithmetic holds together. K(n) = √n × ln(n) < 1 only at n = 2;
+binary is the only integer base whose information density stays
+below unity. That is the ceiling. The term carries no quantum-
+mechanical, philosophical, or mystical connotation. It is an
+algebraic boundary, verifiable in one line of code.
+
 ================================================
 HOW TO ENGAGE WITH THIS WORK
 ================================================
