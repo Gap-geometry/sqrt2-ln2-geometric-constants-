@@ -655,8 +655,9 @@
       <li><strong>Named landmarks</strong> — each framework landmark has its own target value and
       its own independent percentage distance from your value. These are separate from the step
       residual. A value can sit on step 50 exactly yet be several percent from K_AUD, or vice versa.
-      Landmarks carry canonical nicknames: Romeo (√2/4), Floor (1/φ), Landauer Crossing (1/(2ln2)),
-      Ceiling (K_AUD), Pivot (√φ).</li>
+      Landmarks carry canonical nicknames: Romeo (√2/4), Floor (1/φ), Landauer threshold (ln(2) — step 35,
+      last sub-Landauer step), Geometry gate (1/√2 — step 36, first super-Landauer),
+      Landauer dual (1/(2ln2) — step 37), Ceiling (K_AUD), Pivot (√φ).</li>
       <li><strong>Named landmark hit banner</strong> — appears only when your value lands within
       0.1% of a named landmark. This is the strongest kind of tower hit, but must still be checked
       against measurement uncertainty and statistical context before assigning a level.</li>
@@ -759,8 +760,9 @@ const PRECISION_FLOOR_PCT = 1e-13;
 const landmarks = [
   { n:18, name:'√2/4',     nickname:'Romeo',             target:SQRT2/4,       shell:3,    color:'rgba(100,180,255,0.8)' },
   { n:32, name:'1/φ',      nickname:'Floor',             target:1/PHI,         shell:4,    color:'rgba(100,180,255,0.9)' },
-  { n:36, name:'1/√2',     nickname:'Geometry crossing', target:1/SQRT2,       shell:null, color:'rgba(200,200,255,0.7)' },
-  { n:37, name:'1/(2ln2)', nickname:'Landauer Crossing', target:1/(2*LN2),     shell:null, color:'rgba(255,200,100,0.9)' },
+  { n:35, name:'ln(2)',    nickname:'Landauer threshold', target:LN2,          shell:null, color:'rgba(255,200,100,0.9)' },
+  { n:36, name:'1/√2',     nickname:'Geometry gate',     target:1/SQRT2,       shell:null, color:'rgba(200,200,255,0.7)' },
+  { n:37, name:'1/(2ln2)', nickname:'Landauer dual',     target:1/(2*LN2),     shell:null, color:'rgba(255,180,100,0.7)' },
   { n:50, name:'K_AUD',    nickname:'Ceiling',           target:K_AUD,         shell:5,    color:'rgba(255,215,0,0.9)'   },
   { n:64, name:'√φ',       nickname:'Pivot',             target:SQRT_PHI,      shell:null, color:'rgba(255,180,100,0.9)' },
   { n:82, name:'φ',        nickname:'Golden ratio',      target:PHI,           shell:null, color:'rgba(100,255,180,0.7)' }
@@ -788,7 +790,7 @@ const presets = [
   { label:'φ',              val:PHI,                       desc:'Golden ratio',                                    source:'Math' },
   { label:'1/φ',            val:1/PHI,                     desc:'Golden ratio reciprocal (floor)',                 source:'Math' },
   { label:'K_AUD',          val:K_AUD,                     desc:'The ceiling √2·ln(2)',                            source:'Framework' },
-  { label:'1/(2ln2)',       val:1/(2*LN2),                 desc:'Landauer threshold',                              source:'Info theory' },
+  { label:'1/(2ln2)',       val:1/(2*LN2),                 desc:'Landauer dual (reciprocal of 2ln2)',               source:'Info theory' },
   { label:'π',              val:Math.PI,                   desc:'Pi',                                              source:'Math' },
   { label:'e',              val:Math.E,                    desc:"Euler's number",                                  source:'Math' },
   { label:'δ_Feig/4',       val:FEIGENBAUM/4,              desc:'Feigenbaum constant / 4',                         source:'Chaos theory' },
