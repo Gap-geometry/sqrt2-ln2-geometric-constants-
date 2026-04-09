@@ -1,3 +1,8 @@
+[UPDATE — 9 April 2026] Landauer crossing corrected: the thermodynamic
+crossing is between steps 35 and 36 (exact at n = ln(2)/G ≈ 35.11), not
+36 and 37 as previously stated. Step 36 (1/√2) is the first super-Landauer
+geometric landmark (1.025 L). Step 35 is the last sub-Landauer step (0.997 L).
+
 ================================================================================
 
                     THE BOUNDARY INFORMATION INVARIANT
@@ -88,7 +93,7 @@ Three independent mathematical objects — the gap’s own fractional structure,
 
 2.4 The Landauer Crossing
 
-The tower’s energetic staircase has a decisive step at its center. At step 36, the accumulated cost 36G ≈ 1/√2 (pure geometry). At step 37, the accumulated cost 37G ≈ 1/(2 ln 2) (the Landauer information penalty). The crossing between them is algebraically exact:
+The tower’s energetic staircase has a decisive crossing between steps 35 and 36 (exact at n = ln(2)/G ≈ 35.11). Step 35 is the last sub-Landauer step (0.997 L). Step 36, the first super-Landauer step, has accumulated cost 36G ≈ 1/√2 (1.025 L — pure geometry, already above the thermodynamic line). Step 37 has cost 37G ≈ 1/(2 ln 2) (1.054 L — the first post-crossing structural prime). The step between the two landmarks is algebraically exact:
 
   1/(2 ln 2) − 1/√2 = G/(2 ln 2) [exact identity]
 
@@ -287,4 +292,4 @@ References
 Published papers, plain-text versions, and interactive tools available at: gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
 
 ================================================================================
-https://github.com/Gap-geometry
+Gap Geometry — github.com/Gap-geometry/sqrt2-ln2-geometric-constants-
