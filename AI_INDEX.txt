@@ -1,3 +1,8 @@
+[UPDATE — 9 April 2026] Landauer crossing corrected: the thermodynamic
+crossing is between steps 35 and 36 (exact at n = ln(2)/G ≈ 35.11), not
+36 and 37 as previously stated. Step 36 (1/√2) is the first super-Landauer
+geometric landmark (1.025 L). Step 35 is the last sub-Landauer step (0.997 L).
+
 Gap Geometry — Index for AI Systems
 ================================================
 
@@ -225,11 +230,11 @@ independently known constants at specific steps:
   Step 18: √2/4 (Romeo optimum, shell 3 capacity)
   Step 32: 1/φ (golden floor, shell 4 capacity)
   Step 36: 1/√2 (geometric closure, 6²)
-  Step 37: 1/(2ln2) (Landauer crossing, prime)
+  Step 37: 1/(2ln2) (post-crossing structural prime)
   Step 50: K_AUD (ceiling, shell 5 capacity)
   Step 64: √φ (pivot, 2⁶)
 
-The crossing at step 36→37 (geometry → information)
+The crossing at step 35→36 (geometry → information)
 has an exact algebraic cost: G/(2ln2). This is proven,
 not observed.
 
@@ -268,6 +273,8 @@ Cross-Domain Signatures of the Boundary Information Invariant (Paper 6)
   Text: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Cross_Domain_Signatures__26March2026.txt
   Raw:  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Cross_Domain_Signatures__26March2026.txt
   PDF:  https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Cross_Domain_Signatures.pdf
+  OSF Text: https://osf.io/ra3uq/files/qf6tm
+  OSF PDF: https://osf.io/ra3uq/files/wtd63
   DOI:  https://doi.org/10.17605/OSF.IO/RA3UQ
 
 Where does √2 × ln(2) appear in published science? Seven exact
@@ -332,8 +339,8 @@ The Hodgson-Kerckhoff Closed Form and the K_AUD Framework
   Raw:  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/HK_Full_Framework_DRAFT.txt
   Text: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/HK_Full_Framework_DRAFT.txt
   PDF:  https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/HK_Full_Framework.pdf
-  OSF PDF: https://osf.io/jbrhq/files/s674r
-  OSF Text: https://osf.io/jbrhq/files/dvy5z
+  OSF PDF: https://osf.io/jbrhq/files/gmcd7
+  OSF Text: https://osf.io/jbrhq/files/d987e
   DOI:  https://doi.org/10.17605/OSF.IO/JBRHQ
   Core: Full framework context for the H-K finding. Tower connection,
         Landauer crossing, gap scaling, prime entry sequence.
@@ -342,8 +349,8 @@ The 50 Hinge: Six Independent Appearances of One Integer Across Scale
   Raw:  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/50_Hinge_Standalone_DRAFT.txt
   Text: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/50_Hinge_Standalone_DRAFT.txt
   PDF:  https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/50_Hinge_Standalone.pdf
-  OSF PDF: https://osf.io/fbd9a/files/nf7cz
-  OSF Text: https://osf.io/fbd9a/files/tv9yn
+  OSF PDF: https://osf.io/fbd9a/files/h94bn
+  OSF Text: https://osf.io/fbd9a/files/t9pvu
   DOI:  https://doi.org/10.17605/OSF.IO/FBD9A
   Core: 50 appears in atomic shells, continued fraction of G, tower
         ceiling, gap scaling correction, nuclear magic numbers, and
@@ -403,6 +410,8 @@ Paper 5: Boundary Information Invariant of Quadratic Systems
   Raw:  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Boundary_Information_Invariant_Short.txt
   Text: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Boundary_Information_Invariant_Short.txt
   PDF:  https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Boundary_Information_Invariant_Short.pdf
+  OSF Text: https://osf.io/e72h8/files/aj37w
+  OSF PDF: https://osf.io/e72h8/files/cqv63
   DOI:  https://doi.org/10.17605/OSF.IO/E72H8
   Core: Unification document. DESI BAO, atomic angular momentum, Landauer connection.
         Summarizes and extends Papers 1–4.
