@@ -1,3 +1,8 @@
+[UPDATE — 9 April 2026] Landauer crossing corrected: the thermodynamic
+crossing is between steps 35 and 36 (exact at n = ln(2)/G ≈ 35.11), not
+36 and 37 as previously stated. Step 36 (1/√2) is the first super-Landauer
+geometric landmark (1.025 L). Step 35 is the last sub-Landauer step (0.997 L).
+
 Cross-Domain Signatures of the Boundary Information Invariant
 
 Numerical and structural echoes of √2 × ln(2) in published mathematics,
@@ -656,21 +661,22 @@ references the others. The convergence on 50 is structural.
 
 The tower partitions as 18 + 14 + 4 + 1 + 13 + 14 = 64.
 The symmetric shell (14 = 2 × 7 on both sides) and the
-single decisive step (36 → 37) are structural, not fitted.
+single decisive step (35 → 36) are structural, not fitted.
 
 The prime factorizations of the step numbers use only framework
 primes and 37: {2, 3, 5, 7, 13, 37}. The number 37 is not a
 framework prime in the same sense as {2, 3, 5, 7, 11, 13} — it
 enters uniquely as the Landauer crossing step (Section 6.5), where
-it acquires structural meaning as the first step beyond geometric
-closure (36 = 6²). No other primes enter the tower's landmark
-structure.
+it acquires structural meaning as the first post-crossing structural
+prime beyond step 36 (= 6², the first super-Landauer geometric
+landmark). No other primes enter the tower's landmark structure.
 
 
-6.5 — The Landauer Crossing (Step 36 → 37)
+6.5 — The Landauer Crossing (Step 35 → 36)
 
-    36G ≈ 1/√2:    pure geometry (optimal damping)
-    37G ≈ 1/(2ln2): geometry carrying information (Shannon bound)
+    35G = 0.6910 = 0.997 Landauer: last sub-Landauer step
+    36G ≈ 1/√2 = 1.025 Landauer:  first super-Landauer geometric landmark
+    37G ≈ 1/(2ln2) = 1.054 Landauer: first post-crossing structural prime
 
 The crossing cost is algebraically exact:
     1/(2 ln 2) − 1/√2 = G/(2 ln 2)
