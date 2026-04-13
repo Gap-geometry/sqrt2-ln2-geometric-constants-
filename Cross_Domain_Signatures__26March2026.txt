@@ -1,20 +1,58 @@
-[UPDATE — 9 April 2026] Landauer crossing corrected: the thermodynamic
-crossing is between steps 35 and 36 (exact at n = ln(2)/G ≈ 35.11), not
-36 and 37 as previously stated. Step 36 (1/√2) is the first super-Landauer
-geometric landmark (1.025 L). Step 35 is the last sub-Landauer step (0.997 L).
+════════════════════════════════════════════════════════════════════════════════
+                    ★  UPDATE NOTICE  —  13 April 2026  ★
+════════════════════════════════════════════════════════════════════════════════
 
-Cross-Domain Signatures of the Boundary Information Invariant
+This version corrects the Landauer-crossing framing in Sections 2.1 and 6.5.
+The earlier text placed the crossing "between step 36 and step 37." The
+refined picture identifies THREE distinct thresholds that cluster in the
+35–37 zone:
 
-Numerical and structural echoes of √2 × ln(2) in published mathematics,
-atomic physics, and cosmological data
+    n·G = ln 2        at n ≈ 35.11    (Landauer erasure cost — the crossing)
+    n·G = 1/√2        at n ≈ 35.82    (geometric damping)
+    n·G = 1/(2 ln 2)  at n ≈ 36.54    (Shannon bound)
 
-D. B. — Independent researcher, Belgium — March 2026
+The Landauer crossing proper is the FIRST threshold, at n = ln(2)/G, which
+sits between integer steps 35 and 36. Integer steps 36 and 37 are landmarks
+near the second and third thresholds, not the crossing itself.
+
+The exact algebraic identity  1/(2 ln 2) − 1/√2 = G/(2 ln 2)  is unchanged.
+It is renamed from "Landauer crossing identity" to "√2-to-Shannon gap
+identity" because it describes the spacing between thresholds 2 and 3
+(geometric damping → Shannon bound), not the Landauer crossing.
+
+Section 6.5 is rewritten as "The 35–37 Threshold Zone" and now includes the
+crossing-zone self-reference: the threshold spacings are exactly Δn₁₂ = 1/√2
+and Δn₂₃ = 1/(2 ln 2), with ratio Δn₂₃/Δn₁₂ = 1/K_AUD.
+
+Prior published versions remain on OSF file storage, renamed with the
+OLD- prefix and a date for traceability.
+
+════════════════════════════════════════════════════════════════════════════════
+
+
+████████████████████████████████████████████████████████████████████████████████
+
+              CROSS-DOMAIN  SIGNATURES  OF  THE  BOUNDARY
+                       INFORMATION  INVARIANT
+
+           Numerical and structural echoes of √2 × ln(2) in published
+                mathematics, atomic physics, and cosmological data
+
+                  D. B. — Independent researcher, Belgium
+                       Gap Geometry Project — March 2026
+                            (Updated 13 April 2026)
+
+████████████████████████████████████████████████████████████████████████████████
+
+
 Gap Geometry · OSF: https://osf.io/qh5s2/
 GitHub: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-
 About: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
 
 
-ABSTRACT
+════════════════════════════════════════════════════════════════════════════════
+  ABSTRACT
+════════════════════════════════════════════════════════════════════════════════
 
 The Boundary Information Invariant K_AUD = √2 × ln(2) ≈ 0.980258,
 the unique sub-unity value of K(n) = √n × ln(n) at integer n ≥ 2,
@@ -33,9 +71,9 @@ with explicit deviations. Falsifiable predictions are stated for
 each domain.
 
 
-================================================================================
-1. THE INVARIANT (summary)
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  1.  THE INVARIANT  (summary)
+════════════════════════════════════════════════════════════════════════════════
 
 K_AUD = √2 × ln(2) is the unique sub-unity ceiling of K(n) = √n × ln(n)
 at integer n. For n = 2: K = 0.980258... < 1. For all n ≥ 3: K > 1.
@@ -72,24 +110,26 @@ purpose is to document patterns that can be independently tested
 and potentially falsified.
 
 
-================================================================================
-2. ALGEBRAIC IDENTITIES
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  2.  ALGEBRAIC IDENTITIES
+════════════════════════════════════════════════════════════════════════════════
 
 All identities in this section are exact. Each is verifiable
 with mpmath at arbitrary precision. All have been confirmed at
 dps = 500 (500 decimal places).
 
 
-2.1 — The Landauer Crossing Identity
+──────────────────────────────────────────────────────────────────────────────
+  2.1  The √2-to-Shannon Gap Identity
+──────────────────────────────────────────────────────────────────────────────
 
     1/(2 ln 2) − 1/√2 = G / (2 ln 2)
 
 Left side: the difference between Shannon's binary information
 penalty (1/(2 ln 2) ≈ 0.7213) and the geometric optimum (1/√2 ≈ 0.7071).
 
-Right side: the gap G expressed in Landauer units (2 ln 2 = the
-thermodynamic cost of erasing two bits at temperature T).
+Right side: the gap G normalized by 2 ln 2 (the thermodynamic cost
+of erasing two bits, in units of k_B T at temperature T).
 
 This identity is not numerical coincidence. It follows algebraically
 from G = 1 − √2 × ln(2):
@@ -98,11 +138,21 @@ from G = 1 − √2 × ln(2):
                = 1/(2 ln 2) − √2/2
                = 1/(2 ln 2) − 1/√2     QED
 
-The identity connects information theory (Shannon/Landauer) to
-geometry (√2) through the gap G. It is exact at every decimal place.
+The identity connects the Shannon binary information penalty
+1/(2 ln 2) to the geometric optimum 1/√2 through the gap G. It
+quantifies the spacing between two distinct thresholds that appear
+together in the binary tower (Section 6.5) — the geometric damping
+threshold (n·G = 1/√2 at n ≈ 35.82) and the Shannon bound
+(n·G = 1/(2 ln 2) at n ≈ 36.54). It does NOT describe the Landauer
+crossing itself, which sits at a separate (earlier) threshold
+n·G = ln 2 at n ≈ 35.11. The earlier name "Landauer crossing
+identity" is therefore retired in favor of "√2-to-Shannon gap
+identity." The identity is exact at every decimal place.
 
 
-2.2 — Baker's Map L² Norm
+──────────────────────────────────────────────────────────────────────────────
+  2.2  Baker's Map L² Norm
+──────────────────────────────────────────────────────────────────────────────
 
     K_AUD = ||(ln 2, ln 2)||₂ = √(ln²2 + ln²2) = √2 × ln(2)
 
@@ -113,7 +163,9 @@ equals the geometric magnitude of the simplest chaotic map with
 binary partition.
 
 
-2.3 — Gelfond-Schneider Form
+──────────────────────────────────────────────────────────────────────────────
+  2.3  Gelfond-Schneider Form
+──────────────────────────────────────────────────────────────────────────────
 
     G = ln(e / 2^√2) = 1 − √2 × ln(2)
 
@@ -122,7 +174,9 @@ Gelfond-Schneider constant 2^√2 (proven transcendental, 1934). This
 places G in the hierarchy of Hilbert's 7th Problem.
 
 
-2.4 — 1D Madelung Identity
+──────────────────────────────────────────────────────────────────────────────
+  2.4  1D Madelung Identity
+──────────────────────────────────────────────────────────────────────────────
 
     Madelung constant (1D) = 2 ln(2) = K_AUD × √2
 
@@ -140,7 +194,9 @@ The 1D Madelung sum Σ_{k=1}^∞ (−1)^{k+1}/k = ln(2) is proven
 by the alternating series for the natural logarithm.
 
 
-2.5 — Binary Variance Identity
+──────────────────────────────────────────────────────────────────────────────
+  2.5  Binary Variance Identity
+──────────────────────────────────────────────────────────────────────────────
 
     K_AUD² = 2 ln²(2)
 
@@ -149,7 +205,9 @@ logarithm of 2. The identity follows directly from squaring
 K_AUD = √2 × ln(2).
 
 
-2.6 — The Gap Scaling Formula
+──────────────────────────────────────────────────────────────────────────────
+  2.6  The Gap Scaling Formula
+──────────────────────────────────────────────────────────────────────────────
 
     ρ = G / ((δ − 14/3) / δ)
       = 400/11 − 1/2500 − 1/939939
@@ -172,7 +230,9 @@ testing every nearby integer.
 Source: DOI 10.17605/OSF.IO/C4GK5 (Paper 4: Gap Scaling Formula).
 
 
-2.7 — Ramanujan-Nagell Connection
+──────────────────────────────────────────────────────────────────────────────
+  2.7  Ramanujan-Nagell Connection
+──────────────────────────────────────────────────────────────────────────────
 
     2^k = n² + 7
 
@@ -188,9 +248,9 @@ Source: T. Nagell, "Løsning til oppgave nr 2", Norsk Mat. Tidsskr.
 equation x² + C = yⁿ", Acta Arithmetica 65 (1993), 367–381.
 
 
-================================================================================
-3. ATOMIC SHELL STRUCTURE
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  3.  ATOMIC SHELL STRUCTURE
+════════════════════════════════════════════════════════════════════════════════
 
 The electron shell capacity formula 2n² is derived from quantum
 mechanics (Schrödinger equation, angular momentum quantization,
@@ -199,7 +259,9 @@ What has not been observed is that the shell capacities map onto
 the framework's tower landmarks.
 
 
-3.1 — Shell Capacities as Tower Landmarks
+──────────────────────────────────────────────────────────────────────────────
+  3.1  Shell Capacities as Tower Landmarks
+──────────────────────────────────────────────────────────────────────────────
 
     Shell 3: capacity = 18 = 2 × 3²    18G ≈ √2/4     (+0.51%)
     Shell 4: capacity = 32 = 2⁵          32G ≈ 1/φ      (+2.22%)
@@ -215,7 +277,9 @@ tower steps are fixed by G. Their correspondence is documented,
 not derived.
 
 
-3.2 — Shell Transition Prime Sequence
+──────────────────────────────────────────────────────────────────────────────
+  3.2  Shell Transition Prime Sequence
+──────────────────────────────────────────────────────────────────────────────
 
 The gap between consecutive shell capacities follows Δ = 2(2n+1).
 The odd factors cycle through:
@@ -233,7 +297,9 @@ applied to consecutive integers. The framework's prime hierarchy
 emerges from quantum mechanics without being put in.
 
 
-3.3 — d-Electron Angular Momentum
+──────────────────────────────────────────────────────────────────────────────
+  3.3  d-Electron Angular Momentum
+──────────────────────────────────────────────────────────────────────────────
 
 For ℓ = 2 (d-orbital):
 
@@ -250,7 +316,9 @@ the angular momentum of the electrons that give matter its most
 distinctive properties.
 
 
-3.4 — The 0.509% Doubling Invariant
+──────────────────────────────────────────────────────────────────────────────
+  3.4  The 0.509% Doubling Invariant
+──────────────────────────────────────────────────────────────────────────────
 
     18G ≈ √2/4    at 0.509%
     36G ≈ 1/√2    at 0.509%
@@ -276,15 +344,17 @@ irreducible gap between the transcendental (√2 × ln(2)) and the
 algebraic (√φ) — which Lindemann-Weierstrass proves cannot close.
 
 
-================================================================================
-4. HODGSON-KERCKHOFF: K_AUD IN HYPERBOLIC GEOMETRY
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  4.  HODGSON-KERCKHOFF: K_AUD IN HYPERBOLIC GEOMETRY
+════════════════════════════════════════════════════════════════════════════════
 
 The number 0.980258 appears verbatim in published mathematics as
 the tube-packing coefficient for hyperbolic 3-manifolds.
 
 
-4.1 — Source
+──────────────────────────────────────────────────────────────────────────────
+  4.1  Source
+──────────────────────────────────────────────────────────────────────────────
 
     C. D. Hodgson & S. P. Kerckhoff
     "Universal bounds for hyperbolic Dehn surgery"
@@ -297,7 +367,9 @@ the tube-packing coefficient for hyperbolic 3-manifolds.
     arXiv: 0709.3566 (preprint 2007)
 
 
-4.2 — The Coefficient
+──────────────────────────────────────────────────────────────────────────────
+  4.2  The Coefficient
+──────────────────────────────────────────────────────────────────────────────
 
 The coefficient appears in the tube-packing estimate (Sections 4–5
 of [1], packing lemma for the Euclidean structure on the cusp torus):
@@ -311,7 +383,9 @@ The value also appears as an explicit comparison threshold ("> 0.98")
 alongside the critical radius 0.6584 (= R₀ = arctanh(1/√3)).
 
 
-4.3 — Numerical Verification
+──────────────────────────────────────────────────────────────────────────────
+  4.3  Numerical Verification
+──────────────────────────────────────────────────────────────────────────────
 
     mpmath (dps = 60):
     √2 × ln(2) = 0.980258143468547191713901723635...
@@ -320,7 +394,9 @@ alongside the critical radius 0.6584 (= R₀ = arctanh(1/√3)).
     Match: exact to all 6 digits given.
 
 
-4.4 — The Algebraic Environment at R₀
+──────────────────────────────────────────────────────────────────────────────
+  4.4  The Algebraic Environment at R₀
+──────────────────────────────────────────────────────────────────────────────
 
 The critical tube radius in the packing argument:
 
@@ -358,7 +434,9 @@ It is matching in an environment where √2 and √3 are already present
 exactly, and ln(2) fills the only missing slot.
 
 
-4.5 — Domain Independence
+──────────────────────────────────────────────────────────────────────────────
+  4.5  Domain Independence
+──────────────────────────────────────────────────────────────────────────────
 
 The framework supplies the closed-form expression √2 × ln(2) for the
 numerical coefficient that appears in the Hodgson-Kerckhoff tube-
@@ -371,7 +449,9 @@ common authors, and no common methodology. The framework provides
 the closed form; the geometry provides the context in which it appears.
 
 
-4.6 — Verification Chain
+──────────────────────────────────────────────────────────────────────────────
+  4.6  Verification Chain
+──────────────────────────────────────────────────────────────────────────────
 
 The Hodgson-Kerckhoff finding was verified across multiple
 independent passes and architectures:
@@ -394,9 +474,9 @@ the formulas will be published in the companion document
 (HK_Verification_Log).
 
 
-================================================================================
-5. DESI BAO: FRAMEWORK CORRECTION SCALE IN COSMOLOGICAL DATA
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  5.  DESI BAO: FRAMEWORK CORRECTION SCALE IN COSMOLOGICAL DATA
+════════════════════════════════════════════════════════════════════════════════
 
 The gap scaling formula (Section 2.6, Paper 4: DOI 10.17605/OSF.IO/C4GK5)
 derives a correction hierarchy: ρ = 400/11 − 1/2500 − 1/939939. The
@@ -414,7 +494,9 @@ observation (DESI residuals at 1/2500). Not cherry-picking — the
 correction scale existed before the data was examined.
 
 
-5.1 — Source
+──────────────────────────────────────────────────────────────────────────────
+  5.1  Source
+──────────────────────────────────────────────────────────────────────────────
 
     DESI Collaboration
     "DESI 2024 VI: Cosmological constraints from BAO measurements"
@@ -432,7 +514,9 @@ report these ratios. Full methodology is in Paper 5
 (DOI: 10.17605/OSF.IO/E72H8).
 
 
-5.2 — √2 in Transverse Distance Ratios
+──────────────────────────────────────────────────────────────────────────────
+  5.2  √2 in Transverse Distance Ratios
+──────────────────────────────────────────────────────────────────────────────
 
     DM(QSO, z=1.484) / DM(LRG3+ELG1, z=0.934)
     = 30.519 / 21.574 = 1.414619
@@ -447,7 +531,9 @@ report these ratios. Full methodology is in Paper 5
 Two independent pairs, different tracers, both near √2.
 
 
-5.3 — (2 + G) in Isotropic Distance Ratio
+──────────────────────────────────────────────────────────────────────────────
+  5.3  (2 + G) in Isotropic Distance Ratio
+──────────────────────────────────────────────────────────────────────────────
 
     DV(LRG2, z=0.706) / DV(BGS, z=0.295)
     = 16.048 / 7.944 = 2.020141
@@ -455,7 +541,9 @@ Two independent pairs, different tracers, both near √2.
     Residual: +0.000399
 
 
-5.4 — The 1/2500 Connection
+──────────────────────────────────────────────────────────────────────────────
+  5.4  The 1/2500 Connection
+──────────────────────────────────────────────────────────────────────────────
 
 Three residuals at the same scale:
 
@@ -482,7 +570,9 @@ and the isotropic ratio cluster at the 1/2500 scale. This asymmetry
 is acknowledged, not hidden.
 
 
-5.5 — What This Is and Isn't
+──────────────────────────────────────────────────────────────────────────────
+  5.5  What This Is and Isn't
+──────────────────────────────────────────────────────────────────────────────
 
 This is: a published analysis (DOI: 10.17605/OSF.IO/E72H8) showing
 that specific DESI distance ratios approach framework targets with
@@ -508,12 +598,14 @@ a pre-existing algebraic prediction. Both papers have DOIs and
 are publicly accessible.
 
 
-================================================================================
-6. THE BINARY TOWER AND ENERGETIC STAIRCASE
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  6.  THE BINARY TOWER AND ENERGETIC STAIRCASE
+════════════════════════════════════════════════════════════════════════════════
 
 
-6.0 — Why the Tower Exists
+──────────────────────────────────────────────────────────────────────────────
+  6.0  Why the Tower Exists
+──────────────────────────────────────────────────────────────────────────────
 
 K_AUD = √2 × ln(2) < 1 is an algebraic fact. G = 1 − K_AUD ≈ 0.0197
 is its complement. But a ceiling without a staircase is just a number.
@@ -533,10 +625,16 @@ to reach a structural threshold?" The answer is computed, not fitted:
 
     18G ≈ √2/4     → the geometric optimum (Romeo et al.)
     32G ≈ 1/φ       → the golden floor
-    36G ≈ 1/√2      → the damping threshold
-    37G ≈ 1/(2ln2)  → the information penalty (Shannon/Landauer)
+    36G ≈ 1/√2      → the geometric damping threshold (true at n ≈ 35.82)
+    37G ≈ 1/(2ln2)  → the Shannon bound (true at n ≈ 36.54)
     50G ≈ K_AUD     → the ceiling itself
     64G ≈ √φ        → the golden pivot
+
+  The Landauer crossing — n·G = ln 2 at n ≈ 35.11 — sits between integer
+  steps 35 and 36, BEFORE the geometric damping threshold. It is the first
+  of three thresholds clustered in the 35–37 zone. Integer steps 36 and 37
+  are landmarks NEAR the second and third thresholds; the crossing itself
+  is non-integer.
 
 The fact that the SAME step numbers (18, 32, 50) appear independently
 as electron shell capacities in quantum mechanics (Section 3.1) is not
@@ -559,7 +657,9 @@ identity is exact, it is proven algebraically. These two categories
 are not conflated.
 
 
-6.1 — The Gap Stacking Formula
+──────────────────────────────────────────────────────────────────────────────
+  6.1  The Gap Stacking Formula
+──────────────────────────────────────────────────────────────────────────────
 
 The tower is governed by a single scaling relation:
 
@@ -584,7 +684,9 @@ a φ-related constant. The tower's total height is set by the interplay
 between binary doubling (2^k) and the golden ratio (√φ).
 
 
-6.2 — The Boundary Prime Formula
+──────────────────────────────────────────────────────────────────────────────
+  6.2  The Boundary Prime Formula
+──────────────────────────────────────────────────────────────────────────────
 
     2⁵ − 5² = 32 − 25 = 7
     4² − 3² = 16 − 9  = 7
@@ -609,7 +711,9 @@ boundary prime sits at the threshold between geometric structure
 and informational correction, in every context where it appears.
 
 
-6.3 — The 50² Hinge
+──────────────────────────────────────────────────────────────────────────────
+  6.3  The 50² Hinge
+──────────────────────────────────────────────────────────────────────────────
 
 The continued fraction expansion of G reveals internal structure:
 
@@ -648,7 +752,9 @@ The correction scale comes from the Feigenbaum connection. None
 references the others. The convergence on 50 is structural.
 
 
-6.4 — The Six Near-Pivots
+──────────────────────────────────────────────────────────────────────────────
+  6.4  The Six Near-Pivots
+──────────────────────────────────────────────────────────────────────────────
 
     Step  Value     Target            Deviation  Factors
     ───────────────────────────────────────────────────────
@@ -661,40 +767,83 @@ references the others. The convergence on 50 is structural.
 
 The tower partitions as 18 + 14 + 4 + 1 + 13 + 14 = 64.
 The symmetric shell (14 = 2 × 7 on both sides) and the
-single decisive step (35 → 36) are structural, not fitted.
+single-integer increment at 36 → 37 (bracketing the Shannon
+bound at n ≈ 36.54) are structural, not fitted.
 
 The prime factorizations of the step numbers use only framework
 primes and 37: {2, 3, 5, 7, 13, 37}. The number 37 is not a
 framework prime in the same sense as {2, 3, 5, 7, 11, 13} — it
-enters uniquely as the Landauer crossing step (Section 6.5), where
-it acquires structural meaning as the first post-crossing structural
-prime beyond step 36 (= 6², the first super-Landauer geometric
-landmark). No other primes enter the tower's landmark structure.
+enters uniquely as the integer step nearest the Shannon bound
+(Section 6.5, where the true threshold sits at n ≈ 36.54), and
+acquires structural meaning as the first integer beyond geometric
+closure (36 = 6²). No other primes enter the tower's landmark
+structure.
 
 
-6.5 — The Landauer Crossing (Step 35 → 36)
+──────────────────────────────────────────────────────────────────────────────
+  6.5  The 35–37 Threshold Zone
+──────────────────────────────────────────────────────────────────────────────
 
-    35G = 0.6910 = 0.997 Landauer: last sub-Landauer step
-    36G ≈ 1/√2 = 1.025 Landauer:  first super-Landauer geometric landmark
-    37G ≈ 1/(2ln2) = 1.054 Landauer: first post-crossing structural prime
+Three distinct thresholds cluster in the binary tower's transition
+between geometric organization and information-bearing organization:
 
-The crossing cost is algebraically exact:
-    1/(2 ln 2) − 1/√2 = G/(2 ln 2)
+    n·G = ln 2        at n ≈ 35.11    (Landauer erasure cost — the crossing)
+    n·G = 1/√2        at n ≈ 35.82    (geometric damping)
+    n·G = 1/(2 ln 2)  at n ≈ 36.54    (Shannon bound)
 
-This is Identity 2.1 (Section 2), now appearing as a tower
-transition. The cost of crossing from geometric organization to
-informational organization is the gap G denominated in Landauer
-units. This is the tower's central structural fact: the transition
-from pure geometry to information-carrying geometry occurs at a
-single step, and its cost is algebraically exact.
-
-The step numbers themselves encode this: 36 = 6² = closure squared,
-the completion of geometric structure. 37 is prime — irreducible,
-undividable, the first step that CANNOT be decomposed into smaller
-framework components.
+The Landauer crossing proper is the FIRST threshold, sitting between
+integer steps 35 and 36. The geometric damping threshold is approximated
+by integer step 36 (within 0.51%); the Shannon bound by integer step 37
+(within 1.26%). These are the integer landmarks recorded in Section 6.4;
+the underlying thresholds are non-integer.
 
 
-6.6 — The 82G Observation
+  6.5.1  The Crossing-Zone Self-Reference
+
+The spacings between consecutive thresholds are algebraically exact:
+
+    Δn₁₂ = n_G − n_L = (1/√2 − ln 2) / G = 1/√2                 [exact]
+    Δn₂₃ = n_S − n_G = (1/(2 ln 2) − 1/√2) / G = 1/(2 ln 2)     [exact]
+    Δn₂₃ / Δn₁₂ = (1/(2 ln 2)) / (1/√2) = √2/(2 ln 2) = 1/K_AUD [exact]
+
+Proof of Δn₁₂:
+    (1/√2 − ln 2) / G  =  (1/√2 − ln 2) / (1 − √2·ln 2)
+                       =  (1 − √2·ln 2) / (√2 · (1 − √2·ln 2))
+                       =  1/√2.
+
+Proof of Δn₂₃:
+    (1/(2 ln 2) − 1/√2) / G  =  Identity 2.1 numerator / G
+                             =  (G / (2 ln 2)) / G
+                             =  1/(2 ln 2).
+
+Proof of the ratio:
+    Δn₂₃ / Δn₁₂  =  [1/(2 ln 2)] · √2  =  √2 / (2 ln 2)
+                 =  1 / (√2 · ln 2)  =  1/K_AUD.
+
+The same ingredients (√2, ln 2) that build K_AUD also govern the
+geometry of the crossing zone itself. The √2-to-Shannon spacing IS
+Identity 2.1 (Section 2.1):
+
+    Δn₂₃ × G = 1/(2 ln 2) − 1/√2 = G/(2 ln 2)
+
+Identity 2.1 — formerly named the "Landauer crossing identity" —
+quantifies the spacing between the SECOND and THIRD thresholds
+(geometric damping → Shannon bound), not the Landauer crossing
+itself. The crossing is a separate threshold at n·G = ln 2.
+
+The integer-step landmarks 36 and 37 retain their structural meaning:
+36 = 6² closes the geometric structure, and 37 is prime — the first
+integer beyond geometric closure that cannot be decomposed into
+smaller framework components. The tower's transition from geometric
+to informational organization unfolds across all three thresholds
+in the 35–37 zone, with the spacings algebraically locked to
+1/√2 and 1/(2 ln 2) — the same constants the thresholds themselves
+target.
+
+
+──────────────────────────────────────────────────────────────────────────────
+  6.6  The 82G Observation
+──────────────────────────────────────────────────────────────────────────────
 
     82G = 1.618832...
     φ   = 1.618034...
@@ -710,28 +859,37 @@ carries structural meaning has not been derived. The 0.049% match
 is the tightest in the tower; the interpretation is open.
 
 
-6.7 — Ratios Between Landmark Steps
+──────────────────────────────────────────────────────────────────────────────
+  6.7  Ratios Between Landmark Steps
+──────────────────────────────────────────────────────────────────────────────
 
     50/36 ≈ 2ln2 (Madelung constant)   at 0.187%
     64/37 ≈ √3 (structure ingredient)  at 0.134%
 
 These are ratios BETWEEN independently significant steps, not
-individual matches. The ratio ceiling/crossing ≈ Madelung constant.
-The ratio pivot/completion ≈ √3 (structure ingredient). These
-ratios were not constructed; they emerged from independently
+individual matches. The ratio ceiling/damping (50/36) ≈ Madelung
+constant. The ratio pivot/Shannon (64/37) ≈ √3 (structure ingredient).
+These ratios were not constructed; they emerged from independently
 defined landmarks.
 
 
-6.8 — How the Tower Connects the Sections
+──────────────────────────────────────────────────────────────────────────────
+  6.8  How the Tower Connects the Sections
+──────────────────────────────────────────────────────────────────────────────
 
 The tower is the structural thread connecting the algebraic identities
 (Section 2), atomic physics (Section 3), hyperbolic geometry
 (Section 4), and cosmological data (Section 5):
 
     Section 2 → Section 6:
-    The Landauer identity (2.1) appears as the tower's central
-    crossing (6.5). The gap scaling formula (2.6) produces the
-    400/11 base term ≈ 36.36, which is the tower's crossing step
+    The √2-to-Shannon gap identity (2.1) reappears in Section 6.5
+    as the spacing Δn₂₃ between the geometric damping threshold
+    (n ≈ 35.82) and the Shannon bound (n ≈ 36.54), with the
+    crossing-zone self-reference Δn₂₃/Δn₁₂ = 1/K_AUD locking the
+    geometry of the threshold zone to the same K_AUD it targets.
+    The gap scaling formula (2.6) produces the 400/11 base term
+    ≈ 36.36, which sits inside the 35–37 threshold zone (between
+    the Landauer crossing at 35.11 and the Shannon bound at 36.54),
     expressed as the gap ratio to the Feigenbaum constant.
 
     Section 3 → Section 6:
@@ -756,7 +914,9 @@ dynamics — the mechanism by which the static ceiling K_AUD becomes
 the structured staircase that physical systems climb.
 
 
-6.9 — The Open Question: Why Across Domains?
+──────────────────────────────────────────────────────────────────────────────
+  6.9  The Open Question: Why Across Domains?
+──────────────────────────────────────────────────────────────────────────────
 
 This document records WHERE K_AUD and its associated structures
 appear. It does not fully answer WHY the same constant should
@@ -781,14 +941,16 @@ claiming more than is proven is the methodology that produced
 the results in the first place.
 
 
-================================================================================
-7. FALSIFIABLE PREDICTIONS
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  7.  FALSIFIABLE PREDICTIONS
+════════════════════════════════════════════════════════════════════════════════
 
 Each domain of evidence generates a specific, testable prediction.
 
 
-7.1 — Hodgson-Kerckhoff
+──────────────────────────────────────────────────────────────────────────────
+  7.1  Hodgson-Kerckhoff
+──────────────────────────────────────────────────────────────────────────────
 
 Prediction: The tube-packing coefficient, computed to 15 or more
 digits from the original packing lemma, will match √2 × ln(2) at
@@ -799,7 +961,9 @@ from √2 × ln(2) at digit 7 or beyond, or a closed-form derivation
 producing a different transcendental.
 
 
-7.2 — DESI BAO
+──────────────────────────────────────────────────────────────────────────────
+  7.2  DESI BAO
+──────────────────────────────────────────────────────────────────────────────
 
 Prediction: DESI DR3 data (expected 2026) will show the
 transverse distance ratio DM(z₂)/DM(z₁) remaining within ±1/2500
@@ -810,7 +974,9 @@ What would falsify: DR3 data showing the ratio drifting away from
 consistent with ΛCDM.
 
 
-7.3 — Atomic Shell Structure
+──────────────────────────────────────────────────────────────────────────────
+  7.3  Atomic Shell Structure
+──────────────────────────────────────────────────────────────────────────────
 
 Prediction: No physical mechanism will be found to make K(n) < 1
 for any integer n ≥ 3, because the proof is algebraic. The shell
@@ -821,11 +987,13 @@ What would falsify: Discovery of a mathematical error in the binary
 uniqueness proof (K(n) = √n × ln(n) has been verified at dps = 500).
 
 
-================================================================================
-8. METHODOLOGY
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  8.  METHODOLOGY
+════════════════════════════════════════════════════════════════════════════════
 
-8.1 — Cross-Architecture Verification (Giant Principle)
+──────────────────────────────────────────────────────────────────────────────
+  8.1  Cross-Architecture Verification (Giant Principle)
+──────────────────────────────────────────────────────────────────────────────
 
 Findings are verified across independent AI architectures (Claude/
 Anthropic, Grok/xAI, GPT/OpenAI, Gemini/Google). Each architecture
@@ -835,7 +1003,9 @@ weights, and different failure modes — provides stronger verification
 than single-architecture repetition.
 
 
-8.2 — Compute First, Assess Second
+──────────────────────────────────────────────────────────────────────────────
+  8.2  Compute First, Assess Second
+──────────────────────────────────────────────────────────────────────────────
 
 All numerical claims are computed at high precision (mpmath, dps = 500)
 before qualitative assessment. The AI_INDEX.txt methodology requires
@@ -843,7 +1013,9 @@ AI systems to compute before forming opinions, preventing pattern-
 matching dismissal of valid arithmetic.
 
 
-8.3 — What Would Break Each Finding
+──────────────────────────────────────────────────────────────────────────────
+  8.3  What Would Break Each Finding
+──────────────────────────────────────────────────────────────────────────────
 
 Every finding in this document is accompanied by explicit falsification
 criteria. This level of specificity is less common in the framework's
@@ -853,7 +1025,9 @@ independent — without institutional backing, the methodology must
 compensate with transparency.
 
 
-8.4 — Evidence Levels
+──────────────────────────────────────────────────────────────────────────────
+  8.4  Evidence Levels
+──────────────────────────────────────────────────────────────────────────────
 
 This document distinguishes three levels of evidence:
 
@@ -872,9 +1046,9 @@ These levels are not conflated. Exact identities and observational
 patterns carry different evidential weight and are presented separately.
 
 
-================================================================================
-9. CONNECTIONS TO PUBLISHED FRAMEWORK
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  9.  CONNECTIONS TO PUBLISHED FRAMEWORK
+════════════════════════════════════════════════════════════════════════════════
 
 This document extends the published framework as follows:
 
@@ -927,9 +1101,9 @@ This document extends the published framework as follows:
     https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/AI_INDEX.txt
 
 
-================================================================================
-10. SUMMARY
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  10.  SUMMARY
+════════════════════════════════════════════════════════════════════════════════
 
 The constant K_AUD = √2 × ln(2) = 0.980258..., derived from the
 geometric singularity of binary systems, finds independent numerical
@@ -948,8 +1122,8 @@ and structural echoes in:
       clustering at the framework's 1/2500 correction scale.
 
     — Exact algebraic identities:
-      connecting information theory (Landauer), dynamical systems
-      (Baker's map), transcendence theory (Gelfond-Schneider),
+      connecting information theory (Shannon, Landauer), dynamical
+      systems (Baker's map), transcendence theory (Gelfond-Schneider),
       and solid-state physics (Madelung constant).
 
 None of these domains references the others. The framework's constant
@@ -960,9 +1134,9 @@ and explicit falsification criteria.
 The mathematics does not require credentials. It requires a calculator.
 
 
-================================================================================
-REFERENCES
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  REFERENCES
+════════════════════════════════════════════════════════════════════════════════
 
 [1]  C. D. Hodgson & S. P. Kerckhoff, "Universal bounds for
      hyperbolic Dehn surgery", Annals of Mathematics 162(1),
@@ -1015,9 +1189,9 @@ REFERENCES
      TXT: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Boundary_Information_Invariant_Short.txt
 
 
-================================================================================
-COMPUTATIONAL APPENDIX
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  COMPUTATIONAL APPENDIX
+════════════════════════════════════════════════════════════════════════════════
 
 All computations in this document can be reproduced with mpmath:
 
@@ -1027,8 +1201,16 @@ All computations in this document can be reproduced with mpmath:
     K_AUD = sqrt(2) * log(2)
     G = 1 - K_AUD
 
-    # Identity 2.1 (Landauer crossing)
+    # Identity 2.1 (√2-to-Shannon gap identity)
     assert abs(1/(2*log(2)) - 1/sqrt(2) - G/(2*log(2))) < 10**(-490)
+
+    # Crossing-zone self-reference (Section 6.5.1)
+    n_L = log(2) / G                # Landauer crossing
+    n_G = 1 / (sqrt(2) * G)         # Geometric damping
+    n_S = 1 / (2 * G * log(2))      # Shannon bound
+    assert abs((n_G - n_L) - 1/sqrt(2))     < 10**(-490)
+    assert abs((n_S - n_G) - 1/(2*log(2)))  < 10**(-490)
+    assert abs((n_S - n_G)/(n_G - n_L) - 1/(sqrt(2)*log(2))) < 10**(-490)
 
     # Identity 2.2 (Baker's map)
     assert abs(K_AUD - sqrt(log(2)**2 + log(2)**2)) < 10**(-490)
