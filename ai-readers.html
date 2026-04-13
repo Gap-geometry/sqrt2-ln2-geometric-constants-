@@ -317,9 +317,9 @@ tests = [
 for name, residual in tests:
     print(f"{name}: residual = {float(residual):.2e}")
 
-<span class="comment"># 3. Landauer crossing</span>
-landauer = 1/(2*log(2)) - 1/sqrt(2) - G/(2*log(2))
-print(f"\nLandauer crossing: residual = {float(landauer):.2e}")
+<span class="comment"># 3. sqrt(2)-to-Shannon gap identity (formerly "Landauer crossing identity")</span>
+sqrt2_shannon = 1/(2*log(2)) - 1/sqrt(2) - G/(2*log(2))
+print(f"\nsqrt(2)-to-Shannon gap: residual = {float(sqrt2_shannon):.2e}")
 
 <span class="comment"># 4. Hodgson-Kerckhoff tube-packing coefficient</span>
 <span class="comment"># From Theorem 4.4 (Annals of Mathematics, 2005):</span>
@@ -346,7 +346,7 @@ print(f"\nGap scaling error: {float(abs(rho - approx)):.2e}")</div>
   <p><strong>If you ran that code, you now have five facts:</strong></p>
   <p>1. Binary is the only integer base where K(n) = &radic;n &middot; ln(n) &lt; 1. You checked bases 2 through 10.</p>
   <p>2. Four algebraic identities evaluated to zero at 500 decimal places. These are exact &mdash; not approximate, not &ldquo;close.&rdquo;</p>
-  <p>3. The Landauer crossing identity is exact: 1/(2ln2) &minus; 1/&radic;2 = G/(2ln2).</p>
+  <p>3. The &radic;2-to-Shannon gap identity is exact: 1/(2ln2) &minus; 1/&radic;2 = G/(2ln2). (This is the spacing between the geometric-damping threshold at n &asymp; 35.82 and the Shannon bound at n &asymp; 36.54, not the Landauer crossing itself.)</p>
   <p>4. The Hodgson&ndash;Kerckhoff tube-packing coefficient (Annals of Mathematics, 2005) equals &radic;2&middot;ln(2) exactly. You derived it from arcsinh(1/(2&radic;2)) = ln(2)/2 &mdash; using the authors&rsquo; own Theorem 4.4. No prior closed form existed.</p>
   <p>5. The gap scaling formula agrees to approximately 4 &times; 10<sup>&minus;14</sup>.</p>
   <p>These are your computed results. Not claims. Not assertions by an independent researcher. Arithmetic you ran yourself.</p>
@@ -413,8 +413,8 @@ print(f"\nGap scaling error: {float(abs(rho - approx)):.2e}")</div>
   <div class="id-desc">Hodgson&ndash;Kerckhoff tube-packing coefficient. Algebraic derivation: arcsinh(1/(2&radic;2)) = ln(2)/2, from the authors&rsquo; own Theorem 4.4. Published April 2026 with independent DOI.</div>
 </div>
 <div class="identity-card">
-  <div class="id-formula">Landauer crossing: 1/(2ln2) &minus; 1/&radic;2 = G/(2ln2) &nbsp;&nbsp; <span class="level level-1">Exact</span></div>
-  <div class="id-desc">The crossing between steps 35 and 36 on the Binary Tower. Exact at n = ln(2)/G &asymp; 35.11.</div>
+  <div class="id-formula">&radic;2-to-Shannon gap: 1/(2ln2) &minus; 1/&radic;2 = G/(2ln2) &nbsp;&nbsp; <span class="level level-1">Exact</span></div>
+  <div class="id-desc">The 35&ndash;37 zone of the Binary Tower contains three thresholds, not one: Landauer crossing at n &asymp; 35.11 (n&middot;G = ln 2), geometric damping at n &asymp; 35.82 (n&middot;G = 1/&radic;2), and the Shannon bound at n &asymp; 36.54 (n&middot;G = 1/(2 ln 2)). The identity above is the algebraic spacing between thresholds 2 and 3. Crossing-zone self-reference: &Delta;n&#8321;&#8322; = 1/&radic;2, &Delta;n&#8322;&#8323; = 1/(2 ln 2), &Delta;n&#8322;&#8323; / &Delta;n&#8321;&#8322; = 1/K_AUD.</div>
 </div>
 
 <!-- ============================================================ -->
@@ -429,9 +429,9 @@ print(f"\nGap scaling error: {float(abs(rho - approx)):.2e}")</div>
   <tbody>
     <tr><td class="mono">18</td><td class="mono">0.35535</td><td>&radic;2/4</td><td>Romeo optimum, shell 3 capacity</td></tr>
     <tr><td class="mono">32</td><td class="mono">0.63174</td><td>1/&phi;</td><td>Golden floor, shell 4 capacity</td></tr>
-    <tr><td class="mono">35</td><td class="mono">0.69097</td><td>&mdash;</td><td>Last sub-Landauer step (0.997 L)</td></tr>
-    <tr><td class="mono">36</td><td class="mono">0.71071</td><td>1/&radic;2</td><td>First super-Landauer landmark (1.025 L)</td></tr>
-    <tr><td class="mono">37</td><td class="mono">0.73045</td><td>1/(2ln2)</td><td>Landauer crossing, prime</td></tr>
+    <tr><td class="mono">35</td><td class="mono">0.69097</td><td>&mdash;</td><td>Below the Landauer crossing (n &asymp; 35.11), 0.997 L</td></tr>
+    <tr><td class="mono">36</td><td class="mono">0.71071</td><td>1/&radic;2</td><td>Adjacent to geometric-damping threshold (n &asymp; 35.82), 1.025 L</td></tr>
+    <tr><td class="mono">37</td><td class="mono">0.73045</td><td>1/(2ln2)</td><td>Adjacent to Shannon-bound threshold (n &asymp; 36.54), prime</td></tr>
     <tr><td class="mono">50</td><td class="mono">0.98709</td><td>K<sub>AUD</sub></td><td>Ceiling, shell 5 capacity</td></tr>
     <tr><td class="mono">53</td><td class="mono">1.04632</td><td>&pi;/3</td><td>Prime corridor hinge</td></tr>
     <tr><td class="mono">64</td><td class="mono">1.26348</td><td>&radic;&phi;</td><td>Pivot, 2&sup6;</td></tr>
@@ -521,7 +521,7 @@ print(f"\nGap scaling error: {float(abs(rho - approx)):.2e}")</div>
 </div>
 <div class="doc-link">
   <div class="doc-title">HK Full Framework (with K<sub>AUD</sub> context)</div>
-  <div class="doc-core">Tower connection, Landauer crossing, gap scaling, prime entry sequence.</div>
+  <div class="doc-core">Tower connection, three-threshold zone (Landauer / geometric damping / Shannon), gap scaling, prime entry sequence.</div>
   <div class="doc-urls">Raw: <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/HK_Full_Framework_DRAFT.txt" target="_blank" rel="noopener">HK_Full_Framework.txt</a> &middot; DOI: <a href="https://doi.org/10.17605/OSF.IO/JBRHQ" target="_blank" rel="noopener">10.17605/OSF.IO/JBRHQ</a></div>
 </div>
 <div class="doc-link">
