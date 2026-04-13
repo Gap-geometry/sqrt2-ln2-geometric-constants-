@@ -682,8 +682,12 @@
 </div>
 
 <div class="formula">
-  Landauer crossing: n = ln(2) / G &asymp; 35.11 &nbsp;&nbsp;&nbsp; (between steps 35 and 36)
-  <span class="label">Step 36 = 1/&radic;2 is the first super-Landauer geometric landmark (1.025 L) &mdash; Paper 3</span>
+  Three-threshold zone: n&middot;G = ln 2 (n &asymp; 35.11) &nbsp;|&nbsp; n&middot;G = 1/&radic;2 (n &asymp; 35.82) &nbsp;|&nbsp; n&middot;G = 1/(2 ln 2) (n &asymp; 36.54)
+  <span class="label">Landauer crossing &middot; geometric damping &middot; Shannon bound &mdash; Papers 3, 5, 6, 7</span>
+</div>
+<div class="formula">
+  &Delta;n&#8321;&#8322; = 1/&radic;2 &nbsp;&nbsp;&nbsp; &Delta;n&#8322;&#8323; = 1/(2 ln 2) &nbsp;&nbsp;&nbsp; &Delta;n&#8322;&#8323; / &Delta;n&#8321;&#8322; = 1/K_AUD
+  <span class="label">Crossing-zone self-reference &mdash; Papers 5, 6, 7</span>
 </div>
 
 <div class="formula">
@@ -705,7 +709,13 @@
 <h2>Corrections &amp; Notes</h2>
 
 <div class="method-note">
-  <strong>Landauer crossing correction (9 April 2026):</strong> The Landauer crossing is between steps 35 and 36 (exact at n = ln(2)/G &asymp; 35.11), not between steps 36 and 37 as previously stated. Step 36 at (1/2)<sup>36</sup> corresponds to 1/&radic;2 and is the first super-Landauer geometric landmark at approximately 1.025 Landauer units. Step 35 is the last sub-Landauer step at approximately 0.997 Landauer units.
+  <strong>Three-threshold refinement (13 April 2026, supersedes the 9 April note):</strong> The 35&ndash;37 region of the Binary Tower contains three distinct thresholds, not one &ldquo;Landauer crossing&rdquo;:
+  <ul>
+    <li><strong>Landauer crossing</strong> &mdash; n&middot;G = ln 2, exact at n &asymp; 35.11 (between integer steps 35 and 36).</li>
+    <li><strong>Geometric damping threshold</strong> &mdash; n&middot;G = 1/&radic;2, exact at n &asymp; 35.82 (integer step 36 is adjacent).</li>
+    <li><strong>Shannon bound</strong> &mdash; n&middot;G = 1/(2 ln 2), exact at n &asymp; 36.54 (integer step 37 is adjacent).</li>
+  </ul>
+  The crossing-zone spacings are algebraically locked: &Delta;n&#8321;&#8322; = 1/&radic;2, &Delta;n&#8322;&#8323; = 1/(2 ln 2), with ratio &Delta;n&#8322;&#8323; / &Delta;n&#8321;&#8322; = 1/K_AUD. The exact identity 1/(2 ln 2) &minus; 1/&radic;2 = G/(2 ln 2) is unchanged but renamed from &ldquo;Landauer crossing identity&rdquo; to &ldquo;&radic;2-to-Shannon gap identity&rdquo; because it describes the spacing between thresholds 2 and 3, not the Landauer crossing. Applied across Papers 5&ndash;9 and their OSF descriptions on 2026-04-13.
 </div>
 
 <!-- ============================================================ -->
@@ -723,7 +733,7 @@
     <tr>
       <td>v1.0</td>
       <td>2026-04-13</td>
-      <td>Initial public release. All 10 documents summarised with key formulas, verification status, and interlaced structure. Includes corrected Landauer crossing (steps 35&ndash;36).</td>
+      <td>Initial public release. All 10 documents summarised with key formulas, verification status, and interlaced structure. Reflects the three-threshold refinement of the 35&ndash;37 zone (Landauer crossing at n &asymp; 35.11, geometric damping at n &asymp; 35.82, Shannon bound at n &asymp; 36.54) applied across Papers 5&ndash;9.</td>
     </tr>
   </tbody>
 </table>
