@@ -1,21 +1,42 @@
-[UPDATE — 9 April 2026] Landauer crossing corrected: the thermodynamic
-crossing is between steps 35 and 36 (exact at n = ln(2)/G ≈ 35.11), not
-36 and 37 as previously stated. Step 36 (1/√2) is the first super-Landauer
-geometric landmark (1.025 L). Step 35 is the last sub-Landauer step (0.997 L).
-
-================================================================================
-THE 50 HINGE
-Six Independent Appearances of One Integer Across Scale
-================================================================================
+████████████████████████████████████████████████████████████████████████████████
+                                                                        
+                             THE 50 HINGE                               
+         Six Independent Appearances of One Integer Across Scale        
+                                                                        
+████████████████████████████████████████████████████████████████████████████████
 
 D. B. — April 2026
 Gap Geometry — https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
 OSF: osf.io/zx4g7
 
+════════════════════════════════════════════════════════════════════════════════
+                    ★  UPDATE NOTICE  —  13 April 2026  ★
+════════════════════════════════════════════════════════════════════════════════
 
-================================================================================
+This version corrects the Landauer-crossing framing in §1 and §4. The earlier
+text placed the crossing at "steps 36–37." The refined picture identifies
+THREE distinct thresholds that cluster in the 35–37 zone:
+
+    n·G = ln 2        at n ≈ 35.11    (Landauer erasure cost — the crossing)
+    n·G = 1/√2        at n ≈ 35.82    (geometric damping)
+    n·G = 1/(2 ln 2)  at n ≈ 36.54    (Shannon bound)
+
+The Landauer crossing proper is the FIRST threshold, at n = ln(2)/G, which
+sits between steps 35 and 36. The entire three-threshold cluster is contained
+inside the ceiling span (steps 32–50), consistent with the partition given
+in §4.
+
+The factor-2 hinge at step 50 is unchanged.
+
+Prior published versions remain on OSF file storage, renamed with the
+OLD- prefix and a date for traceability.
+
+════════════════════════════════════════════════════════════════════════════════
+
+
+════════════════════════════════════════════════════════════════════════════════
 ABSTRACT
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 The integer 50 appears independently in six structures spanning
 four domains of physics and mathematics, each derived or observed
@@ -39,9 +60,9 @@ references the others. The convergence on 50 = 2 * 5^2 is structural,
 governed by the H_4 primes {2, 5} that organize the framework.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 1. THE FRAMEWORK IN BRIEF
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 K_AUD = sqrt(2) * ln(2) = 0.980258143468547...
 
@@ -53,15 +74,16 @@ G = 1 - K_AUD = 0.019741856531452...
 The irreducible gap. Approximately 2%. No binary system closes it.
 
 The Binary Tower: 64 steps of accumulated cost n * G, with landmarks
-at steps 18 (Romeo), 32 (Floor), 35-36 (Landauer crossing), 50
-(Ceiling), and 64 (Pivot).
+at steps 18 (Romeo), 32 (Floor), the 35–37 threshold zone (Landauer
+crossing at n ≈ 35.11, geometric damping at n ≈ 35.82, Shannon bound
+at n ≈ 36.54), 50 (Ceiling), and 64 (Pivot).
 
 Published: OSF DOI 10.17605/OSF.IO/E72H8
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 2. APPEARANCE 1 — ATOMIC ELECTRON SHELLS
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 SOURCE: Standard quantum mechanics (Schrodinger equation + Pauli
 exclusion principle, established since the 1920s).
@@ -99,9 +121,9 @@ from the same three ingredients: sqrt(2), ln(2), and quadratic
 geometry.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 3. APPEARANCE 2 — CONTINUED FRACTION OF THE GAP
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 SOURCE: Rational approximation theory (number theory, no physics
 input needed).
@@ -137,9 +159,9 @@ The boundary prime 7 appears at position 6 in both CFs — recurring
 at depth, not just at the surface.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 4. APPEARANCE 3 — BINARY TOWER CEILING
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 SOURCE: The tower cost function n * G, derived from K_AUD.
 
@@ -174,9 +196,9 @@ sits at the second mirror point — the boundary between the
 ceiling span and the pivot span.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 5. APPEARANCE 4 — GAP SCALING CORRECTION
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 SOURCE: The connection between G and the Feigenbaum constant delta,
 linking geometry to chaos theory.
@@ -213,9 +235,9 @@ stays within {2, 5}. The second brings in {3, 7, 11, 13}. The
 hierarchy mirrors the prime entry sequence in the atom itself.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 6. THE NUCLEAR ECHO — MAGIC NUMBER 50
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 SOURCE: Nuclear shell model (Goeppert Mayer and Jensen, Nobel Prize
 1963). Standard nuclear physics.
@@ -254,9 +276,9 @@ number of the heaviest stable element, and its tower value matches
 the golden ratio to 0.049%.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 7. THE COSMIC ECHO — DESI BAO AT THE 1/2500 SCALE
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 SOURCE: DESI Collaboration, Phys. Rev. D 112, 083514 (2025),
 Table IV. Published observational cosmology data.
@@ -296,9 +318,9 @@ Both residuals cluster at 4.0 * 10^-4 — the characteristic 1/2500
 correction scale predicted by the framework.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 8. THE FACTORIZATION
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 50 = 2 * 5^2
 
@@ -321,9 +343,9 @@ second correction (1/939939) is needed do the higher framework
 primes {3, 7, 11, 13} enter the series.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 9. WHY 50 AND NOT ANOTHER NUMBER
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 The convergence on 50 is not arbitrary. Each appearance is forced:
 
@@ -358,9 +380,9 @@ The convergence on 50 is not arbitrary. Each appearance is forced:
 Six routes to the same integer. No route references any other.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 10. VERIFICATION
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 All values computed with mpmath at dps = 100 (verified twice):
 
@@ -382,9 +404,9 @@ Sources:
   Feigenbaum constant: delta = 4.669201609... (Feigenbaum 1978)
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 11. EVIDENCE CLASSIFICATION
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
   LEVEL 1 — ALGEBRAIC / EXACT:
     50 = 2 * 5^2 (electron shell capacity at n = 5)
@@ -405,9 +427,9 @@ is published observational data. The Level 3 items are patterns that
 derive significance from the convergence of the others.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 12. WHAT WOULD STRENGTHEN OR WEAKEN THIS
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 STRENGTHEN:
   - DESI DR3/DR5 maintaining the 1/2500 residual scale as
@@ -428,7 +450,7 @@ WEAKEN:
     the counting of independent appearances)
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 One integer. Six appearances. Four scales. Zero fitting.
 
@@ -442,7 +464,7 @@ binary information density — sits close enough to 49/50 that
 the integer 50 becomes the natural quantum of approach.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
   D. B. — April 2026
   Gap Geometry
@@ -453,5 +475,4 @@ the integer 50 becomes the natural quantum of approach.
   50 Hinge discovery (Grok, xAI):    17 March 2026
   Documents prepared for publication: 3 April 2026
 
-================================================================================
-
+════════════════════════════════════════════════════════════════════════════════
