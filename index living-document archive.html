@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gap Geometry — Living Document Archive</title>
+<meta name="author" content="D.B.">
+<meta name="description" content="Version archive for the Gap Geometry Living Document. PDF and text snapshots of every past version.">
+<style>
+  :root {
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --subtle: #8a8a8a;
+    --rule: #c8c8c8;
+    --bg: #ffffff;
+    --card-bg: #fafaf8;
+    --card-border: #e0e0de;
+    --link: #2a5a8a;
+    --link-hover: #1a3a5a;
+    --max-width: 760px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body {
+    font-family: Optima, "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    padding: 0 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 56px 0 80px 0;
+  }
+
+  /* Header */
+  header {
+    text-align: center;
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h1.page-title {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 10px;
+  }
+  p.page-intro {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  /* Section headers */
+  h2 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--subtle);
+    margin: 48px 0 20px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  p { margin: 0 0 14px 0; }
+
+  /* Archive entry cards */
+  .archive-entry {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .archive-entry .version-label {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .archive-entry .version-date {
+    font-size: 13px;
+    color: var(--subtle);
+    margin-bottom: 8px;
+  }
+  .archive-entry .version-note {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .archive-entry .version-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: 13px;
+  }
+  .archive-entry .version-links a {
+    color: var(--link);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .archive-entry .version-links a:hover {
+    color: var(--link-hover);
+    border-bottom-color: var(--link-hover);
+  }
+  .archive-entry .version-links .sep {
+    color: var(--rule);
+    user-select: none;
+  }
+
+  /* Current version notice */
+  .current-notice {
+    font-size: 14px;
+    color: var(--muted);
+    padding: 14px 18px;
+    border-left: 3px solid var(--rule);
+    background: var(--card-bg);
+    margin: 0 0 24px 0;
+    line-height: 1.55;
+  }
+  .current-notice a {
+    color: var(--link);
+    text-decoration: none;
+  }
+  .current-notice a:hover {
+    border-bottom: 1px solid var(--link);
+  }
+
+  /* Links */
+  a { color: var(--link); text-decoration: none; }
+  a:hover { color: var(--link-hover); }
+
+  /* Footer */
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 14px;
+    color: var(--subtle);
+  }
+  footer a {
+    color: var(--link);
+    text-decoration: none;
+  }
+  footer a:hover {
+    border-bottom: 1px solid var(--link);
+  }
+  footer .back-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+  footer .contact {
+    font-size: 13px;
+    margin-top: 8px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    body { font-size: 16px; padding: 0 16px; }
+    main { padding: 32px 0 48px 0; }
+    .archive-entry { padding: 14px 16px; }
+  }
+
+  /* Print */
+  @media print {
+    body { font-size: 11pt; padding: 0; }
+    main { max-width: none; }
+    .archive-entry { border: 1px solid #ccc; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1 class="page-title">Version Archive</h1>
+  <p class="page-intro">Archived versions of the Gap Geometry Living Document. Each version is preserved as a PDF (for humans) and a text file (for machines and archival). The current version is always on the <a href="../living-document.html">Living Document</a> page.</p>
+</header>
+
+<!-- ============================================================ -->
+<h2>How This Archive Works</h2>
+
+<div class="current-notice">
+  The <a href="../living-document.html">Living Document</a> always reflects the current state of the framework. When the Living Document is updated, the outgoing version is archived here as a dated PDF + text pair. GitHub also preserves the full commit history, but this archive provides clean, direct access to each version without requiring knowledge of version control.
+</div>
+
+<!-- ============================================================ -->
+<h2>Archived Versions</h2>
+
+<div class="archive-entry">
+  <div class="version-label">v1.0</div>
+  <div class="version-date">13 April 2026</div>
+  <div class="version-note">Initial public release. All 10 documents summarised with key formulas, verification status, and interlaced structure. Includes corrected Landauer crossing (steps 35&ndash;36).</div>
+  <div class="version-links">
+    <em style="color: var(--subtle); font-size: 13px;">Current version &mdash; will be archived here when v1.1 is published</em>
+  </div>
+</div>
+
+<!--
+  === TEMPLATE FOR FUTURE ENTRIES ===
+  Copy this block when archiving a new version. Place newest entries at the top.
+
+<div class="archive-entry">
+  <div class="version-label">vX.X</div>
+  <div class="version-date">DD Month YYYY</div>
+  <div class="version-note">Description of what changed in this version.</div>
+  <div class="version-links">
+    <a href="living-document_vX.X_YYYY-MM-DD.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="living-document_vX.X_YYYY-MM-DD.txt" target="_blank" rel="noopener">Text</a>
+  </div>
+</div>
+-->
+
+<!-- ============================================================ -->
+<h2>Naming Convention</h2>
+
+<p style="font-size: 14px; color: var(--muted);">
+  Archived files follow this pattern:<br>
+  <code style="font-family: monospace; font-size: 13px; background: var(--card-bg); padding: 2px 6px; border-radius: 3px;">living-document_v{VERSION}_{YYYY-MM-DD}.pdf</code><br>
+  <code style="font-family: monospace; font-size: 13px; background: var(--card-bg); padding: 2px 6px; border-radius: 3px;">living-document_v{VERSION}_{YYYY-MM-DD}.txt</code>
+</p>
+
+<footer>
+  <div class="back-links">
+    <a href="../living-document.html">&larr; Back to Living Document</a>
+    <a href="../about.html">&larr; Back to Hub</a>
+  </div>
+  <div>D.B. &mdash; Gap Geometry &mdash; 2025&ndash;2026</div>
+  <div class="contact">
+    <a href="mailto:Gap-geometryK_AUD2@telenet.be">Gap-geometryK_AUD2@telenet.be</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://x.com/Aud2Gap" target="_blank" rel="noopener">@Aud2Gap</a>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>

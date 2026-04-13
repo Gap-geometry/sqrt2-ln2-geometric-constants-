@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gap Geometry — Living Document</title>
+<meta name="author" content="D.B.">
+<meta name="description" content="Living overview of the Gap Geometry framework: summaries, formulas, verification status, and interlaced structure of all published documents.">
+<style>
+  :root {
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --subtle: #8a8a8a;
+    --rule: #c8c8c8;
+    --bg: #ffffff;
+    --card-bg: #fafaf8;
+    --card-border: #e0e0de;
+    --link: #2a5a8a;
+    --link-hover: #1a3a5a;
+    --verified: #2a6e3f;
+    --conjectural: #8a6a1a;
+    --open: #5a5a8a;
+    --max-width: 760px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body {
+    font-family: Optima, "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    padding: 0 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 56px 0 80px 0;
+  }
+
+  /* Header */
+  header {
+    text-align: center;
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h1.page-title {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 10px;
+  }
+  p.page-intro {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 16px auto;
+  }
+  .version-info {
+    font-size: 13px;
+    color: var(--subtle);
+  }
+
+  /* Section headers */
+  h2 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--subtle);
+    margin: 48px 0 20px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  /* Subsection headers */
+  h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 32px 0 10px 0;
+    color: var(--text);
+  }
+
+  /* Paragraphs */
+  p { margin: 0 0 14px 0; }
+  p.note {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  /* Formula blocks */
+  .formula {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 18px;
+    text-align: center;
+    padding: 14px 20px;
+    margin: 16px 0 20px 0;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    line-height: 1.5;
+  }
+  .formula .label {
+    font-family: Optima, "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 12px;
+    color: var(--subtle);
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* Status badges */
+  .status {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 8px;
+    border-radius: 3px;
+    vertical-align: middle;
+  }
+  .status-verified {
+    color: var(--verified);
+    background: #e6f4ea;
+    border: 1px solid #b7dfc2;
+  }
+  .status-conjectural {
+    color: var(--conjectural);
+    background: #fdf6e3;
+    border: 1px solid #e8d9a8;
+  }
+  .status-open {
+    color: var(--open);
+    background: #ededf4;
+    border: 1px solid #c8c8da;
+  }
+
+  /* Summary of Claims table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 24px 0;
+    font-size: 14px;
+  }
+  th, td {
+    border: 1px solid var(--card-border);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--card-bg);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  /* Document summary cards */
+  .doc-summary {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .doc-summary .doc-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .doc-summary .doc-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    flex: 1;
+  }
+  .doc-summary .doc-body {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .doc-summary .doc-body p { margin: 0 0 10px 0; }
+  .doc-summary .doc-body p:last-child { margin-bottom: 0; }
+  .doc-summary .key-result {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 16px;
+    color: var(--text);
+    padding: 8px 14px;
+    background: #fff;
+    border-left: 3px solid var(--card-border);
+    margin: 10px 0;
+  }
+  .doc-summary .doc-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: 13px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--card-border);
+  }
+  .doc-summary .doc-links a {
+    color: var(--link);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .doc-summary .doc-links a:hover {
+    color: var(--link-hover);
+    border-bottom-color: var(--link-hover);
+  }
+  .doc-summary .doc-links .sep {
+    color: var(--rule);
+    user-select: none;
+  }
+  .doc-summary .doc-doi {
+    font-size: 12px;
+    color: var(--subtle);
+    margin-top: 6px;
+  }
+  .doc-summary .doc-doi a {
+    color: var(--subtle);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--rule);
+  }
+  .doc-summary .doc-doi a:hover { color: var(--link); }
+
+  /* Links */
+  a { color: var(--link); text-decoration: none; }
+  a:hover { color: var(--link-hover); }
+
+  /* Method note box */
+  .method-note {
+    font-size: 14px;
+    color: var(--muted);
+    padding: 14px 18px;
+    border-left: 3px solid var(--rule);
+    background: var(--card-bg);
+    margin: 16px 0 24px 0;
+    line-height: 1.55;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 14px;
+    color: var(--subtle);
+  }
+  footer a {
+    color: var(--link);
+    text-decoration: none;
+  }
+  footer a:hover {
+    border-bottom: 1px solid var(--link);
+  }
+  footer .back-hub {
+    display: inline-block;
+    margin-bottom: 16px;
+    font-size: 15px;
+    color: var(--link);
+  }
+  footer .contact {
+    font-size: 13px;
+    margin-top: 8px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    body { font-size: 16px; padding: 0 16px; }
+    main { padding: 32px 0 48px 0; }
+    .doc-summary { padding: 16px 18px; }
+    .doc-summary .doc-head { flex-direction: column; }
+  }
+
+  /* Print */
+  @media print {
+    body { font-size: 11pt; padding: 0; }
+    main { max-width: none; }
+    .doc-summary { border: 1px solid #ccc; page-break-inside: avoid; }
+    .status { border: 1px solid #999; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1 class="page-title">Living Document</h1>
+  <p class="page-intro">A living overview of the Gap Geometry framework: core constants, structural claims, summaries of all published documents, and their interlaced formulas. This page evolves as the framework evolves.</p>
+  <div class="version-info">
+    Version 1.0 &mdash; Current as of 13 April 2026
+    &nbsp;&middot;&nbsp;
+    <a href="archive/index.html">Previous versions</a>
+  </div>
+</header>
+
+<!-- ============================================================ -->
+<h2>About This Page</h2>
+
+<p>This page is the public-facing living reference for the Gap Geometry framework. It provides summaries and key formulas for each published document, the verification status of each claim, and the interlaced structure of the work. It is intended for readers who want a substantive overview before reading the full documents, and for AI systems that need a structured, formula-rich entry point to the framework.</p>
+
+<div class="method-note">
+  <strong>How this page works.</strong> Each document summary includes its key result, verification status, and links to all available formats. Claims are marked <span class="status status-verified">Verified</span>, <span class="status status-conjectural">Conjectural</span>, or <span class="status status-open">Open</span>. Verified means independently reproducible to the stated precision using the verification protocol below. This page is updated when any document is revised or a new document is published. Older versions are archived as PDF + text pairs in the <a href="archive/index.html">version archive</a>.
+</div>
+
+<!-- ============================================================ -->
+<h2>Core Constants</h2>
+
+<div class="formula">
+  G &nbsp;=&nbsp; 1 &minus; &radic;2 &middot; ln(2) &nbsp;&asymp;&nbsp; 0.019741856&hellip;
+  <span class="label">The Gap constant &mdash; the residual when &radic;2&middot;ln(2) is subtracted from unity</span>
+</div>
+
+<div class="formula">
+  K<sub>AUD</sub> &nbsp;=&nbsp; &radic;2 &middot; ln(2) &nbsp;&asymp;&nbsp; 0.980258143&hellip;
+  <span class="label">The auditor constant &mdash; complement of G, so that G + K<sub>AUD</sub> = 1</span>
+</div>
+
+<p>These two constants are the foundation of the framework. G measures the gap between unity and the product &radic;2&middot;ln(2); K<sub>AUD</sub> is that product itself. Their complementarity (G + K<sub>AUD</sub> = 1) is exact, not approximate. All structural claims in the framework derive from the behavior of these constants across the Binary Tower.</p>
+
+<!-- ============================================================ -->
+<h2>Verification Protocol</h2>
+
+<div class="method-note">
+  All numerical claims in this framework are verified using <strong>mpmath</strong> (Python arbitrary-precision library) to a minimum of <strong>50 decimal digits</strong> unless otherwise stated. External references are source-checked against originals. Claims not meeting this bar are marked as conjectural. The protocol is pre-committed: the bar does not relax to accommodate a claim that fails to meet it.
+</div>
+
+<!-- ============================================================ -->
+<h2>Summary of Claims</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Claim</th>
+      <th>Status</th>
+      <th>Value / Key Result</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>G = 1 &minus; &radic;2&middot;ln(2)</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>&asymp; 0.019741856&hellip;</td>
+      <td>Papers 1, 2, 3</td>
+    </tr>
+    <tr>
+      <td>K<sub>AUD</sub> = &radic;2&middot;ln(2)</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>&asymp; 0.980258143&hellip;</td>
+      <td>Papers 1, 2, 3</td>
+    </tr>
+    <tr>
+      <td>G + K<sub>AUD</sub> = 1 (exact)</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>Algebraic identity</td>
+      <td>Paper 1</td>
+    </tr>
+    <tr>
+      <td>Binary Tower step structure</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>(1/2)<sup>n</sup> staircase with G-scaled residuals</td>
+      <td>Papers 1, 3</td>
+    </tr>
+    <tr>
+      <td>Prime corridor: 13, 23, 37, 53, 73</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>Structural primes along the tower</td>
+      <td>Papers 3, 7</td>
+    </tr>
+    <tr>
+      <td>&pi;/3 hinge at step 53</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>Corridor pivot point</td>
+      <td>Papers 3, 7</td>
+    </tr>
+    <tr>
+      <td>50 Hinge</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>Structural landmark at step 50</td>
+      <td>Paper 8</td>
+    </tr>
+    <tr>
+      <td>400/11 gap-scaling formula</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>&asymp; 36.363636&hellip;</td>
+      <td>Paper 4</td>
+    </tr>
+    <tr>
+      <td>Boundary Information Invariant</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>Invariant of quadratic systems</td>
+      <td>Paper 5</td>
+    </tr>
+    <tr>
+      <td>Landauer crossing at step ~35.11</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>ln(2)/G &asymp; 35.11; between steps 35&ndash;36</td>
+      <td>Paper 3</td>
+    </tr>
+    <tr>
+      <td>Binary scaling of &rho;</td>
+      <td><span class="status status-conjectural">Conjectural</span></td>
+      <td>Scaling behavior under investigation</td>
+      <td>Paper 9</td>
+    </tr>
+    <tr>
+      <td>HK closed-form coefficient</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>Closed form for Hodgson&ndash;Kerckhoff packing</td>
+      <td>HK Standalone</td>
+    </tr>
+    <tr>
+      <td>Cross-domain signatures of &radic;2&middot;ln(2)</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>Independent appearances across domains</td>
+      <td>Paper 6</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ============================================================ -->
+<h2>Foundation Papers</h2>
+<p class="note">Reading order: 1 &rarr; 2 &rarr; 3 &rarr; 4. These four papers establish the framework from first principles.</p>
+
+<div class="doc-summary">
+  <div class="doc-head">
+    <div class="doc-title">1. The Coherence Ceiling and the Geometric Singularity of Binary</div>
+    <span class="status status-verified">Verified</span>
+  </div>
+  <div class="doc-body">
+    <p>Introduces the Gap constant G = 1 &minus; &radic;2&middot;ln(2) and the auditor constant K<sub>AUD</sub> = &radic;2&middot;ln(2), establishing their exact complementarity. Defines the coherence ceiling as the boundary where binary representation meets the geometric structure of &radic;2 and ln(2). This is the foundational paper of the framework.</p>
+    <div class="key-result">
+      G = 1 &minus; &radic;2 &middot; ln(2) &asymp; 0.019741856&hellip; &nbsp;&nbsp;|&nbsp;&nbsp; K<sub>AUD</sub> = &radic;2 &middot; ln(2) &asymp; 0.980258143&hellip;
+    </div>
+  </div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper1_Coherence_Ceiling.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/5vz2r/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/5VZ2R" target="_blank" rel="noopener">10.17605/OSF.IO/5VZ2R</a></div>
+</div>
+
+<div class="doc-summary">
+  <div class="doc-head">
+    <div class="doc-title">2. Geometric Constants from H4 &mdash; Mathematical Framework v2.0</div>
+    <span class="status status-verified">Verified</span>
+  </div>
+  <div class="doc-body">
+    <p>Develops the mathematical framework connecting G and K<sub>AUD</sub> to the geometry of the H4 root system. Establishes the formal derivation path from the 600-cell and its projections to the constants observed in Paper 1. Provides the algebraic scaffolding that the Binary Tower is built on.</p>
+    <div class="key-result">
+      H4 root system &rarr; geometric projection &rarr; &radic;2 &middot; ln(2) as structural constant
+    </div>
+  </div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/sqrt2_ln2_geometric_constants_v2.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper2_Geometric_Constants_v2.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/sjbe9/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/sqrt2_ln2_geometric_constants_v2.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/SJBE9" target="_blank" rel="noopener">10.17605/OSF.IO/SJBE9</a></div>
+</div>
+
+<div class="doc-summary">
+  <div class="doc-head">
+    <div class="doc-title">3. Complete Framework v3.3</div>
+    <span class="status status-verified">Verified</span>
+  </div>
+  <div class="doc-body">
+    <p>The comprehensive statement of the framework. Introduces the Binary Tower as an operational instrument, the prime corridor (13, 23, 37, 53, 73), the &pi;/3 hinge at step 53, and the Landauer crossing between steps 35 and 36. Integrates the results of Papers 1 and 2 into a unified structure and establishes the verification protocol.</p>
+    <div class="key-result">
+      Prime corridor: 13 &rarr; 23 &rarr; 37 &rarr; 53 &rarr; 73 &nbsp;&nbsp;|&nbsp;&nbsp; &pi;/3 hinge at step 53 &nbsp;&nbsp;|&nbsp;&nbsp; Landauer crossing: ln(2)/G &asymp; 35.11
+    </div>
+  </div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/KAUD_Complete_Framework_v3_0.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper3_Complete_Framework_v3_3.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/qh5s2/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/KAUD_Complete_Framework_v3_0.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/QH5S2" target="_blank" rel="noopener">10.17605/OSF.IO/QH5S2</a></div>
+</div>
+
+<div class="doc-summary">
+  <div class="doc-head">
+    <div class="doc-title">4. Gap Scaling Across Domains: The 400/11 Formula</div>
+    <span class="status status-verified">Verified</span>
+  </div>
+  <div class="doc-body">
+    <p>Derives the 400/11 scaling formula (&asymp; 36.36) that governs how the gap constant G scales across domains. Demonstrates that this ratio is not an empirical fit but emerges from the algebraic structure of the framework. Connects gap scaling to the Landauer crossing region.</p>
+    <div class="key-result">
+      Gap scaling ratio = 400/11 &asymp; 36.363636&hellip;
+    </div>
+  </div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Gap_Scaling_Formula_v1.5.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper4_Gap_Scaling_400_11.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/c4gk5/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/Gap_Scaling_Formula_v1.5.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/C4GK5" target="_blank" rel="noopener">10.17605/OSF.IO/C4GK5</a></div>
+</div>
+
+<!-- ============================================================ -->
+<h2>Companion Papers</h2>
+<p class="note">These papers develop specific aspects of the framework. Each can be read independently but connects to the foundation.</p>
+
+<div class="doc-summary">
+  <div class="doc-head">
+    <div class="doc-title">5. The Boundary Information Invariant of Quadratic Systems</div>
+    <span class="status status-verified">Verified</span>
+  </div>
+  <div class="doc-body">
+    <p>Identifies and proves an invariant quantity associated with the boundary behavior of quadratic systems. Shows that this invariant connects to K<sub>AUD</sub> through the information-theoretic interpretation of the framework, bridging geometry and information theory.</p>
+    <div class="key-result">
+      Boundary Information Invariant &harr; K<sub>AUD</sub> = &radic;2 &middot; ln(2)
+    </div>
+  </div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Boundary_Information_Invariant_Short.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Boundary_Information_Invariant_Short.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/e72h8/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/Boundary_Information_Invariant_Short.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/E72H8" target="_blank" rel="noopener">10.17605/OSF.IO/E72H8</a></div>
+</div>
+
+<div class="doc-summary">
+  <div class="doc-head">
+    <div class="doc-title">6. Cross-Domain Signatures of &radic;2 &times; ln(2)</div>
+    <span class="status status-verified">Verified</span>
+  </div>
+  <div class="doc-body">
+    <p>Documents independent appearances of &radic;2&middot;ln(2) across different mathematical and physical domains. Serves as the front door to the framework for readers approaching from specific disciplines, showing that K<sub>AUD</sub> is not a construction but a recurrent structural constant.</p>
+    <div class="key-result">
+      &radic;2 &middot; ln(2) appears independently in: number theory, packing geometry, information theory, spectral analysis
+    </div>
+  </div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Cross_Domain_Signatures__26March2026.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Cross_Domain_Signatures.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/ra3uq/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/Cross_Domain_Signatures__26March2026.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/RA3UQ" target="_blank" rel="noopener">10.17605/OSF.IO/RA3UQ</a></div>
+</div>
+
+<div class="doc-summary">
+  <div class="doc-head">
+    <div class="doc-title">7. HK Full Framework (Hodgson&ndash;Kerckhoff with K<sub>AUD</sub> context)</div>
+    <span class="status status-verified">Verified</span>
+  </div>
+  <div class="doc-body">
+    <p>Places the Hodgson&ndash;Kerckhoff tube-packing coefficient within the K<sub>AUD</sub> framework. Demonstrates that the HK coefficient, previously known only numerically, has a closed-form expression that connects it to the prime corridor and the &pi;/3 hinge structure.</p>
+    <div class="key-result">
+      HK packing coefficient &harr; prime corridor (13, 23, 37, 53, 73) &harr; &pi;/3 hinge
+    </div>
+  </div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/HK_Full_Framework_DRAFT.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/HK_Full_Framework.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/jbrhq/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/HK_Full_Framework_DRAFT.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/JBRHQ" target="_blank" rel="noopener">10.17605/OSF.IO/JBRHQ</a></div>
+</div>
+
+<div class="doc-summary">
+  <div class="doc-head">
+    <div class="doc-title">8. The 50 Hinge</div>
+    <span class="status status-verified">Verified</span>
+  </div>
+  <div class="doc-body">
+    <p>Isolates the structural landmark at step 50 of the Binary Tower. Establishes its role as a hinge point distinct from the &pi;/3 hinge at step 53, and characterizes the structural behavior of the tower in the region between steps 50 and 53.</p>
+    <div class="key-result">
+      Step 50: structural hinge &nbsp;&nbsp;|&nbsp;&nbsp; Steps 50&ndash;53: critical transition region on the tower
+    </div>
+  </div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/50_Hinge_Standalone_DRAFT.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/50_Hinge_Standalone.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/fbd9a/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/50_Hinge_Standalone_DRAFT.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/FBD9A" target="_blank" rel="noopener">10.17605/OSF.IO/FBD9A</a></div>
+</div>
+
+<div class="doc-summary">
+  <div class="doc-head">
+    <div class="doc-title">9. Binary Scaling of &rho;</div>
+    <span class="status status-conjectural">Conjectural</span>
+  </div>
+  <div class="doc-body">
+    <p>Investigates the scaling behavior of &rho; (the golden-ratio-related density parameter) under binary decomposition. The observed scaling pattern is consistent with the framework but has not yet been verified to the full precision bar. This is an active area of investigation.</p>
+    <div class="key-result">
+      &rho; scaling under binary decomposition &mdash; pattern observed, verification in progress
+    </div>
+  </div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Binary_Scaling_Standalone_DRAFT.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Binary_Scaling_Standalone.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/wtu4j/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/Binary_Scaling_Standalone_DRAFT.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/WTU4J" target="_blank" rel="noopener">10.17605/OSF.IO/WTU4J</a></div>
+</div>
+
+<!-- ============================================================ -->
+<h2>Standalone</h2>
+
+<div class="doc-summary">
+  <div class="doc-head">
+    <div class="doc-title">A Closed Form for the Hodgson&ndash;Kerckhoff Tube-Packing Coefficient</div>
+    <span class="status status-verified">Verified</span>
+  </div>
+  <div class="doc-body">
+    <p>Derives a closed-form expression for the Hodgson&ndash;Kerckhoff tube-packing coefficient, which was previously known only as a numerical approximation. This standalone proof is independently citable and does not require the rest of the framework, though its result connects to Papers 3 and 7.</p>
+    <div class="key-result">
+      HK tube-packing coefficient: closed-form derivation &mdash; independently verifiable
+    </div>
+  </div>
+  <div class="doc-links">
+    <a href="https://raw.githubusercontent.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/refs/heads/main/HK_Closed_Form_SHORT_DRAFT.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/blob/main/HK_Closed_Form_SHORT.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/2expn/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/refs/heads/main/HK_Closed_Form_SHORT_DRAFT.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/2EXPN" target="_blank" rel="noopener">10.17605/OSF.IO/2EXPN</a> &mdash; Separate repository: <a href="https://github.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient" target="_blank" rel="noopener">GitHub</a></div>
+</div>
+
+<!-- ============================================================ -->
+<h2>Key Structural Relationships</h2>
+
+<p>The documents above are not isolated results. The framework is interlaced: each document contributes to and draws from a shared structure. The relationships below show how the pieces connect.</p>
+
+<div class="formula">
+  G + K<sub>AUD</sub> = 1 &nbsp;&nbsp;&nbsp; (exact, algebraic)
+  <span class="label">Complementarity &mdash; Papers 1, 2, 3</span>
+</div>
+
+<div class="formula">
+  Landauer crossing: n = ln(2) / G &asymp; 35.11 &nbsp;&nbsp;&nbsp; (between steps 35 and 36)
+  <span class="label">Step 36 = 1/&radic;2 is the first super-Landauer geometric landmark (1.025 L) &mdash; Paper 3</span>
+</div>
+
+<div class="formula">
+  Prime corridor: 13 &rarr; 23 &rarr; 37 &rarr; 53 &rarr; 73
+  <span class="label">Structural primes of the Binary Tower &mdash; Papers 3, 7</span>
+</div>
+
+<div class="formula">
+  &pi;/3 hinge at step 53 &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 50 Hinge at step 50
+  <span class="label">Two distinct structural landmarks in the critical tower region &mdash; Papers 3, 7, 8</span>
+</div>
+
+<div class="formula">
+  Gap scaling: 400/11 &asymp; 36.363636&hellip;
+  <span class="label">Cross-domain scaling ratio derived from the algebraic structure &mdash; Paper 4</span>
+</div>
+
+<!-- ============================================================ -->
+<h2>Corrections &amp; Notes</h2>
+
+<div class="method-note">
+  <strong>Landauer crossing correction (9 April 2026):</strong> The Landauer crossing is between steps 35 and 36 (exact at n = ln(2)/G &asymp; 35.11), not between steps 36 and 37 as previously stated. Step 36 at (1/2)<sup>36</sup> corresponds to 1/&radic;2 and is the first super-Landauer geometric landmark at approximately 1.025 Landauer units. Step 35 is the last sub-Landauer step at approximately 0.997 Landauer units.
+</div>
+
+<!-- ============================================================ -->
+<h2>Document History</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Version</th>
+      <th>Date</th>
+      <th>Changes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>v1.0</td>
+      <td>2026-04-13</td>
+      <td>Initial public release. All 10 documents summarised with key formulas, verification status, and interlaced structure. Includes corrected Landauer crossing (steps 35&ndash;36).</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ============================================================ -->
+<h2>Repositories &amp; Archives</h2>
+
+<div class="doc-summary" style="background: transparent; border-style: dashed;">
+  <div class="doc-links" style="font-size: 14px; gap: 8px 20px; border: none; padding: 0; margin: 0;">
+    <a href="https://github.com/Gap-geometry" target="_blank" rel="noopener">GitHub Organization</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-" target="_blank" rel="noopener">Main Repository</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/zx4g7" target="_blank" rel="noopener">OSF Main Project</a>
+    <span class="sep">&middot;</span>
+    <a href="archive/index.html">Version Archive</a>
+  </div>
+</div>
+
+<footer>
+  <a class="back-hub" href="about.html">&larr; Back to Gap Geometry Hub</a>
+  <div>D.B. &mdash; Gap Geometry &mdash; 2025&ndash;2026</div>
+  <div class="contact">
+    <a href="mailto:Gap-geometryK_AUD2@telenet.be">Gap-geometryK_AUD2@telenet.be</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://x.com/Aud2Gap" target="_blank" rel="noopener">@Aud2Gap</a>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>
