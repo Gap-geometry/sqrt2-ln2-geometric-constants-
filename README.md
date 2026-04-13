@@ -8,9 +8,9 @@ independent domains of mathematics and physics.
 
 Ten published documents with DOIs. Interactive tools. A living reference.
 
-→ **https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html**
+**→ [Enter the framework](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html)**
 
 ---
 
-Licensed under CC BY 4.0
+Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)
 
