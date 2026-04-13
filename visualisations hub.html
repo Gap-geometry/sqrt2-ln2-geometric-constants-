@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gap Geometry — Visualisations</title>
+<meta name="author" content="D.B.">
+<meta name="description" content="Interactive tools for exploring the Gap Geometry framework: the Binary Tower, prime corridor, Chladni patterns, and sonification.">
+<style>
+  :root {
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --subtle: #8a8a8a;
+    --rule: #c8c8c8;
+    --bg: #ffffff;
+    --card-bg: #fafaf8;
+    --card-border: #e0e0de;
+    --link: #2a5a8a;
+    --link-hover: #1a3a5a;
+    --max-width: 760px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body {
+    font-family: Optima, "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    padding: 0 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 56px 0 80px 0;
+  }
+
+  /* Header */
+  header {
+    text-align: center;
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h1.page-title {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 10px;
+  }
+  p.page-intro {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  /* Section headers */
+  h2 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--subtle);
+    margin: 48px 0 20px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  p { margin: 0 0 14px 0; }
+
+  /* Tool cards */
+  .tool {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .tool-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .tool-title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+    flex: 1;
+  }
+  .tool-tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+  .tag-visual {
+    color: #2a5a8a;
+    background: #e8f0f8;
+    border: 1px solid #b8d0e8;
+  }
+  .tag-audio {
+    color: #6a3a6a;
+    background: #f4e8f4;
+    border: 1px solid #d8bcd8;
+  }
+  .tag-dashboard {
+    color: #3a6a3a;
+    background: #e8f4e8;
+    border: 1px solid #b8d8b8;
+  }
+  .tool-body {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .tool-body p { margin: 0 0 10px 0; }
+  .tool-body p:last-child { margin-bottom: 0; }
+  .tool-what {
+    font-size: 14px;
+    color: var(--muted);
+    padding: 8px 14px;
+    background: #fff;
+    border-left: 3px solid var(--card-border);
+    margin: 10px 0;
+    line-height: 1.5;
+  }
+  .tool-link {
+    display: inline-block;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--card-border);
+    width: 100%;
+  }
+  .tool-link a {
+    color: var(--link);
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 600;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .tool-link a:hover {
+    color: var(--link-hover);
+    border-bottom-color: var(--link-hover);
+  }
+  .tool-link .secondary {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--subtle);
+    margin-left: 12px;
+  }
+  .tool-link .secondary a {
+    font-size: 13px;
+    font-weight: 400;
+    color: var(--subtle);
+    border-bottom: 1px dotted var(--rule);
+  }
+  .tool-link .secondary a:hover {
+    color: var(--link);
+  }
+
+  /* Note box */
+  .note-box {
+    font-size: 14px;
+    color: var(--muted);
+    padding: 14px 18px;
+    border-left: 3px solid var(--rule);
+    background: var(--card-bg);
+    margin: 16px 0 24px 0;
+    line-height: 1.55;
+  }
+
+  /* Links */
+  a { color: var(--link); text-decoration: none; }
+  a:hover { color: var(--link-hover); }
+
+  /* Footer */
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 14px;
+    color: var(--subtle);
+  }
+  footer a {
+    color: var(--link);
+    text-decoration: none;
+  }
+  footer a:hover {
+    border-bottom: 1px solid var(--link);
+  }
+  footer .back-hub {
+    display: inline-block;
+    margin-bottom: 16px;
+    font-size: 15px;
+    color: var(--link);
+  }
+  footer .contact {
+    font-size: 13px;
+    margin-top: 8px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    body { font-size: 16px; padding: 0 16px; }
+    main { padding: 32px 0 48px 0; }
+    .tool { padding: 16px 18px; }
+    .tool-head { flex-direction: column; }
+  }
+
+  /* Print */
+  @media print {
+    body { font-size: 11pt; padding: 0; }
+    main { max-width: none; }
+    .tool { border: 1px solid #ccc; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1 class="page-title">Visualisations</h1>
+  <p class="page-intro">Interactive tools for exploring the Gap Geometry framework. Each tool makes a different aspect of the Binary Tower and its structure directly observable.</p>
+</header>
+
+<!-- ============================================================ -->
+<h2>Interactive Tools</h2>
+
+<div class="note-box">
+  All tools run entirely in the browser &mdash; no server, no dependencies, no data collection. They are self-contained HTML files hosted on GitHub Pages.
+</div>
+
+<div class="tool">
+  <div class="tool-head">
+    <div class="tool-title">K<sub>AUD</sub> Dashboard</div>
+    <span class="tool-tag tag-dashboard">Dashboard</span>
+  </div>
+  <div class="tool-body">
+    <p>The main interactive dashboard for the Gap Geometry framework. Displays the core constants G and K<sub>AUD</sub>, the Binary Tower step structure, and key landmarks in a single navigable interface. This is the entry point for hands-on exploration of the framework.</p>
+    <div class="tool-what">
+      <strong>What it shows:</strong> Core constants, step-by-step tower values, prime corridor positions, Landauer crossing region, and the &pi;/3 hinge.
+    </div>
+  </div>
+  <div class="tool-link">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/" target="_blank" rel="noopener">Open K<sub>AUD</sub> Dashboard &rarr;</a>
+  </div>
+</div>
+
+<div class="tool">
+  <div class="tool-head">
+    <div class="tool-title">Telescope Tower</div>
+    <span class="tool-tag tag-visual">Visual</span>
+  </div>
+  <div class="tool-body">
+    <p>A visual instrument for zooming into the Binary Tower at arbitrary depth. Step through the tower level by level, observe how the gap constant G manifests at each scale, and inspect the structural landmarks up close. Designed to make the tower&rsquo;s recursive geometry directly visible.</p>
+    <div class="tool-what">
+      <strong>What it shows:</strong> The (1/2)<sup>n</sup> staircase structure, G-scaled residuals at each step, and the visual rhythm of the tower as it descends through the prime corridor.
+    </div>
+  </div>
+  <div class="tool-link">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/telescope-tower.html" target="_blank" rel="noopener">Open Telescope Tower &rarr;</a>
+  </div>
+</div>
+
+<div class="tool">
+  <div class="tool-head">
+    <div class="tool-title">The Corridor Sonifier</div>
+    <span class="tool-tag tag-audio">Audio</span>
+  </div>
+  <div class="tool-body">
+    <p>Translates the prime corridor into sound. Each corridor prime (13, 23, 37, 53, 73) and its associated tower values are mapped to audio parameters, making the structural relationships between corridor steps audible. A different way of perceiving the pattern &mdash; sometimes the ear catches what the eye misses.</p>
+    <div class="tool-what">
+      <strong>What it sounds like:</strong> The prime corridor as a sequence of tones, with pitch and timbre encoding the tower&rsquo;s structural quantities at each corridor step.
+    </div>
+  </div>
+  <div class="tool-link">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/The%20Corridor%20Sonifier.html" target="_blank" rel="noopener">Open Corridor Sonifier &rarr;</a>
+  </div>
+</div>
+
+<div class="tool">
+  <div class="tool-head">
+    <div class="tool-title">Chladni Staircase</div>
+    <span class="tool-tag tag-visual">Visual</span>
+  </div>
+  <div class="tool-body">
+    <p>Renders the Binary Tower as a Chladni-style vibration pattern. The tower&rsquo;s step structure is mapped to a 2D resonance field, revealing nodal lines and symmetry that correspond to the framework&rsquo;s structural claims. The visual analogy to Chladni plates is deliberate: the tower&rsquo;s structure emerges the way a physical resonance pattern does &mdash; not imposed, but revealed.</p>
+    <div class="tool-what">
+      <strong>What it shows:</strong> Nodal patterns corresponding to tower landmarks, with the prime corridor visible as a structural backbone in the vibration field.
+    </div>
+  </div>
+  <div class="tool-link">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/chladni-staircase-v2.html" target="_blank" rel="noopener">Open Chladni Staircase &rarr;</a>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<h2>About These Tools</h2>
+
+<p>These visualisations are companion instruments to the published documents. They do not replace the formal work &mdash; they make aspects of it directly explorable. Each tool is built as a single self-contained HTML file with no external dependencies, so it can be downloaded, inspected, and run offline.</p>
+
+<p>The tools evolve alongside the framework. As new structures are identified and verified, new visualisations may be added. The <a href="living-document.html">Living Document</a> tracks the current state of the framework; this page tracks the current state of its interactive instruments.</p>
+
+<!-- ============================================================ -->
+<h2>Source</h2>
+
+<div class="tool" style="background: transparent; border-style: dashed;">
+  <div class="tool-body" style="font-size: 14px;">
+    <p style="margin: 0;">All tool source code is in the main repository:<br>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-" target="_blank" rel="noopener">github.com/Gap-geometry/sqrt2-ln2-geometric-constants-</a></p>
+  </div>
+</div>
+
+<footer>
+  <a class="back-hub" href="about.html">&larr; Back to Gap Geometry Hub</a>
+  <div>D.B. &mdash; Gap Geometry &mdash; 2025&ndash;2026</div>
+  <div class="contact">
+    <a href="mailto:Gap-geometryK_AUD2@telenet.be">Gap-geometryK_AUD2@telenet.be</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://x.com/Aud2Gap" target="_blank" rel="noopener">@Aud2Gap</a>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>
