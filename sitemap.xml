@@ -31,33 +31,43 @@
     <priority>0.5</priority>
   </url>
   <url>
-    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/AI_INDEX.txt</loc>
-    <lastmod>2026-04-09</lastmod>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/license.html</loc>
+    <lastmod>2026-04-13</lastmod>
+    <priority>0.4</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/ai-readers.html</loc>
+    <lastmod>2026-04-13</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Cross_Domain_Signatures__26March2026.txt</loc>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/AI_INDEX.txt</loc>
     <lastmod>2026-04-09</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Cross_Domain_Signatures__26March2026.txt</loc>
+    <lastmod>2026-04-13</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/HK_Full_Framework_DRAFT.txt</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/50_Hinge_Standalone_DRAFT.txt</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Binary_Scaling_Standalone_DRAFT.txt</loc>
-    <lastmod>2026-04-04</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
     <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Boundary_Information_Invariant_Short.txt</loc>
-    <lastmod>2026-04-09</lastmod>
+    <lastmod>2026-04-13</lastmod>
     <priority>0.7</priority>
   </url>
   <url>
