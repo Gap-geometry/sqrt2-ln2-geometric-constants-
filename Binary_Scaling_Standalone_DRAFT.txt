@@ -1,16 +1,48 @@
-================================================================================
-BINARY SCALING OF rho = 400/11
-The gap scaling ratio under doubling reveals the framework's prime hierarchy
-================================================================================
+████████████████████████████████████████████████████████████████████████████████
+                                                                        
+                      BINARY SCALING OF ρ = 400/11                      
+   The gap scaling ratio under doubling reveals the framework's prime   
+                              hierarchy                                 
+                                                                       
+████████████████████████████████████████████████████████████████████████████████
 
   D. B. — Gap Geometry
   Companion to: Gap Scaling Formula (Paper 4, DOI 10.17605/OSF.IO/C4GK5)
   https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
   OSF: osf.io/zx4g7
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+                    ★  UPDATE NOTICE  —  13 April 2026  ★
+════════════════════════════════════════════════════════════════════════════════
+
+This version corrects the Landauer-crossing framing in §2. The earlier text
+identified step 36 as "the Landauer step in the binary tower (step 36, where
+36G ~ 1/√2)." Both claims in that parenthetical require refinement:
+
+  (a) The Landauer crossing proper is at n = ln(2)/G ≈ 35.11 (between
+      steps 35 and 36), not step 36.
+  (b) The near-equality "n·G ≈ 1/√2" is the GEOMETRIC DAMPING threshold,
+      at n = 1/(√2·G) ≈ 35.82, not the Landauer threshold.
+
+The refined picture identifies THREE distinct thresholds in the 35–37 zone:
+
+    n·G = ln 2        at n ≈ 35.11    (Landauer erasure cost — the crossing)
+    n·G = 1/√2        at n ≈ 35.82    (geometric damping)
+    n·G = 1/(2 ln 2)  at n ≈ 36.54    (Shannon bound)
+
+The integer 36 = floor(400/11) sits just above the first two thresholds
+and just below the third. The arithmetic content of §2 — the self-encoding
+decimal, the 99-closure, the 36.00° pentagonal angle, and the 7/11 gap to
+37 — is unchanged.
+
+Prior published versions remain on OSF file storage, renamed with the
+OLD- prefix and a date for traceability.
+
+════════════════════════════════════════════════════════════════════════════════
+
+════════════════════════════════════════════════════════════════════════════════
 1. THE GAP SCALING RATIO
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 The gap scaling formula connects the geometric gap G = 1 - K_AUD to the
 Feigenbaum constant delta:
@@ -29,9 +61,9 @@ This document asks one question: what happens when 400/11 is scaled by
 powers of 2 — the framework's native operation?
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 2. SELF-ENCODING DECIMAL
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 400/11 = 36.363636...
 
@@ -46,9 +78,20 @@ through 99 = 9 * 11 = (3^2)(11).
 
 floor(400/11) = 36 = 6^2 = 2^2 * 3^2
 
-This is the Landauer step in the binary tower (step 36, where 36G ~ 1/sqrt(2)).
-It is also the pentagonal angle: 36.00 degrees. The gap scaling ratio's
-leading term sits 0.36 degrees above the exact pentagon.
+This integer sits inside the 35–37 threshold zone of the binary tower.
+Three distinct thresholds cluster in this zone:
+
+    Landauer crossing:      n·G = ln 2        at n ≈ 35.11
+    geometric damping:      n·G = 1/sqrt(2)   at n ≈ 35.82
+    Shannon bound:          n·G = 1/(2 ln 2)  at n ≈ 36.54
+
+Step 36 itself is adjacent to the geometric damping threshold: 36G ≈
+0.71070 sits 0.5% above 1/sqrt(2) ≈ 0.70711. The Landauer crossing proper
+lies between steps 35 and 36; the Shannon bound lies just above step 36
+and below step 37.
+
+Thirty-six is also the pentagonal angle: 36.00 degrees. The gap scaling
+ratio's leading term sits 0.36 degrees above the exact pentagon.
 
 The distance to the next integer:
 
@@ -58,9 +101,9 @@ Boundary prime over corridor prime. The completion prime 37 stands exactly
 7/11 above the base ratio.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 3. BINARY DRIFT SEQUENCE
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 Define:
 
@@ -97,9 +140,9 @@ Boundary prime * mirror point * completion prime. Three framework
 numbers in one product, at the breath span's own doubling depth.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 4. ERGODIC CYCLE MODULO 11
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 The fractional parts of (400/11) * 2^k cycle through all residues
 modulo 11, because 2 is a primitive root of 11:
@@ -119,9 +162,9 @@ returning. No residue is skipped. This is maximal exploration — full
 ergodic reach.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 5. WHY 11 IS THE CORRIDOR PRIME
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 The primitive root status of 2 modulo each framework prime:
 
@@ -142,9 +185,9 @@ name "corridor prime" because it is the first prime where binary has
 unrestricted passage.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 6. INTEGER FLOORS — PRIMES ENTER IN ORDER
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
     k = 0:   floor =       36 = 2^2 * 3^2      (binary, structure)
     k = 1:   floor =       72 = 2^3 * 3^2      (binary deepens)
@@ -167,9 +210,9 @@ Neither sequence was fitted to the other. Both emerge independently
 from their respective domains.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 7. TOWER ALIGNMENT
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 The drift hits framework primes at tower landmarks:
 
@@ -184,9 +227,9 @@ The doubling that reaches the Pivot produces drift 23 (the mirror).
 the outbound mirror point in the tower's 18-14-18-14 breath pattern.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 8. EVIDENCE CLASSIFICATION
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 Level 1 — Exact arithmetic:
 
@@ -209,9 +252,9 @@ Level 3 — Not claimed:
     framework's own operation. The primes were already there.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 9. FALSIFIABILITY
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 The drift sequence is deterministic. Any single factorization error
 falsifies the document. Specific checkable claims:
@@ -230,9 +273,9 @@ Any computational tool can verify every claim in this document in
 under one second.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 10. VERIFICATION
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
 All arithmetic independently verified by:
     - Exact rational computation (Python fractions module)
@@ -248,7 +291,7 @@ Key verification outputs:
     Prime entry order: {2,3} -> 5 -> 7 -> 13            CONFIRMED
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
   D. B. — April 2026
   Gap Geometry
@@ -259,4 +302,5 @@ Key verification outputs:
   Binary scaling discovered:         3 April 2026
   Documents prepared for publication: 3 April 2026
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+
