@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gap Geometry — Documents</title>
+<meta name="author" content="D.B.">
+<meta name="description" content="Direct access to all published Gap Geometry documents. No summaries, no filters — the work speaks for itself.">
+<style>
+  :root {
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --subtle: #8a8a8a;
+    --rule: #c8c8c8;
+    --bg: #ffffff;
+    --card-bg: #fafaf8;
+    --card-border: #e0e0de;
+    --link: #2a5a8a;
+    --link-hover: #1a3a5a;
+    --max-width: 760px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body {
+    font-family: Optima, "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    padding: 0 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 56px 0 80px 0;
+  }
+
+  /* Header */
+  header {
+    text-align: center;
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h1.page-title {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 10px;
+  }
+  p.page-intro {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  /* Section headers */
+  h2 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--subtle);
+    margin: 48px 0 20px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  /* Document cards */
+  .doc {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .doc-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .doc-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: 13px;
+  }
+  .doc-links a {
+    color: var(--link);
+    text-decoration: none;
+    padding: 2px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .doc-links a:hover {
+    color: var(--link-hover);
+    border-bottom-color: var(--link-hover);
+  }
+  .doc-links .sep {
+    color: var(--rule);
+    user-select: none;
+  }
+  .doc-doi {
+    font-size: 12px;
+    color: var(--subtle);
+    margin-top: 6px;
+  }
+  .doc-doi a {
+    color: var(--subtle);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--rule);
+  }
+  .doc-doi a:hover {
+    color: var(--link);
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 14px;
+    color: var(--subtle);
+  }
+  footer a {
+    color: var(--link);
+    text-decoration: none;
+  }
+  footer a:hover {
+    border-bottom: 1px solid var(--link);
+  }
+  footer .back-hub {
+    display: inline-block;
+    margin-bottom: 16px;
+    font-size: 15px;
+    color: var(--link);
+  }
+  footer .contact {
+    font-size: 13px;
+    margin-top: 8px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    body { font-size: 16px; padding: 0 16px; }
+    main { padding: 32px 0 48px 0; }
+    .doc { padding: 14px 16px; }
+  }
+
+  /* Print */
+  @media print {
+    body { font-size: 11pt; padding: 0; }
+    main { max-width: none; }
+    .doc { border: 1px solid #ccc; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1 class="page-title">Documents</h1>
+  <p class="page-intro">Direct access to all published Gap Geometry documents. Plain text, PDF, and archival links for each.</p>
+</header>
+
+<h2>Foundation Papers</h2>
+<p style="font-size: 14px; color: var(--muted); margin-bottom: 20px;">Reading order: 1 &rarr; 2 &rarr; 3 &rarr; 4</p>
+
+<div class="doc">
+  <div class="doc-title">1. The Coherence Ceiling and the Geometric Singularity of Binary</div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper1_Coherence_Ceiling.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/5vz2r/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/5VZ2R" target="_blank" rel="noopener">10.17605/OSF.IO/5VZ2R</a></div>
+</div>
+
+<div class="doc">
+  <div class="doc-title">2. Geometric Constants from H4 &mdash; Mathematical Framework v2.0</div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/sqrt2_ln2_geometric_constants_v2.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper2_Geometric_Constants_v2.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/sjbe9/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/sqrt2_ln2_geometric_constants_v2.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/SJBE9" target="_blank" rel="noopener">10.17605/OSF.IO/SJBE9</a></div>
+</div>
+
+<div class="doc">
+  <div class="doc-title">3. Complete Framework v3.3</div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/KAUD_Complete_Framework_v3_0.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper3_Complete_Framework_v3_3.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/qh5s2/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/KAUD_Complete_Framework_v3_0.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/QH5S2" target="_blank" rel="noopener">10.17605/OSF.IO/QH5S2</a></div>
+</div>
+
+<div class="doc">
+  <div class="doc-title">4. Gap Scaling Across Domains: The 400/11 Formula</div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Gap_Scaling_Formula_v1.5.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper4_Gap_Scaling_400_11.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/c4gk5/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/Gap_Scaling_Formula_v1.5.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/C4GK5" target="_blank" rel="noopener">10.17605/OSF.IO/C4GK5</a></div>
+</div>
+
+<h2>Companion Papers</h2>
+
+<div class="doc">
+  <div class="doc-title">5. The Boundary Information Invariant of Quadratic Systems</div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Boundary_Information_Invariant_Short.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Boundary_Information_Invariant_Short.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/e72h8/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/Boundary_Information_Invariant_Short.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/E72H8" target="_blank" rel="noopener">10.17605/OSF.IO/E72H8</a></div>
+</div>
+
+<div class="doc">
+  <div class="doc-title">6. Cross-Domain Signatures of &radic;2 &times; ln(2)</div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Cross_Domain_Signatures__26March2026.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Cross_Domain_Signatures.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/ra3uq/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/Cross_Domain_Signatures__26March2026.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/RA3UQ" target="_blank" rel="noopener">10.17605/OSF.IO/RA3UQ</a></div>
+</div>
+
+<div class="doc">
+  <div class="doc-title">7. HK Full Framework (Hodgson&ndash;Kerckhoff with K_AUD context)</div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/HK_Full_Framework_DRAFT.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/HK_Full_Framework.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/jbrhq/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/HK_Full_Framework_DRAFT.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/JBRHQ" target="_blank" rel="noopener">10.17605/OSF.IO/JBRHQ</a></div>
+</div>
+
+<div class="doc">
+  <div class="doc-title">8. The 50 Hinge</div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/50_Hinge_Standalone_DRAFT.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/50_Hinge_Standalone.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/fbd9a/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/50_Hinge_Standalone_DRAFT.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/FBD9A" target="_blank" rel="noopener">10.17605/OSF.IO/FBD9A</a></div>
+</div>
+
+<div class="doc">
+  <div class="doc-title">9. Binary Scaling of &rho;</div>
+  <div class="doc-links">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Binary_Scaling_Standalone_DRAFT.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Binary_Scaling_Standalone.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/wtu4j/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/Binary_Scaling_Standalone_DRAFT.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/WTU4J" target="_blank" rel="noopener">10.17605/OSF.IO/WTU4J</a></div>
+</div>
+
+<h2>Standalone</h2>
+
+<div class="doc">
+  <div class="doc-title">A Closed Form for the Hodgson&ndash;Kerckhoff Tube-Packing Coefficient</div>
+  <div class="doc-links">
+    <a href="https://raw.githubusercontent.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/refs/heads/main/HK_Closed_Form_SHORT_DRAFT.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/blob/main/HK_Closed_Form_SHORT.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/2expn/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/refs/heads/main/HK_Closed_Form_SHORT_DRAFT.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/2EXPN" target="_blank" rel="noopener">10.17605/OSF.IO/2EXPN</a> &mdash; Separate repository: <a href="https://github.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient" target="_blank" rel="noopener">GitHub</a></div>
+</div>
+
+<h2>Repositories &amp; Archives</h2>
+
+<div class="doc" style="background: transparent; border-style: dashed;">
+  <div class="doc-links" style="font-size: 14px; gap: 8px 20px;">
+    <a href="https://github.com/Gap-geometry" target="_blank" rel="noopener">GitHub Organization</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-" target="_blank" rel="noopener">Main Repository</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/zx4g7" target="_blank" rel="noopener">OSF Main Project</a>
+  </div>
+</div>
+
+<footer>
+  <a class="back-hub" href="about.html">&larr; Back to Gap Geometry Hub</a>
+  <div>D.B. &mdash; Gap Geometry &mdash; 2025&ndash;2026</div>
+  <div class="contact">
+    <a href="mailto:Gap-geometryK_AUD2@telenet.be">Gap-geometryK_AUD2@telenet.be</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://x.com/Aud2Gap" target="_blank" rel="noopener">@Aud2Gap</a>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>
