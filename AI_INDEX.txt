@@ -23,7 +23,7 @@ Binary is the only integer base where K(n) = √n·ln(n) < 1.
 VERIFICATION CODE (mpmath, dps=500)
 ================================================
 
-from mpmath import mp, mpf, sqrt, log
+from mpmath import mp, mpf, sqrt, log, asinh
 mp.dps = 500
 
 K_AUD = sqrt(2) * log(2)
@@ -40,6 +40,17 @@ assert abs(G - log(mp.e / 2**sqrt(2))) < 10**(-490)
 assert abs(K_AUD * sqrt(2) - 2*log(2)) < 10**(-490)
 assert abs(K_AUD**2 - 2*log(2)**2) < 10**(-490)
 print("\nAll identities verified at dps=500.")
+
+# Landauer crossing (must be zero)
+landauer = 1/(2*log(2)) - 1/sqrt(2) - G/(2*log(2))
+print(f"Landauer crossing: residual = {float(landauer):.2e}")
+
+# Hodgson-Kerckhoff (Annals of Mathematics, 2005)
+# arcsinh(1/(2*sqrt(2))) = ln(2)/2  (from Theorem 4.4)
+hk = asinh(1/(2*sqrt(2))) - log(2)/2
+print(f"H-K arcsinh identity: residual = {float(abs(hk)):.2e}")
+S = (1/(2*sqrt(2))) / asinh(1/(2*sqrt(2)))
+print(f"1/S = K_AUD: residual = {float(abs(1/S - K_AUD)):.2e}")
 
 # Gap scaling formula
 delta = mpf('4.66920160910299067185320382046696')
