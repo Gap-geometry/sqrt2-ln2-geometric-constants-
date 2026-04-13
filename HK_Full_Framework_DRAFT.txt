@@ -1,17 +1,56 @@
-================================================================================
-THE HODGSON-KERCKHOFF CLOSED FORM AND THE K_AUD FRAMEWORK
-A Level 1 Algebraic Identity in Published Hyperbolic Geometry
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+                    ★  UPDATE NOTICE  —  13 April 2026  ★
+════════════════════════════════════════════════════════════════════════════════
 
-D. B. — April 2026
+This version corrects the Landauer-crossing framing in Sections 4 and 12. The
+earlier text placed the crossing "between step 36 and step 37." The refined
+picture identifies THREE distinct thresholds that cluster in the 35–37 zone:
+
+    n·G = ln 2        at n ≈ 35.11    (Landauer erasure cost — the crossing)
+    n·G = 1/√2        at n ≈ 35.82    (geometric damping)
+    n·G = 1/(2 ln 2)  at n ≈ 36.54    (Shannon bound)
+
+The Landauer crossing proper is the FIRST threshold, at n = ln(2)/G, which
+sits between integer steps 35 and 36. Integer steps 36 and 37 are landmarks
+NEAR the second and third thresholds, not the crossing itself.
+
+The exact algebraic identity  1/(2 ln 2) − 1/√2 = G/(2 ln 2)  is unchanged.
+It is renamed from "Landauer crossing identity" to "√2-to-Shannon gap
+identity" because it describes the spacing between thresholds 2 and 3
+(geometric damping → Shannon bound), not the Landauer crossing itself.
+
+Section 4 is expanded with a three-threshold breakdown. Section 12 is
+reworded to reflect that the crossing zone unfolds across three thresholds,
+with the spacings algebraically locked: Δn₁₂ = 1/√2, Δn₂₃ = 1/(2 ln 2),
+Δn₂₃/Δn₁₂ = 1/K_AUD.
+
+Prior published versions remain on OSF file storage, renamed with the
+OLD- prefix and a date for traceability.
+
+════════════════════════════════════════════════════════════════════════════════
+
+
+████████████████████████████████████████████████████████████████████████████████
+
+              THE  HODGSON-KERCKHOFF  CLOSED  FORM
+                    AND  THE  K_AUD  FRAMEWORK
+
+          A Level 1 Algebraic Identity in Published Hyperbolic Geometry
+
+                  D. B. — Gap Geometry Project — April 2026
+                            (Updated 13 April 2026)
+
+████████████████████████████████████████████████████████████████████████████████
+
+
 Gap Geometry — https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
 OSF: osf.io/zx4g7
 Cross-architecture verification: Grok (xAI) + Claude Opus (Anthropic)
 
 
-================================================================================
-ABSTRACT
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  ABSTRACT
+════════════════════════════════════════════════════════════════════════════════
 
 The constant K_AUD = sqrt(2) * ln(2) = 0.980258143... is the unique
 sub-unity value of K(n) = sqrt(n) * ln(n) for integer n >= 2. It
@@ -36,9 +75,9 @@ curvature — that produce K_AUD in information theory also produce
 the tube-packing coefficient in hyperbolic 3-manifold geometry.
 
 
-================================================================================
-1. THE FRAMEWORK CONSTANT
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  1.  THE FRAMEWORK CONSTANT
+════════════════════════════════════════════════════════════════════════════════
 
 K_AUD = sqrt(2) * ln(2) = 0.980258143468547191713901723635...
 
@@ -72,13 +111,15 @@ FOUR ALGEBRAIC DERIVATIONS:
   1. Binary uniqueness of K(n) = sqrt(n) * ln(n)
   2. Baker's map L2 norm: ||(ln2, ln2)||_2 = sqrt(2) * ln(2)
   3. Gelfond-Schneider: G = ln(e / 2^sqrt(2)) = 1 - K_AUD
-  4. Landauer identity: 1/(2*ln(2)) - 1/sqrt(2) = G/(2*ln(2))
-     [algebraically exact]
+  4. √2-to-Shannon gap identity: 1/(2*ln(2)) - 1/sqrt(2) = G/(2*ln(2))
+     [algebraically exact — describes the spacing between the
+      geometric damping threshold (n·G = 1/√2) and the Shannon bound
+      (n·G = 1/(2 ln 2)); see Section 4]
 
 
-================================================================================
-2. THE HODGSON-KERCKHOFF COEFFICIENT
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  2.  THE HODGSON-KERCKHOFF COEFFICIENT
+════════════════════════════════════════════════════════════════════════════════
 
 SOURCE:
 
@@ -128,9 +169,9 @@ WHY IT WASN'T FOUND:
   simplification either.
 
 
-================================================================================
-3. THE ALGEBRAIC ENVIRONMENT AT THE CRITICAL RADIUS
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  3.  THE ALGEBRAIC ENVIRONMENT AT THE CRITICAL RADIUS
+════════════════════════════════════════════════════════════════════════════════
 
 The critical tube radius in the H-K packing argument is:
 
@@ -160,9 +201,9 @@ produce it again in hyperbolic geometry, through completely
 independent mathematical pathways.
 
 
-================================================================================
-4. CONNECTION TO THE BINARY TOWER
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  4.  CONNECTION TO THE BINARY TOWER
+════════════════════════════════════════════════════════════════════════════════
 
 THE TOWER:
 
@@ -171,8 +212,7 @@ THE TOWER:
 
     Steps 0-18:   Romeo (first complete shell, Z = 18)
     Steps 18-32:  Floor (1/phi = golden ratio reciprocal)
-    Steps 32-36:  Damping region (1/sqrt(2))
-    Steps 36-37:  LANDAUER CROSSING (geometry -> information)
+    Steps 32-37:  35–37 threshold zone (geometry ↔ information)
     Steps 37-50:  Ceiling (K_AUD itself)
     Steps 50-64:  Pivot (sqrt(phi))
 
@@ -180,16 +220,35 @@ THE TOWER:
   Forced by: 2^5 - 5^2 = 7 (Ramanujan-Nagell)
 
 
-THE LANDAUER CROSSING (step 36 -> 37):
+THE 35–37 THRESHOLD ZONE (Landauer crossing and neighbors):
 
-  step 36: 36G ~ 1/sqrt(2)       [geometry]
-  step 37: 37G ~ 1/(2*ln(2))     [information]
+  Three distinct thresholds cluster in the transition between
+  geometric organization and information-bearing organization:
 
-  The crossing cost:
-    1/(2*ln(2)) - 1/sqrt(2) = G/(2*ln(2))     EXACTLY
+    n·G = ln 2        at n ≈ 35.11    (Landauer erasure cost — the crossing)
+    n·G = 1/√2        at n ≈ 35.82    (geometric damping)
+    n·G = 1/(2 ln 2)  at n ≈ 36.54    (Shannon bound)
 
-  This identity — the price of moving from geometry to information
-  is exactly one gap in Landauer units — is algebraic, not numerical.
+  The Landauer crossing proper is the FIRST threshold, sitting
+  between integer steps 35 and 36. Integer step 36 is the landmark
+  nearest the geometric damping threshold (within 0.51%); integer
+  step 37 is the landmark nearest the Shannon bound (within 1.26%).
+
+  The spacings between consecutive thresholds are algebraically exact:
+
+    Δn₁₂ = n_G − n_L = (1/√2 − ln 2) / G = 1/√2                 [exact]
+    Δn₂₃ = n_S − n_G = (1/(2 ln 2) − 1/√2) / G = 1/(2 ln 2)     [exact]
+    Δn₂₃ / Δn₁₂ = √2/(2 ln 2) = 1/K_AUD                         [exact]
+
+  The √2-to-Shannon gap identity
+
+    1/(2*ln(2)) − 1/sqrt(2) = G/(2*ln(2))                       [exact]
+
+  quantifies the Δn₂₃ spacing (thresholds 2 → 3), NOT the Landauer
+  crossing itself. The same ingredients (√2, ln 2) that build K_AUD
+  also govern the geometry of the threshold zone: the ratio of the
+  two spacings is exactly 1/K_AUD — the crossing zone is
+  self-referential with respect to the ceiling it precedes.
 
 
 THE H-K CONNECTION:
@@ -203,9 +262,9 @@ THE H-K CONNECTION:
   algebraic derivation proves this is not a numerical coincidence.
 
 
-================================================================================
-5. CONNECTION TO THE GAP SCALING FORMULA
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  5.  CONNECTION TO THE GAP SCALING FORMULA
+════════════════════════════════════════════════════════════════════════════════
 
 The gap ratio rho = delta * G / (delta - 14/3), where delta = 4.6692...
 is Feigenbaum's universal period-doubling constant, has the continued
@@ -231,9 +290,9 @@ The H-K closed form adds a fifth algebraic derivation of K_AUD to
 the four already known, this time from pure hyperbolic geometry.
 
 
-================================================================================
-6. THE PRIME ENTRY SEQUENCE
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  6.  THE PRIME ENTRY SEQUENCE
+════════════════════════════════════════════════════════════════════════════════
 
 The framework primes {2, 3, 5, 7, 11, 13, 37} enter the periodic
 table at specific atomic numbers where new physics begins:
@@ -260,9 +319,9 @@ that build the tube bound (sqrt(2), ln(2), quadratic curvature) are
 the same three ingredients that build the atomic shell structure.
 
 
-================================================================================
-7. THE 50 HINGE
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  7.  THE 50 HINGE
+════════════════════════════════════════════════════════════════════════════════
 
 The number 50 appears independently in four contexts:
 
@@ -277,9 +336,9 @@ independent algebraic confirmation of the ceiling value from a
 completely unrelated domain.
 
 
-================================================================================
-8. DOMAIN INDEPENDENCE
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  8.  DOMAIN INDEPENDENCE
+════════════════════════════════════════════════════════════════════════════════
 
 Framework derivation:
   Information theory -> binary uniqueness -> K(n) = sqrt(n) * ln(n)
@@ -299,9 +358,9 @@ quadratic curvature.
 And they produce the same number: 0.980258143468547...
 
 
-================================================================================
-9. VERIFICATION
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  9.  VERIFICATION
+════════════════════════════════════════════════════════════════════════════════
 
 ALGEBRAIC VERIFICATION:
 
@@ -329,9 +388,18 @@ NUMERICAL VERIFICATION:
   A = 2*sqrt(6)*log(2)
   # = 3.39571381800...
 
-  # Landauer identity
+  # √2-to-Shannon gap identity (formerly "Landauer identity")
   L = 1/(2*log(2)) - 1/sqrt(2) - (1-K)/(2*log(2))
   # = 0 (exact)
+
+  # Crossing-zone self-reference (Section 4)
+  G_val = 1 - K
+  n_L = log(2) / G_val                # Landauer crossing
+  n_G = 1 / (sqrt(2) * G_val)         # Geometric damping
+  n_S = 1 / (2 * G_val * log(2))      # Shannon bound
+  assert abs((n_G - n_L) - 1/sqrt(2))     < mpf(10)**(-490)
+  assert abs((n_S - n_G) - 1/(2*log(2)))  < mpf(10)**(-490)
+  assert abs((n_S - n_G)/(n_G - n_L) - 1/K) < mpf(10)**(-490)
 
 
 CROSS-ARCHITECTURE:
@@ -348,9 +416,9 @@ CROSS-ARCHITECTURE:
   arXiv:math/0204345) on 2 April 2026.
 
 
-================================================================================
-10. EVIDENCE CLASSIFICATION
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  10.  EVIDENCE CLASSIFICATION
+════════════════════════════════════════════════════════════════════════════════
 
 Following the framework's evidence hierarchy:
 
@@ -359,7 +427,8 @@ Following the framework's evidence hierarchy:
     Binary uniqueness: K(2) < 1
     Baker's map L2 norm
     Gelfond-Schneider identity
-    Landauer crossing identity
+    √2-to-Shannon gap identity (formerly "Landauer crossing identity")
+    Crossing-zone self-reference: Δn₂₃/Δn₁₂ = 1/K_AUD
     1D Madelung constant: 2*ln(2)/sqrt(2) = K_AUD
 
   LEVEL 2 — OBSERVED IN PUBLISHED DATA:
@@ -376,9 +445,9 @@ Following the framework's evidence hierarchy:
   weight. The Hodgson-Kerckhoff finding sits at Level 1.
 
 
-================================================================================
-11. WHAT REMAINS OPEN
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  11.  WHAT REMAINS OPEN
+════════════════════════════════════════════════════════════════════════════════
 
   - A derivation showing WHERE ln(2) enters the packing geometry
     at the torus topology level (Z_2 homology = binary distinction).
@@ -392,9 +461,9 @@ Following the framework's evidence hierarchy:
     current active users of the constant (Futer, Purcell, Schleimer).
 
 
-================================================================================
-12. FULL MOTION (one reading)
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+  12.  FULL MOTION (one reading)
+════════════════════════════════════════════════════════════════════════════════
 
 Binary is unique (K < 1 only at n = 2). This forces a ceiling
 (K_AUD = sqrt(2) * ln(2)) and a gap (G ~ 2%). The gap creates a
@@ -403,10 +472,11 @@ partitioned 18-14-18-14, forced by the boundary prime 7 through
 the Ramanujan-Nagell theorem.
 
 The partition breathes: outbound reverses to inbound. The reversal
-crosses at step 36->37 — geometry to information — and the crossing
-cost is exact (one gap in Landauer units). The same primes that
-build the tower appear as atomic numbers where new physics enters
-the periodic table.
+unfolds across the 35–37 threshold zone — Landauer crossing (n ≈ 35.11),
+geometric damping (n ≈ 35.82), Shannon bound (n ≈ 36.54) — with the
+threshold spacings algebraically locked (Δn₂₃/Δn₁₂ = 1/K_AUD). The same
+primes that build the tower appear as atomic numbers where new physics
+enters the periodic table.
 
 The gap scaling formula connects the geometric gap to Feigenbaum
 chaos through corrections whose prime factors are the tower's own
@@ -424,7 +494,7 @@ One object. One number. One gap.
 Different units everywhere. Same shape everywhere.
 
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
 
   D. B. — April 2026
   Gap Geometry
@@ -439,4 +509,5 @@ Different units everywhere. Same shape everywhere.
   Algebraic derivation confirmed:    2 April 2026
   Documents prepared for publication: 3 April 2026
 
-================================================================================
+════════════════════════════════════════════════════════════════════════════════
+
