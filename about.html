@@ -42,7 +42,7 @@
         ],
         "keywords": ["geometric constants", "H4 polytope", "golden ratio", "binary uniqueness", "Feigenbaum constant", "information theory", "Baker map", "Gelfond-Schneider", "DESI BAO", "Landauer principle", "boundary information invariant"],
         "datePublished": "2026-01-25",
-        "dateModified": "2026-04-09"
+        "dateModified": "2026-04-03"
     }
     </script>
     
@@ -162,12 +162,31 @@
         <p class="author-line">D. B. — Independent researcher, Belgium — January–April 2026</p>
     </header>
 
+    <!-- NAVIGATION — spoke pages -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0 36px 0;">
+      <a href="direct-documents.html" class="tool-link" style="text-decoration: none; border: none;">
+        <span class="tool-name">Documents</span>
+        <span class="tool-desc">Direct access to all papers &mdash; Text, PDF, OSF, Raw</span>
+      </a>
+      <a href="living-document.html" class="tool-link" style="text-decoration: none; border: none;">
+        <span class="tool-name">Living Document</span>
+        <span class="tool-desc">Summaries, formulas, and verification status</span>
+      </a>
+      <a href="visualisations%20hub.html" class="tool-link" style="text-decoration: none; border: none;">
+        <span class="tool-name">Visualisations</span>
+        <span class="tool-desc">Interactive tools &mdash; Dashboard, Tower, Sonifier</span>
+      </a>
+      <a href="AI_INDEX.txt" class="tool-link" style="text-decoration: none; border: none;" target="_blank" rel="noopener">
+        <span class="tool-name">AI Readers</span>
+        <span class="tool-desc">Verification index for AI systems</span>
+      </a>
+    </div>
+
     <!-- WHAT THIS WORK IS — for all readers -->
     <div style="background: rgba(139, 69, 19, 0.06); padding: 16px 20px; border-left: 4px solid var(--accent); margin: 16px 0; font-size: 14px;">
         <p style="margin: 0 0 8px 0;"><strong>What is known vs what is original:</strong> The individual constants in this framework — √2, ln(2), the Feigenbaum constant, the golden ratio, shell capacities 2n², the Madelung constant — are all well-established mathematics. This work does not claim to have invented them.</p>
         <p style="margin: 0;">What is original: the derivation of G = 1 − √2·ln(2) as the unique sub-unity gap of binary information density. The Binary Tower (n × G) as a computational tool for locating structural pivots across domains. The gap scaling formula ρ = 400/11 − 1/2500 − 1/939939 connecting the geometric gap to the Feigenbaum constant. The cross-domain documentation of where K_AUD appears independently in published science. And the closed-form identification √2·ln(2) for the Hodgson-Kerckhoff tube-packing coefficient (algebraically proved from the authors' own proof, April 2026). The ingredients are known. The connections, the gap, the tower, and the calculations are the contribution.</p>
         <p style="margin: 8px 0 0 0; font-size: 13px; color: var(--muted);"><strong>Reading note:</strong> The core framework — the gap G, the Binary Tower, the identities, and the gap scaling formula — requires only standard calculus and arithmetic. Some sections reference the H₄ polytope (the 120-cell, a 4D regular solid whose symmetry group has order 14400 = 2⁶ × 3² × 5²). This connection provides structural context for why the primes {2, 3, 5} recur in the framework, but it is not required for understanding the core results. Readers unfamiliar with polytope geometry can treat H₄ references as background and return to them later. The details are in Papers 2 and 3.</p>
-        <p style="margin: 8px 0 0 0; font-size: 13px; color: var(--muted);"><strong>On terminology:</strong> "Coherence" is used here in its literal, structural sense: a system coheres when its arithmetic holds together without contradiction. K(n) = √n × ln(n) < 1 only at n = 2 — binary is the only base whose information density stays below unity. That is the ceiling. The term is not metaphorical and carries no quantum-mechanical, philosophical, or mystical connotation. It is an algebraic boundary, verifiable in one line of code.</p>
     </div>
 
     <h2>The Constants</h2>
@@ -308,13 +327,13 @@ primes that appear throughout the Binary Tower and gap structure.</div>
         <div class="paper-entry">
             <span class="paper-title">The Hodgson-Kerckhoff Closed Form and the K_AUD Framework</span>
             <span class="paper-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/JBRHQ" target="_blank" rel="noopener">10.17605/OSF.IO/JBRHQ</a><br>
-            <span style="font-size: 12px;">GitHub: <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/HK_Full_Framework.pdf" target="_blank" rel="noopener">PDF</a> · <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/HK_Full_Framework_DRAFT.txt" target="_blank" rel="noopener">Raw text</a> &nbsp;|&nbsp; OSF: <a href="https://osf.io/jbrhq/files/gmcd7" target="_blank" rel="noopener">PDF</a> · <a href="https://osf.io/jbrhq/files/d987e" target="_blank" rel="noopener">Text</a></span></span>
+            <span style="font-size: 12px;">GitHub: <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/HK_Full_Framework.pdf" target="_blank" rel="noopener">PDF</a> · <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/HK_Full_Framework_DRAFT.txt" target="_blank" rel="noopener">Raw text</a> &nbsp;|&nbsp; OSF: <a href="https://osf.io/jbrhq/files/s674r" target="_blank" rel="noopener">PDF</a> · <a href="https://osf.io/jbrhq/files/dvy5z" target="_blank" rel="noopener">Text</a></span></span>
             <span class="paper-desc">Full framework context for the H-K finding. Tower connection, Landauer crossing, gap scaling, prime entry sequence. Level 1 algebraic identity.</span>
         </div>
         <div class="paper-entry">
             <span class="paper-title">The 50 Hinge: Six Independent Appearances of One Integer Across Scale</span>
             <span class="paper-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/FBD9A" target="_blank" rel="noopener">10.17605/OSF.IO/FBD9A</a><br>
-            <span style="font-size: 12px;">GitHub: <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/50_Hinge_Standalone.pdf" target="_blank" rel="noopener">PDF</a> · <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/50_Hinge_Standalone_DRAFT.txt" target="_blank" rel="noopener">Raw text</a> &nbsp;|&nbsp; OSF: <a href="https://osf.io/fbd9a/files/h94bn" target="_blank" rel="noopener">PDF</a> · <a href="https://osf.io/fbd9a/files/t9pvu" target="_blank" rel="noopener">Text</a></span></span>
+            <span style="font-size: 12px;">GitHub: <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/50_Hinge_Standalone.pdf" target="_blank" rel="noopener">PDF</a> · <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/50_Hinge_Standalone_DRAFT.txt" target="_blank" rel="noopener">Raw text</a> &nbsp;|&nbsp; OSF: <a href="https://osf.io/fbd9a/files/nf7cz" target="_blank" rel="noopener">PDF</a> · <a href="https://osf.io/fbd9a/files/tv9yn" target="_blank" rel="noopener">Text</a></span></span>
             <span class="paper-desc">50 = 2 × 5² appears in atomic shells, continued fraction of G, tower ceiling, gap scaling correction (1/50²), nuclear magic numbers, and DESI BAO residuals. Six routes, zero fitting.</span>
         </div>
         <div class="paper-entry">
@@ -432,3 +451,4 @@ primes that appear throughout the Binary Tower and gap structure.</div>
 </div>
 </body>
 </html>
+
