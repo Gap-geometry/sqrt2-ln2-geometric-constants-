@@ -64,13 +64,18 @@ const G_GAP = 1 - K_AUD_VAL;                       // 0.0197418565...
 const PHI_VAL = (1 + Math.sqrt(5)) / 2;            // 1.6180339887...
 const FLOOR_VAL = 1 / PHI_VAL;                     // 0.6180339887...
 const CORRIDOR_W = K_AUD_VAL - FLOOR_VAL;          // 0.3622241547...
+// Tower landmarks. The three-threshold band (35/36/37) marks the
+// Landauer crossing → geometric-damping → Shannon bound sequence.
+// Step 32's tower target is √φ/2 (not 1/φ); the corridor floor 1/φ
+// is a separate reference tracked via FLOOR_VAL below.
 const TOWER_LM = [
-  { n:18, name:"√2/4 · Shell 3", col:"#FF6B35" },
-  { n:32, name:"1/φ · Floor",     col:"#66BBAA" },
-  { n:36, name:"1/√2",            col:"#8899AA" },
-  { n:37, name:"Landauer",        col:"#d4a574" },
-  { n:50, name:"K_AUD · Ceiling", col:"#FFD700" },
-  { n:64, name:"√φ · Pivot",      col:"#FF3366" },
+  { n:18, name:"√2/4 · Shell 3",             col:"#FF6B35" },
+  { n:32, name:"√φ/2 · k=5 target",          col:"#66BBAA" },
+  { n:35, name:"ln 2 · Landauer crossing",   col:"#e4b074" },
+  { n:36, name:"1/√2 · Geometric-damping",   col:"#8899AA" },
+  { n:37, name:"1/(2ln2) · Shannon bound",   col:"#d4a574" },
+  { n:50, name:"K_AUD · Ceiling",            col:"#FFD700" },
+  { n:64, name:"√φ · Pivot",                 col:"#FF3366" },
 ];
 
 const MODES = [];
@@ -1072,4 +1077,5 @@ ReactDOM.createRoot(document.getElementById("root")).render(<ChladniStaircase />
 </script>
 </body>
 </html>
+
 
