@@ -311,8 +311,10 @@
   <h2>II. The Binary Tower</h2>
   <div class="desc">
     64 steps of n &times; G. Click any step to hear its tone. Landmarks glow:
-    step 18 (&radic;2/4, Shell 3), 32 (1/&phi;, Floor), 35&rarr;36 (Landauer crossing), 36 (1/&radic;2), 37 (post-crossing prime),
-    50 (K<sub>AUD</sub>, Ceiling), 64 (&radic;&phi;, Pivot).
+    step 18 (&radic;2/4, Shell 3), 32 (&radic;&phi;/2, k=5 tower target — sits ~0.67% from 32&middot;G),
+    35 (ln 2, Landauer crossing — last sub-Landauer step), 36 (1/&radic;2, Geometric-damping threshold),
+    37 (1/(2 ln 2), Shannon bound), 50 (K<sub>AUD</sub>, Ceiling), 64 (&radic;&phi;, Pivot).
+    The corridor floor 1/&phi; &asymp; 0.618 is a separate reference that sits ~2.2% below 32&middot;G.
   </div>
   <div class="tower-container">
     <div class="tower-steps" id="towerSteps"></div>
@@ -391,11 +393,15 @@ const CORRIDOR_DIFF = Math.abs(LOG2_97 - CORRIDOR); // 0.0003459...
 const CENTS_DIFF = CORRIDOR_DIFF * 1200;          // 0.415 cents
 
 // Tower landmarks
+// Note: step 32's tower target is √φ/2 (not 1/φ). The corridor floor 1/φ is a
+// separate reference that sits ~2.2% below 32·G; see the three-threshold band
+// at steps 35–37 (Landauer crossing → geometric-damping → Shannon bound).
 const LANDMARKS = {
   18: '√2/4 · Shell 3',
-  32: '1/φ · Floor',
-  36: '1/√2 · Geometry',
-  37: '1/(2ln2) · Landauer',
+  32: '√φ/2 · k=5 target',
+  35: 'ln 2 · Landauer crossing',
+  36: '1/√2 · Geometric-damping',
+  37: '1/(2ln2) · Shannon bound',
   50: 'K_AUD · Ceiling',
   64: '√φ · Pivot'
 };
@@ -682,3 +688,4 @@ document.getElementById('btnGap').addEventListener('click', function() {
 
 </body>
 </html>
+
