@@ -89,19 +89,20 @@
  * Each step adds one gap. The tower maps out how binary cost accumulates.
  *
  * Key landmarks (n × G ≈ target constant):
- *   Step 18 (Romeo):     18G ≈ √2/4     — first complete structure
- *   Step 32 (Floor):     32G ≈ 1/φ      — golden floor reached
- *   Step 36 (Geometry):  36G ≈ 1/√2     — first super-Landauer geometric landmark
- *   Step 37 (Post-cross): 37G ≈ 1/(2ln2) — first post-crossing structural prime
- *   Step 50 (Ceiling):   50G ≈ K_AUD    — coherence ceiling reached
- *   Step 58 (Pre-pivot): 58G ≈ φ/√2     — golden ratio projected by binary
- *   Step 59 (Turn):      pentagonal turn — mirror of Romeo [current research]
- *   Step 64 (Pivot):     64G ≈ √φ       — master formula pivot
+ *   Step 18 (Romeo):      18G ≈ √2/4      — first complete structure
+ *   Step 32 (k=5):        32G ≈ √φ/2      — tower target at k=5 (1/φ floor sits 2.91% below)
+ *   Step 36 (Geometry):   36G ≈ 1/√2      — geometric-damping threshold
+ *   Step 37 (Post-Shan.): 37G ≈ 1/(2ln2)  — first post-Shannon structural prime
+ *   Step 50 (Ceiling):    50G ≈ K_AUD     — coherence ceiling reached
+ *   Step 58 (Pre-pivot):  58G ≈ φ/√2      — golden ratio projected by binary
+ *   Step 59 (Turn):       pentagonal turn — mirror of Romeo [current research]
+ *   Step 64 (Pivot):      64G ≈ √φ        — master formula pivot
  *
- * The Landauer crossing between steps 35 and 36 is where the tower
- * transitions from geometry to information. Below 36, each step costs less
- * than one bit erasure (sub-Landauer). From step 36 onward, information is possible.
- * The crossing cost is G/(2ln2) — exactly half a gap in Landauer units.
+ * The 35–37 zone spans three distinct thresholds, not one crossing:
+ *   Landauer         at n·G = ln 2        (n ≈ 35.11)
+ *   Geometric-damping at n·G = 1/√2       (n ≈ 35.82)
+ *   Shannon bound    at n·G = 1/(2 ln 2)  (n ≈ 36.54)
+ * The √2-to-Shannon gap identity: 1/(2 ln 2) − 1/√2 = G/(2 ln 2).
  *
  * Master formula: 2^k × G = 2^(k−6) × √φ × (1 − ε), where ε = −0.671%
  * This holds across all binary scales. The tower is self-similar.
@@ -230,9 +231,9 @@ const ALPHA_PRESETS = [
 // marking the transition from sub-Landauer geometry to super-Landauer information.
 const LANDMARKS = [
   { step: 18, label: "Romeo", approx: "√2/4", target: Math.sqrt(2)/4, color: "#4ecdc4", note: "2×3² — first complete structure (Ar)" },
-  { step: 32, label: "Floor", approx: "1/φ", target: INV_PHI, color: "#6c9bcf", note: "2⁵ — golden floor, shell 4" },
+  { step: 32, label: "k=5", approx: "√φ/2", target: SQRT_PHI/2, color: "#6c9bcf", note: "2⁵ — tower target at k=5 (√φ/2, 0.67%); golden floor 1/φ sits 2.91% below" },
   { step: 36, label: "Geom", approx: "1/√2", target: 1/Math.sqrt(2), color: "#88b5dd", note: "6² — first super-Landauer geometric landmark (1.025 L)" },
-  { step: 37, label: "Post-cross", approx: "1/(2ln2)", target: 1/(2*LN2), color: "#f38181", note: "prime — first post-crossing structural prime (1.054 L)" },
+  { step: 37, label: "Post-Shannon", approx: "1/(2ln2)", target: 1/(2*LN2), color: "#f38181", note: "prime — first post-Shannon structural prime (1.054 L)" },
   { step: 50, label: "Ceiling", approx: "K_AUD", target: K_AUD, color: "#ffd700", note: "2×5² — the ceiling reached, shell 5" },
   { step: 58, label: "Pre-pivot", approx: "φ/√2", target: PHI/Math.sqrt(2), color: "#dda0dd", note: "pre-pentagonal turn, φ projected by binary" },
   { step: 59, label: "Turn", approx: "—", target: null, color: "#ff9a76", note: "pentagonal turn (mirror of Romeo)" },
@@ -406,7 +407,7 @@ function GapGeometrySimulation() {
   }, [alpha]);
 
   const verbColor = activePreset.color;
-  const tabs = ["Dynamics", "Tower", "400/11", "Architecture"];
+  const tabs = ["Dynamics", "Tower", "Scaling", "400/11", "Architecture"];
 
   return (
     <div style={{ background: S.bg, color: S.text, minHeight: "100vh", fontFamily: S.font, padding: "16px", maxWidth: "860px", margin: "0 auto" }}>
@@ -788,8 +789,78 @@ function GapGeometrySimulation() {
         </div>
       )}
 
-      {/* ═══ TAB 2: 400/11 ═══ */}
+      {/* ═══ TAB 2: SCALING TABLE ═══ */}
       {tab === 2 && (
+        <div style={{ background: S.card, border: `1px solid ${S.border}`, borderRadius: "8px", padding: "14px" }}>
+          <h2 style={{ fontSize: "12px", color: "#888", margin: "0 0 4px", textAlign: "center" }}>
+            The Scaling Table — one relationship at every scale
+          </h2>
+          <p style={{ fontSize: "10px", color: "#444", textAlign: "center", margin: "0 0 14px" }}>
+            2<sup>k</sup> × G &nbsp;≈&nbsp; 2<sup>k−6</sup> × √φ &nbsp;·&nbsp; constant ε = −0.671% at every k
+          </p>
+
+          <div style={{ overflowX: "auto" }}>
+            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "11px", fontFamily: S.font }}>
+              <thead>
+                <tr style={{ borderBottom: `1px solid ${S.border}` }}>
+                  <th style={{ textAlign: "center", padding: "6px 8px", color: "#666", fontWeight: "normal" }}>k</th>
+                  <th style={{ textAlign: "right", padding: "6px 8px", color: "#666", fontWeight: "normal" }}>2<sup>k</sup></th>
+                  <th style={{ textAlign: "right", padding: "6px 8px", color: S.gold, fontWeight: "normal" }}>2<sup>k</sup> × G</th>
+                  <th style={{ textAlign: "right", padding: "6px 8px", color: "#ffb347", fontWeight: "normal" }}>Target 2<sup>k−6</sup> × √φ</th>
+                  <th style={{ textAlign: "right", padding: "6px 8px", color: "#f38181", fontWeight: "normal" }}>Error</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[0,1,2,3,4,5,6,7,8,9,10].map(k => {
+                  const pow = Math.pow(2, k);
+                  const v = pow * G;
+                  const target = Math.pow(2, k - 6) * SQRT_PHI;
+                  const err = (v - target) / target * 100;
+                  const isPivot = k === 6;
+                  const isK5 = k === 5;
+                  const rowBg = isPivot
+                    ? "rgba(255,179,71,0.10)"
+                    : isK5
+                    ? "rgba(108,155,207,0.07)"
+                    : "transparent";
+                  const tdBase = { padding: "6px 8px", borderBottom: `1px solid ${S.border}` };
+                  return (
+                    <tr key={k} style={{ background: rowBg }}>
+                      <td style={{ ...tdBase, textAlign: "center", color: isPivot ? "#ffb347" : isK5 ? "#6c9bcf" : "#888", fontWeight: (isPivot || isK5) ? "bold" : "normal" }}>{k}{isPivot ? "  ◀" : ""}</td>
+                      <td style={{ ...tdBase, textAlign: "right", color: "#999", fontFamily: "monospace" }}>{pow}</td>
+                      <td style={{ ...tdBase, textAlign: "right", color: S.gold, fontFamily: "monospace" }}>{v.toFixed(5)}</td>
+                      <td style={{ ...tdBase, textAlign: "right", color: "#ffb347", fontFamily: "monospace" }}>{target.toFixed(5)}</td>
+                      <td style={{ ...tdBase, textAlign: "right", color: "#f38181", fontFamily: "monospace" }}>{err.toFixed(3)}%</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "8px", marginTop: "14px" }}>
+            <div style={{ background: "rgba(255,179,71,0.06)", border: "1px solid rgba(255,179,71,0.25)", borderRadius: "6px", padding: "10px 12px" }}>
+              <div style={{ fontSize: "11px", color: "#ffb347", fontWeight: "bold", marginBottom: "4px" }}>k = 6 — the pivot</div>
+              <div style={{ fontSize: "10px", color: "#888", lineHeight: "1.5" }}>
+                64 × G ≈ √φ = 1.272. 2<sup>6</sup> = 4<sup>3</sup>, purely binary, meets the golden ratio's square root. Every row is this one relationship rescaled by a power of 2.
+              </div>
+            </div>
+            <div style={{ background: "rgba(108,155,207,0.05)", border: "1px solid rgba(108,155,207,0.25)", borderRadius: "6px", padding: "10px 12px" }}>
+              <div style={{ fontSize: "11px", color: "#6c9bcf", fontWeight: "bold", marginBottom: "4px" }}>k = 5 — tower target</div>
+              <div style={{ fontSize: "10px", color: "#888", lineHeight: "1.5" }}>
+                32 × G ≈ √φ/2 = 0.636, within 0.67%. The golden floor 1/φ = 0.618 sits 2.91% below — a distinct structural value, not the tower target at this scale.
+              </div>
+            </div>
+          </div>
+
+          <div style={{ fontSize: "10px", color: "#555", padding: "10px 12px", background: "rgba(255,255,255,0.02)", border: `1px solid ${S.border}`, borderRadius: "6px", marginTop: "10px", lineHeight: "1.55" }}>
+            <span style={{ color: "#888", fontWeight: "bold" }}>Why the error is constant.</span> The −0.671% is algebraic, not measured eleven times. Every row reduces to the single identity 64·G = √φ·(1 − ε). Multiplying or dividing both sides by 2 changes the magnitude but preserves ε exactly.
+          </div>
+        </div>
+      )}
+
+      {/* ═══ TAB 3: 400/11 ═══ */}
+      {tab === 3 && (
         <div style={{ background: S.card, border: `1px solid ${S.border}`, borderRadius: "8px", padding: "14px" }}>
           <h2 style={{ fontSize: "12px", color: "#888", margin: "0 0 4px", textAlign: "center" }}>
             ρ = 400/11 − 1/2500 − 1/939939
@@ -963,17 +1034,17 @@ function GapGeometrySimulation() {
         </div>
       )}
 
-      {/* ═══ TAB 3: ARCHITECTURE ═══ */}
-      {tab === 3 && (() => {
+      {/* ═══ TAB 4: ARCHITECTURE ═══ */}
+      {tab === 4 && (() => {
         const ARCH_NODES = [
           { x: 80, step: 18, approx: "√2/4", name: "Romeo", c: "#4ecdc4",
             hover: "First complete structure. 18G ≈ √2/4 — pure geometry, no information cost yet. Named 'Romeo' because it's the first arrival: the tower's opening statement. Factoring: 18 = 2×3², the smallest number carrying both binary and ternary structure." },
-          { x: 155, step: 32, name: "Floor", approx: "1/φ", c: "#6c9bcf",
-            hover: "The golden floor. 32G ≈ 1/φ = 0.618... — the corridor's lower bound. Below this, coherence cannot sustain itself. 32 = 2⁵, shell 4 capacity. The floor is where exploration begins; everything below is sub-corridor." },
+          { x: 155, step: 32, name: "k=5", approx: "√φ/2", c: "#6c9bcf",
+            hover: "Tower target at k=5. 32G ≈ √φ/2 = 0.636, within 0.67% (the same constant ε that holds at every power of 2 — see the Scaling tab). The golden floor 1/φ = 0.618 sits 2.91% below — a distinct structural value, not what 32G approximates. 32 = 2⁵, shell 4 capacity." },
           { x: 220, step: 36, approx: "1/√2", name: "Geom", c: "#88b5dd",
-            hover: "First super-Landauer geometric landmark. 36G ≈ 1/√2 — pure algebraic geometry at 1.025 Landauer units. The Landauer crossing happens between steps 35 and 36: step 35 is the last sub-Landauer step (0.997 L). 36 = 6², the only perfect square among landmarks." },
-          { x: 270, step: 37, approx: "1/(2ln2)", name: "Post-cross", c: "#f38181",
-            hover: "First post-crossing structural prime. 37G ≈ 1/(2ln2) at 1.054 Landauer units. The second super-Landauer step. 37 is prime — a structural landmark beyond the crossing. The Landauer crossing itself is between steps 35 and 36." },
+            hover: "Geometric-damping threshold. 36G ≈ 1/√2 — pure algebraic geometry at 1.025 Landauer units. The 35–37 zone spans three distinct thresholds: Landauer at n·G = ln 2 (n ≈ 35.11), geometric-damping at n·G = 1/√2 (n ≈ 35.82, here), and Shannon at n·G = 1/(2 ln 2) (n ≈ 36.54). 36 = 6², the only perfect square among landmarks." },
+          { x: 270, step: 37, approx: "1/(2ln2)", name: "Post-Shannon", c: "#f38181",
+            hover: "First post-Shannon structural prime. 37G ≈ 1/(2 ln 2) at 1.054 Landauer units — just past the Shannon bound at n ≈ 36.54. The 35–37 zone crosses three thresholds in sequence: Landauer (ln 2), geometric-damping (1/√2), Shannon (1/(2 ln 2)). Step 37 sits beyond all three. 37 is prime — a structural landmark on the far side." },
           { x: 345, step: 50, approx: "K_AUD", name: "Ceiling", c: "#ffd700",
             hover: "The ceiling. 50G ≈ K_AUD = √2 × ln(2) = 0.980... — maximum coherence. The corridor's upper bound. 50 = 2×5², shell 5. K_AUD = √2 Landauer units: the ceiling is exactly one geometric projection above the thermodynamic minimum." },
           { x: 405, step: 58, approx: "φ/√2", name: "Pre-pivot", c: "#dda0dd",
@@ -1035,7 +1106,7 @@ function GapGeometrySimulation() {
             <text x="220" y="195" textAnchor="middle" fill="rgba(255,215,0,0.25)" fontSize="8" transform="rotate(-30,220,195)">CORRIDOR = 0.362</text>
 
             {/* Energy annotation */}
-            <text x="440" y="195" textAnchor="middle" fill="rgba(243,129,129,0.2)" fontSize="7" transform="rotate(30,440,195)">Landauer crossing at step 35→36</text>
+            <text x="440" y="195" textAnchor="middle" fill="rgba(243,129,129,0.2)" fontSize="7" transform="rotate(30,440,195)">Three thresholds in the 35–37 zone</text>
 
             {/* ─── Three Verbs (action layer) ─── */}
             <text x="300" y="284" textAnchor="middle" fill="rgba(255,215,0,0.35)" fontSize="8" fontWeight="bold">THE THREE VERBS</text>
@@ -1088,7 +1159,7 @@ function GapGeometrySimulation() {
             const constDesc = {
               gap: { title: "G — The Gap", color: "#f38181", text: "G = 1 − K_AUD ≈ 0.0197. The structural remainder between the coherence ceiling and unity. Not a deficiency — the gap is where distinction happens. G = ln(e/2^√2): the natural logarithm of e divided by 2^√2. In energy: kT × G = 8.18×10⁻²³ J — the minimum friction of any binary distinction." },
               kaud: { title: "K_AUD — Coherence Ceiling", color: S.gold, text: "K_AUD = √2 × ln(2) ≈ 0.980258. The maximum coherence achievable in any binary system. Combines projection (√2, diagonal of the unit square) with distinction (ln 2, the natural unit of binary information). In physical units: K_AUD = √2 Landauer units — the ceiling sits one geometric projection above the thermodynamic minimum for bit erasure." },
-              floor: { title: "1/φ — Golden Floor", color: "#6c9bcf", text: "1/φ = (√5−1)/2 ≈ 0.6180. The corridor's lower bound. Below this value, coherence is sub-critical — the system cannot sustain organised behavior. Reached at tower step 32 (= 2⁵, shell 4). The floor and ceiling together define the corridor width: K_AUD − 1/φ = 1/φ² − G, a closed algebraic identity." },
+              floor: { title: "1/φ — Golden Floor", color: "#6c9bcf", text: "1/φ = (√5−1)/2 ≈ 0.6180. The corridor's lower bound. Below this value, coherence is sub-critical — the system cannot sustain organised behavior. 32 = 2⁵ sits near the floor but does not land on it: 32·G = 0.632 approximates √φ/2 = 0.636 (0.67%), while 1/φ itself sits 2.91% below — two distinct structural values. The floor and ceiling together define the corridor width: K_AUD − 1/φ = 1/φ² − G, a closed algebraic identity." },
               pivot: { title: "√φ — Master Pivot", color: "#ffb347", text: "√φ ≈ 1.2720. The tower's destination at step 64. The master formula 2ᵏ × G = 2ᵏ⁻⁶ × √φ × (1−ε) holds with ε = −0.671% constant across all binary scales. √φ sits above unity — the pivot is where the tower's cost function exceeds the golden ratio's square root, connecting binary scaling to golden geometry." },
             };
             const info = archNode || (constDesc[activeArch] ? { name: constDesc[activeArch].title, c: constDesc[activeArch].color, hover: constDesc[activeArch].text } : null);
