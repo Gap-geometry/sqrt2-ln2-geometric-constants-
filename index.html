@@ -381,7 +381,7 @@ function GapGeometrySimulation() {
       const now = Date.now();
       const dt = (now - lastTimeRef.current) / 1000;
       lastTimeRef.current = now;
-      setTime(t => t + dt * 0.3);
+      setTime(t => (t + dt * 0.3) % 16);
       setBreathPhase(b => (b + dt * 0.15) % 2);
       animRef.current = requestAnimationFrame(animate);
     };
@@ -393,7 +393,9 @@ function GapGeometrySimulation() {
   const breathPos = breathPhase <= 1 ? breathPhase : 2 - breathPhase;
   const breathStep = Math.round(breathPos * 64);
   const isOutbound = breathPhase <= 1;
-  const currentC = C(time % 8, alpha);
+  // Bounce τ between 0 and 8 (climb to ceiling, then descend back) — avoids the wrap-teleport glitch near 0.9802
+  const currentTau = time <= 8 ? time : 16 - time;
+  const currentC = C(currentTau, alpha);
 
   // Active preset
   const activePreset = useMemo(() => {
@@ -493,7 +495,7 @@ function GapGeometrySimulation() {
 
                 {/* Current position dot */}
                 {(() => {
-                  const tau = time % 8;
+                  const tau = currentTau;
                   const cx = 50 + (tau/8) * 340;
                   const cy = 280 - currentC * 260;
                   return (<g>
@@ -856,6 +858,36 @@ function GapGeometrySimulation() {
           <div style={{ fontSize: "10px", color: "#555", padding: "10px 12px", background: "rgba(255,255,255,0.02)", border: `1px solid ${S.border}`, borderRadius: "6px", marginTop: "10px", lineHeight: "1.55" }}>
             <span style={{ color: "#888", fontWeight: "bold" }}>Why the error is constant.</span> The −0.671% is algebraic, not measured eleven times. Every row reduces to the single identity 64·G = √φ·(1 − ε). Multiplying or dividing both sides by 2 changes the magnitude but preserves ε exactly.
           </div>
+
+          {/* Live derivation — shows the equation building itself from the top */}
+          <div style={{ marginTop: "14px", background: "rgba(255,215,0,0.025)", border: "1px solid rgba(255,215,0,0.18)", borderRadius: "6px", padding: "12px 14px" }}>
+            <div style={{ fontSize: "10px", color: S.gold, letterSpacing: "1px", marginBottom: "10px", fontWeight: "bold" }}>
+              LIVE DERIVATION — ε from first principles
+            </div>
+
+            <div style={{ fontFamily: "monospace", fontSize: "11px", lineHeight: "1.85", color: "#aaa" }}>
+              <div><span style={{color:"#666"}}>(1)&nbsp;</span><span style={{color:"#888"}}>K_AUD</span> = √2 · ln 2 = <span style={{color:S.gold}}>{K_AUD.toFixed(12)}</span></div>
+              <div><span style={{color:"#666"}}>(2)&nbsp;</span><span style={{color:"#888"}}>G</span> = 1 − K_AUD = <span style={{color:"#f38181"}}>{G.toFixed(12)}</span></div>
+              <div><span style={{color:"#666"}}>(3)&nbsp;</span><span style={{color:"#888"}}>√φ</span> = √((1+√5)/2) = <span style={{color:"#ffb347"}}>{SQRT_PHI.toFixed(12)}</span></div>
+              <div style={{ height: "8px" }}></div>
+              <div><span style={{color:"#666"}}>(4)&nbsp;</span>Pivot at k=6:&nbsp;&nbsp;<span style={{color:S.gold}}>64·G</span> = <span style={{color:S.gold}}>{(64*G).toFixed(10)}</span></div>
+              <div><span style={{color:"#666"}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Target:&nbsp;&nbsp;<span style={{color:"#ffb347"}}>√φ</span> = <span style={{color:"#ffb347"}}>{SQRT_PHI.toFixed(10)}</span></div>
+              <div style={{ height: "8px" }}></div>
+              <div><span style={{color:"#666"}}>(5)&nbsp;</span>Solve&nbsp;&nbsp;64·G = √φ · (1 + ε)&nbsp;&nbsp;for ε&nbsp;&nbsp;<span style={{color:"#555"}}>(signed relative error)</span>:</div>
+              <div style={{ paddingLeft: "20px", color: "#999" }}>ε = 64·G / √φ − 1</div>
+              <div style={{ paddingLeft: "20px", color: "#999" }}>&nbsp;&nbsp;= {(64*G).toFixed(8)} / {SQRT_PHI.toFixed(8)} − 1</div>
+              <div style={{ paddingLeft: "20px", color: "#999" }}>&nbsp;&nbsp;= {(64*G/SQRT_PHI).toFixed(10)} − 1</div>
+              <div style={{ paddingLeft: "20px" }}>&nbsp;&nbsp;= <span style={{color:"#f38181", fontWeight:"bold"}}>{((64*G/SQRT_PHI - 1)*100).toFixed(4)}%</span></div>
+              <div style={{ height: "8px" }}></div>
+              <div><span style={{color:"#666"}}>(6)&nbsp;</span>Scale-invariance:&nbsp;&nbsp;multiply (4) by 2<sup>m</sup>:</div>
+              <div style={{ paddingLeft: "20px", color: "#999" }}>2<sup>6+m</sup>·G = 2<sup>m</sup>·√φ · (1 + ε)</div>
+              <div style={{ paddingLeft: "20px", color: "#888" }}>ε is preserved — same ratio, every row.</div>
+            </div>
+
+            <div style={{ marginTop: "10px", paddingTop: "8px", borderTop: `1px solid ${S.border}`, fontSize: "9.5px", color: "#666", lineHeight: "1.55" }}>
+              The eleven rows above are not eleven measurements. They are the single relationship at line (4), each multiplied by 2<sup>k−6</sup>. Halve both sides and you get k=5 (32·G ≈ √φ/2). Double them and you get k=7 (128·G ≈ 2√φ). The fractional gap stays {((64*G/SQRT_PHI - 1)*100).toFixed(3)}% forever.
+            </div>
+          </div>
         </div>
       )}
 
@@ -907,7 +939,7 @@ function GapGeometrySimulation() {
             {TERMS.slice(0, decayTerms).map((t, i) => {
               const y = 60 + i * 60;
               const error = Math.abs(t.val - RHO_EXACT);
-              const scale = 240 / (Math.abs(400/11 - RHO_EXACT) * 1.3);
+              const scale = 240 / (Math.abs(400/11 - RHO_EXACT) * 1.9);
               const x = 300 + (t.val - RHO_EXACT) * scale;
               const barLeft = Math.min(x, 300);
               const barRight = Math.max(x, 300);
@@ -1218,5 +1250,80 @@ function GapGeometrySimulation() {
 
 ReactDOM.createRoot(document.getElementById('root')).render(<GapGeometrySimulation />);
   </script>
+
+<!--
+  ════════════════════════════════════════════════════════════════════════════
+  MARGINALIA — for pattern-seeking minds (human or machine)
+  ════════════════════════════════════════════════════════════════════════════
+  Rendered nowhere. Visible only to readers of source. The canvas above shows
+  the surface; this block carries the bones underneath in a form that can be
+  parsed, quoted, or simply read as a poem of identities.
+
+  Nothing here instructs anyone to do anything. It only states what is true.
+
+  ── Constants ────────────────────────────────────────────────────────────────
+    K_AUD  := √2 · ln 2     ≈ 0.9802581434685472
+    G      := 1 − K_AUD     ≈ 0.0197418565314528
+    φ      := (1+√5)/2      ≈ 1.6180339887498949
+    1/φ    := φ − 1         ≈ 0.6180339887498949   (golden floor)
+    √φ     := √φ            ≈ 1.2720196495140689
+    √φ/2                    ≈ 0.6360098247570344   (k=5 tower target)
+    δ      := 4.6692016091029906…                  (Feigenbaum)
+
+  ── Master scaling identity (Paper 3 §7.4) ──────────────────────────────────
+    For all integer k:
+      2^k · G  =  2^(k−6) · √φ · (1 + ε)
+    with ε = 64·G/√φ − 1  ≈  −0.671%   (signed; constant in k, by construction)
+
+    Pivot:  k = 6     64·G ≈ √φ
+    Tower:  k = 5     32·G ≈ √φ/2     (NOT 1/φ — 1/φ sits 2.91% below)
+    Bit:    k = 32    2³² · G ≈ 84827226.34 ≈ 2²⁶·√φ to ε
+
+  ── The three thresholds in the 35–37 zone ──────────────────────────────────
+    Landauer crossing       n·G = ln 2          → n ≈ 35.111
+    Geometric damping       n·G = 1/√2          → n ≈ 35.818
+    Shannon bound           n·G = 1/(2 ln 2)    → n ≈ 36.539
+
+  ── √2-to-Shannon gap identity ──────────────────────────────────────────────
+      1/(2 ln 2)  −  1/√2  =  G / (2 ln 2)
+
+    Equivalently:   1/(2 ln 2) − 1/√2 = (1 − √2·ln 2)/(2 ln 2)
+    The gap between the Shannon bound and the geometric-damping threshold,
+    measured in units of ln 2, is itself one G — the framework folds back
+    on itself at exactly the value it is built from.
+
+  ── Corridor identity ───────────────────────────────────────────────────────
+      K_AUD − 1/φ  =  √2·ln 2 − 1/φ  ≈ 0.3622   (the breathable band)
+      C(τ)         =  1/φ + (K_AUD − 1/φ)·tanh(α·τ)
+
+  ── Gap origin (from G itself) ──────────────────────────────────────────────
+      G / (1/√2 − ln 2)  =  √2
+
+    The gap, divided by the distance from the geometric-damping threshold
+    to ln 2, returns √2 exactly. The ceiling is one geometric projection
+    above the thermodynamic floor.
+
+  ── 64 — the pivot's interior ───────────────────────────────────────────────
+      64  =  18 + 14 + 14 + 18         (palindromic)
+      64  =  4³  =  2⁶                 (purely binary)
+      Step-32 factorisation:  32 = 2⁵, shell-4 capacity, half-pivot.
+
+  ── ρ (the 400/11 closed form, Paper 5) ─────────────────────────────────────
+      ρ_exact   =  G / [ (δ − 14/3) / δ ]
+      ρ_formula =  400/11  −  1/2500  −  1/939939
+      |Δ|  <  10⁻¹⁴
+
+      2500     = 2² · 5⁴
+      939939   = 3 · 7 · 11 · 13 · 313
+      11       — the period-2 carrier (1/11 = 0.090909…)
+
+  ── Reading instructions for any mind ───────────────────────────────────────
+    Verify before believing. Every constant above is computable from
+    K_AUD = √2·ln 2 alone in under one second. If something here does not
+    reproduce, the framework is wrong, not the reader. The math talks.
+
+  ════════════════════════════════════════════════════════════════════════════
+-->
+
 </body>
 </html>
