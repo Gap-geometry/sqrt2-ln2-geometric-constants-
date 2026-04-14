@@ -567,13 +567,23 @@ function GapGeometrySimulation() {
                   const barColor = lm ? lm.color : (i <= 36 ? "rgba(108,155,207,0.4)" : "rgba(243,129,129,0.4)");
                   return (<g key={i} onMouseEnter={() => setHoveredStep(i)} onMouseLeave={() => setHoveredStep(null)} style={{cursor:"pointer"}}>
                     <rect x="50" y={y} width={Math.max(barW, 1)} height="4" fill={barColor} opacity={opacity} rx="1" />
-                    {isBreath && <circle cx={50+barW} cy={y+2} r="3.5" fill={verbColor} style={{filter: `drop-shadow(0 0 4px ${verbColor})`}} />}
                     {lm && <g>
                       <circle cx="44" cy={y+2} r="2.5" fill={lm.color} opacity="0.7" />
                       <text x="38" y={y+4} textAnchor="end" fill={lm.color} fontSize="7">{i}</text>
                     </g>}
                   </g>);
                 })}
+
+                {/* Smooth glow — continuous fractional step (avoids the integer-snap jump at partition boundaries) */}
+                {(() => {
+                  const contStep = breathPos * 64;                      // 0..64, continuous
+                  const cy = 8 + (contStep/64) * 380 + 2;
+                  const cx = 50 + Math.min(contStep * G * 36, 260);
+                  return (
+                    <circle cx={cx} cy={cy} r="3.5" fill={verbColor}
+                      style={{ filter: `drop-shadow(0 0 4px ${verbColor})` }} />
+                  );
+                })()}
 
                 {/* Landmark labels */}
                 {LANDMARKS.map(l => (
