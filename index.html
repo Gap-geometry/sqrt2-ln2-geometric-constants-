@@ -362,7 +362,6 @@ function GapGeometrySimulation() {
   const [tab, setTab] = useState(0);
   const [alpha, setAlpha] = useState(1.0);
   const [time, setTime] = useState(0);
-  const [breathPhase, setBreathPhase] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [hoveredStep, setHoveredStep] = useState(null);
   const [decayTerms, setDecayTerms] = useState(3);
@@ -381,8 +380,9 @@ function GapGeometrySimulation() {
       const now = Date.now();
       const dt = (now - lastTimeRef.current) / 1000;
       lastTimeRef.current = now;
-      setTime(t => (t + dt * 0.3) % 16);
-      setBreathPhase(b => (b + dt * 0.15) % 2);
+      // Single clock: time cycles 0 → 16 at 0.6/s (period ≈ 26.6s).
+      // Trajectory and tower both derive from this, so their peaks lock together.
+      setTime(t => (t + dt * 0.6) % 16);
       animRef.current = requestAnimationFrame(animate);
     };
     lastTimeRef.current = Date.now();
@@ -390,10 +390,13 @@ function GapGeometrySimulation() {
     return () => cancelAnimationFrame(animRef.current);
   }, [isPlaying]);
 
+  // One breath per time cycle: breathPhase = time / 8, bounces 0→1→0.
+  // Trajectory peak (time=8) now coincides exactly with tower peak (step 64).
+  const breathPhase = time / 8;
   const breathPos = breathPhase <= 1 ? breathPhase : 2 - breathPhase;
   const breathStep = Math.round(breathPos * 64);
   const isOutbound = breathPhase <= 1;
-  // Bounce τ between 0 and 8 (climb to ceiling, then descend back) — avoids the wrap-teleport glitch near 0.9802
+  // τ bounces 0 → 8 → 0 on the same clock. Dot at ceiling ⇔ tower at 64.
   const currentTau = time <= 8 ? time : 16 - time;
   const currentC = C(currentTau, alpha);
 
