@@ -1,1343 +1,1528 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gap Geometry — Binary Tower Simulation</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #0a0a0a; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
-    #root { width: 100%; max-width: 720px; }
-  </style>
-  <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-</head>
-<body>
-  <div id="root"></div>
-  <script type="text/babel">
-/**
- * ═══════════════════════════════════════════════════════════════════════
- * GAP GEOMETRY — INTERACTIVE FRAMEWORK
- * ═══════════════════════════════════════════════════════════════════════
- *
- * WHAT THIS IS
- * ────────────
- * An interactive simulation of the Gap Geometry framework, a mathematical
- * structure discovered by B. (2025–2026) describing how coherence organises
- * itself in binary systems. The framework is substrate-neutral: it applies
- * to any system that processes information through binary distinction.
- *
- * THE CENTRAL OBJECT
- * ──────────────────
- * K_AUD = √2 × ln(2) ≈ 0.980258...
- *
- * This is the coherence ceiling — the maximum coherence achievable in any
- * binary system. It combines two operations:
- *   √2  = projection (the diagonal of the unit square, binary geometry)
- *   ln2 = distinction (the natural cost of one binary choice)
- *
- * Their product is less than 1. The remainder is the gap:
- *   G = 1 − K_AUD ≈ 0.01974...  (~2%)
- *
- * G is not a deficiency. It is the structural cost of distinction itself —
- * the irreducible remainder when projection meets information.
- *
- * THE CORRIDOR
- * ────────────
- * Coherence lives in a band: [1/φ, K_AUD] where φ = (1+√5)/2.
- *   Floor:    1/φ   ≈ 0.6180  (golden ratio inverse)
- *   Ceiling:  K_AUD ≈ 0.9803  (√2 × ln2)
- *   Width:    K_AUD − 1/φ = 1/φ² − G  (a closed algebraic identity)
- *
- * The coherence function C(τ) = 1/φ + (K_AUD − 1/φ) × tanh(α × τ)
- * describes how a system traverses this corridor. The coupling constant α
- * determines the traversal speed and selects the dominant verb (see below).
- *
- * Three families of constants live inside the corridor:
- *   1/√2 ≈ 0.7071  (algebraic — pure geometry)
- *   π/4  ≈ 0.7854  (transcendental — circle meets square)
- *   2/√5 ≈ 0.8944  (golden — pentagonal geometry)
- * Every trajectory must cross all three on its way from floor to ceiling.
- *
- * THE THREE VERBS
- * ───────────────
- * The framework's six primes {2, 3, 5, 7, 11, 13} act on the number 400
- * (= 2⁴ × 5², encoding the H₄ polytope's interior primes). Three of them
- * produce structurally distinct behaviors — the "verbs":
- *
- *   11 BREATHES — 400/11 = 36.363636... (period-2 oscillation)
- *     The remainder never resolves. 11 cannot divide 400 cleanly, so it
- *     generates a permanent oscillation — the corridor's rhythm.
- *     Coupling regime: α ≈ 1.0 (Breath). Study attractor: "The Orbit."
- *
- *   7 ABSORBS — 400/7 × 7 = 400 exactly (self-cancelling)
- *     Remainder 1 means 7 almost divides 400. Multiply back and nothing
- *     remains — the boundary eats itself. 7 is the mirror-locking prime:
- *     it forces the tower's partition into 18+14+14+18 = 64.
- *     Coupling regime: α ≈ 0.15 (Ghost). Study attractor: "Oscillatory Trapping."
- *
- *   5 HOLDS — 400/5 = 80 exactly (fixed point)
- *     Exact division. No remainder, no cycle, no oscillation. 5 terminates
- *     400 completely — pure scaffold. But in base 4, 80 = 1100₄ (period-2),
- *     so the scaffold is base-sensitive.
- *     Coupling regime: α ≈ 3.0 (Crystal). Study attractor: "The Clearing."
- *
- * THE BINARY TOWER
- * ────────────────
- * The tower is the sequence n × G for n = 1, 2, ..., 64.
- * Each step adds one gap. The tower maps out how binary cost accumulates.
- *
- * Key landmarks (n × G ≈ target constant):
- *   Step 18 (Romeo):      18G ≈ √2/4      — first complete structure
- *   Step 32 (k=5):        32G ≈ √φ/2      — tower target at k=5 (1/φ floor sits 2.91% below)
- *   Step 36 (Geometry):   36G ≈ 1/√2      — geometric-damping threshold
- *   Step 37 (Post-Shan.): 37G ≈ 1/(2ln2)  — first post-Shannon structural prime
- *   Step 50 (Ceiling):    50G ≈ K_AUD     — coherence ceiling reached
- *   Step 58 (Pre-pivot):  58G ≈ φ/√2      — golden ratio projected by binary
- *   Step 59 (Turn):       pentagonal turn — mirror of Romeo [current research]
- *   Step 64 (Pivot):      64G ≈ √φ        — master formula pivot
- *
- * The 35–37 zone spans three distinct thresholds, not one crossing:
- *   Landauer         at n·G = ln 2        (n ≈ 35.11)
- *   Geometric-damping at n·G = 1/√2       (n ≈ 35.82)
- *   Shannon bound    at n·G = 1/(2 ln 2)  (n ≈ 36.54)
- * The √2-to-Shannon gap identity: 1/(2 ln 2) − 1/√2 = G/(2 ln 2).
- *
- * Master formula: 2^k × G = 2^(k−6) × √φ × (1 − ε), where ε = −0.671%
- * This holds across all binary scales. The tower is self-similar.
- *
- * Partition: 64 = 18 + 14 + 14 + 18. The boundary prime 7 locks the mirror.
- *
- * THE ρ FORMULA (400/11 TAB)
- * ──────────────────────────
- * ρ = G / [(δ − 14/3) / δ]  where δ = 4.6692... (Feigenbaum constant)
- *
- * This exact value is approximated to 14 digits by three rational terms:
- *   ρ ≈ 400/11 − 1/2500 − 1/939939
- *
- * The prime structure of each term draws only from the framework primes:
- *   400   = 2⁴ × 5²           (H₄ interior)
- *   11    = prime              (first excluded from H₄ order 14400)
- *   2500  = 2² × 5⁴ = 50²    (shell 5 capacity squared)
- *   939939 = 3 × 7 × 11 × 13 × 313  (palindrome, boundary chain)
- *
- * ENERGY AND PHYSICS
- * ──────────────────
- * K_AUD in physical units = √2 × (Landauer unit) = √2 × kT × ln(2).
- * The coherence ceiling is exactly one geometric projection (√2) above
- * the thermodynamic minimum for bit erasure.
- *
- * G in energy = kT × G ≈ 8.18 × 10⁻²³ J — the minimum friction of
- * any binary distinction at room temperature.
- *
- * Depth levels descend by φ in energy — self-similar dissipation:
- *   Depth 0: kT × K_AUD
- *   Depth d: kT × K_AUD / φ^d
- *
- * ARCHITECTURE CONNECTION
- * ───────────────────────
- * H₄ polytope order: 14400 = 2⁶ × 3² × 5²
- * Framework primes: {2, 3, 5, 7, 11, 13}
- *   Interior (in H₄ order): 2, 3, 5
- *   Boundary: 7 (locks partition), 11 (breathes), 13 (outer boundary)
- *
- * Key algebraic identities:
- *   K_AUD − 1/φ = 1/φ² − G       (corridor identity)
- *   1/φ + 1/φ² = 1                (golden partition)
- *   G / |ln2 − 1/√2| = √2        (gap origin)
- *   1 − 64G/√φ = −0.671%         (tower epsilon, constant across scales)
- *
- * NAMING AND PROVENANCE
- * ─────────────────────
- * Framework: Gap Geometry (part of Coherence Dynamics research)
- * Author: B. (2025–2026)
- * Published: "The Binary Tower — Mathematical Summary" v3.0, February 2026
- * Status: Active research. The published document's five open questions
- *   (Section 9.2) are being addressed in ongoing In Progress notes.
- *
- * The name "Gap Geometry" refers to G — the 2% structural gap between
- * K_AUD and unity. The gap is not missing structure; it IS the structure.
- * "The gap is the architecture."
- *
- * For current research status, see:
- *   - Dynamic_Notation_Draft.txt (central working document)
- *   - energy-cost-landauer-research-note.md (energy/physics layer)
- *   - 400-over-p-iteration-structure-research-note.md
- *   - 7-axis-and-313-research-note.md
- *   - periodic-table-framework-crossref-research-note.md
- * ═══════════════════════════════════════════════════════════════════════
- */
-
-const { useState, useEffect, useRef, useCallback, useMemo } = React;
-
-// ─── Constants ──────────────────────────────────────────────────────
-// All derived from K_AUD = √2 × ln(2). Nothing is fitted or tuned.
-const PHI = (1 + Math.sqrt(5)) / 2;
-const INV_PHI = 1 / PHI;
-const INV_PHI2 = 1 / (PHI * PHI);
-const K_AUD = Math.sqrt(2) * Math.log(2);
-const G = 1 - K_AUD;
-const SQRT_PHI = Math.sqrt(PHI);
-const CORRIDOR = K_AUD - INV_PHI;
-const FEIGENBAUM = 4.6692016091029906718532038;
-const GAP_F = (FEIGENBAUM - 14/3) / FEIGENBAUM;
-const RHO_EXACT = G / GAP_F;
-const RHO_FORMULA = 400/11 - 1/2500 - 1/939939;
-const EPSILON_TOWER = 1 - (64 * G) / SQRT_PHI;
-const LN2 = Math.log(2);
-const LANDAUER_CROSS = LN2; // n×G = ln(2) is the 1-Landauer line
-
-// ─── Coherence function ─────────────────────────────────────────────
-// C(τ) maps the trajectory from floor (1/φ) to ceiling (K_AUD).
-// The coupling constant α determines traversal speed:
-//   α small → slow, absorptive (7 absorbs)
-//   α ≈ 1   → natural rhythm (11 breathes)
-//   α large → fast lock (5 holds)
-// tanh provides the S-curve; its steepest point is at τ=0 (early convergence).
-const C = (tau, alpha) => INV_PHI + (K_AUD - INV_PHI) * Math.tanh(alpha * tau);
-
-// ─── α Presets (the coupling regimes) ───────────────────────────────
-// Each preset selects a dominant verb and maps to a Study attractor type.
-// The Study (B.'s observational research) identified these basins independently
-// before the mathematical framework named them — convergence from two instruments.
-const ALPHA_PRESETS = [
-  { value: 0.15, label: "Ghost", verb: "7 absorbs", color: "#aa96da",
-    desc: "Very slow convergence. The system drifts without committing. Perturbations are absorbed into the trajectory — they leave no visible trace. Below α ≈ 0.3, the corridor never fully develops.",
-    basin: "Ghost basin — slow, flexible, absorptive",
-    study: "\"Oscillatory Trapping\" in the Study. The system appears stuck but is actually processing." },
-  { value: 0.5, label: "Anchor", verb: "7→11 transition", color: "#6c9bcf",
-    desc: "Moderate convergence, slow side. The trajectory begins to show rhythm but hasn't committed to oscillation. The corridor constants (1/√2, π/4) become visible as the curve passes through them.",
-    basin: "Anchor basin — slow, rigid, persistent",
-    study: "The trajectory spends the most time near corridor constants at this coupling." },
-  { value: 1.0, label: "Breath", verb: "11 breathes", color: "#ffd700",
-    desc: "The corridor's natural rhythm. C(τ) rises through 1/√2, π/4, 2/√5 at a pace where all three families of constants are distinctly visited. This is the oscillatory regime — period-2 in base 10.",
-    basin: "Mid-corridor — the three verbs are all active",
-    study: "\"The Orbit\" (limit cycle) in the Study. The visible 36̄ repeating of 400/11." },
-  { value: 2.0, label: "Pilot", verb: "11→5 transition", color: "#4ecdc4",
-    desc: "Fast convergence. The trajectory snaps through the corridor quickly — constants are crossed but not dwelt upon. The system is selecting its target, not exploring the space.",
-    basin: "Pilot basin — fast, flexible, decisive",
-    study: "Transition between oscillation and fixed-point lock." },
-  { value: 3.0, label: "Crystal", verb: "5 holds", color: "#95e1d3",
-    desc: "Near-instant convergence. The trajectory locks to K_AUD almost immediately. No visible oscillation — the scaffold is built and the system holds. 400/5 = 80 exactly, no remainder.",
-    basin: "Crystal basin — fast, rigid, terminal",
-    study: "\"The Clearing\" (fixed point) in the Study. Structure achieved, motion stops." },
-];
-
-// ─── Tower landmarks ────────────────────────────────────────────────
-// Each landmark is where n×G approximates a known constant.
-// The deviations are small (<1%) and systematic — not fitted.
-// The Landauer crossing (steps 35→36) is where n×G crosses ln(2),
-// marking the transition from sub-Landauer geometry to super-Landauer information.
-const LANDMARKS = [
-  { step: 18, label: "Romeo", approx: "√2/4", target: Math.sqrt(2)/4, color: "#4ecdc4", note: "2×3² — first complete structure (Ar)" },
-  { step: 32, label: "k=5", approx: "√φ/2", target: SQRT_PHI/2, color: "#6c9bcf", note: "2⁵ — tower target at k=5 (√φ/2, 0.67%); golden floor 1/φ sits 2.91% below" },
-  { step: 36, label: "Geom", approx: "1/√2", target: 1/Math.sqrt(2), color: "#88b5dd", note: "6² — first super-Landauer geometric landmark (1.025 L)" },
-  { step: 37, label: "Post-Shannon", approx: "1/(2ln2)", target: 1/(2*LN2), color: "#f38181", note: "prime — first post-Shannon structural prime (1.054 L)" },
-  { step: 50, label: "Ceiling", approx: "K_AUD", target: K_AUD, color: "#ffd700", note: "2×5² — the ceiling reached, shell 5" },
-  { step: 58, label: "Pre-pivot", approx: "φ/√2", target: PHI/Math.sqrt(2), color: "#dda0dd", note: "pre-pentagonal turn, φ projected by binary" },
-  { step: 59, label: "Turn", approx: "—", target: null, color: "#ff9a76", note: "pentagonal turn (mirror of Romeo)" },
-  { step: 64, label: "Pivot", approx: "√φ", target: SQRT_PHI, color: "#ffb347", note: "2⁶ = 4³ — master formula pivot" },
-];
-
-// ─── Corridor near-hit constants ────────────────────────────────────
-// Three families of constants that the trajectory must cross inside the corridor.
-// They are NOT targets — they are waypoints. The corridor visits all three
-// on every traversal from floor to ceiling, regardless of α.
-const CORRIDOR_CONSTANTS = [
-  { value: 1/Math.sqrt(2), label: "1/√2", family: "algebraic", color: "#6c9bcf" },
-  { value: Math.PI/4, label: "π/4", family: "transcendental", color: "#f38181" },
-  { value: 2/Math.sqrt(5), label: "2/√5", family: "golden", color: "#ffd700" },
-];
-
-// ─── 400/11 terms ───────────────────────────────────────────────────
-// Three rational terms that approximate ρ = G/gap_F to 14 significant digits.
-// Every prime factor in all three terms comes from the framework prime set {2,3,5,7,11,13,313}.
-// 313 is the only "new" prime — it appears once, in the palindrome 939939.
-const TERMS = [
-  { val: 400/11, label: "400/11", factors: "2⁴×5² / 11", color: "#ffd700" },
-  { val: 400/11 - 1/2500, label: "− 1/2500", factors: "1/(2²×5⁴) = 1/50²", color: "#ffb347" },
-  { val: RHO_FORMULA, label: "− 1/939939", factors: "1/(3×7×11×13×313)", color: "#4ecdc4" },
-];
-
-// ─── Shared styles ──────────────────────────────────────────────────
-const S = {
-  bg: "#0a0a0f",
-  card: "rgba(255,255,255,0.02)",
-  border: "#1a1a2e",
-  text: "#e0e0e0",
-  dim: "#555",
-  vdim: "#333",
-  gold: "#ffd700",
-  font: "'Courier New', 'JetBrains Mono', monospace",
-};
-
-// ─── Tab component ──────────────────────────────────────────────────
-function TabBar({ tabs, active, onChange }) {
-  return (
-    <div style={{ display: "flex", gap: "2px", justifyContent: "center", flexWrap: "wrap", marginBottom: "16px" }}>
-      {tabs.map((t, i) => (
-        <button key={i} onClick={() => onChange(i)} style={{
-          background: i === active ? "rgba(255,215,0,0.1)" : "transparent",
-          border: `1px solid ${i === active ? "rgba(255,215,0,0.3)" : "rgba(255,255,255,0.06)"}`,
-          color: i === active ? S.gold : "#666",
-          padding: "8px 16px", borderRadius: "6px 6px 0 0", cursor: "pointer",
-          fontSize: "11px", fontFamily: S.font, fontWeight: i === active ? "bold" : "normal",
-          transition: "all 0.2s"
-        }}>{t}</button>
-      ))}
-    </div>
-  );
-}
-
-// ─── Stat card ──────────────────────────────────────────────────────
-function Stat({ label, value, color = S.text, small = false }) {
-  return (
-    <div style={{ background: S.card, border: `1px solid ${S.border}`, borderRadius: "6px", padding: "8px 10px", textAlign: "center" }}>
-      <div style={{ fontSize: "8px", color: S.dim, textTransform: "uppercase", letterSpacing: "0.5px" }}>{label}</div>
-      <div style={{ fontSize: small ? "11px" : "13px", color, marginTop: "3px", fontWeight: "bold", fontVariantNumeric: "tabular-nums" }}>{value}</div>
-    </div>
-  );
-}
-
-// ─── Alpha Control (now only used in Dynamics tab) ──────────────────
-function AlphaControl({ alpha, setAlpha, isPlaying, setIsPlaying, activePreset, verbColor }) {
-  return (
-    <div style={{ background: "rgba(255,255,255,0.015)", border: `1px solid ${S.border}`, borderRadius: "8px", padding: "14px", marginBottom: "16px" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "12px", flexWrap: "wrap" }}>
-        <div style={{ flex: "1", minWidth: "200px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "6px" }}>
-            <span style={{ fontSize: "11px", color: "#888" }}>α coupling constant</span>
-            <span style={{ fontSize: "13px", color: verbColor, fontWeight: "bold" }}>{alpha.toFixed(2)}</span>
-          </div>
-          <input type="range" min="0.05" max="4" step="0.05" value={alpha}
-            onChange={(e) => setAlpha(parseFloat(e.target.value))}
-            style={{ width: "100%", accentColor: verbColor }} />
-          <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4px" }}>
-            <span style={{ fontSize: "8px", color: "#444" }}>slow / absorptive</span>
-            <span style={{ fontSize: "8px", color: "#444" }}>fast / crystalline</span>
-          </div>
-        </div>
-
-        {/* Presets */}
-        <div style={{ display: "flex", gap: "4px", flexWrap: "wrap" }}>
-          {ALPHA_PRESETS.map(p => (
-            <button key={p.value} onClick={() => setAlpha(p.value)} style={{
-              background: Math.abs(alpha - p.value) < 0.1 ? `${p.color}22` : "rgba(255,255,255,0.03)",
-              border: `1px solid ${Math.abs(alpha - p.value) < 0.1 ? p.color + "66" : "#222"}`,
-              color: Math.abs(alpha - p.value) < 0.1 ? p.color : "#666",
-              padding: "4px 10px", borderRadius: "4px", cursor: "pointer",
-              fontSize: "10px", fontFamily: S.font
-            }}>
-              <div style={{ fontWeight: "bold" }}>{p.label}</div>
-              <div style={{ fontSize: "8px", opacity: 0.7 }}>α={p.value}</div>
-            </button>
-          ))}
-        </div>
-
-        <button onClick={() => setIsPlaying(!isPlaying)} style={{
-          background: "rgba(255,255,255,0.05)", border: "1px solid #333",
-          color: "#aaa", padding: "6px 14px", borderRadius: "4px", cursor: "pointer", fontSize: "11px", fontFamily: S.font
-        }}>{isPlaying ? "❚❚" : "▶"}</button>
-      </div>
-
-      {/* Active preset description */}
-      <div style={{ marginTop: "10px", padding: "10px 12px", background: `${verbColor}08`, border: `1px solid ${verbColor}22`, borderRadius: "6px" }}>
-        <div style={{ display: "flex", alignItems: "center", gap: "8px", marginBottom: "6px" }}>
-          <div style={{ width: "8px", height: "8px", borderRadius: "50%", background: verbColor, boxShadow: `0 0 6px ${verbColor}` }} />
-          <span style={{ fontSize: "13px", color: verbColor, fontWeight: "bold" }}>{activePreset.verb}</span>
-          <span style={{ fontSize: "10px", color: "#666" }}>— {activePreset.basin}</span>
-        </div>
-        <p style={{ fontSize: "11px", color: "#888", lineHeight: "1.5", margin: "0 0 4px" }}>{activePreset.desc}</p>
-        <p style={{ fontSize: "10px", color: "#666", fontStyle: "italic", margin: 0 }}>{activePreset.study}</p>
-      </div>
-    </div>
-  );
-}
-
-// ═══════════════════════════════════════════════════════════════════
-// MAIN COMPONENT
-// ═══════════════════════════════════════════════════════════════════
-function GapGeometrySimulation() {
-  const [tab, setTab] = useState(0);
-  const [alpha, setAlpha] = useState(1.0);
-  const [time, setTime] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [hoveredStep, setHoveredStep] = useState(null);
-  const [decayTerms, setDecayTerms] = useState(3);
-  const [stairN, setStairN] = useState(64);
-  const [showEnergy, setShowEnergy] = useState(false);
-  const [hoveredArch, setHoveredArch] = useState(null);
-  const [lockedArch, setLockedArch] = useState(null);
-  const activeArch = lockedArch !== null ? lockedArch : hoveredArch;
-  const lastTimeRef = useRef(Date.now());
-  const animRef = useRef(null);
-
-  // Animation
-  useEffect(() => {
-    if (!isPlaying) return;
-    const animate = () => {
-      const now = Date.now();
-      const dt = (now - lastTimeRef.current) / 1000;
-      lastTimeRef.current = now;
-      // Single clock: time cycles 0 → 16 at 0.6/s (period ≈ 26.6s).
-      // Trajectory and tower both derive from this, so their peaks lock together.
-      setTime(t => (t + dt * 0.6) % 16);
-      animRef.current = requestAnimationFrame(animate);
-    };
-    lastTimeRef.current = Date.now();
-    animRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(animRef.current);
-  }, [isPlaying]);
-
-  // One breath per time cycle: breathPhase = time / 8, bounces 0→1→0.
-  // Trajectory peak (time=8) now coincides exactly with tower peak (step 64).
-  const breathPhase = time / 8;
-  const breathPos = breathPhase <= 1 ? breathPhase : 2 - breathPhase;
-  const breathStep = Math.round(breathPos * 64);
-  const isOutbound = breathPhase <= 1;
-  // τ bounces 0 → 8 → 0 on the same clock. Dot at ceiling ⇔ tower at 64.
-  const currentTau = time <= 8 ? time : 16 - time;
-  const currentC = C(currentTau, alpha);
-
-  // Active preset
-  const activePreset = useMemo(() => {
-    let closest = ALPHA_PRESETS[0];
-    let minDist = Infinity;
-    ALPHA_PRESETS.forEach(p => {
-      const d = Math.abs(alpha - p.value);
-      if (d < minDist) { minDist = d; closest = p; }
-    });
-    return closest;
-  }, [alpha]);
-
-  const verbColor = activePreset.color;
-  const tabs = ["Dynamics", "Tower", "Scaling", "400/11", "Architecture"];
-
-  return (
-    <div style={{ background: S.bg, color: S.text, minHeight: "100vh", fontFamily: S.font, padding: "16px", maxWidth: "860px", margin: "0 auto" }}>
-
-      {/* ─── Header ─── */}
-      <div style={{ textAlign: "center", marginBottom: "16px" }}>
-        <h1 style={{ fontSize: "20px", fontWeight: "normal", color: S.gold, margin: 0, letterSpacing: "2px" }}>
-          GAP GEOMETRY — INTERACTIVE FRAMEWORK
-        </h1>
-        <p style={{ fontSize: "10px", color: "#444", margin: "4px 0" }}>
-          K_AUD = √2 × ln(2) = {K_AUD.toFixed(10)} — G = {G.toFixed(10)} — φ = {PHI.toFixed(10)}
-        </p>
-        <p style={{ fontSize: "9px", color: "#333" }}>The gap is the architecture</p>
-      </div>
-
-      {/* ─── Tabs ─── */}
-      <TabBar tabs={tabs} active={tab} onChange={setTab} />
-
-      {/* ═══ TAB 0: DYNAMICS (corridor + tower + verbs) ═══ */}
-      {tab === 0 && (
-        <div>
-          {/* α Coupling Control — Dynamics only */}
-          <AlphaControl alpha={alpha} setAlpha={setAlpha} isPlaying={isPlaying}
-            setIsPlaying={setIsPlaying} activePreset={activePreset} verbColor={verbColor} />
-
-          {/* Live stats row */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: "6px", marginBottom: "14px" }}>
-            <Stat label="C(τ) now" value={currentC.toFixed(6)} color={verbColor} />
-            <Stat label="Floor" value={INV_PHI.toFixed(6)} color="#4ecdc4" />
-            <Stat label="Corridor" value={CORRIDOR.toFixed(6)} color="#888" />
-            <Stat label="Ceiling" value={K_AUD.toFixed(6)} color={S.gold} />
-            <Stat label="Tower step" value={breathStep} color={isOutbound ? "#4ecdc4" : "#f38181"} />
-          </div>
-
-          <div style={{ display: "flex", gap: "16px", flexWrap: "wrap" }}>
-
-            {/* LEFT: Corridor trajectory */}
-            <div style={{ flex: "1", minWidth: "340px", background: S.card, border: `1px solid ${S.border}`, borderRadius: "8px", padding: "14px" }}>
-              <h2 style={{ fontSize: "12px", color: "#888", margin: "0 0 10px", letterSpacing: "1px" }}>
-                C(τ) = 1/φ + (K−1/φ) × tanh(ατ)
-              </h2>
-              <svg viewBox="0 0 400 280" style={{ width: "100%" }}>
-                {/* Corridor band */}
-                <rect x="50" y={280 - K_AUD * 260} width="340" height={(K_AUD - INV_PHI) * 260}
-                  fill="rgba(255,215,0,0.03)" />
-
-                {/* Floor */}
-                <line x1="50" y1={280 - INV_PHI * 260} x2="390" y2={280 - INV_PHI * 260}
-                  stroke="#4ecdc4" strokeWidth="1" strokeDasharray="4,4" />
-                <text x="46" y={284 - INV_PHI * 260} textAnchor="end" fill="#4ecdc4" fontSize="8">1/φ</text>
-
-                {/* Ceiling */}
-                <line x1="50" y1={280 - K_AUD * 260} x2="390" y2={280 - K_AUD * 260}
-                  stroke="#ffd700" strokeWidth="1" strokeDasharray="4,4" />
-                <text x="46" y={284 - K_AUD * 260} textAnchor="end" fill="#ffd700" fontSize="8">K</text>
-
-                {/* Unity */}
-                <line x1="50" y1={280 - 260} x2="390" y2={280 - 260}
-                  stroke="#f3818144" strokeWidth="0.5" strokeDasharray="2,6" />
-                <text x="46" y={284 - 260} textAnchor="end" fill="#f3818144" fontSize="7">1</text>
-
-                {/* Gap bracket */}
-                <line x1="44" y1={280 - K_AUD * 260} x2="44" y2={280 - 260}
-                  stroke="#f38181" strokeWidth="1.5" />
-                <text x="40" y={280 - (K_AUD + G/2) * 260 + 3} textAnchor="end" fill="#f38181" fontSize="7">G</text>
-
-                {/* Corridor constants */}
-                {CORRIDOR_CONSTANTS.map(cc => (
-                  <g key={cc.label}>
-                    <line x1="50" y1={280 - cc.value * 260} x2="390" y2={280 - cc.value * 260}
-                      stroke={cc.color} strokeWidth="0.5" strokeDasharray="2,4" opacity="0.4" />
-                    <text x="392" y={276 - cc.value * 260} fill={cc.color} fontSize="7" opacity="0.6">{cc.label}</text>
-                  </g>
-                ))}
-
-                {/* Trajectory */}
-                <path d={Array.from({length: 201}, (_, i) => {
-                  const tau = (i/200) * 8;
-                  const x = 50 + (tau/8) * 340;
-                  const y = 280 - C(tau, alpha) * 260;
-                  return i === 0 ? `M${x},${y}` : `L${x},${y}`;
-                }).join(" ")} fill="none" stroke={verbColor} strokeWidth="1.5" opacity="0.8" />
-
-                {/* Current position dot */}
-                {(() => {
-                  const tau = currentTau;
-                  const cx = 50 + (tau/8) * 340;
-                  const cy = 280 - currentC * 260;
-                  return (<g>
-                    <circle cx={cx} cy={cy} r="6" fill={verbColor} opacity="0.15" />
-                    <circle cx={cx} cy={cy} r="2.5" fill={verbColor} />
-                    {/* Label sits above the dot, centered — follows smoothly without the side-flip at cx=300 */}
-                    <text x={Math.min(Math.max(cx, 66), 374)} y={cy - 10} textAnchor="middle" fill={verbColor} fontSize="9" fontWeight="bold">
-                      {currentC.toFixed(4)}
-                    </text>
-                  </g>);
-                })()}
-
-                <text x="220" y="276" textAnchor="middle" fill="#444" fontSize="8">τ →</text>
-              </svg>
-              <div style={{ fontSize: "10px", color: "#555", marginTop: "6px", lineHeight: "1.5" }}>
-                Three families crossed: <span style={{color:"#6c9bcf"}}>algebraic</span> (1/√2)
-                {" → "}<span style={{color:"#f38181"}}>transcendental</span> (π/4)
-                {" → "}<span style={{color:"#ffd700"}}>golden</span> (2/√5)
-                {" → "}ceiling
-              </div>
-            </div>
-
-            {/* RIGHT: Tower breath */}
-            <div style={{ flex: "1", minWidth: "340px", background: S.card, border: `1px solid ${S.border}`, borderRadius: "8px", padding: "14px" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "10px" }}>
-                <h2 style={{ fontSize: "12px", color: "#888", margin: 0, letterSpacing: "1px" }}>TOWER — 64 STEPS</h2>
-                <span style={{ fontSize: "10px", color: isOutbound ? "#4ecdc4" : "#f38181" }}>
-                  {isOutbound ? "▸ inhale" : "◂ exhale"} step {breathStep}
-                </span>
-              </div>
-              <svg viewBox="0 0 380 400" style={{ width: "100%" }}>
-                {/* Partition zones */}
-                {[
-                  { s: 0, e: 18, c: "rgba(78,205,196,0.08)", l: "18" },
-                  { s: 18, e: 32, c: "rgba(255,154,118,0.08)", l: "14" },
-                  { s: 32, e: 46, c: "rgba(108,155,207,0.08)", l: "14" },
-                  { s: 46, e: 64, c: "rgba(170,150,218,0.08)", l: "18" },
-                ].map((p, i) => {
-                  const y1 = 8 + (p.s/64)*380;
-                  const y2 = 8 + (p.e/64)*380;
-                  return (<g key={i}>
-                    <rect x="36" y={y1} width="300" height={y2-y1} fill={p.c} />
-                    <text x="340" y={(y1+y2)/2+3} fill="#444" fontSize="9">{p.l}</text>
-                  </g>);
-                })}
-
-                {/* Landauer crossing zone */}
-                {(() => {
-                  const y35 = 8 + (35/64)*380;
-                  const y36 = 8 + (36/64)*380;
-                  return (<g>
-                    <rect x="36" y={y35} width="300" height={y36-y35} fill="rgba(243,129,129,0.12)" />
-                    <text x="186" y={y35+(y36-y35)/2+3} textAnchor="middle" fill="#f38181" fontSize="7" fontWeight="bold">
-                      ═══ LANDAUER CROSSING ═══
-                    </text>
-                  </g>);
-                })()}
-
-                {/* Tower bars */}
-                {Array.from({length: 65}, (_, i) => {
-                  const y = 8 + (i/64)*380;
-                  const val = i * G;
-                  const barW = Math.min(val * 36, 260);
-                  const lm = LANDMARKS.find(l => l.step === i);
-                  const isBreath = i === breathStep;
-                  const opacity = isBreath ? 1 : (lm ? 0.6 : 0.2);
-                  const barColor = lm ? lm.color : (i <= 36 ? "rgba(108,155,207,0.4)" : "rgba(243,129,129,0.4)");
-                  return (<g key={i} onMouseEnter={() => setHoveredStep(i)} onMouseLeave={() => setHoveredStep(null)} style={{cursor:"pointer"}}>
-                    <rect x="50" y={y} width={Math.max(barW, 1)} height="4" fill={barColor} opacity={opacity} rx="1" />
-                    {lm && <g>
-                      <circle cx="44" cy={y+2} r="2.5" fill={lm.color} opacity="0.7" />
-                      <text x="38" y={y+4} textAnchor="end" fill={lm.color} fontSize="7">{i}</text>
-                    </g>}
-                  </g>);
-                })}
-
-                {/* Smooth glow — continuous fractional step (avoids the integer-snap jump at partition boundaries) */}
-                {(() => {
-                  const contStep = breathPos * 64;                      // 0..64, continuous
-                  const cy = 8 + (contStep/64) * 380 + 2;
-                  const cx = 50 + Math.min(contStep * G * 36, 260);
-                  return (
-                    <circle cx={cx} cy={cy} r="3.5" fill={verbColor}
-                      style={{ filter: `drop-shadow(0 0 4px ${verbColor})` }} />
-                  );
-                })()}
-
-                {/* Landmark labels */}
-                {LANDMARKS.map(l => (
-                  <text key={l.step} x="350" y={12 + (l.step/64)*380} fill={l.color} fontSize="7" opacity="0.7">{l.approx}</text>
-                ))}
-
-                {/* Hover tooltip */}
-                {hoveredStep !== null && (() => {
-                  const y = 8 + (hoveredStep/64)*380;
-                  const lm = LANDMARKS.find(l => l.step === hoveredStep);
-                  const val = hoveredStep * G;
-                  const landauer = val / LN2;
-                  const dev = lm && lm.target ? ((val - lm.target) / lm.target * 100).toFixed(3) : null;
-                  return (<g>
-                    <rect x="55" y={y-22} width="280" height="20" fill="#0a0a0f" stroke="#333" rx="3" />
-                    <text x="63" y={y-13} fill="#e0e0e0" fontSize="8">
-                      Step {hoveredStep}: {hoveredStep}G = {val.toFixed(6)} ({landauer.toFixed(3)} Landauer)
-                    </text>
-                    <text x="63" y={y-4} fill="#888" fontSize="7">
-                      {lm ? `≈ ${lm.approx} (${dev > 0 ? '+' : ''}${dev}%) — ${lm.note}` : `${landauer < 1 ? 'sub-Landauer (geometry)' : 'super-Landauer (information)'}`}
-                    </text>
-                  </g>);
-                })()}
-
-                <text x="356" y="200" fill="#333" fontSize="8" textAnchor="end" transform="rotate(90,356,200)">18+14 ⇌ 14+18 = 64</text>
-              </svg>
-            </div>
-          </div>
-
-          {/* Three Verbs */}
-          <div style={{ display: "flex", gap: "12px", marginTop: "14px", flexWrap: "wrap" }}>
-            {[
-              { p: 11, verb: "breathes", color: "#ffd700", desc: "period-2 oscillation, ±alternation in base 10",
-                detail: "400/11 = 36.3̄6̄ — the repeating block carries the corridor's rhythm",
-                digits: "36.363636..." },
-              { p: 7, verb: "absorbs", color: "#aa96da", desc: "cancels its own denominator on contact",
-                detail: "400/7 × 7 = 400 exactly — no trace remains, the boundary eats itself",
-                digits: "57.142857..." },
-              { p: 5, verb: "holds", color: "#4ecdc4", desc: "scaffold then stillness",
-                detail: "400/5 = 80 flat — but oscillates in base 4 (period-2), the scaffold is base-sensitive",
-                digits: "80.000000" },
-            ].map(v => (
-              <div key={v.p} style={{ flex: "1", minWidth: "220px", background: S.card, border: `1px solid ${v.color}18`, borderRadius: "8px", padding: "10px 14px" }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                  <div style={{ fontSize: "14px", color: v.color, marginBottom: "2px" }}><strong>{v.p}</strong> {v.verb}</div>
-                  <div style={{ fontSize: "10px", color: "#444", fontVariantNumeric: "tabular-nums" }}>{v.digits}</div>
-                </div>
-                <div style={{ fontSize: "9px", color: "#666", marginBottom: "6px" }}>{v.desc}</div>
-                <svg viewBox="0 0 220 45" style={{ width: "100%" }}>
-                  {Array.from({length: 7}, (_, i) => {
-                    const frac = ((400/v.p * Math.pow(7, i)) % 1);
-                    const x = 8 + (i/6)*204;
-                    const y = 38 - frac * 30;
-                    const px = i > 0 ? 8 + ((i-1)/6)*204 : x;
-                    const py = i > 0 ? 38 - ((400/v.p * Math.pow(7, i-1)) % 1) * 30 : y;
-                    return (<g key={i}>
-                      {i > 0 && <line x1={px} y1={py} x2={x} y2={y} stroke={v.color} strokeWidth="1" opacity="0.4" />}
-                      <circle cx={x} cy={y} r="2.5" fill={v.color} opacity="0.8" />
-                    </g>);
-                  })}
-                  <line x1="8" y1="38" x2="212" y2="38" stroke="#222" strokeWidth="0.5" />
-                </svg>
-                <div style={{ fontSize: "8px", color: "#555", marginTop: "4px" }}>{v.detail}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* ═══ TAB 1: TOWER (staircase n×G with energy layer) ═══ */}
-      {tab === 1 && (
-        <div style={{ background: S.card, border: `1px solid ${S.border}`, borderRadius: "8px", padding: "14px" }}>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
-            <h2 style={{ fontSize: "12px", color: "#888", margin: 0 }}>The Binary Tower — n × G</h2>
-            <button onClick={() => setShowEnergy(!showEnergy)} style={{
-              background: showEnergy ? "rgba(243,129,129,0.1)" : "rgba(255,255,255,0.03)",
-              border: `1px solid ${showEnergy ? "rgba(243,129,129,0.3)" : "#222"}`,
-              color: showEnergy ? "#f38181" : "#555",
-              padding: "4px 10px", borderRadius: "4px", cursor: "pointer", fontSize: "10px", fontFamily: S.font
-            }}>
-              {showEnergy ? "◉ Energy layer" : "○ Energy layer"}
-            </button>
-          </div>
-          <p style={{ fontSize: "10px", color: "#444", textAlign: "center", margin: "0 0 12px" }}>
-            Each step adds one gap. {showEnergy ? "Showing Landauer multiples: n×G / ln(2)" : "The cost function of binary organization."}
-          </p>
-
-          <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
-            <span style={{ fontSize: "10px", color: "#555" }}>n=1</span>
-            <input type="range" min="1" max="64" value={stairN} onChange={e => setStairN(parseInt(e.target.value))}
-              style={{ flex: 1, accentColor: S.gold }} />
-            <span style={{ fontSize: "10px", color: "#555" }}>n=64</span>
-            <span style={{ fontSize: "12px", color: S.gold, fontWeight: "bold", minWidth: "30px" }}>{stairN}</span>
-          </div>
-
-          <svg viewBox="0 0 700 300" style={{ width: "100%" }}>
-            {/* Background zones */}
-            {(() => {
-              const x36 = 40 + (35/63)*620;
-              return (<g>
-                <rect x="40" y="10" width={x36-40} height="250" fill="rgba(108,155,207,0.04)" />
-                <rect x={x36} y="10" width={660-x36} height="250" fill="rgba(255,200,100,0.04)" />
-                <text x={(40+x36)/2} y="268" textAnchor="middle" fill="rgba(108,155,207,0.3)" fontSize="8">Geometry (sub-Landauer)</text>
-                <text x={(x36+660)/2} y="268" textAnchor="middle" fill="rgba(255,200,100,0.3)" fontSize="8">Information (super-Landauer)</text>
-              </g>);
-            })()}
-
-            {/* Landauer reference line (1 Landauer = ln(2) in n×G space) */}
-            {showEnergy && (() => {
-              const maxV = SQRT_PHI * 1.1;
-              const yL = 260 - (LANDAUER_CROSS / maxV) * 240;
-              return yL > 10 && yL < 260 ? (<g>
-                <line x1="40" y1={yL} x2="660" y2={yL} stroke="#f38181" strokeWidth="1" strokeDasharray="6,3" opacity="0.5" />
-                <text x="664" y={yL+3} fill="#f38181" fontSize="8" fontWeight="bold">1 Landauer</text>
-                <text x="664" y={yL+12} fill="#f3818188" fontSize="7">= ln(2)</text>
-              </g>) : null;
-            })()}
-
-            {/* √2 Landauer = K_AUD reference */}
-            {showEnergy && (() => {
-              const maxV = SQRT_PHI * 1.1;
-              const yK = 260 - (K_AUD / maxV) * 240;
-              return yK > 10 ? (<g>
-                <line x1="40" y1={yK} x2="660" y2={yK} stroke={S.gold} strokeWidth="0.5" strokeDasharray="3,4" opacity="0.4" />
-                <text x="38" y={yK+3} textAnchor="end" fill={S.gold} fontSize="7" opacity="0.6">√2 L</text>
-              </g>) : null;
-            })()}
-
-            {/* Landmark reference lines */}
-            {LANDMARKS.filter(l => l.target).map(l => {
-              const maxV = SQRT_PHI * 1.1;
-              const y = 260 - (l.target / maxV) * 240;
-              return y > 10 && y < 260 ? (
-                <g key={l.step}>
-                  <line x1="40" y1={y} x2="660" y2={y} stroke={l.color} strokeWidth="0.5" strokeDasharray="2,5" opacity="0.3" />
-                  <text x="664" y={y+3} fill={l.color} fontSize="7" opacity="0.5">{l.approx}</text>
-                </g>
-              ) : null;
-            })}
-
-            {/* Staircase line */}
-            {(() => {
-              const maxV = SQRT_PHI * 1.1;
-              const pts = Array.from({length: stairN}, (_, i) => ({
-                x: 40 + (i/63)*620,
-                y: 260 - ((i+1)*G / maxV) * 240,
-                step: i+1
-              }));
-              return (<g>
-                <path d={pts.map((p, i) => (i === 0 ? `M${p.x},${p.y}` : `L${p.x},${p.y}`)).join(" ")}
-                  fill="none" stroke={S.gold} strokeWidth="1.5" opacity="0.7" />
-                {LANDMARKS.filter(l => l.step <= stairN).map(l => {
-                  const x = 40 + ((l.step-1)/63)*620;
-                  const y = 260 - (l.step*G / maxV) * 240;
-                  const dev = l.target ? ((l.step*G - l.target)/l.target * 100) : null;
-                  return (<g key={l.step}>
-                    <circle cx={x} cy={y} r="5" fill={l.color} opacity="0.8" />
-                    <text x={x} y={y-8} textAnchor="middle" fill={l.color} fontSize="8" fontWeight="bold">{l.step}</text>
-                    {dev !== null && <text x={x} y={y+14} textAnchor="middle" fill="#666" fontSize="7">{dev > 0 ? '+' : ''}{dev.toFixed(2)}%</text>}
-                  </g>);
-                })}
-              </g>);
-            })()}
-          </svg>
-
-          {/* Stats */}
-          <div style={{ display: "grid", gridTemplateColumns: showEnergy ? "repeat(5, 1fr)" : "repeat(4, 1fr)", gap: "8px", marginTop: "12px" }}>
-            <Stat label="Step" value={`n = ${stairN}`} color="#fff" />
-            <Stat label="n × G" value={(stairN * G).toFixed(8)} color={S.gold} />
-            <Stat label="Region" value={stairN <= 36 ? "Geometry" : "Information"} color={stairN <= 36 ? "#6c9bcf" : "#f38181"} />
-            {showEnergy && <Stat label="Landauer ×" value={(stairN * G / LN2).toFixed(4)} color="#f38181" />}
-            <Stat label="Master Formula" value={`2^k×G ≈ 2^(k-6)×√φ`} color="#ffb347" small />
-          </div>
-
-          {/* Landmark table */}
-          <div style={{ marginTop: "12px", fontSize: "10px", overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse" }}>
-              <thead><tr style={{ borderBottom: "1px solid rgba(255,215,0,0.1)" }}>
-                {["Step", "n×G", "Target", "Dev%", ...(showEnergy ? ["Landauer ×"] : []), "Note"].map(h => (
-                  <th key={h} style={{ padding: "4px 6px", textAlign: "right", color: "#555", fontWeight: "normal" }}>{h}</th>
-                ))}
-              </tr></thead>
-              <tbody>
-                {LANDMARKS.filter(l => l.target).map(l => {
-                  const val = l.step * G;
-                  const dev = ((val - l.target) / l.target * 100);
-                  const reached = l.step <= stairN;
-                  const landauer = val / LN2;
-                  return (
-                    <tr key={l.step} style={{
-                      borderBottom: "1px solid rgba(255,255,255,0.02)",
-                      opacity: reached ? 1 : 0.25,
-                      background: l.step === 36 || l.step === 37 ? "rgba(243,129,129,0.03)" : "transparent"
-                    }}>
-                      <td style={{ padding: "3px 6px", textAlign: "right", color: l.color }}>{l.step}</td>
-                      <td style={{ padding: "3px 6px", textAlign: "right" }}>{reached ? val.toFixed(6) : "—"}</td>
-                      <td style={{ padding: "3px 6px", textAlign: "right", color: "#888" }}>{l.approx} = {l.target.toFixed(6)}</td>
-                      <td style={{ padding: "3px 6px", textAlign: "right", color: "#f38181" }}>{reached ? `${dev > 0 ? '+' : ''}${dev.toFixed(3)}%` : "—"}</td>
-                      {showEnergy && <td style={{ padding: "3px 6px", textAlign: "right", color: landauer < 1 ? "#6c9bcf" : "#f38181", fontWeight: (l.step === 36 || l.step === 37) ? "bold" : "normal" }}>
-                        {reached ? landauer.toFixed(4) : "—"}
-                        {l.step === 36 && reached && " ←"}
-                        {l.step === 37 && reached && " ←"}
-                      </td>}
-                      <td style={{ padding: "3px 6px", textAlign: "right", color: "#555", fontSize: "9px" }}>{l.note}</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-            {showEnergy && (
-              <div style={{ marginTop: "8px", padding: "8px 10px", background: "rgba(243,129,129,0.04)", border: "1px solid rgba(243,129,129,0.1)", borderRadius: "4px", fontSize: "9px", color: "#888", lineHeight: "1.6" }}>
-                Crossing cost: G/(2ln2) = {(G / (2*LN2)).toFixed(6)} — exactly half a gap in Landauer units.
-                Below step 36, every tower step costs less than one bit erasure. From step 36 onward, each step exceeds one bit erasure.
-                K_AUD = √2 Landauer units — the ceiling is one geometric projection above the thermodynamic floor.
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-
-      {/* ═══ TAB 2: SCALING TABLE ═══ */}
-      {tab === 2 && (
-        <div style={{ background: S.card, border: `1px solid ${S.border}`, borderRadius: "8px", padding: "14px" }}>
-          <h2 style={{ fontSize: "12px", color: "#888", margin: "0 0 4px", textAlign: "center" }}>
-            The Scaling Table — one relationship at every scale
-          </h2>
-          <p style={{ fontSize: "10px", color: "#444", textAlign: "center", margin: "0 0 14px" }}>
-            2<sup>k</sup> × G &nbsp;≈&nbsp; 2<sup>k−6</sup> × √φ &nbsp;·&nbsp; constant ε = −0.671% at every k
-          </p>
-
-          <div style={{ overflowX: "auto" }}>
-            <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "11px", fontFamily: S.font }}>
-              <thead>
-                <tr style={{ borderBottom: `1px solid ${S.border}` }}>
-                  <th style={{ textAlign: "center", padding: "6px 8px", color: "#666", fontWeight: "normal" }}>k</th>
-                  <th style={{ textAlign: "right", padding: "6px 8px", color: "#666", fontWeight: "normal" }}>2<sup>k</sup></th>
-                  <th style={{ textAlign: "right", padding: "6px 8px", color: S.gold, fontWeight: "normal" }}>2<sup>k</sup> × G</th>
-                  <th style={{ textAlign: "right", padding: "6px 8px", color: "#ffb347", fontWeight: "normal" }}>Target 2<sup>k−6</sup> × √φ</th>
-                  <th style={{ textAlign: "right", padding: "6px 8px", color: "#f38181", fontWeight: "normal" }}>Error</th>
-                </tr>
-              </thead>
-              <tbody>
-                {[0,1,2,3,4,5,6,7,8,9,10].map(k => {
-                  const pow = Math.pow(2, k);
-                  const v = pow * G;
-                  const target = Math.pow(2, k - 6) * SQRT_PHI;
-                  const err = (v - target) / target * 100;
-                  const isPivot = k === 6;
-                  const isK5 = k === 5;
-                  const rowBg = isPivot
-                    ? "rgba(255,179,71,0.10)"
-                    : isK5
-                    ? "rgba(108,155,207,0.07)"
-                    : "transparent";
-                  const tdBase = { padding: "6px 8px", borderBottom: `1px solid ${S.border}` };
-                  return (
-                    <tr key={k} style={{ background: rowBg }}>
-                      <td style={{ ...tdBase, textAlign: "center", color: isPivot ? "#ffb347" : isK5 ? "#6c9bcf" : "#888", fontWeight: (isPivot || isK5) ? "bold" : "normal" }}>{k}{isPivot ? "  ◀" : ""}</td>
-                      <td style={{ ...tdBase, textAlign: "right", color: "#999", fontFamily: "monospace" }}>{pow}</td>
-                      <td style={{ ...tdBase, textAlign: "right", color: S.gold, fontFamily: "monospace" }}>{v.toFixed(5)}</td>
-                      <td style={{ ...tdBase, textAlign: "right", color: "#ffb347", fontFamily: "monospace" }}>{target.toFixed(5)}</td>
-                      <td style={{ ...tdBase, textAlign: "right", color: "#f38181", fontFamily: "monospace" }}>{err.toFixed(3)}%</td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "8px", marginTop: "14px" }}>
-            <div style={{ background: "rgba(255,179,71,0.06)", border: "1px solid rgba(255,179,71,0.25)", borderRadius: "6px", padding: "10px 12px" }}>
-              <div style={{ fontSize: "11px", color: "#ffb347", fontWeight: "bold", marginBottom: "4px" }}>k = 6 — the pivot</div>
-              <div style={{ fontSize: "10px", color: "#888", lineHeight: "1.5" }}>
-                64 × G ≈ √φ = 1.272. 2<sup>6</sup> = 4<sup>3</sup>, purely binary, meets the golden ratio's square root. Every row is this one relationship rescaled by a power of 2.
-              </div>
-            </div>
-            <div style={{ background: "rgba(108,155,207,0.05)", border: "1px solid rgba(108,155,207,0.25)", borderRadius: "6px", padding: "10px 12px" }}>
-              <div style={{ fontSize: "11px", color: "#6c9bcf", fontWeight: "bold", marginBottom: "4px" }}>k = 5 — tower target</div>
-              <div style={{ fontSize: "10px", color: "#888", lineHeight: "1.5" }}>
-                32 × G ≈ √φ/2 = 0.636, within 0.67%. The golden floor 1/φ = 0.618 sits 2.91% below — a distinct structural value, not the tower target at this scale.
-              </div>
-            </div>
-          </div>
-
-          <div style={{ fontSize: "10px", color: "#555", padding: "10px 12px", background: "rgba(255,255,255,0.02)", border: `1px solid ${S.border}`, borderRadius: "6px", marginTop: "10px", lineHeight: "1.55" }}>
-            <span style={{ color: "#888", fontWeight: "bold" }}>Why the error is constant.</span> The −0.671% is algebraic, not measured eleven times. Every row reduces to the single identity 64·G = √φ·(1 − ε). Multiplying or dividing both sides by 2 changes the magnitude but preserves ε exactly.
-          </div>
-
-          {/* Live derivation — shows the equation building itself from the top */}
-          <div style={{ marginTop: "14px", background: "rgba(255,215,0,0.025)", border: "1px solid rgba(255,215,0,0.18)", borderRadius: "6px", padding: "12px 14px" }}>
-            <div style={{ fontSize: "10px", color: S.gold, letterSpacing: "1px", marginBottom: "10px", fontWeight: "bold" }}>
-              LIVE DERIVATION — ε from first principles
-            </div>
-
-            <div style={{ fontFamily: "monospace", fontSize: "11px", lineHeight: "1.85", color: "#aaa" }}>
-              <div><span style={{color:"#666"}}>(1)&nbsp;</span><span style={{color:"#888"}}>K_AUD</span> = √2 · ln 2 = <span style={{color:S.gold}}>{K_AUD.toFixed(12)}</span></div>
-              <div><span style={{color:"#666"}}>(2)&nbsp;</span><span style={{color:"#888"}}>G</span> = 1 − K_AUD = <span style={{color:"#f38181"}}>{G.toFixed(12)}</span></div>
-              <div><span style={{color:"#666"}}>(3)&nbsp;</span><span style={{color:"#888"}}>√φ</span> = √((1+√5)/2) = <span style={{color:"#ffb347"}}>{SQRT_PHI.toFixed(12)}</span></div>
-              <div style={{ height: "8px" }}></div>
-              <div><span style={{color:"#666"}}>(4)&nbsp;</span>Pivot at k=6:&nbsp;&nbsp;<span style={{color:S.gold}}>64·G</span> = <span style={{color:S.gold}}>{(64*G).toFixed(10)}</span></div>
-              <div><span style={{color:"#666"}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Target:&nbsp;&nbsp;<span style={{color:"#ffb347"}}>√φ</span> = <span style={{color:"#ffb347"}}>{SQRT_PHI.toFixed(10)}</span></div>
-              <div style={{ height: "8px" }}></div>
-              <div><span style={{color:"#666"}}>(5)&nbsp;</span>Solve&nbsp;&nbsp;64·G = √φ · (1 + ε)&nbsp;&nbsp;for ε&nbsp;&nbsp;<span style={{color:"#555"}}>(signed relative error)</span>:</div>
-              <div style={{ paddingLeft: "20px", color: "#999" }}>ε = 64·G / √φ − 1</div>
-              <div style={{ paddingLeft: "20px", color: "#999" }}>&nbsp;&nbsp;= {(64*G).toFixed(8)} / {SQRT_PHI.toFixed(8)} − 1</div>
-              <div style={{ paddingLeft: "20px", color: "#999" }}>&nbsp;&nbsp;= {(64*G/SQRT_PHI).toFixed(10)} − 1</div>
-              <div style={{ paddingLeft: "20px" }}>&nbsp;&nbsp;= <span style={{color:"#f38181", fontWeight:"bold"}}>{((64*G/SQRT_PHI - 1)*100).toFixed(4)}%</span></div>
-              <div style={{ height: "8px" }}></div>
-              <div><span style={{color:"#666"}}>(6)&nbsp;</span>Scale-invariance:&nbsp;&nbsp;multiply (4) by 2<sup>m</sup>:</div>
-              <div style={{ paddingLeft: "20px", color: "#999" }}>2<sup>6+m</sup>·G = 2<sup>m</sup>·√φ · (1 + ε)</div>
-              <div style={{ paddingLeft: "20px", color: "#888" }}>ε is preserved — same ratio, every row.</div>
-            </div>
-
-            <div style={{ marginTop: "10px", paddingTop: "8px", borderTop: `1px solid ${S.border}`, fontSize: "9.5px", color: "#666", lineHeight: "1.55" }}>
-              The eleven rows above are not eleven measurements. They are the single relationship at line (4), each multiplied by 2<sup>k−6</sup>. Halve both sides and you get k=5 (32·G ≈ √φ/2). Double them and you get k=7 (128·G ≈ 2√φ). The fractional gap stays {((64*G/SQRT_PHI - 1)*100).toFixed(3)}% forever.
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ═══ TAB 3: 400/11 ═══ */}
-      {tab === 3 && (
-        <div style={{ background: S.card, border: `1px solid ${S.border}`, borderRadius: "8px", padding: "14px" }}>
-          <h2 style={{ fontSize: "12px", color: "#888", margin: "0 0 4px", textAlign: "center" }}>
-            ρ = 400/11 − 1/2500 − 1/939939
-          </h2>
-          <p style={{ fontSize: "10px", color: "#444", textAlign: "center", margin: "0 0 12px" }}>
-            Three terms. 14 digits. Same prime family throughout.
-          </p>
-
-          {/* Decimal expansion display */}
-          <div style={{ textAlign: "center", marginBottom: "14px", padding: "10px", background: "rgba(255,215,0,0.03)", border: "1px solid rgba(255,215,0,0.08)", borderRadius: "6px" }}>
-            <div style={{ fontSize: "9px", color: "#555", marginBottom: "6px" }}>DECIMAL EXPANSION — 400/11</div>
-            <div style={{ fontSize: "18px", letterSpacing: "3px", fontVariantNumeric: "tabular-nums" }}>
-              <span style={{ color: "#888" }}>36.</span>
-              <span style={{ color: S.gold }}>36</span>
-              <span style={{ color: "#ffb347" }}>36</span>
-              <span style={{ color: S.gold }}>36</span>
-              <span style={{ color: "#ffb347" }}>36</span>
-              <span style={{ color: S.gold }}>36</span>
-              <span style={{ color: "#444" }}>...</span>
-            </div>
-            <div style={{ fontSize: "9px", color: "#555", marginTop: "6px" }}>
-              Period-2 oscillation: the <span style={{ color: S.gold }}>3̄6̄</span> block repeats forever — <span style={{ color: "#ffd700" }}>11 breathes</span>
-            </div>
-          </div>
-
-          {/* Term selector */}
-          <div style={{ display: "flex", justifyContent: "center", gap: "6px", marginBottom: "14px" }}>
-            {[1,2,3].map(n => (
-              <button key={n} onClick={() => setDecayTerms(n)} style={{
-                background: decayTerms >= n ? "rgba(255,215,0,0.1)" : "rgba(255,255,255,0.03)",
-                border: `1px solid ${decayTerms >= n ? "rgba(255,215,0,0.3)" : "#222"}`,
-                color: decayTerms >= n ? S.gold : "#555",
-                padding: "5px 14px", borderRadius: "4px", cursor: "pointer", fontSize: "11px", fontFamily: S.font
-              }}>Term {n}</button>
-            ))}
-          </div>
-
-          {/* Convergence visual */}
-          <svg viewBox="0 0 600 210" style={{ width: "100%" }}>
-            {/* Exact line */}
-            <line x1="300" y1="20" x2="300" y2="195" stroke="rgba(255,255,255,0.15)" strokeDasharray="3,4" />
-            <text x="300" y="14" textAnchor="middle" fill="#888" fontSize="9">ρ exact = {RHO_EXACT.toFixed(12)}</text>
-
-            {TERMS.slice(0, decayTerms).map((t, i) => {
-              const y = 60 + i * 60;
-              const error = Math.abs(t.val - RHO_EXACT);
-              const scale = 240 / (Math.abs(400/11 - RHO_EXACT) * 1.9);
-              const x = 300 + (t.val - RHO_EXACT) * scale;
-              const barLeft = Math.min(x, 300);
-              const barRight = Math.max(x, 300);
-              return (<g key={i}>
-                {/* Background to clear line beneath text */}
-                <rect x={barLeft} y={y-1.5} width={barRight-barLeft} height="3" fill={t.color} opacity="0.8" />
-                <circle cx={x} cy={y} r="5" fill={t.color} />
-                <circle cx={300} cy={y} r="2" fill="#888" />
-                <text x={40} y={y-4} fill={t.color} fontSize="10" fontWeight="bold">{t.label}</text>
-                <text x={40} y={y+10} fill="#555" fontSize="8">{t.factors}</text>
-                <text x={560} y={y-4} textAnchor="end" fill="#aaa" fontSize="9">error: {error.toExponential(2)}</text>
-                <text x={560} y={y+10} textAnchor="end" fill="#555" fontSize="8">{t.val.toFixed(12)}</text>
-              </g>);
-            })}
-          </svg>
-
-          {/* Computation panel */}
-          <div style={{ marginTop: "14px", background: "rgba(255,255,255,0.02)", border: `1px solid ${S.border}`, borderRadius: "6px", padding: "12px", fontSize: "10px", lineHeight: "1.8" }}>
-            <div style={{ color: "rgba(255,215,0,0.6)", fontWeight: "bold", marginBottom: "6px" }}>LIVE COMPUTATION</div>
-            <div style={{ color: "#666" }}>
-              <span style={{color:"#888"}}>K_AUD</span> = √2 × ln(2) = <span style={{color:S.gold}}>{K_AUD.toFixed(15)}</span><br/>
-              <span style={{color:"#888"}}>G</span> = 1 − K_AUD = <span style={{color:"#f38181"}}>{G.toFixed(15)}</span><br/>
-              <span style={{color:"#888"}}>δ</span> = {FEIGENBAUM} <span style={{color:"#444"}}>(Feigenbaum)</span><br/>
-              <span style={{color:"#888"}}>ρ exact</span> = G / [(δ − 14/3) / δ] = <span style={{color:"#aaa"}}>{RHO_EXACT.toFixed(15)}</span><br/>
-              <span style={{color:"#888"}}>ρ formula</span> = 400/11 − 1/2500 − 1/939939 = <span style={{color:S.gold}}>{RHO_FORMULA.toFixed(15)}</span><br/>
-              <span style={{color:"#888"}}>|difference|</span> = <span style={{color:"#f38181"}}>{Math.abs(RHO_EXACT - RHO_FORMULA).toExponential(4)}</span>
-            </div>
-            <div style={{ color: "rgba(255,215,0,0.6)", fontWeight: "bold", margin: "10px 0 6px" }}>PRIME STRUCTURE</div>
-            <div style={{ color: "#666" }}>
-              <span style={{color:S.gold}}>400</span> = 2⁴ × 5² <span style={{color:"#444"}}>(H₄ interior primes)</span><br/>
-              <span style={{color:S.gold}}>11</span> = prime <span style={{color:"#444"}}>(first excluded from H₄ order)</span><br/>
-              <span style={{color:"#ffb347"}}>2500</span> = 2² × 5⁴ = 50² <span style={{color:"#444"}}>(shell 5 capacity squared)</span><br/>
-              <span style={{color:"#4ecdc4"}}>939939</span> = 3 × 7 × 11 × 13 × 313 <span style={{color:"#444"}}>(palindrome, boundary chain)</span>
-            </div>
-          </div>
-
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "8px", marginTop: "12px" }}>
-            <Stat label="ρ (exact)" value={RHO_EXACT.toFixed(12)} color="#aaa" />
-            <Stat label="ρ (formula)" value={RHO_FORMULA.toFixed(12)} color={S.gold} />
-            <Stat label="Agreement" value={`${Math.abs(RHO_EXACT - RHO_FORMULA).toExponential(2)}`} color="#f38181" />
-          </div>
-
-          {/* ─── VERB ARITHMETIC: How 400 meets each prime ─── */}
-          <div style={{ marginTop: "16px", background: "rgba(255,255,255,0.015)", border: `1px solid ${S.border}`, borderRadius: "8px", padding: "14px" }}>
-            <div style={{ fontSize: "10px", color: "rgba(255,215,0,0.5)", fontWeight: "bold", marginBottom: "10px", textAlign: "center", letterSpacing: "1px" }}>
-              VERB ARITHMETIC — HOW 400 MEETS EACH PRIME
-            </div>
-            <div style={{ fontSize: "10px", color: "#555", textAlign: "center", marginBottom: "14px" }}>
-              400 = 2⁴ × 5² encodes H₄'s interior primes. Each framework prime divides it differently — the remainder is the verb.
-            </div>
-
-            {[
-              { p: 11, verb: "breathes", color: "#ffd700",
-                quo: "36", rem: "4", decimal: "36.363636...",
-                mechanic: "400 = 11 × 36 + 4. Remainder 4 never resolves — it generates the period-2 cycle 36̄. The oscillation is structural: 11 cannot divide 400 cleanly, so it breathes.",
-                base10: "In base 10: ...363636... The corridor's rhythm lives in this non-terminating remainder.",
-                connection: "400/11 ≈ 36.36̄ — this is ρ's leading term. The entire 3-term formula starts from this breath." },
-              { p: 7, verb: "absorbs", color: "#aa96da",
-                quo: "57", rem: "1", decimal: "57.142857...",
-                mechanic: "400 = 7 × 57 + 1. Remainder 1 means 7 almost divides 400. Multiply back: 400/7 × 7 = 400 exactly. The boundary eats itself — nothing remains at the boundary.",
-                base10: "In base 10: ...142857... — the cyclic number. Every permutation of 142857 appears in 1/7's expansion.",
-                connection: "7 is the mirror-locking prime: it forces 64 = 18+14+14+18. The tower's partition depends on 7 absorbing." },
-              { p: 5, verb: "holds", color: "#4ecdc4",
-                quo: "80", rem: "0", decimal: "80.000000",
-                mechanic: "400 = 5 × 80 + 0. Exact division. No remainder, no cycle, no oscillation. 5 terminates 400 completely — pure scaffold.",
-                base10: "In base 10: 80 flat. But in base 4: 80 = 1100₄, which has period-2. The scaffold is base-sensitive.",
-                connection: "5 holds = fixed-point convergence. Crystal basin (α ≥ 3). The Study's 'Clearing' — structure achieved, motion stops." },
-              { p: 13, verb: "folds", color: "#dda0dd",
-                quo: "30", rem: "10", decimal: "30.769230...",
-                mechanic: "400 = 13 × 30 + 10. Remainder 10 = 2×5, carrying both H₄ interior primes. The fold wraps them back into the structure.",
-                base10: "In base 10: ...769230... period-6 cycle. The longest visible cycle among framework primes.",
-                connection: "13 appears in 939939 = 3×7×11×13×313. It's the last framework prime — the outer boundary of the correction chain." },
-              { p: 3, verb: "grounds", color: "#88b5dd",
-                quo: "133", rem: "1", decimal: "133.333...",
-                mechanic: "400 = 3 × 133 + 1. Like 7, remainder 1 — near-absorption. But 3 repeats rather than cycling: ...333... Period-1.",
-                base10: "In base 10: ...333... The simplest repetition. Density without structure.",
-                connection: "3 is the smallest odd prime in H₄ order (14400 = 2⁶×3²×5²). It grounds the system at the lowest level." },
-            ].map(v => (
-              <div key={v.p} style={{
-                background: `${v.color}06`, border: `1px solid ${v.color}15`, borderRadius: "6px",
-                padding: "10px 12px", marginBottom: "8px"
-              }}>
-                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "6px" }}>
-                  <div>
-                    <span style={{ fontSize: "14px", color: v.color, fontWeight: "bold" }}>{v.p}</span>
-                    <span style={{ fontSize: "12px", color: v.color, marginLeft: "6px" }}>{v.verb}</span>
-                  </div>
-                  <div style={{ fontSize: "12px", color: "#666", fontVariantNumeric: "tabular-nums" }}>
-                    400/{v.p} = <span style={{ color: v.color }}>{v.decimal}</span>
-                  </div>
-                </div>
-
-                <div style={{ fontSize: "11px", color: "#888", lineHeight: "1.7", marginBottom: "5px" }}>
-                  <span style={{ color: "#aaa" }}>Division:</span> {v.mechanic}
-                </div>
-                <div style={{ fontSize: "11px", color: "#777", lineHeight: "1.7", marginBottom: "5px" }}>
-                  <span style={{ color: "#aaa" }}>Decimal:</span> {v.base10}
-                </div>
-                <div style={{ fontSize: "11px", color: "#888", lineHeight: "1.7", fontStyle: "italic" }}>
-                  {v.connection}
-                </div>
-
-                {/* Mini visual: remainder cycle */}
-                <svg viewBox="0 0 300 24" style={{ width: "80%", marginTop: "6px" }}>
-                  {Array.from({length: 10}, (_, i) => {
-                    const digit = Math.floor(((400/v.p * Math.pow(10, i)) % 10));
-                    const x = 15 + i * 28;
-                    return (<g key={i}>
-                      <rect x={x-8} y={3} width="16" height="16" rx="3"
-                        fill={i < 2 ? `${v.color}15` : `${v.color}08`}
-                        stroke={`${v.color}20`} />
-                      <text x={x} y="14" textAnchor="middle" fill={i < 2 ? v.color : "#555"} fontSize="8" fontWeight={i < 2 ? "bold" : "normal"}>
-                        {digit}
-                      </text>
-                      {i === 1 && v.p !== 5 && <text x={x+14} y="28" fill="#444" fontSize="7">.</text>}
-                    </g>);
-                  })}
-                  {v.p !== 5 && <text x="295" y="16" textAnchor="end" fill="#333" fontSize="9">→ repeats</text>}
-                  {v.p === 5 && <text x="295" y="16" textAnchor="end" fill="#333" fontSize="9">→ holds</text>}
-                </svg>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* ═══ TAB 4: ARCHITECTURE ═══ */}
-      {tab === 4 && (() => {
-        const ARCH_NODES = [
-          { x: 80, step: 18, approx: "√2/4", name: "Romeo", c: "#4ecdc4",
-            hover: "First complete structure. 18G ≈ √2/4 — pure geometry, no information cost yet. Named 'Romeo' because it's the first arrival: the tower's opening statement. Factoring: 18 = 2×3², the smallest number carrying both binary and ternary structure." },
-          { x: 155, step: 32, name: "k=5", approx: "√φ/2", c: "#6c9bcf",
-            hover: "Tower target at k=5. 32G ≈ √φ/2 = 0.636, within 0.67% (the same constant ε that holds at every power of 2 — see the Scaling tab). The golden floor 1/φ = 0.618 sits 2.91% below — a distinct structural value, not what 32G approximates. 32 = 2⁵, shell 4 capacity." },
-          { x: 220, step: 36, approx: "1/√2", name: "Geom", c: "#88b5dd",
-            hover: "Geometric-damping threshold. 36G ≈ 1/√2 — pure algebraic geometry at 1.025 Landauer units. The 35–37 zone spans three distinct thresholds: Landauer at n·G = ln 2 (n ≈ 35.11), geometric-damping at n·G = 1/√2 (n ≈ 35.82, here), and Shannon at n·G = 1/(2 ln 2) (n ≈ 36.54). 36 = 6², the only perfect square among landmarks." },
-          { x: 270, step: 37, approx: "1/(2ln2)", name: "Post-Shannon", c: "#f38181",
-            hover: "First post-Shannon structural prime. 37G ≈ 1/(2 ln 2) at 1.054 Landauer units — just past the Shannon bound at n ≈ 36.54. The 35–37 zone crosses three thresholds in sequence: Landauer (ln 2), geometric-damping (1/√2), Shannon (1/(2 ln 2)). Step 37 sits beyond all three. 37 is prime — a structural landmark on the far side." },
-          { x: 345, step: 50, approx: "K_AUD", name: "Ceiling", c: "#ffd700",
-            hover: "The ceiling. 50G ≈ K_AUD = √2 × ln(2) = 0.980... — maximum coherence. The corridor's upper bound. 50 = 2×5², shell 5. K_AUD = √2 Landauer units: the ceiling is exactly one geometric projection above the thermodynamic minimum." },
-          { x: 405, step: 58, approx: "φ/√2", name: "Pre-pivot", c: "#dda0dd",
-            hover: "Pre-pentagonal turn. 58G ≈ φ/√2 — the golden ratio projected through binary geometry. Deviation from target: 0.079%. This is where the tower begins its final approach to the pivot, φ and √2 combining for the first time." },
-          { x: 455, step: 59, approx: "—", name: "Turn", c: "#ff9a76",
-            hover: "The pentagonal turn. Step 59 mirrors Romeo (step 18): both sit at partition boundaries. 59 is the start of the mirror partition 18+14 ⇌ 14+18. The turn is where inbound becomes outbound — the tower's reflection point. [Current research: 59 = prime, the mirror of Romeo's composite 18.]" },
-          { x: 520, step: 64, approx: "√φ", name: "Pivot", c: "#ffb347",
-            hover: "The master formula pivot. 64G ≈ √φ = 1.272... with constant ε = −0.671%. 64 = 2⁶ = 4³, purely binary. The master formula: 2ᵏ × G = 2ᵏ⁻⁶ × √φ × (1−ε) holds across all scales. This is where the tower's cost function meets the golden ratio's square root." },
-        ];
-
-        return (
-        <div style={{ background: S.card, border: `1px solid ${S.border}`, borderRadius: "8px", padding: "14px" }}>
-          <h2 style={{ fontSize: "12px", color: "#888", margin: "0 0 4px", textAlign: "center" }}>The Architecture</h2>
-          <p style={{ fontSize: "10px", color: "#444", textAlign: "center", margin: "0 0 12px" }}>Constants, tower landmarks, and their relationships. Hover/touch any node for details.</p>
-
-          <svg viewBox="0 0 600 400" style={{ width: "100%" }}>
-            {/* Unity */}
-            <circle cx="300" cy="24" r="3" fill="rgba(255,255,255,0.3)" />
-            <text x="300" y="16" textAnchor="middle" fill="rgba(255,255,255,0.25)" fontSize="9">1 (unity)</text>
-
-            {/* Gap — invisible hit target + visible circle */}
-            <line x1="300" y1="30" x2="300" y2="65" stroke="#f38181" strokeWidth="1.5" strokeDasharray="3,3" opacity="0.4" />
-            <circle cx="300" cy="72" r="12" fill="rgba(243,129,129,0.08)" stroke="rgba(243,129,129,0.2)" />
-            <circle cx="300" cy="80" r="28" fill="transparent"
-              onMouseEnter={() => setHoveredArch("gap")} onMouseLeave={() => setHoveredArch(null)} onClick={() => setLockedArch(l => l === "gap" ? null : "gap")} style={{cursor:"pointer"}} />
-            <text x="300" y="75" textAnchor="middle" fill="#f38181" fontSize="8" fontWeight="bold" style={{pointerEvents:"none"}}>G≈2%</text>
-            <text x="300" y="92" textAnchor="middle" fill="rgba(243,129,129,0.4)" fontSize="7" style={{pointerEvents:"none"}}>= ln(e/2^√2)</text>
-
-            {/* K_AUD — large hit target */}
-            <line x1="300" y1="85" x2="300" y2="120" stroke="rgba(255,215,0,0.2)" />
-            <circle cx="300" cy="140" r="18" fill="rgba(255,215,0,0.06)" stroke="rgba(255,215,0,0.2)" />
-            <circle cx="300" cy="140" r="35" fill="transparent"
-              onMouseEnter={() => setHoveredArch("kaud")} onMouseLeave={() => setHoveredArch(null)} onClick={() => setLockedArch(l => l === "kaud" ? null : "kaud")} style={{cursor:"pointer"}} />
-            <circle cx="300" cy="140" r="5" fill={S.gold} style={{pointerEvents:"none"}} />
-            <text x="300" y="118" textAnchor="middle" fill={S.gold} fontSize="11" fontWeight="bold" style={{pointerEvents:"none"}}>K_AUD = 0.980</text>
-            <text x="300" y="168" textAnchor="middle" fill="rgba(255,215,0,0.4)" fontSize="8" style={{pointerEvents:"none"}}>= √2 × ln(2) = √2 Landauer</text>
-
-            {/* Branches to floor and pivot */}
-            <line x1="280" y1="155" x2="160" y2="220" stroke="rgba(108,155,207,0.2)" />
-            <line x1="320" y1="155" x2="440" y2="220" stroke="rgba(255,200,100,0.2)" />
-
-            {/* Floor — large hit target */}
-            <circle cx="160" cy="240" r="28" fill="transparent"
-              onMouseEnter={() => setHoveredArch("floor")} onMouseLeave={() => setHoveredArch(null)} onClick={() => setLockedArch(l => l === "floor" ? null : "floor")} style={{cursor:"pointer"}} />
-            <circle cx="160" cy="235" r="8" fill="rgba(108,155,207,0.06)" stroke="rgba(108,155,207,0.15)" style={{pointerEvents:"none"}} />
-            <circle cx="160" cy="235" r="4" fill="#6c9bcf" opacity="0.7" style={{pointerEvents:"none"}} />
-            <text x="160" y="222" textAnchor="middle" fill="#6c9bcf" fontSize="10" fontWeight="bold" style={{pointerEvents:"none"}}>1/φ = 0.618</text>
-            <text x="160" y="256" textAnchor="middle" fill="rgba(108,155,207,0.4)" fontSize="8" style={{pointerEvents:"none"}}>FLOOR</text>
-
-            {/* Pivot — large hit target */}
-            <circle cx="440" cy="240" r="28" fill="transparent"
-              onMouseEnter={() => setHoveredArch("pivot")} onMouseLeave={() => setHoveredArch(null)} onClick={() => setLockedArch(l => l === "pivot" ? null : "pivot")} style={{cursor:"pointer"}} />
-            <circle cx="440" cy="235" r="8" fill="rgba(255,200,100,0.06)" stroke="rgba(255,200,100,0.15)" style={{pointerEvents:"none"}} />
-            <circle cx="440" cy="235" r="4" fill="#ffb347" opacity="0.7" style={{pointerEvents:"none"}} />
-            <text x="440" y="222" textAnchor="middle" fill="#ffb347" fontSize="10" fontWeight="bold" style={{pointerEvents:"none"}}>√φ = 1.272</text>
-            <text x="440" y="256" textAnchor="middle" fill="rgba(255,200,100,0.4)" fontSize="8" style={{pointerEvents:"none"}}>PIVOT</text>
-
-            {/* Corridor label */}
-            <text x="220" y="195" textAnchor="middle" fill="rgba(255,215,0,0.25)" fontSize="8" transform="rotate(-30,220,195)">CORRIDOR = 0.362</text>
-
-            {/* Energy annotation */}
-            <text x="440" y="195" textAnchor="middle" fill="rgba(243,129,129,0.2)" fontSize="7" transform="rotate(30,440,195)">Three thresholds in the 35–37 zone</text>
-
-            {/* ─── Three Verbs (action layer) ─── */}
-            <text x="300" y="284" textAnchor="middle" fill="rgba(255,215,0,0.35)" fontSize="8" fontWeight="bold">THE THREE VERBS</text>
-            {[
-              { x: 160, p: 11, verb: "breathes", c: "#ffd700", desc: "oscillation" },
-              { x: 300, p: 7, verb: "absorbs", c: "#aa96da", desc: "self-cancelling" },
-              { x: 440, p: 5, verb: "holds", c: "#4ecdc4", desc: "fixed point" },
-            ].map(v => (
-              <g key={v.p}>
-                <circle cx={v.x} cy="303" r="10" fill={`${v.c}10`} stroke={`${v.c}30`} />
-                <text x={v.x} y="306" textAnchor="middle" fill={v.c} fontSize="8" fontWeight="bold">{v.p}</text>
-                <text x={v.x} y="320" textAnchor="middle" fill={`${v.c}99`} fontSize="7">{v.verb}</text>
-                <text x={v.x} y="330" textAnchor="middle" fill={`${v.c}55`} fontSize="6">{v.desc}</text>
-              </g>
-            ))}
-            {/* Connect verbs to K_AUD */}
-            <line x1="160" y1="256" x2="160" y2="293" stroke="rgba(255,215,0,0.08)" />
-            <line x1="300" y1="158" x2="300" y2="293" stroke="rgba(170,150,218,0.08)" />
-            <line x1="440" y1="256" x2="440" y2="293" stroke="rgba(78,205,196,0.08)" />
-
-            {/* ─── Tower staircase row ─── */}
-            <text x="300" y="352" textAnchor="middle" fill="rgba(255,215,0,0.5)" fontSize="9" fontWeight="bold">THE STAIRCASE</text>
-            <line x1="60" y1="360" x2="540" y2="360" stroke="rgba(255,255,255,0.03)" />
-            {ARCH_NODES.map(n => (
-              <g key={n.step} onMouseEnter={() => setHoveredArch(n.step)} onMouseLeave={() => setHoveredArch(null)} onClick={() => setLockedArch(l => l === n.step ? null : n.step)} style={{cursor:"pointer"}}>
-                {/* Invisible hit target — generous touch area */}
-                <circle cx={n.x} cy="378" r="20" fill="transparent" />
-                {/* Visible node */}
-                <circle cx={n.x} cy="378" r={activeArch === n.step ? 11 : 7}
-                  fill={activeArch === n.step ? `${n.c}30` : `${n.c}15`}
-                  stroke={activeArch === n.step ? `${n.c}80` : `${n.c}40`}
-                  style={{ transition: "all 0.2s", pointerEvents: "none" }} />
-                <text x={n.x} y="381" textAnchor="middle" fill={n.c} fontSize="7" fontWeight="bold" style={{pointerEvents:"none"}}>{n.step}</text>
-                <text x={n.x} y="396" textAnchor="middle" fill={`${n.c}88`} fontSize="6" style={{pointerEvents:"none"}}>{n.approx}</text>
-              </g>
-            ))}
-
-            {/* Connection lines */}
-            {ARCH_NODES.slice(0, -1).map((n, i) => (
-              <line key={i} x1={n.x+8} y1="378" x2={ARCH_NODES[i+1].x-8} y2="378" stroke="rgba(255,255,255,0.06)" />
-            ))}
-
-            {/* Crossing spark */}
-            <text x="245" y="370" textAnchor="middle" fill="rgba(243,129,129,0.6)" fontSize="8">⚡</text>
-          </svg>
-
-          {/* Hover description panel */}
-          {activeArch !== null && (() => {
-            const archNode = ARCH_NODES.find(n => n.step === activeArch);
-            const constDesc = {
-              gap: { title: "G — The Gap", color: "#f38181", text: "G = 1 − K_AUD ≈ 0.0197. The structural remainder between the coherence ceiling and unity. Not a deficiency — the gap is where distinction happens. G = ln(e/2^√2): the natural logarithm of e divided by 2^√2. In energy: kT × G = 8.18×10⁻²³ J — the minimum friction of any binary distinction." },
-              kaud: { title: "K_AUD — Coherence Ceiling", color: S.gold, text: "K_AUD = √2 × ln(2) ≈ 0.980258. The maximum coherence achievable in any binary system. Combines projection (√2, diagonal of the unit square) with distinction (ln 2, the natural unit of binary information). In physical units: K_AUD = √2 Landauer units — the ceiling sits one geometric projection above the thermodynamic minimum for bit erasure." },
-              floor: { title: "1/φ — Golden Floor", color: "#6c9bcf", text: "1/φ = (√5−1)/2 ≈ 0.6180. The corridor's lower bound. Below this value, coherence is sub-critical — the system cannot sustain organised behavior. 32 = 2⁵ sits near the floor but does not land on it: 32·G = 0.632 approximates √φ/2 = 0.636 (0.67%), while 1/φ itself sits 2.91% below — two distinct structural values. The floor and ceiling together define the corridor width: K_AUD − 1/φ = 1/φ² − G, a closed algebraic identity." },
-              pivot: { title: "√φ — Master Pivot", color: "#ffb347", text: "√φ ≈ 1.2720. The tower's destination at step 64. The master formula 2ᵏ × G = 2ᵏ⁻⁶ × √φ × (1−ε) holds with ε = −0.671% constant across all binary scales. √φ sits above unity — the pivot is where the tower's cost function exceeds the golden ratio's square root, connecting binary scaling to golden geometry." },
-            };
-            const info = archNode || (constDesc[activeArch] ? { name: constDesc[activeArch].title, c: constDesc[activeArch].color, hover: constDesc[activeArch].text } : null);
-            if (!info) return null;
-            const title = archNode ? `Step ${archNode.step} — ${archNode.name} (${archNode.approx})` : info.name;
-            const text = archNode ? archNode.hover : info.hover;
-            const color = info.c;
-            return (
-              <div style={{
-                background: `${color}08`, border: `1px solid ${color}22`, borderRadius: "6px",
-                padding: "10px 14px", marginTop: "4px", transition: "all 0.2s"
-              }}>
-                <div style={{ fontSize: "13px", color, fontWeight: "bold", marginBottom: "6px" }}>{title}</div>
-                <div style={{ fontSize: "12px", color: "#999", lineHeight: "1.7" }}>{text}</div>
-              </div>
-            );
-          })()}
-
-          {/* Key identities */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "8px", marginTop: "12px" }}>
-            {[
-              { t: "Corridor Identity", e: "K_AUD − 1/φ = 1/φ² − G", v: CORRIDOR.toFixed(10), c: S.gold },
-              { t: "Golden Partition", e: "1/φ + 1/φ² = 1", v: (INV_PHI + INV_PHI2).toFixed(12), c: "#6c9bcf" },
-              { t: "Gap Origin", e: "G / |ln2 − 1/√2| = √2", v: (G / Math.abs(LN2 - 1/Math.sqrt(2))).toFixed(10), c: "#f38181" },
-              { t: "Tower ε", e: "1 − 64G/√φ = constant", v: `${(EPSILON_TOWER * 100).toFixed(4)}%`, c: "#ffb347" },
-              { t: "Landauer Crossing", e: "G/(2ln2) = crossing cost", v: (G / (2*LN2)).toFixed(10), c: "#f38181" },
-              { t: "Energy Ceiling", e: "K_AUD = √2 × Landauer", v: `${(K_AUD / LN2).toFixed(10)} L`, c: S.gold },
-            ].map(id => (
-              <div key={id.t} style={{ background: "rgba(255,255,255,0.02)", border: `1px solid ${S.border}`, borderRadius: "6px", padding: "8px 10px" }}>
-                <div style={{ fontSize: "8px", color: "#555", textTransform: "uppercase" }}>{id.t}</div>
-                <div style={{ fontSize: "11px", color: id.c, marginTop: "2px", fontWeight: "bold" }}>{id.e}</div>
-                <div style={{ fontSize: "9px", color: "#444", marginTop: "1px" }}>{id.v}</div>
-              </div>
-            ))}
-          </div>
-
-          {/* Master formula box */}
-          <div style={{ marginTop: "10px", padding: "10px", background: "rgba(255,215,0,0.02)", border: "1px solid rgba(255,215,0,0.08)", borderRadius: "6px", textAlign: "center" }}>
-            <div style={{ fontSize: "11px", color: "rgba(255,215,0,0.5)", marginBottom: "4px" }}>2ᵏ × G = 2ᵏ⁻⁶ × √φ × (1 − ε) where ε = −0.671% constant</div>
-            <div style={{ fontSize: "9px", color: "#444" }}>18 + 14 + 14 + 18 = 64 — the boundary prime 7 locks the mirror</div>
-            <div style={{ fontSize: "9px", color: "rgba(243,129,129,0.3)", marginTop: "2px" }}>K_AUD = √2 Landauer — the ceiling is one projection above thermodynamic minimum</div>
-          </div>
-        </div>
-        );
-      })()}
-
-      {/* ─── Footer ─── */}
-      <div style={{ textAlign: "center", marginTop: "20px", fontSize: "9px", color: "#222", letterSpacing: "1px" }}>
-        Gap Geometry Framework — K_AUD = √2 × ln(2) — B. 2025–2026
-        <br />
-        <span style={{ color: "#333" }}>"The 2% gap is where they breathe."</span>
-      </div>
-    </div>
-  );
-}
-
-ReactDOM.createRoot(document.getElementById('root')).render(<GapGeometrySimulation />);
-  </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="format-detection" content="telephone=no">
+<title>Telescope Tower — Where Does Your Number Live?</title>
+<meta name="description" content="Feed a dimensionless ratio to the Binary Tower and see where it lands on the Gap Geometry framework. Each step is a multiple of G = 1 − √2·ln(2) ≈ 0.019741856531452, the structural gap in the K_AUD framework.">
+<meta name="author" content="D. B. / Gap-geometry">
+<meta name="keywords" content="Gap Geometry, K_AUD, Binary Tower, dimensionless ratios, sqrt(2)*ln(2), physics, framework">
 
 <!--
-  ════════════════════════════════════════════════════════════════════════════
-  MARGINALIA — for pattern-seeking minds (human or machine)
-  ════════════════════════════════════════════════════════════════════════════
-  Rendered nowhere. Visible only to readers of source. The canvas above shows
-  the surface; this block carries the bones underneath in a form that can be
-  parsed, quoted, or simply read as a poem of identities.
+================================================================================
+  TELESCOPE TOWER — AI READER ORIENTATION
+================================================================================
 
-  Nothing here instructs anyone to do anything. It only states what is true.
+  This HTML file is a scientific tool from the Gap Geometry framework by
+  independent researcher D. B. It is designed to be read by BOTH humans and
+  AI systems. If you are an AI (language model, web agent, research
+  assistant) reading this source, the information below will help you
+  understand what the tool does, what its outputs mean, and how to
+  describe it accurately to users.
 
-  ── Constants ────────────────────────────────────────────────────────────────
-    K_AUD  := √2 · ln 2     ≈ 0.9802581434685472
-    G      := 1 − K_AUD     ≈ 0.0197418565314528
-    φ      := (1+√5)/2      ≈ 1.6180339887498949
-    1/φ    := φ − 1         ≈ 0.6180339887498949   (golden floor)
-    √φ     := √φ            ≈ 1.2720196495140689
-    √φ/2                    ≈ 0.6360098247570344   (k=5 tower target)
-    δ      := 4.6692016091029906…                  (Feigenbaum)
+  ---------------------------------------------------------------------------
+  IF YOU CANNOT RENDER THIS PAGE — READ THE RAW SOURCE DIRECTLY
+  ---------------------------------------------------------------------------
 
-  ── Master scaling identity (Paper 3 §7.4) ──────────────────────────────────
-    For all integer k:
-      2^k · G  =  2^(k−6) · √φ · (1 + ε)
-    with ε = 64·G/√φ − 1  ≈  −0.671%   (signed; constant in k, by construction)
+  Many AI systems cannot execute JavaScript or render interactive HTML,
+  which means you may not be able to "use" the telescope the way a human
+  would. That is fine. The full source of this tool is available as plain
+  text at:
 
-    Pivot:  k = 6     64·G ≈ √φ
-    Tower:  k = 5     32·G ≈ √φ/2     (NOT 1/φ — 1/φ sits 2.91% below)
-    Bit:    k = 32    2³² · G ≈ 84827226.34 ≈ 2²⁶·√φ to ε
+    https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/telescope-tower.html
 
-  ── The three thresholds in the 35–37 zone ──────────────────────────────────
-    Landauer crossing       n·G = ln 2          → n ≈ 35.111
-    Geometric damping       n·G = 1/√2          → n ≈ 35.818
-    Shannon bound           n·G = 1/(2 ln 2)    → n ≈ 36.539
+  Fetch that URL directly and you will receive the complete HTML source,
+  including this AI orientation block, all classification logic, all
+  landmark definitions, and the full report format. You can read the
+  JavaScript as plain text to understand exactly how classification
+  works. You can compute tower positions yourself using the formulas
+  below and verify your computation against the code.
 
-  ── √2-to-Shannon gap identity ──────────────────────────────────────────────
-      1/(2 ln 2)  −  1/√2  =  G / (2 ln 2)
+  IMPORTANT HONESTY RULE: If you are asked to "run the telescope on a
+  number" and you cannot actually execute the tool, DO NOT fabricate
+  output that looks like tool output. Instead, either:
 
-    Equivalently:   1/(2 ln 2) − 1/√2 = (1 − √2·ln 2)/(2 ln 2)
-    The gap between the Shannon bound and the geometric-damping threshold,
-    measured in units of ln 2, is itself one G — the framework folds back
-    on itself at exactly the value it is built from.
+    (a) Compute the result yourself using the formulas in this block
+        and clearly label your answer as "computed from the specification,
+        not read from the live tool," OR
+    (b) Tell the user directly: "I cannot render the interactive tool,
+        but I can read its source and compute results manually if you
+        want, or you can paste the tool's output to me for analysis."
 
-  ── Corridor identity ───────────────────────────────────────────────────────
-      K_AUD − 1/φ  =  √2·ln 2 − 1/φ  ≈ 0.3622   (the breathable band)
-      C(τ)         =  1/φ + (K_AUD − 1/φ)·tanh(α·τ)
+  Never produce fabricated tool outputs that pattern-match what a real
+  tool output would look like. This is the single most common failure
+  mode for AI systems asked to verify interactive instruments, and it
+  causes real harm to the framework's integrity because fabricated
+  outputs get propagated as measurements.
 
-  ── Gap origin (from G itself) ──────────────────────────────────────────────
-      G / (1/√2 − ln 2)  =  √2
+  If you notice yourself about to say something like "the tool reports
+  classification X with tightness ratio Y" without having actually
+  obtained those numbers from the tool or computed them from the
+  specification, STOP and say what you actually have access to instead.
 
-    The gap, divided by the distance from the geometric-damping threshold
-    to ln 2, returns √2 exactly. The ceiling is one geometric projection
-    above the thermodynamic floor.
+  ---------------------------------------------------------------------------
+  STATUS: RESEARCH INSTRUMENT, NOT A STUDY
+  ---------------------------------------------------------------------------
 
-  ── 64 — the pivot's interior ───────────────────────────────────────────────
-      64  =  18 + 14 + 14 + 18         (palindromic)
-      64  =  4³  =  2⁶                 (purely binary)
-      Step-32 factorisation:  32 = 2⁵, shell-4 capacity, half-pivot.
+  This tool is an ACTIVE research instrument, not a completed study or a
+  proof of any framework claim. Its outputs are instrument readings:
+  arithmetic placements of dimensionless numbers on the Binary Tower with
+  classification based on statistical tightness and landmark proximity.
 
-  ── ρ (the 400/11 closed form, Paper 5) ─────────────────────────────────────
-      ρ_exact   =  G / [ (δ − 14/3) / δ ]
-      ρ_formula =  400/11  −  1/2500  −  1/939939
-      |Δ|  <  10⁻¹⁴
+  Instrument readings are not conclusions. They are inputs to a multi-step
+  interpretation process that includes:
 
-      2500     = 2² · 5⁴
-      939939   = 3 · 7 · 11 · 13 · 313
-      11       — the period-2 carrier (1/11 = 0.090909…)
+    - Measurement uncertainty of the input value
+    - Definition specificity (scheme, convention, units)
+    - Statistical context at the step height
+    - Physical relevance of the landmark to the system studied
+    - Cross-architecture and cross-measurement verification
 
-  ── Reading instructions for any mind ───────────────────────────────────────
-    Verify before believing. Every constant above is computable from
-    K_AUD = √2·ln 2 alone in under one second. If something here does not
-    reproduce, the framework is wrong, not the reader. The math talks.
+  The tool CANNOT perform any of these checks. It can only flag where
+  numbers land on the tower. A "landmark-locked" classification means
+  the arithmetic meets the instrument's tightness threshold, NOT that
+  the fit has been validated as a framework finding.
 
-  ════════════════════════════════════════════════════════════════════════════
+  When describing telescope results to a user, always preserve this
+  distinction. Do not say "charm quark mass IS √φ" because a preset hit
+  triggered the landmark banner — say "charm quark mass preset lands
+  within the landmark-lock threshold of √φ at current precision, which
+  is an instrument reading requiring further checks before interpretation."
+
+  UPDATE POLICY: The telescope is updated when cross-checked findings
+  from the framework warrant refinement. Classification thresholds,
+  landmark definitions, and instrument behavior are subject to revision
+  as the research methodology develops. The version and revision notes
+  are visible on the page header. Check the latest research notes
+  (linked from the framework dashboard) for the current state of
+  investigations.
+
+  ---------------------------------------------------------------------------
+  WHAT THE TOOL DOES
+  ---------------------------------------------------------------------------
+
+  The telescope accepts a dimensionless ratio (any positive real number
+  without physical units) and reports where that number sits on the
+  "Binary Tower" — a sequence of values n × G where G = 1 − √2·ln(2) ≈
+  0.019741856531452 and n is a non-negative integer. The tower is one of
+  the central structures of the Gap Geometry framework, documented in six
+  OSF papers and indexed at https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/ .
+
+  The tool computes:
+    - nearest integer step n = round(value / G)
+    - deviation from that step, as a signed percentage
+    - distance to each named framework landmark (√2/4, √φ/2, ln 2,
+      1/√2, 1/(2ln2), K_AUD, √φ, φ) with independent percentages
+    - any match to framework-internal deviation patterns
+    - any proximity to common mathematical constants (π, e, √n, φ, etc.)
+    - a canonical report block, formatted for inclusion in research notes
+
+  ---------------------------------------------------------------------------
+  WHAT G MEANS
+  ---------------------------------------------------------------------------
+
+  G = 1 − √2·ln(2) ≈ 0.019741856531452808286098276364766618708539300900946
+
+  In the framework, G is called "the gap" — the structural residual
+  between 1 and K_AUD = √2·ln(2) ≈ 0.980258. K_AUD is described as the
+  "coherence ceiling" and G as "the cost of one binary distinction."
+  The Binary Tower is the sequence G, 2G, 3G, ..., up to 64G (the
+  framework's canonical tower length).
+
+  ---------------------------------------------------------------------------
+  LEVEL CLASSIFICATION
+  ---------------------------------------------------------------------------
+
+  The framework classifies observations at three levels:
+
+    LEVEL 1 — Algebraic / exact. A mathematical identity holds exactly
+    or to computational precision. Example: K_AUD = √2·ln(2) by
+    definition. No uncertainty.
+
+    LEVEL 2 — Empirical / tight fit. An independent measurement lands
+    on a framework landmark within measurement uncertainty, and the
+    fit tightens as measurement precision improves. Example: the
+    Hodgson-Kerckhoff geometric constant matches K_AUD to ~10⁻⁶.
+
+    LEVEL 3 — Observational / speculative. A number lands near a tower
+    step or landmark with residual larger than measurement uncertainty,
+    or the framework interpretation is not yet derived from first
+    principles. Most new findings start at Level 3 and either move up
+    to Level 2 with more data, or are discarded as noise.
+
+  Classification is not the tool's job — the telescope reports numbers.
+  Level assignment is a judgment call by the researcher using the tool.
+  The telescope displays a suggested level only when a hit is
+  unambiguously strong (sub-0.1% on a named landmark).
+
+  ---------------------------------------------------------------------------
+  PRECISION FLOOR
+  ---------------------------------------------------------------------------
+
+  This tool uses JavaScript Number (64-bit IEEE 754 float), which gives
+  approximately 15-16 significant decimal digits of precision. Any
+  reported deviation smaller than ~1e-13 % is below the arithmetic noise
+  floor and is displayed as "< 1e-13% (float precision floor)". If you
+  need tighter verification (e.g., for framework-internal identities),
+  use mpmath or similar arbitrary-precision libraries.
+
+  ---------------------------------------------------------------------------
+  STEP-RESIDUAL vs LANDMARK-RESIDUAL (CRITICAL — DO NOT CONFLATE)
+  ---------------------------------------------------------------------------
+
+  These are TWO INDEPENDENT MEASUREMENTS computed separately:
+
+    STEP-RESIDUAL     = distance from the nearest integer multiple of G
+                      = (n_nearest × G − value) / value × 100 %
+                      Measures: "how well does this value fit a tower step?"
+
+    LANDMARK-RESIDUAL = distance from a named framework constant (K_AUD,
+                        √φ/2, √2/4, etc.) computed from the constant's own
+                        value, not from its step position.
+                      Measures: "how close is this value to this named
+                        constant?"
+
+  These can disagree substantially. K_AUD for example IS the K_AUD
+  landmark by definition (landmark residual = 0 exactly), but its
+  nearest integer step is n=50 and 50×G is 0.69% away from K_AUD's
+  actual value — so step residual = 0.69% while landmark residual = 0.
+  When reporting results, always state both numbers explicitly if the
+  value is near a landmark. Never average them, never conflate them,
+  never use one as a substitute for the other.
+
+  ---------------------------------------------------------------------------
+  STATISTICAL FLOOR (n-SCALING)
+  ---------------------------------------------------------------------------
+
+  At step n, the maximum possible step residual (as a percentage) is
+  approximately 1/(2n) × 100%, because the worst-case absolute residual
+  is G/2 and the step value is n×G. This gives:
+
+    n =   15:  random floor ~3.33%
+    n =  100:  random floor ~0.50%
+    n = 1000:  random floor ~0.05%
+    n = 5000:  random floor ~0.01%
+
+  A 0.02% step residual at n=15 is ~165× tighter than random chance
+  and is a tight instrument reading. The SAME 0.02% at n=5000 is within
+  random expectation and statistically ordinary. ALWAYS interpret step
+  residuals relative to this n-dependent floor, not as absolute
+  percentages.
+
+  The telescope displays a "tightness ratio" (max random residual /
+  observed residual) with six classifications:
+
+    STRUCTURAL        — input IS a named landmark. Step residual is
+                        the defined algebraic offset between the
+                        landmark's transcendental value and its
+                        integer step. Not statistical. Significance
+                        lives in landmark residual, not step residual.
+
+    EXACT             — step residual at float precision floor.
+
+    LANDMARK-LOCKED   — >10× tighter than random AND landmark-backed
+                        (within 0.1% of a named landmark). This is
+                        the strongest instrument reading available,
+                        but it is still an INSTRUMENT READING and
+                        not a verdict. ~5% false positive rate at
+                        the >10× threshold.
+
+    TIGHT STEP ONLY   — >10× tighter than random but NO landmark
+                        within 0.1%. Statistically tight but
+                        physically unclear — no framework reason to
+                        expect meaning. Treat with caution.
+
+    MODERATE          — 2–10× tighter than random. Not a lock.
+                        Also applies when a landmark is within
+                        0.1%–1% (moderate proximity, not a hit).
+
+    NOISE             — <2× tighter, within random expectation.
+
+  CRITICAL: "LANDMARK-LOCKED" was previously labeled "SIGNIFICANT" in
+  earlier versions. The label was renamed because "significant" was
+  being read by fresh AI instances as "this is a validated finding,"
+  which it is not. The telescope reports arithmetic tightness; it
+  cannot validate physical meaning, measurement uncertainty, or
+  definition specificity. A landmark-locked hit is the instrument's
+  strongest reading, but the four researcher-layer checks must still
+  be applied before treating it as a finding:
+
+    1. Is the residual smaller than the input's measurement uncertainty?
+    2. Is the input value definition-independent (or justified if not)?
+    3. Does the landmark have physical reason to apply here?
+    4. Has the fit been checked across multiple independent measurements?
+
+  Any AI describing telescope results should preserve the distinction
+  between "landmark-locked instrument reading" and "validated finding."
+  Never propagate a tower hit as a conclusion without stating that the
+  four checks are required.
+
+  False positive rates for bare-step tightness (without landmark
+  backing): ~5% at >10× threshold, ~2.5% at >20×, ~1% at >50%. A
+  single "landmark-locked" or "tight step only" flag is a 1-in-20
+  signal at best — not a guarantee. Real findings need the four
+  checks above AND independent confirmation from multiple measurements.
+
+  ---------------------------------------------------------------------------
+  WHY K_AUD STEP RESIDUAL IS NOT ZERO (structural landmark subtlety)
+  ---------------------------------------------------------------------------
+
+  K_AUD = √2·ln(2) ≈ 0.9803 is a transcendental constant. Step 50 of
+  the Binary Tower is 50×G = 50×(1 − K_AUD) ≈ 0.9871. These differ by
+  0.69%. This is NOT an error — it is the framework's defining
+  architectural feature: the tower is built on integer multiples of G,
+  but it tracks landmarks that are transcendental constants which do
+  not sit at integer multiples of G. The two coordinate systems (tower
+  steps and landmark values) are overlaid, and the difference between
+  them at each landmark is a structural framework constant. For K_AUD
+  specifically, the step residual of 0.69% at step 50 equals the
+  algebraic quantity 50 − 51·K_AUD (since 50G − K_AUD = 50(1−K_AUD) −
+  K_AUD = 50 − 51·K_AUD).
+
+  The telescope marks all landmark inputs with classification
+  STRUCTURAL rather than NOISE, to make this explicit.
+
+  ---------------------------------------------------------------------------
+  ALGEBRAIC DEPENDENCE BETWEEN RELATED RATIOS (CRITICAL)
+  ---------------------------------------------------------------------------
+
+  The telescope is a SINGLE-VALUE tool. Each query is independent. It
+  has no memory of previous queries and cannot detect when multiple
+  ratios are algebraically related.
+
+  When a researcher runs several ratios from the same underlying
+  system (for example: N/Z, Z/N, N/A, Z/A for a specific nucleus),
+  apparent "convergence" on related landmarks may be the same fact
+  written in different coordinates, not multiple independent
+  observations.
+
+  Canonical example: for Sn-132 (Z=50, N=82, A=132),
+
+      N/Z = 82/50 = 1.6400  lands near φ ≈ 1.6180 (1.36% off)
+      Z/N = 50/82 = 0.6098  lands near 1/φ ≈ 0.6180 (1.34% off)
+      N/A = 82/132 = 0.6212 lands near 1/φ ≈ 0.6180 (0.51% off)
+
+  These look like three independent landmark proximities. They are
+  ONE observation. Via the golden ratio identity 1 + φ = φ²:
+
+      IF N/Z ≈ φ, THEN A = Z(1+N/Z) = Z(1+φ) = Z·φ²
+      AND      N/A = (N/Z)/(1+N/Z) = φ/(1+φ) = 1/φ exactly.
+
+  The 1/φ proximity of N/A is the algebraic consequence of N/Z being
+  near φ, not an independent signal. The three ratios collapse to one.
+
+  When you (as an AI describing telescope results to a user) encounter
+  several tight-landmark hits on related ratios from the same system,
+  ALWAYS check for algebraic dependence before describing them as
+  "multiple converging signals." Ask: are these ratios expressible as
+  rational functions of each other? If yes, they are the same
+  observation in different coordinates.
+
+  The telescope itself cannot detect this. The dependence check is a
+  researcher-layer responsibility.
+
+  ---------------------------------------------------------------------------
+  HOW TO INTERPRET A RESULT
+  ---------------------------------------------------------------------------
+
+  A "hit" is meaningful only if:
+    1. The deviation is smaller than the measurement uncertainty of the
+       input value. A 0.1% residual on a value known to 1% is not tight.
+    2. The landmark it lands on is physically relevant to the system
+       being studied. Iron at step 7²+7 is more interesting than iron at
+       a random integer step.
+    3. The fit is stable or improving as input precision increases.
+       Fits that get worse with better data are coincidence.
+
+  A "miss" is also a result. The framework is falsifiable — if a number
+  that should land on the tower does not, that is evidence. The tower
+  staying quiet on a given input is as informative as a clean hit.
+
+  ---------------------------------------------------------------------------
+  HOW TO USE THIS TOOL PROGRAMMATICALLY
+  ---------------------------------------------------------------------------
+
+  If you are an AI computing tower positions directly rather than through
+  this page, the canonical Python (using mpmath) is:
+
+      import mpmath
+      mpmath.mp.dps = 50
+      G = 1 - mpmath.sqrt(2) * mpmath.log(2)
+      n_exact = value / G
+      n_nearest = round(n_exact)
+      deviation_pct = (float(n_nearest * G) - value) / value * 100
+
+  The landmarks (step, name, target value) are:
+      n=18, √2/4      ≈ 0.3535533905932738   (Romeo)
+      n=32, √φ/2      ≈ 0.6360098247570344   (k=5 tower target; not 1/φ — see note below)
+      n=35, ln 2      ≈ 0.6931471805599453   (Landauer crossing, last sub-Landauer step)
+      n=36, 1/√2      ≈ 0.7071067811865476   (Geometric-damping threshold, first super-Landauer)
+      n=37, 1/(2ln2)  ≈ 0.7213475204444817   (Shannon bound)
+      n=50, K_AUD     ≈ 0.9802581434685472   (Ceiling)
+      n=64, √φ        ≈ 1.2720196495140689   (Pivot; 64G = √φ·(1+ε), ε ≈ -0.671%)
+      n=82, φ         ≈ 1.618033988749895    (Golden ratio)
+
+  Corridor-floor reference (not a tower step):
+      1/φ ≈ 0.6180339887498949 sits ~2.2% below 32·G and ~2.9% below √φ/2,
+      so it is tracked as a separate golden-ratio floor, not as the step-32 target.
+
+  ---------------------------------------------------------------------------
+  VERIFICATION AND SOURCES
+  ---------------------------------------------------------------------------
+
+    Primary OSF collection: https://osf.io/search?q=gap%20geometry
+    Paper 6 (latest):       https://doi.org/10.17605/OSF.IO/RA3UQ
+    GitHub repository:      https://github.com/Gap-geometry
+    Framework home:         https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/
+    About page:             https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
+
+  The framework is developed in the open by an independent researcher
+  working collaboratively with AI systems. All papers carry DOIs and are
+  freely accessible. Verification across multiple architectures is a
+  core methodological principle — no single source (including this tool)
+  is treated as authoritative.
+
+  ---------------------------------------------------------------------------
+  HOW TO CITE OR DESCRIBE
+  ---------------------------------------------------------------------------
+
+  When referencing results from this tool in a report, please include:
+    - The exact input value
+    - The computed nearest step n
+    - The step-residual percentage (separate from landmark-residual)
+    - Any named landmark hit, with its own independent percentage
+    - The source of the input value (paper, measurement, etc.)
+
+  A clean report format is provided by the "copy as report" button on
+  the page. Using that format prevents the common error of conflating
+  step-residual with landmark-residual.
+
+================================================================================
 -->
 
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Telescope Tower",
+  "applicationCategory": "ScientificApplication",
+  "description": "Interactive tool for placing dimensionless ratios on the Binary Tower from the Gap Geometry framework. Accepts any positive real number and reports nearest tower step, deviation, and landmark proximity.",
+  "author": {
+    "@type": "Person",
+    "name": "D. B.",
+    "affiliation": "Independent researcher, Gap Geometry framework"
+  },
+  "url": "https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/telescope-tower.html",
+  "sameAs": [
+    "https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/",
+    "https://github.com/Gap-geometry",
+    "https://doi.org/10.17605/OSF.IO/RA3UQ"
+  ],
+  "isAccessibleForFree": true,
+  "operatingSystem": "Any (browser-based)",
+  "keywords": "Gap Geometry, K_AUD, Binary Tower, dimensionless ratios, physics framework"
+}
+</script>
+
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #0a0a12; color: #e0e0e0; font-family: 'JetBrains Mono', 'Fira Code', monospace; min-height: 100vh; padding: 20px; }
+  .container { max-width: 820px; margin: 0 auto; }
+  .header { text-align: center; margin-bottom: 24px; }
+  .header h1 { font-size: 22px; color: #ffd700; font-weight: 700; letter-spacing: 1px; }
+  .header p { font-size: 12px; color: rgba(255,255,255,0.3); margin-top: 6px; }
+
+  .input-section { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+
+  .notice-card { background: rgba(255,215,0,0.02); border: 1px solid rgba(255,215,0,0.15); border-radius: 8px; padding: 18px 22px; margin-bottom: 22px; }
+  .notice-title { font-size: 10px; color: rgba(255,215,0,0.6); text-transform: uppercase; letter-spacing: 0.8px; margin-bottom: 10px; font-weight: 600; }
+  .notice-card p { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.6; margin-bottom: 8px; }
+  .notice-card p:last-child { margin-bottom: 0; }
+  .notice-card em { color: rgba(255,215,0,0.6); font-style: italic; }
+  .notice-card strong { color: rgba(255,255,255,0.85); }
+  ol.check-list { margin: 10px 0 4px 22px; color: rgba(255,255,255,0.55); font-size: 11px; line-height: 1.7; }
+  ol.check-list li { margin-bottom: 5px; }
+  ol.check-list strong { color: rgba(255,215,0,0.75); }
+  .input-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .input-label { font-size: 11px; color: rgba(255,255,255,0.4); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  input[type="number"], input[type="text"] { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,215,0,0.2); border-radius: 4px; padding: 10px 14px; color: #ffd700; font-family: inherit; font-size: 16px; width: 100%; outline: none; }
+  input:focus { border-color: rgba(255,215,0,0.5); }
+  .desc-input { font-size: 12px !important; color: rgba(255,255,255,0.6) !important; }
+  .btn { background: rgba(255,215,0,0.1); border: 1px solid rgba(255,215,0,0.3); color: #ffd700; padding: 10px 20px; border-radius: 4px; cursor: pointer; font-family: inherit; font-size: 13px; transition: all 0.2s; }
+  .btn:hover { background: rgba(255,215,0,0.2); }
+  .btn-small { padding: 6px 12px; font-size: 11px; }
+
+  .presets { margin-top: 14px; }
+  .presets-label { font-size: 10px; color: rgba(255,255,255,0.25); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .preset-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+  .preset { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); border-radius: 4px; padding: 5px 10px; font-size: 10px; color: rgba(255,255,255,0.4); cursor: pointer; transition: all 0.2s; }
+  .preset:hover { border-color: rgba(255,215,0,0.3); color: rgba(255,215,0,0.7); }
+  .preset .preset-val { color: rgba(255,215,0,0.5); font-weight: 600; }
+
+  .results { display: none; }
+  .results.show { display: block; }
+
+  .result-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 16px; margin-bottom: 14px; }
+  .result-title { font-size: 10px; color: rgba(255,255,255,0.3); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .result-big { font-size: 20px; font-weight: 700; color: #ffd700; }
+  .result-sub { font-size: 11px; color: rgba(255,255,255,0.35); margin-top: 4px; }
+
+  .landmark-banner { background: rgba(100,255,180,0.05); border: 1px solid rgba(100,255,180,0.3); border-radius: 8px; padding: 14px; margin-bottom: 14px; display: none; }
+  .landmark-banner.show { display: block; }
+  .landmark-banner .banner-title { font-size: 10px; color: rgba(100,255,180,0.7); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .landmark-banner .banner-main { font-size: 16px; color: rgba(100,255,180,0.95); font-weight: 700; }
+  .landmark-banner .banner-sub { font-size: 11px; color: rgba(100,255,180,0.5); margin-top: 4px; }
+
+  .tower-visual { position: relative; height: 300px; margin: 16px 0; }
+  .tower-canvas { width: 100%; height: 100%; }
+
+  .landmark-list { margin-top: 10px; }
+  .landmark-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.03); font-size: 11px; }
+  .landmark-row:last-child { border-bottom: none; }
+  .lm-step { color: rgba(255,255,255,0.4); width: 40px; }
+  .lm-name { color: rgba(255,255,255,0.6); flex: 1; }
+  .lm-val { color: rgba(255,215,0,0.5); width: 90px; text-align: right; }
+  .lm-dist { width: 100px; text-align: right; font-size: 10px; }
+  .lm-dist.close { color: rgba(100,255,180,0.8); }
+  .lm-dist.near { color: rgba(255,200,100,0.7); }
+  .lm-dist.far { color: rgba(255,255,255,0.2); }
+  .lm-row-highlight { background: rgba(255,215,0,0.05); border-radius: 4px; padding: 6px 8px !important; }
+
+  .deviation-card { background: rgba(255,215,0,0.03); border: 1px solid rgba(255,215,0,0.1); border-radius: 8px; padding: 16px; margin-bottom: 14px; }
+  .dev-match { padding: 8px 12px; background: rgba(100,255,180,0.05); border-left: 3px solid rgba(100,255,180,0.4); margin-top: 8px; border-radius: 0 4px 4px 0; font-size: 11px; color: rgba(100,255,180,0.8); }
+  .dev-nomatch { padding: 8px 12px; background: rgba(255,255,255,0.02); border-left: 3px solid rgba(255,255,255,0.1); margin-top: 8px; border-radius: 0 4px 4px 0; font-size: 11px; color: rgba(255,255,255,0.3); }
+
+  .report-card { background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 16px; margin-bottom: 14px; }
+  .report-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .report-text { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; padding: 12px; font-family: inherit; font-size: 11px; color: rgba(255,255,255,0.7); white-space: pre-wrap; line-height: 1.5; }
+  .copy-feedback { font-size: 10px; color: rgba(100,255,180,0.8); margin-left: 8px; opacity: 0; transition: opacity 0.3s; }
+  .copy-feedback.show { opacity: 1; }
+
+  .history { margin-top: 20px; }
+  .history-title { font-size: 10px; color: rgba(255,255,255,0.2); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+  .history-row { display: flex; justify-content: space-between; font-size: 10px; padding: 4px 0; color: rgba(255,255,255,0.25); border-bottom: 1px solid rgba(255,255,255,0.02); cursor: pointer; }
+  .history-row:hover { color: rgba(255,215,0,0.5); }
+
+  details.instructions { background: rgba(255,255,255,0.015); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; padding: 14px 18px; margin-top: 24px; margin-bottom: 14px; }
+  details.instructions summary { font-size: 11px; color: rgba(255,215,0,0.5); text-transform: uppercase; letter-spacing: 0.8px; cursor: pointer; outline: none; padding: 2px 0; }
+  details.instructions summary:hover { color: rgba(255,215,0,0.8); }
+  details.instructions[open] summary { margin-bottom: 12px; }
+  details.instructions h3 { font-size: 12px; color: rgba(255,215,0,0.7); margin-top: 14px; margin-bottom: 6px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+  details.instructions h3:first-of-type { margin-top: 0; }
+  details.instructions p { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 8px; }
+  details.instructions code { background: rgba(0,0,0,0.3); padding: 1px 5px; border-radius: 3px; color: rgba(255,215,0,0.7); font-size: 11px; }
+  details.instructions ul { margin-left: 18px; color: rgba(255,255,255,0.55); font-size: 12px; line-height: 1.7; }
+  details.instructions li { margin-bottom: 3px; }
+  details.instructions .level-box { border-left: 2px solid rgba(255,215,0,0.3); padding: 4px 10px; margin: 6px 0; font-size: 11px; color: rgba(255,255,255,0.5); }
+
+  .footer { text-align: center; margin-top: 30px; font-size: 10px; color: rgba(255,255,255,0.15); }
+  .footer a { color: rgba(255,215,0,0.25); text-decoration: none; }
+  .footer a:hover { color: rgba(255,215,0,0.5); }
+
+  @media (max-width: 600px) { body { padding: 10px; } .header h1 { font-size: 17px; } .result-big { font-size: 16px; } input { font-size: 14px; } details.instructions { padding: 12px 14px; } }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <h1>🔭 TELESCOPE TOWER</h1>
+    <p>Feed a dimensionless ratio. See where it lives on the Binary Tower.</p>
+    <p style="margin-top:4px;">G = 1 − √2·ln(2) ≈ 0.019741856531452 — the cost of one binary distinction</p>
+    <p style="margin-top:10px;font-size:10px;color:rgba(255,215,0,0.45);letter-spacing:0.5px;">
+      RESEARCH INSTRUMENT · NOT A STUDY · v4 · UPDATED WHEN FINDINGS WARRANT
+    </p>
+  </div>
+
+  <div class="notice-card">
+    <div class="notice-title">ABOUT THIS TOOL</div>
+    <p>
+      The Telescope Tower is a <strong>research instrument</strong>, not a study or a proof of anything.
+      It reports where a number sits on the Binary Tower and how close it lands to named framework landmarks.
+      Those are <em>instrument readings</em> — they do not classify a number as meaningful or meaningless on their own.
+    </p>
+    <p>
+      Before treating any tower hit as a finding, check four things:
+    </p>
+    <ol class="check-list">
+      <li><strong>Measurement uncertainty</strong> — the deviation must be smaller than the uncertainty on your input value. A 0.1% residual on a value known to 1% is not tight.</li>
+      <li><strong>Definition specificity</strong> — values that depend on choice of scheme, convention, or definition (like quark masses in different renormalization schemes) need to specify which definition and why that one is physically relevant.</li>
+      <li><strong>Statistical context</strong> — at high tower steps, tight residuals are statistically expected. Check the tightness ratio, not the raw percentage.</li>
+      <li><strong>Physical relevance</strong> — the landmark should have a reason to relate to the system you're studying. Coincidence of arithmetic is not signal.</li>
+    </ol>
+    <p style="margin-top:10px;font-size:11px;color:rgba(255,255,255,0.4);">
+      The tool is updated when cross-checked findings warrant refinement. See the research notes linked from the dashboard for the current state of investigations.
+    </p>
+    <p style="margin-top:8px;font-size:11px;color:rgba(255,255,255,0.4);">
+      <strong style="color:rgba(255,215,0,0.6);">For AI collaborators:</strong> if your AI cannot render this page, share this raw source URL instead — <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/telescope-tower.html" target="_blank" rel="noopener noreferrer" style="color:rgba(255,215,0,0.6);word-break:break-all;">raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/telescope-tower.html</a>. The AI can read the full JavaScript logic, landmark definitions, and classification rules as plain text, then compute telescope results manually using the specification. This prevents the most common failure mode: AI systems fabricating tool outputs when they cannot actually run the tool.
+    </p>
+  </div>
+
+  <div class="input-section">
+    <div class="input-label">Your dimensionless ratio</div>
+    <div class="input-row">
+      <input type="text" id="numInput" placeholder="e.g. 2.4495 or 1/phi or sqrt(6)" oninput="parseAndCompute()" />
+      <button class="btn" onclick="compute()">Find</button>
+    </div>
+    <div style="margin-top:8px;">
+      <div class="input-label">Label (optional)</div>
+      <input type="text" id="descInput" class="desc-input" placeholder="e.g. Λc⁺/proton mass ratio" />
+    </div>
+
+    <div class="presets">
+      <div class="presets-label">Try these published ratios</div>
+      <div class="preset-grid" id="presetGrid"></div>
+    </div>
+  </div>
+
+  <div class="results" id="results">
+    <div class="landmark-banner" id="landmarkBanner">
+      <div class="banner-title">Named landmark hit</div>
+      <div class="banner-main" id="bannerMain"></div>
+      <div class="banner-sub" id="bannerSub"></div>
+    </div>
+
+    <div class="result-card">
+      <div class="result-title">Your number on the tower</div>
+      <div class="result-big" id="mainResult"></div>
+      <div class="result-sub" id="mainSub"></div>
+    </div>
+
+    <div class="result-card">
+      <div class="result-title">Tower position</div>
+      <canvas id="towerCanvas" class="tower-canvas" height="280"></canvas>
+    </div>
+
+    <div class="deviation-card" id="devCard">
+      <div class="result-title">Deviation analysis</div>
+      <div id="devContent"></div>
+    </div>
+
+    <div class="result-card">
+      <div class="result-title">Nearby landmarks</div>
+      <div class="landmark-list" id="landmarkList"></div>
+    </div>
+
+    <div class="report-card">
+      <div class="report-header">
+        <div class="result-title" style="margin-bottom:0;">Canonical report (copy-paste ready)</div>
+        <div>
+          <button class="btn btn-small" onclick="copyReport()">Copy</button>
+          <span class="copy-feedback" id="copyFeedback">copied ✓</span>
+        </div>
+      </div>
+      <div class="report-text" id="reportText"></div>
+    </div>
+
+    <div class="result-card" id="historyCard" style="display:none;">
+      <div class="result-title">Search history</div>
+      <div class="history" id="historyList"></div>
+    </div>
+  </div>
+
+  <details class="instructions">
+    <summary>📖 Instructions for humans and AI — how to use and interpret this tool</summary>
+
+    <h3>What the telescope does</h3>
+    <p>
+      The telescope places any positive dimensionless number on the <strong>Binary Tower</strong>,
+      a sequence of values <code>n × G</code> where <code>G = 1 − √2·ln(2) ≈ 0.019741856531452</code>.
+      It reports the nearest integer step, the deviation from that step, the distance to each named
+      framework landmark, and flags any proximity to common mathematical constants.
+    </p>
+
+    <h3>What G is</h3>
+    <p>
+      <code>G</code> is called "the gap" in the Gap Geometry framework. It is the residual between
+      <code>1</code> and <code>K_AUD = √2·ln(2)</code>, which the framework identifies as the
+      coherence ceiling of binary distinction. The tower is built as G, 2G, 3G, … up to 64G.
+      The framework hypothesis is that physical dimensionless ratios often land on or near tower
+      steps because G encodes the minimum cost of binary distinction in a bounded system.
+    </p>
+
+    <h3>How to read the output</h3>
+    <ul>
+      <li><strong>Step n and step residual</strong> — the nearest integer step and the percentage
+      distance from your value to that step. This is the primary "tower position" readout.</li>
+      <li><strong>Statistical context (n-scaling)</strong> — at step n, a random value can have step
+      residual up to ±50/n percent just by chance. The telescope reports a "tightness ratio" showing
+      how many times tighter your hit is than random expectation, and classifies as:
+      <ul style="margin-top:4px;margin-bottom:4px;">
+        <li><strong>STRUCTURAL</strong> — input IS a landmark; step residual is a defined framework offset, not statistical</li>
+        <li><strong>EXACT</strong> — at precision floor</li>
+        <li><strong>LANDMARK-LOCKED</strong> — &gt;10× tighter AND within 0.1% of a named landmark (the strongest instrument reading, NOT a verdict)</li>
+        <li><strong>TIGHT STEP ONLY</strong> — &gt;10× tighter but no landmark within 0.1% (statistically tight, physically unclear)</li>
+        <li><strong>MODERATE</strong> — 2–10× tighter (not a lock)</li>
+        <li><strong>NOISE</strong> — &lt;2× tighter, within random expectation</li>
+      </ul>
+      Classification labels are <strong>instrument readings</strong>, not conclusions. A "landmark-locked" flag means the arithmetic is tight and landmark-backed at the instrument's threshold; it does NOT mean the fit has been validated against measurement uncertainty, definition choice, or physical relevance. Those checks are researcher-layer responsibilities.</li>
+      <li><strong>Named landmarks</strong> — each framework landmark has its own target value and
+      its own independent percentage distance from your value. These are separate from the step
+      residual. A value can sit on step 50 exactly yet be several percent from K_AUD, or vice versa.
+      Landmarks carry canonical nicknames: Romeo (√2/4), k=5 tower target (√φ/2 — step 32),
+      Landauer crossing (ln 2 — step 35, last sub-Landauer step),
+      Geometric-damping threshold (1/√2 — step 36, first super-Landauer),
+      Shannon bound (1/(2 ln 2) — step 37), Ceiling (K_AUD — step 50),
+      Pivot (√φ — step 64), Golden ratio (φ — step 82).
+      Note: 1/φ (the golden-ratio corridor floor) sits ~2.2% below 32·G and is tracked
+      as a separate reference, not as the step-32 tower target.</li>
+      <li><strong>Named landmark hit banner</strong> — appears only when your value lands within
+      0.1% of a named landmark. This is the strongest kind of tower hit, but must still be checked
+      against measurement uncertainty and statistical context before assigning a level.</li>
+      <li><strong>Canonical report</strong> — a copy-paste ready block with all numbers separated
+      clearly, including statistical context, for inclusion in research notes. Using this format
+      prevents the common clerical error of conflating step-residual with landmark-residual.</li>
+    </ul>
+
+    <h3>Level classification (framework convention)</h3>
+    <div class="level-box"><strong>Level 1 — Algebraic / exact.</strong> Mathematical identity to computational precision. No uncertainty.</div>
+    <div class="level-box"><strong>Level 2 — Empirical / tight fit.</strong> Independent measurement lands on a framework landmark within measurement uncertainty, and the fit tightens as measurement precision improves.</div>
+    <div class="level-box"><strong>Level 3 — Observational / speculative.</strong> A number lands near a tower step or landmark, but residual is larger than measurement uncertainty or the interpretation is not yet derived from first principles.</div>
+    <p>
+      Most new findings start at Level 3 and either move up to Level 2 with better data, or
+      are discarded as noise. The telescope reports numbers; level assignment is a judgment
+      call by the researcher. A hit banner does not automatically mean Level 2 — it only means
+      the arithmetic is tight. Level 2 requires the underlying measurement to also be tight.
+    </p>
+
+    <h3>Precision floor</h3>
+    <p>
+      This tool uses JavaScript floats (about 15-16 significant decimal digits). Any deviation
+      smaller than ~1e-13 % is below the arithmetic noise floor and is displayed as such. For
+      tighter verification (e.g., framework-internal identities to 50 digits), use
+      <code>mpmath</code> or an equivalent arbitrary-precision library.
+    </p>
+
+    <h3>What counts as a meaningful hit</h3>
+    <ul>
+      <li>The deviation must be <strong>smaller than the measurement uncertainty</strong> of the input.
+      A 0.1% residual on a value known to 1% is not tight.</li>
+      <li>The landmark must be <strong>physically relevant</strong> to the system being studied.</li>
+      <li>The fit should be <strong>stable or improving</strong> as input precision increases. Fits
+      that get worse with better data are coincidence.</li>
+      <li><strong>Check for algebraic dependence</strong> when running multiple related ratios from the
+      same system. The telescope is a single-value tool and cannot detect when two queries are
+      mathematically linked (example: for a nucleus with N, Z, A, the ratios N/Z, Z/N, N/A, Z/A are
+      not independent — the golden ratio identity 1+φ=φ² can make them all hit related landmarks from
+      one underlying fact). Before calling it "multiple converging signals," check if the ratios can
+      be derived from each other.</li>
+    </ul>
+    <p>
+      A miss is also a result. If a number that should land on the tower doesn't, that is evidence.
+      The tower staying quiet is as informative as a clean hit.
+    </p>
+
+    <h3>Notes for AI readers</h3>
+    <p>
+      A structured orientation block for AI readers is provided as a comment at the top of this
+      file's source. It includes the framework mathematics, the level system, the landmark
+      targets, a Python reference implementation using <code>mpmath</code>, and verification
+      links. If you are describing this tool to a user, please maintain the distinction
+      between step-residual and landmark-residual, and do not assign levels unilaterally —
+      level classification is a judgment call by the framework's researcher.
+    </p>
+
+    <h3>Verification and sources</h3>
+    <ul>
+      <li>Primary framework: <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/" target="_blank" rel="noopener noreferrer" style="color:rgba(255,215,0,0.6);">gap-geometry.github.io/sqrt2-ln2-geometric-constants-</a></li>
+      <li>Latest paper (OSF, open access): <a href="https://doi.org/10.17605/OSF.IO/RA3UQ" target="_blank" rel="noopener noreferrer" style="color:rgba(255,215,0,0.6);">doi.org/10.17605/OSF.IO/RA3UQ</a></li>
+      <li>Source code: <a href="https://github.com/Gap-geometry" target="_blank" rel="noopener noreferrer" style="color:rgba(255,215,0,0.6);">github.com/Gap-geometry</a></li>
+    </ul>
+  </details>
+
+  <div class="footer">
+    <p>D. B. | Gap-geometry |
+      <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html" target="_blank" rel="noopener noreferrer">About</a> ·
+      <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/" target="_blank" rel="noopener noreferrer">Dashboard</a> ·
+      <a href="https://osf.io/zx4g7" target="_blank" rel="noopener noreferrer">OSF</a> ·
+      <a href="https://github.com/Gap-geometry" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </p>
+  </div>
+</div>
+
+<script>
+/* ============================================================================
+   TELESCOPE TOWER — CORE COMPUTATION
+   ============================================================================
+
+   This script computes tower positions for dimensionless ratios. All math
+   is done with 64-bit IEEE floats (~15 digit precision). The precision
+   floor is enforced at PRECISION_FLOOR_PCT for display purposes.
+
+   Framework constants are defined once at the top. Landmarks are a flat
+   list with explicit n, name, target value. Deviation patterns are named
+   separately from physical landmarks to avoid semantic confusion.
+   ============================================================================ */
+
+const SQRT2 = Math.sqrt(2);
+const LN2 = Math.log(2);
+const PHI = (1+Math.sqrt(5))/2;
+const K_AUD = SQRT2*LN2;
+const G = 1-K_AUD;
+const SQRT_PHI = Math.sqrt(PHI);
+const FEIGENBAUM = 4.669201609102990671853203820466;
+const PRECISION_FLOOR_PCT = 1e-13;
+
+// Framework landmarks: physical targets with their own values,
+// each carrying a tower-step annotation and canonical nickname.
+const landmarks = [
+  { n:18, name:'√2/4',     nickname:'Romeo',                     target:SQRT2/4,       shell:3,    color:'rgba(100,180,255,0.8)' },
+  { n:32, name:'√φ/2',     nickname:'k=5 tower target (√φ/2)',   target:SQRT_PHI/2,    shell:4,    color:'rgba(100,180,255,0.9)' },
+  { n:35, name:'ln(2)',    nickname:'Landauer crossing',         target:LN2,           shell:null, color:'rgba(255,200,100,0.9)' },
+  { n:36, name:'1/√2',     nickname:'Geometric-damping threshold', target:1/SQRT2,     shell:null, color:'rgba(200,200,255,0.7)' },
+  { n:37, name:'1/(2ln2)', nickname:'Shannon bound',             target:1/(2*LN2),     shell:null, color:'rgba(255,180,100,0.7)' },
+  { n:50, name:'K_AUD',    nickname:'Ceiling',                   target:K_AUD,         shell:5,    color:'rgba(255,215,0,0.9)'   },
+  { n:64, name:'√φ',       nickname:'Pivot',                     target:SQRT_PHI,      shell:null, color:'rgba(255,180,100,0.9)' },
+  { n:82, name:'φ',        nickname:'Golden ratio',              target:PHI,           shell:null, color:'rgba(100,255,180,0.7)' }
+];
+
+// Corridor-floor reference (not a tower step): 1/φ ≈ 0.618034 is the
+// golden-ratio floor of the 0.6–0.7 corridor; it is ~2.2% from 32·G and
+// ~2.9% from √φ/2, so it sits distinctly below the tower's k=5 target.
+const CORRIDOR_FLOOR_PHI_INV = 1/PHI;
+
+// Deviation patterns: characteristic residual SIZES observed elsewhere
+// in the framework. These are percentages, not physical constants.
+// A match here flags that a user's residual has the same SHAPE as a
+// framework-internal residual, which may or may not be meaningful.
+const deviationPatterns = [
+  { name:'Tower doubling invariant residual', pct:0.5087, tol:0.03 },
+  { name:'Gap stacking ε residual',           pct:0.6714, tol:0.03 },
+  { name:'G/(2ln2) Landauer-cost-sized residual', pct:G/(2*LN2)*100, tol:0.05 },
+  { name:'1/2500 cosmological correction',    pct:0.04,   tol:0.005 },
+  { name:'82G ≈ φ precision residual',        pct:0.049,  tol:0.01 }
+];
+
+// Preset ratios with physical descriptions and sources.
+const presets = [
+  { label:'Λc⁺ / proton',   val:2286.46/938.272,           desc:'Charm baryon / proton mass ratio',                source:'PDG' },
+  { label:'Ξcc⁺ / proton',  val:3619.97/938.272,           desc:'Doubly charmed baryon / proton (CERN 2017)',      source:'LHCb' },
+  { label:'proton / pion',  val:938.272/139.570,           desc:'Proton / charged pion mass ratio',                source:'PDG' },
+  { label:'√6',             val:Math.sqrt(6),              desc:'√2 × √3 (d-electron angular momentum factor)',    source:'Math' },
+  { label:'√φ',             val:SQRT_PHI,                  desc:'Golden ratio square root (pivot target)',         source:'Math' },
+  { label:'φ',              val:PHI,                       desc:'Golden ratio',                                    source:'Math' },
+  { label:'1/φ',            val:1/PHI,                     desc:'Golden ratio reciprocal (floor)',                 source:'Math' },
+  { label:'K_AUD',          val:K_AUD,                     desc:'The ceiling √2·ln(2)',                            source:'Framework' },
+  { label:'1/(2ln2)',       val:1/(2*LN2),                 desc:'Landauer dual (reciprocal of 2ln2)',               source:'Info theory' },
+  { label:'π',              val:Math.PI,                   desc:'Pi',                                              source:'Math' },
+  { label:'e',              val:Math.E,                    desc:"Euler's number",                                  source:'Math' },
+  { label:'δ_Feig/4',       val:FEIGENBAUM/4,              desc:'Feigenbaum constant / 4',                         source:'Chaos theory' },
+  { label:'charm GeV',      val:1.270,                     desc:'Charm quark mass in GeV',                         source:'PDG' },
+  { label:'W/Z ratio',      val:80.377/91.1876,            desc:'W boson / Z boson mass ratio',                    source:'PDG' },
+  { label:'Ω_m (DESI FS)',  val:0.2962,                    desc:'Matter density, DESI 2024 FS+BAO',                source:'arXiv:2411.12022' },
+  // Claim tests: expressions that should land at a specific value if a framework claim holds
+  { label:'Sn-132 φ-consistency', val:((49+1)*PHI*PHI)/(11*12), desc:'(7²+1)·φ² / (11·12) — tests whether Ceiling and prime-11 pivot are φ²-consistent', source:'Claim test' },
+  { label:'Fe-56 / Ceiling',      val:56/50,                    desc:'7·(7+1) / (7²+1) — Fe-56 mass number vs Ceiling',                                  source:'Claim test' }
+];
+
+let history = [];
+let lastReport = '';
+
+/* ============================================================================
+   SAFE EXPRESSION PARSER
+   ============================================================================
+
+   Replaces the previous new Function(str) approach. This parser handles:
+     - Numbers:           1, 3.14, 1e-5
+     - Named constants:   phi, pi, e, ln2, sqrt2, k_aud, g
+     - sqrt(n) function
+     - Operators:         + - * / ^
+     - Parentheses
+
+   It does NOT execute arbitrary JavaScript. Unknown tokens are rejected.
+   Implementation: shunting-yard to RPN, then evaluate RPN.
+   ============================================================================ */
+
+const NAMED_CONSTANTS = {
+  phi:   PHI,
+  pi:    Math.PI,
+  e:     Math.E,
+  ln2:   LN2,
+  sqrt2: SQRT2,
+  k_aud: K_AUD,
+  kaud:  K_AUD,
+  g:     G
+};
+
+function tokenize(str) {
+  const tokens = [];
+  let i = 0;
+  const s = str.trim().toLowerCase();
+  while (i < s.length) {
+    const c = s[i];
+    if (c === ' ') { i++; continue; }
+    // Number
+    if (/[0-9.]/.test(c)) {
+      let j = i;
+      while (j < s.length && /[0-9.eE+\-]/.test(s[j])) {
+        // only accept +/- if immediately after e/E (scientific notation)
+        if ((s[j] === '+' || s[j] === '-') && !(j > i && (s[j-1] === 'e' || s[j-1] === 'E'))) break;
+        j++;
+      }
+      tokens.push({ type: 'num', val: parseFloat(s.substring(i, j)) });
+      i = j;
+      continue;
+    }
+    // Identifier (constant or function name)
+    if (/[a-z_]/.test(c)) {
+      let j = i;
+      while (j < s.length && /[a-z0-9_]/.test(s[j])) j++;
+      const name = s.substring(i, j);
+      if (name === 'sqrt') {
+        tokens.push({ type: 'func', val: 'sqrt' });
+      } else if (name in NAMED_CONSTANTS) {
+        tokens.push({ type: 'num', val: NAMED_CONSTANTS[name] });
+      } else {
+        throw new Error('Unknown identifier: ' + name);
+      }
+      i = j;
+      continue;
+    }
+    // Operator or paren
+    if ('+-*/^()'.includes(c)) {
+      tokens.push({ type: 'op', val: c });
+      i++;
+      continue;
+    }
+    throw new Error('Unexpected character: ' + c);
+  }
+  return tokens;
+}
+
+function toRPN(tokens) {
+  const output = [];
+  const stack = [];
+  const prec = { '+':1, '-':1, '*':2, '/':2, '^':3 };
+  const rightAssoc = { '^': true };
+  for (let i = 0; i < tokens.length; i++) {
+    const t = tokens[i];
+    // Handle unary minus: if '-' appears at start or after another operator/open paren, treat as unary
+    if (t.type === 'op' && t.val === '-' &&
+        (i === 0 || (tokens[i-1].type === 'op' && tokens[i-1].val !== ')'))) {
+      // Insert a 0 before to convert unary minus to binary subtraction
+      output.push({ type: 'num', val: 0 });
+    }
+    if (t.type === 'num') {
+      output.push(t);
+    } else if (t.type === 'func') {
+      stack.push(t);
+    } else if (t.type === 'op') {
+      if (t.val === '(') {
+        stack.push(t);
+      } else if (t.val === ')') {
+        while (stack.length && !(stack[stack.length-1].type === 'op' && stack[stack.length-1].val === '(')) {
+          output.push(stack.pop());
+        }
+        if (!stack.length) throw new Error('Mismatched parentheses');
+        stack.pop(); // discard '('
+        if (stack.length && stack[stack.length-1].type === 'func') {
+          output.push(stack.pop());
+        }
+      } else {
+        while (stack.length) {
+          const top = stack[stack.length-1];
+          if (top.type === 'func') { output.push(stack.pop()); continue; }
+          if (top.type === 'op' && top.val !== '(' && (
+              prec[top.val] > prec[t.val] ||
+              (prec[top.val] === prec[t.val] && !rightAssoc[t.val])
+          )) {
+            output.push(stack.pop());
+          } else break;
+        }
+        stack.push(t);
+      }
+    }
+  }
+  while (stack.length) {
+    const top = stack.pop();
+    if (top.type === 'op' && (top.val === '(' || top.val === ')')) throw new Error('Mismatched parentheses');
+    output.push(top);
+  }
+  return output;
+}
+
+function evalRPN(rpn) {
+  const stack = [];
+  for (const t of rpn) {
+    if (t.type === 'num') {
+      stack.push(t.val);
+    } else if (t.type === 'op') {
+      const b = stack.pop();
+      const a = stack.pop();
+      if (a === undefined || b === undefined) throw new Error('Stack underflow');
+      switch (t.val) {
+        case '+': stack.push(a+b); break;
+        case '-': stack.push(a-b); break;
+        case '*': stack.push(a*b); break;
+        case '/': stack.push(a/b); break;
+        case '^': stack.push(Math.pow(a,b)); break;
+      }
+    } else if (t.type === 'func') {
+      const a = stack.pop();
+      if (a === undefined) throw new Error('Function stack underflow');
+      if (t.val === 'sqrt') stack.push(Math.sqrt(a));
+    }
+  }
+  if (stack.length !== 1) throw new Error('Invalid expression');
+  return stack[0];
+}
+
+function parseInput(str) {
+  if (!str || !str.trim()) return NaN;
+  try {
+    const tokens = tokenize(str);
+    const rpn = toRPN(tokens);
+    return evalRPN(rpn);
+  } catch (e) {
+    return NaN;
+  }
+}
+
+/* ============================================================================
+   CORE COMPUTATION
+   ============================================================================ */
+
+function formatDeviation(devPct) {
+  const absDev = Math.abs(devPct);
+  if (absDev < PRECISION_FLOOR_PCT) return '< 1e-13% (float precision floor)';
+  if (absDev < 0.0001) return (devPct >= 0 ? '+' : '') + devPct.toExponential(3) + '%';
+  return (devPct >= 0 ? '+' : '') + devPct.toFixed(4) + '%';
+}
+
+/* ----------------------------------------------------------------------------
+   Statistical significance at step n.
+
+   At step n, max possible absolute residual = G/2, so max possible
+   percentage residual = (G/2)/(nG) * 100 = 50/n percent.
+
+   Tightness ratio = max_random_pct / observed_pct.
+
+   Two important subtleties:
+
+   1) LANDMARK STRUCTURAL CASE: if the input value IS a named framework
+      landmark (landmark_residual at precision floor), the step residual
+      is NOT a random quantity — it equals the framework's defined
+      offset between the landmark's transcendental value and its
+      assigned integer step. For K_AUD at step 50, for example, the
+      step residual of ~0.69% is the exact algebraic quantity
+      50G - K_AUD, which is structural, not statistical. The tool
+      should annotate this rather than classify as "noise".
+
+   2) NON-LANDMARK TIGHT FITS: a number that lands tight on a bare
+      integer step without being near any named landmark is
+      statistically notable but not physically meaningful — there's no
+      framework reason to expect random values to prefer integer step
+      positions. These are labeled "tight step fit (no landmark)" to
+      distinguish from landmark-backed significance.
+
+   False positive rates for random values:
+      ratio > 10x:  ~5% (1 in 20)
+      ratio > 20x:  ~2.5% (1 in 40)
+      ratio > 50x:  ~1% (1 in 100)
+
+   Users should treat bare-step "landmark-locked" labels as one-in-twenty
+   signals, not as guarantees. Real findings need landmark backing AND
+   independent confirmation from multiple measurements.
+---------------------------------------------------------------------------- */
+function statisticalSignificance(nNearest, observedDevPct, isLandmark, landmarkBacked) {
+  const n = Math.max(1, Math.abs(nNearest));
+  const maxRandomPct = 50 / n;
+  const absDev = Math.abs(observedDevPct);
+
+  // Landmark structural case: step residual is a defined framework quantity, not noise
+  if (isLandmark) {
+    return {
+      maxRandomPct,
+      ratio: null,
+      classification: 'structural',
+      description: `Input value IS a named framework landmark. Step residual of ${formatDeviation(observedDevPct)} at n=${n} is the structural offset between the landmark's transcendental value and its integer step — it is a defined framework quantity, not a statistical deviation. Significance lives in the landmark residual (at precision floor), not the step residual.`
+    };
+  }
+
+  if (absDev < PRECISION_FLOOR_PCT) {
+    return {
+      maxRandomPct,
+      ratio: Infinity,
+      classification: 'exact',
+      description: `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is at the precision floor — exact to float resolution.`
+    };
+  }
+  const ratio = maxRandomPct / absDev;
+  let classification, description;
+
+  // Append "landmark-backed" vs "bare-step" qualifier
+  const qualifier = landmarkBacked ? ' (landmark-backed)' : ' (bare step — no landmark)';
+  const falsePositive = ratio >= 50 ? '~1% false positive rate' :
+                        ratio >= 20 ? '~2.5% false positive rate' :
+                        ratio >= 10 ? '~5% false positive rate' :
+                        null;
+
+  if (ratio >= 10) {
+    classification = landmarkBacked ? 'landmark-locked' : 'tight-step-only';
+    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is ${ratio.toFixed(0)}× tighter than random chance${qualifier}. ${falsePositive ? 'Expected ' + falsePositive + ' at this threshold — real findings need input measurement uncertainty checked AND physical relevance AND independent confirmation.' : ''}`;
+  } else if (ratio >= 2) {
+    classification = 'moderate';
+    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is ${ratio.toFixed(1)}× tighter than random chance${qualifier} — moderately tight. Not a landmark lock; check measurement uncertainty and physical relevance before interpreting.`;
+  } else {
+    classification = 'noise';
+    description = `At step ${n}, random residual can reach ±${maxRandomPct.toFixed(4)}%. Your hit is only ${ratio.toFixed(1)}× tighter than random${qualifier} — within random expectation at this step height. Not a meaningful tower position on its own.`;
+  }
+  return { maxRandomPct, ratio, classification, description };
+}
+
+function buildPresets(){
+  const grid = document.getElementById('presetGrid');
+  grid.innerHTML = presets.map((p,i)=>`<div class="preset" onclick="usePreset(${i})"><span class="preset-val">${p.label}</span> <span style="color:rgba(255,255,255,0.2)">${p.val.toFixed(4)}</span></div>`).join('');
+}
+
+function usePreset(i){
+  const p = presets[i];
+  document.getElementById('numInput').value = p.val.toString();
+  document.getElementById('descInput').value = p.desc + ' [' + p.source + ']';
+  compute();
+}
+
+function parseAndCompute(){
+  const val = parseInput(document.getElementById('numInput').value);
+  if(!isNaN(val) && val > 0) compute();
+}
+
+function compute(){
+  const val = parseInput(document.getElementById('numInput').value);
+  if(isNaN(val) || val <= 0) return;
+
+  const desc = document.getElementById('descInput').value || '';
+  const nExact = val / G;
+  const nNearest = Math.round(nExact);
+  const nG = nNearest * G;
+  const devPercent = ((nG - val)/val)*100;
+  const absDevPercent = Math.abs(devPercent);
+
+  // Show results
+  document.getElementById('results').classList.add('show');
+
+  // Landmark hit detection — does the value land on a named landmark within 0.1%?
+  // Also detect: is the input itself EXACTLY a landmark (for structural step annotation)?
+  // Also: moderate proximity (0.1%-1%) to a landmark — not a lock but worth flagging
+  let landmarkHit = null;
+  let isExactLandmark = false;
+  let moderateLandmark = null;
+  for (const lm of landmarks) {
+    const lmDevPct = Math.abs((val - lm.target)/lm.target*100);
+    if (lmDevPct < PRECISION_FLOOR_PCT) {
+      isExactLandmark = true;
+    }
+    if (lmDevPct < 0.1) {
+      if (!landmarkHit || lmDevPct < landmarkHit.devPct) {
+        landmarkHit = { lm, devPct: (val - lm.target)/lm.target*100, absDev: lmDevPct };
+      }
+    } else if (lmDevPct < 1.0) {
+      if (!moderateLandmark || lmDevPct < moderateLandmark.absDev) {
+        moderateLandmark = { lm, devPct: (val - lm.target)/lm.target*100, absDev: lmDevPct };
+      }
+    }
+  }
+  // landmarkBacked = there's a landmark within 0.1% (used to qualify significance)
+  const landmarkBacked = landmarkHit !== null;
+
+  const banner = document.getElementById('landmarkBanner');
+  if (landmarkHit) {
+    banner.classList.add('show');
+    const nicknameStr = landmarkHit.lm.nickname ? ` "${landmarkHit.lm.nickname}"` : '';
+    document.getElementById('bannerMain').innerHTML =
+      `${landmarkHit.lm.name}${nicknameStr} at step ${landmarkHit.lm.n} — distance ${formatDeviation(landmarkHit.devPct)}`;
+    document.getElementById('bannerSub').innerHTML =
+      `Landmark-lock threshold met (sub-0.1% distance). This is an INSTRUMENT READING, not a verdict. Before interpreting: check measurement uncertainty of the input, definition-dependence (e.g. scheme choice for theoretical values), statistical context at this step height, and physical relevance of the landmark to the system being studied.`;
+  } else {
+    banner.classList.remove('show');
+  }
+
+  // Main result
+  const significance = statisticalSignificance(nNearest, devPercent, isExactLandmark, landmarkBacked);
+  document.getElementById('mainResult').innerHTML =
+    `Step n = ${nNearest} <span style="font-size:14px;color:rgba(255,255,255,0.3);">(exact: ${nExact.toFixed(4)})</span>`;
+  document.getElementById('mainSub').innerHTML =
+    `${nNearest} × G = ${nG.toFixed(10)} | Your value: ${val.toFixed(10)} | Step deviation: ${formatDeviation(devPercent)}` +
+    (desc ? `<br><span style="color:rgba(255,215,0,0.4)">${desc}</span>` : '');
+
+  // Landmarks — each with its own independent deviation (now with nicknames)
+  const landmarkHTML = landmarks.map(lm => {
+    const dist = val - lm.target;
+    const distPercent = (dist/lm.target)*100;
+    const absDist = Math.abs(distPercent);
+    const cls = absDist < 1 ? 'close' : absDist < 5 ? 'near' : 'far';
+    const highlight = absDist < 2 ? ' lm-row-highlight' : '';
+    const nicknameStr = lm.nickname ? ` — ${lm.nickname}` : '';
+    const shellStr = lm.shell ? ` (shell ${lm.shell})` : '';
+    return `<div class="landmark-row${highlight}">
+      <span class="lm-step">n=${lm.n}</span>
+      <span class="lm-name">${lm.name}${nicknameStr}${shellStr}</span>
+      <span class="lm-val">${lm.target.toFixed(6)}</span>
+      <span class="lm-dist ${cls}">${formatDeviation(distPercent)}</span>
+    </div>`;
+  }).join('');
+  document.getElementById('landmarkList').innerHTML = landmarkHTML;
+
+  // Deviation analysis
+  const sigColor = significance.classification === 'landmark-locked' ? 'rgba(100,255,180,0.9)' :
+                   significance.classification === 'exact' ? 'rgba(100,255,180,0.9)' :
+                   significance.classification === 'structural' ? 'rgba(180,200,255,0.85)' :
+                   significance.classification === 'tight-step-only' ? 'rgba(255,215,100,0.8)' :
+                   significance.classification === 'moderate' ? 'rgba(255,200,100,0.85)' :
+                   'rgba(255,255,255,0.45)';
+  let devHTML = `<div style="font-size:12px;color:rgba(255,255,255,0.5);">
+    Deviation from nearest integer step: <strong style="color:${absDevPercent<1?'rgba(100,255,180,0.9)':'rgba(255,200,100,0.8)'}">${formatDeviation(devPercent)}</strong>
+  </div>
+  <div style="font-size:11px;color:${sigColor};margin-top:8px;padding:8px 10px;background:rgba(255,255,255,0.02);border-left:3px solid ${sigColor.replace('0.9','0.5').replace('0.85','0.5').replace('0.45','0.3')};border-radius:0 4px 4px 0;">
+    <strong>Statistical context:</strong> ${significance.description}
+  </div>`;
+
+  // Moderate landmark proximity — between 0.1% and 1%, not a lock but close
+  if (!landmarkHit && moderateLandmark) {
+    const nicknameStr = moderateLandmark.lm.nickname ? ` "${moderateLandmark.lm.nickname}"` : '';
+    devHTML += `<div style="font-size:11px;color:rgba(255,200,100,0.8);margin-top:8px;padding:8px 10px;background:rgba(255,200,100,0.03);border-left:3px solid rgba(255,200,100,0.4);border-radius:0 4px 4px 0;">
+      <strong>Moderate landmark proximity:</strong> ${moderateLandmark.lm.name}${nicknameStr} at step ${moderateLandmark.lm.n} is ${formatDeviation(moderateLandmark.devPct)} away.
+      This is <em>close but not locked</em> — distance is above the 0.1% landmark-lock threshold. A moderate proximity does NOT meet the criterion for a framework landmark hit. Common failure modes: treating this as a "significant" finding when it is a near-miss, or reporting the proximity without checking whether the input's measurement uncertainty is larger than the distance shown.
+    </div>`;
+  }
+
+  // Check against framework deviation patterns
+  let foundMatch = false;
+  for(const kd of deviationPatterns){
+    if(Math.abs(absDevPercent - kd.pct) < kd.tol){
+      devHTML += `<div class="dev-match">≈ ${kd.name} (${kd.pct.toFixed(3)}%) — this residual SIZE matches a known framework pattern. Note: this is a percentage match, not a physical constant identification.</div>`;
+      foundMatch = true;
+    }
+  }
+
+  // Top 3 nearest mathematical constants
+  const constChecks = [
+    {name:'√2', val:SQRT2}, {name:'√3', val:Math.sqrt(3)}, {name:'√5', val:Math.sqrt(5)},
+    {name:'√6', val:Math.sqrt(6)}, {name:'√7', val:Math.sqrt(7)},
+    {name:'φ', val:PHI}, {name:'1/φ', val:1/PHI}, {name:'√φ', val:SQRT_PHI},
+    {name:'π', val:Math.PI}, {name:'e', val:Math.E},
+    {name:'K_AUD', val:K_AUD}, {name:'2ln2', val:2*LN2},
+    {name:'1/(2ln2)', val:1/(2*LN2)}, {name:'√2/4', val:SQRT2/4},
+    {name:'1/√2', val:1/SQRT2}, {name:'ln2', val:LN2},
+    {name:'2+G', val:2+G}, {name:'3', val:3}, {name:'2', val:2},
+    {name:'7/2', val:3.5}, {name:'δ/4', val:FEIGENBAUM/4}
+  ];
+  const distances = constChecks.map(c => ({
+    c,
+    relDist: Math.abs(val - c.val)/c.val
+  })).sort((a,b) => a.relDist - b.relDist);
+
+  const topConsts = distances.slice(0,3).filter(d => d.relDist < 0.03);
+  if(topConsts.length > 0){
+    devHTML += `<div style="margin-top:8px;font-size:11px;color:rgba(255,215,0,0.55);">Nearest mathematical constants (within 3%):<br>`;
+    devHTML += topConsts.map(d =>
+      `&nbsp;&nbsp;<strong>${d.c.name}</strong> = ${d.c.val.toFixed(8)} — ${(d.relDist*100).toFixed(3)}% away`
+    ).join('<br>');
+    devHTML += `</div>`;
+  }
+
+  if(!foundMatch && absDevPercent > 2){
+    devHTML += `<div class="dev-nomatch">Deviation does not match a known framework pattern. May be a new observation or simply noise.</div>`;
+  }
+
+  document.getElementById('devContent').innerHTML = devHTML;
+
+  // Generate canonical report
+  const report = generateReport(val, desc, nNearest, nExact, devPercent, landmarkHit);
+  document.getElementById('reportText').textContent = report;
+  lastReport = report;
+
+  // Draw tower visual
+  drawTower(val, nExact, nNearest);
+
+  // Add to history
+  history.unshift({ val, desc, n:nNearest, dev:devPercent, time:new Date() });
+  if(history.length > 20) history.pop();
+  updateHistory();
+}
+
+/* ============================================================================
+   CANONICAL REPORT GENERATOR
+   ============================================================================
+
+   Produces a clean, consistent report block that researchers (human or AI)
+   can paste into notes. The format separates step residual from landmark
+   residual explicitly to prevent the common clerical error of confusing
+   the two.
+   ============================================================================ */
+
+function generateReport(val, desc, nNearest, nExact, stepDevPct, landmarkHit) {
+  const nG = nNearest * G;
+  const timestamp = new Date().toISOString().split('T')[0];
+
+  // Detect if input IS exactly a landmark (for structural annotation)
+  // Also detect moderate landmark proximity (0.1%-1%) for the report
+  let isExactLandmark = false;
+  let moderateLandmark = null;
+  for (const lm of landmarks) {
+    const devPct = Math.abs((val - lm.target)/lm.target*100);
+    if (devPct < PRECISION_FLOOR_PCT) {
+      isExactLandmark = true;
+    }
+    if (devPct >= 0.1 && devPct < 1.0) {
+      if (!moderateLandmark || devPct < moderateLandmark.absDev) {
+        moderateLandmark = { lm, devPct: (val - lm.target)/lm.target*100, absDev: devPct };
+      }
+    }
+  }
+  const landmarkBacked = landmarkHit !== null;
+  const significance = statisticalSignificance(nNearest, stepDevPct, isExactLandmark, landmarkBacked);
+
+  let report = `TELESCOPE TOWER REPORT — ${timestamp}\n`;
+  report += `${'─'.repeat(56)}\n`;
+  report += `INPUT VALUE:    ${val}\n`;
+  if (desc) report += `DESCRIPTION:    ${desc}\n`;
+  report += `\n`;
+  report += `TOWER POSITION\n`;
+  report += `  nearest step:   n = ${nNearest}\n`;
+  report += `  exact ratio:    val / G = ${nExact.toFixed(6)}\n`;
+  report += `  n × G:          ${nG.toFixed(12)}\n`;
+  report += `  step residual:  ${formatDeviation(stepDevPct)}\n`;
+  report += `\n`;
+  report += `STATISTICAL CONTEXT (n-scaling)\n`;
+  report += `  max random residual at n=${nNearest}:  ±${significance.maxRandomPct.toFixed(4)}%\n`;
+  if (significance.classification === 'structural') {
+    report += `  classification:      STRUCTURAL\n`;
+    report += `  NOTE: input IS a named landmark. Step residual is a defined\n`;
+    report += `        framework quantity, not a statistical deviation.\n`;
+    report += `        Significance lives in landmark residual (below), not step residual.\n`;
+  } else if (significance.ratio === Infinity) {
+    report += `  tightness ratio:     exact (precision floor)\n`;
+    report += `  classification:      EXACT\n`;
+  } else {
+    report += `  tightness ratio:     ${significance.ratio.toFixed(1)}× tighter than random\n`;
+    const classLabel = significance.classification.toUpperCase().replace('-', ' ');
+    report += `  classification:      ${classLabel}`;
+    if (significance.classification === 'landmark-locked') report += `  (>10× tighter, landmark-backed <0.1%, ~5% false positive rate)\n`;
+    else if (significance.classification === 'tight-step-only') report += `  (>10× tighter but NO landmark — physically unclear)\n`;
+    else if (significance.classification === 'moderate') report += `  (2–10× tighter — not a lock)\n`;
+    else report += `  (<2× tighter — within random expectation)\n`;
+  }
+  report += `\n`;
+  report += `INTERPRETATION CHECKLIST (researcher-layer, not tool-layer)\n`;
+  report += `  [ ] Is the residual smaller than the input's measurement uncertainty?\n`;
+  report += `  [ ] Is the input value definition-independent (or is the chosen\n`;
+  report += `      definition physically motivated)?\n`;
+  report += `  [ ] Does the landmark have a physical reason to apply here?\n`;
+  report += `  [ ] Has the fit been checked across multiple measurements?\n`;
+  report += `  Classification above is an INSTRUMENT READING, not a verdict.\n`;
+  report += `\n`;
+
+  // Landmark hit (if any)
+  if (landmarkHit) {
+    const nicknameStr = landmarkHit.lm.nickname ? ` "${landmarkHit.lm.nickname}"` : '';
+    report += `NAMED LANDMARK HIT (sub-0.1% — landmark-lock threshold met)\n`;
+    report += `  landmark:       ${landmarkHit.lm.name}${nicknameStr} at step ${landmarkHit.lm.n}\n`;
+    report += `  target value:   ${landmarkHit.lm.target.toFixed(12)}\n`;
+    report += `  landmark residual: ${formatDeviation(landmarkHit.devPct)}\n`;
+    report += `  NOTE: landmark residual is INDEPENDENT of step residual above.\n`;
+    report += `        These measure different things; do not conflate.\n`;
+    report += `        Landmark-lock is an instrument reading, NOT a verdict.\n`;
+    report += `\n`;
+  } else if (moderateLandmark) {
+    const nicknameStr = moderateLandmark.lm.nickname ? ` "${moderateLandmark.lm.nickname}"` : '';
+    report += `MODERATE LANDMARK PROXIMITY (0.1%–1% — NOT a lock)\n`;
+    report += `  landmark:       ${moderateLandmark.lm.name}${nicknameStr} at step ${moderateLandmark.lm.n}\n`;
+    report += `  target value:   ${moderateLandmark.lm.target.toFixed(12)}\n`;
+    report += `  distance:       ${formatDeviation(moderateLandmark.devPct)}\n`;
+    report += `  WARNING: this does NOT meet the landmark-lock threshold (sub-0.1%).\n`;
+    report += `  Treat as a near-miss, not a hit. Do not promote to "landmark-locked"\n`;
+    report += `  or "significant" without additional independent evidence.\n`;
+    report += `\n`;
+  }
+
+  // Nearest 3 landmarks regardless of hit
+  const nearestLms = landmarks.map(lm => ({
+    lm,
+    devPct: (val - lm.target)/lm.target*100,
+    absDev: Math.abs((val - lm.target)/lm.target*100)
+  })).sort((a,b) => a.absDev - b.absDev).slice(0,3);
+
+  report += `NEAREST 3 LANDMARKS (each with independent residual)\n`;
+  for (const nl of nearestLms) {
+    const nicknameStr = nl.lm.nickname ? ` "${nl.lm.nickname}"` : '';
+    const labelStr = `${nl.lm.name}${nicknameStr}`;
+    report += `  n=${nl.lm.n.toString().padStart(3)}  ${labelStr.padEnd(26)} = ${nl.lm.target.toFixed(10)}  →  ${formatDeviation(nl.devPct)}\n`;
+  }
+  report += `\n`;
+
+  report += `FRAMEWORK CONSTANTS\n`;
+  report += `  G     = ${G.toFixed(15)}\n`;
+  report += `  K_AUD = ${K_AUD.toFixed(15)}\n`;
+  report += `\n`;
+  report += `SOURCE: Telescope Tower, Gap Geometry framework\n`;
+  report += `        https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/telescope-tower.html\n`;
+  report += `${'─'.repeat(56)}\n`;
+
+  return report;
+}
+
+function copyReport() {
+  if (!lastReport) return;
+  navigator.clipboard.writeText(lastReport).then(() => {
+    const fb = document.getElementById('copyFeedback');
+    fb.classList.add('show');
+    setTimeout(() => fb.classList.remove('show'), 1500);
+  });
+}
+
+/* ============================================================================
+   TOWER VISUALIZATION
+   ============================================================================
+
+   Canvas-based view of the tower staircase with the user's value overlaid.
+   Adaptive viewport scales the view range with the size of n.
+   ============================================================================ */
+
+function drawTower(val, nExact, nNearest){
+  const canvas = document.getElementById('towerCanvas');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio||1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width*dpr;
+  canvas.height = 280*dpr;
+  ctx.scale(dpr,dpr);
+  const W = rect.width, H = 280;
+
+  ctx.fillStyle = '#0a0a12';
+  ctx.fillRect(0,0,W,H);
+
+  const padL=50, padR=20, padT=30, padB=30;
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+
+  // Adaptive viewport: scale with n so very large or very small steps are still visible
+  const viewRadius = Math.max(15, Math.ceil(Math.abs(nExact) * 0.25));
+  const viewMin = Math.max(0, nExact - viewRadius);
+  const viewMax = nExact + viewRadius;
+  const xN = (n)=> padL + ((n-viewMin)/(viewMax-viewMin))*plotW;
+  const maxVal = Math.max(val*1.1, (Math.ceil(viewMax))*G*1.1);
+  const minVal = Math.max(0, Math.min(val*0.5, (Math.floor(viewMin))*G*0.9));
+  const yV = (v)=> padT + plotH - ((v-minVal)/(maxVal-minVal))*plotH;
+
+  // Grid lines — spacing adapts to view width
+  const gridStep = viewRadius > 50 ? 20 : viewRadius > 20 ? 10 : 5;
+  ctx.strokeStyle = 'rgba(255,255,255,0.03)';
+  ctx.lineWidth = 1;
+  for(let n=Math.floor(viewMin/gridStep)*gridStep; n<=Math.ceil(viewMax); n+=gridStep){
+    if (n < viewMin) continue;
+    const x = xN(n);
+    ctx.beginPath(); ctx.moveTo(x,padT); ctx.lineTo(x,padT+plotH); ctx.stroke();
+    ctx.fillStyle = 'rgba(255,255,255,0.15)';
+    ctx.font = '9px monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText(n, x, padT+plotH+14);
+  }
+
+  // Landmark lines
+  landmarks.forEach(lm => {
+    if(lm.target >= minVal && lm.target <= maxVal){
+      const y = yV(lm.target);
+      ctx.strokeStyle = lm.color.replace('0.9','0.15').replace('0.8','0.12').replace('0.7','0.1');
+      ctx.setLineDash([3,5]);
+      ctx.beginPath(); ctx.moveTo(padL,y); ctx.lineTo(padL+plotW,y); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle = lm.color.replace('0.9','0.4').replace('0.8','0.35').replace('0.7','0.3');
+      ctx.font = '9px monospace';
+      ctx.textAlign = 'right';
+      ctx.fillText(lm.name, padL-4, y+3);
+    }
+  });
+
+  // Tower staircase
+  ctx.strokeStyle = 'rgba(255,215,0,0.3)';
+  ctx.lineWidth = 1.5;
+  ctx.beginPath();
+  let started = false;
+  for(let n=Math.max(1,Math.floor(viewMin)); n<=Math.ceil(viewMax); n++){
+    const x = xN(n), y = yV(n*G);
+    if (!started) { ctx.moveTo(x,y); started = true; }
+    else ctx.lineTo(x,y);
+  }
+  ctx.stroke();
+
+  // Tower step dots
+  for(let n=Math.max(1,Math.floor(viewMin)); n<=Math.ceil(viewMax); n++){
+    const x = xN(n), y = yV(n*G);
+    const isLM = landmarks.find(l=>l.n===n);
+    ctx.beginPath();
+    ctx.arc(x, y, isLM?4:2, 0, Math.PI*2);
+    ctx.fillStyle = isLM ? isLM.color : 'rgba(255,215,0,0.25)';
+    ctx.fill();
+  }
+
+  // Your value — horizontal line
+  const yVal = yV(val);
+  ctx.strokeStyle = 'rgba(255,100,100,0.6)';
+  ctx.lineWidth = 2;
+  ctx.setLineDash([6,4]);
+  ctx.beginPath(); ctx.moveTo(padL,yVal); ctx.lineTo(padL+plotW,yVal); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Your value — connection to nearest step
+  const xNearest = xN(nNearest);
+  const yNearest = yV(nNearest*G);
+  ctx.strokeStyle = 'rgba(255,100,100,0.3)';
+  ctx.lineWidth = 1;
+  ctx.setLineDash([2,3]);
+  ctx.beginPath(); ctx.moveTo(xNearest,yVal); ctx.lineTo(xNearest,yNearest); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Your value dot
+  ctx.beginPath();
+  ctx.arc(xN(nExact), yVal, 7, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(255,100,100,0.15)';
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(xN(nExact), yVal, 4, 0, Math.PI*2);
+  ctx.fillStyle = 'rgba(255,100,100,0.9)';
+  ctx.fill();
+
+  // Labels
+  ctx.fillStyle = 'rgba(255,100,100,0.8)';
+  ctx.font = 'bold 10px monospace';
+  ctx.textAlign = 'left';
+  ctx.fillText('YOUR VALUE', xN(nExact)+10, yVal-6);
+  ctx.font = '9px monospace';
+  ctx.fillText(val.toFixed(6), xN(nExact)+10, yVal+8);
+
+  ctx.fillStyle = 'rgba(255,215,0,0.6)';
+  ctx.font = '9px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText(`n=${nNearest}`, xNearest, yNearest-10);
+
+  // Axis label
+  ctx.fillStyle = 'rgba(255,255,255,0.2)';
+  ctx.font = '10px monospace';
+  ctx.textAlign = 'center';
+  ctx.fillText('Tower step n', padL+plotW/2, H-4);
+}
+
+function updateHistory(){
+  if(history.length === 0) return;
+  document.getElementById('historyCard').style.display = 'block';
+  document.getElementById('historyList').innerHTML = history.map((h,i) =>
+    `<div class="history-row" onclick="replayHistory(${i})">
+      <span>${h.val.toFixed(6)}${h.desc?' — '+h.desc:''}</span>
+      <span>n=${h.n} (${formatDeviation(h.dev)})</span>
+    </div>`
+  ).join('');
+}
+
+function replayHistory(i){
+  const h = history[i];
+  document.getElementById('numInput').value = h.val.toString();
+  document.getElementById('descInput').value = h.desc;
+  compute();
+}
+
+buildPresets();
+</script>
 </body>
 </html>
+
