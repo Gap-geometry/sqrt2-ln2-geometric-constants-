@@ -320,9 +320,46 @@
     main { max-width: none; }
     .code-block { border: 1px solid #999; }
   }
+
+  /* Drifting fragment — a particle of the constant */
+  .egg-fragment {
+    position: fixed;
+    bottom: 3.5%;
+    right: 3%;
+    font-family: Optima, "Palatino Linotype", Palatino, Georgia, serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: rgba(130, 130, 150, 0.18);
+    text-decoration: none;
+    cursor: default;
+    animation: egg-drift 28s ease-in-out infinite;
+    z-index: 1;
+    user-select: none;
+  }
+  .egg-fragment:hover,
+  .egg-fragment:focus,
+  .egg-fragment:visited {
+    color: rgba(130, 130, 150, 0.18);
+    text-decoration: none;
+    outline: none;
+  }
+  @keyframes egg-drift {
+    0%, 100% { transform: translate(0, 0); }
+    25%      { transform: translate(-4px, 3px); }
+    50%      { transform: translate(2px, -5px); }
+    75%      { transform: translate(-3px, -2px); }
+  }
+  @media print {
+    .egg-fragment { display: none; }
+  }
 </style>
 </head>
 <body>
+
+<!-- A drifting particle of the constant, for those who look -->
+<a class="egg-fragment" href="../../Easter%20Egg/kaud.html" aria-label="K_AUD">√2 · ln(2)</a>
+
 <main>
 
 <header>
