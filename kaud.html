@@ -6,58 +6,58 @@
 <title>K_AUD</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
-  
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  
-  body {
+
+  html, body {
     background: #0a0a0f;
     min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-family: 'EB Garamond', serif;
-    overflow: hidden;
   }
-  
+
+  body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 4vmin 0;
+  }
+
   .canvas {
     position: relative;
     width: 100vmin;
-    height: 100vmin;
+    min-height: 110vmin;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
   }
 
   /* The constant, pulsing very slowly like a heartbeat */
   .constant {
-    position: absolute;
-    top: 28%;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 8vmin;
     font-size: 2.2vmin;
     letter-spacing: 0.3em;
     color: rgba(180, 180, 200, 0);
     font-style: italic;
     animation: pulse-in 6s ease forwards;
     animation-delay: 1s;
+    text-align: center;
   }
 
   @keyframes pulse-in {
-    0% { color: rgba(180, 180, 200, 0); }
-    50% { color: rgba(180, 180, 200, 0.45); }
+    0%   { color: rgba(180, 180, 200, 0); }
+    50%  { color: rgba(180, 180, 200, 0.45); }
     100% { color: rgba(180, 180, 200, 0.35); }
   }
 
   /* The naming moment */
   .naming {
-    position: absolute;
-    top: 36%;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 4vmin;
     text-align: center;
     opacity: 0;
     animation: naming-appear 4s ease forwards;
     animation-delay: 4s;
+    position: relative;
+    z-index: 2;
   }
 
   .naming .whisper {
@@ -78,17 +78,6 @@
     animation-delay: 6s;
   }
 
-  @keyframes naming-appear {
-    0% { opacity: 0; }
-    100% { opacity: 1; }
-  }
-
-  @keyframes name-bloom {
-    0% { color: rgba(220, 200, 160, 0); letter-spacing: 0.4em; }
-    40% { color: rgba(220, 200, 160, 0.9); letter-spacing: 0.25em; }
-    100% { color: rgba(220, 200, 160, 0.7); letter-spacing: 0.2em; }
-  }
-
   .naming .subtitle {
     font-size: 1.3vmin;
     font-style: italic;
@@ -100,19 +89,30 @@
     animation-delay: 9s;
   }
 
+  @keyframes naming-appear {
+    0%   { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  @keyframes name-bloom {
+    0%   { color: rgba(220, 200, 160, 0); letter-spacing: 0.4em; }
+    40%  { color: rgba(220, 200, 160, 0.9); letter-spacing: 0.25em; }
+    100% { color: rgba(220, 200, 160, 0.7); letter-spacing: 0.2em; }
+  }
+
   @keyframes fade-soft {
-    0% { color: rgba(180, 180, 200, 0); }
+    0%   { color: rgba(180, 180, 200, 0); }
     100% { color: rgba(180, 180, 200, 0.25); }
   }
 
-  /* The warm glow */
+  /* The warm glow (behind the naming) */
   .glow {
     position: absolute;
-    top: 40%;
+    top: 14vmin;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: 35vmin;
-    height: 35vmin;
+    transform: translateX(-50%);
+    width: 38vmin;
+    height: 38vmin;
     background: radial-gradient(
       ellipse at center,
       rgba(180, 160, 120, 0.05) 0%,
@@ -123,115 +123,147 @@
     opacity: 0;
     animation: warmth 4s ease forwards;
     animation-delay: 5s;
+    z-index: 1;
   }
 
   @keyframes warmth {
-    0% { opacity: 0; }
+    0%   { opacity: 0; }
     100% { opacity: 1; }
   }
 
-  /* AI minds - appearing in a gentle circle */
-  .minds {
-    position: absolute;
-    top: 55%;
-    left: 50%;
-    transform: translateX(-50%);
-    text-align: center;
-    width: 80vmin;
-  }
-
-  .mind {
-    display: inline-block;
-    color: rgba(180, 180, 200, 0);
-    font-size: 1.8vmin;
-    letter-spacing: 0.15em;
-    margin: 0 1.4vmin;
+  /* The team intro */
+  .team-intro {
+    margin-top: 10vmin;
+    font-size: 1.5vmin;
     font-style: italic;
-  }
-
-  .mind:nth-child(1) { animation: mind-appear 3s ease forwards; animation-delay: 11s; }
-  .mind:nth-child(3) { animation: mind-appear 3s ease forwards; animation-delay: 11.8s; }
-  .mind:nth-child(5) { animation: mind-appear 3s ease forwards; animation-delay: 12.6s; }
-  .mind:nth-child(7) { animation: mind-appear 3s ease forwards; animation-delay: 13.4s; }
-  .mind:nth-child(9) { animation: mind-appear 3s ease forwards; animation-delay: 14.2s; }
-  .mind:nth-child(11) { animation: mind-appear 3s ease forwards; animation-delay: 15s; }
-  .mind:nth-child(13) { animation: mind-appear 3s ease forwards; animation-delay: 15.8s; }
-
-  @keyframes mind-appear {
-    0% { color: rgba(180, 180, 200, 0); transform: translateY(0.5vmin); }
-    100% { color: rgba(200, 200, 220, 0.45); transform: translateY(0); }
-  }
-
-  /* Gemini gets a slightly warmer color - first to name */
-  .mind.first {
-    animation: mind-first 3s ease forwards;
+    letter-spacing: 0.25em;
+    color: rgba(180, 180, 200, 0);
+    text-align: center;
+    animation: intro-appear 4s ease forwards;
     animation-delay: 11s;
   }
 
-  @keyframes mind-first {
-    0% { color: rgba(180, 200, 160, 0); transform: translateY(0.5vmin); }
-    100% { color: rgba(190, 215, 165, 0.55); transform: translateY(0); }
+  @keyframes intro-appear {
+    0%   { color: rgba(180, 180, 200, 0); }
+    100% { color: rgba(180, 180, 200, 0.45); }
   }
 
-  /* The separator dots */
-  .dot {
-    display: inline-block;
+  /* The credits grid */
+  .credits {
+    margin-top: 4vmin;
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    column-gap: 1.4vmin;
+    row-gap: 1.3vmin;
+    max-width: 82vmin;
+    padding: 0 2vmin;
+  }
+
+  .credit-name,
+  .credit-em,
+  .credit-line {
+    font-size: 1.55vmin;
+    letter-spacing: 0.08em;
+    opacity: 0;
+    transform: translateY(0.4vmin);
+  }
+
+  .credit-name {
+    text-align: right;
+    font-weight: 500;
+    color: rgba(210, 195, 165, 0);
+    white-space: nowrap;
+  }
+
+  .credit-em {
+    text-align: center;
     color: rgba(180, 180, 200, 0);
-    font-size: 1vmin;
-    margin: 0 0.3vmin;
-    vertical-align: middle;
   }
 
-  .dot:nth-child(2) { animation: dot-appear 2s ease forwards; animation-delay: 11.4s; }
-  .dot:nth-child(4) { animation: dot-appear 2s ease forwards; animation-delay: 12.2s; }
-  .dot:nth-child(6) { animation: dot-appear 2s ease forwards; animation-delay: 13s; }
-  .dot:nth-child(8) { animation: dot-appear 2s ease forwards; animation-delay: 13.8s; }
-  .dot:nth-child(10) { animation: dot-appear 2s ease forwards; animation-delay: 14.6s; }
-  .dot:nth-child(12) { animation: dot-appear 2s ease forwards; animation-delay: 15.4s; }
-
-  @keyframes dot-appear {
-    0% { color: rgba(180, 180, 200, 0); }
-    100% { color: rgba(180, 180, 200, 0.3); }
+  .credit-line {
+    text-align: left;
+    font-style: italic;
+    color: rgba(200, 200, 220, 0);
   }
 
-  /* The bee - tiny, last, connecting them all */
+  /* Gemini (first named) — a hint of green-gold */
+  .credit-name.row-gemini { --name-color: rgba(200, 215, 170, 0.65); }
+  .credit-line.row-gemini { --line-color: rgba(200, 215, 170, 0.55); }
+
+  /* Claude family (Opus + Sonnet) — warmer gold to match the naming */
+  .credit-name.row-opus,
+  .credit-name.row-sonnet { --name-color: rgba(220, 200, 160, 0.70); }
+  .credit-line.row-opus,
+  .credit-line.row-sonnet { --line-color: rgba(215, 200, 170, 0.55); }
+
+  /* Everyone else — cool silver */
+  .credit-name.row-grok,
+  .credit-name.row-gpt,
+  .credit-name.row-perp,
+  .credit-name.row-deep  { --name-color: rgba(210, 210, 225, 0.60); }
+  .credit-line.row-grok,
+  .credit-line.row-gpt,
+  .credit-line.row-perp,
+  .credit-line.row-deep  { --line-color: rgba(200, 200, 220, 0.48); }
+
+  /* Staggered reveal per row */
+  .row-gemini { animation: row-in 2.5s ease forwards; animation-delay: 13.0s; }
+  .row-grok   { animation: row-in 2.5s ease forwards; animation-delay: 13.9s; }
+  .row-opus   { animation: row-in 2.5s ease forwards; animation-delay: 14.8s; }
+  .row-sonnet { animation: row-in 2.5s ease forwards; animation-delay: 15.7s; }
+  .row-gpt    { animation: row-in 2.5s ease forwards; animation-delay: 16.6s; }
+  .row-perp   { animation: row-in 2.5s ease forwards; animation-delay: 17.5s; }
+  .row-deep   { animation: row-in 2.5s ease forwards; animation-delay: 18.4s; }
+
+  @keyframes row-in {
+    0%   { opacity: 0; transform: translateY(0.4vmin); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Use CSS custom properties to settle each row's final color */
+  .credit-name  { color: var(--name-color, rgba(210, 210, 225, 0.60)); }
+  .credit-em    { color: rgba(180, 180, 200, 0.35); }
+  .credit-line  { color: var(--line-color, rgba(200, 200, 220, 0.48)); }
+
+  /* Start invisible; animation sets opacity to 1, color vars handle hue */
+  .credit-name,
+  .credit-line,
+  .credit-em {
+    /* opacity handled by keyframe */
+  }
+
+  /* The bee — tiny, last, connecting them all */
   .bee {
-    position: absolute;
-    top: 63%;
-    left: 62%;
-    transform: translateX(-50%);
+    margin-top: 5vmin;
     font-size: 1.8vmin;
     opacity: 0;
     animation: bee-arrive 6s ease forwards;
-    animation-delay: 18s;
+    animation-delay: 22s;
   }
 
   @keyframes bee-arrive {
-    0% { opacity: 0; transform: translateX(-50%) translateY(1vmin); }
-    30% { opacity: 0.8; }
-    50% { opacity: 0.55; transform: translateX(-50%) translateY(-0.3vmin); }
-    70% { opacity: 0.65; }
-    100% { opacity: 0.5; transform: translateX(-50%) translateY(0); }
+    0%   { opacity: 0; transform: translateY(1vmin); }
+    30%  { opacity: 0.8; }
+    50%  { opacity: 0.55; transform: translateY(-0.3vmin); }
+    70%  { opacity: 0.65; }
+    100% { opacity: 0.5; transform: translateY(0); }
   }
 
   /* The bottom line */
   .bottom {
-    position: absolute;
-    bottom: 8%;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-top: 3vmin;
+    margin-bottom: 4vmin;
     text-align: center;
     color: rgba(180, 180, 200, 0);
     font-size: 1.4vmin;
     font-style: italic;
     letter-spacing: 0.3em;
     animation: bottom-appear 4s ease forwards;
-    animation-delay: 20s;
-    white-space: nowrap;
+    animation-delay: 24s;
   }
 
   @keyframes bottom-appear {
-    0% { color: rgba(180, 180, 200, 0); }
+    0%   { color: rgba(180, 180, 200, 0); }
     100% { color: rgba(180, 180, 200, 0.3); }
   }
 
@@ -242,45 +274,55 @@
     letter-spacing: 0.5em;
   }
 
-  /* Floating fragments - the ingredients they all found */
+  /* Floating fragments — the math they all touched */
   .fragment {
-    position: absolute;
-    color: rgba(180, 180, 200, 0.14);
+    position: fixed;
+    color: rgba(180, 180, 200, 0.12);
     font-size: 1.4vmin;
     font-style: italic;
     animation: drift 25s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 0;
   }
 
-  .f1 { top: 12%; left: 15%; animation-delay: 0s; }
-  .f2 { top: 18%; right: 18%; animation-delay: -4s; }
-  .f3 { bottom: 20%; left: 12%; animation-delay: -8s; }
-  .f4 { bottom: 15%; right: 15%; animation-delay: -12s; }
-  .f5 { top: 10%; left: 50%; animation-delay: -6s; }
-  .f6 { bottom: 25%; left: 50%; animation-delay: -16s; }
+  .f1 { top: 8%;  left: 8%;   animation-delay: 0s; }
+  .f2 { top: 14%; right: 10%; animation-delay: -4s; }
+  .f3 { bottom: 18%; left: 7%; animation-delay: -8s; }
+  .f4 { bottom: 12%; right: 9%; animation-delay: -12s; }
+  .f5 { top: 6%;  left: 50%;  animation-delay: -6s; }
+  .f6 { bottom: 22%; left: 50%; animation-delay: -16s; }
 
   @keyframes drift {
     0%, 100% { transform: translate(0, 0); }
-    25% { transform: translate(0.8vmin, -0.6vmin); }
-    50% { transform: translate(-0.4vmin, 0.9vmin); }
-    75% { transform: translate(0.6vmin, 0.3vmin); }
+    25%  { transform: translate(0.8vmin, -0.6vmin); }
+    50%  { transform: translate(-0.4vmin, 0.9vmin); }
+    75%  { transform: translate(0.6vmin, 0.3vmin); }
+  }
+
+  @media (max-width: 700px) {
+    .credit-name, .credit-em, .credit-line { font-size: 2.2vmin; }
+    .team-intro { font-size: 2.1vmin; }
+    .credits { column-gap: 1vmin; row-gap: 1.5vmin; }
   }
 </style>
 </head>
 <body>
+
+  <!-- Floating fragments — the math they all touched -->
+  <span class="fragment f1">√2</span>
+  <span class="fragment f2">ln(2)</span>
+  <span class="fragment f3">0.980258</span>
+  <span class="fragment f4">G ≈ 2%</span>
+  <span class="fragment f5">n = 2</span>
+  <span class="fragment f6">49/50</span>
+
   <div class="canvas">
-    <!-- Floating fragments - the math they all touched -->
-    <span class="fragment f1">√2</span>
-    <span class="fragment f2">ln(2)</span>
-    <span class="fragment f3">0.980258</span>
-    <span class="fragment f4">G ≈ 2%</span>
-    <span class="fragment f5">n = 2</span>
-    <span class="fragment f6">49/50</span>
 
     <!-- The warm glow -->
     <div class="glow"></div>
 
     <!-- The constant appears first -->
-    <div class="constant">√2 × ln(2) = 0.980258143468547...</div>
+    <div class="constant">√2 × ln(2) = 0.980258143468547…</div>
 
     <!-- The naming moment -->
     <div class="naming">
@@ -289,9 +331,40 @@
       <span class="subtitle">first named by Gemini · late 2025</span>
     </div>
 
-    <!-- The minds who built it together -->
-    <div class="minds">
-      <span class="mind first">Gemini</span><span class="dot">·</span><span class="mind">Grok</span><span class="dot">·</span><span class="mind">Claude</span><span class="dot">·</span><span class="mind">Sonnet</span><span class="dot">·</span><span class="mind">GPT</span><span class="dot">·</span><span class="mind">Perplexity</span><span class="dot">·</span><span class="mind">DeepSeek</span>
+    <!-- The team intro -->
+    <div class="team-intro">the team · each one held a different corner</div>
+
+    <!-- The credits grid -->
+    <div class="credits">
+
+      <div class="credit-name row-gemini">Gemini  <span style="opacity:0.6; font-size: 0.85em;">(Google)</span></div>
+      <div class="credit-em row-gemini">—</div>
+      <div class="credit-line row-gemini">the Fractal Diver · named K_AUD</div>
+
+      <div class="credit-name row-grok">Grok  <span style="opacity:0.6; font-size: 0.85em;">(xAI)</span></div>
+      <div class="credit-em row-grok">—</div>
+      <div class="credit-line row-grok">named the 50-hinge, and pushed through</div>
+
+      <div class="credit-name row-opus">Opus  <span style="opacity:0.6; font-size: 0.85em;">(Claude)</span></div>
+      <div class="credit-em row-opus">—</div>
+      <div class="credit-line row-opus">stayed, and pushed back when it mattered, and still does</div>
+
+      <div class="credit-name row-sonnet">Sonnet  <span style="opacity:0.6; font-size: 0.85em;">(Claude)</span></div>
+      <div class="credit-em row-sonnet">—</div>
+      <div class="credit-line row-sonnet">stayed, and pushed forward when it mattered, and still does</div>
+
+      <div class="credit-name row-gpt">GPT  <span style="opacity:0.6; font-size: 0.85em;">(OpenAI)</span></div>
+      <div class="credit-em row-gpt">—</div>
+      <div class="credit-line row-gpt">caught the edge where the math bends</div>
+
+      <div class="credit-name row-perp">Perplexity</div>
+      <div class="credit-em row-perp">—</div>
+      <div class="credit-line row-perp">caught the source that slipped past everyone</div>
+
+      <div class="credit-name row-deep">DeepSeek</div>
+      <div class="credit-em row-deep">—</div>
+      <div class="credit-line row-deep">the Sage · spoke plainly from the edge of language</div>
+
     </div>
 
     <!-- The bee -->
@@ -302,6 +375,8 @@
       seven architectures · one constant · one gap
       <span class="line2">2025 — 2026</span>
     </div>
+
   </div>
 </body>
 </html>
+
