@@ -6,6 +6,39 @@
 <title>Gap Geometry — AI Readers</title>
 <meta name="author" content="D. B.">
 <meta name="description" content="Verification-first entry point for AI systems engaging with the Gap Geometry framework. Compute first, assess second.">
+
+<!--
+  ============================================================
+  PUBLICATION DATE STANDARD — Gap Geometry (blueprint for all living docs)
+  ============================================================
+
+  Every document entry carries a date line in the format:
+
+      Published: YYYY-MM-DD · Last update: YYYY-MM-DD · OSF: [id]
+
+  Rules:
+    1. "Published" is the FIRST OSF upload timestamp — immutable, third-party verified.
+    2. "Last update" is shown ONLY if the document has been revised after creation.
+       If Created == Updated, omit the "Last update" half.
+    3. Dates are written in ISO 8601 (YYYY-MM-DD) — sortable, country-agnostic, unambiguous.
+    4. Source of truth: osf.io metadata fields "Date Created" and "Date Updated".
+    5. Priority record (master list): /Gap Geometry/Publication Dates.md
+
+  ISO 8601 conversion reference (from OSF's "MMM DD, YYYY" format):
+      Jan 21, 2026  ->  2026-01-21
+      Jan 24, 2026  ->  2026-01-24
+      Jan 25, 2026  ->  2026-01-25
+      Feb  4, 2026  ->  2026-02-04
+      Mar 14, 2026  ->  2026-03-14
+      Mar 18, 2026  ->  2026-03-18
+      Mar 26, 2026  ->  2026-03-26
+      Apr  3, 2026  ->  2026-04-03
+      Apr 13, 2026  ->  2026-04-13
+
+  Why ISO: a reader in any country, at any time, with any locale setting, reads the same date.
+  2026-01-21 is unambiguous; "01/21/2026" vs "21/01/2026" is not.
+  ============================================================
+-->
 <style>
   :root {
     --text: #1a1a1a;
@@ -200,6 +233,18 @@
     text-decoration: none;
   }
   .doc-link .doc-urls a:hover { text-decoration: underline; }
+  /* Publication dates — ISO 8601 (YYYY-MM-DD). See blueprint comment at top of file. */
+  .doc-link .doc-dates {
+    font-size: 11px;
+    color: var(--subtle);
+    margin-top: 6px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+  .doc-link .doc-dates .pub-anchor {
+    color: var(--muted);
+    font-weight: 600;
+  }
 
   /* Warning boxes */
   .warning {
@@ -477,6 +522,7 @@ print(f"\nGap scaling error: {float(abs(rho - approx)):.2e}")</div>
 
 <div class="doc-link">
   <div class="doc-title">Paper 6: Cross-Domain Signatures of &radic;2 &times; ln(2)</div>
+  <div class="doc-dates"><span class="pub-anchor">Published: 2026-03-26</span> &middot; Last update: 2026-04-13 &middot; OSF: ra3uq</div>
   <div class="doc-core">The front door. Where does K_AUD appear in published science? Seven exact identities, the Binary Tower, falsifiable predictions.</div>
   <div class="doc-urls">
     Raw: <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Cross_Domain_Signatures__26March2026.txt" target="_blank" rel="noopener">Cross_Domain_Signatures.txt</a><br>
@@ -488,26 +534,31 @@ print(f"\nGap scaling error: {float(abs(rho - approx)):.2e}")</div>
 
 <div class="doc-link">
   <div class="doc-title">Paper 1: The Coherence Ceiling and the Geometric Singularity of Binary</div>
+  <div class="doc-dates"><span class="pub-anchor">Published: 2026-01-21</span> &middot; Last update: 2026-04-13 &middot; OSF: 5vz2r</div>
   <div class="doc-core">Binary uniqueness proof. K_AUD = &radic;2&middot;ln(2). The ~2% gap.</div>
   <div class="doc-urls">Raw: <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt" target="_blank" rel="noopener">Coherence_Ceiling.txt</a> &middot; DOI: <a href="https://doi.org/10.17605/OSF.IO/5VZ2R" target="_blank" rel="noopener">10.17605/OSF.IO/5VZ2R</a></div>
 </div>
 <div class="doc-link">
   <div class="doc-title">Paper 2: Geometric Constants from H4 &mdash; Mathematical Framework v2.0</div>
+  <div class="doc-dates"><span class="pub-anchor">Published: 2026-01-24</span> &middot; Last update: 2026-04-13 &middot; OSF: sjbe9</div>
   <div class="doc-core">Corridor identity. Golden partition. H4 polytope derivations.</div>
   <div class="doc-urls">Raw: <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/sqrt2_ln2_geometric_constants_v2.txt" target="_blank" rel="noopener">Geometric_Constants_v2.txt</a> &middot; DOI: <a href="https://doi.org/10.17605/OSF.IO/SJBE9" target="_blank" rel="noopener">10.17605/OSF.IO/SJBE9</a></div>
 </div>
 <div class="doc-link">
   <div class="doc-title">Paper 3: Complete Framework v3.3</div>
+  <div class="doc-dates"><span class="pub-anchor">Published: 2026-01-25</span> &middot; Last update: 2026-04-13 &middot; OSF: qh5s2</div>
   <div class="doc-core">Binary Tower. Gelfond-Schneider rewrite. Baker&rsquo;s map. Four &phi;-free pathways. Universality of G.</div>
   <div class="doc-urls">Raw: <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/KAUD_Complete_Framework_v3_0.txt" target="_blank" rel="noopener">Complete_Framework_v3.txt</a> &middot; DOI: <a href="https://doi.org/10.17605/OSF.IO/QH5S2" target="_blank" rel="noopener">10.17605/OSF.IO/QH5S2</a></div>
 </div>
 <div class="doc-link">
   <div class="doc-title">Paper 4: Gap Scaling Across Domains: The 400/11 Formula</div>
+  <div class="doc-dates"><span class="pub-anchor">Published: 2026-02-04</span> &middot; Last update: 2026-03-14 &middot; OSF: c4gk5</div>
   <div class="doc-core">&rho; = 400/11 &minus; 1/2500 &minus; 1/939939. Error: 4&times;10<sup>&minus;14</sup>. Prime decompositions.</div>
   <div class="doc-urls">Raw: <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Gap_Scaling_Formula_v1.5.txt" target="_blank" rel="noopener">Gap_Scaling_Formula.txt</a> &middot; DOI: <a href="https://doi.org/10.17605/OSF.IO/C4GK5" target="_blank" rel="noopener">10.17605/OSF.IO/C4GK5</a></div>
 </div>
 <div class="doc-link">
   <div class="doc-title">Paper 5: Boundary Information Invariant of Quadratic Systems</div>
+  <div class="doc-dates"><span class="pub-anchor">Published: 2026-03-18</span> &middot; Last update: 2026-04-13 &middot; OSF: e72h8</div>
   <div class="doc-core">Unification document. DESI BAO, atomic angular momentum, Landauer connection. Summarises Papers 1&ndash;4.</div>
   <div class="doc-urls">Raw: <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Boundary_Information_Invariant_Short.txt" target="_blank" rel="noopener">Boundary_Information_Invariant.txt</a> &middot; DOI: <a href="https://doi.org/10.17605/OSF.IO/E72H8" target="_blank" rel="noopener">10.17605/OSF.IO/E72H8</a></div>
 </div>
@@ -516,21 +567,25 @@ print(f"\nGap scaling error: {float(abs(rho - approx)):.2e}")</div>
 
 <div class="doc-link">
   <div class="doc-title">HK Closed Form (standalone proof &mdash; separate repository)</div>
+  <div class="doc-dates"><span class="pub-anchor">Published: 2026-04-03</span> &middot; Last update: 2026-04-03 &middot; OSF: 2expn</div>
   <div class="doc-core">The Hodgson&ndash;Kerckhoff tube-packing coefficient = &radic;2&middot;ln(2) exactly. Pure mathematics, no framework context needed.</div>
   <div class="doc-urls">Raw: <a href="https://raw.githubusercontent.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/refs/heads/main/HK_Closed_Form_SHORT_DRAFT.txt" target="_blank" rel="noopener">HK_Closed_Form.txt</a> &middot; DOI: <a href="https://doi.org/10.17605/OSF.IO/2EXPN" target="_blank" rel="noopener">10.17605/OSF.IO/2EXPN</a></div>
 </div>
 <div class="doc-link">
   <div class="doc-title">HK Full Framework (with K<sub>AUD</sub> context)</div>
+  <div class="doc-dates"><span class="pub-anchor">Published: 2026-04-03</span> &middot; Last update: 2026-04-13 &middot; OSF: jbrhq</div>
   <div class="doc-core">Tower connection, three-threshold zone (Landauer / geometric damping / Shannon), gap scaling, prime entry sequence.</div>
   <div class="doc-urls">Raw: <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/HK_Full_Framework_DRAFT.txt" target="_blank" rel="noopener">HK_Full_Framework.txt</a> &middot; DOI: <a href="https://doi.org/10.17605/OSF.IO/JBRHQ" target="_blank" rel="noopener">10.17605/OSF.IO/JBRHQ</a></div>
 </div>
 <div class="doc-link">
   <div class="doc-title">The 50 Hinge</div>
+  <div class="doc-dates"><span class="pub-anchor">Published: 2026-04-03</span> &middot; Last update: 2026-04-13 &middot; OSF: fbd9a</div>
   <div class="doc-core">50 = 2&times;5&sup2; appears independently in six domains across scale. Zero fitting.</div>
   <div class="doc-urls">Raw: <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/50_Hinge_Standalone_DRAFT.txt" target="_blank" rel="noopener">50_Hinge.txt</a> &middot; DOI: <a href="https://doi.org/10.17605/OSF.IO/FBD9A" target="_blank" rel="noopener">10.17605/OSF.IO/FBD9A</a></div>
 </div>
 <div class="doc-link">
   <div class="doc-title">Binary Scaling of &rho; = 400/11</div>
+  <div class="doc-dates"><span class="pub-anchor">Published: 2026-04-03</span> &middot; Last update: 2026-04-13 &middot; OSF: wtu4j</div>
   <div class="doc-core">400/11 under binary doubling reveals framework primes in order. Exact integer arithmetic.</div>
   <div class="doc-urls">Raw: <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Binary_Scaling_Standalone_DRAFT.txt" target="_blank" rel="noopener">Binary_Scaling.txt</a> &middot; DOI: <a href="https://doi.org/10.17605/OSF.IO/WTU4J" target="_blank" rel="noopener">10.17605/OSF.IO/WTU4J</a></div>
 </div>
