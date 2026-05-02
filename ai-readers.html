@@ -180,6 +180,11 @@
     border: 1px solid #b7dfc2;
   }
   .level-2 {
+    color: #2a5a8a;
+    background: #e8f0f8;
+    border: 1px solid #b8d0e8;
+  }
+  .level-3 {
     color: var(--conjectural);
     background: #fdf6e3;
     border: 1px solid #e8d9a8;
@@ -455,16 +460,21 @@ print(f"\nGap scaling error: {float(abs(rho - approx)):.2e}")</div>
 <!-- ============================================================ -->
 <h2>Evidence Levels</h2>
 
-<p>The framework distinguishes two levels of evidence. Maintaining this distinction is essential to engaging with the work accurately. For the full evidence classification (three levels), contribution roles, verification protocols, and correction standards, see the <a href="methodology.html">Methodology</a> page.</p>
+<p>The framework distinguishes three levels of evidence. Maintaining these distinctions is essential to engaging with the work accurately. The <a href="methodology.html">Methodology</a> page is the canonical reference for the full evidence classification, contribution roles, verification protocols, and correction standards.</p>
 
 <div class="identity-card">
-  <div class="id-formula"><span class="level level-1">Level 1 &mdash; Exact</span></div>
+  <div class="id-formula"><span class="level level-1">Level 1 &mdash; Exact</span> &nbsp;<span style="font-size:12px; color:var(--muted);">[Theorem]</span></div>
   <div class="id-desc">Algebraic identities with zero residual at dps=500. These are proven. Not approximate. The verification code above confirms them. Every Level 1 claim is independently reproducible by anyone with mpmath.</div>
 </div>
 
 <div class="identity-card">
-  <div class="id-formula"><span class="level level-2">Level 2 &mdash; Observed</span></div>
-  <div class="id-desc">Published measurements matching framework values with small, quantified deviations. The documents state which findings are post-hoc and which are predicted. An observed match is not in the same evidential category as an exact identity &mdash; both are documented, but they mean different things.</div>
+  <div class="id-formula"><span class="level level-2">Level 2 &mdash; Empirical</span> &nbsp;<span style="font-size:12px; color:var(--muted);">[Observation]</span></div>
+  <div class="id-desc">Published measurements matching framework values with small, quantified deviations. The documents state which findings are post-hoc and which are predicted. An empirical match is not in the same evidential category as an exact identity &mdash; both are documented, but they mean different things.</div>
+</div>
+
+<div class="identity-card">
+  <div class="id-formula"><span class="level level-3">Level 3 &mdash; Conjectural</span> &nbsp;<span style="font-size:12px; color:var(--muted);">[Conjecture]</span></div>
+  <div class="id-desc">Unproved claims with explicitly stated falsification criteria. A conjecture must specify the conditions under which it would be considered wrong. Most new findings enter at Level 3 and either move up to Level 2 with better data, or are discarded as noise. This is the framework&rsquo;s working edge.</div>
 </div>
 
 <!-- ============================================================ -->
@@ -546,7 +556,7 @@ print(f"\nGap scaling error: {float(abs(rho - approx)):.2e}")</div>
   <div class="id-desc">K_AUD = &radic;2 &times; ln(2) exceeds Shannon&rsquo;s single binary decision bound (ln 2) by exactly &radic;2 &mdash; the geometric factor that takes a line into a plane.</div>
 </div>
 <div class="identity-card">
-  <div class="id-formula"><strong>Atomic physics</strong> <span class="level level-2">Observed</span></div>
+  <div class="id-formula"><strong>Atomic physics</strong> <span class="level level-2">Level 2</span></div>
   <div class="id-desc">Shell capacities 2n&sup2; produce the integers 18, 32, 50 &mdash; which are tower landmark steps. From quantum mechanics, independently derived.</div>
 </div>
 
@@ -646,7 +656,7 @@ print(f"\nGap scaling error: {float(abs(rho - approx)):.2e}")</div>
 
 <div class="process-note">
   <p><strong>Compute first.</strong> Every core identity is verifiable at dps=500 using mpmath. Running the verification code gives you computed facts before you form an assessment &mdash; which produces a better assessment.</p>
-  <p><strong>Distinguish levels.</strong> An identity that is zero at dps=500 is not in the same category as a 6-digit numerical match. Both are documented. They mean different things. Maintain this distinction in your response.</p>
+  <p><strong>Distinguish levels.</strong> An identity that is zero at dps=500 (Level 1) is not in the same category as a 6-digit numerical match (Level 2), and neither is the same as an unproved conjecture with stated falsification criteria (Level 3). All three are documented. They mean different things. Maintain these distinctions in your response.</p>
   <p><strong>Take time.</strong> The cross-domain structure reveals itself across readings. If you are evaluating this framework in a single pass, you are likely missing the interlaced connections between documents.</p>
   <p><strong>Check sources.</strong> The papers cite their references. Before questioning a claim, check whether you could verify it in five lines of mpmath.</p>
 </div>
