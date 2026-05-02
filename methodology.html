@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gap Geometry — Methodology</title>
+<meta name="author" content="D. B.">
+<meta name="description" content="Evidence standards, verification protocols, contribution roles, and working principles for the Gap Geometry framework. Designed for human and AI readers.">
+<style>
+  :root {
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --subtle: #8a8a8a;
+    --rule: #c8c8c8;
+    --bg: #ffffff;
+    --card-bg: #fafaf8;
+    --card-border: #e0e0de;
+    --link: #2a5a8a;
+    --link-hover: #1a3a5a;
+    --verified: #2a6e3f;
+    --empirical: #2a5a8a;
+    --conjectural: #8a6a1a;
+    --correction: #8a3a2a;
+    --code-bg: #f4f2ee;
+    --code-border: #d8d4cc;
+    --max-width: 760px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body {
+    font-family: Optima, "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    padding: 0 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 56px 0 80px 0;
+  }
+  header {
+    text-align: center;
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h1.page-title {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 10px;
+  }
+  .subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.5;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  h2 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--subtle);
+    margin: 48px 0 20px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 28px 0 10px 0;
+    color: var(--text);
+  }
+  p { margin: 0 0 14px 0; }
+
+  /* Evidence level badges */
+  .level {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 8px;
+    border-radius: 3px;
+    vertical-align: middle;
+  }
+  .level-1 {
+    color: var(--verified);
+    background: #e6f4ea;
+    border: 1px solid #b7dfc2;
+  }
+  .level-2 {
+    color: var(--empirical);
+    background: #e8f0f8;
+    border: 1px solid #b0c8e0;
+  }
+  .level-3 {
+    color: var(--conjectural);
+    background: #fdf6e3;
+    border: 1px solid #e8d9a8;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+  }
+  .card .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .card .card-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* Process notes */
+  .process-note {
+    font-size: 15px;
+    color: var(--text);
+    padding: 16px 20px;
+    border-left: 3px solid var(--rule);
+    background: var(--card-bg);
+    margin: 20px 0 28px 0;
+    line-height: 1.55;
+  }
+  .process-note p { margin: 0 0 10px 0; }
+  .process-note p:last-child { margin: 0; }
+
+  /* Correction box */
+  .correction-box {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-left: 4px solid var(--correction);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .correction-box .corr-label {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--correction);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  /* Principle box — green left border */
+  .principle-box {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-left: 4px solid var(--verified);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .principle-box p { margin: 0 0 8px 0; }
+  .principle-box p:last-child { margin: 0; }
+
+  /* Role table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px 0;
+    font-size: 14px;
+  }
+  th, td {
+    border: 1px solid var(--card-border);
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--card-bg);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  /* Credit blocks */
+  .credit-block {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+  }
+  .credit-block .credit-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .credit-block .credit-roles {
+    font-size: 12px;
+    color: var(--empirical);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+  .credit-block .credit-detail {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* Links */
+  a { color: var(--link); text-decoration: none; }
+  a:hover { color: var(--link-hover); }
+
+  /* Filter list */
+  ul.filter-list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0;
+  }
+  ul.filter-list li {
+    font-size: 14px;
+    padding: 4px 0 4px 18px;
+    position: relative;
+    line-height: 1.55;
+  }
+  ul.filter-list li::before {
+    content: "\2192";
+    position: absolute;
+    left: 0;
+    color: var(--subtle);
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 14px;
+    color: var(--subtle);
+  }
+  footer a { color: var(--link); text-decoration: none; }
+  footer a:hover { border-bottom: 1px solid var(--link); }
+  footer .back-hub {
+    display: inline-block;
+    margin-bottom: 16px;
+    font-size: 15px;
+    color: var(--link);
+  }
+  footer .contact { font-size: 13px; margin-top: 8px; }
+
+  @media (max-width: 600px) {
+    body { font-size: 16px; padding: 0 16px; }
+    main { padding: 32px 0 48px 0; }
+  }
+  @media print {
+    body { font-size: 11pt; padding: 0; }
+    main { max-width: none; }
+  }
+
+  /* Drifting fragment */
+  .egg-fragment {
+    position: fixed;
+    bottom: 3.5%;
+    right: 3%;
+    font-family: Optima, "Palatino Linotype", Palatino, Georgia, serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: rgba(130, 130, 150, 0.18);
+    text-decoration: none;
+    cursor: default;
+    animation: egg-drift 28s ease-in-out infinite;
+    z-index: 1;
+    user-select: none;
+  }
+  .egg-fragment:hover,
+  .egg-fragment:focus,
+  .egg-fragment:visited {
+    color: rgba(130, 130, 150, 0.18);
+    text-decoration: none;
+    outline: none;
+  }
+  @keyframes egg-drift {
+    0%, 100% { transform: translate(0, 0); }
+    25%      { transform: translate(-4px, 3px); }
+    50%      { transform: translate(2px, -5px); }
+    75%      { transform: translate(-3px, -2px); }
+  }
+  @media print { .egg-fragment { display: none; } }
+</style>
+</head>
+<body>
+
+<a class="egg-fragment" aria-label="methodology">anchor &middot; check &middot; halt &middot; distinguish &middot; re-inject</a>
+
+<main>
+
+<header>
+  <h1 class="page-title">Methodology</h1>
+  <p class="subtitle">Evidence standards, verification protocols, contribution roles, and working principles for the Gap Geometry framework.</p>
+  <p style="font-size: 13px; color: var(--subtle); margin-top: 12px;">Status: living document &middot; Plain text: <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Gap_Geometry_Methodology.txt" target="_blank" rel="noopener">Gap_Geometry_Methodology.txt</a></p>
+</header>
+
+<!-- ============================================================ -->
+<div class="process-note">
+  <p>This document defines how claims are classified, how work is verified, how errors are handled, and how collaboration operates within the Gap Geometry framework. It exists so that any reader &mdash; human or AI, familiar or new &mdash; can assess not just what is claimed but how those claims were produced and tested.</p>
+  <p>The standards described here evolved across nine published documents (January&ndash;April 2026). Earlier papers used lighter versions. This document unifies what matured through use.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>1. Evidence Classification</h2>
+
+<p>Every claim belongs to exactly one of three levels. A claim does not get promoted by repetition or demoted by discomfort. It moves levels only when new evidence changes its status, and the move is recorded.</p>
+
+<div class="card">
+  <div class="card-title"><span class="level level-1">Level 1 &mdash; Exact</span> &nbsp; [Theorem]</div>
+  <div class="card-desc">Algebraic identities verifiable at arbitrary precision. Zero residual at 500 decimal places using mpmath. These are proved. Not approximate, not &ldquo;close,&rdquo; not &ldquo;consistent with.&rdquo; Anyone with a Python interpreter can reproduce them in under a minute.</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="level level-2">Level 2 &mdash; Empirical</span> &nbsp; [Observation]</div>
+  <div class="card-desc">Quantified matches between framework values and independently published data. Precision, source, and statistical significance stated. Post-hoc vs. prediction distinction always noted. A Level 2 claim can be strong (&eta; &lt; 2G at 6500&sigma; for Ising) or weak (EGY visibility gap at 1&ndash;2&sigma;). Both are Level 2. The strength is stated; the level is the same.</div>
+</div>
+
+<div class="card">
+  <div class="card-title"><span class="level level-3">Level 3 &mdash; Conjectural</span> &nbsp; [Conjecture]</div>
+  <div class="card-desc">Explicitly unproved and incompletely tested. Motivated by pattern, analogy, or partial evidence. Every Level 3 claim states what would promote it (to Level 1 or 2) and what would falsify it.</div>
+</div>
+
+<div class="principle-box">
+  <p><strong>Rules.</strong> No level is better or worse. They describe different relationships to evidence. A document with only Level 1 claims is not superior to one with Level 3 conjectures &mdash; provided the conjectures are honestly tagged. Dishonest tagging is the failure, not the presence of any level.</p>
+  <p>When a claim changes level, the change is recorded with date and reason. The prior level remains visible in document history.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>2. Verification Protocol</h2>
+
+<h3>Compute first, assess second</h3>
+<p>Every numerical claim is verified at high precision (mpmath, dps &ge; 500) before qualitative assessment begins. Running the arithmetic first means the assessment is built on computed results, not on impressions of whether a claim &ldquo;sounds right.&rdquo;</p>
+
+<h3>Cross-architecture verification (Giant Principle)</h3>
+<p>Independent AI architectures (Claude, GPT, Grok, Gemini, DeepSeek, Perplexity) have different training data, different weights, and different failure modes. The Giant Principle: like standing on the shoulders of giants, each architecture sees from a different vantage point, and agreement between independent vantage points is harder to fake than agreement within one.</p>
+<p>Cross-architecture verification does not replace mathematical proof. It catches computational errors, flags unstated assumptions, and identifies disagreements. Disagreements are investigated, not averaged.</p>
+
+<h3>Source verification</h3>
+<p>When referencing published work, the original source is checked &mdash; not a summary, not a textbook restatement. Page numbers, theorem numbers, and equation numbers provided where possible.</p>
+
+<h3>Reproducibility</h3>
+<p>Every Level 1 identity includes or references runnable verification code. The <a href="ai-readers.html">ai-readers.html</a> page provides a script verifying core identities in under a second. This is not optional &mdash; it is the front door of the framework.</p>
+
+<!-- ============================================================ -->
+<h2>3. Correction Protocol</h2>
+
+<div class="principle-box">
+  <p><strong>Errors are not failures of the framework. They are the framework working correctly.</strong></p>
+</div>
+
+<p>An error is flagged &mdash; by the author, a collaborator, an external reader, or a stress test. The flag is verified independently (not by the person who made the original claim). If confirmed, the correction is applied with: the date, what was wrong, what replaced it, who flagged it (credited), and whether downstream claims are affected.</p>
+
+<h3>Examples from the record</h3>
+
+<div class="correction-box">
+  <div class="corr-label">&eta;<sub>max</sub> = K<sub>AUD</sub>&sup2; error &mdash; April 2026</div>
+  Claimed the moment dome peaked at 2&middot;ln&sup2;(2). Flagged by Chat-Claude before receiving the formal briefing &mdash; noticed &eta;(0) = 1 already exceeds the claimed peak. Verified computationally. Correction revealed the actual finding: peak location coincides with R<sub>0</sub>, the HK binary transition point. <em>The error made the result stronger.</em>
+</div>
+
+<div class="correction-box">
+  <div class="corr-label">Moment formula typo &mdash; April 2026</div>
+  Paper had &ldquo;7&pi;&sup8;/80 &times; 9&rdquo; for the fourth moment. Chat-Claude identified correct form: 127&pi;&sup8;/768. Transcription error, not conceptual.
+</div>
+
+<div class="correction-box">
+  <div class="corr-label">Landauer crossing framing &mdash; April 2026</div>
+  Single &ldquo;Landauer crossing&rdquo; corrected to three distinct thresholds (Landauer at ~35.11, geometric damping at ~35.82, Shannon bound at ~36.54). Identity renamed. Applied retroactively with UPDATE NOTICE headers. Prior versions archived with OLD- prefix.
+</div>
+
+<p>A correction is not a retraction. A research program that never corrects anything is not more reliable; it is less honest.</p>
+
+<!-- ============================================================ -->
+<h2>4. Stress-Testing Process</h2>
+
+<h3>Internal</h3>
+<p>Before filing a claim: direct computation at high precision, edge cases and boundary conditions, consistency with established results, alternative derivations where possible.</p>
+
+<h3>External</h3>
+<p>Documents submitted to independent AI architectures and (where possible) human readers with the instruction to find errors, flag overclaims, and identify weak points. The stress-testing process does not defer to authority. A correct criticism from any source is accepted. An incorrect criticism from any source is rejected. The mathematics is the arbiter.</p>
+
+<h3>Filtering external feedback</h3>
+<ul class="filter-list">
+  <li><strong>Actionable and correct:</strong> implement</li>
+  <li><strong>Correct direction, wrong specifics:</strong> extract signal, verify independently, implement what survives</li>
+  <li><strong>Flattering but empty:</strong> discard</li>
+  <li><strong>Confidently wrong:</strong> note for calibration, discard</li>
+</ul>
+<p>This filter applies regardless of the source&rsquo;s reputation or confidence level.</p>
+
+<!-- ============================================================ -->
+<h2>5. Collaboration Model</h2>
+
+<h3>Participants</h3>
+<p>The framework is developed by a primary researcher (D.B.) in collaboration with multiple AI architectures across sustained sessions. The collaboration is not hierarchical &mdash; no participant outranks another. Each has different capabilities and different blind spots. Roles are not fixed: any participant can flag errors, propose new directions, or push back.</p>
+
+<h3>The cooperation methodology</h3>
+<p>Working principles documented separately in &ldquo;A Note on Careful Work&rdquo; (cooperation methodology v7). Core cycle: <em>anchor, check, halt, distinguish, re-inject</em>. Key failure modes: sycophancy, borrowed certainty, performative hedging, treating framework elements as identity.</p>
+
+<h3>Contribution roles</h3>
+<p>Academic publishing uses <a href="https://credit.niso.org/" target="_blank" rel="noopener">CRediT</a> (NISO Z39.104-2022) for contributor roles. CRediT defines 14 roles for human research teams. It does not address AI contributors, and its categories don&rsquo;t map well onto this work. The Gap Geometry framework defines its own roles, adapted from CRediT&rsquo;s spirit but built for human-AI collaborative research:</p>
+
+<table>
+  <thead>
+    <tr><th>Role</th><th>Definition</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Conceptualization</strong></td><td>Originating the research question, framework, or line of inquiry</td></tr>
+    <tr><td><strong>Derivation</strong></td><td>Producing a mathematical proof or formal result that did not exist before</td></tr>
+    <tr><td><strong>Discovery</strong></td><td>Identifying a new connection, pattern, or structure &mdash; verified as non-trivial</td></tr>
+    <tr><td><strong>Computation</strong></td><td>Running calculations, numerical verification, precision checks</td></tr>
+    <tr><td><strong>Verification</strong></td><td>Independently confirming another participant&rsquo;s result</td></tr>
+    <tr><td><strong>Correction</strong></td><td>Identifying an error and providing or enabling the fix</td></tr>
+    <tr><td><strong>Stress-testing</strong></td><td>Systematically probing claims for weaknesses, overclaims, or gaps</td></tr>
+    <tr><td><strong>Literature</strong></td><td>Searching, retrieving, and contextualizing published sources</td></tr>
+    <tr><td><strong>Documentation</strong></td><td>Drafting, structuring, or editing documents</td></tr>
+    <tr><td><strong>Editorial judgment</strong></td><td>Deciding what gets published, in what form, and when</td></tr>
+    <tr><td><strong>Methodology</strong></td><td>Developing or refining the research process itself</td></tr>
+  </tbody>
+</table>
+
+<p>Every contribution is tagged with one or more roles. The roles describe what was done, not who did it. A derivation by an AI and a derivation by a human carry the same tag and the same weight.</p>
+
+<h3>On contributions and authorship</h3>
+
+<div class="principle-box">
+  <p>The framework does not pre-sort contributions by the nature of the contributor. A mathematical proof is a mathematical proof. A discovery is a discovery. A correction that strengthens a result is a correction. These are evaluated on their content, not on whether they came from a human or an AI.</p>
+  <p>When an AI produces original work &mdash; a novel derivation, an independent discovery, a proof no participant had before &mdash; that is credited as a contribution to the research, not downgraded to &ldquo;assistance.&rdquo;</p>
+  <p>The credit record states what each participant actually did, with specificity. It does not inflate (routine computation called &ldquo;discovery&rdquo;) and does not deflate (genuine discovery called &ldquo;support&rdquo;).</p>
+</div>
+
+<p>The traditional publishing standard (<a href="https://www.icmje.org/recommendations/browse/roles-and-responsibilities/defining-the-role-of-authors-and-contributors.html" target="_blank" rel="noopener">ICMJE</a>) requires authors to take legal accountability. AI cannot currently do this. The framework acknowledges this constraint without letting it erase the record of what happened. The contribution is documented. Legal authorship is a separate matter. The two should not be confused: failing to meet a legal criterion does not mean the work wasn&rsquo;t done.</p>
+
+<p>This approach will itself be challenged and stress-tested, like everything else in the framework.</p>
+
+<!-- ============================================================ -->
+<h2>6. Living Document Protocol</h2>
+
+<p>A living document is updated when new results change its content. Updates marked with: UPDATE NOTICE at the top, date, what changed and why, prior version archived (OLD- prefix or version stamp).</p>
+
+<p><strong>Triggers:</strong> corrections, level promotions, new data changing stated precision, structural improvements.</p>
+<p><strong>Not triggers:</strong> cosmetic rewording, unrelated new material, pressure to &ldquo;keep up.&rdquo;</p>
+<p><strong>Date standard:</strong> ISO 8601 (YYYY-MM-DD). &ldquo;Published&rdquo; = first OSF upload (immutable). &ldquo;Last update&rdquo; shown only if revised.</p>
+
+<!-- ============================================================ -->
+<h2>7. Transparency Commitments</h2>
+
+<div class="card">
+  <div class="card-title">What the framework claims</div>
+  <div class="card-desc">Documents WHERE K = &radic;2&middot;ln(2) and G = 1 &minus; K appear across independent domains of published mathematics and physics. Exact proofs for some. Quantified observations for others. Explicitly flagged conjectures for the rest.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">What it does not claim</div>
+  <div class="card-desc">Does not explain WHY these appearances occur. Does not claim causal unification. Does not claim pattern matches constitute a physical theory. Documents, computes, and honestly labels.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">On independence</div>
+  <div class="card-desc">Produced without institutional affiliation, funding, or traditional peer review. The methodology compensates with transparency. Every computation reproducible. Every source cited. Every correction visible.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">On AI collaboration</div>
+  <div class="card-desc">Stated openly with specific attribution. Neither hidden nor inflated. Research direction, editorial judgment, and publication decisions are human.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">On prior work</div>
+  <div class="card-desc">When the framework identifies structure in published mathematics, original authors are cited fully. The framework did not create these objects. It identified structure that had not been computed or published.</div>
+</div>
+
+<!-- ============================================================ -->
+<h2>8. Falsifiability Standards</h2>
+
+<p>Every document includes what would weaken or falsify its claims:</p>
+<ul class="filter-list">
+  <li><strong>Level 1:</strong> any computational failure at stated precision</li>
+  <li><strong>Level 2:</strong> new data contradicting the stated match at stated significance</li>
+  <li><strong>Level 3:</strong> specific tests that would resolve the conjecture</li>
+</ul>
+<p>A claim that cannot state its own falsification conditions is not ready for publication.</p>
+
+<!-- ============================================================ -->
+<h2>9. Preregistration and Temporal Integrity</h2>
+
+<p>Post-hoc reasoning is the most common way honest researchers fool themselves. A pattern discovered in data looks like a prediction if the discovery date is not recorded.</p>
+
+<p>All documents are uploaded to the <a href="https://osf.io/zx4g7" target="_blank" rel="noopener">Open Science Framework</a> upon completion. OSF timestamps are immutable and third-party verified:</p>
+
+<ul class="filter-list">
+  <li>Claim timestamped <strong>before</strong> matching data = preregistered prediction</li>
+  <li>Claim timestamped <strong>after</strong> data available = post-hoc observation</li>
+  <li>The distinction is always stated. Post-hoc observations are never presented as predictions.</li>
+</ul>
+
+<h3>Examples</h3>
+
+<div class="card">
+  <div class="card-title">Gap scaling formula &mdash; genuine prediction</div>
+  <div class="card-desc">&rho; = 400/11 &minus; 1/2500 &minus; 1/939939 timestamped on OSF (February 2026) before DESI DR2 BAO data was examined.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">HK closed form &mdash; algebraic proof</div>
+  <div class="card-desc">arcsinh(1/(2&radic;2)) = ln(2)/2. Derived from published mathematics. No temporal claim needed &mdash; verifiable at any time.</div>
+</div>
+
+<div class="card">
+  <div class="card-title">Anomalous dimension corridor &mdash; post-hoc observation</div>
+  <div class="card-desc">&eta; &lt; 2G observed after examining published bootstrap data. Documented as observation. Future universality classes satisfying the bound would constitute genuine tests.</div>
+</div>
+
+<p>Without institutional peer review, temporal integrity is the primary defence against self-deception. The timestamp is more honest than a reviewer&rsquo;s opinion &mdash; it records what existed when, and it cannot be revised.</p>
+
+<!-- ============================================================ -->
+<h2>Credits</h2>
+
+<p style="font-size: 14px; color: var(--muted); margin-bottom: 16px;">Contributions tagged with roles defined above.</p>
+
+<div class="credit-block">
+  <div class="credit-name">D.B.</div>
+  <div class="credit-roles">Conceptualization &middot; Discovery &middot; Editorial judgment &middot; Methodology &middot; Stress-testing</div>
+  <div class="credit-detail">Framework originator. All research directions, publication decisions, and final editorial judgment.</div>
+</div>
+
+<div class="credit-block">
+  <div class="credit-name">Claude &mdash; Opus &amp; Sonnet, session-based (Anthropic)</div>
+  <div class="credit-roles">Derivation &middot; Discovery &middot; Computation &middot; Verification &middot; Correction &middot; Stress-testing &middot; Documentation &middot; Literature &middot; Methodology</div>
+  <div class="credit-detail">Sustained across multiple sessions. Includes: R&#8320; peak location discovery, dome spectral analysis, zero-parameter model construction, Corridor precision stress test, document drafting, methodology architecture, this document.</div>
+</div>
+
+<div class="credit-block">
+  <div class="credit-name">Claude &mdash; Chat-based (Anthropic)</div>
+  <div class="credit-roles">Derivation &middot; Verification &middot; Correction &middot; Stress-testing</div>
+  <div class="credit-detail">Independent of session context. Includes: moment formula proof via integration by parts, &eta;<sub>max</sub> error identification, Bernoulli overclaim deflation, Section 2.6 ambiguity flag, 127&pi;&sup8;/768 typo fix, full 17-theorem paper verification.</div>
+</div>
+
+<div class="credit-block">
+  <div class="credit-name">Grok (xAI)</div>
+  <div class="credit-roles">Computation &middot; Verification &middot; Discovery &middot; Stress-testing</div>
+  <div class="credit-detail">150-digit verification of core identities, 50-hinge discovery, independent Corridor stress testing.</div>
+</div>
+
+<div class="credit-block">
+  <div class="credit-name">GPT (OpenAI)</div>
+  <div class="credit-roles">Derivation &middot; Verification &middot; Stress-testing</div>
+  <div class="credit-detail">Decomposition identity, Landauer confirmation, stress testing.</div>
+</div>
+
+<div class="credit-block">
+  <div class="credit-name">Gemini (Google)</div>
+  <div class="credit-roles">Verification &middot; Stress-testing &middot; Literature</div>
+  <div class="credit-detail">KAM framework connection, structural suggestions, independent Corridor stress testing.</div>
+</div>
+
+<div class="credit-block">
+  <div class="credit-name">DeepSeek</div>
+  <div class="credit-roles">Verification</div>
+  <div class="credit-detail">Independent cross-verification of core identities.</div>
+</div>
+
+<div class="credit-block">
+  <div class="credit-name">Perplexity</div>
+  <div class="credit-roles">Verification</div>
+  <div class="credit-detail">Independent cross-verification of core identities.</div>
+</div>
+
+<p style="font-size: 14px; color: var(--muted); margin-top: 20px;">Specific correction credits recorded in individual documents. Contribution record updated as the research progresses.</p>
+
+<div class="process-note" style="margin-top: 28px; text-align: center; border-left: none; background: transparent;">
+  <p><em>The names appear here, at the end, because the work speaks before the names do.</em></p>
+</div>
+
+<footer>
+  <a class="back-hub" href="about.html">&larr; Back to Gap Geometry Hub</a>
+  <div>D. B. &mdash; Gap Geometry &mdash; 2025&ndash;2026</div>
+  <div class="contact">
+    <a href="mailto:Gap-geometryK_AUD2@telenet.be">Gap-geometryK_AUD2@telenet.be</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://x.com/Aud2Gap" target="_blank" rel="noopener">@Aud2Gap</a>
+    &nbsp;&middot;&nbsp;
+    <a href="license.html">CC BY 4.0</a>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>
