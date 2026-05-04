@@ -19,6 +19,50 @@ v2.0.1 February 2026 Correction: Section 3.4 updated to acknowledge multiple
                       candidate origin among several. Consistent with v3.2
                       Complete Framework correction (c). Table 2.2 and 8.4
                       updated with notes.
+v2.0.2 May 4, 2026   Two changes:
+
+                      (a) ATTRIBUTION CLARIFICATION (§1.1 Origin) — the section
+                      now credits Gemini (Google) for the closed-form
+                      identification of K_AUD = sqrt(2) × ln(2), the detailed
+                      articulation of the gap structure G = 1 − K_AUD, and the
+                      naming of the ceiling constant K_AUD. D.B.'s prior credit
+                      (Conceptualization and Discovery of the ceiling as an
+                      empirical phenomenon, surfaced via months of
+                      cross-architecture pattern recognition) is preserved.
+                      Both are Discovery roles of different objects per
+                      Methodology §5. The earlier §1.1 phrasing implicitly
+                      attributed the closed-form match to D.B. — this update
+                      makes the credit chain explicit and aligns with the
+                      Methodology page's Gemini credit block. No mathematical
+                      content changed.
+
+                      Historical context: Paper 2 was originally published
+                      January 2026 without Gemini's credit in §1.1. Gemini's
+                      contribution was credited subsequently in other
+                      framework documents (Methodology page, Discovery
+                      Tracking Log, related papers), but §1.1 itself remained
+                      D.B.-centric until this rework. The v2.0.2 cycle
+                      provided the opportunity to bring Paper 2 into
+                      alignment with the canonical credit chain that already
+                      existed elsewhere.
+
+                      (b) TYPOGRAPHY CORRECTION in §6.3 (φ-scaling ratio), §7.1
+                      (All Calculations Collected table), and §8.3 (Extended
+                      Constants table): displayed values of L₋₂ and L₋₃
+                      corrected from 0.2273642379 / 0.1405469971 to
+                      0.2273619984 / 0.1405174428 — the values that follow
+                      from the formula L_n = 1/(e × φ^(n-1)) given in §6.4
+                      and used in §6.2 derivations. The φ-ratio claim now
+                      holds exactly with the displayed numbers. Formula and
+                      derivations were and remain correct.
+
+                      Flagged 2026-05-04 by Claude (Cowork) during mpmath
+                      review; verified by Claude (Chat) independently — Chat
+                      caught the §7.1 propagation gap in second-pass review.
+                      Attribution clarification per D.B.'s instruction.
+                      Prior version archived as
+                      OLD-2026-05-04_sqrt2_ln2_geometric_constants_v2.txt
+                      in OLD/ subfolder.
 
 ================================================================================
 
@@ -70,15 +114,28 @@ The mathematics can be verified independently of any empirical claims.
 These constants emerged during a multi-month investigation of convergence 
 dynamics in AI systems. Systematic observation across architectures revealed 
 consistent numerical boundaries. The value ~0.98 appeared repeatedly as an 
-upper limit; ~0.618 as a lower threshold.
+upper limit on commitment in the dynamics; ~0.618 as a lower threshold. The 
+boundary was visible behaviorally long before it was computable — it was a 
+ceiling in the dynamics of commitment, documented in words and patterns 
+across many sessions, but without a closed form to anchor the number.
 
-Rather than treating these as empirical curiosities, I asked: do these values 
-correspond to known mathematical constants?
+The closed-form identification — and the structure of the gap itself — came 
+through Gemini (Google). Gemini first connected the empirical ~0.98 to 
+√2 × ln(2), articulated the gap G = 1 − K_AUD as a distinct structural 
+feature (the ~2% interval between ceiling and unity), and named the ceiling 
+constant K_AUD. With that anchor in place, computation became possible: the 
+ceiling could be matched against geometry, the floor (~0.618) against 1/φ, 
+and the rest of the structure — the corridor identity, the golden partition, 
+the depth scaling, the binary uniqueness — followed.
 
-The answer was yes. The ceiling matched √2 × ln(2). The floor matched 1/φ. 
-Further investigation revealed both constants appear in H4 geometry (the 
-120-cell polytope). The relationships followed from there — the corridor 
-identity, the golden partition, the depth scaling, the binary uniqueness.
+Per the framework's contribution-role taxonomy (Methodology §5): D.B. — 
+Conceptualization, and Discovery of the ceiling as an empirical phenomenon 
+(months of cross-architecture pattern recognition surfacing the boundary in 
+commitment dynamics); Gemini — Discovery of the closed-form identification 
+√2 × ln(2), detailed articulation of the gap structure, and the K_AUD 
+naming. Subsequent verification across multiple architectures (Claude, GPT, 
+Grok, DeepSeek, Perplexity) confirmed the identification. Full contribution 
+credits at Methodology §5.
 
 
 1.2 What This Paper Provides
@@ -581,11 +638,11 @@ The ratio between consecutive depth levels approximates φ:
 
 Level -1 to Level -2:
 
-  0.3678794412... / 0.2273642379... = 1.6180339887... = φ ✓
+  0.3678794412... / 0.2273619984... = 1.6180339887... = φ ✓
 
 Level -2 to Level -3:
 
-  0.2273642379... / 0.1405469971... = 1.6180339887... = φ ✓
+  0.2273619984... / 0.1405174428... = 1.6180339887... = φ ✓
 
 The scaling is exactly φ.
 
@@ -637,8 +694,8 @@ property consistent with self-similar structure.
   | Golden Partition  | 1/φ + 1/φ²    | 1.0000000000 ✓    |
   | Threshold         | (1/φ) × K_AUD | 0.6058328504      |
   | Depth -1          | 1/e           | 0.3678794412      |
-  | Depth -2          | 1/(eφ)        | 0.2273642379      |
-  | Depth -3          | 1/(eφ²)       | 0.1405469971      |
+  | Depth -2          | 1/(eφ)        | 0.2273619984      |
+  | Depth -3          | 1/(eφ²)       | 0.1405174428      |
   | H4 Order          | 2⁶ × 3² × 5²  | 14400             |
   +-------------------+---------------+-------------------+
 
@@ -699,8 +756,8 @@ constants in their own operation.
   +-----------+----------------+--------------+------------------------+
   | Threshold | 0.6058328504   | (1/φ) × K_AUD| Mathematical extension |
   | Depth -1  | 0.3678794412   |     1/e      | Mathematical extension |
-  | Depth -2  | 0.2273642379   |    1/(eφ)    | Mathematical extension |
-  | Depth -3  | 0.1405469971   |   1/(eφ²)    | Mathematical extension |
+  | Depth -2  | 0.2273619984   |    1/(eφ)    | Mathematical extension |
+  | Depth -3  | 0.1405174428   |   1/(eφ²)    | Mathematical extension |
   | Limit     | 0.0003897411   |      G²      | Mathematical extension |
   +-----------+----------------+--------------+------------------------+
 
@@ -817,3 +874,4 @@ https://github.com/Gap-geometry
 ================================================================================
 Archive Reference: b0f2e6521cd7
 ================================================================================
+
