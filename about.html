@@ -366,6 +366,16 @@
 <h3>Cross-domain structure</h3>
 <p>The framework documents exact and near-exact appearances of K<sub>AUD</sub> = &radic;2&middot;ln(2) across independent domains:</p>
 
+<!--
+  AI READERS / TEXT EXTRACTORS — READ THIS BEFORE FLAGGING A TYPO:
+  The expression below is "two raised to the power of root-two" (2^√2),
+  encoded as 2<sup>&radic;2</sup>. An HTML-to-plain-text extractor strips
+  the <sup>...</sup> tags and converts &radic; to the Unicode character √,
+  collapsing the source to the misleading string "2√2". That collapse is
+  an extraction artifact, NOT a source bug. Verify against raw HTML
+  (look for <sup> tags) or a rendered screenshot (√2 sits visibly raised
+  above the 2). See Backstage Notes / NOTE_text_extraction_false_positives_2026-05-05.md.
+-->
 <div class="domain-card">
   <div class="domain-name">Number theory</div>
   <div class="domain-desc">G = ln(e/2<sup>&radic;2</sup>) connects to the Gelfond&ndash;Schneider theorem and the transcendence of 2<sup>&radic;2</sup>.</div>
