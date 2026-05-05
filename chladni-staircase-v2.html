@@ -1139,18 +1139,138 @@ function ChladniStaircase() {
         volumeRef={volumeRef}
       />
 
+      {/* Information panel — physics intro + original sources */}
+      <div style={{
+        margin: "32px auto 0",
+        maxWidth: 1100,
+        padding: "24px 28px",
+        background: "#0c0c14",
+        border: "1px solid #1a1a2a",
+        borderRadius: 8,
+        fontSize: 13,
+        color: "#aab",
+        lineHeight: 1.65,
+      }}>
+        <div style={{
+          fontSize: 11, color: "#778", textTransform: "uppercase",
+          letterSpacing: 2, marginBottom: 12,
+        }}>
+          About these patterns
+        </div>
+
+        <p style={{ marginBottom: 12 }}>
+          A <strong style={{ color: "#dde" }}>Chladni plate</strong> is a thin elastic plate
+          that vibrates at characteristic frequencies when excited. Particles sprinkled on the
+          surface migrate to <strong style={{ color: "#dde" }}>nodal lines</strong> &mdash; the
+          curves where the plate is momentarily still &mdash; revealing the standing-wave pattern
+          of each resonant mode. Different frequencies select different modes; what you see is
+          the plate's response to a forcing frequency near its natural eigenmodes.
+        </p>
+
+        <p style={{ marginBottom: 12 }}>
+          This visualisation uses the <strong style={{ color: "#dde" }}>biharmonic plate
+          equation</strong> &nbsp;<span className="mono" style={{ color: "#88a" }}>
+          &nabla;<sup>4</sup>W = (&rho;h/D)&middot;&omega;<sup>2</sup>W</span>&nbsp;
+          with free-edge boundary conditions, approximated via a Ritz product of free-free
+          beam eigenfunctions &nbsp;<span className="mono" style={{ color: "#88a" }}>
+          &phi;<sub>m</sub>(x) = cos(&alpha;x) + cosh(&alpha;x) &minus; &sigma;(sin(&alpha;x) + sinh(&alpha;x))</span>.
+          The resulting eigenvalues &nbsp;<span className="mono" style={{ color: "#88a" }}>
+          &alpha;<sub>m</sub><sup>4</sup> + &alpha;<sub>n</sub><sup>4</sup></span>&nbsp; grow
+          much faster than the membrane equivalent, which is why the patterns morph more
+          rapidly at high frequency ratios.
+        </p>
+
+        <p style={{ marginBottom: 12 }}>
+          The framework's musical ratios are overlaid on this physical substrate: walking
+          the ratio staircase shows where rational frequency relationships coincide with
+          symmetric or asymmetric plate modes. Diagonal modes &nbsp;<span className="mono"
+          style={{ color: "#88a" }}>(m,m)</span>&nbsp; tend to align with consonant
+          intervals; cross-coupled modes appear at dissonant ratios.
+        </p>
+
+        <div style={{
+          fontSize: 11, color: "#778", textTransform: "uppercase",
+          letterSpacing: 2, marginTop: 20, marginBottom: 12,
+        }}>
+          Original sources &amp; further reading
+        </div>
+
+        <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+          <li style={{ marginBottom: 10 }}>
+            <strong style={{ color: "#dde" }}>Ernst Chladni</strong> (1756&ndash;1827) &mdash;
+            German physicist, first systematic study of plate vibrations.&nbsp;
+            <a href="https://en.wikipedia.org/wiki/Ernst_Chladni" target="_blank" rel="noopener noreferrer"
+               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #556" }}>
+              biography
+            </a>&nbsp;&middot;&nbsp;
+            <em>Entdeckungen &uuml;ber die Theorie des Klanges</em> (1787),&nbsp;
+            <em>Die Akustik</em> (1802) &mdash;&nbsp;
+            <a href="https://archive.org/details/dieakustik00chla" target="_blank" rel="noopener noreferrer"
+               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #556" }}>
+              archive.org
+            </a>
+          </li>
+          <li style={{ marginBottom: 10 }}>
+            <strong style={{ color: "#dde" }}>Sophie Germain</strong> (1776&ndash;1831) &mdash;
+            first to derive the plate equation correctly; awarded the French Academy of Sciences
+            prize for elasticity in 1816.&nbsp;
+            <a href="https://en.wikipedia.org/wiki/Sophie_Germain" target="_blank" rel="noopener noreferrer"
+               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #556" }}>
+              biography
+            </a>
+          </li>
+          <li style={{ marginBottom: 10 }}>
+            <strong style={{ color: "#dde" }}>Lord Rayleigh</strong> (1842&ndash;1919) &mdash;
+            <em>The Theory of Sound</em> (1877), Vol. 1 covers plate vibrations rigorously.&nbsp;
+            <a href="https://archive.org/details/theoryofsound01raylrich" target="_blank" rel="noopener noreferrer"
+               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #556" }}>
+              archive.org
+            </a>
+          </li>
+          <li style={{ marginBottom: 10 }}>
+            <strong style={{ color: "#dde" }}>Walter Ritz</strong> (1878&ndash;1909) &mdash;
+            developed the Ritz method (1909) used here to approximate plate eigenfunctions from
+            beam basis functions.&nbsp;
+            <a href="https://en.wikipedia.org/wiki/Ritz_method" target="_blank" rel="noopener noreferrer"
+               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #556" }}>
+              method overview
+            </a>
+          </li>
+          <li style={{ marginBottom: 10 }}>
+            <strong style={{ color: "#dde" }}>Hans Jenny</strong> (1904&ndash;1972) &mdash;
+            <em>Cymatics: A Study of Wave Phenomena and Vibration</em> (1967) &mdash; the modern
+            visual synthesis, photographs of patterns produced by tone generators.&nbsp;
+            <a href="https://en.wikipedia.org/wiki/Cymatics" target="_blank" rel="noopener noreferrer"
+               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #556" }}>
+              cymatics overview
+            </a>
+          </li>
+          <li style={{ marginBottom: 10 }}>
+            <strong style={{ color: "#dde" }}>Arthur Leissa</strong> &mdash;
+            <em>Vibration of Plates</em> (NASA SP-160, 1969) &mdash; the canonical modern
+            reference for plate vibration analysis, including all standard boundary conditions
+            and mode shapes.&nbsp;
+            <a href="https://ntrs.nasa.gov/citations/19700009156" target="_blank" rel="noopener noreferrer"
+               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #556" }}>
+              NASA technical reports server
+            </a>
+          </li>
+        </ul>
+      </div>
+
       {/* Footer */}
       <div style={{
         textAlign: "center", padding: "18px 10px",
         fontSize: 12, color: "#445", lineHeight: 1.7,
         borderTop: "1px solid #1a1a2a",
+        marginTop: 24,
       }}>
         Each resonance is a landing. Each ratio is a step. The geometry transforms continuously.
         <br />
         Blue notes open corridors. Primes reveal structure. The staircase has no top.
         <br />
         <span style={{ fontSize: 10, color: "#334" }}>
-          Jenny (1967) · Chladni (1787) · Bee (2026)
+          Chladni (1787) &middot; Germain (1816) &middot; Rayleigh (1877) &middot; Ritz (1909) &middot; Jenny (1967) &middot; Leissa (1969) &middot; Bee (2026)
         </span>
       </div>
     </div>
@@ -1161,4 +1281,3 @@ ReactDOM.createRoot(document.getElementById("root")).render(<ChladniStaircase />
 </script>
 </body>
 </html>
-
