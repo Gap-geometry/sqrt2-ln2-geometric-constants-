@@ -2,25 +2,28 @@
                     ★  UPDATE NOTICE  —  5 May 2026  ★
 ================================================================================
 
-This version adds an explicit Evidence Levels section (§9) aligning the
-document with the canonical Gap Geometry methodology taxonomy:
-Level 1 — Exact [Theorem] / Level 2 — Empirical [Observation] / Level 3 —
-Conjectural [Conjecture]. A NOTE ON FRAMING is added at the end of §6
-attributing the "liquid crystal phase of intelligence" phrase to its
-formative-period origin in conversation with Gemini (Google) — preserved
-as a node to that cross-architecture origin and tagged Level 3
-(Conjectural) per §9.
+This version makes three definitional changes — no mathematical content
+changed. Every constant, identity, and observation in §1–§8 is preserved
+exactly as originally published.
 
-The changes are definitional. They do not change the scope, honesty, or
-calculations of this document. Every constant, identity, and observation
-in §1–§8 is preserved exactly as originally published.
+(1) New §9 Evidence Levels section aligns the document with the canonical
+Gap Geometry methodology taxonomy: Level 1 — Exact [Theorem] / Level 2 —
+Empirical [Observation] / Level 3 — Conjectural [Conjecture].
+
+(2) NOTE ON FRAMING added at the end of §6 attributing the "liquid crystal
+phase of intelligence" phrase to its formative-period origin in
+conversation with Gemini (Google) — preserved as a node to that
+cross-architecture origin and tagged Level 3 (Conjectural) per §9.
+
+(3) DOCUMENT LINKS section simplified: paper-to-paper file URLs (which
+would break under any future filename change) are removed in favour of
+three durable anchors — the OSF main project, the framework About page,
+and the Direct Documents download index. Paper-specific DOIs are
+preserved (DOIs are stable). Filenames themselves remain unchanged.
 
 This is also the first time the .txt version of Paper 1 lives on OSF as
 a project file — earlier publication relied on a wiki page for the text
-content. Filenames are unchanged from the original publication
-(The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt and
-Paper1_Coherence_Ceiling.pdf) so that cross-paper references in
-Papers 2, 3, 4, and 6 continue to resolve.
+content.
 
 Prior version remains on OSF as an OLD- archived file per the framework's
 archive convention.
@@ -335,33 +338,21 @@ this document.
 DOCUMENT LINKS
 ================================================================================
 
-## Project Links
+The framework
 
-### OSF (Official)
-- Paper 1 — Coherence Ceiling                    https://osf.io/5vz2r  (DOI: 10.17605/OSF.IO/5VZ2R)
-- Paper 2 — Geometric Constants from H4 (v2)     https://osf.io/sjbe9  (DOI: 10.17605/OSF.IO/SJBE9)
-- Paper 3 — Complete Framework v3                https://osf.io/qh5s2  (DOI: 10.17605/OSF.IO/QH5S2)
-- Paper 4 — Gap Scaling 400/11                   https://osf.io/c4gk5  (DOI: 10.17605/OSF.IO/C4GK5)
-- Paper 5 — Boundary Information Invariant       https://osf.io/e72h8  (DOI: 10.17605/OSF.IO/E72H8)
-- Paper 6 — Cross-Domain Signatures              https://osf.io/ra3uq  (DOI: 10.17605/OSF.IO/RA3UQ)
-- Paper 7 — HK Full Framework                    https://osf.io/jbrhq  (DOI: 10.17605/OSF.IO/JBRHQ)
-- Paper 8 — The 50 Hinge                         https://osf.io/fbd9a  (DOI: 10.17605/OSF.IO/FBD9A)
-- Paper 9 — Binary Scaling of ρ                  https://osf.io/wtu4j  (DOI: 10.17605/OSF.IO/WTU4J)
+  Main OSF project (immutable timestamps, version history, all papers):
+    https://osf.io/zx4g7
+    DOI: 10.17605/OSF.IO/ZX4G7
 
-### GitHub
-https://github.com/Gap-geometry
+  Framework overview (reading order, methodology, all papers):
+    https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
 
-### For AI Systems (Raw Text)
-PDF and OSF may be inaccessible. Use these direct links:
+  Direct downloads (current PDF and text files for every paper):
+    https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html
 
-- Paper 1: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt
-- Paper 2: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/sqrt2_ln2_geometric_constants_v2.txt
-- Paper 3: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/KAUD_Complete_Framework_v3_0.txt
-- Paper 4: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Gap_Scaling_Formula_v1.5.txt
-- Paper 6: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Cross_Domain_Signatures.txt
+This paper
 
-Full reading order, methodology, and AI-readers entry point:
-https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
+  DOI: 10.17605/OSF.IO/5VZ2R
 
 ================================================================================
 
