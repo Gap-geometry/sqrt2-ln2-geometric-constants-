@@ -63,7 +63,7 @@ DOCUMENT LINKS (Raw text — use these in AI contexts)
 ================================================
 
 Paper 6 (start here):
-  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Cross_Domain_Signatures__26March2026.txt
+  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Cross_Domain_Signatures.txt
 
 Paper 1:
   https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt
@@ -103,3 +103,4 @@ D. B. — Gap Geometry Project — 2025–2026
 Gap-geometryK_AUD2@telenet.be
 
 Compute first. Assess second.
+
