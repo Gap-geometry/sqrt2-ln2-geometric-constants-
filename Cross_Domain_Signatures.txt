@@ -4,11 +4,12 @@
 
 This version corrects Section 4.4 (the ellipse-area derivation in the
 Hodgson-Kerckhoff section), expands Section 2.7 (Ramanujan-Nagell list),
-adds Section 4.4.1 (a second appearance of K_AUD in HK 2007), and
+adds Section 4.4.1 (a second appearance of K_AUD in HK 2007),
 rewrites Section 8.4 to align evidence-level labels with the canonical
-methodology taxonomy. The §8.4 alignment does not change the scope,
-honesty, or calculations of this document — only the labels used for
-evidence-level classification.
+methodology taxonomy, and simplifies the §9 / References cross-paper
+links to durable anchors only. The §8.4 alignment and §9 link cleanup do
+not change the scope, honesty, or calculations of this document — only
+the labels used for evidence-level classification and the link layout.
 
 (1) §4.4 ELLIPSE AREA CORRECTION
 
@@ -78,6 +79,16 @@ documents — none are claimed in this paper.
 This is a definitional alignment, not a math change. Every calculation,
 deviation, identity, and falsification criterion in the document is
 unaffected. Scope, honesty, and quantitative content are preserved.
+
+(5) §9 / REFERENCES — CROSS-PAPER LINK CLEANUP
+
+Paper-to-paper file URLs in §9 ("Connections to Published Framework")
+and References [8]–[12] are removed in favour of three durable anchors:
+the OSF main project, the framework About page, and the Direct Documents
+download index. Per-paper DOIs are preserved (DOIs are stable and resolve
+to the OSF project pages). The narrative descriptions in §9 — what each
+paper contributes — are unchanged. This is purely a link-layout cleanup
+to remove URLs that would break under any future filename change.
 
 CHAIN OF VERIFICATION
 
@@ -1201,51 +1212,41 @@ This document extends the published framework as follows:
 
     Paper 1: The Coherence Ceiling and the Geometric Singularity of Binary
     DOI: 10.17605/OSF.IO/5VZ2R
-    URL: https://doi.org/10.17605/OSF.IO/5VZ2R
-    PDF: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper1_Coherence_Ceiling.pdf
-    TXT: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt
     Content: Established K_AUD, binary uniqueness, the gap.
 
     Paper 2: Geometric Constants v2: Corridor Identity and Depth Scaling
     DOI: 10.17605/OSF.IO/SJBE9
-    URL: https://doi.org/10.17605/OSF.IO/SJBE9
-    PDF: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper2_Geometric_Constants_v2.pdf
-    TXT: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/sqrt2_ln2_geometric_constants_v2.txt
     Content: Corridor identity, golden partition, H₄ derivations.
 
     Paper 3: Complete Framework v3.3: Binary Tower and Universality
     DOI: 10.17605/OSF.IO/QH5S2
-    URL: https://doi.org/10.17605/OSF.IO/QH5S2
-    PDF: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper3_Complete_Framework_v3_3.pdf
-    TXT: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/KAUD_Complete_Framework_v3_0.txt
     Content: Binary Tower, Baker's map, four φ-free pathways.
 
     Paper 4: Gap Scaling Across Domains: The 400/11 Formula
     DOI: 10.17605/OSF.IO/C4GK5
-    URL: https://doi.org/10.17605/OSF.IO/C4GK5
-    PDF: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper4_Gap_Scaling_400_11.pdf
-    TXT: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Gap_Scaling_Formula_v1.5.txt
     Content: Gap scaling formula (400/11), Feigenbaum connection.
     NOTE: The 1/2500 correction scale is derived here — BEFORE any
     cosmological data was examined (Section 5 of this document).
 
     Paper 5: Boundary Information Invariant of Quadratic Systems
     DOI: 10.17605/OSF.IO/E72H8
-    URL: https://doi.org/10.17605/OSF.IO/E72H8
-    PDF: https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Boundary_Information_Invariant_Short.pdf
-    TXT: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Boundary_Information_Invariant_Short.txt
     Content: Unification document. DESI BAO analysis published here.
 
     THIS DOCUMENT (Paper 6):
     Numerical and structural echoes of K_AUD in published science.
     DOI: 10.17605/OSF.IO/RA3UQ
-    URL: https://doi.org/10.17605/OSF.IO/RA3UQ
 
-    About page (all links, reading order, interactive tools):
-    https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
+    The framework
 
-    AI verification index (methodology for AI systems):
-    https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/AI_INDEX.txt
+      Main OSF project (overview of all 9 papers, reading order,
+      version history):
+        https://osf.io/zx4g7   (DOI: 10.17605/OSF.IO/ZX4G7)
+
+      Framework overview (reading order, methodology, all papers):
+        https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
+
+      Direct downloads (current PDF and text files for every paper):
+        https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html
 
 
 ════════════════════════════════════════════════════════════════════════════════
@@ -1315,25 +1316,20 @@ The mathematics does not require credentials. It requires a calculator.
 [8]  D. B., "The Coherence Ceiling and the Geometric Singularity
      of Binary", OSF.
      DOI: https://doi.org/10.17605/OSF.IO/5VZ2R
-     TXT: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt
 
 [9]  D. B., "Geometric Constants v2: Corridor Identity and Depth
      Scaling", OSF.
      DOI: https://doi.org/10.17605/OSF.IO/SJBE9
-     TXT: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/sqrt2_ln2_geometric_constants_v2.txt
 
 [10] D. B., "Complete Framework v3.3: Binary Tower and Universality",
      OSF.
      DOI: https://doi.org/10.17605/OSF.IO/QH5S2
-     TXT: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/KAUD_Complete_Framework_v3_0.txt
 
 [11] D. B., "Gap Scaling Across Domains: The 400/11 Formula", OSF.
      DOI: https://doi.org/10.17605/OSF.IO/C4GK5
-     TXT: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Gap_Scaling_Formula_v1.5.txt
 
 [12] D. B., "Boundary Information Invariant of Quadratic Systems", OSF.
      DOI: https://doi.org/10.17605/OSF.IO/E72H8
-     TXT: https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Boundary_Information_Invariant_Short.txt
 
 
 ════════════════════════════════════════════════════════════════════════════════
@@ -1388,3 +1384,4 @@ Full framework, reading order, and interactive tools:
 END OF DOCUMENT
 Draft version — March 2026
 ================================================================================
+
