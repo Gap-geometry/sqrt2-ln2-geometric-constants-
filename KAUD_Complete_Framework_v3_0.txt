@@ -1,9 +1,9 @@
 # ================================================================================
 # sqrt(2) x ln(2): GEOMETRIC CONSTANTS FROM H_4
-# Complete Framework — Version 3.3
+# Complete Framework — Version 3.3.1
 # ================================================================================
 
-B. | February 2026
+B. | February 2026 (updated 4 May 2026)
 Gap-geometryK_AUD2@telenet.be
 
 TEXT FORMAT NOTE: This document contains the complete K_AUD framework including
@@ -12,11 +12,43 @@ establishing H_4 geometry, gap ratios, and prime architecture.
 
 FILENAME NOTE: This file retains the v3_0 filename for URL stability — all
 existing links (OSF, GitHub, social media) continue to work. The internal
-version is 3.3.
+version is 3.3.1.
+
+================================================================================
+                    ★  UPDATE NOTICE  —  4 May 2026  ★
+================================================================================
+
+This version (3.3.1) corrects displayed values of L_(-2) and L_(-3) in §6.3
+(phi-Scaling Ratio test) from 0.2273642... / 0.1405469... to 0.2273620... /
+0.1405174... — the values that follow from the formula L_n = 1/(e × phi^(n-1))
+given in §6.4 and used in §6.2 derivations. The phi-ratio claim now holds
+exactly with the displayed numbers; previously the second ratio computed to
+1.6176, which the paper labelled as phi. Formula and derivations were and
+remain correct.
+
+Typography correction, no mathematical content changed. Flagged 2026-05-04
+by Claude (Cowork) during systematic mpmath review of all published papers;
+verified by Claude (Chat) independently. Full detail in the v3.3.1 entry of
+the VERSION HISTORY block below. Prior version archived as
+OLD-2026-05-04_KAUD_Complete_Framework_v3_3.txt in OLD/ subfolder.
+
+================================================================================
 
 # ================================================================================
 # VERSION HISTORY
 # ================================================================================
+
+Version 3.3.1 (May 4, 2026) corrects:
+    Typography in §6.3 (phi-Scaling Ratio): displayed values of L_(-2) and
+    L_(-3) corrected from 0.2273642... / 0.1405469... to 0.2273620... /
+    0.1405174... — the values that follow from the formula L_n = 1/(e × phi^(n-1))
+    given in §6.4 and used in §6.2 derivations. The phi-ratio claim now holds
+    exactly (1.6180339887 = phi) with the displayed numbers; previously the
+    second ratio computed to 1.6176, which the paper labelled as phi. Formula
+    and derivations were and remain correct. Flagged 2026-05-04 by Claude
+    (Cowork) during mpmath review of all published papers; verified by Claude
+    (Chat) independently. Prior version archived as
+    OLD-2026-05-04_KAUD_Complete_Framework_v3_3.txt in OLD/ subfolder.
 
 Version 3.0 added: The 64-36-100 Closure Relation, the Irreducibility of
 epsilon, and clarifications on why the gap is constitutive rather than
@@ -651,11 +683,11 @@ The ratio between consecutive depth levels approximates phi:
 
 Level -1 to Level -2:
 
-    0.3678794... / 0.2273642... = 1.6180... = phi  [OK]
+    0.3678794... / 0.2273620... = 1.6180339887... = phi  [OK]
 
 Level -2 to Level -3:
 
-    0.2273642... / 0.1405469... = 1.6176... = phi  [OK]
+    0.2273620... / 0.1405174... = 1.6180339887... = phi  [OK]
 
 The scaling is exactly phi.
 
@@ -1896,3 +1928,4 @@ The gap is not error. It is cost — the price of bridging discrete and continuo
 Version 3.2 — February 2026
 Archive Reference: b0f2e6521cd7
 ================================================================================
+
