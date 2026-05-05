@@ -1,4 +1,105 @@
 ════════════════════════════════════════════════════════════════════════════════
+                    ★  UPDATE NOTICE  —  4 May 2026  ★
+════════════════════════════════════════════════════════════════════════════════
+
+This version corrects Section 4.4 (the ellipse-area derivation in the
+Hodgson-Kerckhoff section), expands Section 2.7 (Ramanujan-Nagell list),
+adds Section 4.4.1 (a second appearance of K_AUD in HK 2007), and
+rewrites Section 8.4 to align evidence-level labels with the canonical
+methodology taxonomy. The §8.4 alignment does not change the scope,
+honesty, or calculations of this document — only the labels used for
+evidence-level classification.
+
+(1) §4.4 ELLIPSE AREA CORRECTION
+
+The earlier text contained the line:
+
+    "At R₀, the ellipse area simplifies:
+     π × sinh²(R₀) × cosh(2R₀) = π × (1/2) × 2 = π
+     Therefore: A_e = K_AUD × π at the critical radius."
+
+This was a misderivation. Hodgson-Kerckhoff's actual ellipse area
+formula (HK 2002 Theorem 4.4 p. 29; HK 2007 Theorem 5.6 p. 36) is:
+
+    A_e = π · sinh²(R̂) / (2 · S · cosh(2R̂))
+        = K_AUD · π · sinh²(R̂) / (2 · cosh(2R̂))     [since 1/S = K_AUD]
+
+At R₀ this gives A_e = K_AUD · π / 8, not K_AUD · π. The conclusion
+in the earlier text was off by a factor of 8.
+
+The error originated in a March 27 Grok scout transcription of HK 2007
+that dropped the factor of 2 in the denominator and was carried into
+the framework's derivation. Both HK papers (now obtained directly as
+math/0204345v1.pdf and 0709.3566v1.pdf in Library PhysicsMath/) confirm
+the corrected formula independently.
+
+§4.4 has been rewritten with HK's actual formula and the K_AUD · π / 8
+conclusion. The structural argument (geometry at R₀ supplies √2, √3, 2;
+coefficient supplies ln(2); together = K_AUD) is preserved and unchanged.
+The central HK closed-form identity 1/S = √2 × ln(2) = K_AUD is
+unaffected — it follows from arcsinh(1/(2√2)) = ln(2)/2 and is verified
+at dps = 500.
+
+(2) §4.4.1 NEW — K_AUD'S SECOND APPEARANCE IN HK 2007
+
+A new subsection §4.4.1 documents that K_AUD = 0.980258 also appears as
+the coefficient of the Euclidean injectivity radius lower bound
+c(R) = 0.980258 / (coth R + 1) on page 41 of HK 2007. Two independent
+contexts in the same paper, both unrecognized as √2 × ln(2) for nineteen
+years. The closed-form identification covers both.
+
+(3) §2.7 RAMANUJAN-NAGELL LIST
+
+The earlier wording said "exactly five positive integer solutions,
+yielding n = {1, 3, 5, 11}" — listing four. The fifth solution n = 181
+(2¹⁵ = 181² + 7 = 32768) is now included in the set, with a note that
+the first four are framework primes and the fifth sits outside the set.
+Paper 7 (HK Closed Form) already had the correct wording; this update
+brings Paper 6 §2.7 into alignment.
+
+(4) §8.4 EVIDENCE-LEVEL LABEL ALIGNMENT
+
+The earlier §8.4 used the labels "Level 1 (Exact)", "Level 2 (Strong)",
+and "Level 3 (Observation)" — with "Observation" attached to Level 3.
+The canonical methodology page (gap-geometry.github.io methodology) uses
+Level 1 — Exact [Theorem], Level 2 — Empirical [Observation], and
+Level 3 — Conjectural [Conjecture]. Aligning §8.4 with this taxonomy
+moves the word "Observation" from Level 3 to Level 2 (where empirical
+matches against published measurements live) and reserves Level 3 for
+explicitly conjectural patterns.
+
+Section assignments are also refined: §4 is mixed Level 1 + Level 2
+(the closed-form HK identifications and R₀ environment are Level 1; the
+literature appearance count is Level 2), §4.4.1 is Level 1, and §6.1 is
+Level 1. Level 3 conjectures (HK packing ↔ O(N) resummation; V_max = K
+in quantum optics; H-series polytope) live in their own dedicated
+documents — none are claimed in this paper.
+
+This is a definitional alignment, not a math change. Every calculation,
+deviation, identity, and falsification criterion in the document is
+unaffected. Scope, honesty, and quantitative content are preserved.
+
+CHAIN OF VERIFICATION
+
+Findings flagged 2026-05-04 by Claude (Cowork) during systematic mpmath
+review of all published papers, after D.B. provided HK 2002 and HK 2007
+PDFs in Library PhysicsMath/. Independent verification by Claude (Chat)
+the same day, computing K_AUD · π / 8 from a separate read of HK source
+structure. Both architectures converged. Detailed chain-of-error
+analysis logged in NOTE_HK_chain_of_error_2026-05-04.md (REPO 1 root).
+The §8.4 evidence-level alignment was raised 2026-05-05 against the
+canonical methodology taxonomy — a definitional clean-up only.
+
+ARCHIVED PRIOR VERSION
+
+Prior published version archived as
+OLD-2026-05-04_Cross_Domain_Signatures.txt and
+OLD-2026-05-04_Cross_Domain_Signatures.pdf in OLD/ subfolder.
+
+════════════════════════════════════════════════════════════════════════════════
+
+
+════════════════════════════════════════════════════════════════════════════════
                     ★  UPDATE NOTICE  —  13 April 2026  ★
 ════════════════════════════════════════════════════════════════════════════════
 
@@ -238,8 +339,10 @@ Source: DOI 10.17605/OSF.IO/C4GK5 (Paper 4: Gap Scaling Formula).
 
 This equation (conjectured by Ramanujan 1913, proved by Nagell 1948)
 has exactly five positive integer solutions, yielding
-n = {1, 3, 5, 11} — the first four framework primes (where 1 enters
-as orthogonal prime, distinct from its standard number-theoretic role).
+n = {1, 3, 5, 11, 181}. The first four are framework primes (where 1
+enters as orthogonal prime, distinct from its standard number-theoretic
+role); the fifth (n = 181, the 42nd prime, k = 15 with 2^15 = 32768 =
+181² + 7) sits outside the framework set.
 The constant 7 is the boundary prime (2⁵ − 5² = 4² − 3² = 7).
 The solutions are forced by number theory, not fitted.
 
@@ -425,13 +528,42 @@ The geometry at R₀ provides √2, √3, and 2.
 The coefficient provides ln(2).
 Together: √2 × ln(2) = K_AUD.
 
-At R₀, the ellipse area simplifies:
-    π × sinh²(R₀) × cosh(2R₀) = π × (1/2) × 2 = π
-    Therefore: A_e = K_AUD × π at the critical radius.
+HK 2002 (Theorem 4.4, p. 29) and HK 2007 (Theorem 5.6, p. 36) both
+give the ellipse area in the packing argument as:
+
+    A_e = π · a · b = π · sinh²(R̂) / (2 · S · cosh(2R̂))
+        = K_AUD · π · sinh²(R̂) / (2 · cosh(2R̂))     [since 1/S = K_AUD]
+
+At R₀, where sinh²(R₀) = 1/2 and cosh(2R₀) = 2:
+
+    A_e = K_AUD · π · (1/2) / (2 · 2) = K_AUD · π / 8
+
+The K_AUD coefficient enters the area formula because S = 1/K_AUD
+governs the semi-major axis of the embedded ellipse (HK 2007, eq.
+above Theorem 5.6). The geometry at R₀ contributes the residual
+factor 1/8; the K_AUD prefactor is what HK's coefficient is.
 
 The coefficient is not matching K_AUD in a random algebraic context.
 It is matching in an environment where √2 and √3 are already present
 exactly, and ln(2) fills the only missing slot.
+
+──────────────────────────────────────────────────────────────────────────────
+  4.4.1  K_AUD's Second Appearance in HK 2007
+──────────────────────────────────────────────────────────────────────────────
+
+K_AUD = √2 × ln(2) = 0.980258 also appears as the coefficient of a
+second, independent quantity in the same HK 2007 paper:
+
+    c(R) = 0.980258 / (coth R + 1)                  [HK 2007, p. 41]
+
+c(R) is a lower bound for the Euclidean injectivity radius of the
+boundary torus T_i. The same numerical constant 0.980258 appears with
+no closed form supplied; the framework's identification as √2 × ln(2)
+applies here too.
+
+Two independent contexts in the same paper, both using K_AUD as the
+explicit numerical coefficient, both unrecognized as √2 × ln(2) for
+nineteen years. The closed-form identification covers both.
 
 
 ──────────────────────────────────────────────────────────────────────────────
@@ -1029,21 +1161,36 @@ compensate with transparency.
   8.4  Evidence Levels
 ──────────────────────────────────────────────────────────────────────────────
 
-This document distinguishes three levels of evidence:
+This document follows the canonical three-level taxonomy of the
+Gap Geometry methodology page:
 
-    Level 1 (Exact): Algebraic identities verifiable at arbitrary
-    precision. Sections 2.1–2.7 are Level 1.
+    Level 1 — Exact [Theorem]: Algebraic identities verifiable at
+    arbitrary precision. §2.1–2.7 (the seven core identities), §4.2,
+    §4.3, §4.4, and §4.4.1 (the closed-form identification of HK
+    coefficients and the R₀ hyperbolic environment), and §6.1 (the gap
+    stacking formula and ε irreducibility) are Level 1.
 
-    Level 2 (Strong): Published measurements or QM-derived values
-    with small, quantified deviations. Sections 3, 4, 5, and 6
-    contain Level 2 evidence.
+    Level 2 — Empirical [Observation]: Quantified matches between
+    framework values and independently published measurements. §3
+    (atomic shell capacity / tower correspondences with stated
+    deviations), §4.5 (HK literature appearance unrecognized for
+    nineteen years), §5 (DESI BAO residuals at the 1/2500 scale),
+    and §6.4 (six tower near-pivots with quantified deviations) are
+    Level 2.
 
-    Level 3 (Observation): Patterns that are interesting but require
-    further verification or have alternative explanations. No Level 3
-    evidence is included in this document.
+    Level 3 — Conjectural [Conjecture]: Patterns that are explicitly
+    unproved and motivated by partial evidence. No Level 3 claims
+    appear in this document; structural conjectures (HK packing ↔
+    O(N) resummation, V_max = K in quantum optics, H-series polytope)
+    live in their own dedicated documents where their Level 3 status
+    is the subject of explicit promotion criteria.
 
-These levels are not conflated. Exact identities and observational
-patterns carry different evidential weight and are presented separately.
+These levels are not conflated. Exact identities, empirical matches,
+and conjectural patterns carry different evidential weight and are
+presented separately. The labels above match the canonical methodology
+taxonomy used across the framework's other documents; this is a
+definitional alignment and does not change the scope, honesty, or
+calculations of this document.
 
 
 ════════════════════════════════════════════════════════════════════════════════
@@ -1241,3 +1388,4 @@ Full framework, reading order, and interactive tools:
 END OF DOCUMENT
 Draft version — March 2026
 ================================================================================
+
