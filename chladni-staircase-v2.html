@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Geometric Staircase v2 — Chladni Frequency Explorer</title>
+<title>Geometric Staircase v3 — Biharmonic Chladni Frequency Explorer</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { background: #08080f; color: #dde; font-family: 'Georgia', serif; }
@@ -22,9 +22,13 @@
 const { useState, useEffect, useMemo, useCallback, useRef } = React;
 
 // ═══════════════════════════════════════════════════════════════
-// GEOMETRIC STAIRCASE v2
-// Merged: Claude's multi-mode comparison + Grok's sound & primes
-// Bee × Claude × Grok, February 2026
+// GEOMETRIC STAIRCASE v3 — REAL CHLADNI (biharmonic plate)
+// Built on v2 (Bee × Claude × Grok, Feb 2026) by replacing the
+// membrane physics with the biharmonic plate equation:
+//   ∇⁴W = (ρh/D)·ω²·W,   free-edge boundary conditions.
+// Mode shapes: Ritz product of free-free beam eigenfunctions.
+// Frequency scaling: ω ∝ √(α_m⁴ + α_n⁴), not √(m² + n²).
+// Bee × Cowork-Claude, May 2026.
 // ═══════════════════════════════════════════════════════════════
 
 const GRID = 96;
@@ -79,6 +83,57 @@ const TOWER_LM = [
 ];
 
 const MODES = [];
+
+// ═══════════════════════════════════════════════════════════════
+// FREE-FREE BEAM EIGENVALUES α_m
+// Solutions of cos(α)·cosh(α) = 1 (free-free Euler-Bernoulli beam)
+// These set the spatial wavenumbers for the plate-mode Ritz basis.
+// ═══════════════════════════════════════════════════════════════
+const PLATE_ALPHA = [
+  4.7300407448627040,    // m=1 — first flexural mode
+  7.8532046240958376,    // m=2
+  10.9956078380016710,   // m=3
+  14.1371654912574641,   // m=4
+  17.2787596573994814,   // m=5
+  20.4203522456260610,   // m=6
+  23.5619449019234492,   // m=7
+  26.7035375555538403,   // m=8
+];
+
+// σ_m = (cosh α − cos α) / (sinh α − sin α)  — coupling factor
+const PLATE_SIGMA = PLATE_ALPHA.map(a =>
+  (Math.cosh(a) - Math.cos(a)) / (Math.sinh(a) - Math.sin(a))
+);
+
+// Free-free beam mode shape on x ∈ [0,1]:
+//   φ_m(x) = cos(αx) + cosh(αx) − σ·(sin(αx) + sinh(αx))
+// Returns the raw amplitude; pattern accumulator handles sign/normalisation.
+function beamMode(x, m) {
+  const a = PLATE_ALPHA[m-1];
+  const s = PLATE_SIGMA[m-1];
+  const ax = a * x;
+  return Math.cos(ax) + Math.cosh(ax) - s * (Math.sin(ax) + Math.sinh(ax));
+}
+
+// Plate mode (Ritz approx for free square plate):
+//   W_mn(x,y) = φ_m(x)·φ_n(y)  +  (symmetrised partner if m ≠ n)
+function plateMode(x, y, m, n) {
+  const Xm = beamMode(x, m);
+  const Yn = beamMode(y, n);
+  if (m === n) return Xm * Yn;
+  const Xn = beamMode(x, n);
+  const Ym = beamMode(y, m);
+  return Xm * Yn + Xn * Ym;
+}
+
+// Plate-mode eigenvalue (ω² scaling) — α_m⁴ + α_n⁴ to leading order
+function plateEigen(m, n) {
+  const am = PLATE_ALPHA[m-1];
+  const an = PLATE_ALPHA[n-1];
+  return am*am*am*am + an*an*an*an;
+}
+
+const MAX_MODE = PLATE_ALPHA.length;  // 8 in each direction → 64 modes total
 for (let m = 1; m <= 7; m++) {
   for (let nn = m; nn <= 7; nn++) {
     MODES.push({ m, n: nn, freq: m * m + nn * nn, label: `(${m},${nn})` });
@@ -114,26 +169,55 @@ function primeLimit(step) {
 }
 
 function computePattern(refM, refN, freqRatio, Q) {
-  const targetFreq = (refM * refM + refN * refN) * freqRatio;
+  // Reference eigenvalue (α_refM⁴ + α_refN⁴) and target eigenvalue scaled by ratio.
+  // For biharmonic plates ω² ∝ eigenvalue, so freqRatio acts on eigenvalue space
+  // the same way it did on (m²+n²) for membranes — preserves UI semantics from v2.
+  const refEigen = plateEigen(refM, refN);
+  const targetEigen = refEigen * freqRatio;
   const pixels = new Float32Array(GRID * GRID);
   let maxVal = 0;
 
-  for (let mMode = 1; mMode <= 10; mMode++) {
-    for (let nMode = 1; nMode <= 10; nMode++) {
-      const modeFreq = mMode * mMode + nMode * nMode;
-      const delta = (targetFreq - modeFreq) / modeFreq;
+  // Cache beam-mode lookup tables per (mode, ix) — much faster than recomputing
+  const beamX = [];
+  const beamY = [];
+  for (let m = 1; m <= MAX_MODE; m++) {
+    const rowX = new Float64Array(GRID);
+    const rowY = new Float64Array(GRID);
+    for (let i = 0; i < GRID; i++) {
+      const u = (i + 0.5) / GRID;
+      rowX[i] = beamMode(u, m);
+      rowY[i] = rowX[i];  // square plate — same in both directions
+    }
+    beamX.push(rowX);
+    beamY.push(rowY);
+  }
+
+  for (let mMode = 1; mMode <= MAX_MODE; mMode++) {
+    for (let nMode = 1; nMode <= MAX_MODE; nMode++) {
+      const modeEigen = plateEigen(mMode, nMode);
+      const delta = (targetEigen - modeEigen) / modeEigen;
       const weight = 1.0 / (1.0 + (delta * Q) * (delta * Q));
       if (weight < 0.004) continue;
 
-      for (let iy = 0; iy < GRID; iy++) {
-        const y = (iy + 0.5) / GRID;
-        const sinMY = Math.sin(Math.PI * mMode * y);
-        const sinNY = Math.sin(Math.PI * nMode * y);
-        for (let ix = 0; ix < GRID; ix++) {
-          const x = (ix + 0.5) / GRID;
-          const sinMX = Math.sin(Math.PI * mMode * x);
-          const sinNX = Math.sin(Math.PI * nMode * x);
-          pixels[iy * GRID + ix] += weight * (sinMX * sinNY + sinNX * sinMY);
+      const Xm = beamX[mMode - 1];
+      const Yn = beamY[nMode - 1];
+
+      if (mMode === nMode) {
+        for (let iy = 0; iy < GRID; iy++) {
+          const yv = Yn[iy];
+          for (let ix = 0; ix < GRID; ix++) {
+            pixels[iy * GRID + ix] += weight * Xm[ix] * yv;
+          }
+        }
+      } else {
+        const Xn = beamX[nMode - 1];
+        const Ym = beamY[mMode - 1];
+        for (let iy = 0; iy < GRID; iy++) {
+          const Yn_y = Yn[iy];
+          const Ym_y = Ym[iy];
+          for (let ix = 0; ix < GRID; ix++) {
+            pixels[iy * GRID + ix] += weight * (Xm[ix] * Yn_y + Xn[ix] * Ym_y);
+          }
         }
       }
     }
@@ -1077,5 +1161,4 @@ ReactDOM.createRoot(document.getElementById("root")).render(<ChladniStaircase />
 </script>
 </body>
 </html>
-
 
