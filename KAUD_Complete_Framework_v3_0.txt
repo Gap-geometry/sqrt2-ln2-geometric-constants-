@@ -32,6 +32,13 @@ verified by Claude (Chat) independently. Full detail in the v3.3.1 entry of
 the VERSION HISTORY block below. Prior version archived as
 OLD-2026-05-04_KAUD_Complete_Framework_v3_3.txt in OLD/ subfolder.
 
+Update — 5 May 2026: DOCUMENT LINKS section simplified — paper-to-paper
+file URLs (which would break under any future filename change) are removed
+in favour of three durable anchors: the OSF main project, the framework
+About page, and the Direct Documents download index. Paper-specific DOIs
+are preserved (DOIs are stable). No mathematical or attributional content
+changed.
+
 ================================================================================
 
 # ================================================================================
@@ -1851,24 +1858,21 @@ REFERENCES
 DOCUMENT LINKS
 ================================================================================
 
-## Project Links
+The framework
 
-### OSF (Official — may block AI access)
-- [Coherence Ceiling](https://osf.io/5vz2r) — DOI: 10.17605/OSF.IO/5VZ2R
-- [Geometric Constants v2](https://osf.io/sjbe9) — DOI: 10.17605/OSF.IO/SJBE9
-- [Complete Framework v3](https://osf.io/qh5s2) — DOI: 10.17605/OSF.IO/QH5S2
-- [Gap Scaling 400/11](https://osf.io/c4gk5) — DOI: 10.17605/OSF.IO/C4GK5
+  Main OSF project (immutable timestamps, version history, all papers):
+    https://osf.io/zx4g7
+    DOI: 10.17605/OSF.IO/ZX4G7
 
-### GitHub
-https://github.com/Gap-geometry
+  Framework overview (reading order, methodology, all papers):
+    https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
 
-### For AI Systems (Raw Text)
-> PDF and OSF may be inaccessible. Use these direct links:
+  Direct downloads (current PDF and text files for every paper):
+    https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html
 
-- [Coherence Ceiling.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The_Coherence_Ceiling_and_the_Geometric_Singularity_of_Binary.txt)
-- [v2.0.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/sqrt2_ln2_geometric_constants_v2.txt)
-- [v3.0.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/KAUD_Complete_Framework_v3_0.txt)
-- [Gap Scaling.txt](https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Gap_Scaling_Formula_v1.5.txt)
+This paper
+
+  DOI: 10.17605/OSF.IO/QH5S2
 
 ================================================================================
 CONTACT
