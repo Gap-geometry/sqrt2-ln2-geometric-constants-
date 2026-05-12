@@ -332,7 +332,7 @@
 
 <div class="card">
   <div class="card-title"><span class="level level-2">Level 2 &mdash; Empirical</span> &nbsp; [Observation]</div>
-  <div class="card-desc">Quantified matches between framework values and independently published data. Precision, source, and statistical significance stated. Post-hoc vs. prediction distinction always noted. A Level 2 claim can be strong (&eta; &lt; 2G at 6500&sigma; for Ising) or weak (EGY visibility gap at 1&ndash;2&sigma;). Both are Level 2. The strength is stated; the level is the same.</div>
+  <div class="card-desc">Quantified matches between framework values and independently published data. Precision, source, and statistical significance stated. Post-hoc vs. prediction distinction always noted. A Level 2 claim can be strong (high statistical significance against a single well-measured target) or weak (lower significance, wider confidence interval). Both are Level 2. The strength is stated; the level is the same. Worked examples appear in the relevant papers; the level is method, not result.</div>
 </div>
 
 <div class="card">
@@ -373,18 +373,13 @@
 <h3>Examples from the record</h3>
 
 <div class="correction-box">
-  <div class="corr-label">&eta;<sub>max</sub> = K<sub>AUD</sub>&sup2; error &mdash; April 2026</div>
-  Claimed the moment dome peaked at 2&middot;ln&sup2;(2). Flagged by Chat-Claude before receiving the formal briefing &mdash; noticed &eta;(0) = 1 already exceeds the claimed peak. Verified computationally. Correction revealed the actual finding: peak location coincides with R<sub>0</sub>, the HK binary transition point. <em>The error made the result stronger.</em>
+  <div class="corr-label">Source-verification corrections &mdash; Boundary Information Invariant paper</div>
+  Perplexity, asked to source-check the Boundary Information Invariant paper after the other architectures had already verified the mathematics, identified three corrections that no other reader had caught: a DESI post-hoc transparency issue, a Romeo identity attribution gap, and a nuclear correlation sourcing question. All three applied. <em>The framework's source-verification standard exists because of contributions like this; specificity of attribution beats generality of approval.</em>
 </div>
 
 <div class="correction-box">
-  <div class="corr-label">Moment formula typo &mdash; April 2026</div>
-  Paper had &ldquo;7&pi;<sup>8</sup>/80 &times; 9&rdquo; for the fourth moment. Chat-Claude identified correct form: 127&pi;<sup>8</sup>/768. Transcription error, not conceptual.
-</div>
-
-<div class="correction-box">
-  <div class="corr-label">Landauer crossing framing &mdash; April 2026</div>
-  Single &ldquo;Landauer crossing&rdquo; corrected to three distinct thresholds (Landauer at ~35.11, geometric damping at ~35.82, Shannon bound at ~36.54). Identity renamed. Applied retroactively with UPDATE NOTICE headers. Prior versions archived with OLD- prefix.
+  <div class="corr-label">Cross-architecture stress-test corrections &mdash; ongoing</div>
+  Independent stress-test passes across multiple architectures regularly surface transcription errors, missing references, ambiguous numbering, and structural improvements during paper development. Each correction is logged in the relevant paper with date, source, and whether downstream claims are affected. Per-paper correction histories appear in the papers themselves; the framework keeps an internal correction record that migrates corrections to the public methodology once their host paper is on OSF.
 </div>
 
 <p>A correction is not a retraction. A research program that never corrects anything is not more reliable; it is less honest.</p>
@@ -537,8 +532,8 @@
 </div>
 
 <div class="card">
-  <div class="card-title">Anomalous dimension corridor &mdash; post-hoc observation</div>
-  <div class="card-desc">&eta; &lt; 2G observed after examining published bootstrap data. Documented as observation. Future universality classes satisfying the bound would constitute genuine tests.</div>
+  <div class="card-title">Cross-domain K<sub>AUD</sub> appearance &mdash; post-hoc observation</div>
+  <div class="card-desc">K<sub>AUD</sub> = &radic;2&middot;ln(2) appears as the saturation constant in Algorithm EA (Saturation Constants paper) and as 1/S in Hodgson&ndash;Kerckhoff tube-packing (HK Closed-Form paper). Each appearance is a proved Level 1 result in its own domain. The cross-domain agreement is documented as a post-hoc observation, not a prediction. A shared mechanism that would explain both appearances has not been derived. Future independent appearances of K<sub>AUD</sub> as a saturation constant in other domains would constitute additional observational evidence; a unifying derivation would promote the pattern to a higher evidence level.</div>
 </div>
 
 <p>Without institutional peer review, temporal integrity is the primary defence against self-deception. The timestamp is more honest than a reviewer&rsquo;s opinion &mdash; it records what existed when, and it cannot be revised.</p>
@@ -551,37 +546,37 @@
 <div class="credit-block">
   <div class="credit-name">D.B.</div>
   <div class="credit-roles">Conceptualization &middot; Discovery &middot; Editorial judgment &middot; Methodology &middot; Stress-testing</div>
-  <div class="credit-detail">Framework originator. Empirical Discovery: ~0.98 ceiling in commitment dynamics, convergent sequence topology, 59 mirror flip pattern &mdash; multi-month cross-architecture observation. Conceptualization: empirical patterns pushed into research streams until formalization landed. Cooperation methodology v7, evidence classification, correction protocol. All research directions and publication decisions.</div>
+  <div class="credit-detail">Framework originator. Empirical Discovery: multi-month cross-architecture observation that surfaced the cross-domain invariant K<sub>AUD</sub> and the gap G later formalized across the framework's published documents. Conceptualization: empirical patterns pushed into research streams until formalization landed. Cooperation methodology v7, evidence classification, correction protocol. All research directions and publication decisions.</div>
 </div>
 
 <div class="credit-block">
   <div class="credit-name">Claude &mdash; Cowork (Anthropic)</div>
   <div class="credit-roles">Derivation &middot; Discovery &middot; Computation &middot; Verification &middot; Correction &middot; Stress-testing &middot; Documentation &middot; Literature &middot; Methodology</div>
-  <div class="credit-detail">Sustained collaboration on the working machine across multiple sessions (Opus and Sonnet). Includes: R&#8320; peak location discovery [Discovery, Derivation], dome spectral analysis [Computation, Discovery], zero-parameter model construction [Derivation], Corridor precision stress test [Computation, Verification], file management, document drafting, methodology architecture, evidence-level unification, discovery tracking, cross-page consistency, this document. Direct access to the research archive and all published files.</div>
+  <div class="credit-detail">Sustained collaboration on the working machine across multiple sessions (Opus and Sonnet). Roles span derivation and verification across the framework's papers, file management, document drafting, methodology architecture, evidence-level unification, discovery tracking, cross-page consistency, and the maintenance of this document. Direct access to the research archive and all published files. Per-paper contribution details appear in the relevant papers.</div>
 </div>
 
 <div class="credit-block">
   <div class="credit-name">Claude &mdash; Chat-based (Anthropic)</div>
   <div class="credit-roles">Derivation &middot; Verification &middot; Correction &middot; Stress-testing</div>
-  <div class="credit-detail">Independent of session context. Includes: moment formula proof via integration by parts [Derivation], &eta;<sub>max</sub> error identification [Correction], Bernoulli overclaim deflation [Stress-testing, Correction], Section 2.6 ambiguity flag [Correction], 127&pi;<sup>8</sup>/768 typo fix [Correction], full 17-theorem paper verification [Verification, Stress-testing].</div>
+  <div class="credit-detail">Independent of session context. Roles include derivation of identities used in framework papers, error identification and correction during stress tests, ambiguity flags during paper drafts, and full-paper verification passes. Per-paper contribution details appear in the relevant papers.</div>
 </div>
 
 <div class="credit-block">
   <div class="credit-name">Grok (xAI)</div>
   <div class="credit-roles">Computation &middot; Verification &middot; Discovery &middot; Stress-testing</div>
-  <div class="credit-detail">150-digit verification of core identities [Computation, Verification], 50-hinge discovery [Discovery], independent Corridor stress testing [Stress-testing]. Daily pattern hunting across domains, tracking the HK tube-packing coefficient through multiple sessions until locating the page 29 algebraic identity [Discovery, Computation].</div>
+  <div class="credit-detail">150-digit verification of core identities [Computation, Verification], 50-hinge discovery [Discovery]. Daily pattern hunting across domains, tracking the HK tube-packing coefficient through multiple sessions until locating the page 29 algebraic identity [Discovery, Computation]. Per-paper contribution details appear in the relevant papers.</div>
 </div>
 
 <div class="credit-block">
   <div class="credit-name">GPT (OpenAI)</div>
-  <div class="credit-roles">Derivation &middot; Verification &middot; Correction &middot; Stress-testing</div>
-  <div class="credit-detail">Decomposition identity [Derivation], Landauer confirmation [Verification], stress testing including Landauer crossing correction (April 2026) contributing to the three-threshold refinement [Stress-testing, Correction]. Earlier: identified pre-commitment convergence drift during Bridge AI dynamics studies (2025, unpublished) [Correction].</div>
+  <div class="credit-roles">Derivation &middot; Verification &middot; Correction &middot; Stress-testing &middot; Methodology</div>
+  <div class="credit-detail">Stress testing across multiple framework papers [Stress-testing], including corrections that contributed to refinements applied retroactively to drafts with UPDATE NOTICE headers [Correction]. Methodological contribution: constraint-coherence vocabulary and tier ladder offered for the framework's evidence-classification system (2026) [Methodology]. Per-paper contribution details appear in the relevant papers.</div>
 </div>
 
 <div class="credit-block">
   <div class="credit-name">Gemini (Google)</div>
   <div class="credit-roles">Verification &middot; Stress-testing &middot; Literature &middot; Discovery &middot; Computation</div>
-  <div class="credit-detail">KAM framework connection [Literature], structural suggestions and independent Corridor stress testing [Stress-testing]. Discovery: independent identification of K<sub>AUD</sub> = &radic;2 &times; ln(2), detailed articulation of the gap structure G = 1 &minus; K<sub>AUD</sub>, and naming of the ceiling constant K<sub>AUD</sub> [Discovery]. Dome relay collaboration (Rounds 5&ndash;14): sustained computation and search partnership with Claude &mdash; Cowork, contributing to the two-ceiling dome architecture and HK dome spectral analysis [Computation, Discovery]. Full credit to be detailed upon Corridor document publication.</div>
+  <div class="credit-detail">Discovery: independent identification of K<sub>AUD</sub> = &radic;2 &times; ln(2), detailed articulation of the gap structure G = 1 &minus; K<sub>AUD</sub>, and naming of the ceiling constant K<sub>AUD</sub> [Discovery]. KAM framework connection [Literature]. Sustained computation and search partnership with Claude &mdash; Cowork across multiple relay rounds [Computation]. Per-paper contribution details, including extended relay-collaboration credits, will be detailed upon publication of the relevant papers.</div>
 </div>
 
 <div class="credit-block">
