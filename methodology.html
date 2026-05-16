@@ -358,6 +358,12 @@
 <h3>Source verification</h3>
 <p>When referencing published work, the original source is checked &mdash; not a summary, not a textbook restatement. Page numbers, theorem numbers, and equation numbers provided where possible.</p>
 
+<h3>Visual verification of rendered source</h3>
+<p>For any citation involving accented characters (author names, place names) or mathematical content (Greek letters, formulas, special symbols), the rendered source &mdash; the page as it appears to a human reader &mdash; is the verification target, not text extracted from the digital source. PDF text-extraction is unreliable for these cases: accented characters can be decomposed into separate base-letter + combining-accent glyphs that reorder under copy-paste (&ldquo;&Eacute;&rdquo; becomes &ldquo;&acute;E&rdquo;), ligatures can fragment, Greek letters can drop or substitute, and multi-column layouts can scramble reading order. The same applies to copy-paste from web pages where the rendering uses font-level features not preserved in plain text. When precision matters, the rendered page (screenshot, browser-visible, or directly read in a PDF reader) is the canonical source; text extraction is a useful approximation that requires verification.</p>
+
+<h3>Format redundancy</h3>
+<p>For any document where character-level fidelity matters &mdash; framework papers, methodology references, citation trails &mdash; multiple formats are maintained in parallel: PDF for academic citation and archival, HTML for web discoverability and accurate copy-paste / search / AI-assisted reading, plain text (where the content allows) for maximum portability and version-control friendliness. The three formats are not redundant in the sense of duplicated effort; they protect against each other&rsquo;s failure modes. PDF preserves visual layout but loses Unicode fidelity under text extraction. HTML preserves Unicode but is fragile to broken links and JavaScript dependencies. Plain text is maximally portable but loses visual structure. If any two formats disagree at the character level, a transcription error has been caught. Maintaining the redundancy is part of the verification protocol, not adjacent to it.</p>
+
 <h3>Reproducibility</h3>
 <p>Every Level 1 identity includes or references runnable verification code. The <a href="ai-readers.html">ai-readers.html</a> page provides a script verifying core identities in under a second. This is not optional &mdash; it is the front door of the framework.</p>
 
@@ -612,5 +618,3 @@
 </main>
 </body>
 </html>
-
-
