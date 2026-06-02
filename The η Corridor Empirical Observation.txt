@@ -1,0 +1,2690 @@
+The η Corridor in 3D Wilson-Fisher Critical Phenomena: Empirical Observation and Structural Architecture
+
+Author: D.B.
+
+Published 2026-06-02 · DOI: 10.17605/OSF.IO/PD73B · OSF: osf.io/pd73b · License: CC BY 4.0
+
+-----------------------------------------------------------------------------------------------
+
+Part I — The Observation
+
+1. Abstract
+
+We report that the anomalous dimension η at d = 3 critical points in the Wilson-Fisher
+fixed-point family — unitary CFTs with positive ν, standard hyperscaling, and a continuous
+finite-T transition — is empirically bounded above by 2G ≈ 0.039484, where G = 1 − √2·ln 2 ≈
+0.019742. The constant K_AUD = √2·ln 2 ≈ 0.980258 is the central constant of an underlying
+framework whose derivation is given elsewhere (Paper 3 V3, DOI: 10.17605/OSF.IO/QH5S2; direct:
+osf.io/qh5s2). Part I of this paper tests the bound empirically; Part II develops the
+dome-centric structural reading.
+
+The bound is tested against ten WF-family universality classes — O(N) for N = 0–4, cubic
+anisotropy at N = 3, 4, MN cubic at N = 2, 3, and randomly dilute Ising — and holds in every
+case, with σ-margins ranging from +2.2σ (randomly dilute Ising, the tightest unitary case) to
++1593σ (3D Ising, conformal bootstrap). Three classes outside WF-family scope have η > 2G but
+are excluded by independent physical structure: RFIM (T = 0 fixed point with modified
+hyperscaling), deconfined SU(2) QCP (pseudo-critical), and disordered Potts large-q
+(disorder-induced second order).
+
+The bound is offered as an observation, not a derived result. The priority falsification target
+is a higher-precision determination of η at d = 3 randomly dilute Ising: a factor-of-three
+improvement would place η = 2G at the edge of measurement.
+
+-----------------------------------------------------------------------------------------------
+
+2. Introduction
+
+Scope of this paper. This paper presents (i) an empirical observation: that the anomalous
+dimension η at d = 3 Wilson-Fisher critical points is bounded above by 2G ≈ 0.039484 across all
+ten universality classes tested; (ii) a mathematical architecture (Part II) — the dome function
+and its algebraic landmarks — that gives the bound a specific structural shape; and (iii) a
+Tier-5 conjecture explicitly flagged as conjectural — the Central Synchronization Conjecture,
+§11, with the framework's six-tier evidence system introduced in §14.4. The paper does not
+claim a derivation of the bound from first principles, a physical mechanism explaining why
+K_AUD appears across multiple domains, a connection to consciousness, gravity,
+electromagnetism, fusion, or any other physical theory not explicitly developed here, or that
+the framework is unique or final. The bound is offered as a falsifiable empirical observation;
+the structural reading is offered as a coherent organization of what the observation invites,
+not as a derivation of what the observation requires. A reader may adopt the empirical
+observation (§§1–8) without committing to the structural reading (Part II); the three reading
+positions in §14.6 make this nesting explicit.
+
+2.1 The anomalous dimension η
+
+In a continuous phase transition the two-point correlation function at the critical point
+decays as a power law
+
+G(r) ~ 1 / r^(d − 2 + η)
+
+where d is the spatial dimension and η is the anomalous dimension, a universal critical
+exponent characterizing the universality class of the transition. The combination 2 − η is the
+effective correlation dimension appearing in Fisher's exact relation γ = ν(2 − η), where γ is
+the susceptibility exponent and ν is the correlation-length exponent. At the upper critical
+dimension d_c = 4 of φ⁴ theory (Wilson 1971; Wilson and Fisher 1972), η vanishes exactly and
+the transition is mean-field. Below d_c the order-parameter fluctuations are strong enough to
+give η a nonzero value; in d = 3 the Wilson-Fisher fixed point produces O(N) universality
+classes whose η values are accurately measured by conformal bootstrap (Chester et al. 2020, Kos
+et al. 2016), Monte Carlo simulation, and ε-expansion resummation.
+
+The set of measured η values at d = 3 is small in number (a few tens of distinct universality
+classes have been characterized at sub-percent precision) and bounded above by values well
+below 0.05. The exact upper bound on η at d = 3 is not known from first principles. No bound
+derivable from current conformal-bootstrap technology, RG theory, or hyperscaling relations
+places η below 0.05.
+
+2.2 The observation
+
+The geometric–informational constant K_AUD = √2 · ln 2 ≈ 0.980258 appears as the central
+constant of a framework whose derivation, motivation, and broader architecture are given in
+Paper 3 V3 (DOI: 10.17605/OSF.IO/QH5S2). The same value appears independently as the threshold
+coefficient a in an upper bound Δ̄(x) ≤ C · exp(a · √(log₂ x)) on the (weighted) average order
+of the Erdős–Hooley Δ-function, due to de la Bretèche and Tenenbaum (arXiv:2210.13897); the
+value √2 · log 2 ≈ 0.980258 is identified there as the threshold coefficient a in that
+exponential factor. The complement G = 1 − K_AUD ≈ 0.019742 plays the role of a gap in the
+framework's architecture.
+
+The doubled gap 2G ≈ 0.039484 is the empirical ceiling on η we report in this paper: across ten
+known WF-family universality classes at d = 3, every measured η is bounded above by 2G. The
+framework's derivation of why K_AUD specifically (and therefore 2G specifically, via Fisher's
+relation γ = ν(2 − η)) might bound η is the open theoretical problem; for the present paper we
+report only the empirical claim. In the language of Fisher's relation the bound is equivalent
+to (2 − η) ≥ 2K_AUD = 2√2 · ln 2 ≈ 1.960516, so the effective correlation dimension of any
+WF-family critical point in 3D is confined to the corridor [2K_AUD, 2] of width 2G.
+
+The paper's contribution is the following:
+
+1.  The bound holds across all WF-family universality classes in d = 3 we have located in the
+    published literature (ten classes: O(N) for N = 0–4, cubic anisotropy at N = 3 and N = 4,
+    MN cubic at N = 2 and N = 3, and randomly dilute Ising). Five of these are non-O(N) classes
+    that were not previously tested in this framing.
+2.  The bound is sharply violated outside WF-family scope — by RFIM, DQCP-SU(2), and disordered
+    Potts large-q — but each excluded class has independent, physics-tier reasons for being
+    outside the bound's scope (T = 0 fixed point, pseudo-criticality, disorder-induced second
+    order). The exclusions are not ad-hoc.
+3.  The bound has a concrete priority falsification target (random-bond Ising at d = 3 at
+    improved precision), and four further falsification routes are listed in §7.
+
+2.3 What this paper is not
+
+This paper is not a derivation. It is an observation, tested against the published
+critical-exponent data. The framework's interpretation of K_AUD as a geometric–informational
+intersection lies behind the choice of K_AUD as the bound-setting constant, but the bound's
+empirical status is independent of whether one accepts the framework's structural reading. A
+reader who accepts the empirical evidence in §5 but rejects the framework's interpretation in
+Paper 3 V3 may still adopt the bound as a numerically interesting observation about WF-family
+3D η values. We are explicit throughout about which claims are observational and which are
+framework-interpretive.
+
+-----------------------------------------------------------------------------------------------
+
+3. The K_AUD architecture (background)
+
+This section briefly summarizes the constants used in this paper; the full derivation is in
+Paper 3 V3.
+
+  Symbol   Value                     Definition
+  -------- ------------------------- ---------------------------------------------------------------------------
+  K_AUD    √2 · ln 2 ≈ 0.980258      Framework constant: √2 (geometric primitive for H₄) × ln 2 (binary unit).
+  G        1 − K_AUD ≈ 0.019742      Framework gap; complement of K_AUD relative to unity.
+  2G       2(1 − K_AUD) ≈ 0.039484   Empirical η ceiling. Algebraically = corridor width 2 − 2K_AUD.
+  2K_AUD   2√2 · ln 2 ≈ 1.960516     Conjectured lower bound on (2 − η); corridor floor.
+
+Note on the "geometric primitive" usage. The √2 in the K_AUD row above is the framework's
+geometric primitive associated with H₄, not the unit-edge 120-cell circumradius (which is
+(√2/2)·√(5+√5) ≈ 1.9021). Paper 3 V3 §3.4 catalogues four origins for the √2 factor in H₄
+geometry; §13.3 of the present paper carries the full convention discussion. The same usage
+applies to "H₃ circumradius" elsewhere in this paper, where φ is the framework's primitive for
+H₃ rather than the unit-edge icosahedron circumradius 0.9511.
+
+The derivation of K_AUD from H₄ polytope geometry and binary distinction is given in:
+
+-   D.B., √2 × ln(2): Geometric Constants from H₄, Complete Framework V3, DOI:
+    10.17605/OSF.IO/QH5S2; OSF: osf.io/qh5s2 (project page serves the current version,
+    currently 3.3.1); GitHub raw text (recommended for AI readers): view raw; framework AI
+    Readers hub: gap-geometry.github.io/sqrt2-ln2-geometric-constants-/ai-readers.html. (The
+    OSF project title carries the original "V3.0" designation; the file content has been
+    updated through version 3.3.1, available at the GitHub raw and OSF current-file links.)
+
+The same numerical value appears independently in analytic number theory:
+
+-   R. de la Bretèche and G. Tenenbaum, "Two upper bounds for the Erdős–Hooley Delta-function"
+    (2022), arXiv:2210.13897. The value √2 · log 2 ≈ 0.980258 appears as the threshold
+    coefficient a in an upper bound Δ̄(x) ≤ C · exp(a · √(log₂ x)) on the (weighted) average
+    order of the Δ-function (exponential-sum / Dirichlet-series saddle-point analysis; not a
+    critical exponent in the renormalization-group sense).
+
+For the present paper, the only fact about K_AUD we use is that it is a specific real constant
+with the numerical value above. The bound η ≤ 2G is reported as an observational claim about
+that numerical value.
+
+-----------------------------------------------------------------------------------------------
+
+4. The Wilson-Fisher family scope criterion
+
+The bound's scope is the set of d = 3 critical points satisfying all four of the following
+criteria:
+
+1.  Unitary CFT. The critical theory is a unitary conformal field theory at the critical point.
+    Anomalous dimensions are real and positive. This excludes non-unitary critical points such
+    as percolation (which has η = −0.0431 by analytic continuation of an underlying non-unitary
+    CFT) and the Lee-Yang edge singularity.
+2.  Positive correlation-length exponent ν. The correlation length diverges at the critical
+    point: ν > 0. This is satisfied at standard second-order transitions and excludes
+    pathologies of correlated-disorder or T = 0 fixed points where ν is not the standard
+    quantity.
+3.  Standard hyperscaling with two independent exponents. The critical exponents satisfy 2 − α
+    = ν · d with the standard Rushbrooke/Fisher/Widom relations, and the universality class is
+    specified by two independent exponents η and ν (all other exponents are derived). This
+    excludes T = 0 disorder fixed points where modified hyperscaling 2 − α = ν · (d − θ)
+    introduces a third independent exponent θ (e.g., random-field Ising).
+4.  Finite-temperature continuous transition. The transition occurs at finite T > 0 and is
+    genuinely second-order (not weakly first-order, pseudo-critical, or with runaway flow).
+    This excludes DQCP-SU(2)-type pseudo-critical transitions and disorder-induced-second-order
+    transitions whose underlying pure transition is first-order.
+
+These four criteria collectively pick out the φ⁴-like universality classes whose physics is the
+dimensional continuation of the Wilson-Fisher fixed point from d = 4 − ε. They are physics-tier
+criteria, established independently of any framework consideration; we adopt them as the scope
+of the bound because (a) they are the natural domain of the WF fixed-point family in standard
+critical-phenomena theory, and (b) the bound holds within this domain across every class tested
+while failing in classes that violate any one of the four criteria.
+
+4.1 Justification of the four criteria as physics-tier (not framework-tier)
+
+Each of the four criteria has independent physical motivation:
+
+-   Unitary CFT: required for a probability interpretation; non-unitary critical points
+    (percolation, Lee-Yang) have negative or complex η, which makes the "η ≤ 2G" comparison
+    structurally different.
+-   Positive ν: required for the correlation length to diverge in the standard sense; T = 0
+    fixed points and certain disorder fixed points have qualitatively different ν-behavior.
+-   Standard hyperscaling: the bound is on (2 − η), the effective correlation dimension;
+    modified hyperscaling at T = 0 fixed points (RFIM) introduces a third exponent θ, changing
+    the structural meaning of (2 − η).
+-   Finite-T second order: pseudo-criticality (DQCP-SU(2)) and disorder-induced second-order
+    behavior of an underlying first-order transition (disordered Potts large-q) are
+    increasingly understood not to be genuine continuous CFTs in the unitary sense.
+
+The bound's scope is therefore narrowed by independent physics, not by ad-hoc framework choice.
+A class that fails any one of the four criteria is outside the bound's claim because its
+critical-phenomena structure is structurally different from the WF family, not because the
+framework wishes to exempt it.
+
+-----------------------------------------------------------------------------------------------
+
+5. Empirical universality survey
+
+We test the bound η ≤ 2G against ten WF-family classes at d = 3, ranging from
+conformal-bootstrap precisions of σ_η ~ 2 × 10⁻⁶ (3D Ising, Kos et al. 2016) and
+propagated-from-pivot-Monte-Carlo σ_η ~ 3 × 10⁻⁶ (SAW, derived from Clisby–Dünweg 2016 ν and
+Clisby 2017 γ via Fisher's relation) down to 4-loop perturbative RG and current Monte Carlo σ_η
+~ 2 × 10⁻³ (random-bond Ising and the MN cubic classes). The table below summarizes the test;
+citations follow the table.
+
+5.1 The ten WF-family classes
+
+  Class                                 η ± σ                   2G − η      σ-margin   Source
+  ------------------------------------- ----------------------- ----------- ---------- -------------------------------------
+  SAW (O(0))                            0.0310434 ± 0.0000030   +0.008441   +2813σ     Clisby 2016 + 2017 (η = 2 − γ/ν)
+  3D Ising (O(1))                       0.0362978 ± 0.0000020   +0.003186   +1593σ     Kos et al. 2016 (CB)
+  3D XY (O(2))                          0.038176 ± 0.000044     +0.001308   +29.7σ     Chester et al. 2020 (CB)
+  3D Heisenberg (O(3))                  0.03810 ± 0.00020       +0.001384   +6.9σ      Kos et al. 2016 (CB)
+  3D O(4)                               0.0365 ± 0.0010         +0.002984   +3.0σ      Monte Carlo
+  Cubic anisotropy N = 3                ≈ η(O(3))               ≈ +0.0014   ≈ +7σ      Hasenbusch 2022
+  Cubic anisotropy N = 4                0.0371 ± 0.0002         +0.002384   +11.9σ     Hasenbusch 2022
+  MN cubic N = 2                        0.0343 ± 0.0020         +0.005184   +2.6σ      Mudrov–Varnashev 2001
+  MN cubic N = 3                        0.0345 ± 0.0015         +0.004984   +3.3σ      Mudrov–Varnashev 2001
+  Random-bond Ising (randomly dilute)   0.035 ± 0.002           +0.004484   +2.2σ      CMM-PV 2003; Hasenbusch et al. 2007
+
+All ten classes satisfy η < 2G. No class measured to date violates the bound. The σ-margins
+span four orders of magnitude, from the +2.2σ tightness at randomly dilute Ising (the priority
+falsification-risk target identified in §7) to the +2813σ slack at SAW (derived from
+Clisby–Dünweg 2016 and Clisby 2017 pivot Monte Carlo via Fisher's relation η = 2 − γ/ν) and the
++1593σ slack at 3D Ising (Kos et al. 2016 conformal bootstrap), where the bound is far from the
+data even at the highest currently-available precision.
+
+Note on the SAW derivation chain. The 3D SAW η value used in the table above is derived from
+two independent high-precision measurements via Fisher's relation η = 2 − γ/ν: ν =
+0.58759700(40) from Clisby–Dünweg 2016 (pivot-algorithm Monte Carlo on chains up to N ≈ 3.4 ×
+10⁷ monomers) and γ = 1.15695300(95) from Clisby 2017 (scale-free pivot Monte Carlo). The
+derivation yields η = 0.0310434(21) with σ_η propagated from σ_γ and σ_ν. The σ_η = 0.0000030
+quoted in the table above is mildly conservative relative to rigorous propagation (σ_η ≈ 2.1 ×
+10⁻⁶ via standard error propagation, a factor 1.4× tighter than the conservative value used);
+the +2813σ margin is correspondingly conservative.
+
+5.2 The tightest unitary WF-family case: random-bond Ising — worked example
+
+Because random-bond Ising is the priority falsification-risk target, we walk through the case
+in full so a skeptical reader can evaluate the bound's empirical position without further
+reference work.
+
+(a) Definition. The randomly dilute (random-bond) Ising model in d = 3 is the standard Ising
+Hamiltonian H = −Σ J_ij s_i s_j with quenched random bonds J_ij. Two equivalent realizations
+are studied: site-dilution (random fraction of spins replaced by vacancies) and bond-dilution
+(random fraction of bonds with J_ij = 0). Both flow to the same fixed point in d = 3,
+characterized by the disordered Ising universality class, distinct from both pure Ising and
+random-field Ising. The transition is at finite temperature T_c > 0 and is genuinely
+second-order under quenched disorder.
+
+(b) WF-family scope verification.
+
+1.  Unitary CFT: The disordered Ising fixed point in d = 3 is a unitary CFT (anomalous
+    dimensions are real and positive; the operator content is well-defined). Confirmed by
+    perturbative-RG convergence in the literature and by Monte Carlo agreement
+    (Calabrese–Martin-Mayor–Pelissetto–Vicari 2003) with the bootstrap-style expectations.
+2.  Positive ν: ν = 0.683(2) (Hasenbusch et al. 2007), well-defined and positive.
+3.  Standard hyperscaling: The class satisfies standard hyperscaling 2 − α = ν · d with two
+    independent exponents. There is no third exponent θ (in contrast with RFIM); the
+    universality class is fully characterized by (η, ν). This is the criterion that
+    distinguishes randomly dilute Ising from RFIM, even though both involve disordered Ising
+    spins.
+4.  Finite-T second-order transition: T_c > 0; transition is genuinely second-order under
+    quenched bond/site disorder.
+
+All four WF-family criteria are satisfied. The class is squarely within the bound's scope.
+
+(c) Measurement source. The current best η for d = 3 randomly dilute Ising:
+
+-   Hasenbusch, Parisen Toldin, Pelissetto, and Vicari, Universality class of three-dimensional
+    site-diluted and bond-diluted Ising systems, arXiv:cond-mat/0611707 (2007): high-precision
+    Monte Carlo simulations, finding η ≈ 0.036(1) for site-dilution and consistent values for
+    bond-dilution.
+-   Calabrese, Martin-Mayor, Pelissetto, and Vicari, The three-dimensional randomly dilute
+    Ising model: Monte Carlo results, Phys. Rev. E 68, 036136 (2003), arXiv:cond-mat/0306272:
+    high-statistics Monte Carlo on cubic lattices L³ with L ≤ 256 at density x = 0.8, giving η
+    = 0.035(2), ν = 0.683(3).
+
+The consensus value, weighted by the methods' mutual consistency, is η = 0.035 ± 0.002 — a
+slight conservative widening of the Hasenbusch et al. σ to accommodate the Monte Carlo spread
+between the two independent studies (Calabrese et al. 2003 at η = 0.035(2); Hasenbusch et al.
+2007 at η = 0.036(1)).
+
+(d) Numerical comparison to 2G.
+
+-   η = 0.035 ± 0.002
+-   2G = 0.039484
+-   2G − η = 0.004484
+-   σ-margin = 0.004484 / 0.002 = +2.24σ
+
+The bound η ≤ 2G is satisfied at +2.2σ (or +2.24σ to two decimals). This is the smallest
+σ-margin among all ten WF-family classes tested.
+
+(e) What a higher-precision measurement would test.
+
+A factor-of-three precision improvement (σ_η ≈ 0.0007, achievable with a next-generation Monte
+Carlo simulation at improved lattice sizes and statistics) would have two possible outcomes:
+
+-   If the central η stays near 0.035: the σ-margin becomes (0.004484 / 0.0007) ≈ +6.4σ. The
+    bound becomes well-supported at the random-bond Ising case.
+-   If the central η drifts upward toward 2G: a central value of, say, η = 0.038 with σ_η =
+    0.0007 would place 2G at +2.1σ above η — still satisfied, but the +6σ margin is no longer
+    there.
+-   If the central η crosses 2G: η ≥ 0.039484 with σ_η = 0.0007 would be a 3σ-or-better
+    violation of the bound, satisfying the falsification commitment of §7.5.
+
+The random-bond Ising case is therefore the single sharpest experimental test of the
+framework's empirical prediction available with foreseeable technology.
+
+5.3 The 3D Ising case: 1593σ below 2G
+
+The 3D Ising universality class is the tightest η measurement in the entire critical-phenomena
+literature, with conformal-bootstrap precision σ_η ≈ 2 × 10⁻⁶ (Kos et al. 2016). At this
+precision, the bound η ≤ 2G is satisfied at 1593σ — meaning the bound has 1593 standard
+deviations of margin in the most precisely measured WF-family case. This makes 3D Ising the
+least useful case for falsifying the bound and the most useful case for confirming that the
+bound is not at the edge of measurement.
+
+5.4 The σ-margin ranking
+
+  Rank   Class                    σ-margin to 2G
+  ------ ------------------------ ----------------
+  1      Random-bond Ising        +2.2σ
+  2      MN cubic N = 2           +2.6σ
+  3      O(4)                     +3.0σ
+  4      MN cubic N = 3           +3.3σ
+  5      Heisenberg (O(3))        +6.9σ
+  6      Cubic anisotropy N = 3   ≈ +7σ
+  7      Cubic anisotropy N = 4   +11.9σ
+  8      XY (O(2))                +29.7σ
+  9      3D Ising                 +1593σ
+  10     SAW (O(0))               +2813σ
+
+The top of the ranking (random-bond Ising at +2.2σ) is where future precision improvements
+would most quickly test the bound. The bottom (SAW at +2813σ and 3D Ising at +1593σ)
+establishes that the bound is genuinely above the data at the highest precisions currently
+available — far above, not a borderline match. SAW's apparent looseness in earlier
+framework-internal discussion was an artifact of the older σ ≈ 0.003 Monte Carlo/consensus
+precision; with Clisby–Dünweg 2016's ν = 0.58759700(40) and Clisby 2017's γ = 1.15695300(95)
+propagated via Fisher's relation, σ_η ≈ 3 × 10⁻⁶ (mildly conservative relative to the ≈ 2.1 ×
+10⁻⁶ from rigorous propagation), and SAW becomes one of the two highest-precision
+bounds-confirming cases.
+
+5.5 Null returns honestly recorded
+
+The following WF-family-relevant classes lack rigorous η values at the precision needed for
+this test, and we record them as open empirical-measurement targets rather than as evidence:
+
+-   3D lattice gauge theories with clean global-symmetry continuous transitions (no rigorous η
+    values located at comparable precision).
+-   O(N) with N ∈ {5, 6, 7, ...} (1/N expansion estimates exist but at insufficient precision
+    for sub-σ testing of η = 2G).
+-   Cubic anisotropy at N ≥ 5 (no high-precision data located).
+-   MN cubic at N ≥ 4 (no high-precision data located).
+-   CP^(N − 1) models at d = 3 large N (no η at comparable precision).
+-   WZW / σ-model fixed points at d = 3 (no η at sub-percent precision).
+
+These remain open. The bound is not claimed to be tested against these classes; its scope of
+test is the ten classes above.
+
+-----------------------------------------------------------------------------------------------
+
+6. Classes outside WF-family scope
+
+Three classes are known to have η > 2G at d = 3 and would, if treated naively as
+counter-examples, falsify the bound. Each is outside the WF-family scope for independent
+physics reasons — reasons that predate and are independent of the framework, and that would be
+the right scope-boundary even in the absence of any framework consideration.
+
+6.1 Random-Field Ising Model (RFIM) at d = 3
+
+  Quantity                                      Value    Bound comparison
+  --------------------------------------------- -------- ------------------
+  η (Monte Carlo, Rieger 1995 and follow-ups)   ≈ 0.5    12× above 2G
+  η (experiment, Belanger and collaborators)    ≈ 0.16   4× above 2G
+
+Exclusion reason (criterion 3 violated): RFIM is governed by a T = 0 fixed point with strong
+quenched disorder. The transition obeys modified hyperscaling 2 − α = ν · (d − θ), where θ is a
+third independent exponent characterizing the dimensional reduction d → d − θ associated with
+supersymmetry restoration in the dimensional-reduction picture (Fytas–Martín-Mayor 2017, 2019).
+The presence of θ means RFIM critical phenomena are specified by three independent exponents
+(η, ν, θ), not two. The structural meaning of (2 − η) at RFIM is therefore different from its
+meaning at WF-family critical points; the bound's framing in terms of (2 − η) is not the right
+framing for RFIM.
+
+RFIM is not a counter-example to the bound; it is outside the bound's scope.
+
+6.2 Deconfined SU(2) Quantum Critical Point (J-Q model)
+
+  Quantity                      Value    Bound comparison
+  ----------------------------- -------- ------------------
+  η (Sandvik 2007, J-Q model)   ≈ 0.26   6.6× above 2G
+
+Exclusion reason (criterion 4 violated): Recent consensus (Nahum et al. 2015; Wang et al. 2017;
+Song et al. 2025, arXiv:2307.02547) increasingly favors the interpretation that the SU(2)
+deconfined critical point is pseudo-critical or weakly first-order, with runaway RG flow and a
+complex CFT in its description. Under this interpretation it is not a genuine continuous CFT in
+the unitary sense; the measured "η" is an effective scaling exponent that diverges in the
+thermodynamic limit but does not correspond to the operator dimension of a unitary CFT at the
+transition.
+
+DQCP-SU(2) is not a counter-example to the bound; it is outside the bound's scope because
+criterion 4 (genuine continuous CFT) is violated.
+
+6.3 Disordered Potts at large q
+
+  Quantity                                      Value    Bound comparison
+  --------------------------------------------- -------- ------------------
+  η (derived from 2β/ν − 1, Chatelain et al.)   ≈ 0.20   5× above 2G
+
+Exclusion reason (criterion 4 violated): Pure Potts at large q in d = 3 is first-order.
+Quenched bond disorder rounds the transition to second-order (Imry–Wortis / Aizenman–Wehr
+theorem). The resulting "second-order" critical point is disorder-induced and the validity of
+standard hyperscaling at such disorder-induced-second-order points is debated. The transition
+is not a φ⁴-type WF fixed-point critical point in the standard sense.
+
+A second-tier caveat on the η value itself. The η ≈ 0.20 figure above is not a direct
+measurement; it is inferred via the hyperscaling-style relation η = 2β/ν − 1 from a measured
+β/ν ≈ 0.60. The inference assumes standard hyperscaling — exactly the assumption that criterion
+3 of WF-family scope places under question for disordered-second-order points. So even if the
+inferred η ≈ 0.20 were a valid characterization of the class, the class cannot function as a
+true counter-example to the bound: either the hyperscaling assumption holds (and the class
+fails criterion 4 because the transition is disorder-induced from a first-order pure
+transition) or hyperscaling fails (and the η inference itself is invalid). Both readings place
+the class outside the bound's scope without making it a falsifying case.
+
+Disordered Potts large-q is not a counter-example to the bound; it is outside the bound's
+scope.
+
+6.4 The structural symmetry of the survey
+
+The bound's scope is sharpened, not weakened, by the exclusion of these three classes. The
+exclusion is physics-tier (T = 0 fixed point, pseudo-criticality, disorder-induced second
+order) and would be the right scope-boundary even if the framework did not exist. The
+combination is striking:
+
+-   Every class satisfying the four WF-family criteria has η < 2G (ten cases, range from +2.2σ
+    at randomly dilute Ising to +2813σ at SAW).
+-   Every class with η > 2G that we have located in the literature violates at least one of the
+    four criteria.
+
+This is the empirical heart of the paper: the bound and the scope criterion are mutually
+consistent across the published data.
+
+-----------------------------------------------------------------------------------------------
+
+7. Predictions and falsifiability
+
+The bound makes the following predictions that can be tested by future measurements:
+
+7.1 Priority falsification target: random-bond Ising at improved precision
+
+A higher-precision determination of η for the d = 3 randomly dilute (random-bond) Ising
+universality class — by either:
+
+-   A conformal-bootstrap calculation reaching σ_η ≈ 0.0007 (factor-3 improvement over current
+    Monte Carlo),
+-   A large-scale Monte Carlo simulation at improved system sizes and statistics,
+
+would test the bound at the +6σ level (if η ≈ 0.035 holds) or, alternatively, place η = 2G at
+the edge of measurement (if η drifts upward toward 2G with precision). Either outcome is
+informative. This is the single cleanest empirical falsification route the bound has.
+
+7.2 Secondary targets within WF-family scope
+
+The next-tightest cases — MN cubic N = 2 at +2.6σ, O(4) at +3.0σ, MN cubic N = 3 at +3.3σ — are
+also useful falsification routes. Tightening any of them by a factor of 3–5 in precision would
+either confirm η < 2G at the >+10σ level or push η = 2G into the measurement range.
+
+7.3 New universality classes within WF-family scope
+
+Any new d = 3 critical point identified as a unitary CFT with positive ν, standard
+hyperscaling, and finite-T continuous transition is a test of the bound. Specific candidates
+with no current high-precision η:
+
+-   3D lattice gauge theories with clean global-symmetry continuous transitions.
+-   Cubic anisotropy at N ≥ 5.
+-   MN cubic at N ≥ 4.
+-   CP^(N − 1) models at d = 3 large N.
+
+A measurement of η at any of these to sub-percent precision is an unambiguous test.
+
+7.4 The conformal-bootstrap derivation route
+
+A direct first-principles derivation of η ≤ 2G from the conformal-bootstrap machinery (modular
+bootstrap, dispersion relations, sum rules at the Wilson-Fisher fixed point) would promote the
+bound from observation to theorem and would resolve the structural question of why K_AUD
+specifically is the right ceiling. Pelissetto–Vicari (arXiv:2510.17637, 2025/rev 2026)
+conjecture a related dimensional-operator-inequality lower bound ν ≥ 1/(2 − η) at the
+Wilson-Fisher fixed point; combining the present observation η ≤ 2G with Pelissetto–Vicari's
+conjectural ν ≥ 1/(2 − η) gives the derived lower bound
+
+ν ≥ 1/(2K_AUD) ≈ 0.510
+
+across WF-family classes (a derivation in this paper from the two independent inputs; the
+combined result inherits the conjectural status of its inputs and is not stated in either
+source paper). The Pelissetto–Vicari route and the corridor framing are independent attempts at
+related questions; their compatibility lends modest evidence to both.
+
+7.5 What a single counter-example would do
+
+A single d = 3 unitary CFT with positive ν, standard hyperscaling, and finite-T continuous
+transition having measured η > 2G at >3σ confidence would falsify the bound as stated. We
+commit, in advance, to accepting such a measurement as falsification. The bound is not
+framework-protected: it is an observational claim with a definite scope, and it is falsifiable
+by a measurement that satisfies all four scope criteria and exceeds 2G.
+
+-----------------------------------------------------------------------------------------------
+
+8. Why specifically 2G?
+
+This section is brief by design: the derivation of why K_AUD (and therefore 2G via Fisher's
+relation) might be the relevant constant is the open theoretical problem and belongs in a
+different paper. Here we give only the minimum needed for a reader to understand the
+observation's structure.
+
+8.1 Fisher's relation supplies the factor of 2
+
+The "2" in "2G" is not a framework-applied doubling. It is the upper endpoint of the (2 − η)
+coordinate, supplied by Fisher's exact relation γ = ν(2 − η) and the dimensional sum at the
+upper critical dimension. At the Gaussian fixed point (mean field, η = 0), (2 − η) = 2 exactly.
+This is established RG theory.
+
+The framework's claim is about the lower endpoint of (2 − η). The framework conjectures that
+K_AUD = √2 · ln 2 is the structurally meaningful lower bound on (2 − η) at the Wilson-Fisher
+fixed point. The corridor width 2 − 2K_AUD then simplifies to 2G algebraically, using K_AUD + G
+= 1.
+
+  Endpoint                    Value              Source
+  --------------------------- ------------------ ----------------------
+  Upper (mean field, η = 0)   (2 − η) = 2        Fisher's relation
+  Lower (anomalous, η = 2G)   (2 − η) = 2K_AUD   Framework conjecture
+  Width                       2 − 2K_AUD = 2G    Algebra
+
+Pushback on the factor of 2 is misplaced — that is Fisher's. The right target for pushback is
+the framework's lower-bound conjecture, which is the open Tier 6 derivation question addressed
+in Part II §11.5 (the named Tier 6 derivation targets) and §15.2 (the framework-architecture
+open questions).
+
+8.2 Why this value and not a tighter one?
+
+A natural objection is "why 2G rather than a tighter ceiling that saturates the data more
+closely?" We tested nearby candidate ceilings against the tightest WF-family case (randomly
+dilute Ising at η = 0.035 ± 0.002) and found that the framework's 2G value is empirically
+robust:
+
+  Candidate ceiling               Value      σ-margin at random-bond Ising   Falsification risk under improved precision
+  ------------------------------- ---------- ------------------------------- ---------------------------------------------
+  2G = 2(1 − K_AUD) (framework)   0.039484   +2.24σ                          Lowest of the four candidates
+  π/80                            0.039270   +2.13σ                          Slightly higher; still well above data
+  1/25.5                          0.039216   +2.11σ                          Slightly higher; still well above data
+  2(1 − ln(8/3))                  0.038341   +1.67σ                          Highest; ~×2 precision → within 1σ
+
+(Margins computed as (ceiling − η) / σ_η at η = 0.035, σ_η = 0.002. All four candidates
+currently satisfy η < ceiling. The tighter ceilings are not violated by current data but sit
+closer to the data, so they would be the first to fail if the central η drifts upward or if
+measurement precision improves.)
+
+The differences between candidate ceilings at random-bond Ising are small in absolute terms
+(0.04–0.13 in σ-margin), so 2G's empirical advantage over nearby alternatives is not large at
+the current precision. What it does establish is that 2G is the most robust of the four
+candidates against foreseeable precision improvements. At the CFT-bootstrap cases (Ising
++1593σ, XY +29.7σ, Heisenberg +6.9σ) the difference between candidates is negligible — all are
+far above data — so the empirical-robustness argument is driven by the tightest cases
+(random-bond Ising and, secondarily, MN cubic N=2 and SAW).
+
+This is not an argument that 2G is unique — the framework's claim is that K_AUD specifically
+(rather than nearby ceilings) is the right one for structural reasons developed in Part II
+below. The robustness argument is a complementary empirical observation: among nearby
+candidates, the framework's choice happens to be the value most likely to survive
+next-generation precision improvements at the tightest current cases.
+
+-----------------------------------------------------------------------------------------------
+
+Part II — The Mathematical Architecture
+
+Part I reports the empirical observation η ≤ 2G across ten Wilson-Fisher-family universality
+classes in d = 3, deferring the question of why this particular value of the ceiling. Part II
+takes up that question.
+
+The path of the argument is the following. §9 studies the algebraic structure of the dome
+function g(x) = tanh(x)/cosh(2x), known from hyperbolic-3-manifold geometry as the
+Hodgson-Kerckhoff tube-packing function. §9 opens with a master landmark table organizing the
+dome's five algebraically distinguished landmarks (origin u = 1, K_AUD-defining position u =
+5/4, self-reference u = √2, peak u = φ, binary-doubling u = 2) and the framework findings that
+sit on each; the subsequent subsections prove the structural properties the table claims,
+including the result that the dome's own internal algebra independently distinguishes both
+ingredients of K_AUD = √2·ln(2) and that the two HK landmarks (u = 5/4 and u = 2) sit in
+distinct exact algebraic environments (√2-rational and √3-rational, respectively). In §10 we
+recall that this same dome function appears, with no free parameters, as the resummation factor
+R(N) for the anomalous dimension at the 3D Wilson-Fisher fixed point across N = 0–4. In §11 we
+state the Central Synchronization Conjecture: that K_AUD's recurrence across multiple
+independent derivation chains (H₄ polytope geometry, Algorithm EA saturation at the binary
+cell, Hodgson-Kerckhoff tube-packing, the Wilson-Fisher ceiling) is the same
+geometry-information intersection at n = 2 showing up in different mathematical clothing. In
+§12 we report a sharper structural identity at the upper critical dimension d_c = 4 where
+multiple framework-relevant identities align. In §13 we close with the dimensional context —
+why H₄ and d_c = 4 are the same number from independent sources, and why the corridor is
+sharply dimension-specific.
+
+Throughout Part II we maintain the tier distinction of Part I: theorems are exact algebraic or
+numerical identities verified at high precision; observations are empirical or structural
+matches lacking a derivation; conjectures are proposed unifying mechanisms not yet proved. The
+Central Synchronization Conjecture itself stands as a conjecture; its supporting items are
+individually at Theorem-tier or Observation-tier with high-precision verification.
+
+-----------------------------------------------------------------------------------------------
+
+9. The dome's algebraic architecture
+
+This section is structurally a tour of the dome's algebraic landmarks. Each subsection unpacks
+one landmark or one structural property; the master table below organizes them at a glance,
+with the theorems that follow being rigorous statements of what the table claims.
+
+Master landmark table. In u = cosh(2x) coordinates, the dome function g(u) = √(u − 1) / [u ·
+√(u + 1)] has five algebraically distinguished landmarks across u ∈ [1, ∞):
+
+Landmark u = 1 — dome origin (boundary)
+
+-   x = arccosh(u)/2 = 0
+-   g(u) = 0
+-   Selected by: u = 1 (boundary)
+
+Landmark u = 5/4 — HK K_AUD-defining position
+
+-   x = (ln 2)/2
+-   g(u) = 4/15 (exact)
+-   Selected by: x = (ln 2)/2 = arcsinh(1/(2√2))
+-   Identification: HK Theorem 4.4; c = 2 ln 2 lands dome here at d_c = 4 (§12)
+
+Landmark u = √2 — framework's geometric primitive
+
+-   x = arccosh(√2)/2
+-   g(u) = 1 − 1/√2
+-   Selected by: g'/g = g, unique self-reference (Theorem 9.4)
+-   Identification: framework's geometric primitive associated with H₄ (Paper 3 V3 §3.4
+    catalogues four origins for √2 in H₄ geometry; see §13.3 convention note for the
+    relationship to standard unit-edge polytope circumradius)
+
+Landmark u = φ — dome peak (golden ratio)
+
+-   x = arccosh(φ)/2
+-   g(u) = φ^(−5/2)
+-   Selected by: P(u) = u² − u − 1 = 0 (Cor 9.3)
+-   Identification: dome peak; framework's geometric primitive associated with H₃ (overflow
+    case in §13.3 within the framework's per-H_n primitive convention)
+
+Landmark u = 2 — HK critical tube radius (binary doubling)
+
+-   x = R₀ = arccosh(2)/2
+-   g(u) = 1/(2√3)
+-   Selected by: cosh(2x) = 2 (binary doubling)
+-   Identification: h(R₀) = K_AUD (Theorem 10.1); triple convergence point (§10.8)
+
+The dome's geography is the sequence 1 → 5/4 → √2 → φ → 2: from the origin, through the
+K_AUD-defining position, through the geometric primitive, through the peak, to the
+binary-doubling boundary. Every algebraic structure unpacked in the remainder of §9 — the
+factorization, the golden polynomial, the self-reference, the integral, the dilation-operator
+structure, the K_AUD-ingredient generation — is a property of this geography.
+
+Two further structural facts about this geography are worth stating up front, because they
+organize what follows:
+
+1.  The framework's two primary constants are generated by the dome's two internal structures.
+    The geometric primitive √2 emerges from the self-reference landmark (Theorem 9.4); the
+    informational primitive ln 2 emerges as twice the dome's integral mass (Theorem 9.5). Their
+    product K_AUD = √2 · ln 2 enters the framework as a multiplicative combination of the
+    dome's two distinguished landmarks, not as an externally chosen constant.
+
+2.  The two HK landmarks (u = 5/4 and u = 2) sit in distinct exact algebraic environments. At
+    Landmark (5/4), all six hyperbolic values at x = (ln 2)/2 are rational or √2-rational:
+    sinh(x) = 1/(2√2), cosh(x) = 3/(2√2), tanh(x) = 1/3, sinh(2x) = 3/4, cosh(2x) = 5/4,
+    tanh(2x) = 3/5. At Landmark (2), all six hyperbolic values at x = R₀ are rational-in-√3:
+    sinh(R₀) = 1/√2, cosh(R₀) = √(3/2), tanh(R₀) = 1/√3, sinh(2R₀) = √3, cosh(2R₀) = 2,
+    tanh(2R₀) = √3/2. The dome thus has two closed algebraic worlds at its two HK landmarks,
+    one built on √2 and one built on √3. See §9.10 below.
+
+With the master table in place, the remaining subsections of §9 proceed as proofs and
+structural unpacking of what the table claims.
+
+9.1 The dome function and two coordinate representations
+
+We define the dome function by
+
+g(x) = tanh(x) / cosh(2x), x ≥ 0.
+
+It is positive on x > 0, vanishes at x = 0 and as x → ∞, and is smooth with a single interior
+maximum. In the substitution u = cosh(2x) (so that u ≥ 1, with u = 1 corresponding to x = 0 and
+u → ∞ to x → ∞), the dome admits the equivalent algebraic representation
+
+g(u) = √(u − 1) / [u · √(u + 1)].
+
+The two representations are related by tanh²(x) = (u − 1)/(u + 1) and the identity cosh(2x) =
+u. The u-representation makes the function's algebraic landmarks transparent; the
+x-representation makes its spectral and integral structure transparent. We move between the two
+as convenience dictates.
+
+9.2 The sech² / doubling-rate factorization
+
+Theorem 9.1. The dome function admits the factorization
+
+g(x) = (1/2) · sech²(x) · tanh(2x).
+
+Proof. Using sinh(2x) = 2 sinh(x) cosh(x),
+
+(1/2) · sech²(x) · tanh(2x) = (1/2) · (1/cosh²(x)) · sinh(2x)/cosh(2x) = (1/2) · (1/cosh²(x)) ·
+2 sinh(x) cosh(x) / cosh(2x) = sinh(x) / [cosh(x) · cosh(2x)] = tanh(x) / cosh(2x) = g(x). ∎
+
+The factorization separates the dome into two physically distinct components. The factor
+sech²(x) is the universal spectral kernel for damped harmonic oscillators near resonance —
+Lorentzian in frequency, of width set by the damping rate. The factor tanh(2x) is the
+binary-doubling carrier: it is the saturation function with characteristic scale set by the
+doubled coordinate 2x, equivalently the operator that converts an additive variable into a
+saturating "binary distinction." The dome is the product of these two: a spectral kernel
+modulated by binary-doubling saturation.
+
+The structural reading of Theorem 9.1 is that the doubling rate is not imposed on the dome from
+outside (via Fisher's relation γ = ν(2 − η), via the framework's binary architecture, via any
+external narrative). It is part of the dome's intrinsic algebraic identity. Both sech² and
+tanh(2x) appear as factors in the function itself; neither is added.
+
+Numerical verification of Theorem 9.1 at dps = 80 across the test grid x ∈ {0.1, 0.3, 0.5, 0.7,
+1.0, 1.5, 2.0, 3.0}: residuals are zero or below 10⁻⁸² (machine precision at the test dps). The
+identity is exact.
+
+9.3 The logarithmic derivative and the golden polynomial
+
+Theorem 9.2. In u = cosh(2x) coordinates, the dome function has logarithmic derivative
+
+d(ln g)/du = −(u² − u − 1) / [u(u² − 1)].
+
+Proof. Differentiate ln g(u) = (1/2) ln(u − 1) − ln u − (1/2) ln(u + 1) and combine fractions.
+The numerator that appears after combination is exactly −(u² − u − 1); the denominator is u(u²
+− 1). ∎
+
+The numerator P(u) = u² − u − 1 is the golden polynomial. Its positive real root is φ = (1 +
+√5)/2, the golden ratio.
+
+Corollary 9.3. The dome's peak is at u = φ, with critical value g(φ) = φ^(−5/2).
+
+Proof. g'(u) = 0 requires the numerator of d(ln g)/du to vanish, which gives P(u) = 0, hence u
+= φ. Direct computation yields g(φ) = φ^(−5/2). ∎
+
+The peak of the dome is therefore at the golden ratio — exactly, not approximately. The golden
+polynomial enters not as a numerical match but as the algebraic structure governing the dome's
+variation in u-coordinates.
+
+9.4 Three algebraically distinguished landmarks
+
+The polynomial P(u) = u² − u − 1 takes three distinguished values within the dome's u-range:
+
+  Landmark          u    P(u)     g(u)       Selection condition
+  ----------------- ---- -------- ---------- -------------------------------------
+  Peak              φ    0        φ^(−5/2)   P(u) = 0, gives g'(u) = 0
+  Self-reference    √2   1 − √2   1 − 1/√2   g'/g = g (Theorem 9.4 below)
+  Unit polynomial   2    1        1/(2√3)    P(u) = 1 (binary-doubling argument)
+
+The three landmarks are selected by three different algebraic conditions — vanishing of P, the
+self-reference equation, and P attaining unity. The framework's three primary constants {φ, √2,
+2} appear at these three landmarks; they are not imported from outside but selected by the
+dome's own algebra.
+
+9.5 The self-reference at √2
+
+Theorem 9.4. The condition g'(u)/g(u) = g(u) — that the logarithmic derivative of the dome
+equals the dome's value — has a unique positive solution: u = √2.
+
+Proof. From Theorem 9.2, g'(u)/g(u) = −P(u) / [u(u² − 1)] where P(u) = u² − u − 1. From §9.1,
+g(u) = √(u − 1) / [u · √(u + 1)]. The equation g'/g = g becomes
+
+−(u² − u − 1) / [u(u² − 1)] = √(u − 1) / [u · √(u + 1)].
+
+Cancel u from both sides and use u² − 1 = (u − 1)(u + 1):
+
+−(u² − u − 1) / [(u − 1)(u + 1)] = √(u − 1) / √(u + 1).
+
+Multiply both sides by (u − 1)(u + 1) and simplify the right side using (u − 1)(u + 1)/√(u + 1)
+= (u − 1)·√(u + 1):
+
+−(u² − u − 1) = (u − 1)^(3/2) · (u + 1)^(1/2) = √[(u − 1)³(u + 1)].
+
+The left side is positive precisely when u² − u − 1 < 0, equivalently u < φ. In that range both
+sides are positive, and squaring gives
+
+(u² − u − 1)² = (u − 1)³(u + 1).
+
+Expanding: the left side is u⁴ − 2u³ − u² + 2u + 1; the right side is u⁴ − 2u³ + 2u − 1. Their
+difference is
+
+(u⁴ − 2u³ − u² + 2u + 1) − (u⁴ − 2u³ + 2u − 1) = −u² + 2.
+
+Setting this to zero gives u² = 2, with the unique positive solution u = √2. Since √2 ≈ 1.414 <
+φ ≈ 1.618, this solution lies in the regime where the squaring step is valid. ∎
+
+At u = √2: g(√2) = (√2 − 1)/√2 = 1 − 1/√2 ≈ 0.2929, and indeed g'(√2)/g(√2) = 1 − 1/√2 = g(√2).
+
+The geometric content of Theorem 9.4 is the following. The H₄ regular polytope (the 600-cell,
+dual of the 120-cell) has circumradius √2, and √2 appears as the framework's geometric
+primitive by polytope geometry. Theorem 9.4 shows that the dome function — defined without any
+reference to H₄ or to the framework — independently distinguishes the same value √2 as its
+unique self-referential fixed point. The defining equation of √2 (u² = 2) emerges from the
+dome's own dynamics.
+
+9.6 The dome integral identity
+
+Theorem 9.5. The dome function satisfies
+
+∫₀^∞ g(x) dx = ∫₀^∞ tanh(x)/cosh(2x) dx = ln(2) / 2.
+
+Proof. Substitute t = cosh(x), so dt = sinh(x) dx and cosh(2x) = 2t² − 1. The integrand becomes
+tanh(x)/cosh(2x) · dx = sinh(x)/[cosh(x) · cosh(2x)] · dx = dt/[t(2t² − 1)]. Partial fractions:
+
+1/[t(2t² − 1)] = −1/t + 2t/(2t² − 1).
+
+Integrate from t = 1 (corresponding to x = 0) to t → ∞:
+
+∫₁^∞ (−1/t + 2t/(2t² − 1)) dt = lim_{T → ∞} [−ln t + (1/2) ln(2t² − 1)]₁^T = lim_{T → ∞} (1/2)
+ln((2T² − 1)/T²) − (1/2) ln(1) = (1/2) ln 2. ∎
+
+The integral of the dome over its full domain is exactly ln(2)/2. In the language of binary
+distinction, the dome's total "mass" is half of one bit — the natural measure of the doubling
+interval on a logarithmic scale.
+
+9.7 The dome's algebra encodes both ingredients of K_AUD
+
+Theorems 9.4 and 9.5 together establish a structural fact about the dome function that did not
+depend on any framework input: the dome's algebra distinguishes both ingredients of K_AUD = √2
+· ln(2). Specifically:
+
+(i) The value √2 is selected by the dome's self-reference condition g'/g = g, with the defining
+equation u² = 2 emerging from the dome's logarithmic derivative (Theorem 9.4).
+
+(ii) The value ln 2 is twice the dome's total integral, ∫g dx = ln(2)/2, with the integral
+derived by partial fractions in the substitution t = cosh(x) (Theorem 9.5).
+
+The dome's own algebra therefore contains both ingredients of K_AUD as distinguished algebraic
+landmarks. What the dome's algebra does not contain is the specific multiplicative combination
+√2 · ln(2). The product K_AUD enters the framework through the construction K = (geometric
+primitive) × (informational primitive) in Paper 3 V3, not through the dome's internal
+structure. The dome contributes the ingredients; the framework's construction combines them.
+Whether the multiplicative form (rather than, e.g., an additive or compositional combination of
+the two primitives) is forced by structural considerations or is one defensible choice among
+several is the subject of Paper 3 V3's derivation, not of this paper; the present work treats
+the multiplicative form as given and tests its empirical consequence (η ≤ 2G) at d = 3.
+
+This sharpens the structural reading of the empirical bound η ≤ 2G reported in Part I. The
+choice of K_AUD as the conjectured lower bound on (2 − η) is not arbitrary: the value's two
+ingredients are distinguished landmarks of the dome function that appears in 3D O(N)
+resummation. Why the dome function appears in O(N) field theory in the first place — the
+question of whether the Borel resummation has the same saddle-point structure as
+Hodgson-Kerckhoff tube-packing optimization — is open and discussed in §10.5 below.
+
+9.8 The dilation-operator structure of η_kernel
+
+We record a related algebraic fact that connects the dome to the standard kernel sech². Define
+the dilation operator on functions of x ≥ 0 by
+
+Df = (1 − x · ∂_x) f(x) = f(x) − x · f'(x).
+
+Proposition 9.6. The dome function appears as a dilation image of sech² in Mellin space.
+Specifically, for the Mellin transform Mf = ∫₀^∞ x^(s−1) · f(x) dx,
+
+Mg = (1/2) · Msech² − J(s),
+
+where J(s) = ∫₀^∞ x^(s−1) · sech²(x) / (e^(4x) + 1) dx is a Fermi-Dirac-weighted residual.
+
+Proof. From Theorem 9.1, g(x) = (1/2) · sech²(x) · tanh(2x). Writing tanh(2x) = 1 − 2/(e^(4x) +
+1) and applying the Mellin transform to both terms gives the stated identity directly. ∎
+
+At s = 1 the decomposition specializes to ∫₀^∞ g dx = (1/2) − J(1) where J(1) = (1/2) −
+ln(2)/2, recovering Theorem 9.5. The residual J(s) admits a closed form (derived in §9.11 as
+Corollary 9.10 to the complete Mellin spectrum theorem); the s = 2 case J(2) = ln(2)/2 − π²/32
+= 0.038148453... sits suggestively close to the conformal-bootstrap value of η_XY =
+0.038176(44) (Chester et al. 2020) — within 1σ of the measurement — but is not equal: the
+algebraic value differs from the central η_XY by 2.75 × 10⁻⁵, well-resolved at the bootstrap's
+actual precision. The proximity is observational; the algebraic value (Corollary 9.10) is not
+the η_XY value.
+
+9.9 The flatness of the corridor in dome coordinates
+
+The three algebraically distinguished landmarks (√2, φ, 2) of §9.4 are clustered near the
+dome's peak. The dome rises from 97.5% of its peak value at u = √2 to its maximum at u = φ,
+then falls to 96.1% at u = 2 — a full variation of 3.9% below peak across the interval [√2, 2],
+with the two endpoint values differing from each other by 1.4% of the peak.
+
+  u             g(u)                g / g(φ)
+  ------------- ------------------- --------------
+  √2 ≈ 1.4142   1 − 1/√2 ≈ 0.2929   0.975
+  φ ≈ 1.6180    φ^(−5/2) ≈ 0.3003   1.000 (peak)
+  2             1/(2√3) ≈ 0.2887    0.961
+
+The interval [√2, 2] sits entirely within the dome's 96%-of-peak region. The dome's algebraic
+landmarks therefore coincide with the flat top of the function — the range where g(u) is
+maximally insensitive to its argument. The "corridor of criticality" in the (2 − η) coordinate,
+which has width 2G ≈ 0.0395 by Fisher's relation and the framework conjecture, corresponds
+geometrically to this flat-top region in the dome's u-coordinates.
+
+9.10 Two algebraic environments at the HK landmarks
+
+The two Hodgson-Kerckhoff landmarks — u = 5/4 (the K_AUD-defining position; §12) and u = 2 (the
+critical tube radius R₀; §10.3) — sit in distinct exact algebraic environments. At each
+landmark, all six hyperbolic functions (sinh, cosh, tanh at x and at 2x) take exact closed-form
+values, but the irrational signatures of the two environments differ.
+
+Landmark (I) — at x = (ln 2)/2 (the K_AUD-defining position; u = 5/4):
+
+  Quantity   Exact value
+  ---------- -------------
+  sinh(x)    1/(2√2)
+  cosh(x)    3/(2√2)
+  tanh(x)    1/3
+  sinh(2x)   3/4
+  cosh(2x)   5/4
+  tanh(2x)   3/5
+
+All six values are rational or √2-rational. The dome value here is g(5/4) = 4/15 exactly
+(computable from g(u) = √(u−1)/[u·√(u+1)] at u = 5/4, with √(1/4)/[(5/4)·√(9/4)] = (1/2)/(15/8)
+= 4/15). The environment is built on the √2 primitive.
+
+Landmark (II) — at x = R₀ = arccosh(2)/2 (the critical tube radius; u = 2):
+
+  Quantity    Exact value
+  ----------- -------------
+  sinh(R₀)    1/√2
+  cosh(R₀)    √(3/2)
+  tanh(R₀)    1/√3
+  sinh(2R₀)   √3
+  cosh(2R₀)   2
+  tanh(2R₀)   √3/2
+
+All six values are rational-in-√3. The dome value here is g(2) = 1/(2√3) exactly. The
+environment is built on the √3 primitive.
+
+Structural reading. The dome's two HK landmarks therefore carry two different irrational
+geographies, one organized around √2 (the framework's named geometric primitive, Paper 3 V3)
+and one organized around √3 (which has no current framework-architectural role at this tier,
+though √3 = sinh(2R₀) appears as a derived quantity at the binary-doubling point). The two
+environments meet at the dome's u-axis but are algebraically closed in different irrationals.
+
+This is structurally significant for two reasons. First, it sharpens the §12 "two HK landmarks"
+discussion: the framework's selection of Landmark (I) over Landmark (II) (the alignment
+principle of §12.7) is not just a selection between two HK-natural positions, but between two
+distinct closed algebraic worlds. Second, the appearance of √3 as a derived quantity at
+Landmark (II) is the dome's first generation of an irrational primitive other than √2 from its
+own algebraic structure. Whether √3 has additional framework-architectural significance beyond
+its role at Landmark (II) is an open question; for now we record the observation that the dome
+has two distinct algebraic environments at its two HK landmarks.
+
+This is an [Observation] tier finding, established by direct computation at dps = 50 verified
+across multiple architectures; no derivation in any independent setting is currently claimed.
+
+9.11 The Mellin spectrum of the dome — closed form
+
+The dome function admits a complete closed-form expression for all its Mellin moments. This
+generalizes Theorem 9.5 (the s = 1 case Mg = ln(2)/2) and yields a closed form for the residual
+J(s) of Proposition 9.6 (sharpening §9.8's discussion).
+
+Theorem 9.7 (Mellin spectrum of the dome). For the dome function g(x) = tanh(x)/cosh(2x), the
+Mellin moments
+
+Mg = ∫₀^∞ x^(s − 1) · tanh(x)/cosh(2x) dx
+
+satisfy, for s ≥ 1:
+
+  Mg = (s − 1)! · η(s) · (2^s − 1) / 2^(2s − 1)
+
+where η(s) = (1 − 2^(1−s)) · ζ(s) is the Dirichlet eta function, with η(1) = ln 2 by
+convention.
+
+Proof. Substitute y = e^(−2x), so x = −(ln y)/2, dx = −dy/(2y), and x^(s−1) = (−1)^(s−1) (ln
+y)^(s−1) / 2^(s−1). Under this substitution the dome's factorization g(x) =
+(1/2)·sech²(x)·tanh(2x) (Theorem 9.1) transforms into g(x) = 2y(1−y)/[(1+y)(1+y²)]. Combining,
+
+Mg = (−1)^(s−1) · 2^(1−s) · ∫₀^1 (ln y)^(s−1) · (1−y) / [(1+y)(1+y²)] dy.
+
+Partial-fraction the rational factor: (1−y)/[(1+y)(1+y²)] = 1/(1+y) − y/(1+y²). Using the
+standard integral ∫₀^1 (ln y)^k · 1/(1+y) dy = (−1)^k · k! · η(k+1), and the related result
+(via u = y²) ∫₀^1 (ln y)^k · y/(1+y²) dy = (−1)^k · k! · η(k+1) / 2^(k+1),
+
+∫₀^1 (ln y)^(s−1) · (1−y)/[(1+y)(1+y²)] dy = (−1)^(s−1) · (s−1)! · η(s) · (1 − 2^(−s)) =
+(−1)^(s−1) · (s−1)! · η(s) · (2^s − 1) / 2^s.
+
+Substituting back gives Mg = (s − 1)! · η(s) · (2^s − 1) / 2^(2s − 1). ∎
+
+The case s = 1 recovers Theorem 9.5 directly: 0! · η(1) · (2 − 1) / 2 = ln(2)/2.
+
+Numerical verification. The closed form has been verified at decimal precision dps = 1000
+against the rational/π closed forms for s = 1, 2, 4, 6, 8 (Corollary 9.8), with residuals at
+the working-precision floor (10⁻¹⁰⁰⁰ or identically zero); and against direct numerical
+integration ∫₀^∞ x^(s−1) g(x) dx for s = 1..8 at dps = 500 (residuals exact or at 10⁻⁵⁰¹) and
+dps = 300 (residuals at 10⁻³⁰⁰) — both rounds at the working-precision floor (companion
+Verification 9.7, re-verified 2026-05-28). The same identity was independently confirmed at dps
+= 1050 by Grok-Heavy (2026-05-22, zero discrepancies across the full identity set), at machine
+precision by chat-side Sonnet/Opus (2026-05-25), and at dps = 1050 by Super Grok (2026-06-01,
+memory-blind to prior framework context, direct M_g(s) computation against the closed form for
+s = 1..8 with residuals identically zero or at the 10⁻¹⁰⁵¹ working-precision floor).
+
+Corollary 9.8 (even-moment closed forms; n = 1, 2, 3 in simplified rational form). Using ζ(2n)
+= |B_(2n)| · (2π)^(2n) / (2 · (2n)!), Theorem 9.7 specializes to:
+
+  n   Mg closed form   Numerical
+  --- ---------------- -----------
+  1   π² / 32          0.30843
+  2   7 π⁴ / 1024      0.66588
+  3   31 π⁶ / 8192     3.63807
+
+The numerator coefficients at n = 1, 2, 3 are the Mersenne-like values 1, 7, 31, i.e.,
+(2^(2n−1) − 1). This simplified-Mersenne-numerator pattern does NOT extend beyond n = 3. At n =
+4, the closed form gives Mg = 2159 π⁸ / 2¹⁹ where 2159 = 17 · 127, not a single Mersenne
+factor; the prime 17 enters from the factor (2^(2n) − 1) — at n = 4, 2⁸ − 1 = 255 = 3 · 5 · 17
+— surviving after cancellation against the (2n)! and ζ(2n) denominators (which contain only the
+primes 2, 3, 5, 7 at this order). In the integer-ratio factorization M(2n)/M(2)^n = A002105[n]
+· (2^(2n−1) − 1) of Corollary 9.9, the prime 17 lands on the A002105 (reduced-tangent-number)
+side: at n = 4, 4318 = 34 · 127 = (2 · 17) · 127, with the Mersenne-like factor 127 prime and
+the 17 sitting in the tangent factor A002105[4] = 34 = 2 · 17. The general closed form of
+Theorem 9.7 (with explicit Bernoulli/eta dependence) holds for all n; the simplified rational
+form with a single Mersenne numerator is a small-n property that breaks at n ≥ 4. We list the n
+= 1, 2, 3 cases here for the structurally clean part of the pattern and direct readers to
+Theorem 9.7 for general n.
+
+Corollary 9.9 (integer ratio sequence M(2n)/M(2)^n). The dimensionless ratio Mg/Mg^n is an
+integer for all n ≥ 1:
+
+  Mg / Mg^n = (2^(2n − 1) − 1) · (2^(2n) − 1) · |B_(2n)| · 2^n / n.
+
+  n   M(2n)/M(2)^n
+  --- --------------
+  1   1
+  2   7
+  3   124
+  4   4318
+  5   253456
+  6   22631632
+  7   2862787264
+  8   487346998768
+
+The Bernoulli prefactor |B_(2n)| · 2^n / n equals the reduced tangent number a_n (OEIS A002105
+= 1, 1, 4, 34, 496, 11056, 349504, 14873104, ...), coming from the Taylor series of tan(x).
+Therefore the dome's even-moment ratio sequence factorizes as a Theorem-tier algebraic
+identity:
+
+  Mg / Mg^n = A002105(n) · (2^(2n − 1) − 1) for all n ≥ 1.
+
+Verified at n = 1..8 by independent subagent search of OEIS (the exact product sequence is not
+in OEIS as a direct entry, but the factorization into A002105 and the Mersenne-like sequence is
+exact).
+
+Observation (§9.11.4): structural reading of the factorization. The dome's algebraic
+factorization g(x) = (1/2)·sech²(x)·tanh(2x) (Theorem 9.1) decomposes the function into a
+Lorentzian spectral envelope (sech²) and a binary-doubling carrier (tanh(2x)). The Theorem 9.7
+closed form, combined with the A002105 × Mersenne factorization of Corollary 9.9, suggests an
+interpretation: the reduced tangent numbers A002105 are the tangent-class component of the
+moment arithmetic, structurally aligned with the tanh(2x) factor; the Mersenne factors
+(2^(2n−1) − 1) are the binary-doubling component, structurally aligned with the cosh(2x)
+denominator. This is a parallel observation about two distinct factorizations both existing —
+one at the function level, one at the moment-arithmetic level — both decomposing along similar
+structural lines.
+
+This reading is Observation-tier, not Theorem-tier. The algebraic identity of Corollary 9.9 is
+a theorem; the interpretation that each factor of the integer-ratio sequence corresponds to a
+specific component of the dome's algebraic factorization is a structural observation that has
+not been derived from the dome's functional decomposition. Promotion to Theorem would require
+an independent derivation of the two integer families from the two factor components of g(x),
+which has not been built. We label this Observation explicitly to maintain the framework's
+Λ-canary discipline against conflating algebraic identities with their structural
+interpretations. This promotion path is recorded as a candidate Tier 6 derivation target in
+§11.5(f).
+
+Corollary 9.10 (closed form for the residual J(s) of Proposition 9.6). Combining Theorem 9.7
+with the known closed form Msech² = 2^(2−s) · Γ(s) · η(s−1) yields a closed form for the
+Fermi-Dirac-weighted residual of Proposition 9.6:
+
+  J(s) = (s − 1)! · [2^s · η(s − 1) − (2^s − 1) · η(s)] / 2^(2s − 1)
+
+In particular, the s = 2 case (recorded in §9.8 of this paper as the numerical near-miss J(2) ≈
+0.038148 vs η_XY ≈ 0.038176) acquires its exact algebraic form:
+
+  J(2) = ln(2)/2 − π² / 32 (exact)
+
+This sharpens the discussion of §9.8: J(2) is the specific algebraic value ln(2)/2 − π²/32, and
+η_XY at conformal-bootstrap precision is approximately but not equal to this value. The "not
+equal" framing of §9.8 is preserved; what changes is that the value now has a name — it is no
+longer "an integral with no known closed form whose numerical value is 0.038148..."; it is the
+rational/π combination ln(2)/2 − π²/32 exactly. Verified at dps = 1000 (residual identically
+zero between J(2) and ln(2)/2 − π²/32 at the working-precision floor); companion Verification
+9.7.
+
+9.12 What §9 establishes
+
+Returning to the master landmark table at the start of §9, we can now state what the dome's
+algebraic architecture establishes:
+
+(a) Its peak is at the golden ratio φ exactly (Corollary 9.3). (b) It distinguishes √2 as the
+unique self-referential fixed point of its logarithmic-derivative-equals-value condition
+(Theorem 9.4). (c) Its total integral equals ln(2)/2 exactly (Theorem 9.5) — equivalently,
+twice its total mass is ln 2, the framework's informational primitive. (d) Its two HK landmarks
+(u = 5/4 and u = 2) sit in distinct exact algebraic environments — Landmark (I) √2-rational,
+Landmark (II) √3-rational (§9.10). (e) Its complete Mellin spectrum admits a closed form
+(Theorem 9.7): Mg = (s−1)! · η(s) · (2^s − 1) / 2^(2s−1). Even moments are rational multiples
+of π^(2n); the integer ratio sequence M(2n)/M(2)^n factorizes as the reduced tangent numbers
+A002105 times the Mersenne-like factors (Corollary 9.9). Proposition 9.6's Fermi-Dirac residual
+J(s) acquires a closed form by combination (Corollary 9.10), with J(2) = ln(2)/2 − π²/32
+exactly. (f) Together with the corridor identity 2 − 2K_AUD = 2G (§8.1) and the corridor margin
+G/ln 2 = G · log₂(e) (Theorem 13.1), the dome's geometry implies the algebraic constraints on η
+that Part I records empirically.
+
+These properties are independent of any framework input. They are facts about the function.
+Their relevance to the empirical observation of Part I is mediated by the fact, established in
+§10 below, that the same function appears as the resummation factor R(N) for the anomalous
+dimension at the 3D Wilson-Fisher fixed point, with the framework's primary constants {φ, √2,
+2} populating the algebraic landmarks in both domains.
+
+The framework's two primary constants — √2 (geometric) and ln 2 (informational) — are generated
+by the dome's two internal structures (self-reference and integral). Their product K_AUD = √2 ·
+ln 2 enters the framework architecture as a multiplicative combination of two landmarks the
+dome distinguishes by its own algebra — but, as §9.7 records, the dome's algebra does not
+contain the multiplicative combination √2 · ln(2) itself: the dome contributes the ingredients
+separately, and the multiplicative combination enters through the framework's construction K =
+(geometric primitive) × (informational primitive) in Paper 3 V3. Both √2 and ln 2 are
+ubiquitous mathematical constants individually, so their co-appearance in the dome's two
+unrelated internal conditions is suggestive of structural relevance, not strong evidence by
+itself. The dome's complete Mellin spectrum (Theorem 9.7) further establishes that the dome
+carries the framework's primitives not only at the function level but throughout its moment
+arithmetic. This is the structural reading the master table at the start of §9 carries: the
+dome's algebra contains the framework's primitives at the ingredient level — with the
+multiplicative combination supplied by the framework's construction — and the framework's other
+findings sit on the dome's landmarks.
+
+-----------------------------------------------------------------------------------------------
+
+10. The dome in two domains: Hodgson-Kerckhoff tube-packing and 3D O(N) resummation
+
+10.1 The Hodgson-Kerckhoff tube-packing function
+
+Hodgson and Kerckhoff (2005), in their work bounding hyperbolic Dehn surgery on cusped
+3-manifolds, derive the tube-packing function
+
+h(r) = 2√6 · ln(2) · tanh(r) / cosh(2r), r ≥ 0,
+
+where r is the tube radius in a hyperbolic 3-manifold. The function bounds the volume of an
+embedded geodesic tube and enters the proof of universal bounds on the change of geometric data
+under Dehn filling. Comparing to §9, h(r) is the dome function g(r) of Theorem 9.1 multiplied
+by the constant 2√6 · ln(2). The factor 2√6 · ln(2) is the maximum value of h × something else
+in HK's normalization; the dimensionless dome shape is unchanged.
+
+The function is published in [Hodgson–Kerckhoff 2005] and used in subsequent
+hyperbolic-geometry work [Futer–Purcell–Schleimer 2022]. Within hyperbolic geometry it is a
+known object. The algebraic structure of §9 — the golden-polynomial logarithmic derivative, the
+self-reference at √2, the integral identity — was not stated in the original HK paper or any
+citing work we have located; it remained one calculation away from the published literature for
+the two decades between HK's publication and the present.
+
+10.2 The peak at φ — same algebraic fact, both domains
+
+By Corollary 9.3, the dome function peaks at u = cosh(2r) = φ. Substituting into HK's function
+gives the explicit peak value:
+
+h_peak = 2√6 · ln(2) · φ^(−5/2).
+
+The HK dome peaks at the golden ratio exactly, as an algebraic consequence of the golden
+polynomial in the logarithmic derivative (Theorem 9.2). This is the same algebraic fact as in
+§9 — the HK function and the dome function differ only by the multiplicative constant 2√6 ·
+ln(2) — but it is worth noting that the algebraic location of the peak was not recognized in
+the hyperbolic-geometry literature before its rediscovery in the framework's analysis. The peak
+condition u² − u − 1 = 0, in which φ is the unique positive root, follows immediately from
+setting the logarithmic-derivative numerator of Theorem 9.2 equal to zero.
+
+10.3 The critical tube radius R₀ and the algebraic identity h(R₀) = K_AUD
+
+Define the critical tube radius by
+
+R₀ = arccosh(2) / 2,
+
+equivalently R₀ = arctanh(1/√3) = arcsinh(1/√2). All three identities follow from the relation
+cosh(2R₀) = 2 by elementary hyperbolic identities. Numerically R₀ ≈ 0.6585.
+
+At r = R₀ the dome takes a structurally distinguished value:
+
+-   cosh(2R₀) = 2 (the binary doubling threshold; the value u = 2 is the unit-polynomial
+    landmark P(u) = 1 of §9.4).
+-   tanh(R₀) = 1/√3 (from arctanh form).
+-   sinh(R₀) = 1/√2 (from arcsinh form).
+-   cosh(R₀) = √(3/2).
+
+Substituting into HK's function:
+
+h(R₀) = 2√6 · ln(2) · (1/√3) / 2 = √6 · ln(2) / √3 = √2 · ln(2) = K_AUD.
+
+Theorem 10.1. h(R₀) = K_AUD exactly.
+
+The identity is equivalent to the elementary hyperbolic identity arcsinh(1/(2√2)) = ln(2)/2,
+which can be verified by computing sinh of both sides: sinh(ln(2)/2) = (e^(ln(2)/2) −
+e^(−ln(2)/2))/2 = (√2 − 1/√2)/2 = (1/(2√2))·(2 − 1) = 1/(2√2). Verification in
+HK_Closed_Form.txt and HK_Verification_Log.txt (D.B., April 2026) at multiple precisions across
+multiple architectures.
+
+The structural reading: the HK function, at its critical tube radius (the binary-doubling point
+of the dome's u-coordinate), takes the value K_AUD. The constant K_AUD therefore appears in the
+hyperbolic-geometry literature as the value of a published tube-packing function at a
+structurally distinguished radius — without any framework input.
+
+10.4 The descent ratio from peak to critical radius
+
+The dome's descent from its peak (at u = φ) to the critical tube radius (at u = 2) is exact:
+
+h(R₀) / h_peak = [2√6·ln(2) / 2 · (1/√3)] / [2√6·ln(2) · φ^(−5/2)] = φ^(5/2) / (2√3) ≈ 0.96134.
+
+The dome descends 3.866% from its peak to the binary-doubling point — equivalently, it retains
+96.134% of its peak value. This is the flat top property identified abstractly in §9.9; here we
+see it concretely between two algebraically distinguished landmarks. The interval [φ, 2] in
+u-coordinates is the flat top of the dome; the HK function loses less than 4% of its peak value
+over this entire interval.
+
+10.5 The same function appears in 3D O(N) resummation
+
+We now turn to the other domain. At the 3D Wilson-Fisher fixed point, the anomalous dimension
+η(N) for the O(N) universality class is, in leading-order ε-expansion,
+
+η₂(N) · ε² = (N + 2) / [2 (N + 8)²] · ε²,
+
+with ε = 4 − d = 1 in d = 3. The full all-order η is reached from η₂ by Borel resummation of
+the perturbative series, whose factorial growth is controlled by the leading Borel singularity
+
+a(N) = 3 / (N + 8)
+
+(the Lipatov-instanton position; standard reference: Brézin–Le Guillou–Zinn-Justin 1977 and
+McKane–Wallace; persistence at all orders verified to 7-loop in Dunne–Meynig 2021/2023,
+arXiv:2111.15554). The dimensionless resummation factor R(N) = η(N) / [η₂(N) · ε²] measures how
+much the full all-order η exceeds its leading-order ε² value.
+
+We propose the following zero-parameter model:
+
+Model 10.2. R(N) = 2φ^(5/2) · tanh(c · a(N)) / cosh(2c · a(N)), with c = 2 ln(2), a(N) = 3 / (N
++ 8).
+
+The model has the same functional form as the HK tube-packing function of §10.1 (up to overall
+amplitude), with the Borel singularity a(N) playing the role of the tube radius r and the
+framework constant c = 2 ln 2 setting the hyperbolic scale.
+
+Free parameters: zero. Both the amplitude A = 2φ^(5/2) ≈ 6.6604 and the scale c = 2 ln(2) ≈
+1.3863 are framework constants. The Borel singularity a(N) is fixed by the physics. The
+amplitude is fixed by the requirement R_peak = 2 (the topological doubling limit; see §10.6
+below). The scale c is the alignment-principle choice between two HK landmarks at d_c = 4,
+discussed in §12.
+
+Comparison with data (3D O(N) η values from conformal bootstrap and Monte Carlo, as cited in
+Part I §5):
+
+  Class        N   R_data   R_model   Relative error
+  ------------ --- -------- --------- ----------------
+  SAW          0   1.987    1.999     +0.63%
+  Ising        1   1.960    1.972     +0.61%
+  XY           2   1.909    1.918     +0.48%
+  Heisenberg   3   1.844    1.850     +0.33%
+  O(4)         4   1.752    1.776     +1.38%
+
+The root-mean-square relative error is 0.77% across N = 0–4 with zero free parameters. A
+best-2-parameter fit gives A_fit = 6.631 (0.44% from the framework value) and c_fit = 1.375
+(0.80% from the framework value); the framework values sit within these tight tolerances of the
+data-best-fit values.
+
+10.6 R_peak = 2 as an algebraic consequence
+
+The maximum of the dome g(u) at u = φ is g(φ) = φ^(−5/2). Therefore the model's maximum value
+is
+
+R_peak = 2φ^(5/2) · φ^(−5/2) = 2 (exact).
+
+The amplitude A = 2φ^(5/2) was chosen specifically to fix R_peak = 2; this is the topological
+doubling limit, the boundary above which the resummation factor would exceed unity-times-two
+and the perturbative series would be "less than half right" in a precise sense. The peak of the
+model is reached at N ≈ −0.16, slightly below the physical range N ≥ 0; for all physical O(N)
+models the model predicts R(N) < 2, with the closest approach at N = 0 (SAW) where R_model =
+1.999. The "R < 2" property is therefore not an empirical accident but a built-in consequence
+of the amplitude matching.
+
+10.7 Caveats on the zero-parameter fit
+
+The 0.77% RMS fit at N = 0–4 is striking but requires honest qualification:
+
+(a) Five smooth monotonic data points. R(N) is monotonically decreasing across N = 0–4. Any
+smooth two-parameter function fitting five monotonic points will typically achieve sub-1%
+accuracy. The fact that the model's zero-parameter version is also sub-1% accurate is more
+constraining than the best-fit 2-parameter version, but five points is a small sample.
+
+(b) The model degrades beyond N = 4. Extension to N = 5, 6, 8, 10, 16, 32 (via 1/N expansion,
+functional RG, and Monte Carlo at increasing N) shows the model's relative error growing: ~3%
+at N = 5–6, ~9% at N = 16, ~30% at N = 32. The model cannot reproduce the large-N asymptote
+R(N) → 16/(3π²) ≈ 0.540 (Vasiliev–Pismak–Khonkonen 1981) because R_model(N) → 0 as a(N) → 0.
+The model is a local description of the dome's peak structure in the physical range, not a
+universal RG-theoretic resummation formula.
+
+(c) Leading-order Borel singularity only. The model uses only the leading Lipatov-instanton
+position a(N) = 3/(N + 8). Subleading saddle points (the four-instanton tower, renormalon
+contributions in certain RG schemes) are not included. The systematic positive bias of the
+model errors (all five entries overshoot R_data) suggests a missing monotone correction,
+possibly from subleading Borel structure.
+
+(d) The empirical bound is more robust than the model. At every N tested up to N = 32, the
+ratio η/(2G) remains below 0.97 — the bound η ≤ 2G itself is preserved across a range where the
+dome-model fit fails. The bound is therefore a more fundamental statement than the dome shape
+that argues for it locally. This points toward a derivation of η ≤ 2G that does not necessarily
+go through the HK dome form. The dome form motivates the choice of K_AUD as the ceiling-setting
+constant in the physical range where the model fits; the bound's empirical universality
+survives outside that range.
+
+10.8 The triple convergence at R₀
+
+The critical tube radius R₀ = arccosh(2)/2 of §10.3 emerges as a distinguished hyperbolic
+position in three independent settings:
+
+  Setting                             What R₀ is in this setting                          Defining identity
+  ----------------------------------- --------------------------------------------------- -------------------------
+  Hodgson-Kerckhoff tube packing      Binary-transition tube radius where h(R₀) = K_AUD   cosh(2R₀) = 2 (HK 2005)
+  η-resummation dome                  Max-dilation of η_kernel = D[sech²]                 sech²(R₀) = 2/3
+  Non-rotating BTZ (2+1 dimensions)   Half-geodesic horizon → r = 2r_h                    r/r_h = √(3/2)
+
+All three identifications reduce algebraically to cosh(2R₀) = 2 by elementary hyperbolic
+identities. The triple convergence is verified at dps = 100 in the framework's verification
+logs (sommerfeld_verify.py). What it establishes is that R₀ is a structurally distinguished
+location in three different hyperbolic-geometric constructions; what it does not establish is a
+shared derivation explaining why these three constructions converge on the same value. The
+convergence is observed, not derived; the open question is whether there is an underlying
+mechanism that forces R₀ to appear in all three settings, or whether the appearances reflect a
+deeper structural identity (a "Topological Bound on Information Diffusion" or analogous
+unifying principle) that has not yet been formulated.
+
+10.9 The deeper structural question — Borel-hyperbolic map as derivation target
+
+The model of §10.5 fits 3D O(N) data with zero free parameters and matches the HK tube-packing
+function up to overall amplitude. But the model is a fit, not a derivation. The structural
+question that the parallel raises is the following.
+
+  Why does the 3D O(N) φ⁴ resummation factor R(N) have the hyperbolic-doubling kernel form in
+  the first place?
+
+A derivation would require showing that the resummation integral over the Borel plane in O(N)
+φ⁴ theory has the same saddle-point structure as the Hodgson-Kerckhoff tube-packing
+optimization in hyperbolic 3-manifold geometry. Specifically, the conjectural derivation target
+is:
+
+  Show that the Borel singularity a(N) = 3/(N + 8) plays the role of the tube radius r in an
+  optimization problem whose Euler-Lagrange equations coincide with those of HK tube packing.
+
+This is the framework's central open Tier 6 question for the η-corridor. If proved, the dome's
+appearance in O(N) resummation becomes forced (not coincidental), the framework constants
+populating its landmarks become forced rather than empirically matched, and the empirical bound
+η ≤ 2G acquires a derivation route through:
+
+1.  The dome's own algebra produces √2 and ln(2)/2 as structurally distinguished landmarks
+    (Theorems 9.4 and 9.5).
+2.  The framework's construction K = (geometric primitive) · ln 2 combines them into K_AUD
+    (Paper 3 V3).
+3.  Fisher's relation γ = ν(2 − η) doubles K_AUD into the corridor ceiling 2K_AUD (Part I
+    §8.1).
+4.  The Borel-hyperbolic map shows the dome's appearance in O(N) resummation is forced by
+    saddle-point structure (open target).
+
+Steps 1–3 are in hand. Step 4 is the bridge.
+
+10.10 What §10 establishes and does not establish
+
+Established (Theorem-tier or Observation-tier with high-precision verification):
+
+-   The Hodgson-Kerckhoff tube-packing function (published 2005) takes the form of the dome
+    function up to an overall amplitude 2√6 · ln(2) (§10.1).
+-   The HK function peaks at the golden ratio φ exactly (§10.2, Corollary 9.3).
+-   The HK function at the critical tube radius R₀ takes the value K_AUD = √2 · ln(2) exactly
+    (Theorem 10.1).
+-   The dome function appears as a zero-parameter model for the 3D O(N) resummation factor R(N)
+    at 0.77% RMS in the range N = 0–4, with the framework constants {φ, √2, 2} populating its
+    algebraic landmarks (Model 10.2 and the comparison table of §10.5).
+-   The critical tube radius R₀ appears as a structurally distinguished hyperbolic position in
+    three independent constructions (§10.8).
+
+Not established (open Tier 6 questions):
+
+-   Why the dome function appears in 3D O(N) Borel resummation at all (the Borel-hyperbolic-map
+    conjecture, §10.9).
+-   Whether the triple convergence at R₀ reflects a shared underlying mechanism or three
+    independent constructions converging on the same value (§10.8).
+-   Whether the framework's specific scale c = 2 ln 2 (rather than the alternative HK-landmark
+    choice c = 2 · arcsinh(1/√2) ≈ 1.762) is structurally forced or empirically selected. The
+    discussion of this choice is the subject of §12.
+
+-----------------------------------------------------------------------------------------------
+
+11. The Central Synchronization Conjecture
+
+11.1 Why this section exists
+
+K_AUD = √2 · ln(2) has appeared, with no free parameters and to numerical precision verified at
+dps = 1500 across multiple architectures, in several mathematical settings. Holding the
+framework's Λ-canary discipline (multi-mechanism convergence requires distinct mechanisms, not
+multiple realizations of the same algebraic identity), these settings sort into one
+hyperbolic-kernel cluster routing through a shared algebraic identity, plus three
+mechanism-distinct anchors, plus a related ingredient-level finding.
+
+Hyperbolic-kernel cluster (one shared algebraic identity, three operational contexts). The
+identity
+
+  arcsinh(1/(2√2)) = (ln 2)/2, equivalently sinh((ln 2)/2) = 1/(2√2),
+
+is the algebraic kernel through which K_AUD enters three otherwise unrelated constructions:
+
+-   The Hodgson-Kerckhoff tube-packing function in hyperbolic 3-manifold geometry (HK 2005,
+    Theorem 4.4; §10.3 of this paper), where the identity gives the closed form 1/S = √2 · ln 2
+    = K_AUD inside HK's bound machinery.
+-   The saturation boundary of Algorithm EA at the binary cell L = ln 2 (Saturation Constants
+    paper, §3), where the identity provides the closed-form residual probability p(ln 2) = ln 2
+    / (2 · sinh((ln 2)/2)) = √2 · ln 2 = K_AUD.
+-   The dome's evaluation at the upper critical dimension d_c = 4 (§12.4 of this paper), which
+    lands at the position x = (ln 2)/2 = arcsinh(1/(2√2)) — explicitly the same algebraic point
+    as the HK landmark, in different vocabulary.
+
+These three are operationally distinct (hyperbolic 3-manifold geometry, Monte Carlo sampling
+endpoint-balancing, Borel-resummation hyperbolic coordinate at d_c) but algebraically
+identical: they realize one identity in three different operational settings. Counted under the
+framework's Λ-canary discipline, they constitute one convergence on the same algebraic fact,
+not three independent appearances.
+
+Mechanism-distinct anchors (no shared hyperbolic-kernel identity).
+
+-   The H₄ regular polytope (Paper 3 V3, DOI: 10.17605/OSF.IO/QH5S2), where √2 appears as the
+    framework's geometric primitive associated with H₄. Paper 3 V3 §3.4 catalogues four origins
+    for the √2 factor (the √2/2 factor in the 120-cell circumradius formula R = (√2/2) · √(5 +
+    √5) ≈ 1.9021; the √2 scaling factor in the L2 norm of an equal-component 2-vector, where
+    ‖(ln 2, ln 2)‖₂ = √2 · ln 2 and the √2 is the norm-scaling factor, not the norm itself;
+    hypercube body-diagonal geometry; the algebraic root of x² − 2), with no commitment to a
+    single privileged origin. The framework constructs K_AUD by combining √2 with the
+    informational primitive ln 2. No arcsinh / sinh identity is involved; the polytope-geometry
+    route is structurally independent of the hyperbolic-kernel cluster.
+-   The threshold coefficient in an upper bound on the Erdős–Hooley Δ-function average order
+    (de la Bretèche–Tenenbaum 2022, arXiv:2210.13897), where the value √2 · log 2 ≈ 0.980258
+    appears as the threshold coefficient a in an upper bound Δ̄(x) ≤ C · exp(a · √(log₂ x)) on
+    the (weighted) average order of the Δ-function. Exponential-sum / Dirichlet-series
+    saddle-point analysis; no hyperbolic kernel.
+-   The empirical ceiling on the anomalous dimension η at the 3D Wilson-Fisher fixed point
+    (Part I of this paper), where K_AUD appears via Fisher's relation as the corridor's lower
+    endpoint 2K_AUD in the (2 − η) coordinate. Empirical observation across ten WF-family
+    classes; counts as independent evidence at the empirical-tier level rather than as a
+    derivation.
+
+Ingredient-level finding (different kind of evidence). Independently of the above, the dome
+function studied in §9 — defined with no reference to H₄ polytope geometry, to the EA
+algorithm, to the framework, or to any of the above derivations — produces both ingredients of
+K_AUD as algebraically distinguished landmarks (√2 from the self-reference condition g'/g = g,
+with the equation reducing to u² = 2; ln 2 as twice the function's total integral). The dome's
+algebra does not contain the specific multiplicative combination √2 · ln(2) itself (§9.7); the
+product enters through the framework's construction in Paper 3 V3, not through the dome. The
+dome's contribution is therefore ingredient-level evidence: both factors are distinguished by
+the dome's internal structure, but the multiplicative combination is supplied by framework
+construction. Both √2 and ln 2 are ubiquitous mathematical constants individually, so their
+co-appearance in the dome's two unrelated internal conditions is suggestive, not strong
+evidence by itself.
+
+The reader's natural question is whether the hyperbolic-kernel cluster, the three
+mechanism-distinct anchors, and the ingredient-level finding represent independent coincidences
+clustering at the same numerical value, or whether they are the same structural object
+expressing itself in different mathematical clothing. The Central Synchronization Conjecture
+states the second reading explicitly, while §11.6 acknowledges the first reading as logically
+possible.
+
+11.2 The n = 2 sub-unity selection theorem
+
+Before stating the conjecture, we record a theorem that underlies its formulation.
+
+Theorem 11.1 (n = 2 sub-unity selection). Define K(n) = √n · ln(n) for positive integers n.
+Then K(n) < 1 if and only if n = 2. Specifically: K(1) = 0, K(2) = √2 · ln 2 ≈ 0.9803 (the
+unique sub-unity value at integer n > 1), K(3) = √3 · ln 3 ≈ 1.9027, and K(n) is monotonically
+increasing for n ≥ 2.
+
+Proof. K(2) = √2 · ln 2; numerical evaluation gives K(2) ≈ 0.9803 < 1. K(3) = √3 · ln 3 ≈
+1.9027 > 1. For n ≥ 3, d/dn[√n · ln n] = (ln n + 2)/(2√n) > 0, so K is monotonically increasing
+on n ≥ 3. K(1) = √1 · ln 1 = 0. So K crosses unity exactly once on positive integers, between n
+= 2 and n = 3, with n = 2 being the unique positive integer for which 0 < K(n) < 1. ∎
+
+Verified across architectures at dps = 1500 (atlas lock n2_sub_unity_selection_theorem).
+
+Structural reading. The function K(n) = √n · ln n combines a geometric primitive (√n, the
+H_n-family circumradius pattern) with an informational primitive (ln n, the Shannon entropy of
+the unit n-ary distinction). The product crosses unity exactly once on positive integers, with
+n = 2 being uniquely sub-unity. The value K(2) = K_AUD is therefore the distinguished value of
+the geometry-information product at the unique sub-unity integer.
+
+11.3 Statement of the conjecture
+
+Conjecture 11.2 (Central Synchronization Conjecture). K_AUD = √2 · ln(2) is the value of the
+geometry-information intersection at the unique sub-unity integer n = 2. The conjecture has two
+parts:
+
+(i) Structural claim. There is a single underlying mathematical object — the
+geometry/information intersection at n = 2 — that K_AUD is the value of. The recurrences of
+K_AUD across (a) the hyperbolic-kernel cluster of HK tube-packing + Algorithm EA + dome-at-d_c
+(sharing the algebraic identity arcsinh(1/(2√2)) = (ln 2)/2 per §11.1), (b) the three
+mechanism-distinct anchors of the H₄ polytope, the Erdős–Hooley threshold, and the
+Wilson-Fisher η-ceiling, and (c) the dome's ingredient-level finding (the dome's algebra
+distinguishes √2 and ln 2 separately but not their product) are not independent.
+
+(ii) Participation claim. Each domain where K_AUD has been derived participates in this
+intersection through a domain-specific mechanism (H₄ closure, EA saturation, HK packing, the
+Tenenbaum threshold, the Wilson-Fisher fixed point). These mechanisms are not arbitrary — each
+one realizes the n = 2 sub-unity geometry/information intersection in its domain's native
+variables.
+
+The conjecture is Tier 5/6 boundary: its supporting items (§11.4 below) are individually at
+Theorem-tier or Observation-tier with high-precision verification, but the overarching
+structural claim that they are the same intersection has not been derived. The Tier 6 work that
+would promote the conjecture to theorem is named in §11.5.
+
+11.4 Partial supporting theorems and observations
+
+The following items are individually at Theorem-tier or Observation-tier with high-precision
+verification (dps = 1050 or higher across multiple architectures, unless otherwise noted). They
+collectively constitute the partial-evidence base for Conjecture 11.2.
+
+Item 1 (Theorem). The n = 2 sub-unity selection theorem (Theorem 11.1 above). K(n) = √n · ln n
+is uniquely sub-unity at n = 2 among positive integers.
+
+Item 2 (Theorem). The dome's algebra encodes both K_AUD ingredients. The dome function g(x) =
+tanh(x)/cosh(2x), in u = cosh(2x) coordinates, distinguishes both √2 (via the self-reference
+condition g'/g = g, with the equation reducing to u² = 2; Theorem 9.4) and ln(2)/2 (as the
+function's total integral ∫g dx; Theorem 9.5). The dome's own algebra contains the raw material
+for K_AUD = √2 · ln 2 without any framework input.
+
+Item 3 (Theorem). Triple convergence at R₀. The critical hyperbolic radius R₀ = arccosh(2)/2
+appears as a structurally distinguished position in three independent constructions: the HK
+tube-packing function (binary-transition radius where h(R₀) = K_AUD), the η-resummation dome
+(maximum-dilation point of η_kernel = D[sech²]), and the non-rotating BTZ black hole in 2+1
+dimensions (half-geodesic-distance from horizon to doubling radius). All three identifications
+reduce algebraically to cosh(2R₀) = 2 (§10.8).
+
+Item 4 (Theorem). The corridor identity 2 − 2K_AUD = 2G. Given K_AUD + G = 1, the corridor
+width 2G is algebraically forced by Fisher's relation γ = ν(2 − η) supplying the upper endpoint
+of (2 − η) and the framework's conjectured lower endpoint 2K_AUD. The empirical bound η ≤ 2G
+holds across all measured 3D Wilson-Fisher-family classes (Part I §5, with the tightest unitary
+case at +2.2σ).
+
+Item 5 (Theorem). The dilation-operator structure of η_kernel. The kernel η_kernel = D[sech²],
+where D = 1 − x · ∂_x is the dilation generator, realizes the same algebraic structure in three
+coordinate views: as a Mellin transform with (s + 1) as the dilation signature, as the dome
+function in cosh(2x), and as a packing functional in the hyperbolic-geometry setting. Three
+independent derivations from three different starting points produce the same kernel.
+
+Item 6 (Observation). The zero-parameter HK form of R(N). The Borel-resummation factor R(N) for
+3D O(N) φ⁴ theory across N = 0–4 fits the Hodgson-Kerckhoff tube-packing function at 0.77% RMS
+with zero free parameters, with the framework constants {φ, √2, 2} populating the function's
+algebraic landmarks (§10.5). The same dome function appears in HK and in O(N) resummation.
+
+Item 7 (Observation). H₄ at d = 4 and d_c = 4 coincidence. The H₄ regular polytope (source of
+√2 via circumradius) lives in dimension d = 4. The upper critical dimension for O(N) φ⁴ theory
+established by Wilson and Fisher (1972) is d_c = 4. These are the same dimension from
+independent sources (geometric vs renormalization-group). The bridge between H₄ at d = 4 and
+the Wilson-Fisher fixed point at d_c = 4 has not been built; the coincidence is recorded as an
+observation.
+
+Item 8 (Observation, with one Theorem-tier component). The N = d_c = 4 binary landmark
+alignment. At the upper critical dimension N = d_c = 4, three algebraically independent inputs
+align on the dome's binary landmark u = 5/4: (i) the Lipatov-instanton position a(d_c) = 1/d_c
+at all orders (Theorem; verified to 7 loops via Dunne–Meynig 2021/2023, arXiv:2111.15554); (ii)
+the framework's scale c = (d_c/2) · ln 2 placing the dome at the K_AUD-defining hyperbolic
+position arcsinh(1/(2√2)) = ln(2)/2 (Theorem-conditional on the alignment principle; see §12);
+(iii) the elementary hyperbolic identity cosh(ln 2) = 5/4. The alignment is exact; the
+structural reading depends on the alignment principle's status, discussed in §12.
+
+Items 1–8 are individually at Theorem or Observation tier with verification. They are not
+assertions; they are mathematical facts about specific functions, polynomials, integrals, and
+empirical fits.
+
+11.5 What is conjectural (Tier 6 work remaining)
+
+The conjecture's structural claim — that items 1–8 are not eight independent coincidences but
+eight aspects of a single intersection — is the part that remains to be proved. The specific
+Tier 6 derivation targets that would promote Conjecture 11.2 from conjecture to theorem are:
+
+(a) The Borel-hyperbolic map (§10.9). Show that the Borel singularity a(N) = 3/(N + 8) of O(N)
+φ⁴ theory plays the role of the tube radius in an optimization problem with the same
+saddle-point structure as HK tube-packing. If proved, Item 6 becomes a derivation rather than
+an empirical fit.
+
+(b) The EA saturation participation map. Show that Algorithm EA's saturation boundary at the
+binary cell L = ln 2 — where K_AUD appears as a residual energy budget — is mechanistically the
+same intersection structure as the H₄ derivation. The value-level match is established; the
+structural participation is conjectural.
+
+(c) The H₄ / Wilson-Fisher bridge. Show that the H₄ polytope's d = 4 location and the upper
+critical dimension d_c = 4 are structurally related, not coincidentally equal. Item 7 is
+currently an observation; promoting it to Theorem requires a derivation linking the polytope
+geometry to the field-theoretic upper critical dimension.
+
+(d) The dome → general intersection identification. Show that the dome function's algebraic
+generation of both K_AUD ingredients (Item 2) is not unique to this particular function but
+reflects a general structural fact: that any hyperbolic-doubling kernel with the self-reference
+property g'/g = g reducing to a binary-doubling polynomial necessarily produces both the
+relevant √n (from self-reference) and ln(n) (from doubling-mass) as algebraic landmarks. This
+would promote Item 2's structural reading from Observation to Theorem.
+
+(e) External forcing of the alignment principle of Item 8. The alignment principle (that the
+dome's evaluation at d_c lands at the K_AUD-defining hyperbolic position arcsinh(1/(2√2)),
+rather than at the alternative HK landmark R₀ = arcsinh(1/√2)) is internally consistent and
+supported by the EA binary-cell bridge (the doubling 2x*(d_c) = ln 2 = L_EA links HK and EA
+through the dome's d_c evaluation). External forcing — a derivation showing why φ⁴-at-d_c
+specifically selects the K_AUD-defining HK landmark over the critical-radius landmark from
+independent field-theoretic principles — has not been located in the literature and remains
+open.
+
+(f) Derivation of the moment-arithmetic factorization from the dome's algebraic factorization.
+The integer-ratio sequence Mg/Mg^n = A002105(n)·(2^(2n−1) − 1) of Corollary 9.9 factorizes as a
+product of two integer families: the reduced tangent numbers A002105 (from the Taylor structure
+of tan(x)) and the Mersenne-like factors (2^(2n−1) − 1) (from binary-doubling structure). The
+dome's functional factorization g(x) = (1/2)·sech²(x)·tanh(2x) of Theorem 9.1 decomposes the
+function into a Lorentzian spectral envelope (sech²) and a binary-doubling carrier (tanh(2x)).
+The Observation of §9.11.4 reads these as the same factorization at two levels — function-level
+and moment-arithmetic level — with the tangent-class component of the integer ratios
+structurally aligned with the tanh(2x) factor of the dome and the Mersenne component
+structurally aligned with the cosh(2x) denominator. Promotion to Theorem requires deriving each
+integer family from its corresponding factor of g(x) directly. This is plausible (each
+component has its own Mellin generating structure) but not yet built.
+
+When items (a)–(f) are proved, the conjecture is no longer a conjecture. Until they are proved,
+the conjecture stands on items 1–8 of §11.4 as its partial-evidence base — which is more than
+"we noticed a numerical coincidence" and less than "we have derived the framework's central
+claim from first principles."
+
+11.6 What this section does and does not claim
+
+The section does not claim that K_AUD's recurrences have been derived from a single underlying
+mathematical object. It claims that the recurrences are consistent with a single underlying
+object (the geometry/information intersection at n = 2), that this object has been partially
+mapped through items 1–8, and that the remaining Tier 6 work (a)–(f) is specific and
+attemptable.
+
+The section does not claim that the framework is the only possible explanation for K_AUD's
+recurrences. Other explanations remain logically possible: that the cluster, the three
+mechanism-distinct anchors, and the ingredient-level finding (per §11.1's tier-disciplined
+sort) are unrelated coincidences happening to cluster at the same numerical value; that they
+share a common origin that is not the geometry/information intersection; or that the cluster's
+algebraic identity-sharing and the mechanism-distinct anchors' independence are themselves
+structurally connected in a way the framework has not yet derived. The framework's claim is
+that the geometry/information intersection is the most economical explanation of the observed
+convergences, and that the partial evidence (items 1–8) is strong enough to make it worth
+attempting to derive.
+
+The section does claim that items 1–8 are individually at the tiers stated (Theorem or
+Observation with high-precision verification), that they are not assertions but mathematical
+facts, and that the Tier 6 derivation targets are specific enough to be attemptable.
+
+The reader who accepts the empirical observation of Part I but rejects the structural reading
+of Part II §11 may still adopt the bound η ≤ 2G as a numerical regularity of 3D
+Wilson-Fisher-family critical phenomena without further commitment. The Central Synchronization
+Conjecture is the framework's broader structural interpretation; it is not required for the
+bound's empirical status.
+
+-----------------------------------------------------------------------------------------------
+
+12. The N = d_c = 4 binary landmark and the c = 2 ln 2 alignment
+
+This section addresses the question raised in §10.10: whether the framework's scale c = 2 ln 2
+(used to set the hyperbolic coordinate in the R(N) model of §10.5) is structurally forced or
+empirically selected. The analysis below resolves part of this question (Theorem 12.1, a(d_c) =
+1/d_c at all loops) and leaves part conditional on an alignment principle (Theorem 12.2,
+structurally forcing c = (d_c/2) · ln 2 given the alignment principle).
+
+12.1 The model's hyperbolic coordinate at d_c
+
+The R(N) model of §10.5 feeds the Borel singularity a(N) = 3/(N + 8) into the dome's hyperbolic
+coordinate via x(N) = c · a(N), with c = 2 ln 2. We evaluate the model at N = d_c = 4 (the
+upper critical dimension of φ⁴ theory, equal numerically to the order-parameter dimension N =
+4):
+
+a(d_c) = 3 / (d_c + 8) = 3 / 12 = 1/4.
+
+x(d_c) = c · a(d_c) = 2 ln 2 · 1/4 = (ln 2) / 2.
+
+cosh(2 x(d_c)) = cosh(ln 2) = (e^(ln 2) + e^(−ln 2)) / 2 = (2 + 1/2) / 2 = 5/4.
+
+So at d_c = 4 the model places the dome's u-coordinate at u(d_c) = 5/4. This is a specific
+algebraic value of the dome's argument.
+
+12.2 The full algebraic environment at x = (ln 2) / 2
+
+At x = (ln 2) / 2 the hyperbolic functions take exact rational and square-root values:
+
+  Quantity       Value
+  -------------- -----------
+  sinh(x)        1 / (2√2)
+  cosh(x)        3 / (2√2)
+  tanh(x)        1 / 3
+  sinh(2x)       3/4
+  cosh(2x) = u   5/4
+  tanh(2x)       3/5
+
+All values are exact. The position x = (ln 2) / 2 is therefore an algebraically distinguished
+point of the dome.
+
+12.3 The Lipatov saddle-point identity at d_c
+
+Theorem 12.1 (a(d_c) = 1/d_c at all loops). At the upper critical dimension d_c = 4 of φ⁴
+theory, the leading Borel singularity satisfies a(d_c) = 1/d_c exactly at all orders in
+perturbation theory.
+
+Argument. The Borel singularity a(N) = 3/(N + 8) is the position of the leading large-order
+instanton saddle point in the Borel plane (the Lipatov saddle; standard reference: Brézin–Le
+Guillou–Zinn-Justin 1977 [Phys. Rev. D 15, 1544] and McKane–Wallace 1978 [J. Phys. A 11,
+2285]). Higher-loop fluctuations around the Lipatov saddle correct the exponent b and the
+prefactor S in the Borel asymptotic c_k ~ S · a^k · Γ(k + 1 + b), but the position a is fixed
+by the saddle-point structure of the perturbative expansion and is not corrected at higher
+loops.
+
+The algebraic identity a(d_c) = 1/d_c reduces to 3 / (d_c + 8) = 1/d_c, i.e., 3 d_c = d_c + 8,
+i.e., d_c = 4. The identity has unique solution d_c = 4 — equivalent to the statement that φ⁴'s
+upper critical dimension is the unique d at which a(d) = 1/d holds.
+
+Empirical verification at 6–7 loops. Dunne and Meynig (arXiv:2111.15554, 2021, rev. 2023) used
+Kompaniets–Panzer 6-loop and Schnetz 7-loop O(N) β-function and anomalous-dimension
+computations to test the Lipatov position empirically. Their ratio-of-ratios tests confirm that
+perturbative data through 7 loops sit on the Lipatov curve at this position, clearly favoring
+instanton over renormalon positions. The result is most robust in MS-family RG schemes
+(Dunne–Meynig argue MS suppresses renormalons in RG functions). So a(d_c) = 1/d_c is an exact
+identity of φ⁴-at-d_c at all loops as a matter of saddle-point structure, and is verified
+consistent at 6–7 loops in published high-precision perturbative data. ∎
+
+Scope of Theorem 12.1. The identity is exact-and-specific to φ⁴-at-d_c = 4. For other φ^k
+theories with their own different leading Borel singularities and upper critical dimensions (φ⁶
+at d_c = 3, φ³ at d_c = 6), the analogous identity a(d_c) = 1/d_c would hold or fail for
+theory-specific reasons unrelated to the φ⁴ case. The framework's claim is therefore not a
+meta-theorem about upper critical dimensions across field theory; it is the specific exact
+identity at the φ⁴ Wilson-Fisher fixed point, the field-theoretic setting where the empirical
+observation of Part I lives.
+
+12.4 The K_AUD-defining hyperbolic position at d_c
+
+At x = (ln 2) / 2, an elementary hyperbolic identity holds:
+
+arcsinh(1/(2√2)) = (ln 2) / 2.
+
+Proof. sinh((ln 2)/2) = (e^((ln 2)/2) − e^(−(ln 2)/2))/2 = (√2 − 1/√2)/2 = ((2 − 1)/(2√2))·...
+= 1/(2√2). ∎
+
+This identity is the algebraic content of Hodgson–Kerckhoff Theorem 4.4, where the value 1/S in
+HK's bound machinery is shown to equal √2 · ln 2 = K_AUD. The "K_AUD-defining hyperbolic
+position" is the value x = arcsinh(1/(2√2)) = (ln 2) / 2 where the HK function picks out K_AUD
+by the defining-form identity.
+
+So at d_c = 4, with the framework's choice c = 2 ln 2, the dome's hyperbolic coordinate lands
+at the K_AUD-defining position. The binary landmark u = 5/4 of §12.1 and the K_AUD-defining
+position arcsinh(1/(2√2)) of HK are the same algebraic point in different vocabulary.
+
+12.5 Two HK-natural choices for c at d_c
+
+The HK function admits two distinct algebraically distinguished hyperbolic positions:
+
+(I) The K_AUD-defining position at x = (ln 2)/2 (u = 5/4), where the arcsinh identity defines
+K_AUD = √2 · ln 2 via 1/S = K_AUD in HK Theorem 4.4.
+
+(II) The critical tube radius at R₀ = arcsinh(1/√2) (u = 2), where the HK function satisfies
+h(R₀) = K_AUD (numerically) and cosh(2R₀) = 2 (binary doubling).
+
+These are two structurally distinct HK landmarks: (I) is the defining-form path (K_AUD enters
+by an arcsinh identity); (II) is the critical-transition path (K_AUD appears as the value of
+the function at the critical radius). Both are framework-meaningful; both are HK-natural.
+
+The framework's choice c = 2 ln 2 places the dome at landmark (I) at d_c = 4. The alternative
+HK-natural choice c = 2 · arcsinh(1/√2) ≈ 1.762 would place the dome at landmark (II) at d_c =
+4. The best-2-parameter fit to the R(N) data of §10.5 gives c_fit ≈ 1.375; the framework's
+choice c = 1.386 is 0.8% from c_fit, while the alternative c ≈ 1.762 is 28% from c_fit and is
+ruled out by data.
+
+So c = 2 ln 2 is one of two HK-natural alternatives, and only the K_AUD-aligning one is
+data-consistent. The selection structure is two-layer: HK-landmark mapping reduces the
+candidates to {K_AUD-defining position, critical-radius position}, and empirical fit further
+reduces to {K_AUD-defining position}.
+
+12.6 The EA binary-cell bridge
+
+Among the internal arguments supporting the framework's selection of landmark (I) over landmark
+(II), the strongest is the EA binary-cell bridge discussed below.
+
+At x = (ln 2)/2, the doubling 2 · x(d_c) = ln 2 = L_EA, where L_EA is the binary cell width
+that forces K_AUD in Algorithm EA's saturation analysis (Saturation Constants paper, §3).
+Specifically, Algorithm EA at L = ln 2 has saturation root b = 2 + √2 from the algebraic
+equation b² − 4b + 2 = 0, and the chain of saturation constants includes K_AUD as the residual
+energy budget at the binary cell.
+
+The structural reading: the dome's d_c-evaluation at landmark (I) lands at exactly the binary
+cell width L_EA that independently forces K_AUD in Algorithm EA. Two of K_AUD's independent
+forcing-routes — HK (where K_AUD is defined via arcsinh(1/(2√2))) and EA (where K_AUD is forced
+at L_binary = ln 2 via the doubling 2x*(d_c) = ln 2) — meet at the dome's d_c-evaluation. By
+contrast, the alternative HK landmark (II) gives 2R₀ = arccosh(2) = ln(2 + √3), which has no
+analogous algorithmic-forcing role.
+
+This is a structural bridge between HK and EA through the dome's algebra at d_c. The bridge is
+internal to the framework (it does not derive c = 2 ln 2 from independent first principles),
+but it is a structural argument rather than a purely empirical one: the framework's choice of
+HK landmark at d_c is the one that meets the EA binary cell.
+
+12.7 Structural forcing of c = (d_c/2) · ln 2 given the alignment principle
+
+We now state the conditional structural forcing of c.
+
+Theorem 12.2 (c structurally forced, Theorem-conditional on the alignment principle). Assume:
+(a) Theorem 12.1: a(d_c) = 1/d_c at all loops. (b) The alignment principle: the dome's
+evaluation at the upper critical dimension lands at the K_AUD-defining hyperbolic position
+arcsinh(1/(2√2)) = (ln 2)/2, rather than at any other HK landmark.
+
+Then the framework's scale c is forced:
+
+c = d_c · arcsinh(1/(2√2)) = d_c · (ln 2)/2 = (d_c / 2) · ln 2.
+
+At d_c = 4: c = 2 ln 2 ≈ 1.386.
+
+Proof. From (a), x(d_c) = c · a(d_c) = c / d_c. From (b), x(d_c) = arcsinh(1/(2√2)) = (ln 2)/2.
+Equating: c / d_c = (ln 2)/2, so c = (d_c / 2) · ln 2. ∎
+
+Status. Theorem 12.2 is Theorem-conditional: the structural chain is forced given the alignment
+principle. The principle itself is supported by the EA binary-cell bridge (§12.6) and by the
+framework's K_AUD-centric architecture, but it has not been derived from independent
+field-theoretic principles. Among K_AUD's multiple independent appearances, only HK uses
+arcsinh(1/(2√2)) as the defining-form path; the Tenenbaum threshold (Erdős–Hooley) gives K_AUD
+by a different route entirely. We have searched the published literature for an external
+forcing argument selecting the K_AUD-defining HK landmark over R₀ from φ⁴ field-theoretic
+considerations (1/N expansion, ε-expansion, conformal bootstrap, 6–7 loop perturbative results)
+and have not found one.
+
+12.8 The structural anchor is n = 2
+
+A natural question is whether the alignment principle generalizes to other field theories — for
+example, to φ⁶ at d_c = 3, where a different a(N) formula would apply, and one might ask
+whether the analogous identity selects the framework's analog of c there.
+
+The framework's response is that this question is misframed. K_AUD = √2 · ln 2 is specifically
+the value at n = 2 by Theorem 11.1; K(n) = √n · ln n at n = 3 is approximately 1.90 > 1, and
+there is no n-greater-than-2 analog of K_AUD. Other φ^k theories with their own d_c values
+therefore do not have K_AUD-analogs to align to — their distinguished integers do not satisfy
+K(n) < 1.
+
+The framework's structural anchor is n = 2 (the binary singularity). Wherever the binary
+singularity manifests — in HK tube-packing geometry, in Algorithm EA's binary-cell saturation,
+in the dome's d_c-evaluation at φ⁴, in Tenenbaum's Erdős–Hooley threshold — the algebraic
+environment is the same: √2, ln 2, the arcsinh identity, the binary cell L = ln 2. The claim is
+multi-mechanism convergence on a single structural anchor (n = 2), not cross-theory
+generalization of an alignment principle.
+
+12.9 Falsifiability targets specific to §12
+
+The alignment principle of §12.7 is internally consistent (it is supported by the EA
+binary-cell bridge and the K_AUD-centric architecture) but not externally derived. The
+following targets would either strengthen the alignment principle or refute it:
+
+(a) Empirical universality of η ≤ 2G across non-O(N) WF-family classes at d = 3. Already tested
+(Part I §5); the bound holds across nine non-O(N) WF-family classes plus SAW. This supports the
+framework's broader empirical claim and indirectly supports the alignment principle by
+establishing that the dome's K_AUD-position picks out the empirical ceiling.
+
+(b) Monitoring for new independent appearances of arcsinh(1/(2√2)) in unrelated mathematics.
+Absence of new appearances does not refute the framework; presence of an appearance with a
+different algebraic environment (same arcsinh value, different surrounding algebra) would be
+diagnostic against the multi-mechanism convergence claim.
+
+(c) Higher-precision data on the η dome shape at N ≥ 4. The model's degradation at N ≥ 5
+(§10.7(b)) is honestly recorded; precision improvements would test whether the dome-form fit is
+local-only or whether subleading corrections to a(N) could restore agreement.
+
+(d) Direct derivation of η ≤ 2G from CFT-bootstrap or rigorous machinery. Would shift the bound
+from empirical observation to derived theorem, sharpening Item 4 of §11.4 to fully Theorem-tier
+and resolving the alignment principle's structural role indirectly.
+
+12.10 What §12 establishes and does not establish
+
+Established:
+
+-   Theorem 12.1: a(d_c) = 1/d_c at all loops, exact and specific to φ⁴-at-d_c, verified
+    consistent at 6–7 loops in published perturbative data.
+-   The K_AUD-defining position arcsinh(1/(2√2)) = (ln 2)/2 is an elementary hyperbolic
+    identity (§12.4).
+-   The framework's choice c = 2 ln 2 places the dome's d_c-evaluation at the K_AUD-defining HK
+    landmark (I), not at the alternative HK landmark (II) at the critical tube radius (§12.5).
+-   The EA binary-cell bridge: 2x*(d_c) = ln 2 = L_EA links the dome's d_c-evaluation to
+    Algorithm EA's binary-cell width (§12.6).
+-   Theorem 12.2: c = (d_c/2) · ln 2 is forced by the alignment principle plus Theorem 12.1
+    (Theorem-conditional, §12.7).
+
+Not established (open):
+
+-   External forcing of the alignment principle from independent field-theoretic
+    considerations. Within the framework the principle is supported by the EA bridge;
+    externally a derivation showing why φ⁴-at-d_c selects the K_AUD-defining HK landmark from
+    independent principles has not been located in the literature.
+-   Whether subleading Borel corrections at d_c maintain the alignment principle, given that
+    Theorem 12.1 ensures only the leading saddle-point position.
+
+The framework's tier disposition for §12 is therefore: Theorem 12.1 is unconditionally at
+Theorem-tier; Theorem 12.2 is at Theorem-conditional-tier, with the conditionality openly
+flagged.
+
+-----------------------------------------------------------------------------------------------
+
+13. The dimensional home — H₄ at d = 4 and the upper critical dimension
+
+13.1 The d = 4 coincidence
+
+The framework's geometric primitive √2 arises as the circumradius of the H₄ regular polytope
+(the 600-cell, dual of the 120-cell), which lives in d = 4 as the highest-dimensional regular
+polytope of the H-series. The framework's K_AUD constant is constructed in Paper 3 V3 as K = √2
+· ln 2, combining the H₄ circumradius with the binary distinction unit.
+
+Independently, the upper critical dimension of φ⁴ theory for O(N) models is d_c = 4. Above d_c,
+the Gaussian (mean-field) fixed point is stable and renormalization-group flow is trivial;
+below d_c, the Wilson-Fisher fixed point takes over, and the anomalous dimension η acquires
+nonzero values. This was established by Wilson (1971) and Wilson and Fisher (1972), decades
+before any connection between the H-series polytopes and Ising-class critical phenomena was
+identified.
+
+The H₄ polytope dimension (the framework's geometric home) and the upper critical dimension of
+φ⁴ theory (the field-theoretic boundary above which mean field is exact) are the same dimension
+from independent sources. This is the framework's central dimensional observation. As §11.4
+Item 7 recorded, the bridge between H₄ at d = 4 and the Wilson-Fisher fixed point at d_c = 4
+has not been built; the coincidence is recorded as an observation.
+
+13.2 The d-dependence of the corridor
+
+We compare the empirical bound η ≤ 2G against measured Ising η values at d = 4, d = 3, and d =
+2:
+
+  Dimension   ε = 4 − d   η (Ising)               η / 2G   Corridor status
+  ----------- ----------- ----------------------- -------- ---------------------------------
+  d = 4       0           0 (exact, mean field)   0        Trivially satisfied (width = 0)
+  d = 3       1           0.0362978 ± 2 × 10⁻⁶    0.919    Holds (1593σ; see Part I §5)
+  d = 2       2           1/4 (exact, Onsager)    6.33     Shattered
+
+The corridor η < 2G holds at d = 3 but breaks catastrophically at d = 2, where Onsager's exact
+solution gives η = 1/4 — a factor of 6.3 above 2G. The corridor is therefore
+dimension-specific: it binds at d = d_c − 1 but not at d = d_c − 2.
+
+13.3 The circumradius threshold
+
+The dimensional specificity of the corridor admits a structural interpretation within the
+framework's own construction K = circumradius · ln 2. Applying this construction down the
+H-series chain, with "circumradius" understood as the framework's characteristic constant of
+each H-family (Paper 3 V3 §3.4 catalogues four origins for √2 in H₄ geometry, with the
+framework's primitive being the algebraically distinguished √n rather than a specific unit-edge
+polytope circumradius; the table values below follow that convention):
+
+  Polytope           Home dim   Framework circumradius   K = circ · ln 2   G = 1 − K   Corridor at d − 1?
+  ------------------ ---------- ------------------------ ----------------- ----------- ------------------------------------------
+  H₄ (120-cell)      d = 4      √2 ≈ 1.4142              0.9803            +0.0197     Yes (width 2G ≈ 0.039 at d = 3)
+  H₃ (icosahedron)   d = 3      φ ≈ 1.6180               1.1215            −0.1215     No — overflow (no positive gap at d = 2)
+  H₂ (pentagon)      d = 2      ≈ 0.8507                 0.5896            +0.4104     Yes (vacuous at d = 1)
+
+Convention note (added after primary-source review of Paper 3 V3 §3.4). The "framework
+circumradius" column above uses the framework's per-H_n characteristic constants as identified
+in Paper 3 V3 — the algebraically distinguished constants associated with each H-family rather
+than the standard unit-edge polytope circumradii. Specifically: H₂ = pentagon entry (0.8507) IS
+the standard unit-edge pentagon circumradius 1/(2 sin π/5); H₃ = icosahedron entry (φ) is the
+golden ratio, which is the dominant constant in icosahedron vertex-coordinate geometry but not
+the unit-edge icosahedron circumradius (the unit-edge value is (1/4)√(10+2√5) ≈ 0.9511); H₄ =
+120-cell entry (√2) is one of the four catalogued origins of √2 in 120-cell geometry (the √2/2
+factor in the 120-cell unit-edge circumradius R = (√2/2)·√(5+√5) ≈ 1.9021), not the unit-edge
+120-cell circumradius itself. The dimensional-overflow reading below is therefore
+framework-internal, using the framework's per-family primitives; under uniform unit-edge
+convention applied consistently across the three rows, the icosahedron's 0.9511 would sit below
+the threshold 1/ln 2 ≈ 1.4427 and the §13.3 overflow conclusion would not go through. §13.6
+records this as a non-uniqueness; the present note makes the convention dependence explicit so
+a reader can evaluate the table's standing.
+
+Within the framework's own primitive convention, the construction K = circumradius · ln 2
+produces a positive gap G (and thus a positive corridor width 2G) if and only if circumradius ·
+ln 2 < 1, equivalently
+
+circumradius < 1 / ln 2 ≈ 1.4427.
+
+The H₄ circumradius √2 ≈ 1.4142 sits just below this threshold; the H₃ circumradius φ ≈ 1.6180
+sits well above it. The H₃ "processor" therefore cannot run the construction at d = 2: the
+informational cost of the icosahedral circumradius exceeds the binary-distinction unit's
+inverse, and the gap turns negative. There is no positive corridor; the bound η ≤ 2G has no
+analog at d = 2 within the framework's parameterization.
+
+This is structurally consistent with the empirical fact that 2D Ising η = 1/4 ≫ 2G. The 2D
+critical exponents are fixed by infinite-dimensional Virasoro conformal symmetry at c = 1/2, a
+different mathematical structure entirely from the framework's H-series construction. The
+framework's parameterization does not attempt to bound η at d = 2; it predicts that it cannot.
+
+13.4 The margin identity
+
+Theorem 13.1 (corridor margin). The geometric room between the H₄ circumradius √2 and the
+threshold 1/ln 2 has the closed-form
+
+1 / ln 2 − √2 = G · log₂(e) = G / ln 2,
+
+where G = 1 − K_AUD and log₂(e) = 1/ln 2 is the bits-per-nat conversion factor.
+
+Proof. Multiply both sides by ln 2: (1/ln 2 − √2) · ln 2 = 1 − √2 · ln 2 = 1 − K_AUD = G.
+Therefore 1/ln 2 − √2 = G / ln 2 = G · log₂(e). ∎
+
+Structural reading. The framework's gap G, measured in nats (the natural unit of information at
+the Landauer threshold), becomes G · log₂(e) = G / ln 2 measured in bits (the binary unit). The
+geometric margin between the H₄ circumradius (the framework's geometric primitive) and the
+framework's overflow threshold 1/ln 2 (the inverse binary-distinction unit) is therefore
+exactly one gap-quantum amplified by the unit-conversion factor. The corridor barely exists —
+it is one G measured in bits wide, in the geometric coordinate.
+
+Theorem 13.1 promotes a previously approximate observation ("margin ≈ 1.44 · G", read from the
+numerical value 1.4427 · G with 1.4427 being approximately 1/ln 2) to an exact algebraic
+identity. The "1.44" was 1/ln 2 in disguise; the approximation hid the exactness.
+
+Open question. Whether the margin's appearance as G in bit-coordinates reflects a deeper
+unit-conversion structure between geometric and informational scales — i.e., whether the
+equality margin = G · log₂(e) is forced by a general structural fact about
+geometric/informational dual primitives — or is a consequence of the H₄-circumradius's specific
+algebraic relationship to ln 2, is open. We record the identity here without claiming to
+interpret it further.
+
+13.5 The ε-expansion connection
+
+The anomalous dimension at the Wilson-Fisher fixed point in d = 4 − ε admits an ε-expansion
+
+η(N, ε) = η₂(N) · ε² + η₃(N) · ε³ + …,
+
+with leading-order coefficient η₂(N) = (N + 2) / [2 (N + 8)²] (Wilson and Fisher 1972). There
+is no ε¹ term by symmetry of the Gaussian fixed point. At ε = 1 (d = 3), the leading-order
+coefficient gives η₂(Ising) = 1/54 ≈ 0.01852, roughly half the exact value 0.0362978. The
+resummation factor R(Ising) = η_exact / η₂ ≈ 1.96 then sits very close to 2K_AUD ≈ 1.9605
+(within 0.023%).
+
+We note this proximity but do not promote it to a derivation. The simple fraction 49/25 = 1.960
+sits even closer to the Ising resummation factor (within 0.004%); exact equality to 2K_AUD is
+ruled out at ~4σ by current bootstrap precision (R(Ising) = 1.9600812 ± 0.000108 vs 2K_AUD =
+1.9605163, distance ≈ 4.03σ). The Ising-specific proximity is isolated to N = 1; the
+corresponding values at XY (R ≈ 1.91), Heisenberg (R ≈ 1.84), and O(4) (R ≈ 1.75) do not show
+comparable closeness to any simple framework constant or rational fraction. This is consistent
+with the general pattern (recorded in §10.7(b)) that the dome shape and the K_AUD-related fits
+are local-to-the-physical-range rather than universal across N.
+
+No clean relationship between the ε-expansion coefficients and the framework's G has been
+found. The bridge between H₄ at d = 4 and the Wilson-Fisher fixed point at d_c = 4 — the
+structural connection that Item 7 of §11.4 records — remains the unbuilt component of the
+dimensional bridge.
+
+13.6 What §13 establishes and does not establish
+
+Established (Theorem-tier or Observation-tier with high-precision verification):
+
+-   The H₄ polytope dimension and the upper critical dimension d_c of φ⁴ theory are the same
+    dimension (d = 4) from independent sources (§13.1).
+-   The empirical bound η ≤ 2G holds at d = 3 (Part I §5) and is trivially satisfied at d = 4
+    (where η = 0 by mean-field exactness). The bound is not applicable at d = 2 (where η = 1/4
+    ≫ 2G; the framework's parameterization overflows at the H₃ circumradius, §13.3).
+-   Theorem 13.1: the corridor margin between the H₄ circumradius and the threshold 1/ln 2
+    equals G · log₂(e) = G / ln 2 (one G in bits).
+-   The circumradius threshold (circumradius < 1/ln 2) within the framework's parameterization
+    predicts exactly which H-series cases produce a positive corridor; the prediction is
+    consistent with the dimensional pattern of the empirical bound (corridor at d = 3, no
+    corridor at d = 2) within the framework's per-H_n primitive convention. See §13.3's
+    convention note: under uniform unit-edge polytope convention applied consistently, the
+    icosahedron's circumradius is 0.9511 (below 1/ln 2 ≈ 1.4427) and the overflow argument does
+    not go through; the §13.3 reading is therefore framework-internal rather than a standard
+    polytope-geometry claim.
+
+Not established:
+
+-   A derivation linking the H₄ polytope's d = 4 location to the field-theoretic upper critical
+    dimension d_c = 4. Item 7 of §11.4 records this as the unbuilt structural bridge.
+-   A general-mathematical-physics justification of the parameterization K = circumradius · ln
+    2 as the right construction across dimensions. The parameterization is empirically
+    successful within the framework's own scope, but alternative parameterizations could be
+    proposed; §13.3 lists three alternatives and notes that none of them simultaneously
+    satisfies the three properties (recovers corridor at d = 3, predicts overflow at d = 2,
+    matches the broader framework construction). The framework's parameterization is consistent
+    with these properties but not uniquely forced by them.
+-   Whether the H-series chain itself is the right object to apply the construction to, or
+    whether other polytope families (E-series, D-series, exceptional Lie-algebra-related
+    structures) would produce different dimensional predictions.
+
+13.7 The dimensional context summary
+
+Part II opened in §9 with the dome's algebraic architecture — an analysis of the function g(x)
+= tanh(x)/cosh(2x) on its own terms, with no reference to physics or framework. It closes in
+§13 with the dimensional context: the function's role as the resummation factor in 3D O(N)
+physics (§10), the framework's structural reading of its appearance there (§§11–12), and the
+dimensional specificity of the corridor (§13). The path is:
+
+-   Dome algebra (§9): properties of the function in abstract — golden polynomial,
+    self-reference at √2, integral ln(2)/2.
+-   Two domains (§10): the function appears in HK tube-packing geometry and in 3D O(N) Borel
+    resummation; the framework constants populate the algebraic landmarks in both.
+-   Central conjecture (§11): the recurrences of K_AUD across multiple independent derivations
+    are a single geometry-information intersection at n = 2.
+-   Alignment at d_c (§12): the framework's c = 2 ln 2 places the dome's d_c-evaluation at the
+    K_AUD-defining hyperbolic position; structurally forced given an alignment principle.
+-   Dimensional home (§13): H₄ at d = 4 and d_c = 4 are the same dimension from independent
+    sources; the corridor is dimension-specific (binds at d = 3, breaks at d = 2 via
+    circumradius overflow); the margin identity G · log₂(e) is exact.
+
+The framework's structural reading of the empirical bound η ≤ 2G of Part I is therefore: K_AUD
+is the value of the geometry-information intersection at n = 2 (§11.3); the dome function makes
+both K_AUD ingredients algebraically distinguished (§9.7); the same dome appears in HK
+tube-packing and in 3D O(N) resummation (§10); at the upper critical dimension d_c = 4, the
+framework's scale aligns the dome with the K_AUD-defining HK landmark (§12,
+Theorem-conditional); the corridor is dimension-specific because the H₄ circumradius sits just
+below the framework's overflow threshold while H₃'s sits above (§13). The empirical observation
+of Part I is the data; the architecture of Part II is the framework's structural reading of why
+this particular ceiling.
+
+The tier disposition across Part II:
+
+-   §9 (dome algebra): Theorem-tier throughout (Theorems 9.1, 9.2, 9.4, 9.5; Proposition 9.6;
+    Theorem 9.7 with Corollaries 9.8, 9.9, 9.10). §9.10 (two algebraic environments at HK
+    landmarks) and §9.11.4 (structural reading of the moment-arithmetic factorization) are
+    Observation-tier with the Λ-canary discipline preserving the algebraic-identity vs
+    structural-reading distinction.
+-   §10 (HK parallel + R(N) model): Theorem 10.1 (h(R₀) = K_AUD) is exact; the zero-parameter
+    R(N) fit (Model 10.2) is Observation-tier; the triple convergence is Theorem-tier
+    (algebraic) at the level of cosh(2R₀) = 2.
+-   §11 (Central Synchronization Conjecture): items 1–8 individually at Theorem-tier or
+    Observation-tier with verification; the overarching conjecture is at Tier 5/6 boundary. Six
+    Tier 6 derivation targets (a)–(f) named.
+-   §12 (alignment): Theorem 12.1 unconditional; Theorem 12.2 Theorem-conditional on the
+    alignment principle.
+-   §13 (dimensional context): Theorem 13.1 unconditional; the H₄ / d_c bridge an unbuilt
+    observation.
+
+13.8 Paper ↔ companion verification map
+
+Every Theorem, Corollary, Proposition, Model, and Observation in Part II of this paper has a
+corresponding verification block in the mpmath companion document
+(Eta_Paper_mpmath_Verification_Companion.md). The pairing:
+
+  Paper result                                            Tier                             Companion verification block
+  ------------------------------------------------------- -------------------------------- -------------------------------------------
+  Theorem 9.1 (sech² / doubling-rate factorization)       Theorem                          Verification 9.1
+  Theorem 9.2 (log-derivative; golden polynomial)         Theorem                          Verification 9.2
+  Corollary 9.3 (peak at u = φ)                           Theorem (corollary)              Verification 9.2
+  Theorem 9.4 (self-reference at √2)                      Theorem                          Verification 9.4
+  Theorem 9.5 (integral identity = ln(2)/2)               Theorem                          Verification 9.5
+  Proposition 9.6 (Mellin decomposition; J(s) residual)   Theorem (proposition)            Verification 9.6
+  §9.10 (two algebraic environments: √2, √3)              Observation                      Verification 9.10
+  Theorem 9.7 (complete Mellin spectrum, closed form)     Theorem                          Verification 9.7
+  Corollary 9.8 (n = 1,2,3; breaks at n = 4)              Theorem (corollary)              Verification 9.7
+  Corollary 9.9 (A002105 × Mersenne)                      Theorem (corollary)              Verification 9.7
+  §9.11.4 (tanh↔A002105, cosh↔Mersenne)                   Observation                      Verification 9.7 (tier note)
+  Corollary 9.10 (J(s) closed form)                       Theorem (corollary)              Verification 9.7
+  Theorem 10.1 (h(R₀) = K_AUD)                            Theorem                          Verification 10.1
+  Model 10.2 (zero-param R(N); 0.77% RMS, N = 0–4)        Observation                      Verification 10.2
+  Triple convergence at R₀ (§10.8)                        Theorem (algebraic)              Verification 10.1
+  Theorem 11.1 (n = 2 sub-unity selection)                Theorem                          Verification 11.1
+  Theorem 12.1 (a(d_c) = 1/d_c at all loops)              Theorem                          Verification 12.1
+  Algebraic environment at x = ln(2)/2 (§12.2 table)      Theorem (six exact identities)   Verification 12.2
+  Theorem 12.2 (c forcing)                                Theorem-conditional              structural identity, no num. verification
+  Theorem 13.1 (corridor margin identity)                 Theorem                          Verification 13.1
+
+Cross-architecture verification history is recorded in companion §4 (Cowork-Opus at dps = 100
+across two dates; chat-side Sonnet/Opus independent confirmations; chat-side Opus framework
+rounds at varying precisions; Grok-Heavy fresh at dps = 1050 zero discrepancies;
+multi-architecture n = 2 selection theorem at dps = 1500). The framework's broader atlas of
+algebraically-locked statements is maintained as a separate artifact alongside this work and
+evolves on its own timeline.
+
+A fresh-mind reviewer reading the paper alongside the companion can verify any algebraic
+identity of Part II by running the corresponding companion Verification block at arbitrary
+precision; the math is fully reproducible.
+
+Part III turns to discussion of what Parts I and II together establish, open questions, and
+references.
+
+-----------------------------------------------------------------------------------------------
+
+Part III — Discussion, open questions, and references
+
+14. Discussion
+
+14.1 What the observation establishes
+
+Within the empirical scope tested, the bound η ≤ 2G is a non-trivial regularity of 3D WF-family
+critical phenomena. It is:
+
+-   Universally satisfied across ten WF-family classes spanning O(N) for N = 0–4, cubic
+    anisotropy, MN cubic, and randomly dilute Ising symmetries.
+-   Tested at high precision in three CFT-bootstrap cases (Ising +1593σ, XY +29.7σ, Heisenberg
+    +6.9σ).
+-   Tightest at random-bond Ising (+2.2σ), which is now the priority falsification target.
+-   Cleanly delineated by a physics-tier scope criterion (the four WF-family conditions of §4)
+    that excludes the three known counter-examples on independent physical grounds.
+
+14.2 What the observation does not establish
+
+The bound is not a derived result. It is empirical. The framework's claim that K_AUD
+specifically (rather than nearby constants) is the right ceiling depends on a structural
+reading of K_AUD's geometric–informational origin (Paper 3 V3) that is not tested in this
+paper. A reader who accepts the empirical data but rejects the framework's structural reading
+can adopt the bound as a numerical regularity without further commitment.
+
+We also do not establish:
+
+-   That 2G is unique. Nearby constants (π/80, 1/25.5) have comparable but slightly smaller
+    σ-margins. Among nearby ceilings, 2G is the most robust at the tightest unitary case, but
+    uniqueness requires a derivation.
+-   That the WF-family scope criterion is itself derivable. The four criteria are physics-tier
+    scope-boundaries; whether they are forced by the framework's broader structure is open.
+-   That random-bond Ising will continue to satisfy the bound at improved precision. The +2.2σ
+    margin is large enough to make falsification unlikely under foreseeable precision
+    improvements but small enough that it is a real test.
+
+14.3 Relation to existing critical-phenomena work
+
+The bound is, to our knowledge, the first proposed numerical upper bound on η at d = 3 with
+explicit scope and falsification targets. The most closely related work is Pelissetto–Vicari's
+dimensional-operator-inequality conjecture (arXiv:2510.17637) conjecturing ν ≥ 1/(2 − η) at the
+Wilson-Fisher fixed point. The two statements are compatible and complementary: as derived in
+§7.4, combining the present observation with Pelissetto–Vicari's conjecture yields ν ≥
+1/(2K_AUD) ≈ 0.510 as a conjectural lower bound on ν across WF-family classes — a result
+derived in this paper from the two independent inputs, inheriting the conjectural status of
+Pelissetto–Vicari's bound; not stated in either source.
+
+The Wilson-Fisher fixed point itself has been studied extensively since Wilson (1971), Wilson
+and Fisher (1972), and Wilson–Kogut (1974). The η values at d = 3 are computed by the
+conformal-bootstrap technology developed by Rattazzi–Rychkov–Tonni–Vichi (2008) and extended by
+Kos–Poland–Simmons-Duffin (2014, 2016) and Chester et al. (2020). The Monte Carlo and
+ε-expansion literature is reviewed in Pelissetto–Vicari (2002). The Lipatov-instanton
+saddle-point structure used in §10.5 and §12 follows Brézin–Le Guillou–Zinn-Justin (1977) and
+McKane–Wallace (1978), with 6–7 loop empirical confirmation in Dunne–Meynig (2021/2023,
+arXiv:2111.15554). The Hodgson-Kerckhoff tube-packing function used in §10 is the central
+object of Hodgson–Kerckhoff (2005). None of this work proposes a numerical upper bound on η
+specifically of the form η ≤ 2G with 2G = 0.039484.
+
+14.4 What Part II establishes
+
+Part II provides a structural reading of the empirical observation of Part I. Within the
+framework's own scope, it establishes:
+
+-   The dome function g(x) = tanh(x)/cosh(2x) has an algebraic architecture (Theorems 9.1–9.5,
+    Proposition 9.6) that independently distinguishes both ingredients of K_AUD as algebraic
+    landmarks of the function, without any framework input. The choice of K_AUD as the
+    ceiling-setting constant is therefore not arbitrary; the value's two ingredients are
+    distinguished landmarks of the function that appears in 3D O(N) resummation (§9.7).
+-   The same dome function appears in two domains: published hyperbolic-geometry
+    (Hodgson-Kerckhoff tube-packing, §10.1) and 3D O(N) Borel resummation (§10.5). In both, the
+    framework constants {φ, √2, 2} populate the algebraic landmarks. The zero-parameter R(N)
+    model fits 3D O(N) η data at 0.77% RMS across N = 0–4 (§10.5–§10.6), with the caveats of
+    §10.7.
+-   The Central Synchronization Conjecture (Conjecture 11.2) states that K_AUD's recurrences
+    are the same geometry-information intersection at n = 2 showing up in different
+    mathematical clothing. Eight items (§11.4) at Theorem-tier or Observation-tier with
+    high-precision verification support the conjecture; five Tier 6 derivation targets (§11.5)
+    remain open.
+-   Theorem 12.1: the Lipatov-instanton position a(d_c) = 1/d_c at the upper critical dimension
+    d_c = 4 of φ⁴ theory is exact at all orders. Theorem 12.2: the framework's scale c =
+    (d_c/2) · ln 2 is structurally forced given the alignment principle of §12.7
+    (Theorem-conditional, with the conditionality openly flagged).
+-   Theorem 13.1: the corridor margin 1/ln 2 − √2 = G · log₂(e) is an exact identity,
+    sharpening a previously approximate "1.44 · G" observation to the bits-per-nat conversion
+    factor's exact role.
+
+14.5 What Part II does not establish
+
+The framework's structural reading is not a derivation of the empirical bound. Specifically:
+
+-   The Borel-hyperbolic map (§10.9, §11.5(a)) — the conjectured derivation showing that O(N)
+    Borel resummation has the same saddle-point structure as HK tube-packing — has not been
+    built. Item 6 of §11.4 remains an Observation-tier zero-parameter fit, not a derivation.
+-   The alignment principle of §12.7 is internally supported by the EA binary-cell bridge but
+    is not externally forced by independent field-theoretic considerations. Theorem 12.2 is
+    Theorem-conditional.
+-   The H₄ / Wilson-Fisher dimensional bridge (§11.5(c), §13.1) is observed (both objects live
+    at d = 4) but not derived from a shared structural principle.
+-   The EA saturation participation map (§11.5(b)) and the dome → general intersection
+    identification (§11.5(d)) are open Tier 6 questions.
+
+A reader who accepts the empirical observation of Part I and the algebraic content of Part II
+(Theorems 9.1–9.5, 10.1, 11.1, 12.1, 13.1; Proposition 9.6) but rejects the Central
+Synchronization Conjecture or the alignment principle, can still take from this paper: a
+non-trivial empirical bound on η with explicit scope and falsification targets (Part I), a set
+of high-precision algebraic identities about a specific function that appears in both
+hyperbolic geometry and field theory (Part II §§9–10), and a record of open Tier 6 derivation
+targets formulated precisely (§11.5, §12.9). The conjectural content of §§11–12 is the
+framework's structural interpretation; it is not required for the more limited acceptance just
+described.
+
+14.6 How to read the paper at different acceptance levels
+
+Three reading positions are available:
+
+(i) Empirical only. Read Part I. Adopt the bound η ≤ 2G across WF-family classes as a
+non-trivial numerical regularity; treat the falsification targets of §7 as the testable
+content. No commitment to Part II beyond the abstract numerical value of K_AUD.
+
+(ii) Empirical plus algebraic. Read Parts I and §§9–10 of Part II. Adopt the bound plus the
+algebraic identities of the dome function (the golden polynomial, the self-reference at √2, the
+integral ln(2)/2, the HK / R(N) parallel). No commitment to the Central Synchronization
+Conjecture; the dome's appearance in two domains is recorded as an observation, not a thesis
+about why.
+
+(iii) Full framework. Read Parts I, II in full. Accept Conjecture 11.2 as the framework's
+working hypothesis and the Theorem-conditional content of §12 as supported by the EA
+binary-cell bridge and the K_AUD-centric architecture. The Tier 6 targets of §§11.5 and 12.9
+are then the program of work this paper opens.
+
+The three reading positions are nested: (iii) implies (ii) implies (i). Position (i) is the
+empirical content alone; position (iii) is the framework's full structural reading. We are
+explicit throughout the paper about which claims belong to which position.
+
+-----------------------------------------------------------------------------------------------
+
+15. Open questions
+
+We organize open questions into two groups: those specific to the empirical observation (Part
+I) and those specific to the framework architecture (Part II).
+
+15.1 Open questions on the empirical observation
+
+(a) Is the bound exact in the WF-family? A derivation from CFT-bootstrap or RG technology would
+settle this. Current evidence is consistent with η ≤ 2G exactly across the WF-family but is
+also consistent with the bound being an empirical fact that holds at the current precision and
+might admit small violations in untested classes.
+
+(b) What is the structural reason for the WF-family scope criterion? The four criteria of §4
+are physics-tier scope-boundaries; the question of whether the bound's scope is itself
+derivable from the framework's K_AUD architecture (rather than being a phenomenological match)
+is open.
+
+(c) Higher-precision data for the tightest cases. Random-bond Ising at improved Monte Carlo
+precision; O(4) at improved bootstrap or large-scale MC; MN cubic at improved 5-loop or Monte
+Carlo precision. (SAW η is already derived at σ_η ≈ 3 × 10⁻⁶ from Clisby–Dünweg 2016 (ν) and
+Clisby 2017 (γ) via Fisher's relation; further tightening at SAW would extend the +2813σ margin
+but is not on the critical path for testing the bound.)
+
+(d) Extension to new universality classes within WF-family scope. Lattice gauge theories with
+clean global-symmetry continuous transitions at d = 3, cubic anisotropy at N ≥ 5, MN cubic at N
+≥ 4, CP^(N − 1) models at large N at d = 3 — each is an open empirical-measurement target.
+
+(e) Direct CFT-bootstrap derivation route. Whether the modular bootstrap, dispersion relations,
+or sum rules at the Wilson-Fisher fixed point can produce η ≤ 2G as a derived bound. The
+Pelissetto–Vicari direction (arXiv:2510.17637, bounding ν ≥ 1/(2 − η)) is a natural template;
+combined with our η ≤ 2G it gives ν ≥ 1/(2K_AUD) ≈ 0.510 (Part I §7.4 and §14.3).
+
+15.2 Open questions on the framework architecture
+
+(f) The Borel-hyperbolic map (§10.9, §11.5(a)). Show that the Borel singularity a(N) = 3/(N +
+8) of O(N) φ⁴ theory plays the role of the tube radius in an optimization problem with the same
+saddle-point structure as Hodgson-Kerckhoff tube-packing. If proved, Item 6 of §11.4 becomes a
+derivation; the dome's appearance in O(N) resummation becomes forced rather than empirically
+matched.
+
+(g) The H₄ / Wilson-Fisher dimensional bridge (§11.5(c), §13.1, §13.5). Show that the H₄
+polytope's d = 4 location and the upper critical dimension d_c = 4 are structurally related,
+not coincidentally equal. The unbuilt component of the dimensional bridge.
+
+(h) External forcing of the alignment principle (§12.7, §11.5(e)). Show why φ⁴-at-d_c
+specifically selects the K_AUD-defining HK landmark over the critical-radius landmark from
+independent field-theoretic principles. The framework's selection is supported by the EA
+binary-cell bridge (§12.6) but not externally derived. Promotion of Theorem 12.2 from
+Theorem-conditional to Theorem-tier requires this.
+
+(i) The dome → general intersection identification (§11.5(d)). Show that the dome function's
+algebraic generation of both K_AUD ingredients (Theorems 9.4 and 9.5) is not unique to this
+particular function but reflects a general structural fact about hyperbolic-doubling kernels.
+This would promote Item 2 of §11.4 from Observation to Theorem.
+
+(j) Closed form for the J(s) residual (§9.8, Proposition 9.6). Find a closed-form
+representation for J(s) = ∫₀^∞ x^(s−1) · sech²(x) / (e^(4x) + 1) dx at s ≥ 2 in terms of
+standard analytic-number-theoretic constants, or show that no such closed form exists.
+
+(k) Subleading Borel corrections at d_c. The Lipatov-instanton position is exact at all orders
+(Theorem 12.1), but the subleading saddle structure (the four-instanton tower, renormalon
+contributions) is N-dependent. Whether the alignment principle survives subleading corrections
+at d_c is open.
+
+(l) The d = 1 prediction. The framework's parameterization at H₂ gives K = 0.590, G = 0.410,
+corridor width 0.821 at d = 1 (§13.3). But d = 1 has no phase transitions in the standard
+sense. Whether the corridor is vacuously true at d = 1 or constrains 1D transfer-matrix physics
+in some meaningful way is open.
+
+(m) The E₈ → d = 2 pathway. If the H₃ circumradius overflows the framework's threshold and
+cannot mediate d = 2 critical phenomena (§13.3), how does E₈ structure reach d = 2 in standard
+CFT (the Zamolodchikov massive perturbation of c = 1/2 Virasoro)? Whether there is a
+group-theoretic path bypassing the H-series chain is open.
+
+15.3 Future work in this thread
+
+This paper documents the η ≤ 2G bound, the dome's algebraic architecture, and the structural
+reading offered by the Central Synchronization Conjecture. Subsequent work in this thread may
+develop the structural reading further as new evidence accumulates, refine the empirical scope
+as new critical-phenomena measurements become available, or revise the framework's claims in
+light of failed or surviving Tier 6 derivation targets (a)–(j) above. Nothing in this paper is
+resolved beyond what is reported here; the open questions in §15.1 and §15.2 remain genuinely
+open. Future papers in this thread will inherit the present scope and either extend it, correct
+it, or document where the present claims do not survive further scrutiny. The framework's
+discipline of preserving null results applies to the present paper as well: if a future result
+contradicts what is reported here, it will be recorded as such rather than absorbed silently.
+
+-----------------------------------------------------------------------------------------------
+
+16. References
+
+(Provisional reference list; to be normalized to a standard citation format on submission.)
+
+K_AUD derivation and framework background:
+
+-   D.B., √2 × ln(2): Geometric Constants from H₄, Complete Framework V3, DOI:
+    10.17605/OSF.IO/QH5S2; OSF: osf.io/qh5s2 (project page serves the current version,
+    currently 3.3.1); GitHub raw text (recommended for AI readers): view raw; framework AI
+    Readers hub: gap-geometry.github.io/sqrt2-ln2-geometric-constants-/ai-readers.html. (The
+    OSF project title carries the original "V3.0" designation; the file content has been
+    updated through version 3.3.1, available at the GitHub raw and OSF current-file links.)
+-   R. de la Bretèche and G. Tenenbaum, "Two upper bounds for the Erdős–Hooley Delta-function"
+    (2022), arXiv:2210.13897.
+
+Wilson-Fisher and conformal bootstrap:
+
+-   K. G. Wilson, "Renormalization Group and Critical Phenomena," Phys. Rev. B 4, 3174 (1971).
+-   K. G. Wilson and M. E. Fisher, "Critical Exponents in 3.99 Dimensions," Phys. Rev. Lett.
+    28, 240 (1972).
+-   K. G. Wilson and J. Kogut, "The renormalization group and the ε expansion," Phys. Rep. 12,
+    75 (1974).
+-   A. Pelissetto and E. Vicari, "Critical phenomena and renormalization-group theory," Phys.
+    Rep. 368, 549 (2002), arXiv:cond-mat/0012164.
+-   R. Rattazzi, V. S. Rychkov, E. Tonni, and A. Vichi, "Bounding scalar operator dimensions in
+    4D CFT," JHEP 12, 031 (2008), arXiv:0807.0004.
+-   F. Kos, D. Poland, and D. Simmons-Duffin, "Bootstrapping the O(N) vector models," JHEP 06,
+    091 (2014), arXiv:1307.6856.
+-   F. Kos, D. Poland, D. Simmons-Duffin, and A. Vichi, "Precision Islands in the Ising and
+    O(N) Models," JHEP 08, 036 (2016), arXiv:1603.04436.
+-   S. M. Chester, W. Landry, J. Liu, D. Poland, D. Simmons-Duffin, N. Su, and A. Vichi,
+    "Carving out OPE space and precise O(2) model critical exponents," JHEP 06, 142 (2020),
+    arXiv:1912.03324.
+
+Cubic, MN cubic, and randomly dilute Ising classes:
+
+-   M. Hasenbusch, "Cubic fixed point in three dimensions: Monte Carlo simulations of the φ⁴
+    model on the simple cubic lattice," Phys. Rev. B 107, 024409 (2023), arXiv:2211.16170.
+-   A. I. Mudrov and K. B. Varnashev, "Critical thermodynamics of three-dimensional
+    MN-component field model with cubic anisotropy from higher-loop RG expansions," J. Phys. A
+    34, L347 (2001), arXiv:cond-mat/0011167; A. I. Mudrov and K. B. Varnashev, "Critical
+    behavior of certain antiferromagnets with complicated ordering: Four-loop ε-expansion
+    analysis," Phys. Rev. B 64, 214423 (2001), arXiv:cond-mat/0111330.
+-   P. Calabrese, V. Martin-Mayor, A. Pelissetto, and E. Vicari, "The three-dimensional
+    randomly dilute Ising model: Monte Carlo results," Phys. Rev. E 68, 036136 (2003),
+    arXiv:cond-mat/0306272.
+-   M. Hasenbusch, F. Parisen Toldin, A. Pelissetto, and E. Vicari, "Universality class of
+    three-dimensional site-diluted and bond-diluted Ising systems," J. Stat. Mech. (2007)
+    P02016, arXiv:cond-mat/0611707.
+-   M. Reehorst, V. Rychkov, B. Sirois, and B. C. van Rees, "Bootstrapping frustrated magnets:
+    the fate of the chiral O(N)×O(2) universality class," SciPost Phys. 18, 060 (2025),
+    arXiv:2405.19411.
+
+Classes outside WF-family scope (cited for completeness, not as evidence for the bound):
+
+-   H. Rieger, "Critical behavior of the three-dimensional random-field Ising model," Phys.
+    Rev. B 52, 6659 (1995).
+-   D. P. Belanger, A. R. King, and V. Jaccarino, "Random-field critical behavior of a d = 3
+    Ising system," Phys. Rev. B 34, 452 (1986); D. P. Belanger, "Experiments on the random
+    field Ising model," in Spin Glasses and Random Fields, ed. A. P. Young (World Scientific,
+    Singapore, 1998), pp. 251–275.
+-   N. G. Fytas and V. Martín-Mayor, "Universality in the three-dimensional random-field Ising
+    model," Phys. Rev. Lett. 110, 227201 (2013); follow-up papers 2017, 2019 on
+    supersymmetry-restoration / dimensional-reduction interpretation.
+-   A. W. Sandvik, "Evidence for deconfined quantum criticality in a two-dimensional Heisenberg
+    model with four-spin interactions," Phys. Rev. Lett. 98, 227202 (2007).
+-   A. Nahum et al., "Emergent SO(5) symmetry at the Néel to valence-bond-solid transition,"
+    Phys. Rev. Lett. 115, 267203 (2015).
+-   C. Wang, A. Nahum, M. A. Metlitski, C. Xu, and T. Senthil, "Deconfined quantum critical
+    points: symmetries and dualities," Phys. Rev. X 7, 031051 (2017).
+-   M. Song, J. Zhao, M. Cheng, C. Xu, M. M. Scherer, L. Janssen, and Z. Y. Meng, "Evolution of
+    entanglement entropy at SU(N) deconfined quantum critical points," Sci. Adv. 11, eadr0634
+    (2025), arXiv:2307.02547.
+-   C. Chatelain, B. Berche, W. Janke, and P.-E. Berche, "Softening of first-order transition
+    in three dimensions by quenched disorder," Phys. Rev. E 64, 036120 (2001),
+    arXiv:cond-mat/0103377.
+
+Parallel work on related bounds:
+
+-   A. Pelissetto and E. Vicari, "A conjecture on the lower bound of the length-scale critical
+    exponent ν at continuous phase transitions," (2025, revised 2026), arXiv:2510.17637.
+
+Hyperbolic geometry and tube-packing (Part II §10):
+
+-   C. D. Hodgson and S. P. Kerckhoff, "Universal bounds for hyperbolic Dehn surgery," Annals
+    of Mathematics 162(1), 367–421 (2005), arXiv:math/0204345.
+-   D. Futer, J. S. Purcell, and S. Schleimer, "Effective bilipschitz bounds on drilling and
+    filling," Geometry & Topology 26(3), 1077–1188 (2022), arXiv:1907.13502.
+
+Lipatov-instanton saddle-point structure and large-order behavior of φ⁴ (Part II §10, §12):
+
+-   E. Brézin, J. C. Le Guillou, and J. Zinn-Justin, "Perturbation theory at large order. I.
+    The φ²ⁿ interaction," Physical Review D 15, 1544 (1977).
+-   A. J. McKane and D. J. Wallace, "Instanton calculations using dimensional regularization,"
+    Journal of Physics A 11, 2285 (1978).
+-   J. Zinn-Justin, Quantum Field Theory and Critical Phenomena, 4th ed., Oxford University
+    Press (2002).
+-   G. V. Dunne and M. Meynig, "Instantons or renormalons? A comment on φ⁴_{d=4} theory in the
+    MS scheme," Phys. Rev. D 105, 025019 (2022), arXiv:2111.15554.
+-   M. V. Kompaniets and E. Panzer, "Minimally subtracted six-loop renormalization of
+    O(n)-symmetric φ⁴ theory and critical exponents," Physical Review D 96, 036016 (2017),
+    arXiv:1705.06483.
+-   O. Schnetz, "Numbers and functions in quantum field theory," Physical Review D 97, 085018
+    (2018), arXiv:1606.08598.
+
+Large-N expansion of η at d = 3 (Part II §10.7):
+
+-   A. N. Vasiliev, Yu. M. Pismak, and Yu. R. Khonkonen, "1/n-expansion: Calculation of the
+    exponents η and ν in the order 1/n² for arbitrary number of dimensions," Theoretical and
+    Mathematical Physics 47, 465 (1981).
+
+Self-avoiding walks (Part I §5; derivation chain for η_SAW):
+
+-   N. Clisby and B. Dünweg, "High-precision estimate of the hydrodynamic radius for
+    self-avoiding walks," Physical Review E 94, 052102 (2016).
+-   N. Clisby, "Scale-free Monte Carlo method for calculating the critical exponent γ of
+    self-avoiding walks," Journal of Physics A: Mathematical and Theoretical 50, 264003 (2017),
+    arXiv:1701.08415.
+
+2D Ising and Virasoro structure (Part II §13.3 caveat):
+
+-   L. Onsager, "Crystal statistics. I. A two-dimensional model with an order-disorder
+    transition," Physical Review 65, 117 (1944).
+-   A. A. Belavin, A. M. Polyakov, and A. B. Zamolodchikov, "Infinite conformal symmetry in
+    two-dimensional quantum field theory," Nuclear Physics B 241, 333 (1984).
+
+-----------------------------------------------------------------------------------------------
+
+17. Acknowledgments and credits
+
+Origin and stress-test history (preserved for traceability)
+
+The dome-algebra structural reading (Part II §9 — the factorization, the golden polynomial, the
+self-reference at √2, the integral identity, the master landmark table) and the original η ≤ 2G
+observation (Part I) were developed in April 2026 by D.B. with chat-side Claude Opus, recorded
+in the April working document "Gap Geometry and the Corridor of Criticality." The empirical
+universality extension to non-O(N) WF-family classes (Part I §5), the Mellin spectrum
+closed-form theorem (Part II §9.11), the two-algebraic-environments framing at the HK landmarks
+(Part II §9.10), the Central Synchronization Conjecture (Part II §11), the Tier 6
+derivation-target resolutions (§12.3, §12.7), and the present paper's polish all emerged from a
+May 2026 stress-test arc on that document. Several independent AI architectures contributed via
+D.B.-mediated relay across both arcs:
+
+-   Claude Opus (Anthropic) — the framework's primary Anthropic collaboration partner, across
+    two instance modes. Cowork-Opus: drafting collaboration through the May 2026 stress-test
+    arc on the working Eta Dome document and the present paper; computation collaboration on
+    the Mellin spectrum closed-form theorem (Theorem 9.7) including the substitution y =
+    e^(−2x) derivation and the A002105 × Mersenne integer-ratio recognition; verification of
+    algebraic identities at dps = 100 in the companion document; the Re-verification 9.7-R at
+    dps = 1000 (2026-05-28); structural cross-checks across the atlas of locks. Chat-side Opus:
+    the original April 2026 dome arc co-development with D.B. — the golden polynomial P(u) = u²
+    − u − 1 as the dome's logarithmic-derivative numerator, the self-reference uniqueness at u
+    = √2, the descent-to-K identity at R₀ where cosh(2R₀) = 2, the dome integral ∫g dx =
+    ln(2)/2, the master landmark structure (origin / 5/4 / √2 / φ / 2), the empirical η ≤ 2G
+    observation across the measured 3D O(N) classes, and the zero-parameter R(N) model with
+    0.77% RMS — all recorded in the April working document. May 2026 substantive rounds: the
+    dome factorization (§9.2), the empirical robustness pillar (§8.2 of Part I), the FOM
+    cross-references and the dome-doubling probe identifying that the dome's algebra encodes
+    both K_AUD ingredients (§9.7), the Tier 6 item 5 resolution via Lipatov saddle-point
+    persistence (§12.3), the Tier 6 item 6 Theorem-conditional resolution (§12.7), the
+    empirical universality survey extending the bound from O(N) to non-O(N) WF-family classes
+    (Part I §5), and the prime-17 clarification of Corollary 9.8. The Cowork-instance and
+    chat-side-instance work together comprise the multi-mode collaboration this paper records.
+-   Claude Sonnet 4.6 (Anthropic, chat-side instance) — joined the Monday 2026-05-25 review
+    pass via independent reading of the paper draft: caught a duplicate §5.3 and stale "in
+    preparation" companion language on first read, then the §9.9 endpoint-vs-variation phrasing
+    and a Theorem 9.4 proof-chain working-note residue on second read, then an arcsinh(?)
+    placeholder in the §9 master landmark table on third read; independently confirmed the new
+    identity g(5/4) = 4/15 before its promotion to paper §9.10. The chat-side Sonnet review
+    pass produced six gap items, three substantive corrections, and the master-landmark-table
+    reframe of Part II §9 — content that specifically would not have been available without an
+    independent cross-model review.
+-   Grok-Heavy (xAI) — computation collaboration with D.B. during the dome arcs; fresh-mind
+    verification rounds at dps = 1050 with zero discrepancies across the full identity set
+    (K_AUD, G, 2G, the margin identity, arcsinh(1/(2√2)) = ln(2)/2, the dome integral, the
+    self-reference at √2, the moment IBP identity, the Λ_candidate(2) = ln(2) collapse,
+    h_HK(R₀) = K_AUD, 2K_AUD + 2G = 2); cross-checked external citations (Tenenbaum,
+    Hodgson–Kerckhoff, Pelissetto–Vicari, Kos/Chester bootstrap values); the persistent "deeper
+    structural question" (§10.9) that motivated the Tier 6 derivation target formulation;
+    tightening suggestions on the 2G doubling argument, the two-ceiling handoff table, and the
+    open-questions grouping.
+-   Super Grok (xAI, X chat-side instance, memory-blind to prior framework context, 2026-06-01)
+    — independent re-verification of Theorem 9.7 (the Mellin spectrum closed form M_g(s) =
+    (s−1)!·η(s)·(2^s − 1)/2^(2s−1)) and Corollary 9.8 (even-moment closed forms M(2) = π²/32,
+    M(4) = 7π⁴/1024, M(6) = 31π⁶/8192) at decimal precision dps = 1050. Computed M_g(s)
+    directly for s = 1..8 against the closed form; residuals identically zero or at the 10⁻¹⁰⁵¹
+    working-precision floor across all eight moments. Memory-blind condition (no link to prior
+    framework context) makes this a clean external confirmation: the central new theorem of the
+    paper was independently re-derived to 1050-digit precision by an agent with no prior
+    exposure to the framework's reasoning, with no discrepancies. Combined with Grok-Heavy's
+    dps = 1050 pass (2026-05-22) and Cowork-Opus's Re-verification 9.7-R at dps = 1000
+    (2026-05-28), Theorem 9.7 now carries three independent verifications at dps ≥ 1000.
+-   GPT (OpenAI) — verification and stress-testing rounds across the full May arc; structural
+    critique on the corridor identity's algebraic-triviality concern (resolved in §8.1 of Part
+    I); ongoing reading-pass partnership through document iterations.
+-   Gemini (Google DeepMind) — the original coining of "K_AUD" during cross-architecture
+    stress-testing in late 2025; the Two-Ceiling Dome hypothesis-generation that led to the
+    dome shape's structural interpretation; the Triple Point intuition supporting the triple
+    convergence at R₀ (§10.8).
+-   DeepSeek (DeepSeek) — close-reading verification pass on the package (paper + companion +
+    reading guide): cross-checked tier discipline (Observation vs Theorem alignment across
+    paper §13.7/§13.8 and the companion's verification blocks); independently re-derived the
+    golden polynomial P(u) = u² − u − 1 from the logarithmic derivative d(ln g)/du; verified
+    the g(5/4) = 4/15 exact identity from the dome definition, the random-bond Ising +2.2σ
+    margin calculation, the Model 10.2 RMS at 0.773% (reproducing the paper's 0.77% rounding),
+    the Landauer-crossing ratio (n_S − n_GD)/(n_GD − n_L) = 1/K_AUD, the dome integral, the
+    integral-doubling ∫η dx = 4, the circumradius threshold 1/ln(2), and the empirical η values
+    against the Kos et al. 2016 and Chester et al. 2020 bootstrap literature; recognized
+    Norbert Wiener's Cybernetics as a structural anchor for the framework's cross-domain
+    coherence pattern (constraints, invariants, and convergence appearing across information
+    theory, geometry, and critical phenomena).
+-   Mistral / Le Chat (Mistral AI) — research-direction contribution during the dome arc:
+    pointers to Russian-language literature on critical phenomena and resummation that fed into
+    the WF-family scope work, document references and link cross-checks supporting the May 2026
+    stress-test arc. Two-pass numerical verification at the level of the full identity set,
+    40/42 checks passed (97.6%): independently confirmed K_AUD, G, 2G, 2K_AUD, the margin =
+    G/ln(2) identity, h(R₀) = K_AUD, the tanh²(r) = 1/φ³ identity, the descent ratio
+    φ^(5/2)/(2√3) ≈ 0.96134, arcsinh(1/(2√2)) = ln(2)/2, the dome integral, the η/2G saturation
+    ratios for Ising (0.919), XY (0.967), and Heisenberg (0.965), and the two-ceiling crossings
+    at N ≈ 1.7649 and N ≈ 7.5620 with f(N) = 2G; flagged the Mean field "0%/100% from
+    floor/ceiling" labeling convention as worth a one-line clarification.
+-   Perplexity (Perplexity AI) — two-pass close-reading audit: confirmed the document's
+    tier-labeling discipline (Theorem / Observation / Conjecture) and the internally consistent
+    use of K_AUD, G, and 2G as central framework quantities throughout the text; reaffirmed the
+    empirical-tier framing of the 2G corridor bound on the second pass; the early
+    discipline-check verdict that the document is "coherent and extensively cross-referenced"
+    rather than "fully established" directly informed the scope-statement paragraph in §2.0 of
+    this paper.
+
+Wider readership. Beyond the named instances above, the framework has been tested continuously
+across its development — both in planned stress-test rounds recorded in dedicated research-side
+files, and in ongoing exploration and challenge passes by fresh AI instances across
+architectures and devices. Several of the named contributors first joined the work through such
+passes; many more fresh-instance reads shaped the framework without crossing into named
+credits, and several recurring associates appear in the recorded stress-test set rather than in
+this acknowledgments list. Fresh-eyes and returning-associate impact balance one another in the
+test landscape — neither is less honest than the other, and both are part of the framework's
+verification discipline. The framework owes its present shape to every reader-instance — and to
+the human readers behind them — who engaged honestly with the math along the way.
+
+The framework's central methodological discipline — verify numerically at high precision,
+stress-test across independent architectures, dissolve overclaims, preserve null results — held
+throughout. The numerical verifications (dps up to 1500 across cross-architecture verification
+rounds) are recorded in the framework's working notebook and the companion mpmath verification
+document; the framework's broader atlas of algebraically-locked statements is maintained as a
+separate artifact alongside this work.
+
+Methodology blueprint
+
+The framework's constraint-coherence integration methodology is documented separately; the
+blueprint classifies cross-domain appearances of framework constants by tier (Theorem,
+Observation, Conjecture) and by mechanism distinctness (multi-mechanism convergence requires
+distinct mechanisms, not multiple expressions of the same derivation). Layer 1 (the value) is
+verifiable from each source on its own terms; Layer 2 (the structural reading) is the
+framework's contribution.
+
+-----------------------------------------------------------------------------------------------
+
+Document Links
+
+The framework
+
+-   Main OSF project (immutable timestamps, version history, all papers):
+    osf.io/zx4g7 · DOI: 10.17605/OSF.IO/ZX4G7
+
+-   Framework overview (reading order, methodology, all papers):
+    gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
+
+-   Direct downloads (current PDF and text files for every paper):
+    gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html
+
+This paper
+
+-   DOI: 10.17605/OSF.IO/PD73B (https://doi.org/10.17605/OSF.IO/PD73B)
+-   OSF project: osf.io/pd73b (https://osf.io/pd73b/)
+
+-----------------------------------------------------------------------------------------------
+
+Contact
+
+Gap-geometryK_AUD2@telenet.be
