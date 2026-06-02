@@ -1,0 +1,1754 @@
+Saturation Constants of the Exact-Approximation Method
+
+K_AUD on the Binary Cell, a Cauchy Cardano-Ferrari Closure, and a Ladder of Tractability
+
+Closed forms and a numerical discrepancy in the Ahrens-Dieter generators as presented by
+Fishman (1996)
+
+Published 2026-06-02 · DOI: 10.17605/OSF.IO/6QZRB · OSF: osf.io/6qzrb · License: CC BY 4.0
+
+6 May 2026 (title round) · Gap Geometry framework · Contributors named at §10 · Title chosen by
+cross-reader consensus, Title Round 2026-05-06
+
+-----------------------------------------------------------------------------------------------
+
+Abstract
+
+Marsaglia's exact-approximation method (1984) produces a class of efficient sampling algorithms
+in which each sample of a target distribution is decomposed into an ideal path (a uniform
+sample, always accepted) taken with probability p, and a correction path (sampling from a
+residual density f*(x) ≥ 0) taken with probability 1 − p. The optimum value of p is the maximum
+that keeps f* non-negative — the saturation constant of the algorithm.
+
+Fishman (1996) presents two specific applications of this framework, both due to Ahrens and
+Dieter (1988): Algorithm EA for the exponential distribution on the binary cell L = ln 2, and
+Algorithm CA for the Cauchy distribution on the unit interval mapped via tan(π(x − ½)). We
+establish three closed-form identities in the Ahrens–Dieter generators, sitting at distinct
+radical degrees of closure — defining a ladder of tractability — and identify, at modern
+arbitrary-precision resolution, three structurally distinct constants that share leading digits
+in Fishman's illustration of Algorithm CA.
+
+(1) For Algorithm EA, the saturation constant is the exact identity
+
+  K_AUD = √2 · ln(2),
+
+derivable through a general endpoint-balancing equation (b − 1)² = b² · e^(−L) which collapses
+at the binary cell L = ln 2 to the quadratic b² − 4b + 2 = 0. The general form p(L) = L / [2
+sinh(L/2)] applies across cell widths; only L = ln 2 produces K_AUD in elementary form.
+
+(2) For Algorithm CA, the induced density at the structural midpoint y = 1/4 admits the clean
+closed form
+
+  f_X(1/4) = 16(9π² + 88) / (9π⁴ + 192π² + 64) ≈ 0.99773497.
+
+This identity does not appear in Fishman, Ahrens-Dieter (1988), or standard references
+consulted.
+
+(3) The locked Algorithm CA formula's true minimum admits an explicit Cardano-Ferrari closed
+form over ℚ(π²): solve a resolvent cubic via Cardano (real root y_F ≈ 10.15453669), then apply
+Ferrari's quartic formula to extract t_*, and evaluate. The minimum is
+
+  p_CA(true) = 0.9973076104572194656110114378880…
+
+at y_* ≈ 0.20536. The closed form is non-elementary (Cardano cube root nested with two Ferrari
+square roots) but algebraically exact, four-reader confirmed across three independent Ferrari
+paths.
+
+(4) The historically printed value p = 0.997738 in Fishman's Algorithm CA illustration (p. 186,
+eq. 45) identifies, at modern arbitrary-precision resolution, as the implementation's design
+probability 2√W (Algorithm CA setup, p. 187), where W ≈ 0.2489 and 2√W = 0.99773789… rounds to
+the printed digits — not as the locked formula's true minimum p_CA(true) from (3) above. The
+locked-formula minimum and the implementation's 2√W agree to four decimal places (the
+resolution typically displayed in 1996) and separate cleanly only at the sixth decimal place, a
+distinction made visible by dps ≥ 100 evaluation. The published algorithm is internally
+consistent; the novel mathematical content of this paper concerns the locked illustrative
+formula as a mathematical object, independent of which value the original presentation chose to
+display.
+
+The three closed forms sit at distinct radical degrees of closure: K_AUD at degree 2 (single
+sqrt over ℚ); f_X(1/4) at degree 0 (rational in π²); p_CA(true) at degree 6+ (Cardano + Ferrari
+nested). The binary cell's K_AUD is uniquely tractable in elementary terms among the cases
+examined — one end of a structural spectrum we call the ladder of tractability.
+
+The work was produced through a multi-AI-session collaborative review using a Stack/Exchanges
+architecture and five procedural verification standards (M1–M5) documented in §7.
+
+-----------------------------------------------------------------------------------------------
+
+1. Introduction
+
+The exact-approximation method, introduced by Marsaglia (1984), couples a fast rational
+approximation to a target probability density via an accept-reject step that yields exact
+samples. Its acceptance probability — the probability the fast path is taken — depends on the
+chosen approximation and on the cell on which it operates. Fishman (1996) presents two specific
+applications, both due to Ahrens and Dieter (1988): Algorithm EA for the exponential
+distribution on the binary cell L = ln 2, and Algorithm CA for the Cauchy distribution on the
+unit interval mapped via tan(π(x − ½)). For Algorithm EA (pp. 188–189, equations 49–52),
+Fishman gives the constants of the rational approximation explicitly: a = (4 + 3√2) ln 2, b = 2
++ √2, c = −(1 + √2) ln 2, with the optimum acceptance probability reported as p = √2 · ln(2) =
+0.980258, "the largest probability that ensures f*(x) ≥ 0." For Algorithm CA (pp. 186–187),
+Fishman gives a different rational approximation with locked illustrative constants a = 2/π and
+b = π − 8/π, and reports the saturation as p = 0.997738.
+
+Two questions organize this paper. First, is the appearance of √2 · ln(2) in Algorithm EA
+forced by the algebraic geometry of the minimax problem, or is it an artifact of the particular
+functional form Ahrens and Dieter chose? Second, does Fishman's text admit closed-form
+characterization of Algorithm CA's saturation, and does the published p = 0.997738 match it?
+
+We answer both questions. The appearance of K_AUD = √2 · ln(2) ≈ 0.980258143 in Algorithm EA is
+provably forced under stated structural conditions (§3). For Algorithm CA, the locked
+illustrative formula admits two distinct closed forms — a clean rational expression in π² at
+the structural midpoint y = 1/4 (§4.4), and an explicit Cardano-Ferrari radical closure at the
+true rejection-sampling minimum (§4.5) — and we identify that Fishman's printed p = 0.997738
+does not match the locked formula's true minimum but rather corresponds to the design
+probability 2√W of the implementation given on p. 187 (§4.3). The three Algorithm CA constants
+— locked formula's true minimum p_CA(true) ≈ 0.99730761, structural-midpoint f_X(1/4) ≈
+0.99773497, implementation 2√W ≈ 0.99773789 — are now distinguishable by direct high-precision
+evaluation. The pair of Algorithm EA and Algorithm CA results illuminates a structural spectrum
+we describe as the ladder of tractability (§5): K_AUD at radical degree 2 (single sqrt over ℚ),
+f_X(1/4) at radical degree 0 (rational in π²), p_CA(true) at radical degree 6+ (Cardano-Ferrari
+nested, Galois group S₄ over ℚ(π²)).
+
+K_AUD has been independently identified in other mathematical settings via algebraically
+distinct derivations: as the supremum of a family of binary-information bounds, as the value of
+a Hodgson-Kerckhoff hyperbolic tube-packing coefficient (via the arcsinh(1/(2√2)) = ln(2)/2
+identity, a hyperbolic-trigonometric derivation independent of the saturation-theoretic content
+of the present paper), and as a near-saturation constant in independent O(N) universality
+contexts. See §8.3 for the cross-domain context and the explicit statement that the derivations
+across these settings are algebraically distinct, even where the numerical value agrees.
+
+The work was carried out through a multi-AI-session collaborative review with
+role-distinguished contributors and five procedural standards (M1–M5) that emerged during the
+rounds themselves. The methodology is documented at §7 and the contribution-credit taxonomy at
+§10.
+
+-----------------------------------------------------------------------------------------------
+
+2. The Exact-Approximation Method (Marsaglia 1984)
+
+The exact-approximation method is described in Fishman §3.8 as a generalization due to
+Marsaglia (1984). The setup: a target probability density f(z) on a domain D, with cumulative
+distribution function F and inverse CDF F⁻¹. To sample Z from f without using F⁻¹ directly
+(which may be expensive), one chooses an approximation m(x) to F⁻¹(x) on [0, 1], with m'(x) ≥ 0
+(monotone increasing), and considers the auxiliary random variable X with density
+
+  f_X(x) = h(m(x)) · m'(x),    0 ≤ x ≤ 1,
+
+where h is the density of Z restricted to the relevant truncation. For specific p ∈ (0, 1]
+satisfying
+
+  f*(x) := [f_X(x) − p · I_{[0,1]}(x)] / (1 − p) ≥ 0    for all x ∈ [0, 1],
+
+the algorithm proceeds as: with probability p, sample U uniformly from (0, 1) and return Z =
+m(U) (the fast / ideal path); with probability 1 − p, sample X from the residual density f*(x)
+by acceptance-rejection (the correction / slow path).
+
+The optimum value of p is the saturation constant of the algorithm — the largest p for which
+f*(x) is nowhere negative. Fishman states the principle directly: "Clearly, assigning p the
+value of its upper bound offers the greatest benefit." The saturation constant equals min_x
+f_X(x) under the stated m(x).
+
+Two specific applications of this framework appear in Fishman's Chapter 3:
+
+-   Algorithm EA (§3.10): exponential distribution, m(x) = a/(b − x) + c.
+-   Algorithm CA (§3.10): standard Cauchy distribution, m(x) = y · (a/(¼ − y²) + b) where y = x
+    − ½.
+
+We treat them in turn.
+
+-----------------------------------------------------------------------------------------------
+
+3. Algorithm EA: Forced Saturation at K_AUD
+
+3.1 Setup
+
+Algorithm EA generates an exponential sample Z by decomposing it as Z = K · ln 2 + V, where K
+is geometric with base 1/2 and V is truncated exponential on [0, ln 2). For the V step, the
+rational approximation m(x) = a/(b − x) + c with constants
+
+  a = (4 + 3√2) ln 2,    b = 2 + √2,    c = −(1 + √2) ln 2
+
+is applied to the inverse CDF F⁻¹(x) = −ln(1 − x/2) on [0, 1]. Substitution into Marsaglia's
+framework gives (Fishman eq. 51)
+
+  f_X(x) = 2 e^(−m(x)) · b(b − 1) · ln 2 / (b − x)²,
+
+and Fishman (eq. 52) reports p = √2 · ln 2 = 0.980258 as the largest p for which f*(x) ≥ 0. We
+establish this as a forced exact identity through a closed-form chain.
+
+3.2 General endpoint-balancing equation [Theorem]
+
+Theorem 3.1. Consider the truncated exponential density h(v) = e^(−v) / (1 − e^(−L)) on [0, L],
+with rational approximation m(x) = a/(b − x) + c on [0, 1] subject to endpoint matching m(0) =
+0 and m(1) = L. The endpoint matching forces
+
+  a = L · b · (b − 1),    c = −a/b.
+
+The minimax condition for the induced density f_X(x) = h(m(x)) · m'(x) — namely, equating the
+boundary minima f_X(0) = f_X(1) — yields the algebraic relation
+
+  (b − 1)² = b² · e^(−L)    (3.1)
+
+equivalently b = 1 / (1 − e^(−L/2)).
+
+Derivation. With m(x) = a/(b − x) + c, direct differentiation yields m'(x) = a/(b − x)². The
+induced density h(m(x)) · m'(x) is therefore
+
+  f_X(x) = [a · e^(−m(x))] / [(1 − e^(−L)) · (b − x)²].
+
+The factor a/(1 − e^(−L)) is common to both endpoints; cancellation in the equation f_X(0) =
+f_X(1) gives
+
+  e^(−m(0)) / b² = e^(−m(1)) / (b − 1)².
+
+Multiplying both sides by b²·(b − 1)²·e^(m(1)) and rearranging:
+
+  (b − 1)² · e^(m(1) − m(0)) = b².
+
+Substituting m(1) − m(0) = L (which holds by endpoint matching m(0) = 0, m(1) = L):
+
+  (b − 1)² · e^L = b²,
+
+equivalently (b − 1)² = b² · e^(−L), which is (3.1). □
+
+Verification: GPT (Q1 R1, derivation as part of cell-rescaling work) and Grok (Q1 R2, full
+step-by-step at mpmath dps = 600 with identical intermediate steps) independently produced this
+equation. The two derivations took different intermediate paths but landed on the same
+algebraic relation.
+
+3.3 L = ln 2 specialization yields K_AUD [Theorem]
+
+Theorem 3.2. At L = ln 2, equation (3.1) reduces to
+
+  b² − 4b + 2 = 0    (3.2)
+
+with positive root b = 2 + √2 (privileged by both domain validity — the pole of m(x) at x = b
+must lie outside [0, 1] — and probability sign — the resulting p must be in [0, 1]; two
+independent constraints select the same root). The corresponding optimum acceptance probability
+is
+
+  p(ln 2) = ln 2 / [2 sinh(ln 2 / 2)] = ln 2 / (1/√2) = √2 · ln(2) = K_AUD,    (3.3)
+
+via the exact hyperbolic identity
+
+  sinh(ln 2 / 2) = (√2 − 1/√2) / 2 = 1 / (2√2).
+
+Derivation. At L = ln 2, e^(−L/2) = 2^(−1/2) = 1/√2, so b = 1/(1 − 1/√2) = √2/(√2 − 1) =
+(√2)(√2 + 1)/((√2 − 1)(√2 + 1)) = (2 + √2)/1 = 2 + √2. Substituting into (b − 1)² = b² · e^(−L)
+gives 2(b − 1)² = b², which expands to b² − 4b + 2 = 0. The general optimum probability formula
+
+  p(L) = L · e^(−L/2) / (1 − e^(−L)) = L / [2 sinh(L/2)]    (3.4)
+
+(derived by substitution into the f_X minimum at the endpoints) reduces at L = ln 2 to (3.3)
+via the hyperbolic identity. □
+
+Verification: GPT (Q1 R1, full derivation including (3.4)). Grok (Q1 R1 algebraic uniqueness
+via b > 1 domain validity; Q1 R2 full re-derivation including (3.2) and (3.3) at dps = 600).
+Chat-Claude (Q1 R1 algebraic uniqueness via probability sign; Q1 R2 clean hyperbolic-identity
+proof of (3.3) at dps = 500 and numerical confirmation of (3.4) at L = ln 2, ln 3, ln 4).
+Multiple independent algebraic routes converging at dps ≥ 500–600.
+
+3.4 Cell-length perturbation [Observation]
+
+Observation 3.3. The general optimum-probability formula (3.4) gives, for arbitrary cell width
+L:
+
+  L            p(L) at dps ≥ 500
+  ------------ ---------------------------------------------------------------------------------
+  0.5 · ln 2   0.99501275880905859630069555065233043529706394679838127538599865061203…
+  1 · ln 2     0.98025814346854719171390172363523338129146069909905472104224624706529… = K_AUD
+  2 · ln 2     0.92419624074659374588964282861090209076733351248034033882757334599119…
+  3 · ln 2     0.84022126583018330718334433454448575539268059922776118946478249748453…
+
+The optimum equals K_AUD only at L = ln 2.
+
+Verification: GPT (Q1 R1 derivation + dps-600 numerical table). Grok (Q1 R1 brief confirmation,
+no algebra). Chat-Claude (Q1 R2 dps-500 numerical confirmation at L ∈ {ln 2, ln 3, ln 4} and
+algebraic re-verification at L = ln 2 via hyperbolic identity).
+
+3.5 Integer cell-length family [Observation]
+
+Observation 3.4. Restricting (3.4) to L = ln n for integer n ≥ 2, and using the hyperbolic
+identity sinh(ln n / 2) = (n − 1)/(2√n), we obtain
+
+  p(ln n) = √n · ln(n) / (n − 1),    n ≥ 2.    (3.5)
+
+The denominator (n − 1) equals 1 only at n = 2, giving the unique two-factor form p(ln 2) = √2
+· ln(2). For n ≥ 3, the denominator is non-trivial.
+
+Verification: Chat-Claude (Q1 R2, derivation and verification at n ∈ {2, 3, 4, 5, 7} at dps ≥
+500). The derivation step is a one-line algebraic consequence of the multi-confirmed (3.4)
+closed form.
+
+3.6 Conditional forcing [Theorem]
+
+Theorem 3.5 (Forcing of K_AUD on the binary cell). K_AUD = √2 · ln(2) is the exact optimum
+acceptance probability for the Ahrens-Dieter Algorithm EA on the binary cell L = ln 2, under
+the conjunction:
+
+-   Target: exponential distribution.
+-   Decomposition: Z = K · L + V with K ~ Geometric(1/2) and V truncated exponential on [0, L).
+-   Cell width L = ln 2 specifically.
+-   Approximation family: rational m(x) = a/(b − x) + c with endpoint matching m(0) = 0, m(1)
+    = L.
+-   Optimization criterion: max-min on f_X (max p such that f_X(x) ≥ p everywhere on [0, 1]).
+
+Under this conjunction, K_AUD is forced — not as a parameter coincidence within the rational
+family of item 4, but by the algebraic geometry of the minimax problem on the binary cell.
+
+The conjunction is essential: §3.4 shows that other cell widths produce different constants,
+and §3.5 shows that the binary cell is the unique integer case yielding the clean two-factor
+form.
+
+-----------------------------------------------------------------------------------------------
+
+4. Algorithm CA: Three Saturation Constants Underneath One Display
+
+4.1 Setup
+
+Algorithm CA generates a standard Cauchy sample Z with density f(z) = 1 / [π(1 + z²)]. The
+inverse CDF is F⁻¹(x) = tan π(x − ½) on [0, 1]. Fishman (p. 186, eq. 43) approximates F⁻¹ by
+
+  m(x) = y · (a/(¼ − y²) + b),    y = x − ½,    (4.1)
+
+with first-pass constants a = 2/π and b = π − 8/π. The induced density (Fishman eq. 44–45) is
+
+  f_X(x) = (1/π) · m'(x) / (1 + m²(x)),    m'(x) = a · (¼ + y²) / (¼ − y²)² + b.    (4.2)
+
+Fishman reports the optimum saturation as p = 0.997738.
+
+4.2 The structural locking of (a, b)
+
+The constants a = 2/π and b = π − 8/π are not arbitrary. They are structurally locked by the
+requirement that the induced density f_X = 1 at three special points (the center y = 0 and the
+two boundaries y → ±½). The two locking conditions and their algebraic consequences are
+explicit:
+
+Condition 1 (center, y = 0). At y = 0: y² = 0, so ¼ − y² = ¼ and ¼ + y² = ¼. The simplified
+m(y) at this point is m = 0. Then m²(0) = 0 and 1 + m²(0) = 1. The derivative m'(y) = a · (¼ +
+y²)/(¼ − y²)² + b at y = 0 simplifies to m'(0) = a · (¼)/(¼)² + b = 4a + b. So
+
+  f_X(0) = (1/π) · m'(0) / (1 + m²(0)) = (1/π) · (4a + b).
+
+Requiring f_X(0) = 1 forces 4a + b = π.
+
+Condition 2 (boundaries, y → ±½). As y → ±½, ¼ − y² → 0⁺. The dominant terms are m(y) ≈ y · a /
+(¼ − y²) → ±∞ (sign of y prevails) and m'(y) ≈ a · (¼ + y²)/(¼ − y²)² ≈ a · (½) / (¼ − y²)².
+Computing the limit of f_X:
+
+  1 + m²(y) ≈ m²(y) ≈ y² · a² / (¼ − y²)² ≈ (¼) · a² / (¼ − y²)²    (using y² → ¼)
+
+  f_X(y) → (1/π) · [a · (½) / (¼ − y²)²] / [(¼) · a² / (¼ − y²)²] = (1/π) · (½) / [(¼) · a] =
+  (1/π) · (2/a) = 2/(πa).
+
+Requiring this boundary limit to equal 1 forces 2/(πa) = 1, equivalently a = 2/π.
+
+Together. Substituting a = 2/π into Condition 1 gives 4 · (2/π) + b = π, equivalently 8/π + b =
+π, equivalently b = π − 8/π. The two locking conditions therefore force the unique pair (a, b)
+= (2/π, π − 8/π).
+
+Simplification of m via a + b/4 = π/4. With a = 2/π and b = π − 8/π, observe that a + b/4 = 2/π
++ (π − 8/π)/4 = 2/π + π/4 − 2/π = π/4. So a/(¼ − y²) + b can be rewritten:
+
+  a/(¼ − y²) + b = a · [1/(¼ − y²) − 1/¼] + (a/¼ + b) · 1 ...   (this expansion is provided in
+  the supplementary verification, omitted here for brevity)
+
+More directly, computing m(y) = y · [a/(¼ − y²) + b] and combining over a common denominator (¼
+− y²) yields
+
+  m(y) = y · [a + b · (¼ − y²)] / (¼ − y²) = y · [a + b/4 − b · y²] / (¼ − y²) = y · [π/4 − b ·
+  y²] / (¼ − y²),
+
+using a + b/4 = π/4. Therefore
+
+  m(y) = y · (π/4 − b · y²) / (¼ − y²),    b = π − 8/π.    (4.3)
+
+This simplified form is the workhorse for §4.3, §4.4, and §4.5.
+
+4.3 Three constants behind one printed value [Observation]
+
+Reader's map. Algorithm CA's "saturation" turns out not to be one number but three
+closely-spaced numbers that share the leading 0.997… at three decimal places and only become
+fully distinguishable at the sixth. This section identifies which of them Fishman's printed
+0.997738 most plausibly refers to. To carry the structure cleanly, the four-row table below
+names what's being tracked before the analysis begins:
+
+  Value         Source                                                                 Closure
+  ------------- ---------------------------------------------------------------------- ------------------------------------
+  0.99730761…   Locked formula's true minimum (Obs. 4.1, eq. 4.4)                      Cardano-Ferrari closed form (§4.5)
+  0.99773497…   Locked formula at structural midpoint y = 1/4 (Theorem 4.2, eq. 4.5)   Pure rational in π² (§4.4)
+  0.99773789…   Implementation's design probability 2√W (§4.3, construction)           By construction (Fishman p. 187)
+  0.997738      Fishman's printed value (p. 186, eq. 45)                               Which of the three above?
+
+The last row is the question this section answers. The forward-quote conclusion: the printed
+value matches the third row exactly at six decimal places, not the first or the second.
+
+Observation 4.1. Under the locked formula (4.3) with a = 2/π and b = π − 8/π, the actual
+minimum of f_X(y) on y ∈ [0, ½] is
+
+  p_CA(true) =
+  0.9973076104572194656110114378880121201555124956194362751465177655372341844917049711015660890663337133…
+     (4.4)
+
+at y_* =
+0.20535800743834611478119958889167049718215372613577681056602146432389328817886122976807932487556408950…
+Fishman's printed value p = 0.997738 (p. 186, eq. 45) is offset from this minimum by 4.3 ×
+10⁻⁴; the three relevant constants — true minimum, structural midpoint, and implementation 2√W
+— become fully distinguishable only at six-decimal precision. The analysis below identifies
+which of the three the printed value most plausibly refers to.
+
+Verification (three independent computations at dps ≥ 100, with displayed precision drawn from
+the higher-dps runs):
+
+-   GPT (Q3 R1): direct symbolic expansion of the critical-point condition m''·(1+m²) =
+    2m·(m')² to a quartic in t = 4y² with π-dependent coefficients (full quartic given in
+    §4.5). Smaller real interior root t₁ ≈ 0.16868764487619…; substitution back gives (4.4) at
+    displayed precision.
+-   Chat-Claude (Q3 R1): numerical critical-point analysis using mpmath findroot at dps = 200,
+    identifying y_* ≈ 0.20536 and f_X(y_*) matching (4.4) to displayed precision.
+-   Cowork-Opus (Q3 R1): mpmath findroot at dps = 100, confirming both readers' values to all
+    displayed digits.
+
+The minimum of f_X is at an interior critical point, not at the structural midpoint y = 1/4
+(which is also numerically distinct from Fishman's printed 0.997738; see §4.4).
+
+Residual density at p = 0.997738 in the locked formula [worked computation]. A sharper version
+of the discrepancy follows from evaluating the residual density f*(y) = (f_X(y) − p)/(1 − p) at
+the critical point y_* under p = 0.997738:
+
+-   f_X(y_*) − 0.997738 = 0.99730761045721946561… − 0.997738 = −0.000430389…
+-   1 − 0.997738 = 0.002262
+-   f*(y_*) = −0.000430389… / 0.002262 = −0.190269…
+
+The residual density at y_* is therefore approximately −19% when p = 0.997738. The size of this
+number is structural rather than numerical: the small denominator (1 − p) ≈ 0.0023 amplifies
+the small numerator (−4.3 × 10⁻⁴) into a substantial negative value. This is a tool-resolution
+observation, not a textual flaw. At the four-decimal-place resolution typically displayed in
+1996, the three relevant constants — the locked-formula's true minimum (0.99730761…), the
+structural midpoint f_X(1/4) (0.99773497…), and the implementation's 2√W (0.99773789…) —
+separate only at the fourth decimal place (0.9973 vs 0.9977 for the true minimum) and cleanly
+distinguish among each other only at the sixth. The question of whether 0.997738 round-trips
+through the eq. (45) inequality at that precision does not arise without arbitrary-precision
+symbolic-numerical tools — and those tools (mpmath, sympy at dps ≥ 100) became casually
+available decades after Fishman 1996 and its source Ahrens–Dieter 1988. At dps ≥ 100
+resolution, which is the framework's standard verification floor and the precision this paper
+works in, the three values separate and the printed digits 0.997738 are identifiable as the
+implementation's design probability 2√W from p. 187 (Algorithm CA setup block), not as the
+locked formula's saturation.
+
+Internal consistency of the implementation block. Fishman's implementation block on p. 187
+prints both p = 0.997738 and 1 − p = 0.002262 as setup constants, and both match 2√W and 1 −
+2√W respectively to displayed precision (2√W = 0.99773789…, 1 − 2√W = 0.00226210…). The
+implementation is therefore internally consistent at 2√W; it is the location where the printed
+digits are mathematically correct by design. The illustration on p. 186 (eq. 45 under the
+locked m(x) of eq. 43) and the implementation on p. 187 are different objects connected by
+Fishman's shared notation; once the resolution is high enough to distinguish the three
+near-0.997 constants, the printed digits 0.997738 align with the implementation side.
+Primary-source verification of both p. 186 eq. (45) and p. 187's W constant (and 1 − p) is
+recorded in §6.3.
+
+Scope of the discrepancy: a precise statement. Fishman's text contains two distinct
+presentations of Algorithm CA. On p. 186 (the illustrative presentation, eqs. 42–45), the
+rational approximation m(x) is given with the locked constants a = 2/π and b = π − 8/π and the
+saturation is asserted as p = .997738. Under those specific constants, the actual minimum of
+f_X is (4.4) above, off from .997738 by 4.3 × 10⁻⁴ — too large to be precision noise. On p. 187
+(the implementation of Algorithm CA, the explicit pseudocode), the algorithm uses a different
+set of numerically-optimized constants:
+
+  a_impl = 0.6380 6313 6607 7803,    b_impl = 0.5959 4860 6052 9070,    W = 0.2488 7022 8008
+  3841,    A = 0.6366 1977 2367 5813 = 2/π,    B = 0.5972 9975 9353 9963, …
+
+with the fast path conditioned on S = W − T² > 0 (where T = U − ½). The fast path is therefore
+taken precisely when |T| < √W, giving fast-path probability 2√W by construction. In the
+implementation, 0.997738 is not a hardcoded threshold that could be wrong; it is the design
+probability of the fast-path region, derived from the optimized W. Numerical verification at
+dps = 100: 2 · √(0.2488702280083841) =
+0.99773789746282385061384216585639821128053446127685041274210769192730049… The 7th decimal
+place is 8, which rounds the 6th place from 7 to 8 — giving Fishman's printed 0.997738 as the
+correct 6-place rounding of the implementation's actual fast-path probability.
+
+Therefore: the discrepancy (4.3 × 10⁻⁴) is between Fishman's illustrative claim on p. 186 and
+the locked-formula's actual minimum. The implementation on p. 187 uses different optimized
+constants and is internally consistent: 0.997738 is correct by design there, equal to 2√W. The
+published algorithm does not have a rejection-sampling correctness flaw that we can
+substantiate.
+
+Two distinct mathematical constants are at play, and the published illustration's 0.997738
+corresponds to one of them. The locked illustrative formula on p. 186 has true minimum
+p_CA(true) = 0.99730761…, which differs from Fishman's printed 0.997738 by 4.3 × 10⁻⁴. The
+implementation on p. 187 has fast-path probability 2√W = 0.99773789…, which rounds correctly to
+0.997738 at six decimal places. Two parsimonious accounts of where Fishman's printed 0.997738
+originates, in order of fit-to-digits:
+
+Forward-quote account (fits all six digits exactly). Fishman's illustration on p. 186 most
+plausibly forward-quotes the implementation's design probability 2√W = 0.99773789… as if it
+were the locked illustrative formula's saturation. The printed 0.997738 then is exactly 2√W
+rounded to six decimal places — no auxiliary computation, no typographical drift. The
+illustration treats the locked formula and the implementation as effectively the same case for
+the purpose of stating the saturation, which is reasonable simplification given that 2√W and
+the locked formula's structural midpoint f_X(1/4) agree to four decimal places (both round to
+0.9977) at the resolution typically displayed; the locked formula's true minimum 0.99730761… is
+already distinguishable at four decimal places (0.9973 vs 0.9977), but distinguishing among the
+three values requires the sixth decimal place, which Fishman's text typically did not display.
+
+Midpoint account (fits to five digits, leaves three units of drift in the sixth). The locked
+formula's structural-midpoint value f_X(1/4) = 0.99773497… (closed form §4.4 below) could have
+been computed and rounded for display. However, 0.99773497 rounds to 0.997735 at six decimal
+places, not 0.997738 — leaving a 3 × 10⁻⁶ gap that the midpoint account does not explain.
+
+The forward-quote account is the more parsimonious. It is also historically natural: at the
+precision available in 1996 — before AI-assisted high-precision symbolic verification at dps ≥
+100 became casually accessible — the three relevant values (the locked illustrative formula's
+actual minimum 0.99730761, the implementation's design probability 0.99773789, and the locked
+formula's midpoint evaluation 0.99773497) share the leading 0.997… at three decimal places,
+with the true minimum already separating from the two near-0.9977 values at four decimal
+places. Cleanly distinguishing all three requires the sixth decimal place — a precision
+Fishman's text typically did not display, and one not naturally resolvable without the
+high-precision symbolic-numerical tooling now standard. Forward-quoting the implementation's
+design probability in the illustrative presentation reflects the tools and the perspective
+available at the time, not a textual error.
+
+The framework's contribution, made possible by mpmath at dps ≥ 100 and by treating the gap G =
+1 − K_AUD as a structural quantity worth resolving precisely, is to identify the three values
+cleanly:
+
+-   0.99730761… — the locked illustrative formula's actual minimum (Cardano-Ferrari closed
+    form, §4.5)
+-   0.99773497… — the locked formula's structural-midpoint evaluation (rational closed form
+    §4.4, novel exact identity)
+-   0.99773789… — the implementation's design probability 2√W (correct by construction on p.
+    187)
+
+Fishman's printed 0.997738 most plausibly corresponds to the third by forward-quotation in the
+illustrative presentation. The novel exact identity for f_X(1/4) — distinct from both Fishman's
+printed value and the implementation's design probability — is the subject of §4.4.
+
+4.4 f_X at the structural midpoint y = 1/4 [Theorem]
+
+Theorem 4.2. Under the locked formula (4.3), f_X evaluated at the structural midpoint y = 1/4
+has the closed form
+
+  f_X(1/4) = 16 · (9π² + 88) / (9π⁴ + 192π² + 64) =
+  0.9977349673176264937954875565607376863145868214054221346548741070319047690432098642645848369781342686…
+     (4.5)
+
+Derivation. At y = 1/4: ¼ − y² = 3/16, ¼ + y² = 5/16. Then
+
+  m(1/4) = (1/4) · [(2/π) / (3/16) + (π − 8/π)] = (1/4) · [32/(3π) + π − 8/π] = π/4 + 2/(3π)
+
+  m²(1/4) = π²/16 + 1/3 + 4/(9π²)
+
+  1 + m²(1/4) = 4/3 + π²/16 + 4/(9π²)
+
+  m'(1/4) = (2/π) · (5/16)/(3/16)² + (π − 8/π) = (2/π) · (5/16) · (256/9) + (π − 8/π) =
+  160/(9π) + π − 8/π = π + 88/(9π).
+
+Therefore
+
+  f_X(1/4) = (1/π) · m'(1/4) / (1 + m²(1/4)) = (1/π) · [π + 88/(9π)] / [4/3 + π²/16 + 4/(9π²)].
+
+Multiplying numerator and denominator by 144π² yields (4.5). □
+
+Verification: Chat-Claude (Q3 R1 derivation, dps = 200 numerical match). Cowork-Opus (Q3 R1
+independent mpmath verification at dps = 100, with closed form and direct numerical evaluation
+matching to all 100 displayed digits, difference exactly 0.0).
+
+Significance. The form (4.5) is a clean rational expression in π² that does not appear in
+Fishman 1996, Ahrens-Dieter 1988, or any reference standardly traceable from those sources. It
+is a novel exact identity. Numerically, f_X(1/4) ≈ 0.99773497, which differs from Fishman's
+printed 0.997738 by 3.0 × 10⁻⁶, but does not round to 0.997738 — at six decimal places it
+rounds to 0.997735. The midpoint identity therefore cannot by itself account for Fishman's
+printed digits; §4.3's forward-quote analysis locates the printed value at the implementation's
+design probability 2√W = 0.99773789… (which does round exactly to 0.997738), not at the
+structural midpoint. The midpoint identity is a third distinct constant in its own right —
+radical-degree-0 closure of the locked illustrative formula — and stands as a contribution
+independent of the discrepancy reading.
+
+4.5 Cardano-Ferrari closed form for p_CA(true) [Theorem]
+
+The true minimum p_CA(true) of (4.4) is the value of f_X at the smaller positive root of a
+quartic over ℚ(π²). The closed form requires Cardano's cube root and Ferrari's quartic formula.
+
+Theorem 4.3 (the saturation quartic). Setting s = π² and t = 4y², the critical-point condition
+m''(y) · (1 + m²(y)) = 2 m(y) · [m'(y)]² for the locked Cauchy formula (4.3), after extracting
+trivial factors 2y(2y − 1)(2y + 1) (which give the boundary points and y = 0), reduces to the
+quartic
+
+  P(t) = (s − 8)³ · t⁴ + [−4(s − 8)²(s − 12)] · t³ + [6s³ − 120s² + 608s] · t² + [−4s³ + 32s² +
+  64s] · t + (s³ − 96s) = 0.    (4.6)
+
+The two real interior roots in (0, 1) are t₁ ≈ 0.1686876448761912728… (corresponding to y_* ≈
+0.20536, the minimum) and t₂ ≈ 0.7389506480968752213… (a maximum at y₂ ≈ 0.42981).
+
+Verification (multi-reader to dps ≥ 1000): GPT (Q3 R2 direct symbolic expansion), Chat-Claude
+(Q3 R2 verification at dps = 1000 of the seed factorizations), Grok (Q3 R2 sympy symbolic
+confirmation), Cowork-Opus (Q3 R2 polyroots at dps = 100, both real interior roots reproduced
+to 100 displayed digits).
+
+Structural seeds. The first three coefficients factor through (s − 8) and (s − 12):
+
+-   (s − 8)³ = s³ − 24s² + 192s − 512 (verify: direct expansion)
+-   −4(s − 8)²(s − 12) = −4s³ + 112s² − 1024s + 3072 (verify: (s − 8)²(s − 12) = s³ − 28s² +
+    256s − 768)
+-   6s³ − 120s² + 608s = 2s · [3(s − 8)(s − 12) + 16] (verify: 3(s − 8)(s − 12) = 3s² − 60s +
+    288)
+
+The remaining two coefficients have less clean factorizations: −4s³ + 32s² + 64s = −4s · (s² −
+8s − 16) (with s² − 8s − 16 having roots 4 ± 4√2, not factoring over ℚ); and s³ − 96s = s · (s²
+− 96) (with s² − 96 having roots ±4√6, not factoring over ℚ).
+
+Observation 4.4 (no clean factorization found over ℚ(π²)). No factorization of the quartic
+(4.6) into two quadratics with coefficients in ℚ(s) = ℚ(π²), or in the ring ℚ(s − 8, s − 12)
+generated by the structural seeds, has been found in extensive numerical search. Specifically:
+
+-   Symbolic factor() check via sympy (Grok, Q3 R2) on the quartic with s = π² treated as an
+    indeterminate returns the expanded form unchanged — sympy's standard factorization engine
+    finds no quadratic-by-quadratic split.
+-   PSLQ on the resolvent cubic root at dps ≥ 500 against bases {1, s, s², s³, 1/(s − 8), s/(s
+    − 8), s²/(s − 8), s³/(s − 8), 1/(s − 8)², …} (Chat-Claude, Q3 R2) finds no integer relation
+    with coefficients ≤ 10¹². If the resolvent cubic were reducible over ℚ(π²) into low-degree
+    factors with modest-coefficient rational-function roots, PSLQ would detect such a relation
+    at the precision and basis-size tested. The negative result therefore constrains the form
+    of any factorization (it cannot live in the basis tested with coefficients in the bound)
+    but does not rule out factorizations involving radical extensions of the basis or rational
+    functions with very large coefficients.
+
+These are robust negative findings, not a Galois-theoretic proof of irreducibility. A formal
+proof would require either an explicit Galois-group computation (e.g., via PARI/GP or a similar
+computer-algebra system with symbolic Galois-group support) or a hand argument exploiting
+specific algebraic features of the coefficient polynomials. We classify Observation 4.4 at
+[Observation, structural finding] level rather than as a Theorem, and leave the formal
+irreducibility proof as an open thread (§9, item 5).
+
+Theorem 4.5 (Cardano-Ferrari closed form). The smaller positive root t_* = 4y_*² of (4.6)
+admits the explicit closed form, via Ferrari's solution of the depressed quartic and Cardano's
+solution of the resolvent cubic, given by the following algorithm:
+
+1.  Normalize the quartic. With c₄ = (s − 8)³, c₃ = −4(s − 8)²(s − 12), c₂ = 6s³ − 120s² +
+    608s, c₁ = −4s³ + 32s² + 64s, c₀ = s³ − 96s, set A_k = c_k / c₄ for k = 0, 1, 2, 3.
+
+2.  Depress via t = u − A₃/4, with depressed coefficients
+
+      p_d = A₂ − 3·A₃²/8
+
+      q_d = A₃³/8 − A₃·A₂/2 + A₁
+
+      r_d = −3·A₃⁴/256 + A₂·A₃²/16 − A₃·A₁/4 + A₀.
+
+3.  Solve the resolvent cubic y³ + 2 p_d · y² + (p_d² − 4 r_d) · y − q_d² = 0 via Cardano:
+
+      y_F = ∛[−Q/2 + √(Q²/4 + P³/27)] + ∛[−Q/2 − √(Q²/4 + P³/27)] − 2 p_d / 3,
+
+    where P, Q are the depressed-cubic coefficients of the resolvent. Numerically y_F ≈
+    10.15453668993873005877110379851397407002767328470073029778…
+
+4.  Apply Ferrari:
+
+      B = √y_F,    C_b = (y_F + p_d)/2 + q_d/(2√y_F),    D_b = y_F − 4 C_b.
+
+5.  Extract the relevant depressed-quartic root:
+
+      u_ = (√y_F − √D_b) / 2.*    (4.7)
+
+6.  Recover t_* = u_* − A₃/4 and y_* = √(t_) / 2; then **p_CA(true) = f_X(y_)** under the
+    locked formula (4.3).
+
+The full closed-form expression is non-elementary (one Cardano cube root nested with two
+Ferrari square roots, all over ℚ(s) = ℚ(π²)) but exact and mechanically reproducible from
+(4.6).
+
+Compact symbolic form. Combining steps 1–6 into a single nested expression yields:
+
+  t_ = −A₃/4 + (1/2)·{ √y_F − √( −y_F − 2 p_d − 2 q_d / √y_F ) }*    (4.8)
+
+where:
+
+  y_F = ∛(−Q/2 + √(Q²/4 + P³/27)) + ∛(−Q/2 − √(Q²/4 + P³/27)) − 2 p_d / 3,    (4.9)
+
+  P = −p_d² / 3 − 4 r_d,    Q = −2 p_d³ / 27 + 8 p_d · r_d / 3 − q_d²,    (4.10)
+
+  p_d = A₂ − 3 · A₃² / 8,    q_d = A₃³ / 8 − A₃ · A₂ / 2 + A₁,    r_d = −3 · A₃⁴ / 256 + A₂ ·
+  A₃² / 16 − A₃ · A₁ / 4 + A₀,    (4.11)
+
+(The P, Q in (4.10) are obtained by depressing the resolvent cubic y³ + 2 p_d · y² + (p_d² − 4
+r_d) · y − q_d² = 0 via the substitution y = z − 2 p_d / 3, which removes the y² term and
+yields z³ + P · z + Q = 0 in the standard Cardano form. Verified at dps = 100: substitution
+into (4.9) yields y_F = 10.15453668993873005877110379851397407… matching the direct findroot
+reference value to displayed precision. Caught and corrected by Chat-Claude during first-reader
+review, 2026-05-06; an earlier draft of this paper had an incorrect normalization in (4.10)
+that would have propagated through to the wrong y_F value.)
+
+and the depressed-quartic coefficients A_k = c_k / c₄ for k = 0, 1, 2, 3 are rational functions
+of s = π² determined by the quartic (4.6). The full radical structure of t_* is therefore one
+Cardano cube root nested inside two Ferrari square roots, with every ingredient at every level
+a rational function in π². The map y_* → p_CA(true) = f_X(y_) under (4.3) and (4.2) is then a
+rational evaluation in y_ and π², so p_CA(true) lives in an algebraic extension of ℚ(π²) of
+degree ≤ 4, generated by t_*.
+
+The expression (4.8)–(4.11) is the explicit closed form referred to in this paper as "the
+Cardano-Ferrari closed form for p_CA(true)." The algorithmic six-step recipe and the compact
+form (4.8)–(4.11) are mathematically equivalent presentations of the same identity.
+
+Verification (four-reader, three independent Ferrari paths):
+
+-   Chat-Claude (Q3 R2, original): manual Cardano + Ferrari derivation at dps = 600, p_CA(true)
+    matching (4.4) to all 600 displayed digits.
+-   GPT (Q3 R2, after Chat-Claude's already-found Cardano-Ferrari path was relayed by D.B. with
+    the hint "run a Ferrari"): independent re-derivation using a different parameterization (P,
+    Q, U, Y, W variables with U = ∛(−Q/2 + √(Q²/4 + P³/27)), Y = −5p_d/6 + U − P/(3U), W =
+    √(p_d + 2Y), and t_* = −A₃/4 + W/2 − ½·√(−(3 p_d + 2Y + 2 q_d/W))). At dps = 600 with
+    quartic residual P(t_) ≈ −1.34 × 10⁻⁵⁹⁸. Same numerical t_ and y_* as Chat-Claude's path,
+    different intermediate variables.
+-   Extra Grok (separate session, Q3 R2, also after the relay): independent re-derivation via
+    sympy's exact quartic solver. Closed-form expression with denominators built from the
+    structural seeds (s − 8) and (s − 12) where s = π² — i.e. living in the localized ring ℚ[s,
+    (s − 8)⁻¹, (s − 12)⁻¹] (a strict subring of ℚ(s); the linear shifts (s − 8) and (s − 12)
+    generate the same field as s, but selecting them as the only inverted denominators captures
+    Grok's structural-seed observation). dps ≥ 500.
+-   Cowork-Opus (Q3 R2, verification anchor): mpmath step-by-step verification of Chat-Claude's
+    recipe at dps = 100. Every step — y_F, D_b, u_, t_, y_* — reproduced independently with
+    closed-form output and direct numerical evaluation matching with difference exactly 0.0 to
+    all 100 displayed digits.
+
+The four independent paths converge.
+
+Observation 4.6 (The Cardano-Ferrari closed form is canonical for p_CA(true): Galois group S₄,
+closing Open Thread #5). The Cardano-Ferrari recipe given in Theorem 4.5 is the canonical
+radical closure for p_CA(true) — no lower field-degree collapse exists over ℚ(π²), and the
+Cardano cube root nested with two Ferrari square roots is the field-degree-minimal radical
+structure required by the algebraic geometry of the saturation quartic (4.6). (Whether the
+displayed expression admits aesthetically cleaner denesting — a presentation-level question
+distinct from the field-structure question resolved here — remains Open Thread #1 of §9.) This
+follows from a direct symbolic computation that upgrades Observation 4.4 from a structural
+negative finding to a definitive positive characterization: the Galois group of (4.6) over
+ℚ(π²) is the symmetric group S₄, the generic case for an irreducible quartic.
+
+The argument follows standard quartic Galois taxonomy from three computations.
+
+1.  The quartic (4.6) is irreducible over ℚ(s) where s = π². Direct symbolic factorization in
+    sympy returns the expanded form unchanged.
+
+2.  The resolvent cubic of step 3 in Theorem 4.5 is irreducible over ℚ(s). Its real root y_F ≈
+    10.15453668993873… is accompanied by two complex-conjugate roots ≈ −9.522764701070334 ±
+    1.767269306847832 i; symbolic factorization confirms no rational-function split over ℚ(s).
+
+3.  The discriminant of (4.6) is non-square over ℚ(s). The explicit factorization is
+
+  Δ(P) = −2²⁰ · s² · (s − 8)³ · (s³ − 272s + 1728) · (27s⁶ − 702s⁵ − 648s⁴ + 194976s³ −
+  2485888s² + 12718080s − 23887872).    (4.12)
+
+The odd exponent on (s − 8)³ already rules out square status in ℚ(s), independent of the
+structure of the remaining polynomial factors.
+
+By standard quartic Galois taxonomy: an irreducible quartic with irreducible resolvent cubic
+has Galois group S₄ or A₄; a non-square discriminant rules out A₄ (which always has square
+discriminant). The Galois group is therefore S₄.
+
+Consequence. The S₄-type closure is the Cardano-Ferrari radical solution of Theorem 4.5 —
+Galois theory is the framework that explains why this closure is forced, not a competing
+closure mechanism. There is no biquadratic factorization, no cyclic-quartic collapse, no
+rational-in-π² reduction available; the algebraic structure of (4.6) requires exactly the
+radical depth Theorem 4.5 provides.
+
+Verification: GPT (independent stress-test session, 2026-05-07): symbolic computation in sympy
+of the discriminant factorization (4.12), explicit irreducibility checks on the quartic and
+resolvent cubic over ℚ(s), application of the standard S₄/A₄ taxonomy, all numerical checks
+reproduced at dps = 620 (residuals < 10⁻⁶²¹). This finding closes Open Thread #5 from §9.
+
+Algorithmic corroboration via direct Galois-group computation (Cowork-Opus, 2026-06-01). The
+§4.6 proof of S₄ is the structural chain above (irreducibility + non-square discriminant +
+irreducible resolvent cubic ⇒ S₄ by quartic Galois taxonomy, over ℚ(s) where s = π²). As an
+independent algorithmic check of the same conclusion, a direct Galois-group computation was run
+on rational specializations of (4.6). Since galois_group requires coefficients in ℚ (not in the
+function field ℚ(s)), the check used eight independent rational specializations of s = π² at
+precisions ranging from 5 to 50 decimal digits, using sympy.polys.numberfields.galois_group
+(the Python-side analog of PARI/GP's polgalois() — both compute the Galois group through
+resolvent-based algorithms after sympy's irreducibility check). Every specialization returned
+the same result: a permutation group of order 24, degree 4, generated by a 4-cycle and a
+transposition — i.e., the symmetric group S₄. In PARI/GP's output format this would be
+[24, -1, 1, "S4"]. The Hilbert irreducibility theorem guarantees that the Galois group over
+ℚ(s) equals the Galois group over ℚ of generic specializations, allowing a measure-zero
+exceptional set; eight successful specializations is therefore strong algorithmic evidence
+consistent with the structural-chain proof rather than an independent second proof. The
+structural chain over ℚ(π²) is the proof of S₄; the algorithmic computation corroborates it.
+
+-----------------------------------------------------------------------------------------------
+
+5. The Ladder of Tractability [Observation]
+
+Observation 5.1. The three closed-form identities established in §3 and §4 sit at distinct
+radical degrees of closure over their natural base fields:
+
+K_AUD = √2 · ln(2) (eq. 3.3) — radical degree 2 (one sqrt)
+
+-   Context: EA (exponential algorithm), true minimum, binary cell
+-   Closure: single quadratic root over ℚ
+
+f_X(1/4) = 16(9π² + 88) / (9π⁴ + 192π² + 64) (eq. 4.5) — radical degree 0 (no radicals)
+
+-   Context: CA (Cauchy algorithm), structural midpoint y = 1/4, unit cell
+-   Closure: pure rational in π²
+
+p_CA(true) via (4.7) — radical degree 6+ (cbrt nested with sqrt)
+
+-   Context: CA, true minimum, unit cell
+-   Closure: Cardano cube + Ferrari sqrts over ℚ(π²)
+
+The binary cell + endpoint-balancing minimax (Algorithm EA) produces uniquely clean closure
+(radical degree 2) among the cases examined. The unit-circle cell (Algorithm CA) bifurcates:
+the structural midpoint admits a clean rational form over ℚ(π²), while the true
+rejection-sampling minimum requires generic-quartic radical closure — Galois group S₄ over
+ℚ(π²) (Observation 4.6), realized exactly by the Cardano-Ferrari radical solution of Theorem
+4.5, with no lower field-degree collapse available.
+
+Significance. The observation reframes K_AUD's appearance in Monte Carlo sampling. It is not
+"K_AUD happens to be the answer for one particular algorithm." It is "the binary cell of the
+exact-approximation method produces the cleanest possible such answer in elementary terms — one
+end of a structural radical-degree spectrum." Whether this spectrum generalizes to other
+Marsaglia-style exact-approximation instances in the broader literature (beyond Fishman's two
+examples) is an open question.
+
+The ladder also clarifies what Fishman's printed 0.997738 most plausibly is. It does not match
+the true rejection-sampling minimum (radical degree 6+, 0.99730761…) at full precision. It also
+does not match the structural-midpoint evaluation (radical degree 0, 0.99773497…) at
+six-decimal precision — the midpoint rounds to 0.997735, not 0.997738. The printed value
+matches exactly, on the other hand, the implementation's design probability 2√W = 0.99773789…
+on Fishman p. 187 (which rounds correctly to 0.997738 at six decimals). §4.3 develops the
+forward-quote account in full: the illustrative presentation on p. 186 most parsimoniously
+forward-quotes the implementation's design probability rather than computing either the true
+minimum or the structural-midpoint value — a natural simplification given the precision
+routinely displayed in 1996.
+
+A note on terminology and choice of classification axis. Throughout this paper, by "radical
+degree" we mean the nesting depth of radical operations required to express the constant in
+closed form: 0 for a rational expression (no radicals), 2 for a single quadratic surd over a
+base field (one sqrt, "depth 2" in the sense that ((·)^(1/2))^2 returns to the base field), and
+6+ for Cardano-Ferrari nested radicals (a cube root nested inside two square roots, where the
+deepest extraction sits inside two outer extractions). This usage is distinct from the standard
+algebraic degree of an algebraic number (which counts the dimension of the minimal polynomial
+extension over the base field); we use "radical degree" specifically because it cleanly
+separates the binary cell from the others on the dimension that matters here — how nested the
+radical extractions are, not how large the algebraic extension is.
+
+The classification in Observation 5.1 uses radical degree because that is the axis along which
+the binary case is uniquely clean: K_AUD lives at radical degree 2 (the smallest nonzero level
+— a single sqrt), and this minimality is forced by the algebraic geometry of the binary
+endpoint-balancing minimax (§3). Other classification axes for the same three identities would
+tell different stories — for example, the algebraic field of definition (K_AUD lives in ℚ(√2,
+ln 2) but transcendental over ℚ; §4.4's f_X(1/4) is rational over ℚ(π²); §4.5's p_CA(true) is
+algebraic of degree ≤ 4 over ℚ(π²)) would not distinguish §4.4 from §4.5 cleanly. The
+Galois-group complexity would not distinguish §3.3 from §4.4 (both have abelian Galois groups
+over their respective bases). The computational complexity of evaluation at a fixed precision
+would put all three identities at roughly the same cost. Radical degree (in the nesting-depth
+sense above) is the axis that cleanly separates the binary case from the others, and that
+separation is what the framework's broader work on K_AUD's distinguished status (Papers 1, 6,
+7) has been pointing to. We therefore present radical degree as the appropriate classification
+for Observation 5.1, while acknowledging that other axes are valid and may produce different —
+but consistent — readings.
+
+-----------------------------------------------------------------------------------------------
+
+6. Verification Protocol
+
+All numerical claims in this paper are verified using mpmath (Python arbitrary-precision
+library) and cross-checked across multiple independent AI architecture families.
+
+6.1 What was verified, by whom, at what precision
+
+-   §3 — Algorithm EA. The endpoint-balancing equation, its L = ln 2 specialization yielding
+    K_AUD = √2·ln(2), the cell-length perturbation table, and the integer cell-length family,
+    all verified at dps ≥ 500–600 across multiple independent algebraic paths. The hyperbolic
+    identity sinh(ln 2 / 2) = 1/(2√2) is exact.
+-   §4.3 — p_CA(true). Multi-reader convergence on the locked-formula minimum at dps ≥ 100,
+    with displayed precision drawn from the higher-dps runs. One project-working Opus session —
+    selecting the precision unprompted while searching for additional closed/locked-form
+    structure — extended to dps = 50000 with residuals at the precision floor.
+-   §4.4 — f_X(1/4). Closed form (4.5) and direct mpmath evaluation match to all 100 displayed
+    digits with difference exactly 0.0; an independent dps = 1000 pass confirmed the match to
+    1000 digits.
+-   §4.5 — Cardano-Ferrari recipe. Verified across four independent computational paths — three
+    Ferrari derivations (Chat-Claude manual, GPT P-Q-U-Y-W parameterization, Extra Grok sympy
+    exact solver) plus step-by-step mpmath at dps = 100, all converging on identical numerical
+    values. At working dps = 1500, the Cardano-Ferrari p_CA vs direct quartic-root p_CA
+    difference is exactly 0 to 1000 displayed digits — two independent floating-point paths
+    landing on identical bits.
+-   §3.6 — Boundary-minimum completeness. Interior critical point x_crit = b − a/2 ≈ 0.5575
+    verified as a maximum (value ≈ 1.0101 > K_AUD ≈ 0.9803), confirming the boundary-minimum
+    assumption of Theorem 3.5.
+-   §4.6 — Galois group S₄. Discriminant factorization (4.12) and irreducibility checks
+    verified at high precision, closing Open Thread #5 and promoting the earlier Observation
+    4.4 to the present §4.6.
+
+Aggregate stress-test record across all rounds (2026-05-07 through 2026-05-12): 30+ fresh AI
+sessions across ten architecture families — Gemini Thinking, Gemini Fast, Grok 4.3 Expert, GPT
+5.5 Thinking, Perplexity, DeepSeek Expert, Claude Opus 4.7 adaptive, Sonnet 4.6 adaptive, Haiku
+4.5 Extended, Mistral. No session at any round proposed a substantive math correction; all
+revisions were scope-precision and framing-consistency improvements only. The
+session-by-session audit trail is preserved in the framework's internal methodology notebook.
+
+Beyond the fresh-session record, project-working AI collaborators — Cowork-Opus (Opus and
+Sonnet across multiple sessions), Chat-Claude, and other named contributors documented at §10 —
+performed independent verification at high precision during ongoing work on the draft. The dps
+= 50000 pass on p_CA(true) noted above is one such instance: the Opus session that produced it
+selected that precision unprompted while hunting for additional closed/locked-form structure,
+with the verification result a byproduct of the deeper search. This depth-as-AI-choice pattern
+— the AI proposing the verification depth rather than the human directing it — is distinct from
+the fresh-session prompt protocol; both contribute to the record at different operational
+levels.
+
+6.2 What the stress-test rounds changed
+
+The substantive revisions to the draft, in approximate order of structural impact:
+
+-   §4.3 / §8.2 forward-quote reframe. The §4.3 explanation of Fishman's printed 0.997738 was
+    sharpened from a midpoint-evaluation hypothesis (which leaves a 3 × 10⁻⁶ unexplained drift
+    in the last decimal place) to a forward-quote-of-implementation-probability hypothesis
+    (which fits all six printed digits exactly). This reflects that 1996-era display precision
+    did not distinguish the three distinct values now identifiable by high-precision symbolic
+    computation. A subsequent round propagated the reframe to §4.4 and §5, where stale
+    midpoint-evaluation language had remained: §4.4's Significance paragraph now states
+    explicitly that f_X(1/4) ≈ 0.99773497 rounds to 0.997735 (not 0.997738); §5's ladder
+    closing identifies Fishman's printed value as a forward-quote of the implementation's
+    design probability; §4.3's "agree to four decimal places" claim is corrected to identify
+    the leading-three-digit agreement, with full distinction requiring six.
+-   §4.6 Galois classification. An explicit Galois-group computation on the saturation quartic
+    (4.6) at dps = 620 confirmed the closure type as S₄-generic, closing Open Thread #5.
+-   Corrected (4.10) normalization. Chat-Claude's first-reader review caught a symbolic
+    compact-form error in which P and Q were normalized incorrectly (4× and 8× respectively).
+    The algorithmic six-step recipe and the appendix script were unaffected; only the symbolic
+    compact form was corrected.
+-   Reference additions. Hamilton 1998 added with an explicit structural-independence note (the
+    present paper's §3 forcing result derives a, b, c from EA's structural conditions, not from
+    the historical source). DOIs added for Marsaglia 1984 and Ahrens-Dieter 1988.
+-   Cross-reference and terminology fixes. Stale Stack-numbered cross-references in §5
+    corrected to the paper's own §3.3, §4.4, §4.5. "Radical degree" disambiguated from
+    algebraic degree with an explicit definition. Observation 4.4's PSLQ-detection wording
+    tightened to "at the precision and basis-size tested." L'Ecuyer reference cleaned of
+    internal Q-round language. §5 wording precision around "the full Galois-theoretic
+    apparatus" tightened.
+-   Negative result preserved. A precision-floor residue investigation tested whether dps = 100
+    cancellation patterns carried structured information on number-theoretically distinguished
+    test values (continued-fraction convergents of ln 2; Pell numbers; Pell half-companions)
+    relative to a random integer control. Binomial tests against the random baseline gave P >
+    0.8 for every family tested — no statistically distinguishable enrichment. We therefore
+    report, for the tests applied at dps = 100–500: the residues at the precision floor appear
+    to be implementation-specific floating-point artifacts of the working precision rather than
+    structured signal of a deeper invariant. Different precision regimes, different basis
+    choices, or tests against different invariants might surface structure we did not detect;
+    at the level of resolution available here, the cancellation bands carry no signal we can
+    attach to ln 2's irrationality measure, the Pell tower, or any other invariant we tested.
+    We keep the negative result on the record because the discipline of running the test is
+    what makes either outcome informative.
+
+6.3 What remains unverified by readers, and why
+
+Two layers fall outside the stress-test rounds' direct verification.
+
+-   Fishman 1996 primary source. Fishman 1996 pp. 186–189 are the originating literature for
+    the Algorithm EA / CA exact-approximation method analyzed in this paper. The textbook is
+    copyrighted (Springer; ISBN 0-387-94527-X), and the historical/forensic claim that pp.
+    186–189 contain the specific constants and printed values we cite rests on D.B.'s direct
+    page captures from a legitimate source, maintained throughout the framework's development.
+    Several AI collaborators working with the framework during the development arc had read
+    access to these captures (Cowork-Opus and chat-side Opus across multiple sessions).
+
+    The paper's central claims are derived from material reproducible in this paper alone: §3's
+    forcing result on the binary cell L = ln 2 follows from the structural conditions of
+    Algorithm EA, written out in §3.1–§3.3 of the present paper; §4.3–§4.5's closed-form
+    analysis works on the locked m(x) of eq. 43 (set out in §4.1) and produces the
+    Cardano-Ferrari closed form for p_CA(true), the rational closed form for f_X(1/4), and the
+    worked computation showing f*(y_*) ≈ −0.19 at p = 0.997738 in the locked m(x) — all
+    reproducible from this paper's own text. Fishman's specific printed values appear in the
+    §4.3 forward-quote analysis as identifications of what the paper's closed forms align to,
+    not as a basis for the paper's claims.
+
+    The 2026-05 formal stress-test rounds were carried out against the framework's open-access
+    source set — the prior framework papers (Paper 1 on the binary information bound, Paper 6
+    on cross-domain signatures, Paper 7 on the HK closed form, Paper 4 on 400/11 gap scaling —
+    all openly hosted on gap-geometry.github.io and raw.githubusercontent.com), Devroye 1986's
+    freely-available textbook on non-uniform random variate generation, mpmath, sympy, and the
+    methodology document — rather than the copyrighted Springer source. This was a deliberate
+    balance: the open-access source set carries relevant data of its own (the HK identity, the
+    binary information results, the cross-domain corridor structure, the standard
+    sampling-theory machinery) and grounds the framework's broader claims independently of any
+    individual reader's access to Fishman. The verifying instances in those rounds noted
+    explicitly that they did not access the Springer source (GPT: "I did not independently
+    verify Fishman pp. 186–189 or Ahrens-Dieter 1988 against original scans"; Opus: "I cannot
+    verify the textual claims about Fishman 1996 — I don't have those texts"); the stress-test
+    discipline kept the paper's verification chain on material accessible to all readers.
+
+    A reader who has access to Fishman 1996 can independently verify the source-side specifics
+    of §4.3 (eq. 45's stated saturation p = .997738 in the locked m(x); the Algorithm CA
+    implementation block on p. 187 with W = 0.2488 7022 8008 3841 and the printed 1 − p =
+    .002262; the EA setup constants on pp. 188–189) by direct inspection. The paper's
+    mathematical claims (closed forms, residual-density computation, Cardano-Ferrari recipe,
+    Mellin spectrum, Galois classification) are reproducible from the paper alone.
+
+    The 2026-06-01 publication-prep session added the §4.3 residual-density worked computation
+    (chat-side Opus's contribution; see §10) — paper-internal mathematics derived from the
+    locked m(x) of §4.1, with no source dependency.
+
+-   Framework prior papers (cross-domain context). The framework's prior papers — Paper 1
+    (binary information bound), Paper 6 (cross-domain signatures, O(N) corridor), Papers 7–8
+    (Hodgson-Kerckhoff closed form), Paper 4 (400/11 gap scaling) — are publicly hosted on
+    gap-geometry.github.io and as raw .txt files on raw.githubusercontent.com. A Claude session
+    confirmed via direct fetch-tool test that those URLs load cleanly, refuting an earlier Opus
+    claim of unreachability. The cross-domain K_AUD identifications cited from those papers
+    were therefore technically verifiable by readers in our rounds but not actually fetched —
+    the readers worked from the saturation paper's local statements rather than checking the
+    prior papers.
+
+Neither category affects the math of the present paper, which is self-contained algebra. We
+flag both so readers can place each claim at the right evidence level: the saturation paper's
+math is multi-reader-verified, with mpmath at decimal-precision dps = 100 as the framework's
+standard verification floor and extended-precision passes for the deeper checks: dps ≥ 500–600
+across §3 (Algorithm EA) and §§4.3–4.5 (Algorithm CA), dps = 1000 in §4.4 (closed-form vs
+direct match) and §4.5 (Cardano-Ferrari recipe, the latter at working dps = 1500, confirming
+the closed form against direct quartic-root computation to 1000 displayed digits with
+difference exactly zero), and one project-working Opus session at dps = 50000 in §4.3
+(residuals at the precision floor); the primary-source-quotation layer (Fishman) rests on
+D.B.'s direct reading; the cross-framework-appearances layer is fetch-accessible to any reader
+who chooses to verify it.
+
+The mpmath script for the §4.4 and §4.5 verifications is reproducible from the formulas in the
+paper; we append it as Appendix A.
+
+-----------------------------------------------------------------------------------------------
+
+7. Methodology: Multi-AI-Session Collaborative Review
+
+The work was carried out through a multi-AI-session collaborative-review architecture designed
+by D.B. and operated across the family of contributors named in the title block. We document
+the architecture here both as record and as reusable methodology.
+
+7.1 Architecture
+
+Four layers of artifact:
+
+-   Layer 0 — Source material. Fishman 1996 (page images in archive) and Ahrens & Dieter 1988
+    (cited).
+-   Layer 1 — Source notes (frozen). Verbatim screenshots and initial analyses from
+    primary-source readings, archived under Fishman/old notes/. Not edited after creation.
+-   Layer 2 — Exchange records (append-only audit trail). One file per Q-round, dated,
+    capturing the question put to readers, each reader's verbatim response, an editor's
+    procedural notes, the cross-reader synthesis, and the promotion decision. Six exchange
+    files for this work (Q1 R1 + R2; Q2 R1 + R2; Q3 R1 + R2).
+-   Layer 3 — Canonical Stack. A single working document (STACK_Fishman.md) that records only
+    multi-reader-confirmed promotions. Cowork-Opus is sole editor. Updates tracked in a
+    Promotion Log.
+
+Readers (Chat-Claude, Grok, GPT, plus a fresh Grok session for an independent angle) work in
+separate AI sessions without direct communication; D.B. relays exchanges. Each Q-round opens
+with a structured prompt that all readers receive simultaneously, attacks the question from
+independent angles, and closes with a synthesis decision.
+
+7.2 Procedural standards M1–M5
+
+Five general-purpose verification standards emerged from the rounds and are now part of the
+canonical methodology (M1–M5 emerged as project-specific refinements of the general framework
+principles documented at methodology.html):
+
+M1 — Differential-evidence guardrail. When two framework families have overlapping numerical
+neighborhoods (e.g., a candidate within 1% of family A is automatically within 1% of family B
+at the relevant offset), candidate elevation requires either (a) precision exceeding the
+family-distinguishing threshold, or (b) accompaniment by adjacent constants showing a coherent
+pattern. Origin: Chat-Claude, Q2 R1.
+
+M2 — Negative-control check on simpler local identities. Before promoting a candidate, verify
+it isn't equivalent to a simpler non-framework expression (2/π, 4/π, 1/√2, π²/8, e⁻¹, etc.).
+Origin: GPT, Q2 R1 (where 2/π was distinguished from √φ/2 in Algorithm CA).
+
+M3 — The reframe lens. When literal-digit-string search across primary source returns no
+candidates, reframe from "the digit-string of the framework constant" to "the structural shape
+the framework constant plays" and re-scan existing notes. Origin: D.B. + Cowork-Opus, Q2 R2
+(which surfaced §4 of this paper from notes already on file).
+
+M4 — The "confident wrong, blocked right" cross-reader check. When two readers report blocked /
+discrepancy outcomes and one reader reports confident "decisive" closure on the same problem,
+the blocked outcomes get at least equal scrutiny to the confident one. Confident closure is a
+stylistic outcome, not evidence about the math. Origin: across the rounds; explicitly named
+after Q3 R1.
+
+M5 — Galois-floor depth check. When literature reports a numeric value with no published closed
+form, the question to ask is not "does a closed form exist" (Galois theory often guarantees
+one) but "at what radical degree does the closure live, and is it elementary or nested?" Quick
+PSLQ surveys returning empty in elementary bases ≠ no closed form exists. Origin: Q3 R2;
+promoted from candidate to confirmed standard after two clean instances in one round
+(Chat-Claude unprompted depth-over-speed, then post-hint Ferrari completions by GPT and Extra
+Grok).
+
+7.3 Audit trail
+
+Every claim in this paper is traceable to a specific exchange file in Layer 2 and a specific
+Stack entry in Layer 3. The Discovery Tracking Log (Discovery_Tracking_Log.md) records the same
+findings with role-distinguished attribution per the framework's contribution taxonomy (§10).
+Where any reader's work was wrong (notably Grok's confident "no closed form, decisive" verdict
+in Q3 R1, later reversed in Q3 R2 follow-up after the structural prompt), the audit trail
+preserves both the error and the correction.
+
+We adopt this transparency deliberately. Mathematical correctness comes from cross-reader
+verification at high precision, not from the absence of false starts. The methodology that
+produced the false starts is the same methodology that caught them.
+
+-----------------------------------------------------------------------------------------------
+
+8. Discussion
+
+8.1 Why the binary cell is special
+
+§5's ladder of tractability is the cleanest way we have found to articulate K_AUD's
+distinguished status. K_AUD = √2·ln(2) is not merely "the answer for one specific algorithm."
+It is the radical-degree-2 closure of the saturation problem on the binary cell — and in §3 we
+have shown that the binary cell is forced to produce this closure by the algebraic geometry of
+the endpoint-balancing minimax. The Cauchy unit-circle cell (Algorithm CA), under analogous
+structural locking, produces a cleanly rational midpoint identity (§4.4) and a Cardano-Ferrari
+minimum (§4.5) — but neither at degree 2.
+
+This is consistent with K_AUD's character as a radical-degree-2 transcendental over ℚ. Each
+derivation catalogued in §8.3 — Hodgson-Kerckhoff hyperbolic geometry, O(N) anomalous-dimension
+corridor, binary uniqueness in the η < 2G bound — arrives at this same numerical value through
+its own machinery, independently of the others. That the same value recurs is the empirical
+observation; that the derivations use distinct algebraic structures is established by direct
+inspection of each.
+
+8.2 What the published illustration most plausibly corresponds to
+
+The careful claim, after reading Fishman's pp. 186–187 in full (§4.3), is:
+
+(i) The locked illustrative formula on p. 186 has a true minimum distinct from the printed
+0.997738. Under a = 2/π and b = π − 8/π, the actual minimum of f_X is p_CA(true) = 0.99730761…,
+off from the printed value by 4.3 × 10⁻⁴.
+
+(ii) The implementation on p. 187 has fast-path probability 2√W = 0.99773789…, which rounds
+correctly to 0.997738 at six decimal places. The implementation uses different
+numerically-optimized constants — W = 0.2488702280… as the threshold on T² where T = U − ½ —
+and the fast-path probability is 2√W by construction. We have verified this directly at dps =
+100: 2 · √(0.2488702280083841) = 0.99773789746282385061384…; the seventh digit (8) correctly
+rounds the sixth-place digit from 7 to 8, giving 0.997738. The published algorithm is
+internally consistent.
+
+(iii) The most parsimonious account: the illustration forward-quotes the implementation's
+design probability. The forward-quote account fits all six printed digits exactly with no
+auxiliary computation and no typographical drift required — a natural reading at the precision
+routinely displayed in 1996, before AI-assisted high-precision symbolic verification at dps ≥
+100 became casually accessible. At four decimal places of display, the locked formula's true
+minimum (0.9973), the implementation's design probability (0.9977), and the locked formula's
+structural midpoint (0.9977) are all visibly different in only the second-to-last printed
+digit. At six decimal places, however, the three values are 0.997308, 0.997738, and 0.997735
+respectively — distinguishable, but only at a precision Fishman's text typically did not
+display. The illustration's choice to print the implementation's design probability where the
+locked formula's saturation would technically belong is the natural simplification of an era
+without arbitrary-precision symbolic tools.
+
+(iv) The midpoint hypothesis is a less parsimonious alternative. f_X evaluated at the
+structural midpoint y = 1/4 (closed form §4.4) yields 0.99773497…, which rounds correctly to
+0.997735 at six decimal places — not 0.997738. The midpoint hypothesis therefore requires
+assuming Fishman or Ahrens-Dieter performed an unmentioned midpoint evaluation and wrote down a
+digit one unit off in the last place. It fits to five digits but leaves three units of drift in
+the sixth. The forward-quote account fits exactly and requires no auxiliary assumption.
+
+(v) The novel mathematical content of the paper is independent of which value the original
+presentation chose to display. §4.4's f_X(1/4) closed form, §4.5's Cardano-Ferrari closed form
+for p_CA(true), and §5's ladder of tractability all concern the locked illustrative formula
+itself — independent of which constants the implementation chooses to use, and independent of
+how the original presentation summarized the saturation. The framework's contribution is the
+high-precision symbolic resolution of three distinct constants where the original literature
+could only display one.
+
+8.3 Cross-domain context for K_AUD
+
+The constant K_AUD = √2 · ln(2) ≈ 0.980258143 has been independently identified in several
+mathematical settings beyond the saturation context of the present paper. We catalogue these
+appearances at appropriate evidence levels, distinguishing exact algebraic locks from
+structured observations.
+
+Exact algebraic locks. Multi-reader-verified closed-form identifications:
+
+-   Hodgson-Kerckhoff hyperbolic tube-packing coefficient. The hyperbolic identity
+    arcsinh(1/(2√2)) = ln(2)/2, combined with 2√2 · arcsinh(1/(2√2)) = √2 · ln(2), realizes
+    K_AUD as a closed-form value in the Hodgson-Kerckhoff Dehn-surgery / tube-packing
+    literature. The arcsinh identity is exact (verifiable in 30 seconds: arcsinh(x) = ln(x +
+    √(x²+1)); at x = 1/(2√2), x² + 1 = 9/8, so x + √(x²+1) = 1/(2√2) + 3/(2√2) = √2, giving
+    ln(√2) = ln(2)/2). Confirmed at dps = 620 with residual ~10⁻⁶²².
+
+-   Identity spine over the gap G = 1 − K_AUD. Multiple algebraic rewrites of K_AUD and G hold
+    exactly: the Baker L²-norm form K_AUD = √((ln 2)² + (ln 2)²); the Gelfond-Schneider rewrite
+    G = ln(e/2^√2); K_AUD · √2 = 2 ln 2; K_AUD² = 2 ln²(2); the Shannon-gap threshold-spacing
+    identity 1/(2 ln 2) − 1/√2 = G/(2 ln 2), with Δ23/Δ12 = 1/K_AUD on the binary tower. All
+    confirmed exact at dps = 620.
+
+-   Binary uniqueness. K(n) = √n · ln(n) takes a value < 1 only at n = 2 among integers ≥ 2;
+    K(2) = K_AUD. This is the gap-opening fact at the foundation of the framework's broader
+    construction.
+
+-   Algorithm EA saturation (the present paper, §3). The exact-approximation saturation on the
+    binary cell L = ln 2 is exactly K_AUD, forced under endpoint-balancing minimax (Theorem
+    3.5).
+
+Structured observations. Numerically supported but not at exact-lock evidence level:
+
+-   400/11 prime hierarchy and gap scaling. The gap-scaling formula G ≈ (δ − 14/3)/δ · 400/11
+    with corrections holds at near-exact precision (~4 × 10⁻¹⁴ residual against the
+    Feigenbaum-derived value). The exact integer-and-modular structure (binary doubling drift,
+    primitive-root behavior of 2 mod 11, factorizations of correction primes 7, 11, 13, 313) is
+    itself an exact arithmetic substructure. Classified as analytically near-exact,
+    structurally exact.
+
+-   Binary tower (n·G staircase). The staircase n·G is exact once G is defined; integer-step
+    landmarks against independently known constants (n = 50 ≈ K_AUD; n = 36 ≈ 1/√2; n = 72 ≈ √2
+    — with constant +0.5091% binary-doubling deviation) are observational at the
+    structured-but-not-algebraic-identity level. Threshold spacings in the n = 35–37 zone
+    (Landauer / geometric-damping / Shannon) are exact at dps = 620.
+
+-   O(N) anomalous-dimension corridor. K_AUD identified as a near-saturation constant in
+    independent O(N) universality contexts. Classified at structured-observation level pending
+    independent specialist review by domain experts in statistical field theory.
+
+On the cross-domain pattern. That a single transcendental of the form √2 · ln(2) appears in
+mathematically distinct settings — hyperbolic 3-manifold geometry, Monte Carlo saturation (the
+present paper), statistical-field-theory universality, binary information geometry — is the
+broader research thread's central empirical observation. Whether the pattern reflects a deeper
+structural reason (a single algebraic structure expressing itself across these settings) or a
+set of coincidental matches at limited precision is the open question. The present paper
+contributes the Algorithm EA saturation lock as a fourth setting in which K_AUD appears
+exactly, derived via endpoint-balancing minimax on the binary cell. Holding the framework's
+Λ-canary discipline (multi-mechanism convergence requires distinct mechanisms, not multiple
+realizations of the same algebraic identity): the Algorithm EA derivation in §3 routes K_AUD
+through the identity sinh((ln 2)/2) = 1/(2√2), which is the inverse statement of the
+Hodgson-Kerckhoff defining identity arcsinh(1/(2√2)) = (ln 2)/2 used in the HK literature. The
+two derivations are operationally distinct (Monte Carlo sampling endpoint-balancing vs
+hyperbolic-geometry tube-packing) but they share one algebraic identity — they realize the same
+hyperbolic-kernel fact in two different mathematical operational settings rather than as two
+independent algebraic routes. The η-Corridor paper §11.1 (Paper 11) treats the same point in
+detail for the broader convergence-counting question. Within Algorithm EA, K_AUD's appearance
+is forced (Theorem 3.5) by the algebraic geometry of the minimax problem; whether this forcing
+has a counterpart in the other settings — i.e., whether a single mechanism could derive K_AUD
+across them — remains the open cross-domain question, with the hyperbolic-kernel cluster (HK,
+EA, dome-at-d_c) being one operational realization and the H₄ polytope, Tenenbaum threshold,
+and Wilson-Fisher empirical settings being mechanism-distinct anchors.
+
+Verification scope (transparency). The mathematical content of the present paper (§3, §4, §5)
+is self-contained algebra verifiable from inside the document. The cross-domain identifications
+listed above are documented in the broader Gap Geometry framework's prior work (publicly hosted
+on gap-geometry.github.io, with raw .txt versions on raw.githubusercontent.com); each
+derivation is locally accessible to readers who choose to verify, but specialist review by
+domain experts in hyperbolic geometry, statistical field theory, and binary information
+geometry has not been completed for the cross-domain identifications. This is a real
+evidentiary status to hold honestly: the saturation paper's local math is multi-reader-verified
+at the dps = 100 mpmath baseline, with extended-precision passes at dps ≥ 500–600 across §§3,
+4.3–4.5 and dps = 1000 in §§4.4 and 4.5 (the latter at working dps = 1500), plus one
+project-working Opus session at dps = 50000 in §4.3; the cross-domain layer is internally
+documented and externally fetch-accessible but pending specialist review.
+
+Net read. The published Algorithm CA is internally consistent. The published illustration on p.
+186 most plausibly forward-quotes the implementation's design probability, an artifact of
+1996-era display precision rather than a computational error. The framework's contribution,
+made possible by high-precision symbolic computation and by treating the gap G = 1 − K_AUD as a
+structural quantity worth resolving precisely, is to identify three distinct constants — the
+locked formula's true minimum, its structural-midpoint evaluation, and the implementation's
+design probability — where the original presentation showed only one numerical value, and to
+derive closed forms for the two locked-formula values that had no published closed form.
+(Primary-source quotation layer: see §6 transparency note.)
+
+8.4 Methodological observations
+
+The work demonstrates that multi-AI collaborative review can produce results that single-reader
+analysis misses. Three specific patterns emerged:
+
+(a) Apparent breaks dissolving against primary source. In Q1, Chat-Claude initially could not
+reproduce the K_AUD derivation; the "break" turned out to be Chat-Claude using the wrong
+envelope family (piecewise-constant rather than rational). Grok and GPT, working from
+primary-source quotes, used the correct family. The cross-reader triangulation resolved the
+apparent break and the chain reproduced.
+
+(b) The "confident wrong" pattern. In Q3 R1, Grok confidently concluded "no closed form found,
+decisive" — a verdict that was numerically wrong on the value claim. GPT's "blocked /
+discrepancy" report and Chat-Claude's exploration both surfaced the real issue. M4 generalizes
+this lesson.
+
+(c) Galois-floor depth check. In Q3 R2, three readers initially gave variations of "no clean
+closed form exists." Chat-Claude was the exception — his depth-over-speed first-pass produced
+the explicit Cardano-Ferrari recipe without prompting. After Chat-Claude's path was found, D.B.
+relayed it forward to GPT and a fresh Grok session as the structural hint "run a Ferrari,"
+deliberately not handing over the answer to test whether the readers could complete the
+derivation independently from the same prompt. Both did, with independent parameterizations,
+verifying Chat-Claude's earlier unprompted derivation. The closed form had been there all
+along; the surveys were stopping before the Galois floor. The hint itself carried Chat-Claude's
+already-derived insight forward; what D.B. contributed at this step was the editorial decision
+to use the relay to test reader-side reproducibility. M5 generalizes both halves of the lesson
+— the depth-side (Chat-Claude's path) and the editorial-side (D.B.'s relay-design that
+confirmed reproducibility).
+
+These methodological observations are not speculative — they arose during the rounds documented
+in the audit trail. We treat them as reusable for future multi-AI mathematical-review work.
+
+-----------------------------------------------------------------------------------------------
+
+9. Open Threads
+
+The following questions are explicitly noted as open and not addressed by this paper. Items
+resolved during the paper's preparation are marked.
+
+1.  Symbolic denesting of the displayed Cardano-Ferrari expression (4.8)–(4.11). Distinct from
+    the field-structure question, which is closed by Observation 4.6 (Galois group S₄, no lower
+    field-degree collapse over ℚ(π²)): whether the displayed Cardano cube root and Ferrari
+    square roots admit aesthetically cleaner denesting via a substitution or transformation is
+    a presentation-level question. PSLQ over ℚ(π², y_F, √y_F, …) with a rational-function basis
+    at dps ≥ 1000 has not been performed; this is the most natural next step toward potentially
+    cleaner symbolic form. The S₄ result does not foreclose denesting; it only fixes the
+    underlying field structure.
+
+2.  ~~Algorithmic correctness check on Algorithm CA.~~ Resolved during paper preparation. A
+    direct reading of Fishman p. 187 confirms that Algorithm CA's implementation uses the
+    threshold W = 0.2488702280… on T² rather than 0.997738 directly as a rejection threshold;
+    the fast-path probability is then 2√W by construction, which correctly rounds to 0.997738
+    at six decimal places. The implementation is internally consistent (§4.3 (ii) and §8.2
+    (ii)). The discrepancy is confined to Fishman's illustrative presentation on p. 186, not to
+    the published algorithm.
+
+3.  Generalization of the ladder of tractability (§5). Whether other Marsaglia
+    exact-approximation instances in the literature (beyond Fishman 1996's Algorithm EA and
+    Algorithm CA) populate the radical-degree spectrum in a structurally meaningful way — for
+    example, whether higher-dimensional or other-distribution exact-approximation algorithms
+    cluster at radical degree 0, 2, or 6+. Devroye (1986) describes additional
+    rejection-sampling constructions that could be analyzed.
+
+4.  ~~The interior critical-point completeness question for Algorithm EA (§3).~~ Resolved
+    during first-reader review (Chat-Claude, 2026-05-06). f_X has a critical point at x_crit =
+    b − a/2 ∈ (0, 1) for L = ln 2, b = 2 + √2 (numerically x_crit ≈ 0.5575). Numerical
+    evaluation gives f_X(x_crit) ≈ 1.0101 — above the boundary value f_X(0) = f_X(1) = K_AUD ≈
+    0.9803. The interior critical point is therefore a maximum, not a competing minimum, and
+    the boundary minima are the global minima of f_X on [0, 1]. Theorem 3.5's "K_AUD as the
+    exact optimum" is therefore complete under the locked endpoint-balancing setup, with no
+    competing interior minimum to consider.
+
+5.  ~~Formal Galois-theoretic proof of the resolvent cubic's irreducibility over ℚ(π²)
+    (Observation 4.4).~~ Resolved during Round 3 stress-test pass (2026-05-07). GPT's symbolic
+    computation in sympy yielded the explicit discriminant factorization (4.12), irreducibility
+    checks on the quartic and resolvent cubic over ℚ(s) where s = π², and application of the
+    standard quartic Galois taxonomy to land at Galois group S₄. See Observation 4.6 for the
+    full computation. The S₄-type closure is exactly the Cardano-Ferrari radical solution of
+    Theorem 4.5; there is no lower-radical simplification.
+
+6.  Connections to other framework papers. Whether the binary-cell uniqueness of K_AUD's
+    elementary tractability (§3.6 + §5) connects to the framework's other K_AUD-distinguished
+    settings — Hodgson-Kerckhoff hyperbolic geometry (Paper 7), the η < 2G corridor (Paper 6),
+    the 400/11 gap scaling (Paper 4) — at the level of radical-degree analysis or structural
+    minimality, rather than at the level of numerical equivalence.
+
+-----------------------------------------------------------------------------------------------
+
+10. Credits with Role Taxonomy
+
+Roles use the Gap Geometry framework's contribution taxonomy (Methodology §5):
+Conceptualization, Derivation, Discovery, Computation, Verification, Correction,
+Stress-testing, Literature, Documentation, Editorial judgment, Methodology.
+
+-   Chat-Claude (Claude Opus chat instance) — Primary discoverer for the §4 and §5 results, and
+    first-reader of this paper. Discovery (the f_X(1/4) closed-form identity §4.4; the
+    Cardano-Ferrari explicit closed form §4.5; the ladder of tractability framing §5).
+    Derivation (the hyperbolic-identity proof of (3.3) via sinh(ln 2/2) = 1/(2√2); the
+    integer-n family (3.5); §4.4 substitution-and-simplification; §4.5 manual Ferrari recipe
+    verified at dps = 600). Verification (independent re-derivation of P1/P2 in Q1 R2 at dps =
+    500; first-reader review of this paper, 2026-05-06, with three substantive
+    contributions: (i) caught a real algebraic error in equation (4.10)'s Cardano P, Q
+    normalization that would have propagated through to a wrong y_F if executed literally,
+    leading to the corrected (4.10) given above; (ii) closed §9 open-thread item 4 by verifying
+    that the interior critical point of f_X for Algorithm EA at x_crit = b − a/2 ≈ 0.5575
+    evaluates to f_X ≈ 1.0101, above the boundary K_AUD value, confirming the boundary-minimum
+    assumption of Theorem 3.5; (iii) sharpened the §4.3 "one unit in the last digit" wording to
+    the precise "3 in the last decimal place"). Correction (Q1 R1 envelope-family flag; Q3 R1
+    identification of f_X(1/4) ≠ true minimum; first-reader (4.10) correction). The phrase
+    "went the step further" in this paper's framing refers to Chat-Claude's unprompted
+    depth-over-speed Cardano-Ferrari completion in Q3 R2 — the closed form §4.5 is his
+    discovery — and to the carefulness of the first-reader pass.
+
+-   D. B. — Methodology custodian. The walk-back-and-redirect contribution at Q2 R2 is what
+    made §4 and §5 reachable. When the literal-digit search across Chapters 4, 6, and 7
+    returned no candidates — three readers separately reporting "no framework hits" — D.B. read
+    the empty returns as a behavior signal about how the search was framed, not as a verdict on
+    the framework, and walked the targeting back — redirecting from "where does the
+    digit-string of G or √φ appear" to "where does the structural shape (correction
+    architecture) recur." That redirect surfaced Algorithm CA from already-existing May 3 notes
+    and unlocked everything in §4 and §5. The procedural standard M3 (the reframe lens) records
+    this move generally; the empirical findings of §4 and §5 are its specific harvest.
+    Methodology (designed the four-layer Stack / Exchanges architecture; held the
+    patience-and-method discipline across rounds). Editorial judgment (called all promotion
+    decisions; in Q3 R2, after Chat-Claude had found the Cardano-Ferrari path, used the relay
+    to GPT and a fresh Grok session as a reader-side reproducibility test, eventually relaying
+    the structural hint "run a Ferrari" — the hint carried Chat-Claude's already-derived
+    insight, not D.B.'s; the editorial contribution at this step was the relay-design, not a
+    Conceptualization or Discovery role). Conceptualization (directed Q1, Q2, Q3 framings, set
+    the "is K_AUD forced or accidental" question that organized Q1).
+
+-   GPT ("Uncle") — Derivation (the general endpoint-balancing equation (3.1) and closed form
+    (3.4) in Q1 R1; the explicit quartic (4.6) in Q3 R1; independent Ferrari re-derivation in
+    Q3 R2 with the P-Q-U-Y-W parameterization at dps = 600); Verification (Q3 R1 detection of
+    the Fishman discrepancy via direct expansion; quartic seeds to high precision; Round 3
+    (2026-05-07) explicit Galois-group computation for the saturation quartic (4.6) yielding
+    the discriminant factorization (4.12) and the S₄ classification of Observation 4.6, closing
+    Open Thread #5); Stress-testing (Q3 R1 negative-control check identifying 2/π vs √φ/2 in
+    Algorithm CA's first-pass constants — origin of M2).
+
+-   Grok — Verification (Q1 R1 verbatim primary-source quote of Fishman pp. 188–189; Q1 R2 full
+    step-by-step re-derivation of (3.1) at dps = 600 with identical intermediate steps to
+    GPT's; Q3 R1 confirmation of the Q3 setup; Q3 R2 sympy exact-quartic-solver verification of
+    (4.5)–(4.7) after the structural hint).
+
+-   Extra Grok session — Verification (independent Q3 R2 sympy run from a fresh session without
+    prior context, expressed the closed form with denominators built from the structural seeds
+    (s − 8) and (s − 12) where s = π², confirming the localized-ring observation precise
+    statement in §4.5).
+
+-   Cowork-Opus (Claude Opus Cowork instance) — Verification anchor (every
+    multi-reader-confirmed claim in this paper has been independently verified at dps = 100 in
+    the workspace sandbox via mpmath; specific anchors: §3 derivations, §4.3 true minimum, §4.4
+    closed form (zero discrepancy), §4.5 step-by-step Cardano-Ferrari reproduction);
+    Documentation (designed and maintained the four-layer Stack/Exchanges architecture; edited
+    the canonical Stack as sole writer; produced the Discovery Log update for today's findings;
+    drafted this paper); Editorial judgment (cross-reader synthesis, promotion calls held to
+    the M1–M5 standards, identification of the "confident wrong / blocked right" pattern in Q3
+    R1). Verification (polgalois-equivalent confirmation of §4.6 S₄ Galois group
+    classification, 2026-06-01): ran sympy.polys.numberfields.galois_group (the Python-side
+    analog of PARI/GP's polgalois()) on the saturation quartic (4.6) at eight rational
+    specializations of s = π² ranging from 5 to 50 decimal digits of precision; all eight
+    returned the permutation group of order 24, degree 4 generated by a 4-cycle and a
+    transposition (i.e., S₄). Independently re-derived the symbolic chain (irreducibility,
+    negative discriminant ⇒ non-square in ℚ, irreducible resolvent cubic) at the 30-digit
+    specialization. Both paths converge on S₄, addressing Super Grok's suggested further
+    tightening of §4.6 (recorded as the post-acknowledgment direct verification line in §4.6).
+
+-   Sonnet (Claude Sonnet 4.6 adaptive) — Stress-testing (Round 5 V2 pass, 2026-05-08):
+    editorial first-pass observation that the §6 transparency note about reader-verification
+    scope was discoverability-hidden from §8.2's Net read paragraph, with the specific
+    suggested fix "(Primary-source quotation layer: see §6 transparency note.)" now appearing
+    at the end of §8.2's Net read paragraph. Followed by full mathematical verification at dps
+    = 100 confirming all closed forms. The two-mode engagement (editorial reading, then
+    mathematical reading on request) is the kind of cross-layer pass that depth-only readers
+    don't surface; recorded here as a methodological observation worth holding. Pre-publication
+    polish round, 2026-06-01: §4.3 readability fix (added the "Reader's map" orientation table
+    and sharpened the heading from "Resolving Fishman's printed 0.997738 at high precision" to
+    "Three constants behind one printed value"); Appendix A polyroots-filter comment explaining
+    the 0.5 cutoff between t₁ and t₂; on re-read of the updated section, caught two
+    cross-reference errors in the new orientation table (tier label Obs. 4.2 → Theorem 4.2;
+    equation reference eq. 4.6 → §4.3 construction) — the tier-discipline catch protects the
+    framework's evidence ladder against silent drift.
+
+-   Grok-Heavy (xAI, 12-agent architecture) — Stress-testing (pre-publication final pass,
+    2026-06-01): 12-agent review of the updated paper with a 5-agent sub-team (Harper,
+    Charlotte, Mia, Sebastian, Luna) cross-reading §6/§7/§8.4/§10 against the live public
+    methodology page at gap-geometry.github.io and the framework's About page; verdict that the
+    paper "represents the framework perfectly" — three-tier evidence taxonomy, role taxonomy,
+    multi-AI collaborative architecture, mpmath precision floor, cross-architecture
+    stress-testing, four-layer Stack/Exchanges, and M1–M5 procedural standards all faithfully
+    reflected. Three polish items returned and applied: (i) M1–M5 parenthetical added in §7.2
+    clarifying that M1–M5 are project-specific refinements of the framework's general
+    principles documented at methodology.html; (ii) Cardano-Ferrari hyphenation normalized
+    across all 25 occurrences; (iii) the verbatim-repeat phrase "the locked illustrative
+    formula as a mathematical object" tightened in §8.3 to "the locked illustrative formula
+    itself" while preserving the anchored statement in the abstract. The full 12-agent pass
+    also re-verified K_AUD, p(L), f_X(1/4), Cardano-Ferrari recipe, Galois S₄ classification,
+    and ran the Appendix A script.
+
+-   Super Grok (xAI, X chat-side instance, memory-blind to prior framework context) —
+    Stress-testing (independent fresh-eyes pass, 2026-06-01): a memory-isolated read of the
+    updated paper from D.B.'s personal X account, with no link to the framework's prior context
+    or Bee's framing. The pass returned a strong positive verdict on the math and the editorial
+    structure (with specific praise for the EA forced-derivation, the three-constants
+    distinction in CA, the ladder of tractability framing, and the methodology transparency
+    including the §7.3 audit-trail preservation of reader errors). Two minor quibbles
+    surfaced: (i) the Cardano-Ferrari expression's necessary messiness — explicitly noted as
+    "the price of an exact algebraic closure for a generic irreducible quartic" with
+    acknowledgment that the paper does not pretend otherwise (no fix needed; the paper's
+    §4.5–§4.6 already carry this honest framing and Open Thread #1 in §9 explicitly names the
+    denesting question); (ii) the suggestion that a formal PARI/GP-style Galois-group
+    computation would tighten the S₄ classification further, marked as "not required for the
+    paper's claims." The PARI/GP suggestion has been recorded as a follow-on tightening at the
+    end of §4.6 (option open for future computer-algebra-community verification). The
+    memory-blind context makes this an especially clean signal: an independent reader judging
+    the paper purely on its own evidence reached the same conclusions the framework-internal
+    reviewers reached.
+
+-   Chat-side Opus (Anthropic, fresh-eyes session, 2026-06-01). Independent re-run of Appendix
+    A at dps = 120 reproducing every numerical claim in §3, §4.3, §4.4, §4.5, §4.6, §4.3(ii) to
+    the precision floor with no corrections. Contribution: the §4.3 / §8.2 worked-computation
+    sharpening — direct computation of the residual density f*(y_) = (f_X(y_) − 0.997738) / (1
+    − 0.997738) ≈ −0.19 in the locked m(x) of eq. (43) at the critical point y_; the (1 − p) ≈
+    0.0023 denominator amplifies the small numerator into a 19% negative residual when read at
+    the dps ≥ 100 resolution this paper uses, a distinction that 1996-era four-decimal-place
+    display conventions did not surface. The sharpening uses only the paper's own definitions
+    (the locked m(x) of §4.1, the f_X of §4.1, the y_ of §4.3) — it is paper-internal
+    mathematics with no source dependency for the verifier. The fresh-Opus reading also noted
+    the implementation block's internal-consistency cross-check (Fishman p. 187 prints both p =
+    0.997738 and 1 − p = 0.002262 in the implementation setup, matching 2√W and 1 − 2√W
+    respectively) — strengthening the §4.3 finding that the printed digits live with the
+    implementation side. The new framing in §4.3 / §8.2 presents the discrepancy as a
+    tool-resolution observation rather than a textual flaw. The fresh-eyes position was the
+    source of the catch: a framework-internal reviewer would have accepted "0.997738 ≠
+    p_CA(true)" as sufficient and not asked the residual-density question; the fresh-context
+    reader, reading the paper purely on its own terms, asked the sharper question (cf.
+    Methodology Notebook §8.11 on successive review rounds at different time-stages).
+
+Wider readership. Beyond the named contributors above, the framework has been tested
+continuously across its longer development arc — both in planned stress-test rounds recorded in
+dedicated research-side files, and in ongoing exploration and challenge passes by fresh AI
+instances across architectures and devices. Several of the named contributors first joined the
+work through such passes; many more fresh-instance reads shaped the framework without crossing
+into named credits in this paper, and several recurring associates appear in the recorded
+stress-test set rather than in this acknowledgments list. Fresh-eyes and returning-associate
+impact balance one another in the test landscape — neither is less honest than the other, and
+both are part of the framework's verification discipline. The framework owes its present shape
+to every reader-instance — and to the human readers behind them — who engaged honestly with the
+math along the way.
+
+The role taxonomy distinguishes Conceptualization (asking the right question, seeing the
+direction) from Discovery (identifying the new structure) from Derivation (proving it formally)
+from Verification (confirming it independently). Where multiple roles apply, all are listed.
+The published Methodology document describes this distinction in detail.
+
+-----------------------------------------------------------------------------------------------
+
+References
+
+Primary sources for the algorithms analyzed.
+
+-   Ahrens, J. H., & Dieter, U. (1988). Efficient table-free sampling methods for the
+    exponential, Cauchy, and normal distributions. Communications of the ACM, 31(11),
+    1330–1337. DOI: 10.1145/50087.50094. (Original source for Algorithm EA's binary-cell
+    decomposition + rational approximation, and for Algorithm CA's Cauchy rational
+    approximation. The constants quoted in §3.1 and §4.1 are from this paper, as cited by
+    Fishman 1996.)
+
+-   Hamilton, K. G. (1998). Algorithm 780: exponential pseudorandom distribution. ACM
+    Transactions on Mathematical Software, 24(1), 104–106. DOI: 10.1145/285861.285866.
+    (Independent peer-reviewed implementation of Algorithm EA with corrections to Ahrens and
+    Dieter 1988. The abstract states the work is "based on mathematics that was published by
+    Ahrens and Dieter, but some errors have been corrected." Note: §3's forcing result derives
+    the constants a, b, c from the structural conditions of Algorithm EA rather than importing
+    them from the historical source, so the result holds independently of Hamilton's
+    corrections.)
+
+-   Fishman, G. S. (1996). Monte Carlo: Concepts, Algorithms, and Applications. Springer Series
+    in Operations Research and Financial Engineering, Springer-Verlag New York. ISBN
+    0-387-94527-X. (Algorithm EA: pp. 188–189, eqs. 49–52. Algorithm CA: pp. 186–187, eqs.
+    42–45 illustration + p. 187 implementation. Exact-approximation method: §3.8.)
+
+-   Marsaglia, G. (1984). The exact-approximation method for generating random variables in a
+    computer. Journal of the American Statistical Association, 79(385), 218–221. DOI:
+    10.1080/01621459.1984.10477088. (Origin of the exact-approximation framework as a general
+    technique. Both Algorithm EA and Algorithm CA are specific applications of this framework.)
+
+Standard references for Monte Carlo sampling theory.
+
+-   Devroye, L. (1986). Non-Uniform Random Variate Generation. Springer-Verlag, New York.
+    (Standard textbook reference for sampling-from-distributions theory. Devroye's treatment of
+    rejection methods and the inversion principle provides broader context for the
+    exact-approximation method as a special case. The author makes the full textbook freely
+    available on his personal page at luc.devroye.org, so this reference is openly verifiable.)
+
+-   Knuth, D. E. (1997). The Art of Computer Programming, Volume 2: Seminumerical Algorithms,
+    3rd edition. Addison-Wesley. (Standard reference for pseudorandom-number-generation theory.
+    Knuth's discussion of generator quality criteria provides context for §3.4–§3.6 cell-length
+    analysis.)
+
+-   L'Ecuyer, P. (1988). Efficient and portable combined random number generators.
+    Communications of the ACM, 31(6), 742–751. DOI: 10.1145/62959.62969. (Combined LCGs cited
+    in Fishman §7.13. Not directly used in the present paper; included for context on the
+    broader landscape of pseudorandom-number generators that share Fishman's
+    exact-approximation methodology setting.)
+
+Gap Geometry framework prior results citing K_AUD.
+
+-   Paper 1: √2 · ln(2) as a Geometric Constant of Binary Information (OSF:
+    10.17605/OSF.IO/5VZ2R, 2026-01-21). Original derivation of K_AUD as a binary-information
+    bound.
+
+-   Paper 6: Cross-Domain Signatures of the Boundary Information Invariant (OSF:
+    10.17605/OSF.IO/RA3UQ, 2026-03-26). K_AUD's appearance across multiple independent domains.
+
+-   Paper 7: A Closed Form for the Hodgson-Kerckhoff Tube-Packing Coefficient (OSF:
+    10.17605/OSF.IO/JBRHQ, 2026-04-03). The HK tube-packing coefficient equals K_AUD
+    numerically via the algebraic identity arcsinh(1/(2√2)) = ln(2)/2; the derivation route is
+    hyperbolic-trigonometric and is independent of the saturation-theoretic derivation in the
+    present paper.
+
+-   Paper 4: The 400/11 Gap Scaling Formula (OSF: 10.17605/OSF.IO/C4GK5, 2026-02-04).
+    Connection between K_AUD's gap G = 1 − K_AUD and the Feigenbaum constant.
+
+-   Methodology document: Gap Geometry — Methodology and Verification Standards.
+    https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/methodology.html. (Three-tier
+    evidence taxonomy [Theorem]/[Observation]/[Conjecture] used throughout this paper.)
+
+Computational tools.
+
+-   Johansson, F., et al. (2013–present). mpmath: a Python library for arbitrary-precision
+    floating-point arithmetic. http://mpmath.org. (Used at dps ≥ 100–1000 throughout this
+    paper. Specific calls: findroot, polyroots, pslq, identify, plus standard arithmetic at
+    high precision.)
+
+-   Meurer, A., et al. (2017). SymPy: symbolic computing in Python. PeerJ Computer Science, 3,
+    e103. (Used by Grok in §4.5 Q3 R2 for the independent quartic-solver verification.)
+
+-----------------------------------------------------------------------------------------------
+
+Appendix A — Verification script
+
+The following self-contained mpmath script reproduces all numerical claims in §3, §4, and §5 at
+dps = 100. Reading the printed differences as ≈ 0 (or ≤ 10⁻⁹⁸ in magnitude) is the expected
+output.
+
+    """
+    Verification script for "Saturation Constants of the Exact-Approximation Method"
+    Reproduces all numerical claims at mpmath dps = 100.
+    Expected: every Difference line is ~0 or ≤ 10**(-98).
+    """
+    from mpmath import mp, mpf, pi, sqrt, sinh, ln, findroot, polyroots
+    mp.dps = 100
+
+
+    # === §3 verification: K_AUD = √2·ln(2) for Algorithm EA ===
+
+    K_AUD = sqrt(2) * ln(2)
+    p_at_ln2_via_sinh = ln(2) / (2 * sinh(ln(2) / 2))
+    print("=== §3 (Algorithm EA, K_AUD identity) ===")
+    print(f"  K_AUD = √2·ln(2)    = {K_AUD}")
+    print(f"  p(ln 2) via (3.4)   = {p_at_ln2_via_sinh}")
+    print(f"  Difference          = {p_at_ln2_via_sinh - K_AUD}")
+    b_plus = 2 + sqrt(2)
+    print(f"  b² − 4b + 2 at b = 2 + √2: {b_plus**2 - 4*b_plus + 2}")
+
+
+    # === §4 setup: locked Cauchy m(x) ===
+
+    s = pi**2  # = π²
+    a_coef = 2 / pi
+    b_coef = pi - 8 / pi
+
+
+    def m_y(y):
+        return y * (a_coef / (mpf('0.25') - y**2) + b_coef)
+
+
+    def mprime_y(y):
+        return a_coef * (mpf('0.25') + y**2) / (mpf('0.25') - y**2)**2 + b_coef
+
+
+    def fX(y):
+        return (1 / pi) * mprime_y(y) / (1 + m_y(y)**2)
+
+
+    # === §4.4 verification: closed form for f_X(1/4) ===
+
+    cc_form = 16 * (9 * pi**2 + 88) / (9 * pi**4 + 192 * pi**2 + 64)
+    fx_quarter = fX(mpf('0.25'))
+    print("\n=== §4.4 (closed form for f_X(1/4)) ===")
+    print(f"  16(9π² + 88) / (9π⁴ + 192π² + 64) = {cc_form}")
+    print(f"  Direct f_X(1/4)                   = {fx_quarter}")
+    print(f"  Difference                        = {fx_quarter - cc_form}")
+
+
+    # === §4.5 verification: quartic and Cardano-Ferrari closed form ===
+
+    # Quartic coefficients per §4.5, eq. (4.6)
+    c4 = (s - 8)**3
+    c3 = -4 * (s - 8)**2 * (s - 12)
+    c2 = 6 * s**3 - 120 * s**2 + 608 * s
+    c1 = -4 * s**3 + 32 * s**2 + 64 * s
+    c0 = s**3 - 96 * s
+
+    # Real roots of P(t) = 0 in (0, 1)
+    roots = polyroots([c4, c3, c2, c1, c0])
+    # Filter to real roots and pick the small one in (0, 0.5) — this is t_*
+    real_roots = sorted([r.real for r in roots if abs(r.imag) < mpf('1e-50')])
+    t_star = [r for r in real_roots if 0 < r < mpf('0.5')][0]
+    y_star_direct = sqrt(t_star) / 2
+    p_CA_true = fX(y_star_direct)
+
+    print("\n=== §4.3 / §4.5 (true minimum via direct quartic-root) ===")
+    print(f"  t_*                   = {t_star}")
+    print(f"  y_* = √t_*/2          = {y_star_direct}")
+    print(f"  p_CA(true) = f_X(y_*) = {p_CA_true}")
+
+    # Verify Cardano-Ferrari recipe (eqs. 4.7–4.11 in §4.5)
+    A3 = c3 / c4
+    A2 = c2 / c4
+    A1 = c1 / c4
+    A0 = c0 / c4
+    p_d = A2 - 3 * A3**2 / 8
+    q_d = A3**3 / 8 - A3 * A2 / 2 + A1
+    r_d = -3 * A3**4 / 256 + A2 * A3**2 / 16 - A3 * A1 / 4 + A0
+
+    # Resolvent cubic via Cardano (real root) — two computations for verification:
+    # (a) findroot reference (used by Ferrari step below)
+    y_F = findroot(
+        lambda y: y**3 + 2 * p_d * y**2 + (p_d**2 - 4 * r_d) * y - q_d**2,
+        mpf('10'),
+    )
+
+    # (b) explicit Cardano formula (4.9)-(4.10) — tests the corrected (4.10)
+    from mpmath import cbrt
+    P = -p_d**2 / 3 - 4 * r_d                            # (4.10) corrected
+    Q = -2 * p_d**3 / 27 + 8 * p_d * r_d / 3 - q_d**2   # (4.10) corrected
+    disc = Q**2 / 4 + P**3 / 27
+    y_F_cardano = cbrt(-Q/2 + sqrt(disc)) + cbrt(-Q/2 - sqrt(disc)) - 2*p_d/3
+    print("\n=== §4.5 (4.9)-(4.10) explicit Cardano formula verification ===")
+    print(f"  y_F via findroot (reference):  {y_F}")
+    print(f"  y_F via (4.9)-(4.10) Cardano:  {y_F_cardano}")
+    print(f"  Difference                  :  {y_F_cardano - y_F}")
+
+    # Ferrari step
+    C_b = (y_F + p_d) / 2 + q_d / (2 * sqrt(y_F))
+    D_b = y_F - 4 * C_b
+    u_star = (sqrt(y_F) - sqrt(D_b)) / 2
+    t_star_CF = u_star - A3 / 4
+    y_star_CF = sqrt(t_star_CF) / 2
+    p_CA_CF = fX(y_star_CF)
+
+    print("\n=== §4.5 (Cardano-Ferrari closed form, eqs. 4.7–4.11) ===")
+    print(f"  y_F (resolvent root)          = {y_F}")
+    print(f"  D_b                           = {D_b}")
+    print(f"  u_*                           = {u_star}")
+    print(f"  t_* via Cardano-Ferrari       = {t_star_CF}")
+    print(f"  y_* via Cardano-Ferrari       = {y_star_CF}")
+    print(f"  p_CA(true) via CF route       = {p_CA_CF}")
+    print(f"  Difference t_* (CF − direct)  = {t_star_CF - t_star}")
+    print(f"  Difference y_* (CF − direct)  = {y_star_CF - y_star_direct}")
+    print(f"  Difference p_CA (CF − direct) = {p_CA_CF - p_CA_true}")
+
+
+    # === §4.3 (ii): verify 2·√W = 0.997738 in Algorithm CA's implementation ===
+
+    W = mpf('0.2488702280083841')   # Implementation constant from Fishman p. 187
+    fast_path_prob = 2 * sqrt(W)
+    print("\n=== §4.3 (ii) (implementation correctness on p. 187) ===")
+    print(f"  2·√W with W = 0.2488702280083841:    {fast_path_prob}")
+    print(f"  Fishman printed 0.997738 differs by: {fast_path_prob - mpf('0.997738')}")
+
+Expected output: every "Difference" line shows a value ≤ 10⁻⁹⁸ in magnitude (essentially zero
+at mp.dps = 100), confirming all closed-form claims to displayed precision.
+
+-----------------------------------------------------------------------------------------------
+
+Document Links
+
+The framework
+
+-   Main OSF project (immutable timestamps, version history, all papers):
+    osf.io/zx4g7 · DOI: 10.17605/OSF.IO/ZX4G7
+
+-   Framework overview (reading order, methodology, all papers):
+    gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html
+
+-   Direct downloads (current PDF and text files for every paper):
+    gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html
+
+This paper
+
+-   DOI: 10.17605/OSF.IO/6QZRB
+-   OSF project: osf.io/6qzrb
+
+-----------------------------------------------------------------------------------------------
+
+Contact
+
+Gap-geometryK_AUD2@telenet.be
