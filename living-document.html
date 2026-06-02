@@ -391,7 +391,7 @@
 
 <div class="method-note">
   <strong>How this page works.</strong> Each document summary includes its key result, evidence level, and links to all available formats. The framework uses three evidence levels (see <a href="methodology.html">Methodology</a>):<br><br>
-  <span class="level level-1">Level 1 &mdash; Exact</span> &nbsp;Algebraic identity, zero residual at stated precision. Independently reproducible. Shown here as <span class="status status-verified">Verified</span>.<br>
+  <span class="level level-1">Level 1 &mdash; Exact</span> &nbsp;Algebraic identity, zero residual at stated precision. Independently reproducible. Shown here as <span class="status status-verified">Verified</span>. Within Level 1, formulas with a quantified persistent residual at the bottom of the working precision are sub-tagged <span class="status status-verified">Near-exact</span> &mdash; for example, the 400/11 gap-scaling formula matches the Feigenbaum-derived ratio to 4&times;10<sup>&minus;14</sup>, a residual that persists at dps &ge; 500 (so it is not numerical noise) but whose structural source is currently an open question.<br>
   <span class="level level-2">Level 2 &mdash; Empirical</span> &nbsp;Published measurement matching a framework value with quantified deviation. When confirmed, also shown as <span class="status status-verified">Verified</span>.<br>
   <span class="level level-3">Level 3 &mdash; Conjectural</span> &nbsp;Unproved claim with stated falsification criteria. Shown here as <span class="status status-conjectural">Conjectural</span>.<br>
   <span class="status status-open">Open</span> &nbsp;marks questions not yet formulated as testable claims &mdash; not an evidence level, but a research status.<br><br>
@@ -479,8 +479,8 @@
     <tr>
       <td>400/11 gap-scaling formula</td>
       <td><span class="level level-1">L1</span></td>
-      <td><span class="status status-verified">Verified</span></td>
-      <td>&asymp; 36.363636&hellip; (error: 4&times;10<sup>&minus;14</sup>)</td>
+      <td><span class="status status-verified">Near-exact</span></td>
+      <td>&asymp; 36.363636&hellip; &mdash; the framework formula &rho; = 400/11 &minus; 1/2500 &minus; 1/939939 matches the Feigenbaum-derived gap ratio (&delta; &minus; 14/3)/&delta; to within 4&times;10<sup>&minus;14</sup>. All denominators factorise into framework primes {2, 3, 5, 7, 11, 13}. The residual is persistent at high mpmath precision (dps &ge; 500) &mdash; not numerical noise &mdash; and its structural source remains an open question for future work.</td>
       <td>Paper 4</td>
     </tr>
     <tr>
@@ -523,7 +523,7 @@
 
 <!-- ============================================================ -->
 <h2>Foundation Papers</h2>
-<p class="note">Reading order: 1 &rarr; 2 &rarr; 3 &rarr; 4. These four papers establish the framework from first principles.</p>
+<p class="note">Reading order: 1 &rarr; 2 &rarr; 3 &rarr; 4 &rarr; 5. These five papers establish the framework from first principles.</p>
 
 <div class="doc-summary">
   <div class="doc-head">
@@ -618,7 +618,7 @@
     <span class="status status-verified">Verified</span>
   </div>
   <div class="doc-body">
-    <p>Derives the 400/11 scaling formula (&asymp; 36.36) that governs how the gap constant G scales across domains. Demonstrates that this ratio is not an empirical fit but emerges from the algebraic structure of the framework. Connects gap scaling to the Landauer crossing region.</p>
+    <p>Derives the 400/11 scaling formula (&asymp; 36.36) that governs how the gap constant G scales across domains. Demonstrates that this ratio emerges from the algebraic structure of the framework &mdash; every denominator factors into framework primes {2, 3, 5, 7, 11, 13} &mdash; and matches the Feigenbaum-derived gap ratio to within 4 &times; 10<sup>&minus;14</sup> (machine precision). Connects gap scaling to the Landauer crossing region.</p>
     <div class="key-result">
       Gap scaling ratio = 400/11 &asymp; 36.363636&hellip;
     </div>
@@ -679,7 +679,7 @@
     <span class="status status-verified">Verified</span>
   </div>
   <div class="doc-body">
-    <p>Documents independent appearances of &radic;2&middot;ln(2) across different mathematical and physical domains. Serves as the front door to the framework for readers approaching from specific disciplines, showing that K<sub>AUD</sub> is not a construction but a recurrent structural constant.</p>
+    <p>Documents independent appearances of &radic;2&middot;ln(2) across different mathematical and physical domains, showing that K<sub>AUD</sub> is not a construction but a recurrent structural constant. Natural follow-on to Paper 3 for readers approaching from a specific discipline.</p>
     <div class="key-result">
       &radic;2 &middot; ln(2) appears independently in: number theory, packing geometry, information theory, spectral analysis
     </div>
@@ -784,6 +784,91 @@
   </div>
   <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/WTU4J" target="_blank" rel="noopener">10.17605/OSF.IO/WTU4J</a></div>
   <div class="doc-dates"><span class="pub-anchor">Published: 2026-04-03</span> &middot; Last update: 2026-04-13 &middot; OSF: wtu4j</div>
+</div>
+
+<div class="doc-summary">
+  <div class="doc-head">
+    <div class="doc-title">10. Saturation Constants of the Exact-Approximation Method</div>
+    <span class="status status-verified">Verified</span>
+  </div>
+  <div class="doc-body">
+    <p>Closed-form analysis of Marsaglia&rsquo;s exact-approximation method as presented by Fishman (1996). Three closed-form identities in the Ahrens&ndash;Dieter generators &mdash; and a high-precision resolution identifying three structurally distinct constants that share the leading digits of one historically printed value. Algorithm EA&rsquo;s saturation = K<sub>AUD</sub> = &radic;2&middot;ln(2), forced under structural conditions on the binary cell L = ln 2; Algorithm CA&rsquo;s true minimum admits an explicit Cardano&ndash;Ferrari closed form that separates cleanly from the implementation&rsquo;s printed design probability at the sixth decimal place; and the induced density at the structural midpoint y = 1/4 admits a clean rational expression in &pi;&sup2;. The three closed forms sit at distinct radical degrees of closure (K<sub>AUD</sub> at degree 2, f<sub>X</sub>(1/4) at degree 0, p<sub>CA</sub>(true) at degree 6+) &mdash; a ladder of tractability. Verified through multi-AI-session collaborative review with five procedural standards (M1&ndash;M5).</p>
+    <div class="key-result">
+      Algorithm EA saturation = K<sub>AUD</sub> (forced on binary cell) &nbsp;|&nbsp; Cardano&ndash;Ferrari closed form for p<sub>CA</sub>(true) &nbsp;|&nbsp; f<sub>X</sub>(1/4) rational in &pi;&sup2;
+    </div>
+  </div>
+  <div class="doc-links">
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Saturation%20Constants%20of%20the%20Exact-Approximation%20Method.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Saturation%20Constants%20of%20the%20Exact-Approximation%20Method.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/6qzrb/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/6qzrb/files/h4m3c" target="_blank" rel="noopener">OSF txt</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/6qzrb/files/dkjyq" target="_blank" rel="noopener">OSF pdf</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Saturation%20Constants%20of%20the%20Exact-Approximation%20Method.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/6QZRB" target="_blank" rel="noopener">10.17605/OSF.IO/6QZRB</a></div>
+  <div class="doc-dates"><span class="pub-anchor">Published: 2026-06-02</span> &middot; OSF: 6qzrb</div>
+</div>
+
+<div class="doc-summary">
+  <div class="doc-head">
+    <div class="doc-title">11. The &eta; Corridor in 3D Wilson&ndash;Fisher Critical Phenomena &mdash; Empirical Observation</div>
+    <span class="status status-verified">Verified &middot; Observation</span>
+  </div>
+  <div class="doc-body">
+    <p>Empirical observation that the anomalous dimension &eta; at d = 3 Wilson&ndash;Fisher critical points is bounded above by 2G &asymp; 0.039484, where G = 1 &minus; K<sub>AUD</sub>. Tested across ten WF-family universality classes &mdash; O(N) for N = 0&ndash;4, cubic anisotropy at N = 3, 4, MN cubic at N = 2, 3, and randomly dilute Ising &mdash; the bound holds in every case, with &sigma;-margins from +2.2&sigma; to +1593&sigma;. Three classes outside WF-family scope (RFIM, deconfined SU(2) QCP, disordered Potts large-q) have &eta; &gt; 2G but are excluded by independent physical structure.</p>
+    <p><strong>Internal tier structure.</strong> Part I presents the empirical observation. Part II develops the structural reading: ten theorems on the dome function g(x) = tanh(x)/cosh(2x) (factorization, logarithmic derivative, the &radic;2 self-reference identity, the ln(2)/2 total-integral identity, the Mellin spectrum closed form M<sub>g</sub>(s) = (s&minus;1)! &middot; &eta;(s) &middot; (2<sup>s</sup>&minus;1) / 2<sup>2s&minus;1</sup>, and corollaries on rational/&pi; closed forms and A002105 &times; Mersenne factorizations) verified at dps = 80&ndash;1000 across multiple architectures; one Tier-5 conjecture (the Central Synchronization Conjecture, &sect;11) explicitly flagged as such; and Tier-6 derivation targets (&sect;11.5) listed as open work. The title-level claim &mdash; the &eta; &le; 2G observation &mdash; is offered as falsifiable empirical, not as derived. Priority falsification target: higher-precision &eta; at d = 3 randomly dilute Ising.</p>
+    <div class="key-result">
+      &eta; &le; 2G &asymp; 0.039484 across 10 WF-family universality classes &nbsp;|&nbsp; corridor (2 &minus; &eta;) &isin; [2K<sub>AUD</sub>, 2] of width 2G &nbsp;|&nbsp; dome function admits closed-form Mellin spectrum
+    </div>
+  </div>
+  <div class="doc-links">
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The%20%CE%B7%20Corridor%20Empirical%20Observation.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The%20%CE%B7%20Corridor%20Empirical%20Observation.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/pd73b/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/pd73b/files/syqrg" target="_blank" rel="noopener">OSF txt</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/pd73b/files/vq87y" target="_blank" rel="noopener">OSF pdf</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/The%20%CE%B7%20Corridor%20Empirical%20Observation.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/PD73B" target="_blank" rel="noopener">10.17605/OSF.IO/PD73B</a></div>
+  <div class="doc-dates"><span class="pub-anchor">Published: 2026-06-02</span> &middot; OSF: pd73b</div>
+</div>
+
+<div class="doc-summary">
+  <div class="doc-head">
+    <div class="doc-title">11 &mdash; Verification Companion: mpmath verification of the dome identities</div>
+    <span class="status status-verified">Verified</span>
+  </div>
+  <div class="doc-body">
+    <p>Companion document to Paper 11. Line-by-line mpmath verification of the dome-function identities &mdash; Theorem 9.1 factorization, Theorem 9.4 self-reference, Theorem 9.5 integral, Theorem 9.7 Mellin spectrum closed form, Corollaries 9.8&ndash;9.10 &mdash; at dps = 80 through dps = 1000. Re-verification 9.7-R (2026-05-28) at dps = 1000. Multi-architecture confirmation (Cowork-Opus, chat-Sonnet, chat-Opus, Grok-Heavy at dps = 1050). Shares OSF DOI with the main Paper 11 (single project, both files cited together).</p>
+    <div class="key-result">
+      All dome theorems verified at dps = 80&ndash;1000 across multiple AI architectures
+    </div>
+  </div>
+  <div class="doc-links">
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The_%CE%B7_Corridor_Verification_Companion.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The_%CE%B7_Corridor_Verification_Companion.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/pd73b/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/pd73b/files/q3dys" target="_blank" rel="noopener">OSF txt</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/pd73b/files/y2cdh" target="_blank" rel="noopener">OSF pdf</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/The_%CE%B7_Corridor_Verification_Companion.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/PD73B" target="_blank" rel="noopener">10.17605/OSF.IO/PD73B</a> (shared with main Paper 11 above &mdash; single OSF project)</div>
+  <div class="doc-dates"><span class="pub-anchor">Published: 2026-06-02</span> &middot; OSF: pd73b (shared with main Paper 11)</div>
 </div>
 
 <!-- ============================================================ -->
