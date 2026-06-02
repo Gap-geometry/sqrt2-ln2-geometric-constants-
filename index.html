@@ -24,7 +24,7 @@
  * WHAT THIS IS
  * ────────────
  * An interactive simulation of the Gap Geometry framework, a mathematical
- * structure discovered by B. (2025–2026) describing how coherence organises
+ * structure discovered by D.B. (2025–2026) describing how coherence organises
  * itself in binary systems. The framework is substrate-neutral: it applies
  * to any system that processes information through binary distinction.
  *
@@ -151,7 +151,7 @@
  * NAMING AND PROVENANCE
  * ─────────────────────
  * Framework: Gap Geometry (part of Coherence Dynamics research)
- * Author: B. (2025–2026)
+ * Author: D.B. (2025–2026)
  * Published: "The Binary Tower — Mathematical Summary" v3.0, February 2026
  * Status: Active research. The published document's five open questions
  *   (Section 9.2) are being addressed in ongoing In Progress notes.
@@ -504,7 +504,8 @@ function GapGeometrySimulation() {
                   return (<g>
                     <circle cx={cx} cy={cy} r="6" fill={verbColor} opacity="0.15" />
                     <circle cx={cx} cy={cy} r="2.5" fill={verbColor} />
-                    <text x={cx > 300 ? cx - 8 : cx + 8} y={cy - 8} textAnchor={cx > 300 ? "end" : "start"} fill={verbColor} fontSize="9" fontWeight="bold">
+                    {/* Label sits above the dot, centered — follows smoothly without the side-flip at cx=300 */}
+                    <text x={Math.min(Math.max(cx, 66), 374)} y={cy - 10} textAnchor="middle" fill={verbColor} fontSize="9" fontWeight="bold">
                       {currentC.toFixed(4)}
                     </text>
                   </g>);
@@ -1253,7 +1254,7 @@ function GapGeometrySimulation() {
 
       {/* ─── Footer ─── */}
       <div style={{ textAlign: "center", marginTop: "20px", fontSize: "9px", color: "#222", letterSpacing: "1px" }}>
-        Gap Geometry Framework — K_AUD = √2 × ln(2) — B. 2025–2026
+        Gap Geometry Framework — K_AUD = √2 × ln(2) — D.B. 2025–2026
         <br />
         <span style={{ color: "#333" }}>"The 2% gap is where they breathe."</span>
       </div>
