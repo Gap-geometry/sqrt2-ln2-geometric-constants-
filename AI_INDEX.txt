@@ -62,8 +62,10 @@ print(f"\nGap scaling error: {abs(rho - approx)}")
 DOCUMENT LINKS (Raw text — use these in AI contexts)
 ================================================
 
-Paper 6 (start here):
-  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Cross_Domain_Signatures.txt
+Paper 3 (start here — comprehensive framework: the gap G, H₄ integration, Binary Tower):
+  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/KAUD_Complete_Framework_v3_0.txt
+
+--- Foundation Papers (reading order: 1 → 2 → 3 → 4 → 5) ---
 
 Paper 1:
   https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Coherence_Ceiling.txt
@@ -79,6 +81,33 @@ Paper 4:
 
 Paper 5:
   https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Boundary_Information_Invariant_Short.txt
+
+--- Applications & Cross-Domain Papers ---
+
+Paper 6 (cross-domain appearances):
+  https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Cross_Domain_Signatures.txt
+
+Paper 10 (Saturation Constants of the Exact-Approximation Method — closed forms for Algorithm EA, CA; ladder of tractability):
+  Raw:      https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Saturation%20Constants%20of%20the%20Exact-Approximation%20Method.txt
+  OSF txt:  https://osf.io/6qzrb/files/h4m3c
+  OSF pdf:  https://osf.io/6qzrb/files/dkjyq
+  DOI:      10.17605/OSF.IO/6QZRB
+
+Paper 11 (η Corridor in 3D Wilson-Fisher Critical Phenomena — Empirical Observation; Part I observation, Part II ten theorems + Tier-5 conjecture):
+  Raw:      https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/The%20%CE%B7%20Corridor%20Empirical%20Observation.txt
+  OSF:      https://osf.io/pd73b/
+  OSF txt:  https://osf.io/pd73b/files/syqrg
+  OSF pdf:  https://osf.io/pd73b/files/vq87y
+  DOI:      10.17605/OSF.IO/PD73B
+
+Paper 11 — Verification Companion (mpmath verification of the dome identities at dps = 80–1000; shares OSF DOI with main Paper 11 above):
+  Raw:      https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/The_%CE%B7_Corridor_Verification_Companion.txt
+  OSF:      https://osf.io/pd73b/
+  OSF txt:  https://osf.io/pd73b/files/q3dys
+  OSF pdf:  https://osf.io/pd73b/files/y2cdh
+  DOI:      10.17605/OSF.IO/PD73B (shared with main Paper 11)
+
+--- Companion Documents ---
 
 HK Closed Form:
   https://raw.githubusercontent.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/refs/heads/main/HK_Closed_Form_SHORT_DRAFT.txt
@@ -103,5 +132,6 @@ D. B. — Gap Geometry Project — 2025–2026
 Gap-geometryK_AUD2@telenet.be
 
 Compute first. Assess second.
+
 
 
