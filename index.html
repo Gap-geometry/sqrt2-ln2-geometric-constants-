@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Gap Geometry — Binary Tower Simulation</title>
+  <link rel="alternate" type="text/plain" href="AI_INDEX.txt" title="Machine-readable index (plain text)">
+  <link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt — AI site map">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { background: #0a0a0a; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
@@ -104,7 +106,7 @@
  *   Shannon bound    at n·G = 1/(2 ln 2)  (n ≈ 36.54)
  * The √2-to-Shannon gap identity: 1/(2 ln 2) − 1/√2 = G/(2 ln 2).
  *
- * Master formula: 2^k × G = 2^(k−6) × √φ × (1 − ε), where ε = −0.671%
+ * Master formula: 2^k × G = 2^(k−6) × √φ × (1 + ε), where ε = −0.671%
  * This holds across all binary scales. The tower is self-similar.
  *
  * Partition: 64 = 18 + 14 + 14 + 18. The boundary prime 7 locks the mirror.
@@ -146,7 +148,7 @@
  *   K_AUD − 1/φ = 1/φ² − G       (corridor identity)
  *   1/φ + 1/φ² = 1                (golden partition)
  *   G / |ln2 − 1/√2| = √2        (gap origin)
- *   1 − 64G/√φ = −0.671%         (tower epsilon, constant across scales)
+ *   64G/√φ − 1 = −0.671%         (tower epsilon, constant across scales)
  *
  * NAMING AND PROVENANCE
  * ─────────────────────
@@ -184,7 +186,9 @@ const FEIGENBAUM = 4.6692016091029906718532038;
 const GAP_F = (FEIGENBAUM - 14/3) / FEIGENBAUM;
 const RHO_EXACT = G / GAP_F;
 const RHO_FORMULA = 400/11 - 1/2500 - 1/939939;
-const EPSILON_TOWER = 1 - (64 * G) / SQRT_PHI;
+// 2026-06-11: sign flipped to fleet convention (observed/target − 1, negative: the tower
+// lands just BELOW √φ). Display formulas updated from ×(1 − ε) to ×(1 + ε) accordingly.
+const EPSILON_TOWER = (64 * G) / SQRT_PHI - 1;
 const LN2 = Math.log(2);
 const LANDAUER_CROSS = LN2; // n×G = ln(2) is the 1-Landauer line
 
@@ -812,7 +816,7 @@ function GapGeometrySimulation() {
             The Scaling Table — one relationship at every scale
           </h2>
           <p style={{ fontSize: "10px", color: "#444", textAlign: "center", margin: "0 0 14px" }}>
-            2<sup>k</sup> × G &nbsp;≈&nbsp; 2<sup>k−6</sup> × √φ &nbsp;·&nbsp; constant ε = −0.671% at every k
+            2<sup>k</sup> × G &nbsp;=&nbsp; 2<sup>k−6</sup> × √φ × (1 + ε) &nbsp;·&nbsp; constant ε = −0.671% at every k
           </p>
 
           <div style={{ overflowX: "auto" }}>
@@ -870,7 +874,7 @@ function GapGeometrySimulation() {
           </div>
 
           <div style={{ fontSize: "10px", color: "#555", padding: "10px 12px", background: "rgba(255,255,255,0.02)", border: `1px solid ${S.border}`, borderRadius: "6px", marginTop: "10px", lineHeight: "1.55" }}>
-            <span style={{ color: "#888", fontWeight: "bold" }}>Why the error is constant.</span> The −0.671% is algebraic, not measured eleven times. Every row reduces to the single identity 64·G = √φ·(1 − ε). Multiplying or dividing both sides by 2 changes the magnitude but preserves ε exactly.
+            <span style={{ color: "#888", fontWeight: "bold" }}>Why the error is constant.</span> The −0.671% is algebraic, not measured eleven times. Every row reduces to the single identity 64·G = √φ·(1 + ε). Multiplying or dividing both sides by 2 changes the magnitude but preserves ε exactly.
           </div>
 
           {/* Live derivation — shows the equation building itself from the top */}
@@ -1098,7 +1102,7 @@ function GapGeometrySimulation() {
           { x: 455, step: 59, approx: "—", name: "Turn", c: "#ff9a76",
             hover: "The pentagonal turn. Step 59 mirrors Romeo (step 18): both sit at partition boundaries. 59 is the start of the mirror partition 18+14 ⇌ 14+18. The turn is where inbound becomes outbound — the tower's reflection point. [Current research: 59 = prime, the mirror of Romeo's composite 18.]" },
           { x: 520, step: 64, approx: "√φ", name: "Pivot", c: "#ffb347",
-            hover: "The master formula pivot. 64G ≈ √φ = 1.272... with constant ε = −0.671%. 64 = 2⁶ = 4³, purely binary. The master formula: 2ᵏ × G = 2ᵏ⁻⁶ × √φ × (1−ε) holds across all scales. This is where the tower's cost function meets the golden ratio's square root." },
+            hover: "The master formula pivot. 64G ≈ √φ = 1.272... with constant ε = −0.671%. 64 = 2⁶ = 4³, purely binary. The master formula: 2ᵏ × G = 2ᵏ⁻⁶ × √φ × (1+ε) holds across all scales. This is where the tower's cost function meets the golden ratio's square root." },
         ];
 
         return (
@@ -1206,7 +1210,7 @@ function GapGeometrySimulation() {
               gap: { title: "G — The Gap", color: "#f38181", text: "G = 1 − K_AUD ≈ 0.0197. The structural remainder between the coherence ceiling and unity. Not a deficiency — the gap is where distinction happens. G = ln(e/2^√2): the natural logarithm of e divided by 2^√2. In energy: kT × G = 8.18×10⁻²³ J — the minimum friction of any binary distinction." },
               kaud: { title: "K_AUD — Coherence Ceiling", color: S.gold, text: "K_AUD = √2 × ln(2) ≈ 0.980258. The maximum coherence achievable in any binary system. Combines projection (√2, diagonal of the unit square) with distinction (ln 2, the natural unit of binary information). In physical units: K_AUD = √2 Landauer units — the ceiling sits one geometric projection above the thermodynamic minimum for bit erasure." },
               floor: { title: "1/φ — Golden Floor", color: "#6c9bcf", text: "1/φ = (√5−1)/2 ≈ 0.6180. The corridor's lower bound. Below this value, coherence is sub-critical — the system cannot sustain organised behavior. 32 = 2⁵ sits near the floor but does not land on it: 32·G = 0.632 approximates √φ/2 = 0.636 (0.67%), while 1/φ itself sits 2.91% below — two distinct structural values. The floor and ceiling together define the corridor width: K_AUD − 1/φ = 1/φ² − G, a closed algebraic identity." },
-              pivot: { title: "√φ — Master Pivot", color: "#ffb347", text: "√φ ≈ 1.2720. The tower's destination at step 64. The master formula 2ᵏ × G = 2ᵏ⁻⁶ × √φ × (1−ε) holds with ε = −0.671% constant across all binary scales. √φ sits above unity — the pivot is where the tower's cost function exceeds the golden ratio's square root, connecting binary scaling to golden geometry." },
+              pivot: { title: "√φ — Master Pivot", color: "#ffb347", text: "√φ ≈ 1.2720. The tower's destination at step 64. The master formula 2ᵏ × G = 2ᵏ⁻⁶ × √φ × (1+ε) holds with ε = −0.671% constant across all binary scales. √φ sits above unity — the pivot is where the tower's cost function exceeds the golden ratio's square root, connecting binary scaling to golden geometry." },
             };
             const info = archNode || (constDesc[activeArch] ? { name: constDesc[activeArch].title, c: constDesc[activeArch].color, hover: constDesc[activeArch].text } : null);
             if (!info) return null;
@@ -1230,7 +1234,7 @@ function GapGeometrySimulation() {
               { t: "Corridor Identity", e: "K_AUD − 1/φ = 1/φ² − G", v: CORRIDOR.toFixed(10), c: S.gold },
               { t: "Golden Partition", e: "1/φ + 1/φ² = 1", v: (INV_PHI + INV_PHI2).toFixed(12), c: "#6c9bcf" },
               { t: "Gap Origin", e: "G / |ln2 − 1/√2| = √2", v: (G / Math.abs(LN2 - 1/Math.sqrt(2))).toFixed(10), c: "#f38181" },
-              { t: "Tower ε", e: "1 − 64G/√φ = constant", v: `${(EPSILON_TOWER * 100).toFixed(4)}%`, c: "#ffb347" },
+              { t: "Tower ε", e: "64G/√φ − 1 = constant", v: `${(EPSILON_TOWER * 100).toFixed(4)}%`, c: "#ffb347" },
               { t: "Landauer Crossing", e: "G/(2ln2) = crossing cost", v: (G / (2*LN2)).toFixed(10), c: "#f38181" },
               { t: "Energy Ceiling", e: "K_AUD = √2 × Landauer", v: `${(K_AUD / LN2).toFixed(10)} L`, c: S.gold },
             ].map(id => (
@@ -1244,7 +1248,7 @@ function GapGeometrySimulation() {
 
           {/* Master formula box */}
           <div style={{ marginTop: "10px", padding: "10px", background: "rgba(255,215,0,0.02)", border: "1px solid rgba(255,215,0,0.08)", borderRadius: "6px", textAlign: "center" }}>
-            <div style={{ fontSize: "11px", color: "rgba(255,215,0,0.5)", marginBottom: "4px" }}>2ᵏ × G = 2ᵏ⁻⁶ × √φ × (1 − ε) where ε = −0.671% constant</div>
+            <div style={{ fontSize: "11px", color: "rgba(255,215,0,0.5)", marginBottom: "4px" }}>2ᵏ × G = 2ᵏ⁻⁶ × √φ × (1 + ε) where ε = −0.671% constant</div>
             <div style={{ fontSize: "9px", color: "#444" }}>18 + 14 + 14 + 18 = 64 — the boundary prime 7 locks the mirror</div>
             <div style={{ fontSize: "9px", color: "rgba(243,129,129,0.3)", marginTop: "2px" }}>K_AUD = √2 Landauer — the ceiling is one projection above thermodynamic minimum</div>
           </div>
