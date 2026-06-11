@@ -8,6 +8,8 @@
 <meta name="description" content="Feed a dimensionless ratio to the Binary Tower and see where it lands on the Gap Geometry framework. Each step is a multiple of G = 1 − √2·ln(2) ≈ 0.019741856531452, the structural gap in the K_AUD framework.">
 <meta name="author" content="D. B. / Gap-geometry">
 <meta name="keywords" content="Gap Geometry, K_AUD, Binary Tower, dimensionless ratios, sqrt(2)*ln(2), physics, framework">
+<link rel="alternate" type="text/plain" href="AI_INDEX.txt" title="Machine-readable index (plain text)">
+<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt — AI site map">
 
 <!--
 ================================================================================
@@ -787,12 +789,15 @@ const CORRIDOR_FLOOR_PHI_INV = 1/PHI;
 // in the framework. These are percentages, not physical constants.
 // A match here flags that a user's residual has the same SHAPE as a
 // framework-internal residual, which may or may not be meaningful.
+// 2026-06-11 audit: hardcoded pattern sizes replaced with in-page computation
+// (house rule: constants are computed, never recalled). The old hardcoded
+// 0.5087 was slightly off — the doubling residual 18·G/(√2/4) − 1 is 0.50912%.
 const deviationPatterns = [
-  { name:'Tower doubling invariant residual', pct:0.5087, tol:0.03 },
-  { name:'Gap stacking ε residual',           pct:0.6714, tol:0.03 },
+  { name:'Tower doubling invariant residual', pct:(18*G/(SQRT2/4)-1)*100,            tol:0.03 },
+  { name:'Gap stacking ε residual',           pct:Math.abs(64*G/SQRT_PHI-1)*100,     tol:0.03 },
   { name:'G/(2ln2) Landauer-cost-sized residual', pct:G/(2*LN2)*100, tol:0.05 },
-  { name:'1/2500 cosmological correction',    pct:0.04,   tol:0.005 },
-  { name:'82G ≈ φ precision residual',        pct:0.049,  tol:0.01 }
+  { name:'1/2500 cosmological correction',    pct:100/2500, tol:0.005 },
+  { name:'82G ≈ φ precision residual',        pct:(82*G/PHI-1)*100,                  tol:0.01 }
 ];
 
 // Preset ratios with physical descriptions and sources.
@@ -1526,3 +1531,4 @@ buildPresets();
 </script>
 </body>
 </html>
+
