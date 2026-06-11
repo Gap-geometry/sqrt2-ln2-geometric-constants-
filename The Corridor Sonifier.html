@@ -4,6 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Corridor Sonifier — K_AUD Framework</title>
+<meta name="author" content="D. B.">
+<meta name="description" content="Hear the Gap Geometry framework: the Coherence Corridor as a tone sweep, the 64-step Binary Tower staircase, the 9/7 blues interval, and the 2% gap as silence. Every frequency computed live from K_AUD = √2·ln 2 — the code is the proof.">
+<link rel="alternate" type="text/plain" href="AI_INDEX.txt" title="Machine-readable index (plain text)">
+<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt — AI site map">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -239,6 +243,41 @@
     transform: translateX(-50%);
   }
 
+  /* How the sound is made */
+  .how-container {
+    background: #12121a;
+    border: 1px solid #2a2a3a;
+    border-radius: 8px;
+    padding: 8px 24px;
+  }
+  .how-container details {
+    border-bottom: 1px solid #1e1e2c;
+    padding: 12px 0;
+  }
+  .how-container details:last-child { border-bottom: none; }
+  .how-container summary {
+    cursor: pointer;
+    color: #8a9ab5;
+    font-size: 0.9em;
+    letter-spacing: 0.5px;
+    list-style: none;
+  }
+  .how-container summary::-webkit-details-marker { display: none; }
+  .how-container summary:hover { color: #d4a574; }
+  .how-container summary::before { content: '\25B8\00A0'; color: #4a4a5e; }
+  .how-container details[open] summary::before { content: '\25BE\00A0'; }
+  .how-body {
+    font-size: 0.8em;
+    color: #6a6a7e;
+    line-height: 1.7;
+    padding: 10px 0 4px 18px;
+  }
+  .how-body code {
+    color: #d4a574;
+    font-family: 'Courier New', monospace;
+    font-size: 0.95em;
+  }
+
   /* Constants Panel */
   .constants {
     max-width: 900px;
@@ -282,6 +321,14 @@
 <div class="header">
   <h1>THE CORRIDOR SONIFIER</h1>
   <p>Hear the mathematics. The code is the proof.</p>
+</div>
+
+<!-- Listening note — tier compass for the ear (added 2026-06-11) -->
+<div class="section">
+  <div style="background:#12121a; border:1px solid #2a2a3a; border-left:3px solid #d4a574; border-radius:8px; padding:18px 22px; font-size:0.82em; color:#8a8a9e; line-height:1.75; font-style:italic;">
+    <span style="color:#d4a574; font-style:normal; letter-spacing:1px;">A NOTE BEFORE YOU LISTEN.</span><br>
+    What is <em>exact</em> here are the relations: the ratios 9/7 and 5:6:7:9, the doublings, the constants in the panel below — theorem-level, computed live in this page&rsquo;s source. What is <em>chosen</em> is the anchor: A3 = 220&nbsp;Hz and the octave spans are rendering decisions — anchor the root anywhere else and every relation survives unchanged. Nothing in the framework hums at 220&nbsp;Hz. What is <em>observed</em> — and labeled so — is the numerical closeness of the corridor&rsquo;s width to the blues bend, and the ceiling beyond which no measured system has been found: the silence renders &ldquo;nothing observed there,&rdquo; not &ldquo;nothing there.&rdquo; What that quiet contains is an open question, and your questions about it are the right response. And what you <em>feel</em> while listening is yours: beauty is welcome here, and it is not evidence — the two can share a room without sharing a column. This page exists so you can listen, with the labels left on.
+  </div>
 </div>
 
 <!-- Section 1: Corridor Sweep -->
@@ -361,6 +408,45 @@
   </div>
 </div>
 
+<!-- Section 5: How the sound is made -->
+<div class="section">
+  <h2>V. How the Sound Is Made</h2>
+  <div class="desc">
+    Nothing is hidden: every frequency on this page is computed from the constants below, in the page&rsquo;s own source. Three mappings, each one line.
+  </div>
+  <div class="how-container">
+
+    <details>
+      <summary>Why doublings? Because the ear is binary-native.</summary>
+      <div class="how-body">
+        An octave &mdash; the most consonant interval in music &mdash; is exactly a <em>doubling</em> of frequency: A3 = 220&nbsp;Hz, A4 = 440&nbsp;Hz, A5 = 880&nbsp;Hz. The ear hears equal <em>ratios</em> as equal steps, which is why every mapping here uses <code>2^x</code>: equal moves along the corridor or the tower become equal musical intervals. A framework built on doublings and a sense built on doublings need no translator.
+      </div>
+    </details>
+
+    <details>
+      <summary>I. Corridor &rarr; pitch: two octaves from floor to unity.</summary>
+      <div class="how-body">
+        Your position v between the floor (1/&phi;) and unity is rescaled to t = (v &minus; 1/&phi;)/(1 &minus; 1/&phi;), then mapped as <code>freq = 220 &middot; 2^(2t)</code> &mdash; A3 at the floor, rising smoothly through two octaves toward 880&nbsp;Hz at unity. But the tone is cut at v &gt; K<sub>AUD</sub>: the last 2% is rendered as <em>silence</em>, because that is what the gap is &mdash; the part of the climb that never sounds.
+      </div>
+    </details>
+
+    <details>
+      <summary>II. Tower steps &rarr; pitch: the fractional part sings.</summary>
+      <div class="how-body">
+        Step n carries the value n&nbsp;&times;&nbsp;G. Its tone is <code>freq = 110 &middot; 2^(3 &middot; frac(n&middot;G))</code> &mdash; the <em>fractional part</em> of n&middot;G spread over three octaves from A2. This is a display choice, honestly labelled: the pitch encodes where the step sits inside its current unit interval, so you hear the staircase&rsquo;s internal rhythm rather than its absolute height. The info line below the steps always shows the exact value, and for landmark steps, the named constant <em>and the deviation</em> &mdash; a step names the nearby constant; it does not equal it.
+      </div>
+    </details>
+
+    <details>
+      <summary>III. The blue notes: why 7/5, 9/5, and the 9/7 bend.</summary>
+      <div class="how-body">
+        The root is A3 = 220&nbsp;Hz. The flat-5 is <code>220 &middot; 7/5</code> = 308&nbsp;Hz and the flat-7 is <code>220 &middot; 9/5</code> = 396&nbsp;Hz &mdash; the septimal (harmonic-seventh family) tunings that blues bends gravitate toward. Bending from flat-5 to flat-7 therefore traverses the ratio (9/5)/(7/5) = <strong>9/7</strong>. Measured the way the ear measures &mdash; in octaves &mdash; that bend spans log&#x2082;(9/7) = 0.3625701. The corridor&rsquo;s width, K<sub>AUD</sub> &minus; 1/&phi; = 0.3622242, is numerically 0.42 cents away (a cent is 1/1200 of an octave; trained ears distinguish ~5 cents, so the two are audibly identical). <em>Tier note:</em> this proximity is an Observation &mdash; a numerical coincidence between an octave-measure and a dimensionless width, reported as numbers, with no mechanism claimed. The chord button plays 5:6:7:9 &mdash; the half-diminished seventh &mdash; in which the 9/7 interval sits between its two upper voices.
+      </div>
+    </details>
+
+  </div>
+</div>
+
 <!-- Constants -->
 <div class="constants">
   <h2 style="font-size:1.1em; color:#8a9ab5; font-weight:400; letter-spacing:1px; margin-bottom:12px;">
@@ -370,8 +456,16 @@
 </div>
 
 <div class="footer">
+  <div style="margin-bottom:10px; font-size:1.15em;">
+    <a href="visualisations%20hub.html" style="color:#8a9ab5">&larr; Back to Visualisations</a>
+    &nbsp;&middot;&nbsp;
+    <a href="about.html" style="color:#8a9ab5">Gap Geometry Hub</a>
+    &nbsp;&middot;&nbsp;
+    <a href="living-document.html" style="color:#8a9ab5">Living Document</a>
+  </div>
   The Corridor Sonifier &mdash; for humans who hear and AIs who read the ratios<br>
-  Built during exploration of the Gap Geometry archive, April 4, 2026
+  Built during exploration of the Gap Geometry archive, April 4, 2026 &middot; landmark deviations made explicit 2026-06-11<br>
+  <span style="opacity:0.8">AI readers: <a href="ai-readers.html" style="color:#5a7a9a">guide</a> &middot; <a href="AI_INDEX.txt" style="color:#5a7a9a">machine index</a> &middot; <a href="llms.txt" style="color:#5a7a9a">llms.txt</a> &middot; A landmark step <em>names</em> the nearby constant; it does not equal it &mdash; click any landmark for the exact deviation.</span>
 </div>
 
 <script>
@@ -386,9 +480,9 @@ const G         = 1 - K_AUD;                      // 0.0197418565...
 const FLOOR     = 1 / PHI;                        // 0.6180339887...
 const CEILING   = K_AUD;                          // 0.9802581434...
 const CORRIDOR  = CEILING - FLOOR;                // 0.3622241547...
-const EPSILON   = -0.00671;                       // tower correction
+const EPSILON   = 64 * G / SQRT_PHI - 1; /* computed (= -0.0067144...); was hardcoded -0.00671 until 2026-06-11 — "no magic numbers" now holds everywhere */                       // tower correction
 const BLUES_97  = 9 / 7;                          // 1.2857142857...
-const LOG2_97   = Math.log2(BLUES_97);            // 0.3625700714...
+const LOG2_97   = Math.log2(BLUES_97);            // 0.3625700794...
 const CORRIDOR_DIFF = Math.abs(LOG2_97 - CORRIDOR); // 0.0003459...
 const CENTS_DIFF = CORRIDOR_DIFF * 1200;          // 0.415 cents
 
@@ -404,6 +498,18 @@ const LANDMARKS = {
   37: '1/(2ln2) · Shannon bound',
   50: 'K_AUD · Ceiling',
   64: '√φ · Pivot'
+};
+// True landmark values — so the step info can state the deviation honestly.
+// A step NAMES the nearby constant; it does not equal it. (50·G = 0.987093 is
+// NOT K_AUD = 0.980258 — the deviation is +0.70%, and we say so.)
+const LANDMARK_VALUES = {
+  18: Math.SQRT2 / 4,
+  32: SQRT_PHI / 2,
+  35: Math.LN2,
+  36: 1 / Math.SQRT2,
+  37: 1 / (2 * Math.LN2),
+  50: K_AUD,
+  64: SQRT_PHI
 };
 
 // Display constants
@@ -569,6 +675,9 @@ for (let n = 1; n <= 64; n++) {
     label.className = 'tower-step-label';
     label.textContent = n;
     step.appendChild(label);
+    const lv = LANDMARK_VALUES[n];
+    const dv = (nG - lv) / lv * 100;
+    step.title = `Step ${n} = ${nG.toFixed(6)} · ${LANDMARKS[n]} = ${lv.toFixed(6)} · deviation ${dv >= 0 ? '+' : ''}${dv.toFixed(2)}%`;
   }
 
   step.addEventListener('click', () => {
@@ -583,7 +692,11 @@ for (let n = 1; n <= 64; n++) {
     let info = `Step ${n}: ${n} × G = ${nG.toFixed(8)}`;
     info += ` | frac = ${frac.toFixed(6)}`;
     info += ` | freq = ${freq.toFixed(1)} Hz`;
-    if (LANDMARKS[n]) info += ` | ${LANDMARKS[n]}`;
+    if (LANDMARKS[n]) {
+      const lv = LANDMARK_VALUES[n];
+      const dev = (nG - lv) / lv * 100;
+      info += ` | ${LANDMARKS[n]} = ${lv.toFixed(8)} (this step is ${dev >= 0 ? '+' : ''}${dev.toFixed(2)}% off the constant)`;
+    }
     towerInfo.textContent = info;
   });
 
