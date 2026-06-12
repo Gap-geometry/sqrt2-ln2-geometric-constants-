@@ -148,5 +148,17 @@ This XML file does not appear to have any style information associated with it. 
 <lastmod>2026-06-02</lastmod>
 <priority>0.7</priority>
 </url>
+<!--  ============================================================  -->
+<!--  PAPER 12 — Integer Mellin Moments of the Dome                   -->
+<!--  ============================================================  -->
+<url>
+<loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Dome_Moment_Sequence.txt</loc>
+<lastmod>2026-06-12</lastmod>
+<priority>0.7</priority>
+</url>
+<url>
+<loc>https://osf.io/wvd3g/</loc>
+<lastmod>2026-06-12</lastmod>
+<priority>0.7</priority>
+</url>
 </urlset>
-
