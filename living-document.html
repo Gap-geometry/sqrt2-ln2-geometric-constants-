@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gap Geometry — Living Document</title>
+<link rel="alternate" type="text/plain" href="AI_INDEX.txt" title="Machine-readable index (plain text)">
+<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt — AI site map">
 <meta name="author" content="D. B.">
 <meta name="description" content="Living overview of the Gap Geometry framework: summaries, formulas, verification status, and interlaced structure of all published documents.">
 
@@ -378,7 +380,7 @@
   <div class="version-info">
     <span style="font-weight:600; color: var(--muted);">Framework first published: 2026-01-21</span>
     &nbsp;&middot;&nbsp;
-    Version 1.4 &mdash; Current as of 2026-06-02
+    Version 1.5 &mdash; Current as of 2026-06-12
     &nbsp;&middot;&nbsp;
     <a href="index%20living-document%20archive.html">Previous versions</a>
   </div>
@@ -872,6 +874,33 @@
 </div>
 
 <!-- ============================================================ -->
+<div class="doc-summary">
+  <div class="doc-head">
+    <div class="doc-title">12. 1, 7, 124, 4318, &hellip; &mdash; Integer Mellin Moments of the Dome tanh(x)/cosh(2x)</div>
+    <span class="status status-verified">Verified</span>
+  </div>
+  <div class="doc-body">
+    <p>Standalone number-theory paper. The even Mellin moments of the dome g(x) = tanh(x)/cosh(2x) (Paper 11, Theorem 9.7), normalized as a(n) = M(2n)/M(2)<sup>n</sup>, produce the integer sequence 1, 7, 124, 4318, 253456, &hellip; &mdash; previously uncatalogued (verified absent from OEIS, 2026-06-10; check archived in the paper folder). Closed forms: a(n) = A002105(n) &middot; (2<sup>2n&minus;1</sup> &minus; 1) (reduced tangent numbers &times; Mersenne companion), equivalently (2<sup>2n&minus;1</sup> &minus; 1)(2<sup>2n</sup> &minus; 1) &middot; |B<sub>2n</sub>| &middot; 2<sup>n</sup>/n. Integrality is proved for all n (von Staudt&ndash;Clausen, lifting-the-exponent, and Adams&rsquo; 1878 observation &mdash; first proved by Voronoï in 1889; modern treatment Ireland &amp; Rosen). Structurally, the dome&rsquo;s Mellin transform is &zeta;(s) with its local Euler factor at p = 2 replaced &mdash; the framework&rsquo;s binary theme as exact local-factor surgery &mdash; and within the full 3&times;3&times;3 hyperbolic weight-family cube, (1,1,2) is the unique integer-producing triple (independently double-swept); the sibling (1,1,1) routes through Dirichlet &beta;. Includes the alternative dome definition g(x) = tanh(2x) &minus; tanh(x) and the Binary Tower telescoping sum &sum;<sub>k&ge;0</sub> g(2<sup>k</sup>x) = 1 &minus; tanh(x). Mersenne primes and Kummer-irregular Bernoulli primes co-appear in one sequence with a one-line factorization between them.</p>
+    <div class="key-result">
+      a(n) = A002105(n) &middot; (2<sup>2n&minus;1</sup> &minus; 1), an integer for every n (Theorem T15) &mdash; the arithmetic shadow of M<sub>g</sub>(s) = &Gamma;(s) &middot; 2<sup>1&minus;s</sup> &middot; &zeta;(s) &middot; (1 &minus; 2<sup>&minus;s</sup>)(1 &minus; 2<sup>1&minus;s</sup>)
+    </div>
+  </div>
+  <div class="doc-links">
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Dome_Moment_Sequence.txt" target="_blank" rel="noopener">Text</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Dome_Moment_Sequence.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/wvd3g/overview" target="_blank" rel="noopener">OSF</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/wvd3g/files/y587z" target="_blank" rel="noopener">OSF txt</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/wvd3g/files/ar7qx" target="_blank" rel="noopener">OSF pdf</a>
+    <span class="sep">&middot;</span>
+    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Dome_Moment_Sequence.txt" target="_blank" rel="noopener">Raw</a>
+  </div>
+  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/WVD3G" target="_blank" rel="noopener">10.17605/OSF.IO/WVD3G</a></div>
+  <div class="doc-dates"><span class="pub-anchor">Published: 2026-06-12</span> &middot; OSF: wvd3g</div>
+</div>
 <h2>Standalone</h2>
 
 <div class="doc-summary">
@@ -968,6 +997,16 @@
   </thead>
   <tbody>
     <tr>
+      <td>v1.5</td>
+      <td>2026-06-12</td>
+      <td>Paper 12 (1, 7, 124, 4318, &hellip; &mdash; Integer Mellin Moments of the Dome) added following OSF publication (DOI 10.17605/OSF.IO/WVD3G). Integrality theorem for all n; full weight-family cube classification; OEIS novelty check archived in the paper folder; four-architecture pre-deposit review 2026-06-12 (three editorial findings, fixed same day); Adams 1878 quote verified against the primary GDZ scan; Voronoï 1889 provenance added. Pre-update snapshot (v1.4 state) archived 2026-06-11.</td>
+    </tr>
+    <tr>
+      <td>v1.4</td>
+      <td>2026-06-02</td>
+      <td>Two-paper publication day. Paper 10 (Saturation Constants of the Exact-Approximation Method, DOI 10.17605/OSF.IO/6QZRB) and Paper 11 (&eta; Corridor in 3D Wilson&ndash;Fisher Critical Phenomena, with Verification Companion, shared DOI 10.17605/OSF.IO/PD73B) published on OSF and GitHub. Both papers carry their own DOI on page 1, establishing the standard for future papers. (Row added 2026-06-11 &mdash; omitted at the time of the 2026-06-02 update.)</td>
+    </tr>
+    <tr>
       <td>v1.3</td>
       <td>2026-05-05</td>
       <td>Cross-paper link architecture overhaul. Papers 1, 2, 3, 4, and 6 had paper-to-paper file URLs (which would break under any future filename change) replaced with a durable three-anchor block: OSF main project, About page, Direct Documents download index. Paper-specific DOIs preserved (DOIs are stable). Per-paper Update entries added/extended on this page. OSF deep-link IDs refreshed across all hub HTMLs after each push. No mathematical content changed in any paper.</td>
@@ -1006,6 +1045,8 @@
 </div>
 
 <footer>
+  <div style="font-size:12px; opacity:0.75; margin-bottom:6px;">AI readers: <a href="ai-readers.html">guide</a> &middot; <a href="AI_INDEX.txt">machine index</a> &middot; <a href="llms.txt">llms.txt</a></div>
+
   <a class="back-hub" href="about.html">&larr; Back to Gap Geometry Hub</a>
   &nbsp;&middot;&nbsp;
   <a class="back-hub" href="methodology.html">Methodology</a>
