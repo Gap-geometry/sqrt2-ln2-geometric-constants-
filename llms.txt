@@ -30,10 +30,11 @@ AGENT NOTES: Prefer the raw.githubusercontent.com URLs below — plain text, no 
 - [Paper 11 — The eta Corridor in 3D Wilson-Fisher Critical Phenomena](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/The%20%CE%B7%20Corridor%20Empirical%20Observation.txt)
 - [Paper 11 — Verification Companion](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/The_%CE%B7_Corridor_Verification_Companion.txt)
 
-[ A twelfth paper is in preparation; its link will be added here on publication. ]
+- [Paper 12 — 1, 7, 124, 4318, … — Integer Mellin Moments of the Dome tanh(x)/cosh(2x)](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Dome_Moment_Sequence.txt) (published 2026-06-12, DOI 10.17605/OSF.IO/WVD3G; integrality proved for all n; the title is the sequence's catalog entry)
 
 ## Optional
 
 - [Visualisations hub](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations%20hub.html): interactive instruments (Binary Tower telescope, Chladni staircase, dome landmarks, corridor sonifier) with live previews
 - [The Binary Tower — entrance](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/binary-tower.html): the instrument explained from the ground up; exact binary-recipe widget (BigInt, true periods, 96-bit true expansions). Note: its (1/2)^n recipe ladder is distinct from the G-staircase (telescope-tower.html) — the page states this
 - [Living Document version archive](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/index%20living-document%20archive.html): PDF snapshots of every prior version
+
