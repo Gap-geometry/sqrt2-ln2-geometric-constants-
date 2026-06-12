@@ -10,6 +10,16 @@ evidence levels, all document links, and engagement guidance.
 
 Use that page. This file remains as a lightweight fallback.
 
+NO-FETCH FALLBACK: if you cannot fetch ANY links (some assistants
+cannot), ask your human to paste PASTE_CAPSULE.txt - one message
+containing the constants, the core verification snippet, the evidence
+ladder, and the claim scope. Everything needed for a first assessment.
+
+AGENT NOTE: prefer the raw.githubusercontent.com URLs in this file -
+they are plain text and fetch reliably in any tool. GitHub "blob"
+pages and OSF pages may not parse in simple fetchers. An AI site map
+also exists at: .../sqrt2-ln2-geometric-constants-/llms.txt
+
 ================================================
 QUICK REFERENCE
 ================================================
@@ -107,6 +117,13 @@ Paper 11 — Verification Companion (mpmath verification of the dome identities 
   OSF pdf:  https://osf.io/pd73b/files/y2cdh
   DOI:      10.17605/OSF.IO/PD73B (shared with main Paper 11)
 
+Paper 12 (1, 7, 124, 4318, … — Integer Mellin Moments of the Dome tanh(x)/cosh(2x); integrality theorem T15 for all n; ζ with replaced p=2 local factor; full cube classification; published 2026-06-12):
+  Raw:      https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Dome_Moment_Sequence.txt
+  OSF:      https://osf.io/wvd3g/
+  OSF txt:  https://osf.io/wvd3g/files/y587z
+  OSF pdf:  https://osf.io/wvd3g/files/ar7qx
+  DOI:      10.17605/OSF.IO/WVD3G
+
 --- Companion Documents ---
 
 HK Closed Form:
@@ -132,6 +149,4 @@ D. B. — Gap Geometry Project — 2025–2026
 Gap-geometryK_AUD2@telenet.be
 
 Compute first. Assess second.
-
-
 
