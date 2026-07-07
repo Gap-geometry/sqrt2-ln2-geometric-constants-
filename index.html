@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gap Geometry — Binary Tower Simulation</title>
+  <title>Gap Geometry — The Gap Dashboard</title>
   <link rel="alternate" type="text/plain" href="AI_INDEX.txt" title="Machine-readable index (plain text)">
   <link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt — AI site map">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: #0a0a0a; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    body { background: #0c1322; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
     #root { width: 100%; max-width: 720px; }
   </style>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
@@ -20,7 +20,7 @@
   <script type="text/babel">
 /**
  * ═══════════════════════════════════════════════════════════════════════
- * GAP GEOMETRY — INTERACTIVE FRAMEWORK
+ * THE GAP DASHBOARD
  * ═══════════════════════════════════════════════════════════════════════
  *
  * WHAT THIS IS
@@ -206,7 +206,7 @@ const C = (tau, alpha) => INV_PHI + (K_AUD - INV_PHI) * Math.tanh(alpha * tau);
 // The Study (B.'s observational research) identified these basins independently
 // before the mathematical framework named them — convergence from two instruments.
 const ALPHA_PRESETS = [
-  { value: 0.15, label: "Ghost", verb: "7 absorbs", color: "#aa96da",
+  { value: 0.15, label: "Ghost", verb: "7 absorbs", color: "#7d8aa6",
     desc: "Very slow convergence. The system drifts without committing. Perturbations are absorbed into the trajectory — they leave no visible trace. Below α ≈ 0.3, the corridor never fully develops.",
     basin: "Ghost basin — slow, flexible, absorptive",
     study: "\"Oscillatory Trapping\" in the Study. The system appears stuck but is actually processing." },
@@ -222,7 +222,7 @@ const ALPHA_PRESETS = [
     desc: "Fast convergence. The trajectory snaps through the corridor quickly — constants are crossed but not dwelt upon. The system is selecting its target, not exploring the space.",
     basin: "Pilot basin — fast, flexible, decisive",
     study: "Transition between oscillation and fixed-point lock." },
-  { value: 3.0, label: "Crystal", verb: "5 holds", color: "#95e1d3",
+  { value: 3.0, label: "Crystal", verb: "5 holds", color: "#5cc46a",
     desc: "Near-instant convergence. The trajectory locks to K_AUD almost immediately. No visible oscillation — the scaffold is built and the system holds. 400/5 = 80 exactly, no remainder.",
     basin: "Crystal basin — fast, rigid, terminal",
     study: "\"The Clearing\" (fixed point) in the Study. Structure achieved, motion stops." },
@@ -234,13 +234,15 @@ const ALPHA_PRESETS = [
 // The Landauer crossing (steps 35→36) is where n×G crosses ln(2),
 // marking the transition from sub-Landauer geometry to super-Landauer information.
 const LANDMARKS = [
-  { step: 18, label: "Romeo", approx: "√2/4", target: Math.sqrt(2)/4, color: "#4ecdc4", note: "2×3² — first complete structure (Ar)" },
-  { step: 32, label: "k=5", approx: "√φ/2", target: SQRT_PHI/2, color: "#6c9bcf", note: "2⁵ — tower target at k=5 (√φ/2, 0.67%); golden floor 1/φ sits 2.91% below" },
-  { step: 36, label: "Geom", approx: "1/√2", target: 1/Math.sqrt(2), color: "#88b5dd", note: "6² — first super-Landauer geometric landmark (1.025 L)" },
-  { step: 37, label: "Post-Shannon", approx: "1/(2ln2)", target: 1/(2*LN2), color: "#f38181", note: "prime — first post-Shannon structural prime (1.054 L)" },
+  { step: 18, label: "Romeo", approx: "√2/4", target: Math.sqrt(2)/4, color: "#2f6bf2", note: "2×3² — first complete structure (Ar)" },
+  { step: 32, label: "k=5", approx: "√φ/2", target: SQRT_PHI/2, color: "#ffb347", note: "2⁵ — tower target at k=5 (√φ/2, 0.67%); golden floor 1/φ sits 2.91% below" },
+  { step: 35, label: "Landauer", approx: "ln 2", target: LN2, color: "#4a86e8", note: "5×7 — n·G crosses ln 2 at n≈35.1 (the Landauer crossing): below is sub-Landauer geometry, above is super-Landauer information" },
+  { step: 36, label: "Geom", approx: "1/√2", target: 1/Math.sqrt(2), color: "#6c9bcf", note: "6² — first super-Landauer geometric landmark (1.025 L)" },
+  { step: 37, label: "Shannon", approx: "1/(2ln2)", target: 1/(2*LN2), color: "#88b5dd", note: "prime — first post-Shannon structural prime (1.054 L)" },
   { step: 50, label: "Ceiling", approx: "K_AUD", target: K_AUD, color: "#ffd700", note: "2×5² — the ceiling reached, shell 5" },
-  { step: 58, label: "Pre-pivot", approx: "φ/√2", target: PHI/Math.sqrt(2), color: "#dda0dd", note: "pre-pentagonal turn, φ projected by binary" },
-  { step: 59, label: "Turn", approx: "—", target: null, color: "#ff9a76", note: "pentagonal turn (mirror of Romeo)" },
+  { step: 53, label: "Hinge", approx: "π/3", target: Math.PI/3, color: "#f38181", note: "53 (prime) — 53·G ≈ π/3 (−0.08%): the transcendental hinge above the ceiling, before the golden pivot" },
+  { step: 58, label: "Pre-pivot", approx: "φ/√2", target: PHI/Math.sqrt(2), color: "#ffb347", note: "pre-pentagonal turn, φ projected by binary" },
+  { step: 59, label: "Turn", approx: "—", target: null, color: "#7d8aa6", note: "pentagonal turn (mirror of Romeo)" },
   { step: 64, label: "Pivot", approx: "√φ", target: SQRT_PHI, color: "#ffb347", note: "2⁶ = 4³ — master formula pivot" },
 ];
 
@@ -266,13 +268,15 @@ const TERMS = [
 
 // ─── Shared styles ──────────────────────────────────────────────────
 const S = {
-  bg: "#0a0a0f",
-  card: "rgba(255,255,255,0.02)",
-  border: "#1a1a2e",
-  text: "#e0e0e0",
-  dim: "#555",
-  vdim: "#333",
+  bg: "#0c1322",
+  card: "rgba(255,255,255,0.03)",
+  border: "#23314d",
+  text: "#e8eef7",
+  dim: "#8aa0c0",
+  vdim: "#566179",
   gold: "#ffd700",
+  blue: "#2f6bf2",   /* binary_tower — this page's signature */
+  teal: "#4ecdc4",   /* UI / live-selected, reserved */
   font: "'Courier New', 'JetBrains Mono', monospace",
 };
 
@@ -282,9 +286,9 @@ function TabBar({ tabs, active, onChange }) {
     <div style={{ display: "flex", gap: "2px", justifyContent: "center", flexWrap: "wrap", marginBottom: "16px" }}>
       {tabs.map((t, i) => (
         <button key={i} onClick={() => onChange(i)} style={{
-          background: i === active ? "rgba(255,215,0,0.1)" : "transparent",
-          border: `1px solid ${i === active ? "rgba(255,215,0,0.3)" : "rgba(255,255,255,0.06)"}`,
-          color: i === active ? S.gold : "#666",
+          background: i === active ? "rgba(78,205,196,0.12)" : "transparent",
+          border: `1px solid ${i === active ? "rgba(78,205,196,0.4)" : "rgba(255,255,255,0.06)"}`,
+          color: i === active ? S.teal : "#8aa0c0",
           padding: "8px 16px", borderRadius: "6px 6px 0 0", cursor: "pointer",
           fontSize: "11px", fontFamily: S.font, fontWeight: i === active ? "bold" : "normal",
           transition: "all 0.2s"
@@ -318,8 +322,8 @@ function AlphaControl({ alpha, setAlpha, isPlaying, setIsPlaying, activePreset, 
             onChange={(e) => setAlpha(parseFloat(e.target.value))}
             style={{ width: "100%", accentColor: verbColor }} />
           <div style={{ display: "flex", justifyContent: "space-between", marginTop: "4px" }}>
-            <span style={{ fontSize: "8px", color: "#444" }}>slow / absorptive</span>
-            <span style={{ fontSize: "8px", color: "#444" }}>fast / crystalline</span>
+            <span style={{ fontSize: "8px", color: "#7d8aa6" }}>slow / absorptive</span>
+            <span style={{ fontSize: "8px", color: "#7d8aa6" }}>fast / crystalline</span>
           </div>
         </div>
 
@@ -340,7 +344,7 @@ function AlphaControl({ alpha, setAlpha, isPlaying, setIsPlaying, activePreset, 
         </div>
 
         <button onClick={() => setIsPlaying(!isPlaying)} style={{
-          background: "rgba(255,255,255,0.05)", border: "1px solid #333",
+          background: "rgba(255,255,255,0.05)", border: "1px solid #6a7a92",
           color: "#aaa", padding: "6px 14px", borderRadius: "4px", cursor: "pointer", fontSize: "11px", fontFamily: S.font
         }}>{isPlaying ? "❚❚" : "▶"}</button>
       </div>
@@ -372,7 +376,7 @@ function GapGeometrySimulation() {
   const [stairN, setStairN] = useState(64);
   const [showEnergy, setShowEnergy] = useState(false);
   const [hoveredArch, setHoveredArch] = useState(null);
-  const [lockedArch, setLockedArch] = useState(null);
+  const [lockedArch, setLockedArch] = useState(50); // default-open the K_AUD ceiling, so a newcomer sees the pivots are interactive
   const activeArch = lockedArch !== null ? lockedArch : hoveredArch;
   const lastTimeRef = useRef(Date.now());
   const animRef = useRef(null);
@@ -416,27 +420,27 @@ function GapGeometrySimulation() {
   }, [alpha]);
 
   const verbColor = activePreset.color;
-  const tabs = ["Dynamics", "Tower", "Scaling", "400/11", "Architecture"];
+  const tabs = ["Tower", "Architecture", "Scaling", "Dynamics", "400/11"];
 
   return (
     <div style={{ background: S.bg, color: S.text, minHeight: "100vh", fontFamily: S.font, padding: "16px", maxWidth: "860px", margin: "0 auto" }}>
 
       {/* ─── Header ─── */}
       <div style={{ textAlign: "center", marginBottom: "16px" }}>
-        <h1 style={{ fontSize: "20px", fontWeight: "normal", color: S.gold, margin: 0, letterSpacing: "2px" }}>
-          GAP GEOMETRY — INTERACTIVE FRAMEWORK
+        <h1 style={{ fontSize: "26px", fontWeight: "normal", color: S.gold, margin: 0, letterSpacing: "2px", fontFamily: "ui-monospace, monospace" }}>
+          THE GAP DASHBOARD
         </h1>
-        <p style={{ fontSize: "10px", color: "#444", margin: "4px 0" }}>
+        <p style={{ fontSize: "10px", color: "#7d8aa6", margin: "4px 0" }}>
           K_AUD = √2 × ln(2) = {K_AUD.toFixed(10)} — G = {G.toFixed(10)} — φ = {PHI.toFixed(10)}
         </p>
-        <p style={{ fontSize: "9px", color: "#333" }}>The gap is the architecture</p>
+        <p style={{ fontSize: "9px", color: "#6a7a92" }}>The gap is the architecture</p>
       </div>
 
       {/* ─── Tabs ─── */}
       <TabBar tabs={tabs} active={tab} onChange={setTab} />
 
-      {/* ═══ TAB 0: DYNAMICS (corridor + tower + verbs) ═══ */}
-      {tab === 0 && (
+      {/* ═══ TAB 3: DYNAMICS (corridor + tower + verbs) ═══ */}
+      {tab === 3 && (
         <div>
           {/* α Coupling Control — Dynamics only */}
           <AlphaControl alpha={alpha} setAlpha={setAlpha} isPlaying={isPlaying}
@@ -458,7 +462,7 @@ function GapGeometrySimulation() {
               <h2 style={{ fontSize: "12px", color: "#888", margin: "0 0 10px", letterSpacing: "1px" }}>
                 C(τ) = 1/φ + (K−1/φ) × tanh(ατ)
               </h2>
-              <svg viewBox="0 0 400 280" style={{ width: "100%" }}>
+              <svg viewBox="0 0 400 140" style={{ width: "100%" }}>
                 {/* Corridor band */}
                 <rect x="50" y={280 - K_AUD * 260} width="340" height={(K_AUD - INV_PHI) * 260}
                   fill="rgba(255,215,0,0.03)" />
@@ -515,9 +519,9 @@ function GapGeometrySimulation() {
                   </g>);
                 })()}
 
-                <text x="220" y="276" textAnchor="middle" fill="#444" fontSize="8">τ →</text>
+                <text x="220" y="132" textAnchor="middle" fill="#7d8aa6" fontSize="8">τ →</text>
               </svg>
-              <div style={{ fontSize: "10px", color: "#555", marginTop: "6px", lineHeight: "1.5" }}>
+              <div style={{ fontSize: "10px", color: "#8aa0c0", marginTop: "6px", lineHeight: "1.5" }}>
                 Three families crossed: <span style={{color:"#6c9bcf"}}>algebraic</span> (1/√2)
                 {" → "}<span style={{color:"#f38181"}}>transcendental</span> (π/4)
                 {" → "}<span style={{color:"#ffd700"}}>golden</span> (2/√5)
@@ -545,18 +549,18 @@ function GapGeometrySimulation() {
                   const y2 = 8 + (p.e/64)*380;
                   return (<g key={i}>
                     <rect x="36" y={y1} width="300" height={y2-y1} fill={p.c} />
-                    <text x="340" y={(y1+y2)/2+3} fill="#444" fontSize="9">{p.l}</text>
+                    <text x="340" y={(y1+y2)/2+3} fill="#7d8aa6" fontSize="9">{p.l}</text>
                   </g>);
                 })}
 
-                {/* Landauer crossing zone */}
+                {/* Crossing zone — three distinct thresholds (Landauer · geometric-damping · Shannon), each its own theorem */}
                 {(() => {
                   const y35 = 8 + (35/64)*380;
-                  const y36 = 8 + (36/64)*380;
+                  const y38 = 8 + (38/64)*380;
                   return (<g>
-                    <rect x="36" y={y35} width="300" height={y36-y35} fill="rgba(243,129,129,0.12)" />
-                    <text x="186" y={y35+(y36-y35)/2+3} textAnchor="middle" fill="#f38181" fontSize="7" fontWeight="bold">
-                      ═══ LANDAUER CROSSING ═══
+                    <rect x="36" y={y35} width="300" height={y38-y35} fill="rgba(108,155,207,0.10)" />
+                    <text x="186" y={(y35+y38)/2+2.5} textAnchor="middle" fill="#6c9bcf" fontSize="7" fontWeight="bold">
+                      CROSSING ZONE · 3 thresholds
                     </text>
                   </g>);
                 })()}
@@ -590,10 +594,17 @@ function GapGeometrySimulation() {
                   );
                 })()}
 
-                {/* Landmark labels */}
-                {LANDMARKS.map(l => (
-                  <text key={l.step} x="350" y={12 + (l.step/64)*380} fill={l.color} fontSize="7" opacity="0.7">{l.approx}</text>
-                ))}
+                {/* Landmark labels — the tight crossing trio (35/36/37) fanned out and named, so each threshold reads as its own */}
+                {LANDMARKS.map(l => {
+                  const crossName = { 35: "Landauer", 36: "Geom", 37: "Shannon" };
+                  const isCross = l.step in crossName;
+                  const dy = isCross ? (l.step - 36) * 8 : 0;   // spread the three: −8 / 0 / +8 px
+                  return (
+                    <text key={l.step} x="340" y={12 + (l.step/64)*380 + dy} fill={l.color} fontSize="7" opacity="0.78">
+                      {isCross ? crossName[l.step] : l.approx}
+                    </text>
+                  );
+                })}
 
                 {/* Hover tooltip */}
                 {hoveredStep !== null && (() => {
@@ -603,7 +614,7 @@ function GapGeometrySimulation() {
                   const landauer = val / LN2;
                   const dev = lm && lm.target ? ((val - lm.target) / lm.target * 100).toFixed(3) : null;
                   return (<g>
-                    <rect x="55" y={y-22} width="280" height="20" fill="#0a0a0f" stroke="#333" rx="3" />
+                    <rect x="55" y={y-22} width="280" height="20" fill="#0a0a0f" stroke="#6a7a92" rx="3" />
                     <text x="63" y={y-13} fill="#e0e0e0" fontSize="8">
                       Step {hoveredStep}: {hoveredStep}G = {val.toFixed(6)} ({landauer.toFixed(3)} Landauer)
                     </text>
@@ -613,7 +624,7 @@ function GapGeometrySimulation() {
                   </g>);
                 })()}
 
-                <text x="356" y="200" fill="#333" fontSize="8" textAnchor="end" transform="rotate(90,356,200)">18+14 ⇌ 14+18 = 64</text>
+                <text x="356" y="200" fill="#6a7a92" fontSize="8" textAnchor="end" transform="rotate(90,356,200)">18+14 ⇌ 14+18 = 64</text>
               </svg>
             </div>
           </div>
@@ -634,7 +645,7 @@ function GapGeometrySimulation() {
               <div key={v.p} style={{ flex: "1", minWidth: "220px", background: S.card, border: `1px solid ${v.color}18`, borderRadius: "8px", padding: "10px 14px" }}>
                 <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
                   <div style={{ fontSize: "14px", color: v.color, marginBottom: "2px" }}><strong>{v.p}</strong> {v.verb}</div>
-                  <div style={{ fontSize: "10px", color: "#444", fontVariantNumeric: "tabular-nums" }}>{v.digits}</div>
+                  <div style={{ fontSize: "10px", color: "#7d8aa6", fontVariantNumeric: "tabular-nums" }}>{v.digits}</div>
                 </div>
                 <div style={{ fontSize: "9px", color: "#666", marginBottom: "6px" }}>{v.desc}</div>
                 <svg viewBox="0 0 220 45" style={{ width: "100%" }}>
@@ -651,36 +662,50 @@ function GapGeometrySimulation() {
                   })}
                   <line x1="8" y1="38" x2="212" y2="38" stroke="#222" strokeWidth="0.5" />
                 </svg>
-                <div style={{ fontSize: "8px", color: "#555", marginTop: "4px" }}>{v.detail}</div>
+                <div style={{ fontSize: "8px", color: "#8aa0c0", marginTop: "4px" }}>{v.detail}</div>
               </div>
             ))}
           </div>
         </div>
       )}
 
-      {/* ═══ TAB 1: TOWER (staircase n×G with energy layer) ═══ */}
-      {tab === 1 && (
+      {/* ═══ TAB 0: TOWER (staircase n×G with energy layer) — the foundation, shown first ═══ */}
+      {tab === 0 && (
         <div style={{ background: S.card, border: `1px solid ${S.border}`, borderRadius: "8px", padding: "14px" }}>
+          {/* Fresh-reader info panel + colour key — Tower is the first tab now */}
+          <div style={{ background: "rgba(47,107,242,0.06)", border: `1px solid ${S.border}`, borderLeft: `3px solid ${S.blue}`, borderRadius: "6px", padding: "12px 14px", marginBottom: "14px", fontSize: "11px", lineHeight: "1.6" }}>
+            <div style={{ color: S.blue, fontWeight: "bold", letterSpacing: "0.5px", marginBottom: "6px" }}>THE BINARY TOWER — start here</div>
+            <div style={{ color: S.dim }}>
+              64 steps. Each step <b style={{color: S.text}}>n</b> sits at <b style={{color: S.gold}}>n·G</b>, where <b style={{color: S.text}}>G = 1 − K_AUD ≈ 0.0197</b> is the gap — the ~2% below unity. Climb, and the gaps accumulate; <b style={{color: S.text}}>named landmarks</b> appear where n·G lands near a known constant: √2/4, ln 2, the <b style={{color: S.gold}}>K_AUD ceiling</b> at step 50, √φ at the pivot 64. A landmark <i>names</i> the nearby constant — it does not equal it; hover any step for the exact deviation.
+            </div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px 16px", marginTop: "10px", fontSize: "10px", color: S.dim }}>
+              <span><span style={{color: "#2f6bf2"}}>●</span> √2 / binary</span>
+              <span><span style={{color: "#ffb347"}}>●</span> golden / √φ</span>
+              <span><span style={{color: "#ffd700"}}>●</span> K_AUD ceiling</span>
+              <span><span style={{color: "#4ecdc4"}}>●</span> live / selected</span>
+              <span><span style={{color: "#f38181"}}>●</span> π · transcendental</span>
+            </div>
+          </div>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4px" }}>
             <h2 style={{ fontSize: "12px", color: "#888", margin: 0 }}>The Binary Tower — n × G</h2>
             <button onClick={() => setShowEnergy(!showEnergy)} style={{
               background: showEnergy ? "rgba(243,129,129,0.1)" : "rgba(255,255,255,0.03)",
               border: `1px solid ${showEnergy ? "rgba(243,129,129,0.3)" : "#222"}`,
-              color: showEnergy ? "#f38181" : "#555",
+              color: showEnergy ? "#f38181" : "#8aa0c0",
               padding: "4px 10px", borderRadius: "4px", cursor: "pointer", fontSize: "10px", fontFamily: S.font
             }}>
               {showEnergy ? "◉ Energy layer" : "○ Energy layer"}
             </button>
           </div>
-          <p style={{ fontSize: "10px", color: "#444", textAlign: "center", margin: "0 0 12px" }}>
+          <p style={{ fontSize: "10px", color: "#7d8aa6", textAlign: "center", margin: "0 0 12px" }}>
             Each step adds one gap. {showEnergy ? "Showing Landauer multiples: n×G / ln(2)" : "The cost function of binary organization."}
           </p>
 
           <div style={{ display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
-            <span style={{ fontSize: "10px", color: "#555" }}>n=1</span>
+            <span style={{ fontSize: "10px", color: "#8aa0c0" }}>n=1</span>
             <input type="range" min="1" max="64" value={stairN} onChange={e => setStairN(parseInt(e.target.value))}
               style={{ flex: 1, accentColor: S.gold }} />
-            <span style={{ fontSize: "10px", color: "#555" }}>n=64</span>
+            <span style={{ fontSize: "10px", color: "#8aa0c0" }}>n=64</span>
             <span style={{ fontSize: "12px", color: S.gold, fontWeight: "bold", minWidth: "30px" }}>{stairN}</span>
           </div>
 
@@ -768,7 +793,7 @@ function GapGeometrySimulation() {
             <table style={{ width: "100%", borderCollapse: "collapse" }}>
               <thead><tr style={{ borderBottom: "1px solid rgba(255,215,0,0.1)" }}>
                 {["Step", "n×G", "Target", "Dev%", ...(showEnergy ? ["Landauer ×"] : []), "Note"].map(h => (
-                  <th key={h} style={{ padding: "4px 6px", textAlign: "right", color: "#555", fontWeight: "normal" }}>{h}</th>
+                  <th key={h} style={{ padding: "4px 6px", textAlign: "right", color: "#8aa0c0", fontWeight: "normal" }}>{h}</th>
                 ))}
               </tr></thead>
               <tbody>
@@ -792,7 +817,7 @@ function GapGeometrySimulation() {
                         {l.step === 36 && reached && " ←"}
                         {l.step === 37 && reached && " ←"}
                       </td>}
-                      <td style={{ padding: "3px 6px", textAlign: "right", color: "#555", fontSize: "9px" }}>{l.note}</td>
+                      <td style={{ padding: "3px 6px", textAlign: "right", color: "#8aa0c0", fontSize: "9px" }}>{l.note}</td>
                     </tr>
                   );
                 })}
@@ -815,9 +840,20 @@ function GapGeometrySimulation() {
           <h2 style={{ fontSize: "12px", color: "#888", margin: "0 0 4px", textAlign: "center" }}>
             The Scaling Table — one relationship at every scale
           </h2>
-          <p style={{ fontSize: "10px", color: "#444", textAlign: "center", margin: "0 0 14px" }}>
+          <p style={{ fontSize: "10px", color: "#7d8aa6", textAlign: "center", margin: "0 0 14px" }}>
             2<sup>k</sup> × G &nbsp;=&nbsp; 2<sup>k−6</sup> × √φ × (1 + ε) &nbsp;·&nbsp; constant ε = −0.671% at every k
           </p>
+
+          {/* Why the error is constant — π/ratio framing (skeptic-proof: constancy is arithmetic; the value is the observation) */}
+          <div style={{ background: "rgba(47,107,242,0.06)", border: `1px solid ${S.border}`, borderLeft: `3px solid ${S.blue}`, borderRadius: "6px", padding: "12px 14px", marginBottom: "14px", fontSize: "11px", lineHeight: "1.65" }}>
+            <div style={{ color: S.blue, fontWeight: "bold", letterSpacing: "0.5px", marginBottom: "6px" }}>WHY THE ERROR IS CONSTANT</div>
+            <div style={{ color: S.dim }}>
+              Each rung is measured two ways — its gap-height <b style={{color: S.text}}>2ᵏ·G</b> and its golden target <b style={{color: S.text}}>2ᵏ⁻⁶·√φ</b>. Climb one step and <i>both</i> scale by the same 2ᵏ, so their ratio <b style={{color: S.text}}>64G/√φ</b> has the scaling cancel out — the identical number at every rung. Nothing exotic: it's the same reason <b style={{color: S.text}}>C/d = π is the same for every circle</b> — a ratio of two quantities that scale together cannot depend on the scale. The constancy is guaranteed arithmetic.
+              <div style={{ marginTop: "8px" }}>
+                What the arithmetic does <i>not</i> force is the <b style={{color: S.gold}}>value</b>. That frozen ratio lands at <b style={{color: S.text}}>0.9933</b> — meaning <b style={{color: S.gold}}>G sits just 0.67% from √φ/64</b>. The constancy comes free; the closeness does not. That near-hit is an <i>observation</i>, reported as one — and ε is simply where you read it: steady at every scale precisely because it is a pure ratio.
+              </div>
+            </div>
+          </div>
 
           <div style={{ overflowX: "auto" }}>
             <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "11px", fontFamily: S.font }}>
@@ -873,7 +909,7 @@ function GapGeometrySimulation() {
             </div>
           </div>
 
-          <div style={{ fontSize: "10px", color: "#555", padding: "10px 12px", background: "rgba(255,255,255,0.02)", border: `1px solid ${S.border}`, borderRadius: "6px", marginTop: "10px", lineHeight: "1.55" }}>
+          <div style={{ fontSize: "10px", color: "#8aa0c0", padding: "10px 12px", background: "rgba(255,255,255,0.02)", border: `1px solid ${S.border}`, borderRadius: "6px", marginTop: "10px", lineHeight: "1.55" }}>
             <span style={{ color: "#888", fontWeight: "bold" }}>Why the error is constant.</span> The −0.671% is algebraic, not measured eleven times. Every row reduces to the single identity 64·G = √φ·(1 + ε). Multiplying or dividing both sides by 2 changes the magnitude but preserves ε exactly.
           </div>
 
@@ -891,7 +927,7 @@ function GapGeometrySimulation() {
               <div><span style={{color:"#666"}}>(4)&nbsp;</span>Pivot at k=6:&nbsp;&nbsp;<span style={{color:S.gold}}>64·G</span> = <span style={{color:S.gold}}>{(64*G).toFixed(10)}</span></div>
               <div><span style={{color:"#666"}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>Target:&nbsp;&nbsp;<span style={{color:"#ffb347"}}>√φ</span> = <span style={{color:"#ffb347"}}>{SQRT_PHI.toFixed(10)}</span></div>
               <div style={{ height: "8px" }}></div>
-              <div><span style={{color:"#666"}}>(5)&nbsp;</span>Solve&nbsp;&nbsp;64·G = √φ · (1 + ε)&nbsp;&nbsp;for ε&nbsp;&nbsp;<span style={{color:"#555"}}>(signed relative error)</span>:</div>
+              <div><span style={{color:"#666"}}>(5)&nbsp;</span>Solve&nbsp;&nbsp;64·G = √φ · (1 + ε)&nbsp;&nbsp;for ε&nbsp;&nbsp;<span style={{color:"#8aa0c0"}}>(signed relative error)</span>:</div>
               <div style={{ paddingLeft: "20px", color: "#999" }}>ε = 64·G / √φ − 1</div>
               <div style={{ paddingLeft: "20px", color: "#999" }}>&nbsp;&nbsp;= {(64*G).toFixed(8)} / {SQRT_PHI.toFixed(8)} − 1</div>
               <div style={{ paddingLeft: "20px", color: "#999" }}>&nbsp;&nbsp;= {(64*G/SQRT_PHI).toFixed(10)} − 1</div>
@@ -909,19 +945,19 @@ function GapGeometrySimulation() {
         </div>
       )}
 
-      {/* ═══ TAB 3: 400/11 ═══ */}
-      {tab === 3 && (
+      {/* ═══ TAB 4: 400/11 ═══ */}
+      {tab === 4 && (
         <div style={{ background: S.card, border: `1px solid ${S.border}`, borderRadius: "8px", padding: "14px" }}>
           <h2 style={{ fontSize: "12px", color: "#888", margin: "0 0 4px", textAlign: "center" }}>
             ρ = 400/11 − 1/2500 − 1/939939
           </h2>
-          <p style={{ fontSize: "10px", color: "#444", textAlign: "center", margin: "0 0 12px" }}>
+          <p style={{ fontSize: "10px", color: "#7d8aa6", textAlign: "center", margin: "0 0 12px" }}>
             Three terms. 14 digits. Same prime family throughout.
           </p>
 
           {/* Decimal expansion display */}
           <div style={{ textAlign: "center", marginBottom: "14px", padding: "10px", background: "rgba(255,215,0,0.03)", border: "1px solid rgba(255,215,0,0.08)", borderRadius: "6px" }}>
-            <div style={{ fontSize: "9px", color: "#555", marginBottom: "6px" }}>DECIMAL EXPANSION — 400/11</div>
+            <div style={{ fontSize: "9px", color: "#8aa0c0", marginBottom: "6px" }}>DECIMAL EXPANSION — 400/11</div>
             <div style={{ fontSize: "18px", letterSpacing: "3px", fontVariantNumeric: "tabular-nums" }}>
               <span style={{ color: "#888" }}>36.</span>
               <span style={{ color: S.gold }}>36</span>
@@ -929,9 +965,9 @@ function GapGeometrySimulation() {
               <span style={{ color: S.gold }}>36</span>
               <span style={{ color: "#ffb347" }}>36</span>
               <span style={{ color: S.gold }}>36</span>
-              <span style={{ color: "#444" }}>...</span>
+              <span style={{ color: "#7d8aa6" }}>...</span>
             </div>
-            <div style={{ fontSize: "9px", color: "#555", marginTop: "6px" }}>
+            <div style={{ fontSize: "9px", color: "#8aa0c0", marginTop: "6px" }}>
               Period-2 oscillation: the <span style={{ color: S.gold }}>3̄6̄</span> block repeats forever — <span style={{ color: "#ffd700" }}>11 breathes</span>
             </div>
           </div>
@@ -942,7 +978,7 @@ function GapGeometrySimulation() {
               <button key={n} onClick={() => setDecayTerms(n)} style={{
                 background: decayTerms >= n ? "rgba(255,215,0,0.1)" : "rgba(255,255,255,0.03)",
                 border: `1px solid ${decayTerms >= n ? "rgba(255,215,0,0.3)" : "#222"}`,
-                color: decayTerms >= n ? S.gold : "#555",
+                color: decayTerms >= n ? S.gold : "#8aa0c0",
                 padding: "5px 14px", borderRadius: "4px", cursor: "pointer", fontSize: "11px", fontFamily: S.font
               }}>Term {n}</button>
             ))}
@@ -967,9 +1003,9 @@ function GapGeometrySimulation() {
                 <circle cx={x} cy={y} r="5" fill={t.color} />
                 <circle cx={300} cy={y} r="2" fill="#888" />
                 <text x={40} y={y-4} fill={t.color} fontSize="10" fontWeight="bold">{t.label}</text>
-                <text x={40} y={y+10} fill="#555" fontSize="8">{t.factors}</text>
+                <text x={40} y={y+10} fill="#8aa0c0" fontSize="8">{t.factors}</text>
                 <text x={560} y={y-4} textAnchor="end" fill="#aaa" fontSize="9">error: {error.toExponential(2)}</text>
-                <text x={560} y={y+10} textAnchor="end" fill="#555" fontSize="8">{t.val.toFixed(12)}</text>
+                <text x={560} y={y+10} textAnchor="end" fill="#8aa0c0" fontSize="8">{t.val.toFixed(12)}</text>
               </g>);
             })}
           </svg>
@@ -980,17 +1016,17 @@ function GapGeometrySimulation() {
             <div style={{ color: "#666" }}>
               <span style={{color:"#888"}}>K_AUD</span> = √2 × ln(2) = <span style={{color:S.gold}}>{K_AUD.toFixed(15)}</span><br/>
               <span style={{color:"#888"}}>G</span> = 1 − K_AUD = <span style={{color:"#f38181"}}>{G.toFixed(15)}</span><br/>
-              <span style={{color:"#888"}}>δ</span> = {FEIGENBAUM} <span style={{color:"#444"}}>(Feigenbaum)</span><br/>
+              <span style={{color:"#888"}}>δ</span> = {FEIGENBAUM} <span style={{color:"#7d8aa6"}}>(Feigenbaum)</span><br/>
               <span style={{color:"#888"}}>ρ exact</span> = G / [(δ − 14/3) / δ] = <span style={{color:"#aaa"}}>{RHO_EXACT.toFixed(15)}</span><br/>
               <span style={{color:"#888"}}>ρ formula</span> = 400/11 − 1/2500 − 1/939939 = <span style={{color:S.gold}}>{RHO_FORMULA.toFixed(15)}</span><br/>
               <span style={{color:"#888"}}>|difference|</span> = <span style={{color:"#f38181"}}>{Math.abs(RHO_EXACT - RHO_FORMULA).toExponential(4)}</span>
             </div>
             <div style={{ color: "rgba(255,215,0,0.6)", fontWeight: "bold", margin: "10px 0 6px" }}>PRIME STRUCTURE</div>
             <div style={{ color: "#666" }}>
-              <span style={{color:S.gold}}>400</span> = 2⁴ × 5² <span style={{color:"#444"}}>(H₄ interior primes)</span><br/>
-              <span style={{color:S.gold}}>11</span> = prime <span style={{color:"#444"}}>(first excluded from H₄ order)</span><br/>
-              <span style={{color:"#ffb347"}}>2500</span> = 2² × 5⁴ = 50² <span style={{color:"#444"}}>(shell 5 capacity squared)</span><br/>
-              <span style={{color:"#4ecdc4"}}>939939</span> = 3 × 7 × 11 × 13 × 313 <span style={{color:"#444"}}>(palindrome, boundary chain)</span>
+              <span style={{color:S.gold}}>400</span> = 2⁴ × 5² <span style={{color:"#7d8aa6"}}>(H₄ interior primes)</span><br/>
+              <span style={{color:S.gold}}>11</span> = prime <span style={{color:"#7d8aa6"}}>(first excluded from H₄ order)</span><br/>
+              <span style={{color:"#ffb347"}}>2500</span> = 2² × 5⁴ = 50² <span style={{color:"#7d8aa6"}}>(shell 5 capacity squared)</span><br/>
+              <span style={{color:"#4ecdc4"}}>939939</span> = 3 × 7 × 11 × 13 × 313 <span style={{color:"#7d8aa6"}}>(palindrome, boundary chain)</span>
             </div>
           </div>
 
@@ -1005,7 +1041,7 @@ function GapGeometrySimulation() {
             <div style={{ fontSize: "10px", color: "rgba(255,215,0,0.5)", fontWeight: "bold", marginBottom: "10px", textAlign: "center", letterSpacing: "1px" }}>
               VERB ARITHMETIC — HOW 400 MEETS EACH PRIME
             </div>
-            <div style={{ fontSize: "10px", color: "#555", textAlign: "center", marginBottom: "14px" }}>
+            <div style={{ fontSize: "10px", color: "#8aa0c0", textAlign: "center", marginBottom: "14px" }}>
               400 = 2⁴ × 5² encodes H₄'s interior primes. Each framework prime divides it differently — the remainder is the verb.
             </div>
 
@@ -1061,7 +1097,7 @@ function GapGeometrySimulation() {
                 </div>
 
                 {/* Mini visual: remainder cycle */}
-                <svg viewBox="0 0 300 24" style={{ width: "80%", marginTop: "6px" }}>
+                <svg viewBox="0 0 300 34" style={{ width: "80%", marginTop: "6px" }}>
                   {Array.from({length: 10}, (_, i) => {
                     const digit = Math.floor(((400/v.p * Math.pow(10, i)) % 10));
                     const x = 15 + i * 28;
@@ -1069,14 +1105,14 @@ function GapGeometrySimulation() {
                       <rect x={x-8} y={3} width="16" height="16" rx="3"
                         fill={i < 2 ? `${v.color}15` : `${v.color}08`}
                         stroke={`${v.color}20`} />
-                      <text x={x} y="14" textAnchor="middle" fill={i < 2 ? v.color : "#555"} fontSize="8" fontWeight={i < 2 ? "bold" : "normal"}>
+                      <text x={x} y="14" textAnchor="middle" fill={i < 2 ? v.color : "#8aa0c0"} fontSize="8" fontWeight={i < 2 ? "bold" : "normal"}>
                         {digit}
                       </text>
-                      {i === 1 && v.p !== 5 && <text x={x+14} y="28" fill="#444" fontSize="7">.</text>}
+                      {i === 1 && v.p !== 5 && <text x={x+14} y="28" fill="#7d8aa6" fontSize="7">.</text>}
                     </g>);
                   })}
-                  {v.p !== 5 && <text x="295" y="16" textAnchor="end" fill="#333" fontSize="9">→ repeats</text>}
-                  {v.p === 5 && <text x="295" y="16" textAnchor="end" fill="#333" fontSize="9">→ holds</text>}
+                  {v.p !== 5 && <text x="298" y="31" textAnchor="end" fill="#6a7a92" fontSize="9">→ repeats</text>}
+                  {v.p === 5 && <text x="298" y="31" textAnchor="end" fill="#6a7a92" fontSize="9">→ holds</text>}
                 </svg>
               </div>
             ))}
@@ -1084,22 +1120,26 @@ function GapGeometrySimulation() {
         </div>
       )}
 
-      {/* ═══ TAB 4: ARCHITECTURE ═══ */}
-      {tab === 4 && (() => {
+      {/* ═══ TAB 1: ARCHITECTURE ═══ */}
+      {tab === 1 && (() => {
         const ARCH_NODES = [
-          { x: 80, step: 18, approx: "√2/4", name: "Romeo", c: "#4ecdc4",
+          { x: 80, step: 18, approx: "√2/4", name: "Romeo", c: "#2f6bf2",
             hover: "First complete structure. 18G ≈ √2/4 — pure geometry, no information cost yet. Named 'Romeo' because it's the first arrival: the tower's opening statement. Factoring: 18 = 2×3², the smallest number carrying both binary and ternary structure." },
-          { x: 155, step: 32, name: "k=5", approx: "√φ/2", c: "#6c9bcf",
+          { x: 150, step: 32, name: "k=5", approx: "√φ/2", c: "#ffb347",
             hover: "Tower target at k=5. 32G ≈ √φ/2 = 0.636, within 0.67% (the same constant ε that holds at every power of 2 — see the Scaling tab). The golden floor 1/φ = 0.618 sits 2.91% below — a distinct structural value, not what 32G approximates. 32 = 2⁵, shell 4 capacity." },
-          { x: 220, step: 36, approx: "1/√2", name: "Geom", c: "#88b5dd",
-            hover: "Geometric-damping threshold. 36G ≈ 1/√2 — pure algebraic geometry at 1.025 Landauer units. The 35–37 zone spans three distinct thresholds: Landauer at n·G = ln 2 (n ≈ 35.11), geometric-damping at n·G = 1/√2 (n ≈ 35.82, here), and Shannon at n·G = 1/(2 ln 2) (n ≈ 36.54). 36 = 6², the only perfect square among landmarks." },
-          { x: 270, step: 37, approx: "1/(2ln2)", name: "Post-Shannon", c: "#f38181",
-            hover: "First post-Shannon structural prime. 37G ≈ 1/(2 ln 2) at 1.054 Landauer units — just past the Shannon bound at n ≈ 36.54. The 35–37 zone crosses three thresholds in sequence: Landauer (ln 2), geometric-damping (1/√2), Shannon (1/(2 ln 2)). Step 37 sits beyond all three. 37 is prime — a structural landmark on the far side." },
-          { x: 345, step: 50, approx: "K_AUD", name: "Ceiling", c: "#ffd700",
+          { x: 205, step: 35, approx: "ln 2", name: "Landauer", c: "#4a86e8",
+            hover: "Landauer crossing — first of the three crossing-zone thresholds. n·G crosses ln 2 at n ≈ 35.11: the transition from sub-Landauer geometry (below) to super-Landauer information (above). The 35–37 zone holds three distinct thresholds, each its own theorem: Landauer (ln 2, n≈35.11), geometric-damping (1/√2, n≈35.82), Shannon (1/(2 ln 2), n≈36.54). 35 = 5×7." },
+          { x: 250, step: 36, approx: "1/√2", name: "Geom-damp", c: "#6c9bcf",
+            hover: "Geometric-damping threshold — the middle of the three crossing-zone thresholds. 36G ≈ 1/√2, pure algebraic geometry at 1.025 Landauer units. The trio: Landauer (ln 2, n≈35.11), geometric-damping (1/√2, n≈35.82, here), Shannon (1/(2 ln 2), n≈36.54). 36 = 6², the only perfect square among landmarks." },
+          { x: 295, step: 37, approx: "1/(2ln2)", name: "Shannon", c: "#88b5dd",
+            hover: "Shannon bound — third of the three crossing-zone thresholds. 37G ≈ 1/(2 ln 2) at 1.054 Landauer units, just past the Shannon threshold at n ≈ 36.54. The trio in sequence: Landauer (ln 2) → geometric-damping (1/√2) → Shannon (1/(2 ln 2)); step 37 sits beyond all three. 37 is prime — a structural landmark on the far side." },
+          { x: 350, step: 50, approx: "K_AUD", name: "Ceiling", c: "#ffd700",
             hover: "The ceiling. 50G ≈ K_AUD = √2 × ln(2) = 0.980... — maximum coherence. The corridor's upper bound. 50 = 2×5², shell 5. K_AUD = √2 Landauer units: the ceiling is exactly one geometric projection above the thermodynamic minimum." },
-          { x: 405, step: 58, approx: "φ/√2", name: "Pre-pivot", c: "#dda0dd",
+          { x: 388, step: 53, approx: "π/3", name: "Hinge", c: "#f38181",
+            hover: "The π/3 hinge. 53G ≈ π/3 (−0.08%) — a transcendental near-hit above the ceiling, before the golden pivot. 53 is prime. Observation-tier: a clean near-value, not a derived landmark." },
+          { x: 425, step: 58, approx: "φ/√2", name: "Pre-pivot", c: "#ffb347",
             hover: "Pre-pentagonal turn. 58G ≈ φ/√2 — the golden ratio projected through binary geometry. Deviation from target: 0.079%. This is where the tower begins its final approach to the pivot, φ and √2 combining for the first time." },
-          { x: 455, step: 59, approx: "—", name: "Turn", c: "#ff9a76",
+          { x: 455, step: 59, approx: "—", name: "Turn", c: "#7d8aa6",
             hover: "The pentagonal turn. Step 59 mirrors Romeo (step 18): both sit at partition boundaries. 59 is the start of the mirror partition 18+14 ⇌ 14+18. The turn is where inbound becomes outbound — the tower's reflection point. [Current research: 59 = prime, the mirror of Romeo's composite 18.]" },
           { x: 520, step: 64, approx: "√φ", name: "Pivot", c: "#ffb347",
             hover: "The master formula pivot. 64G ≈ √φ = 1.272... with constant ε = −0.671%. 64 = 2⁶ = 4³, purely binary. The master formula: 2ᵏ × G = 2ᵏ⁻⁶ × √φ × (1+ε) holds across all scales. This is where the tower's cost function meets the golden ratio's square root." },
@@ -1108,7 +1148,7 @@ function GapGeometrySimulation() {
         return (
         <div style={{ background: S.card, border: `1px solid ${S.border}`, borderRadius: "8px", padding: "14px" }}>
           <h2 style={{ fontSize: "12px", color: "#888", margin: "0 0 4px", textAlign: "center" }}>The Architecture</h2>
-          <p style={{ fontSize: "10px", color: "#444", textAlign: "center", margin: "0 0 12px" }}>Constants, tower landmarks, and their relationships. Hover/touch any node for details.</p>
+          <p style={{ fontSize: "10px", color: "#7d8aa6", textAlign: "center", margin: "0 0 12px" }}>Constants, tower landmarks, and their relationships. Hover/touch any node for details.</p>
 
           <svg viewBox="0 0 600 400" style={{ width: "100%" }}>
             {/* Unity */}
@@ -1184,11 +1224,25 @@ function GapGeometrySimulation() {
               <g key={n.step} onMouseEnter={() => setHoveredArch(n.step)} onMouseLeave={() => setHoveredArch(null)} onClick={() => setLockedArch(l => l === n.step ? null : n.step)} style={{cursor:"pointer"}}>
                 {/* Invisible hit target — generous touch area */}
                 <circle cx={n.x} cy="378" r="20" fill="transparent" />
+                {/* Quiet "selectable" ring on resting nodes — signals interactivity without motion */}
+                {activeArch !== n.step && (
+                  <circle cx={n.x} cy="378" r="11" fill="none" stroke={`${n.c}22`} strokeWidth="0.5" style={{pointerEvents:"none"}} />
+                )}
                 {/* Visible node */}
                 <circle cx={n.x} cy="378" r={activeArch === n.step ? 11 : 7}
                   fill={activeArch === n.step ? `${n.c}30` : `${n.c}15`}
                   stroke={activeArch === n.step ? `${n.c}80` : `${n.c}40`}
                   style={{ transition: "all 0.2s", pointerEvents: "none" }} />
+                {/* Rotating reticle — only on the active/selected node (Atlas grammar: the one moving thing is "live") */}
+                {activeArch === n.step && (
+                  <g style={{pointerEvents:"none"}}>
+                    <circle cx={n.x} cy="378" r="14" fill="none" stroke="rgba(255,255,255,0.22)" strokeWidth="0.75" strokeDasharray="1.5,3" />
+                    <g>
+                      <circle cx={n.x} cy="364" r="1.8" fill="#ffffff" />
+                      <animateTransform attributeName="transform" attributeType="XML" type="rotate" from={`0 ${n.x} 378`} to={`360 ${n.x} 378`} dur="4s" repeatCount="indefinite" />
+                    </g>
+                  </g>
+                )}
                 <text x={n.x} y="381" textAnchor="middle" fill={n.c} fontSize="7" fontWeight="bold" style={{pointerEvents:"none"}}>{n.step}</text>
                 <text x={n.x} y="396" textAnchor="middle" fill={`${n.c}88`} fontSize="6" style={{pointerEvents:"none"}}>{n.approx}</text>
               </g>
@@ -1229,19 +1283,27 @@ function GapGeometrySimulation() {
           })()}
 
           {/* Key identities */}
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "8px", marginTop: "12px" }}>
+          <div style={{ fontSize: "9px", color: "#8aa0c0", margin: "12px 0 6px" }}>
+            Key relations — each labelled by evidence tier: <span style={{color:"#3fb27f"}}>Theorem</span> (proven identity) · <span style={{color:"#a9b6cc"}}>Observation</span> (verified near-value).
+          </div>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "8px" }}>
             {[
-              { t: "Corridor Identity", e: "K_AUD − 1/φ = 1/φ² − G", v: CORRIDOR.toFixed(10), c: S.gold },
-              { t: "Golden Partition", e: "1/φ + 1/φ² = 1", v: (INV_PHI + INV_PHI2).toFixed(12), c: "#6c9bcf" },
-              { t: "Gap Origin", e: "G / |ln2 − 1/√2| = √2", v: (G / Math.abs(LN2 - 1/Math.sqrt(2))).toFixed(10), c: "#f38181" },
-              { t: "Tower ε", e: "64G/√φ − 1 = constant", v: `${(EPSILON_TOWER * 100).toFixed(4)}%`, c: "#ffb347" },
-              { t: "Landauer Crossing", e: "G/(2ln2) = crossing cost", v: (G / (2*LN2)).toFixed(10), c: "#f38181" },
-              { t: "Energy Ceiling", e: "K_AUD = √2 × Landauer", v: `${(K_AUD / LN2).toFixed(10)} L`, c: S.gold },
+              { t: "Corridor Identity", e: "K_AUD − 1/φ = 1/φ² − G", v: CORRIDOR.toFixed(10), c: S.gold, tier: "Theorem" },
+              { t: "Golden Partition", e: "1/φ + 1/φ² = 1", v: (INV_PHI + INV_PHI2).toFixed(12), c: "#6c9bcf", tier: "Theorem" },
+              { t: "Gap Origin", e: "G / |ln2 − 1/√2| = √2", v: (G / Math.abs(LN2 - 1/Math.sqrt(2))).toFixed(10), c: "#f38181", tier: "Theorem" },
+              { t: "Tower ε", e: "64G/√φ ≈ 1  (−0.67%)", v: `${(EPSILON_TOWER * 100).toFixed(4)}%`, c: "#ffb347", tier: "Observation" },
+              { t: "Landauer Crossing", e: "G/(2ln2) = crossing cost", v: (G / (2*LN2)).toFixed(10), c: "#f38181", tier: "Theorem" },
+              { t: "Energy Ceiling", e: "K_AUD = √2 × Landauer", v: `${(K_AUD / LN2).toFixed(10)} L`, c: S.gold, tier: "Theorem" },
             ].map(id => (
               <div key={id.t} style={{ background: "rgba(255,255,255,0.02)", border: `1px solid ${S.border}`, borderRadius: "6px", padding: "8px 10px" }}>
-                <div style={{ fontSize: "8px", color: "#555", textTransform: "uppercase" }}>{id.t}</div>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", gap: "6px" }}>
+                  <div style={{ fontSize: "8px", color: "#8aa0c0", textTransform: "uppercase" }}>{id.t}</div>
+                  <span style={{ fontSize: "7px", textTransform: "uppercase", letterSpacing: "0.4px", padding: "1px 5px", borderRadius: "8px", whiteSpace: "nowrap",
+                    color: id.tier === "Theorem" ? "#3fb27f" : "#a9b6cc",
+                    background: id.tier === "Theorem" ? "rgba(63,178,127,0.12)" : "rgba(125,138,166,0.15)" }}>{id.tier}</span>
+                </div>
                 <div style={{ fontSize: "11px", color: id.c, marginTop: "2px", fontWeight: "bold" }}>{id.e}</div>
-                <div style={{ fontSize: "9px", color: "#444", marginTop: "1px" }}>{id.v}</div>
+                <div style={{ fontSize: "9px", color: "#7d8aa6", marginTop: "1px" }}>{id.v}</div>
               </div>
             ))}
           </div>
@@ -1249,7 +1311,7 @@ function GapGeometrySimulation() {
           {/* Master formula box */}
           <div style={{ marginTop: "10px", padding: "10px", background: "rgba(255,215,0,0.02)", border: "1px solid rgba(255,215,0,0.08)", borderRadius: "6px", textAlign: "center" }}>
             <div style={{ fontSize: "11px", color: "rgba(255,215,0,0.5)", marginBottom: "4px" }}>2ᵏ × G = 2ᵏ⁻⁶ × √φ × (1 + ε) where ε = −0.671% constant</div>
-            <div style={{ fontSize: "9px", color: "#444" }}>18 + 14 + 14 + 18 = 64 — the boundary prime 7 locks the mirror</div>
+            <div style={{ fontSize: "9px", color: "#7d8aa6" }}>18 + 14 + 14 + 18 = 64 — the boundary prime 7 locks the mirror</div>
             <div style={{ fontSize: "9px", color: "rgba(243,129,129,0.3)", marginTop: "2px" }}>K_AUD = √2 Landauer — the ceiling is one projection above thermodynamic minimum</div>
           </div>
         </div>
@@ -1260,7 +1322,7 @@ function GapGeometrySimulation() {
       <div style={{ textAlign: "center", marginTop: "20px", fontSize: "9px", color: "#222", letterSpacing: "1px" }}>
         Gap Geometry Framework — K_AUD = √2 × ln(2) — D.B. 2025–2026
         <br />
-        <span style={{ color: "#333" }}>"The 2% gap is where they breathe."</span>
+        <span style={{ color: "#6a7a92" }}>"The 2% gap is where they breathe."</span>
       </div>
     </div>
   );
