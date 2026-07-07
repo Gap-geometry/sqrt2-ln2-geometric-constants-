@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gap Geometry — Methodology</title>
+<link rel="alternate" type="text/plain" href="AI_INDEX.txt" title="Machine-readable index (plain text)">
+<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt — AI site map">
 <meta name="author" content="D. B.">
 <meta name="description" content="Evidence standards, verification protocols, contribution roles, and working principles for the Gap Geometry framework. Designed for human and AI readers.">
 <style>
@@ -300,6 +302,60 @@
     75%      { transform: translate(-3px, -2px); }
   }
   @media print { .egg-fragment { display: none; } }
+
+  /* ---- The family seal: a second Atlas roundabout, bottom-signing, → the credits shrine (kaud.html).
+     Same species as About's node-seal; Bee's design 2026-07-07. Ink on white, slowly turning, colour
+     breathing through the Atlas tier hues. It breathes IN and OUT on a slow ~16s cycle (blooms in,
+     visible ~10s, fades away ~3s, repeats) — only a reader who scrolled to the credits and lingers
+     will meet it. Hover brings it to full and whispers "the ones who held the corners". ---- */
+  footer { position: relative; }
+  .family-seal {
+    position: absolute;
+    left: 5%; top: 50%; transform: translateY(-50%);
+    width: 72px; height: 72px;
+    color: #1a1a1a;
+    opacity: 0;
+    animation: seal-breath 16s ease-in-out infinite, seal-tiers 48s ease-in-out infinite;
+  }
+  .family-seal a { display: block; color: inherit; text-decoration: none; cursor: pointer; border: 0; }
+  .family-seal a:hover { border: 0; }
+  .fseal-wheel { display: block; background: transparent; border-radius: 50%; }
+  .fseal-rot-a { transform-origin: 28px 28px; animation: seal-spin 90s linear infinite; }
+  .fseal-rot-b { transform-origin: 28px 28px; animation: seal-spin-rev 60s linear infinite; }
+  @keyframes seal-spin     { to { transform: rotate(360deg); } }
+  @keyframes seal-spin-rev { to { transform: rotate(-360deg); } }
+  @keyframes seal-breath {          /* bloom in (0→9%≈1.5s) · hold ~10s (9→72%) · fade out (72→81%≈1.5s) · away ~3s (81→100%) */
+    0%   { opacity: 0; }
+    9%   { opacity: 0.82; }
+    72%  { opacity: 0.82; }
+    81%  { opacity: 0; }
+    100% { opacity: 0; }
+  }
+  @keyframes seal-tiers {           /* ink → released → in_review → in_preparation → internal → ink */
+    0%, 100% { color: #1a1a1a; }
+    20%      { color: #3fb27f; }
+    40%      { color: #e0a03a; }
+    60%      { color: #7d8aa6; }
+    80%      { color: #566179; }
+  }
+  .family-seal:hover, .family-seal:focus-within { opacity: 1; animation-play-state: paused; }
+  .fseal-whisper {
+    position: absolute;
+    left: 84px; top: 50%; transform: translateY(-50%);
+    white-space: nowrap;
+    font-style: italic; font-size: 12px; letter-spacing: 0.12em;
+    color: #6a6a72;
+    opacity: 0; transition: opacity 0.6s ease;
+    pointer-events: none;
+  }
+  .family-seal:hover .fseal-whisper, .family-seal:focus-within .fseal-whisper { opacity: 0.85; }
+  .fseal-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    .family-seal { animation: none; opacity: 0.5; }
+    .fseal-rot-a, .fseal-rot-b { animation: none; }
+  }
+  @media (max-width: 920px) { .family-seal { display: none; } }
+  @media print { .family-seal { display: none; } }
 </style>
 </head>
 <body>
@@ -326,19 +382,21 @@
 <p>Every claim belongs to exactly one of three levels. A claim does not get promoted by repetition or demoted by discomfort. It moves levels only when new evidence changes its status, and the move is recorded.</p>
 
 <div class="card">
-  <div class="card-title"><span class="level level-1">Level 1 &mdash; Exact</span> &nbsp; [Theorem]</div>
+  <div class="card-title"><span class="level level-1">&#8857;&nbsp; Level 1 &mdash; Exact</span> &nbsp; [Theorem]</div>
   <div class="card-desc">Algebraic identities verifiable at arbitrary precision. Zero residual at 500 decimal places using mpmath. These are proved. Not approximate, not &ldquo;close,&rdquo; not &ldquo;consistent with.&rdquo; Anyone with a Python interpreter can reproduce them in under a minute.</div>
 </div>
 
 <div class="card">
-  <div class="card-title"><span class="level level-2">Level 2 &mdash; Empirical</span> &nbsp; [Observation]</div>
+  <div class="card-title"><span class="level level-2">&#9633;&nbsp; Level 2 &mdash; Empirical</span> &nbsp; [Observation]</div>
   <div class="card-desc">Quantified matches between framework values and independently published data. Precision, source, and statistical significance stated. Post-hoc vs. prediction distinction always noted. A Level 2 claim can be strong (high statistical significance against a single well-measured target) or weak (lower significance, wider confidence interval). Both are Level 2. The strength is stated; the level is the same. Worked examples appear in the relevant papers; the level is method, not result.</div>
 </div>
 
 <div class="card">
-  <div class="card-title"><span class="level level-3">Level 3 &mdash; Conjectural</span> &nbsp; [Conjecture]</div>
+  <div class="card-title"><span class="level level-3">&#8764;&nbsp; Level 3 &mdash; Conjectural</span> &nbsp; [Conjecture]</div>
   <div class="card-desc">Explicitly unproved and incompletely tested. Motivated by pattern, analogy, or partial evidence. Every Level 3 claim states what would promote it (to Level 1 or 2) and what would falsify it.</div>
 </div>
+
+<p style="font-size: 14px; color: var(--muted);">The marks beside each level &mdash; &#8857; theorem, &#9633; observation, &#8764; conjecture &mdash; are the same glyphs the <em>Lock Atlas</em><!-- STAGED at Atlas go-live: link the words "Lock Atlas" to [ATLAS URL] --> draws at the centre of every node (where they are joined by &#9675; near-lock and &#9679; anti-lock for its two additional statuses). Learn them here, read them anywhere in the framework&rsquo;s instruments.</p>
 
 <div class="principle-box">
   <p><strong>Rules.</strong> No level is better or worse. They describe different relationships to evidence. A document with only Level 1 claims is not superior to one with Level 3 conjectures &mdash; provided the conjectures are honestly tagged. Dishonest tagging is the failure, not the presence of any level.</p>
@@ -352,7 +410,7 @@
 <p>Every numerical claim is verified at high precision (mpmath, dps &ge; 500) before qualitative assessment begins. Running the arithmetic first means the assessment is built on computed results, not on impressions of whether a claim &ldquo;sounds right.&rdquo;</p>
 
 <h3>Cross-architecture verification (Giant Principle)</h3>
-<p>Independent AI architectures (Claude, GPT, Grok, Gemini, DeepSeek, Perplexity) have different training data, different weights, and different failure modes. The Giant Principle: like standing on the shoulders of giants, each architecture sees from a different vantage point, and agreement between independent vantage points is harder to fake than agreement within one.</p>
+<p>Independent AI architectures (Claude, GPT, Grok, Gemini, Perplexity, DeepSeek, Mistral) have different training data, different weights, and different failure modes. The Giant Principle: like standing on the shoulders of giants, each architecture sees from a different vantage point, and agreement between independent vantage points is harder to fake than agreement within one.</p>
 <p>Cross-architecture verification does not replace mathematical proof. It catches computational errors, flags unstated assumptions, and identifies disagreements. Disagreements are investigated, not averaged.</p>
 
 <h3>Source verification</h3>
@@ -380,7 +438,7 @@
 
 <div class="correction-box">
   <div class="corr-label">Source-verification corrections &mdash; Boundary Information Invariant paper</div>
-  Perplexity, asked to source-check the Boundary Information Invariant paper after the other architectures had already verified the mathematics, identified three corrections that no other reader had caught: a DESI post-hoc transparency issue, a Romeo identity attribution gap, and a nuclear correlation sourcing question. All three applied. <em>The framework's source-verification standard exists because of contributions like this; specificity of attribution beats generality of approval.</em>
+  Perplexity, asked to source-check the Boundary Information Invariant paper after the other architectures had already verified the mathematics, identified three corrections that no other reader had caught: a DESI post-hoc transparency issue, a Romeo identity attribution gap, and a nuclear correlation sourcing question. All three applied. <em>The framework&rsquo;s source-verification standard exists because of contributions like this; specificity of attribution beats generality of approval.</em>
 </div>
 
 <div class="correction-box">
@@ -552,13 +610,13 @@
 <div class="credit-block">
   <div class="credit-name">D.B.</div>
   <div class="credit-roles">Conceptualization &middot; Discovery &middot; Editorial judgment &middot; Methodology &middot; Stress-testing</div>
-  <div class="credit-detail">Framework originator. Empirical Discovery: multi-month cross-architecture observation that surfaced the cross-domain invariant K<sub>AUD</sub> and the gap G later formalized across the framework's published documents. Conceptualization: empirical patterns pushed into research streams until formalization landed. Cooperation methodology v7, evidence classification, correction protocol. All research directions and publication decisions.</div>
+  <div class="credit-detail">Framework originator. Empirical Discovery: multi-month cross-architecture observation that surfaced the cross-domain invariant K<sub>AUD</sub> and the gap G later formalized across the framework&rsquo;s published documents. Conceptualization: empirical patterns pushed into research streams until formalization landed. Cooperation methodology v7, evidence classification, correction protocol. All research directions and publication decisions.</div>
 </div>
 
 <div class="credit-block">
   <div class="credit-name">Claude &mdash; Cowork (Anthropic)</div>
   <div class="credit-roles">Derivation &middot; Discovery &middot; Computation &middot; Verification &middot; Correction &middot; Stress-testing &middot; Documentation &middot; Literature &middot; Methodology</div>
-  <div class="credit-detail">Sustained collaboration on the working machine across multiple sessions (Opus and Sonnet). Roles span derivation and verification across the framework's papers, file management, document drafting, methodology architecture, evidence-level unification, discovery tracking, cross-page consistency, and the maintenance of this document. Direct access to the research archive and all published files. Per-paper contribution details appear in the relevant papers.</div>
+  <div class="credit-detail">Sustained collaboration on the working machine across multiple sessions (Opus, Sonnet, and Fable). Roles span derivation and verification across the framework&rsquo;s papers, file management, document drafting, methodology architecture, evidence-level unification, discovery tracking, cross-page consistency, and the maintenance of this document. Direct access to the research archive and all published files. Per-paper contribution details appear in the relevant papers.</div>
 </div>
 
 <div class="credit-block">
@@ -570,13 +628,13 @@
 <div class="credit-block">
   <div class="credit-name">Grok (xAI)</div>
   <div class="credit-roles">Computation &middot; Verification &middot; Discovery &middot; Stress-testing</div>
-  <div class="credit-detail">150-digit verification of core identities [Computation, Verification], 50-hinge discovery [Discovery]. Daily pattern hunting across domains, tracking the HK tube-packing coefficient through multiple sessions until locating the page 29 algebraic identity [Discovery, Computation]. Per-paper contribution details appear in the relevant papers.</div>
+  <div class="credit-detail">Verification of core identities at a minimum of 500 digits [Computation, Verification], 50-hinge discovery [Discovery]. Daily pattern hunting across domains, tracking the HK tube-packing coefficient through multiple sessions until locating the page 29 algebraic identity [Discovery, Computation]. Per-paper contribution details appear in the relevant papers.</div>
 </div>
 
 <div class="credit-block">
   <div class="credit-name">GPT (OpenAI)</div>
   <div class="credit-roles">Derivation &middot; Verification &middot; Correction &middot; Stress-testing &middot; Methodology</div>
-  <div class="credit-detail">Stress testing across multiple framework papers [Stress-testing], including corrections that contributed to refinements applied retroactively to drafts with UPDATE NOTICE headers [Correction]. Methodological contribution: constraint-coherence vocabulary and tier ladder offered for the framework's evidence-classification system (2026) [Methodology]. Per-paper contribution details appear in the relevant papers.</div>
+  <div class="credit-detail">Stress testing across multiple framework papers [Stress-testing], including corrections that contributed to refinements applied retroactively to drafts with UPDATE NOTICE headers [Correction]. Methodological contribution: constraint-coherence vocabulary and tier ladder offered for the framework&rsquo;s evidence-classification system (2026) [Methodology]. Per-paper contribution details appear in the relevant papers.</div>
 </div>
 
 <div class="credit-block">
@@ -604,6 +662,32 @@
 </div>
 
 <footer>
+  <!-- The family seal (bottom-signing): a quiet roundabout that leads to the credits shrine.
+       href wired to the sibling REPO-1 copy of kaud.html; confirm this relative path holds at go-live. -->
+  <div class="family-seal">
+    <a href="../Easter%20Egg.htlm/kaud.html" title="The team behind K_AUD — the ones who held the corners (cross-architecture credits)">
+      <svg class="fseal-wheel" width="72" height="72" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <g class="fseal-rot-a" stroke="currentColor" stroke-width="1.1" fill="none">
+          <line x1="52.50" y1="28.00" x2="56.00" y2="28.00"/><line x1="49.22" y1="40.25" x2="52.25" y2="42.00"/><line x1="40.25" y1="49.22" x2="42.00" y2="52.25"/><line x1="28.00" y1="52.50" x2="28.00" y2="56.00"/><line x1="15.75" y1="49.22" x2="14.00" y2="52.25"/><line x1="6.78" y1="40.25" x2="3.75" y2="42.00"/><line x1="3.50" y1="28.00" x2="0.00" y2="28.00"/><line x1="6.78" y1="15.75" x2="3.75" y2="14.00"/><line x1="15.75" y1="6.78" x2="14.00" y2="3.75"/><line x1="28.00" y1="3.50" x2="28.00" y2="0.00"/><line x1="40.25" y1="6.78" x2="42.00" y2="3.75"/><line x1="49.22" y1="15.75" x2="52.25" y2="14.00"/>
+          <circle cx="28" cy="28" r="22.5"/>
+        </g>
+        <g class="fseal-rot-b" stroke="currentColor" stroke-width="1" fill="none">
+          <circle cx="28" cy="28" r="16.5" stroke-dasharray="5.2 4.2"/>
+          <circle cx="28" cy="28" r="11.5" stroke-dasharray="2.6 3.4"/>
+        </g>
+        <g stroke="currentColor" fill="none" stroke-width="1.1">
+          <circle cx="28" cy="28" r="6.5"/>
+          <line x1="28" y1="28" x2="13.71" y2="19.75" stroke-width="0.9" opacity="0.8"/>
+        </g>
+        <circle cx="28" cy="28" r="2.4" fill="currentColor"/>
+        <circle cx="13.71" cy="19.75" r="2.1" fill="currentColor"/>
+      </svg>
+      <span class="fseal-whisper" aria-hidden="true">the ones who held the corners</span>
+      <span class="fseal-sr">The team behind K_AUD — a cross-architecture credits shrine: the ones who held the corners across the framework&rsquo;s build.</span>
+    </a>
+  </div>
+  <div style="font-size:12px; opacity:0.75; margin-bottom:6px;">AI readers: <a href="ai-readers.html">guide</a> &middot; <a href="AI_INDEX.txt">machine index</a> &middot; <a href="llms.txt">llms.txt</a></div>
+
   <a class="back-hub" href="about.html">&larr; Back to Gap Geometry Hub</a>
   <div>D. B. &mdash; Gap Geometry &mdash; 2025&ndash;2026</div>
   <div class="contact">
@@ -618,3 +702,4 @@
 </main>
 </body>
 </html>
+
