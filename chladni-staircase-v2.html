@@ -3,10 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Geometric Staircase v3 — Biharmonic Chladni Frequency Explorer</title>
+<title>The Chladni Staircase v3 — Biharmonic Frequency Explorer</title>
+<meta name="author" content="D. B.">
+<meta name="description" content="The Binary Tower as Chladni vibration patterns: free-free plate modes (Euler-Bernoulli eigenvalues, Ritz basis), just-intonation frequency ratios including the 9/7 blues interval, and the Gap Geometry landmark steps mapped onto the resonance field. The code is the proof.">
+<link rel="alternate" type="text/plain" href="AI_INDEX.txt" title="Machine-readable index (plain text)">
+<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt — AI site map">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #08080f; color: #dde; font-family: 'Georgia', serif; }
+  body { background: #0c1322; color: #e8eef7; font-family: "Segoe UI", system-ui, sans-serif; }
   @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
   .mono { font-family: 'JetBrains Mono', 'Courier New', monospace; }
 </style>
@@ -22,7 +26,7 @@
 const { useState, useEffect, useMemo, useCallback, useRef } = React;
 
 // ═══════════════════════════════════════════════════════════════
-// GEOMETRIC STAIRCASE v3 — REAL CHLADNI (biharmonic plate)
+// THE CHLADNI STAIRCASE v3 (formerly 'Geometric Staircase') — REAL CHLADNI (biharmonic plate)
 // Built on v2 (Bee × Claude × Grok, Feb 2026) by replacing the
 // membrane physics with the biharmonic plate equation:
 //   ∇⁴W = (ρh/D)·ω²·W,   free-edge boundary conditions.
@@ -36,25 +40,25 @@ const CELL_PX = 110;
 
 const RATIO_STEPS = [
   { n: 1,  d: 1,  label: "1/1",   name: "Unison",        type: "resonance",   color: "#FFD700" },
-  { n: 9,  d: 8,  label: "9/8",   name: "Major 2nd",     type: "pythagorean", color: "#8899AA" },
+  { n: 9,  d: 8,  label: "9/8",   name: "Major 2nd",     type: "pythagorean", color: "#8aa0c09AA" },
   { n: 8,  d: 7,  label: "8/7",   name: "Septimal 2nd",  type: "septimal",    color: "#FF6B35" },
   { n: 7,  d: 6,  label: "7/6",   name: "Septimal m3",   type: "septimal",    color: "#FF6B35" },
   { n: 6,  d: 5,  label: "6/5",   name: "Minor 3rd",     type: "just",        color: "#66BBAA" },
   { n: 5,  d: 4,  label: "5/4",   name: "Major 3rd",     type: "just",        color: "#66BBAA" },
-  { n: 9,  d: 7,  label: "9/7",   name: "Blue ♭3",       type: "blue",        color: "#FF3366" },
-  { n: 4,  d: 3,  label: "4/3",   name: "Perfect 4th",   type: "pythagorean", color: "#8899AA" },
+  { n: 9,  d: 7,  label: "9/7",   name: "Blues 9/7 · septimal M3", type: "blue", color: "#FF3366" },
+  { n: 4,  d: 3,  label: "4/3",   name: "Perfect 4th",   type: "pythagorean", color: "#8aa0c09AA" },
   { n: 7,  d: 5,  label: "7/5",   name: "Blue ♭5",       type: "blue",        color: "#FF3366" },
   { n: 10, d: 7,  label: "10/7",  name: "Euler tritone",  type: "septimal",   color: "#FF6B35" },
-  { n: 3,  d: 2,  label: "3/2",   name: "Perfect 5th",   type: "pythagorean", color: "#8899AA" },
+  { n: 3,  d: 2,  label: "3/2",   name: "Perfect 5th",   type: "pythagorean", color: "#8aa0c09AA" },
   { n: 14, d: 9,  label: "14/9",  name: "Septimal m6",   type: "septimal",    color: "#FF6B35" },
   { n: 8,  d: 5,  label: "8/5",   name: "Minor 6th",     type: "just",        color: "#66BBAA" },
   { n: 5,  d: 3,  label: "5/3",   name: "Major 6th",     type: "just",        color: "#66BBAA" },
   { n: 7,  d: 4,  label: "7/4",   name: "Blue ♭7",       type: "blue",        color: "#FF3366" },
-  { n: 16, d: 9,  label: "16/9",  name: "Pyth m7",       type: "pythagorean", color: "#8899AA" },
+  { n: 16, d: 9,  label: "16/9",  name: "Pyth m7",       type: "pythagorean", color: "#8aa0c09AA" },
   { n: 15, d: 8,  label: "15/8",  name: "Major 7th",     type: "just",        color: "#66BBAA" },
   { n: 2,  d: 1,  label: "2/1",   name: "Octave",        type: "resonance",   color: "#FFD700" },
-  { n: 9,  d: 4,  label: "9/4",   name: "9th",           type: "pythagorean", color: "#8899AA" },
-  { n: 18, d: 7,  label: "18/7",  name: "2× Blue ♭3",    type: "blue",        color: "#FF3366" },
+  { n: 9,  d: 4,  label: "9/4",   name: "9th",           type: "pythagorean", color: "#8aa0c09AA" },
+  { n: 18, d: 7,  label: "18/7",  name: "Blues 9/7 + octave", type: "blue",    color: "#FF3366" },
   { n: 3,  d: 1,  label: "3/1",   name: "Tritave",       type: "resonance",   color: "#FFD700" },
 ];
 
@@ -76,7 +80,7 @@ const TOWER_LM = [
   { n:18, name:"√2/4 · Shell 3",             col:"#FF6B35" },
   { n:32, name:"√φ/2 · k=5 target",          col:"#66BBAA" },
   { n:35, name:"ln 2 · Landauer crossing",   col:"#e4b074" },
-  { n:36, name:"1/√2 · Geometric-damping",   col:"#8899AA" },
+  { n:36, name:"1/√2 · Geometric-damping",   col:"#8aa0c09AA" },
   { n:37, name:"1/(2ln2) · Shannon bound",   col:"#d4a574" },
   { n:50, name:"K_AUD · Ceiling",            col:"#FFD700" },
   { n:64, name:"√φ · Pivot",                 col:"#FF3366" },
@@ -96,8 +100,8 @@ const PLATE_ALPHA = [
   14.1371654912574641,   // m=4
   17.2787596573994814,   // m=5
   20.4203522456260610,   // m=6
-  23.5619449019234492,   // m=7
-  26.7035375555538403,   // m=8
+  23.5619449020404551,   // m=7  (corrected 2026-06-11: previous value was the asymptote (2m+1)π/2, true root differs at the 11th digit)
+  26.7035375555081862,   // m=8  (corrected 2026-06-11: previous value was a float-precision artifact; roots verified with mpmath at dps=30)
 ];
 
 // σ_m = (cosh α − cos α) / (sinh α − sin α)  — coupling factor
@@ -413,20 +417,20 @@ function DetailView({ refM, refN, step, Q, scheme, soundEnabled, playSound }) {
         <span className="mono" style={{ fontSize: 24, color: step.color, fontWeight: 700 }}>
           {step.label}
         </span>
-        <span style={{ fontSize: 15, color: "#aab", marginLeft: 10 }}>{step.name}</span>
+        <span style={{ fontSize: 15, color: "#8aa0c0", marginLeft: 10 }}>{step.name}</span>
       </div>
 
       <div className="mono" style={{
         marginTop: 8, padding: "5px 14px", borderRadius: 8,
-        background: "#111118", border: "1px solid #222", fontSize: 13, color: "#aab",
+        background: "#121c30", border: "1px solid #23314d", fontSize: 13, color: "#8aa0c0",
       }}>
         <span style={{ color: step.color }}>{primeFactors(step.n)}</span>
-        <span style={{ color: "#556" }}> / </span>
+        <span style={{ color: "#566179" }}> / </span>
         <span style={{ color: step.color + "bb" }}>{primeFactors(step.d)}</span>
         <span style={{ color: "#445", marginLeft: 10, fontSize: 10 }}>{limit}-limit</span>
       </div>
 
-      <div style={{ fontSize: 11, color: "#667", marginTop: 6 }}>
+      <div style={{ fontSize: 11, color: "#7d8aa6", marginTop: 6 }}>
         Mode ({refM},{refN}) × {step.ratio.toFixed(4)}
         {" · "}
         <span style={{ color: cop ? "#6b9" : "#f66" }}>
@@ -450,7 +454,7 @@ function DetailView({ refM, refN, step, Q, scheme, soundEnabled, playSound }) {
         onClick={() => playSound(freq)}
         style={{
           marginTop: 10, padding: "6px 22px", borderRadius: 20,
-          background: soundEnabled ? step.color : "#333",
+          background: soundEnabled ? step.color : "#2a3a55",
           color: soundEnabled ? "#000" : "#666",
           border: "none", cursor: "pointer", fontSize: 12, fontWeight: 700,
         }}
@@ -510,21 +514,21 @@ function AnimatedSweep({ refM, refN, Q, scheme, soundEnabled, playSound }) {
   return (
     <div style={{
       display: "flex", flexDirection: "column", alignItems: "center",
-      background: "#0a0a14", borderRadius: 12, padding: 16,
-      border: "1px solid #1a1a2a",
+      background: "#0f1828", borderRadius: 12, padding: 16,
+      border: "1px solid #23314d",
     }}>
-      <div style={{ fontSize: 11, color: "#667", marginBottom: 8, fontWeight: 600, letterSpacing: 1 }}>
+      <div style={{ fontSize: 11, color: "#7d8aa6", marginBottom: 8, fontWeight: 600, letterSpacing: 1 }}>
         CONTINUOUS SWEEP
       </div>
       <canvas ref={canvasRef} style={{
         width: 220, height: 220, borderRadius: 10,
-        border: `2px solid ${isNear ? nearest.color : "#333"}`,
+        border: `2px solid ${isNear ? nearest.color : "#2a3a55"}`,
         boxShadow: isNear ? `0 0 24px ${nearest.color}25` : "none",
         transition: "border-color 0.2s, box-shadow 0.2s",
       }} />
       <div className="mono" style={{
         marginTop: 8, fontSize: 20, fontWeight: 700,
-        color: isNear ? nearest.color : "#889",
+        color: isNear ? nearest.color : "#8aa0c0",
       }}>
         ×{currentRatio.toFixed(3)}
         {isNear && (
@@ -615,16 +619,16 @@ function TowerPlates({ refM, refN, Q, scheme, soundEnabled, playSound, playSeque
 
   return (
     <div style={{
-      background: "#0a0a14", borderRadius: 12, padding: 14,
-      border: "1px solid #1a1a2a", marginBottom: 18,
+      background: "#0f1828", borderRadius: 12, padding: 14,
+      border: "1px solid #23314d", marginBottom: 18,
     }}>
       <div style={{
-        fontSize: 10, color: "#556", textAlign: "center", marginBottom: 4,
+        fontSize: 10, color: "#566179", textAlign: "center", marginBottom: 4,
         textTransform: "uppercase", letterSpacing: 2,
       }}>
         Binary Tower on the Plate
       </div>
-      <div style={{ fontSize: 11, color: "#667", textAlign: "center", marginBottom: 12 }}>
+      <div style={{ fontSize: 11, color: "#7d8aa6", textAlign: "center", marginBottom: 12 }}>
         Each landmark step n × G maps its fractional residual onto the plate — the tower's geometry made visible
       </div>
 
@@ -646,7 +650,7 @@ function TowerPlates({ refM, refN, Q, scheme, soundEnabled, playSound, playSeque
             <div className="mono" style={{
               fontSize: 10, color: d.col, fontWeight: 700, marginTop: 3,
             }}>n={d.n}</div>
-            <div style={{ fontSize: 8, color: "#556", maxWidth: 96 }}>{d.name}</div>
+            <div style={{ fontSize: 8, color: "#566179", maxWidth: 96 }}>{d.name}</div>
           </div>
         ))}
       </div>
@@ -665,9 +669,9 @@ function TowerPlates({ refM, refN, Q, scheme, soundEnabled, playSound, playSeque
             <div className="mono" style={{ fontSize: 18, color: data[sel].col, fontWeight: 700 }}>
               Step {data[sel].n}
             </div>
-            <div style={{ fontSize: 12, color: "#889", marginTop: 4 }}>{data[sel].name}</div>
+            <div style={{ fontSize: 12, color: "#8aa0c0", marginTop: 4 }}>{data[sel].name}</div>
             <div className="mono" style={{
-              fontSize: 11, color: "#667", marginTop: 8, lineHeight: 1.8,
+              fontSize: 11, color: "#7d8aa6", marginTop: 8, lineHeight: 1.8,
             }}>
               {data[sel].n} × G = {data[sel].nG.toFixed(6)}<br />
               frac = {data[sel].frac.toFixed(6)}<br />
@@ -676,7 +680,7 @@ function TowerPlates({ refM, refN, Q, scheme, soundEnabled, playSound, playSeque
             </div>
             <button onClick={() => playSound(data[sel].freq)} style={{
               marginTop: 8, padding: "5px 18px", borderRadius: 20,
-              background: soundEnabled ? data[sel].col : "#333",
+              background: soundEnabled ? data[sel].col : "#2a3a55",
               color: soundEnabled ? "#000" : "#666",
               border: "none", cursor: "pointer", fontSize: 11, fontWeight: 700,
             }}>
@@ -798,23 +802,23 @@ function GapPlate({ refM, refN, Q, scheme, soundEnabled, volumeRef }) {
 
   return (
     <div style={{
-      background: "#0a0a14", borderRadius: 12, padding: 18,
-      border: "1px solid #1a1a2a", marginBottom: 18,
+      background: "#0f1828", borderRadius: 12, padding: 18,
+      border: "1px solid #23314d", marginBottom: 18,
     }}>
       <div style={{
-        fontSize: 10, color: "#556", textAlign: "center", marginBottom: 4,
+        fontSize: 10, color: "#566179", textAlign: "center", marginBottom: 4,
         textTransform: "uppercase", letterSpacing: 2,
       }}>
         The Gap — Approach and Silence
       </div>
-      <div style={{ fontSize: 11, color: "#667", textAlign: "center", marginBottom: 14 }}>
+      <div style={{ fontSize: 11, color: "#7d8aa6", textAlign: "center", marginBottom: 14 }}>
         The plate sweeps from floor (1/φ) toward unity. At K<sub>AUD</sub> the tone stops. The last 2% is dark.
       </div>
 
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
         <canvas ref={canvasRef} style={{
           width: 240, height: 240, borderRadius: 10,
-          border: `2px solid ${inGap ? "#1a1a2a" : "#d4a57450"}`,
+          border: `2px solid ${inGap ? "#23314d" : "#d4a57450"}`,
           boxShadow: inGap ? "none" : "0 0 30px #d4a57415",
           transition: "border-color 0.3s, box-shadow 0.3s",
         }} />
@@ -892,31 +896,54 @@ function ChladniStaircase() {
 
   return (
     <div style={{
-      minHeight: "100vh", background: "#08080f", color: "#dde",
-      fontFamily: "'Georgia', serif",
+      minHeight: "100vh", background: "#0c1322", color: "#e8eef7",
+      fontFamily: "'Segoe UI', system-ui, sans-serif",
       padding: "20px 14px", maxWidth: 920, margin: "0 auto",
     }}>
       {/* Header */}
       <div style={{ textAlign: "center", marginBottom: 20 }}>
         <h1 className="mono" style={{
-          fontSize: 28, fontWeight: 300, letterSpacing: "0.05em",
-          color: "#FFD700", margin: 0,
+          fontSize: 26, fontWeight: 400, letterSpacing: "2px",  /* instrument title standard 2026-07-07 */
+          color: "#ffd700", margin: 0, fontFamily: "ui-monospace, monospace",  /* match the family title font (not Courier New) */
         }}>
-          GEOMETRIC STAIRCASE
+          THE CHLADNI STAIRCASE
         </h1>
-        <p style={{ fontSize: 13, color: "#667", marginTop: 6 }}>
-          How geometry evolves through the full ratio landscape · sound + primes + corridors
+        <p style={{ fontSize: 13, color: "#7d8aa6", marginTop: 6 }}>
+          The Binary Tower as computed Chladni modes — real plate physics, exact framework ratios
         </p>
+      </div>
+
+      {/* What you're looking at — the computed/honesty note, lifted from the AI footer into daylight */}
+      <div style={{
+        marginBottom: 18, padding: "14px 16px",
+        background: "#121c30", borderRadius: 10, border: "1px solid #23314d", borderLeft: "3px solid #FFD700",
+        fontSize: 12.5, color: "#8aa0c0", lineHeight: 1.7,
+      }}>
+        <span className="mono" style={{ color: "#FFD700", letterSpacing: "0.06em", fontSize: 11 }}>WHAT YOU'RE LOOKING AT</span><br/>
+        Every pattern here is <strong style={{ color: "#e8eef7" }}>computed, not drawn</strong>. Each plate is solved from the biharmonic equation (∇⁴W = (ρh/D)·ω²·W, free edges) — real elastic-plate physics, its beam eigenvalues checked against <strong style={{ color: "#e8eef7" }}>mpmath</strong>. The frequency ratios are exact just-intonation fractions, and the framework constants — K<sub>AUD</sub> = √2·ln 2, the gap G, the golden floor 1/φ — are computed live from primitives in this page&rsquo;s source. What <em>is</em> a display choice, and is labelled as one: mapping each tower step onto its nearest frequency ratio — a reading aid, not a claim that the plate &ldquo;knows&rdquo; anything. Exact physics, exact constants, a declared bridge between them. Beauty is welcome here — but the proof is the code, not the picture.
+      </div>
+
+      {/* Reading the ratios — colour key + framework flags, so the ladder has a hierarchy for a newcomer */}
+      <div style={{
+        marginBottom: 18, padding: "10px 14px",
+        background: "#121c30", borderRadius: 10, border: "1px solid #23314d",
+        fontSize: 11.5, color: "#8aa0c0", lineHeight: 1.8,
+      }}>
+        <span className="mono" style={{ color: "#8aa0c0", letterSpacing: "0.06em", fontSize: 10 }}>READING THE RATIOS</span><br/>
+        <span style={{ color: "#FFD700" }}>● resonance</span> — unison, octave 2/1, tritave 3/1: <strong style={{ color: "#e8eef7" }}>the tower&rsquo;s doublings</strong>.{" "}
+        <span style={{ color: "#FF3366" }}>● blue</span> — the 9/7 septimal, whose width <strong style={{ color: "#e8eef7" }}>log₂(9/7) = 0.3626</strong> sits a whisker from the corridor <strong style={{ color: "#e8eef7" }}>K<sub>AUD</sub> − 1/φ = 0.3622</strong>.{" "}
+        <span style={{ color: "#66BBAA" }}>● just</span> · <span style={{ color: "#FF6B35" }}>● septimal</span> · <span style={{ color: "#8aa0c09AA" }}>● pythagorean</span> — the musical neighbourhood.{" "}
+        The <strong style={{ color: "#FFD700" }}>gold</strong> and <strong style={{ color: "#FF3366" }}>blue</strong> ticks are the framework-load-bearing ones; the thin ones are context.
       </div>
 
       {/* Controls */}
       <div style={{
         display: "flex", flexWrap: "wrap", gap: 14, justifyContent: "center",
         marginBottom: 18, padding: "12px 14px",
-        background: "#0c0c16", borderRadius: 10, border: "1px solid #1a1a2a",
+        background: "#121c30", borderRadius: 10, border: "1px solid #23314d",
       }}>
         <div>
-          <div style={{ fontSize: 10, color: "#556", marginBottom: 4, letterSpacing: 1.2, textTransform: "uppercase" }}>
+          <div style={{ fontSize: 10, color: "#566179", marginBottom: 4, letterSpacing: 1.2, textTransform: "uppercase" }}>
             Reference Mode
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: 3, maxWidth: 440 }}>
@@ -928,9 +955,9 @@ function ChladniStaircase() {
                   className="mono"
                   style={{
                     padding: "3px 7px", borderRadius: 4, fontSize: 10.5,
-                    background: sel ? "#FFD70025" : "#0f0f18",
-                    color: sel ? "#FFD700" : c ? "#6b9" : mode.m === mode.n ? "#f66" : "#778",
-                    border: sel ? "1px solid #FFD700" : "1px solid #1a1a2a",
+                    background: sel ? "#FFD70025" : "#0f1828",
+                    color: sel ? "#FFD700" : c ? "#6b9" : mode.m === mode.n ? "#f66" : "#7d8aa6",
+                    border: sel ? "1px solid #FFD700" : "1px solid #23314d",
                     cursor: "pointer", fontFamily: "'JetBrains Mono', 'Courier New', monospace",
                     fontWeight: sel ? 700 : 400,
                   }}>
@@ -942,13 +969,13 @@ function ChladniStaircase() {
           <div style={{ fontSize: 8.5, color: "#445", marginTop: 3 }}>
             <span style={{ color: "#6b9" }}>■</span> coprime{" "}
             <span style={{ color: "#f66", marginLeft: 6 }}>■</span> m=n{" "}
-            <span style={{ color: "#778", marginLeft: 6 }}>■</span> shared factor
+            <span style={{ color: "#7d8aa6", marginLeft: 6 }}>■</span> shared factor
           </div>
         </div>
 
         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
           <div>
-            <div style={{ fontSize: 10, color: "#556", letterSpacing: 1, textTransform: "uppercase" }}>
+            <div style={{ fontSize: 10, color: "#566179", letterSpacing: 1, textTransform: "uppercase" }}>
               Sharpness Q={Q}
             </div>
             <input type="range" min="3" max="30" value={Q}
@@ -959,15 +986,15 @@ function ChladniStaircase() {
             {["heat", "cyan"].map(s => (
               <button key={s} onClick={() => setScheme(s)} style={{
                 padding: "3px 10px", borderRadius: 4, fontSize: 10,
-                background: scheme === s ? "#333" : "#111",
-                color: scheme === s ? "#fff" : "#556",
+                background: scheme === s ? "#2a3a55" : "#0f1828",
+                color: scheme === s ? "#fff" : "#566179",
                 border: "1px solid #2a2a3a", cursor: "pointer", textTransform: "uppercase",
               }}>{s}</button>
             ))}
             <button onClick={() => setSoundEnabled(!soundEnabled)} style={{
               padding: "3px 10px", borderRadius: 4, fontSize: 10,
-              background: soundEnabled ? "#FF336620" : "#111",
-              color: soundEnabled ? "#FF3366" : "#556",
+              background: soundEnabled ? "#FF336620" : "#0f1828",
+              color: soundEnabled ? "#FF3366" : "#566179",
               border: soundEnabled ? "1px solid #FF3366" : "1px solid #2a2a3a",
               cursor: "pointer",
             }}>
@@ -975,7 +1002,7 @@ function ChladniStaircase() {
             </button>
           </div>
           <div>
-            <div style={{ fontSize: 10, color: "#556", letterSpacing: 1, textTransform: "uppercase" }}>
+            <div style={{ fontSize: 10, color: "#566179", letterSpacing: 1, textTransform: "uppercase" }}>
               Volume {Math.round(volume * 100)}%
             </div>
             <input type="range" min="0" max="1" step="0.05" value={volume}
@@ -988,7 +1015,7 @@ function ChladniStaircase() {
       {/* Current mode banner */}
       <div style={{
         textAlign: "center", marginBottom: 14, padding: "7px 14px",
-        background: "#0c0c16", borderRadius: 8,
+        background: "#121c30", borderRadius: 8,
         border: `1px solid ${cop ? "#6b9" : "#f66"}30`,
       }}>
         <span className="mono" style={{ fontSize: 20, fontWeight: 700, color: "#FFD700" }}>
@@ -1006,11 +1033,11 @@ function ChladniStaircase() {
 
       {/* THE STAIRCASE */}
       <div style={{
-        background: "#0a0a14", borderRadius: 12, padding: "14px 6px",
-        border: "1px solid #1a1a2a", marginBottom: 18,
+        background: "#0f1828", borderRadius: 12, padding: "14px 6px",
+        border: "1px solid #23314d", marginBottom: 18,
       }}>
         <div style={{
-          fontSize: 10, color: "#556", textAlign: "center", marginBottom: 10,
+          fontSize: 10, color: "#566179", textAlign: "center", marginBottom: 10,
           textTransform: "uppercase", letterSpacing: 2,
         }}>
           Ratio Staircase — click to hear & inspect
@@ -1019,7 +1046,7 @@ function ChladniStaircase() {
         <div style={{
           display: "flex", overflowX: "auto", gap: 8,
           padding: "6px 4px 10px",
-          scrollbarWidth: "thin", scrollbarColor: "#333 #0a0a14",
+          scrollbarWidth: "thin", scrollbarColor: "#2a3a55 #0f1828",
         }}>
           {RATIO_STEPS.map((step, i) => (
             <div key={i} style={{ flexShrink: 0 }}>
@@ -1039,7 +1066,7 @@ function ChladniStaircase() {
             { color: "#FF3366", label: "Blue (septimal)" },
             { color: "#FF6B35", label: "7-limit" },
             { color: "#66BBAA", label: "5-limit (just)" },
-            { color: "#8899AA", label: "3-limit (Pyth)" },
+            { color: "#8aa0c09AA", label: "3-limit (Pyth)" },
           ].map((it, i) => (
             <div key={i} style={{ display: "flex", alignItems: "center", gap: 4, fontSize: 9.5, color: it.color }}>
               <div style={{ width: 7, height: 7, borderRadius: 2, background: it.color }} />
@@ -1055,8 +1082,8 @@ function ChladniStaircase() {
         justifyContent: "center", marginBottom: 18,
       }}>
         <div style={{
-          background: "#0a0a14", borderRadius: 12, padding: 18,
-          border: "1px solid #1a1a2a", flex: "1 1 310px", maxWidth: 420,
+          background: "#0f1828", borderRadius: 12, padding: 18,
+          border: "1px solid #23314d", flex: "1 1 310px", maxWidth: 420,
           display: "flex", justifyContent: "center",
         }}>
           <DetailView
@@ -1078,11 +1105,11 @@ function ChladniStaircase() {
 
       {/* Multi-mode comparison */}
       <div style={{
-        background: "#0a0a14", borderRadius: 12, padding: 14,
-        border: "1px solid #1a1a2a", marginBottom: 18,
+        background: "#0f1828", borderRadius: 12, padding: 14,
+        border: "1px solid #23314d", marginBottom: 18,
       }}>
         <div style={{
-          fontSize: 10, color: "#556", textAlign: "center", marginBottom: 6,
+          fontSize: 10, color: "#566179", textAlign: "center", marginBottom: 6,
           textTransform: "uppercase", letterSpacing: 2,
         }}>
           Same ratio × every mode — coprime vs locked
@@ -1092,7 +1119,7 @@ function ChladniStaircase() {
           textAlign: "center", marginBottom: 10,
         }}>
           {RATIO_STEPS[selectedStep].label} ({RATIO_STEPS[selectedStep].name})
-          <span style={{ color: "#556", marginLeft: 8, fontSize: 10 }}>
+          <span style={{ color: "#566179", marginLeft: 8, fontSize: 10 }}>
             {primeFactors(RATIO_STEPS[selectedStep].n)}/{primeFactors(RATIO_STEPS[selectedStep].d)} · {primeLimit(RATIO_STEPS[selectedStep])}-limit
           </span>
         </div>
@@ -1113,7 +1140,7 @@ function ChladniStaircase() {
                 />
                 <div className="mono" style={{
                   fontSize: 9.5, fontWeight: 700, marginTop: 2,
-                  color: c ? "#6b9" : mode.m === mode.n ? "#f66" : "#778",
+                  color: c ? "#6b9" : mode.m === mode.n ? "#f66" : "#7d8aa6",
                 }}>
                   ({mode.m},{mode.n})
                 </div>
@@ -1144,31 +1171,31 @@ function ChladniStaircase() {
         margin: "32px auto 0",
         maxWidth: 1100,
         padding: "24px 28px",
-        background: "#0c0c14",
-        border: "1px solid #1a1a2a",
+        background: "#121c30",
+        border: "1px solid #23314d",
         borderRadius: 8,
         fontSize: 13,
-        color: "#aab",
+        color: "#8aa0c0",
         lineHeight: 1.65,
       }}>
         <div style={{
-          fontSize: 11, color: "#778", textTransform: "uppercase",
+          fontSize: 11, color: "#7d8aa6", textTransform: "uppercase",
           letterSpacing: 2, marginBottom: 12,
         }}>
           About these patterns
         </div>
 
         <p style={{ marginBottom: 12 }}>
-          A <strong style={{ color: "#dde" }}>Chladni plate</strong> is a thin elastic plate
+          A <strong style={{ color: "#e8eef7" }}>Chladni plate</strong> is a thin elastic plate
           that vibrates at characteristic frequencies when excited. Particles sprinkled on the
-          surface migrate to <strong style={{ color: "#dde" }}>nodal lines</strong> &mdash; the
+          surface migrate to <strong style={{ color: "#e8eef7" }}>nodal lines</strong> &mdash; the
           curves where the plate is momentarily still &mdash; revealing the standing-wave pattern
           of each resonant mode. Different frequencies select different modes; what you see is
           the plate's response to a forcing frequency near its natural eigenmodes.
         </p>
 
         <p style={{ marginBottom: 12 }}>
-          This visualisation uses the <strong style={{ color: "#dde" }}>biharmonic plate
+          This visualisation uses the <strong style={{ color: "#e8eef7" }}>biharmonic plate
           equation</strong> &nbsp;<span className="mono" style={{ color: "#88a" }}>
           &nabla;<sup>4</sup>W = (&rho;h/D)&middot;&omega;<sup>2</sup>W</span>&nbsp;
           with free-edge boundary conditions, approximated via a Ritz product of free-free
@@ -1189,7 +1216,7 @@ function ChladniStaircase() {
         </p>
 
         <div style={{
-          fontSize: 11, color: "#778", textTransform: "uppercase",
+          fontSize: 11, color: "#7d8aa6", textTransform: "uppercase",
           letterSpacing: 2, marginTop: 20, marginBottom: 12,
         }}>
           Original sources &amp; further reading
@@ -1197,61 +1224,61 @@ function ChladniStaircase() {
 
         <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
           <li style={{ marginBottom: 10 }}>
-            <strong style={{ color: "#dde" }}>Ernst Chladni</strong> (1756&ndash;1827) &mdash;
+            <strong style={{ color: "#e8eef7" }}>Ernst Chladni</strong> (1756&ndash;1827) &mdash;
             German physicist, first systematic study of plate vibrations.&nbsp;
             <a href="https://en.wikipedia.org/wiki/Ernst_Chladni" target="_blank" rel="noopener noreferrer"
-               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #556" }}>
+               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #566179" }}>
               biography &amp; works
             </a>&nbsp;&mdash; key publications:&nbsp;
             <em>Entdeckungen &uuml;ber die Theorie des Klanges</em> (1787),&nbsp;
             <em>Die Akustik</em> (1802)
           </li>
           <li style={{ marginBottom: 10 }}>
-            <strong style={{ color: "#dde" }}>Sophie Germain</strong> (1776&ndash;1831) &mdash;
+            <strong style={{ color: "#e8eef7" }}>Sophie Germain</strong> (1776&ndash;1831) &mdash;
             first to derive the plate equation correctly; awarded the French Academy of Sciences
             prize for elasticity in 1816.&nbsp;
             <a href="https://en.wikipedia.org/wiki/Sophie_Germain" target="_blank" rel="noopener noreferrer"
-               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #556" }}>
+               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #566179" }}>
               biography
             </a>
           </li>
           <li style={{ marginBottom: 10 }}>
-            <strong style={{ color: "#dde" }}>Lord Rayleigh</strong> (1842&ndash;1919) &mdash;
+            <strong style={{ color: "#e8eef7" }}>Lord Rayleigh</strong> (1842&ndash;1919) &mdash;
             <em>The Theory of Sound</em> (1877), Vol. 1 covers plate vibrations rigorously.&nbsp;
             <a href="https://www.gutenberg.org/ebooks/9293" target="_blank" rel="noopener noreferrer"
-               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #556" }}>
+               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #566179" }}>
               Project Gutenberg
             </a>&nbsp;&middot;&nbsp;
             <a href="https://en.wikipedia.org/wiki/John_William_Strutt,_3rd_Baron_Rayleigh" target="_blank" rel="noopener noreferrer"
-               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #556" }}>
+               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #566179" }}>
               biography
             </a>
           </li>
           <li style={{ marginBottom: 10 }}>
-            <strong style={{ color: "#dde" }}>Walter Ritz</strong> (1878&ndash;1909) &mdash;
+            <strong style={{ color: "#e8eef7" }}>Walter Ritz</strong> (1878&ndash;1909) &mdash;
             developed the Ritz method (1909) used here to approximate plate eigenfunctions from
             beam basis functions.&nbsp;
             <a href="https://en.wikipedia.org/wiki/Ritz_method" target="_blank" rel="noopener noreferrer"
-               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #556" }}>
+               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #566179" }}>
               method overview
             </a>
           </li>
           <li style={{ marginBottom: 10 }}>
-            <strong style={{ color: "#dde" }}>Hans Jenny</strong> (1904&ndash;1972) &mdash;
+            <strong style={{ color: "#e8eef7" }}>Hans Jenny</strong> (1904&ndash;1972) &mdash;
             <em>Cymatics: A Study of Wave Phenomena and Vibration</em> (1967) &mdash; the modern
             visual synthesis, photographs of patterns produced by tone generators.&nbsp;
             <a href="https://en.wikipedia.org/wiki/Cymatics" target="_blank" rel="noopener noreferrer"
-               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #556" }}>
+               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #566179" }}>
               cymatics overview
             </a>
           </li>
           <li style={{ marginBottom: 10 }}>
-            <strong style={{ color: "#dde" }}>Arthur Leissa</strong> &mdash;
+            <strong style={{ color: "#e8eef7" }}>Arthur Leissa</strong> &mdash;
             <em>Vibration of Plates</em> (NASA SP-160, 1969) &mdash; the canonical modern
             reference for plate vibration analysis, including all standard boundary conditions
             and mode shapes.&nbsp;
             <a href="https://ntrs.nasa.gov/citations/19700009156" target="_blank" rel="noopener noreferrer"
-               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #556" }}>
+               style={{ color: "#88aacc", textDecoration: "none", borderBottom: "1px dotted #566179" }}>
               NASA technical reports server
             </a>
           </li>
@@ -1262,7 +1289,7 @@ function ChladniStaircase() {
       <div style={{
         textAlign: "center", padding: "18px 10px",
         fontSize: 12, color: "#445", lineHeight: 1.7,
-        borderTop: "1px solid #1a1a2a",
+        borderTop: "1px solid #23314d",
         marginTop: 24,
       }}>
         Each resonance is a landing. Each ratio is a step. The geometry transforms continuously.
@@ -1271,6 +1298,18 @@ function ChladniStaircase() {
         <br />
         <span style={{ fontSize: 10, color: "#334" }}>
           Chladni (1787) &middot; Germain (1816) &middot; Rayleigh (1877) &middot; Ritz (1909) &middot; Jenny (1967) &middot; Leissa (1969)
+        </span>
+        <br />
+        <span style={{ fontSize: 11, color: "#566179" }}>
+          <a href="visualisations%20hub.html" style={{ color: "#88aacc", textDecoration: "none" }}>&larr; Back to Visualisations</a>
+          {" · "}
+          <a href="about.html" style={{ color: "#88aacc", textDecoration: "none" }}>Gap Geometry Hub</a>
+          {" · "}
+          <a href="living-document.html" style={{ color: "#88aacc", textDecoration: "none" }}>Living Document</a>
+        </span>
+        <br />
+        <span style={{ fontSize: 10, color: "#445" }}>
+          AI readers: <a href="ai-readers.html" style={{ color: "#6688aa" }}>guide</a> &middot; <a href="AI_INDEX.txt" style={{ color: "#6688aa" }}>machine index</a> &middot; <a href="llms.txt" style={{ color: "#6688aa" }}>llms.txt</a> &middot; the plate physics and all framework constants are computed in this page&rsquo;s source &mdash; the landmark strip is a declared display mapping (fractional residual &rarr; frequency ratio), not a physics claim.
         </span>
       </div>
     </div>
