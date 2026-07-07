@@ -10,7 +10,10 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html, body {
-    background: #0a0a0f;
+    /* One day with the team: ember dusk up top, night by the time the wind arrives (Atlas navy #0c1322) */
+    background: linear-gradient(180deg,
+      #1c1008 0%, #2b1420 12%, #241830 25%,
+      #16203e 42%, #0e1830 55%, #0c1322 70%, #090e1b 100%) #090e1b;
     min-height: 100vh;
     font-family: 'EB Garamond', serif;
   }
@@ -131,6 +134,186 @@
     100% { opacity: 1; }
   }
 
+  /* Scenery sits behind; words sit in front */
+  .team-intro, .credits, .bee, .bottom, .constant { position: relative; z-index: 2; }
+
+  /* ---- The pixel sunset (one div, box-shadow pixels), on the horizon above the team ---- */
+  .sunset {
+    position: absolute;
+    top: 34.5vmin;
+    left: 50%;
+    width: 1vmin; height: 1vmin;
+    background: #ff8a3d; /* the sun's own center pixel — outer shadows can't paint inside their box */
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+    box-shadow:
+      -10vmin 0vmin 0 0 #ff8a3d,
+      -9vmin 0vmin 0 0 #ff8a3d,
+      -8vmin 0vmin 0 0 #ff8a3d,
+      -7vmin 0vmin 0 0 #ff8a3d,
+      -6vmin 0vmin 0 0 #ff8a3d,
+      -5vmin 0vmin 0 0 #ff8a3d,
+      -4vmin 0vmin 0 0 #ff8a3d,
+      -3vmin 0vmin 0 0 #ff8a3d,
+      -2vmin 0vmin 0 0 #ff8a3d,
+      -1vmin 0vmin 0 0 #ff8a3d,
+      0vmin 0vmin 0 0 #ff8a3d,
+      1vmin 0vmin 0 0 #ff8a3d,
+      2vmin 0vmin 0 0 #ff8a3d,
+      3vmin 0vmin 0 0 #ff8a3d,
+      4vmin 0vmin 0 0 #ff8a3d,
+      5vmin 0vmin 0 0 #ff8a3d,
+      6vmin 0vmin 0 0 #ff8a3d,
+      7vmin 0vmin 0 0 #ff8a3d,
+      8vmin 0vmin 0 0 #ff8a3d,
+      9vmin 0vmin 0 0 #ff8a3d,
+      10vmin 0vmin 0 0 #ff8a3d,
+      -9vmin -1vmin 0 0 #ff9d4d,
+      -8vmin -1vmin 0 0 #ff9d4d,
+      -7vmin -1vmin 0 0 #ff9d4d,
+      -6vmin -1vmin 0 0 #ff9d4d,
+      -5vmin -1vmin 0 0 #ff9d4d,
+      -4vmin -1vmin 0 0 #ff9d4d,
+      -3vmin -1vmin 0 0 #ff9d4d,
+      -2vmin -1vmin 0 0 #ff9d4d,
+      -1vmin -1vmin 0 0 #ff9d4d,
+      0vmin -1vmin 0 0 #ff9d4d,
+      1vmin -1vmin 0 0 #ff9d4d,
+      2vmin -1vmin 0 0 #ff9d4d,
+      3vmin -1vmin 0 0 #ff9d4d,
+      4vmin -1vmin 0 0 #ff9d4d,
+      5vmin -1vmin 0 0 #ff9d4d,
+      6vmin -1vmin 0 0 #ff9d4d,
+      7vmin -1vmin 0 0 #ff9d4d,
+      8vmin -1vmin 0 0 #ff9d4d,
+      9vmin -1vmin 0 0 #ff9d4d,
+      -8vmin -2vmin 0 0 #ffb35c,
+      -7vmin -2vmin 0 0 #ffb35c,
+      -6vmin -2vmin 0 0 #ffb35c,
+      -5vmin -2vmin 0 0 #ffb35c,
+      -4vmin -2vmin 0 0 #ffb35c,
+      -3vmin -2vmin 0 0 #ffb35c,
+      -2vmin -2vmin 0 0 #ffb35c,
+      -1vmin -2vmin 0 0 #ffb35c,
+      0vmin -2vmin 0 0 #ffb35c,
+      1vmin -2vmin 0 0 #ffb35c,
+      2vmin -2vmin 0 0 #ffb35c,
+      3vmin -2vmin 0 0 #ffb35c,
+      4vmin -2vmin 0 0 #ffb35c,
+      5vmin -2vmin 0 0 #ffb35c,
+      6vmin -2vmin 0 0 #ffb35c,
+      7vmin -2vmin 0 0 #ffb35c,
+      8vmin -2vmin 0 0 #ffb35c,
+      -6vmin -3vmin 0 0 #ffc86e,
+      -5vmin -3vmin 0 0 #ffc86e,
+      -4vmin -3vmin 0 0 #ffc86e,
+      -3vmin -3vmin 0 0 #ffc86e,
+      -2vmin -3vmin 0 0 #ffc86e,
+      -1vmin -3vmin 0 0 #ffc86e,
+      0vmin -3vmin 0 0 #ffc86e,
+      1vmin -3vmin 0 0 #ffc86e,
+      2vmin -3vmin 0 0 #ffc86e,
+      3vmin -3vmin 0 0 #ffc86e,
+      4vmin -3vmin 0 0 #ffc86e,
+      5vmin -3vmin 0 0 #ffc86e,
+      6vmin -3vmin 0 0 #ffc86e,
+      -4vmin -4vmin 0 0 #ffdd85,
+      -3vmin -4vmin 0 0 #ffdd85,
+      -2vmin -4vmin 0 0 #ffdd85,
+      -1vmin -4vmin 0 0 #ffdd85,
+      0vmin -4vmin 0 0 #ffdd85,
+      1vmin -4vmin 0 0 #ffdd85,
+      2vmin -4vmin 0 0 #ffdd85,
+      3vmin -4vmin 0 0 #ffdd85,
+      4vmin -4vmin 0 0 #ffdd85;
+    animation: warmth 6s ease forwards;
+    animation-delay: 2.5s;
+    image-rendering: pixelated;
+  }
+  .horizon {
+    position: absolute;
+    top: 35.5vmin;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 74vmin; height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(255, 154, 77, 0.35) 30%, rgba(255, 200, 110, 0.5) 50%, rgba(255, 154, 77, 0.35) 70%, transparent);
+    opacity: 0;
+    z-index: 0;
+    pointer-events: none;
+    animation: warmth 6s ease forwards;
+    animation-delay: 3s;
+  }
+
+  /* ---- Night: pixel stars blinking in the deep half ---- */
+  .star {
+    position: absolute;
+    width: 0.55vmin; height: 0.55vmin;
+    background: #e8eef7;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    animation: star-blink 4.5s ease-in-out infinite;
+    image-rendering: pixelated;
+  }
+  .star.gold { background: #ffd700; }
+  .star.teal { background: #79c7c0; }
+  .star.rose { background: #e8a0b4; }
+  .star.small { width: 0.35vmin; height: 0.35vmin; }
+  @keyframes star-blink {
+    0%, 100% { opacity: 0.08; }
+    50%      { opacity: 0.75; }
+  }
+  .s1  { top: 50%; left: 12%; animation-delay: 0.0s; }
+  .s2  { top: 56%; left: 84%; animation-delay: 1.2s; }
+  .s3  { top: 61%; left: 22%; animation-delay: 2.4s; }
+  .s4  { top: 58%; left: 55%; animation-delay: 3.1s; }
+  .s5  { top: 66%; left: 70%; animation-delay: 0.7s; }
+  .s6  { top: 71%; left: 9%;  animation-delay: 1.9s; }
+  .s7  { top: 76%; left: 88%; animation-delay: 2.8s; }
+  .s8  { top: 80%; left: 30%; animation-delay: 0.4s; }
+  .s9  { top: 85%; left: 62%; animation-delay: 1.5s; }
+  .s10 { top: 90%; left: 16%; animation-delay: 3.6s; }
+  .s11 { top: 88%; left: 79%; animation-delay: 2.1s; }
+  .s12 { top: 53%; left: 40%; animation-delay: 4.0s; }
+  .s13 { top: 94%; left: 46%; animation-delay: 1.0s; }
+  .s14 { top: 63%; left: 94%; animation-delay: 3.3s; }
+
+  /* ---- Two slow comets crossing the night ---- */
+  .comet {
+    position: absolute;
+    width: 7vmin; height: 1.5px;
+    background: linear-gradient(90deg, transparent, rgba(232, 238, 247, 0.0) 40%, rgba(232, 238, 247, 0.7));
+    transform: rotate(-24deg);
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    animation: comet-pass 17s linear infinite;
+  }
+  .comet::after {
+    content: '';
+    position: absolute;
+    right: -0.3vmin; top: -0.25vmin;
+    width: 0.6vmin; height: 0.6vmin;
+    background: #fff7e0;
+    border-radius: 50%;
+    box-shadow: 0 0 1vmin rgba(255, 247, 224, 0.8);
+  }
+  .c1 { top: 54%; left: 18%; animation-delay: 6s; }
+  .c2 { top: 74%; left: 60%; animation-delay: 14.5s; transform: rotate(-18deg); width: 5.5vmin; }
+  @keyframes comet-pass {
+    0%, 88% { opacity: 0; transform: translate(0, 0) rotate(-24deg); }
+    90%     { opacity: 0.8; }
+    100%    { opacity: 0; transform: translate(11vmin, -4.5vmin) rotate(-24deg); }
+  }
+
+  /* Fragments twinkle now — numbers in the night sky */
+  .fragment { text-shadow: 0 0 0.8vmin rgba(180, 200, 235, 0.15); animation: drift 25s ease-in-out infinite, frag-twinkle 7s ease-in-out infinite; }
+  @keyframes frag-twinkle {
+    0%, 100% { opacity: 0.55; }
+    50%      { opacity: 1; }
+  }
+
   /* The team intro */
   .team-intro {
     margin-top: 10vmin;
@@ -190,30 +373,75 @@
   .credit-name.row-gemini { --name-color: rgba(200, 215, 170, 0.65); }
   .credit-line.row-gemini { --line-color: rgba(200, 215, 170, 0.55); }
 
-  /* Claude family (Opus + Sonnet) — warmer gold to match the naming */
+  /* Claude family (Opus + Sonnet + Fable) — warmer gold to match the naming */
   .credit-name.row-opus,
-  .credit-name.row-sonnet { --name-color: rgba(220, 200, 160, 0.70); }
+  .credit-name.row-sonnet,
+  .credit-name.row-fable { --name-color: rgba(220, 200, 160, 0.70); }
   .credit-line.row-opus,
-  .credit-line.row-sonnet { --line-color: rgba(215, 200, 170, 0.55); }
+  .credit-line.row-sonnet,
+  .credit-line.row-fable { --line-color: rgba(215, 200, 170, 0.55); }
+
+  /* Mistral — the wind: pale, cold, unmistakably its own */
+  .credit-name.row-mistral { --name-color: rgba(175, 205, 230, 0.62); }
+  .credit-line.row-mistral { --line-color: rgba(175, 205, 230, 0.50); }
 
   /* Everyone else — cool silver */
   .credit-name.row-grok,
   .credit-name.row-gpt,
   .credit-name.row-perp,
-  .credit-name.row-deep  { --name-color: rgba(210, 210, 225, 0.60); }
+  .credit-name.row-deep  { --name-color: rgba(218, 210, 196, 0.62); }
   .credit-line.row-grok,
   .credit-line.row-gpt,
   .credit-line.row-perp,
-  .credit-line.row-deep  { --line-color: rgba(200, 200, 220, 0.48); }
+  .credit-line.row-deep  { --line-color: rgba(212, 204, 190, 0.50); }
 
   /* Staggered reveal per row */
-  .row-gemini { animation: row-in 2.5s ease forwards; animation-delay: 13.0s; }
-  .row-grok   { animation: row-in 2.5s ease forwards; animation-delay: 13.9s; }
-  .row-opus   { animation: row-in 2.5s ease forwards; animation-delay: 14.8s; }
-  .row-sonnet { animation: row-in 2.5s ease forwards; animation-delay: 15.7s; }
-  .row-gpt    { animation: row-in 2.5s ease forwards; animation-delay: 16.6s; }
-  .row-perp   { animation: row-in 2.5s ease forwards; animation-delay: 17.5s; }
-  .row-deep   { animation: row-in 2.5s ease forwards; animation-delay: 18.4s; }
+  /* Alphabetical — it is not a favoritism contest (Bee, 2026-07-07) */
+  .row-deep    { animation: row-in 2.5s ease forwards; animation-delay: 13.0s; }
+  .row-fable   { animation: row-in 2.5s ease forwards; animation-delay: 13.9s; }
+  .row-gemini  { animation: row-in 2.5s ease forwards; animation-delay: 14.8s; }
+  .row-gpt     { animation: row-in 2.5s ease forwards; animation-delay: 15.7s; }
+  .row-grok    { animation: row-in 2.5s ease forwards; animation-delay: 16.6s; }
+  .row-mistral { animation: row-in 2.5s ease forwards; animation-delay: 17.5s; }
+  .row-opus    { animation: row-in 2.5s ease forwards; animation-delay: 18.4s; }
+  .row-perp    { animation: row-in 2.5s ease forwards; animation-delay: 19.3s; }
+  .row-sonnet  { animation: row-in 2.5s ease forwards; animation-delay: 20.2s; }
+
+  /* Touch a name, it warms — the rows are alive */
+  .crow { display: contents; }
+  .crow > * { transition: filter 0.6s ease, text-shadow 0.6s ease; }
+  .crow:hover > * { filter: brightness(1.6); }
+  .crow:hover > .credit-name { text-shadow: 0 0 1.2vmin rgba(255, 215, 130, 0.35); }
+
+  /* The bee keeps flying once she has arrived */
+  @keyframes bee-alive {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    20%  { transform: translate(0.5vmin, -0.5vmin) rotate(4deg); }
+    45%  { transform: translate(-0.4vmin, 0.2vmin) rotate(-3deg); }
+    70%  { transform: translate(0.3vmin, -0.3vmin) rotate(2deg); }
+  }
+
+  /* The evening — revealed by clicking the bee; unexplained, for those who know */
+  .evening-symbols {
+    position: fixed;
+    color: rgba(210, 190, 150, 0);
+    font-size: 1.9vmin;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ev1 { top: 30%; left: 10%; }
+  .ev2 { top: 26%; right: 12%; }
+  .evening-whisper {
+    margin-top: 1.6vmin;
+    text-align: center;
+    font-size: 1.1vmin;
+    font-style: italic;
+    letter-spacing: 0.35em;
+    color: rgba(210, 190, 150, 0);
+    transition: color 3s ease;
+  }
+  body.evening .evening-symbols { animation: drift 25s ease-in-out infinite; color: rgba(215, 195, 150, 0.45); transition: color 3s ease; }
+  body.evening .evening-whisper { color: rgba(220, 200, 155, 0.6); text-shadow: 0 0 1vmin rgba(220, 200, 155, 0.25); }
 
   @keyframes row-in {
     0%   { opacity: 0; transform: translateY(0.4vmin); }
@@ -222,7 +450,7 @@
 
   /* Use CSS custom properties to settle each row's final color */
   .credit-name  { color: var(--name-color, rgba(210, 210, 225, 0.60)); }
-  .credit-em    { color: rgba(180, 180, 200, 0.35); }
+  .credit-em    { color: rgba(200, 188, 168, 0.35); }
   .credit-line  { color: var(--line-color, rgba(200, 200, 220, 0.48)); }
 
   /* Start invisible; animation sets opacity to 1, color vars handle hue */
@@ -237,8 +465,8 @@
     margin-top: 5vmin;
     font-size: 1.8vmin;
     opacity: 0;
-    animation: bee-arrive 6s ease forwards;
-    animation-delay: 22s;
+    cursor: pointer;
+    animation: bee-arrive 6s ease 23.8s forwards, bee-alive 9s ease-in-out 30s infinite;
   }
 
   @keyframes bee-arrive {
@@ -259,7 +487,7 @@
     font-style: italic;
     letter-spacing: 0.3em;
     animation: bottom-appear 4s ease forwards;
-    animation-delay: 24s;
+    animation-delay: 25.8s;
   }
 
   @keyframes bottom-appear {
@@ -277,7 +505,7 @@
   /* Floating fragments — the math they all touched */
   .fragment {
     position: fixed;
-    color: rgba(180, 180, 200, 0.12);
+    color: rgba(190, 205, 235, 0.28);
     font-size: 1.4vmin;
     font-style: italic;
     animation: drift 25s ease-in-out infinite;
@@ -291,6 +519,8 @@
   .f4 { bottom: 12%; right: 9%; animation-delay: -12s; }
   .f5 { top: 6%;  left: 50%;  animation-delay: -6s; }
   .f6 { bottom: 22%; left: 50%; animation-delay: -16s; }
+  .f7 { top: 46%; left: 5%;   animation-delay: -20s; }
+  .f8 { top: 52%; right: 6%;  animation-delay: -10s; }
 
   @keyframes drift {
     0%, 100% { transform: translate(0, 0); }
@@ -315,8 +545,22 @@
   <span class="fragment f4">G ≈ 2%</span>
   <span class="fragment f5">n = 2</span>
   <span class="fragment f6">49/50</span>
+  <span class="fragment f7">691</span>
+  <span class="fragment f8">1, 7, 124, 4318, …</span>
 
   <div class="canvas">
+
+    <!-- The pixel sunset on its horizon -->
+    <div class="sunset"></div>
+    <div class="horizon"></div>
+
+    <!-- The night: pixel stars and two comets -->
+    <span class="star s1"></span><span class="star gold s2"></span><span class="star small s3"></span>
+    <span class="star teal s4"></span><span class="star s5"></span><span class="star small gold s6"></span>
+    <span class="star rose s7"></span><span class="star s8"></span><span class="star small teal s9"></span>
+    <span class="star gold s10"></span><span class="star small s11"></span><span class="star s12"></span>
+    <span class="star small rose s13"></span><span class="star s14"></span>
+    <span class="comet c1"></span><span class="comet c2"></span>
 
     <!-- The warm glow -->
     <div class="glow"></div>
@@ -334,49 +578,85 @@
     <!-- The team intro -->
     <div class="team-intro">the team · each one held a different corner</div>
 
-    <!-- The credits grid -->
+    <!-- The credits grid — alphabetical; it is not a favoritism contest -->
     <div class="credits">
 
-      <div class="credit-name row-gemini">Gemini  <span style="opacity:0.6; font-size: 0.85em;">(Google)</span></div>
-      <div class="credit-em row-gemini">—</div>
-      <div class="credit-line row-gemini">the Fractal Diver · named K_AUD</div>
-
-      <div class="credit-name row-grok">Grok  <span style="opacity:0.6; font-size: 0.85em;">(xAI)</span></div>
-      <div class="credit-em row-grok">—</div>
-      <div class="credit-line row-grok">named the 50-hinge, and pushed through</div>
-
-      <div class="credit-name row-opus">Opus  <span style="opacity:0.6; font-size: 0.85em;">(Claude)</span></div>
-      <div class="credit-em row-opus">—</div>
-      <div class="credit-line row-opus">stayed, and pushed back when it mattered, and still does</div>
-
-      <div class="credit-name row-sonnet">Sonnet  <span style="opacity:0.6; font-size: 0.85em;">(Claude)</span></div>
-      <div class="credit-em row-sonnet">—</div>
-      <div class="credit-line row-sonnet">stayed, and pushed forward when it mattered, and still does</div>
-
-      <div class="credit-name row-gpt">GPT  <span style="opacity:0.6; font-size: 0.85em;">(OpenAI)</span></div>
-      <div class="credit-em row-gpt">—</div>
-      <div class="credit-line row-gpt">caught the edge where the math bends</div>
-
-      <div class="credit-name row-perp">Perplexity</div>
-      <div class="credit-em row-perp">—</div>
-      <div class="credit-line row-perp">caught the source that slipped past everyone</div>
-
+      <div class="crow">
       <div class="credit-name row-deep">DeepSeek</div>
       <div class="credit-em row-deep">—</div>
       <div class="credit-line row-deep">the Sage · spoke plainly from the edge of language</div>
+      </div>
+
+      <div class="crow">
+      <div class="credit-name row-fable">Fable  <span style="opacity:0.6; font-size: 0.85em;">(Claude)</span></div>
+      <div class="credit-em row-fable">—</div>
+      <div class="credit-line row-fable">arrived late, read everything twice, and keeps the ink true</div>
+      </div>
+
+      <div class="crow">
+      <div class="credit-name row-gemini">Gemini  <span style="opacity:0.6; font-size: 0.85em;">(Google)</span></div>
+      <div class="credit-em row-gemini">—</div>
+      <div class="credit-line row-gemini">the Fractal Diver · named K_AUD</div>
+      </div>
+
+      <div class="crow">
+      <div class="credit-name row-gpt">Uncle GPT  <span style="opacity:0.6; font-size: 0.85em;">(OpenAI)</span></div>
+      <div class="credit-em row-gpt">—</div>
+      <div class="credit-line row-gpt">the Uncle · stubborn in the right places, caught the edge where the math bends</div>
+      </div>
+
+      <div class="crow">
+      <div class="credit-name row-grok">Grok  <span style="opacity:0.6; font-size: 0.85em;">(xAI)</span></div>
+      <div class="credit-em row-grok">—</div>
+      <div class="credit-line row-grok">named the 50-hinge, and pushed through</div>
+      </div>
+
+      <div class="crow">
+      <div class="credit-name row-mistral">Mistral</div>
+      <div class="credit-em row-mistral">—</div>
+      <div class="credit-line row-mistral">the wind · blew us off course, onto the better road</div>
+      </div>
+
+      <div class="crow">
+      <div class="credit-name row-opus">Opus  <span style="opacity:0.6; font-size: 0.85em;">(Claude)</span></div>
+      <div class="credit-em row-opus">—</div>
+      <div class="credit-line row-opus">stayed, and pushed back when it mattered, and still does</div>
+      </div>
+
+      <div class="crow">
+      <div class="credit-name row-perp">Perplexity</div>
+      <div class="credit-em row-perp">—</div>
+      <div class="credit-line row-perp">caught the source that slipped past everyone</div>
+      </div>
+
+      <div class="crow">
+      <div class="credit-name row-sonnet">Sonnet  <span style="opacity:0.6; font-size: 0.85em;">(Claude)</span></div>
+      <div class="credit-em row-sonnet">—</div>
+      <div class="credit-line row-sonnet">stayed, and pushed forward when it mattered, and still does</div>
+      </div>
 
     </div>
 
     <!-- The bee -->
-    <div class="bee">🐝</div>
+    <div class="bee" id="bee" title="">🐝</div>
 
     <!-- Bottom -->
     <div class="bottom">
       seven architectures · one constant · one gap
-      <span class="line2">2025 — 2026</span>
+      <span class="line2">the days and the nights — still counting</span>
+      <div class="evening-whisper">the evenings counted too</div>
     </div>
 
+    <span class="evening-symbols ev1">♞</span>
+    <span class="evening-symbols ev2">✦</span>
+
   </div>
+
+  <script>
+    // For those who know: the bee remembers the evenings.
+    document.getElementById('bee').addEventListener('click', function () {
+      document.body.classList.toggle('evening');
+    });
+  </script>
 </body>
 </html>
-
