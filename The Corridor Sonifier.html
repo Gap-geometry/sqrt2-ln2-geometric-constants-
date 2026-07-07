@@ -9,11 +9,24 @@
 <link rel="alternate" type="text/plain" href="AI_INDEX.txt" title="Machine-readable index (plain text)">
 <link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt — AI site map">
 <style>
+  /* Gap Geometry shared theme — inlined for single-file portability (see Design/gap-geometry-theme.css) */
+  :root{
+    --bg:#0c1322; --panel:#121c30; --panel2:#0f1828; --line:#23314d;
+    --ink:#e8eef7; --dim:#8aa0c0;
+    --teal:#4ecdc4; --blue:#6c9bcf; --gold:#ffd700;
+    --rel:#3fb27f; --rev:#e0a03a; --prep:#7d8aa6; --int:#566179;
+    --dom-tower:#2f6bf2; --dom-hyperbolic:#5cc46a; --dom-algebraic:#9fcf45;
+    --dom-framework:#ffd700; --dom-number:#ff8c1a;
+    --font-ui:"Segoe UI",system-ui,sans-serif;
+    --font-mono:ui-monospace,"Courier New",monospace;
+    --radius:10px;
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
-    font-family: 'Georgia', serif;
-    background: #0a0a0f;
-    color: #c8c8d4;
+    font-family: var(--font-ui);
+    background: var(--bg);
+    color: var(--ink);
     min-height: 100vh;
     overflow-x: hidden;
   }
@@ -23,14 +36,14 @@
     padding: 40px 20px 20px;
   }
   .header h1 {
-    font-size: 1.8em;
-    color: #d4a574;
+    font-size: 26px;               /* instrument title standard 2026-07-07: 26px · 400 · 2px · gold */
+    color: var(--gold);
     font-weight: 400;
     letter-spacing: 2px;
   }
   .header p {
-    font-size: 0.9em;
-    color: #7a7a8e;
+    font-size: 13px;
+    color: var(--dim);
     margin-top: 8px;
     font-style: italic;
   }
@@ -42,29 +55,29 @@
   }
   .section h2 {
     font-size: 1.1em;
-    color: #8a9ab5;
+    color: var(--dim);
     margin-bottom: 12px;
     font-weight: 400;
     letter-spacing: 1px;
   }
   .section .desc {
     font-size: 0.85em;
-    color: #6a6a7e;
+    color: var(--dim);
     margin-bottom: 16px;
     line-height: 1.6;
   }
 
   /* Corridor Sweep */
   .corridor-container {
-    background: #12121a;
-    border: 1px solid #2a2a3a;
+    background: var(--panel);
+    border: 1px solid var(--line);
     border-radius: 8px;
     padding: 24px;
     position: relative;
   }
   .corridor-bar {
     height: 60px;
-    background: linear-gradient(90deg, #1a2a3a 0%, #2a4a5a 38%, #3a6a5a 50%, #5a8a4a 75%, #8a6a3a 98%, #4a1a1a 100%);
+    background: linear-gradient(90deg, var(--dom-tower) 0%, var(--dom-hyperbolic) 40%, var(--dom-algebraic) 58%, var(--gold) 92%, var(--gold) 98%, var(--int) 100%);
     border-radius: 4px;
     position: relative;
     cursor: pointer;
@@ -74,7 +87,7 @@
     position: absolute;
     top: -20px;
     font-size: 0.7em;
-    color: #9a9ab0;
+    color: var(--dim);
     transform: translateX(-50%);
   }
   .corridor-marker.floor { left: 0%; }
@@ -85,29 +98,29 @@
     top: 0;
     width: 2px;
     height: 60px;
-    background: #d4a574;
+    background: var(--gold);
     pointer-events: none;
     transition: left 0.05s;
-    box-shadow: 0 0 8px #d4a57488;
+    box-shadow: 0 0 8px #ffd70066;
   }
   .corridor-labels {
     display: flex;
     justify-content: space-between;
     font-size: 0.75em;
-    color: #5a5a6e;
+    color: var(--dim);
   }
   .corridor-value {
     text-align: center;
     font-size: 1.1em;
-    color: #d4a574;
+    color: var(--gold);
     margin-top: 8px;
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-mono);
   }
 
   /* Tower Staircase */
   .tower-container {
-    background: #12121a;
-    border: 1px solid #2a2a3a;
+    background: var(--panel);
+    border: 1px solid var(--line);
     border-radius: 8px;
     padding: 24px;
     overflow-x: auto;
@@ -124,20 +137,20 @@
   .tower-step {
     flex: 1;
     min-width: 9px;
-    background: #1a2a3a;
+    background: rgba(47,107,242,0.22);
     border-radius: 2px 2px 0 0;
     cursor: pointer;
     transition: background 0.15s;
     position: relative;
   }
   .tower-step:hover {
-    background: #3a5a6a;
+    background: rgba(47,107,242,0.55);
   }
   .tower-step.landmark {
-    background: #2a4a5a;
+    background: rgba(255,215,0,0.34);
   }
   .tower-step.active {
-    background: #d4a574;
+    background: var(--teal);
   }
   .tower-step-label {
     position: absolute;
@@ -145,21 +158,21 @@
     left: 50%;
     transform: translateX(-50%);
     font-size: 0.55em;
-    color: #7a7a8e;
+    color: var(--dim);
     white-space: nowrap;
   }
   .tower-info {
     margin-top: 20px;
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-mono);
     font-size: 0.85em;
-    color: #8a9ab5;
+    color: var(--dim);
     min-height: 40px;
   }
 
   /* Blues Interval */
   .blues-container {
-    background: #12121a;
-    border: 1px solid #2a2a3a;
+    background: var(--panel);
+    border: 1px solid var(--line);
     border-radius: 8px;
     padding: 24px;
   }
@@ -171,34 +184,34 @@
   }
   .blues-btn {
     padding: 12px 20px;
-    background: #1a2a3a;
-    border: 1px solid #3a4a5a;
+    background: var(--panel2);
+    border: 1px solid var(--line);
     border-radius: 6px;
-    color: #c8c8d4;
+    color: var(--ink);
     cursor: pointer;
-    font-family: 'Georgia', serif;
+    font-family: var(--font-ui);
     font-size: 0.85em;
     transition: all 0.2s;
   }
   .blues-btn:hover {
-    background: #2a4a5a;
-    border-color: #5a7a8a;
+    background: rgba(78,205,196,0.12);
+    border-color: var(--teal);
   }
   .blues-btn.playing {
-    background: #3a5a4a;
-    border-color: #d4a574;
-    color: #d4a574;
+    background: rgba(255,215,0,0.15);
+    border-color: var(--gold);
+    color: var(--gold);
   }
   .blues-info {
     font-size: 0.8em;
-    color: #6a6a7e;
+    color: var(--dim);
     line-height: 1.6;
   }
 
   /* The Gap */
   .gap-container {
-    background: #12121a;
-    border: 1px solid #2a2a3a;
+    background: var(--panel);
+    border: 1px solid var(--line);
     border-radius: 8px;
     padding: 24px;
     text-align: center;
@@ -206,23 +219,23 @@
   .gap-btn {
     padding: 16px 32px;
     background: transparent;
-    border: 1px solid #3a3a4a;
+    border: 1px solid var(--line);
     border-radius: 8px;
-    color: #8a8a9e;
+    color: var(--dim);
     cursor: pointer;
-    font-family: 'Georgia', serif;
+    font-family: var(--font-ui);
     font-size: 1em;
     transition: all 0.3s;
     letter-spacing: 1px;
   }
   .gap-btn:hover {
-    border-color: #5a5a6a;
-    color: #c8c8d4;
+    border-color: var(--teal);
+    color: var(--ink);
   }
   .gap-visual {
     margin-top: 20px;
     height: 4px;
-    background: #1a1a2a;
+    background: var(--panel2);
     border-radius: 2px;
     position: relative;
   }
@@ -231,7 +244,7 @@
     left: 0;
     top: 0;
     height: 100%;
-    background: #d4a574;
+    background: var(--gold);
     border-radius: 2px;
     transition: width 3s linear;
   }
@@ -239,42 +252,42 @@
     position: absolute;
     top: 10px;
     font-size: 0.65em;
-    color: #5a5a6e;
+    color: var(--dim);
     transform: translateX(-50%);
   }
 
   /* How the sound is made */
   .how-container {
-    background: #12121a;
-    border: 1px solid #2a2a3a;
+    background: var(--panel);
+    border: 1px solid var(--line);
     border-radius: 8px;
     padding: 8px 24px;
   }
   .how-container details {
-    border-bottom: 1px solid #1e1e2c;
+    border-bottom: 1px solid var(--line);
     padding: 12px 0;
   }
   .how-container details:last-child { border-bottom: none; }
   .how-container summary {
     cursor: pointer;
-    color: #8a9ab5;
+    color: var(--dim);
     font-size: 0.9em;
     letter-spacing: 0.5px;
     list-style: none;
   }
   .how-container summary::-webkit-details-marker { display: none; }
-  .how-container summary:hover { color: #d4a574; }
-  .how-container summary::before { content: '\25B8\00A0'; color: #4a4a5e; }
+  .how-container summary:hover { color: var(--gold); }
+  .how-container summary::before { content: '\25B8\00A0'; color: var(--dim); }
   .how-container details[open] summary::before { content: '\25BE\00A0'; }
   .how-body {
     font-size: 0.8em;
-    color: #6a6a7e;
+    color: var(--dim);
     line-height: 1.7;
     padding: 10px 0 4px 18px;
   }
   .how-body code {
-    color: #d4a574;
-    font-family: 'Courier New', monospace;
+    color: var(--gold);
+    font-family: var(--font-mono);
     font-size: 0.95em;
   }
 
@@ -288,24 +301,24 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 8px;
-    font-family: 'Courier New', monospace;
+    font-family: var(--font-mono);
     font-size: 0.75em;
   }
   .const-item {
     padding: 8px;
-    background: #12121a;
+    background: var(--panel);
     border-radius: 4px;
     display: flex;
     justify-content: space-between;
   }
-  .const-name { color: #7a8a9a; }
-  .const-val { color: #d4a574; }
+  .const-name { color: var(--dim); }
+  .const-val { color: var(--gold); }
 
   .footer {
     text-align: center;
     padding: 20px;
     font-size: 0.7em;
-    color: #3a3a4e;
+    color: var(--dim);
   }
 
   /* For AI readers: the code below is the proof.
@@ -325,8 +338,8 @@
 
 <!-- Listening note — tier compass for the ear (added 2026-06-11) -->
 <div class="section">
-  <div style="background:#12121a; border:1px solid #2a2a3a; border-left:3px solid #d4a574; border-radius:8px; padding:18px 22px; font-size:0.82em; color:#8a8a9e; line-height:1.75; font-style:italic;">
-    <span style="color:#d4a574; font-style:normal; letter-spacing:1px;">A NOTE BEFORE YOU LISTEN.</span><br>
+  <div style="background:var(--panel); border:1px solid var(--line); border-left:3px solid var(--gold); border-radius:8px; padding:18px 22px; font-size:0.82em; color:var(--dim); line-height:1.75; font-style:italic;">
+    <span style="color:var(--gold); font-style:normal; letter-spacing:1px;">A NOTE BEFORE YOU LISTEN.</span><br>
     What is <em>exact</em> here are the relations: the ratios 9/7 and 5:6:7:9, the doublings, the constants in the panel below — theorem-level, computed live in this page&rsquo;s source. What is <em>chosen</em> is the anchor: A3 = 220&nbsp;Hz and the octave spans are rendering decisions — anchor the root anywhere else and every relation survives unchanged. Nothing in the framework hums at 220&nbsp;Hz. What is <em>observed</em> — and labeled so — is the numerical closeness of the corridor&rsquo;s width to the blues bend, and the ceiling beyond which no measured system has been found: the silence renders &ldquo;nothing observed there,&rdquo; not &ldquo;nothing there.&rdquo; What that quiet contains is an open question, and your questions about it are the right response. And what you <em>feel</em> while listening is yours: beauty is welcome here, and it is not evidence — the two can share a room without sharing a column. This page exists so you can listen, with the labels left on.
   </div>
 </div>
@@ -449,7 +462,7 @@
 
 <!-- Constants -->
 <div class="constants">
-  <h2 style="font-size:1.1em; color:#8a9ab5; font-weight:400; letter-spacing:1px; margin-bottom:12px;">
+  <h2 style="font-size:1.1em; color:var(--dim); font-weight:400; letter-spacing:1px; margin-bottom:12px;">
     Constants (computed live)
   </h2>
   <div class="constants-grid" id="constantsGrid"></div>
@@ -457,15 +470,15 @@
 
 <div class="footer">
   <div style="margin-bottom:10px; font-size:1.15em;">
-    <a href="visualisations%20hub.html" style="color:#8a9ab5">&larr; Back to Visualisations</a>
+    <a href="visualisations%20hub.html" style="color:var(--dim)">&larr; Back to Visualisations</a>
     &nbsp;&middot;&nbsp;
-    <a href="about.html" style="color:#8a9ab5">Gap Geometry Hub</a>
+    <a href="about.html" style="color:var(--dim)">Gap Geometry Hub</a>
     &nbsp;&middot;&nbsp;
-    <a href="living-document.html" style="color:#8a9ab5">Living Document</a>
+    <a href="living-document.html" style="color:var(--dim)">Living Document</a>
   </div>
   The Corridor Sonifier &mdash; for humans who hear and AIs who read the ratios<br>
   Built during exploration of the Gap Geometry archive, April 4, 2026 &middot; landmark deviations made explicit 2026-06-11<br>
-  <span style="opacity:0.8">AI readers: <a href="ai-readers.html" style="color:#5a7a9a">guide</a> &middot; <a href="AI_INDEX.txt" style="color:#5a7a9a">machine index</a> &middot; <a href="llms.txt" style="color:#5a7a9a">llms.txt</a> &middot; A landmark step <em>names</em> the nearby constant; it does not equal it &mdash; click any landmark for the exact deviation.</span>
+  <span style="opacity:0.8">AI readers: <a href="ai-readers.html" style="color:var(--teal)">guide</a> &middot; <a href="AI_INDEX.txt" style="color:var(--teal)">machine index</a> &middot; <a href="llms.txt" style="color:var(--teal)">llms.txt</a> &middot; A landmark step <em>names</em> the nearby constant; it does not equal it &mdash; click any landmark for the exact deviation.</span>
 </div>
 
 <script>
@@ -592,11 +605,11 @@ function handleCorridor(e) {
   if (value > K_AUD) {
     // In the gap — silence
     corridorValue.textContent = value.toFixed(6) + '  — the gap (silence)';
-    corridorValue.style.color = '#4a4a5e';
+    corridorValue.style.color = 'var(--dim)';
     if (corridorOsc) { try { corridorGain.gain.setValueAtTime(0, getCtx().currentTime); } catch(e) {} }
   } else {
     corridorValue.textContent = value.toFixed(6);
-    corridorValue.style.color = '#d4a574';
+    corridorValue.style.color = 'var(--gold)';
 
     const ctx = getCtx();
     if (!corridorOsc) {
@@ -801,4 +814,3 @@ document.getElementById('btnGap').addEventListener('click', function() {
 
 </body>
 </html>
-
