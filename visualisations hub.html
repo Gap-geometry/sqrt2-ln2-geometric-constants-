@@ -7,7 +7,7 @@
 <link rel="alternate" type="text/plain" href="AI_INDEX.txt" title="Machine-readable index (plain text)">
 <link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt — AI site map">
 <meta name="author" content="D. B.">
-<meta name="description" content="Interactive tools for exploring the Gap Geometry framework: the Binary Tower, prime corridor, Chladni patterns, and sonification. With live previews and theater mode.">
+<meta name="description" content="Interactive tools for exploring the Gap Geometry framework: the Lock Atlas, the Telescope Tower, Chladni patterns, and sonification. With live previews and theater mode.">
 <style>
   :root {
     --text: #1a1a1a;
@@ -208,6 +208,32 @@
   All tools run entirely in the browser &mdash; no server, no data collection, nothing tracked. Most are single self-contained HTML files; the Dashboard and the Chladni explorer additionally load their rendering library (React) from a public CDN, so they need an internet connection on first view. All source is readable in the files themselves. Click a preview to open the instrument in place (<kbd>Esc</kbd> returns here), or use the full-page link on each card.
 </div>
 
+<!-- ==================== STAGED ATLAS CARD (prepared 2026-07-06, Fable/Cowork) ====================
+  AT ATLAS GO-LIVE (Z1 step 6d): (1) fill [ATLAS URL] everywhere in this block; (2) uncomment
+  this card; (3) DELETE the entire "The Binary Tower (entrance)" card below it (binary-tower
+  keeps its front-door access via the About page nav card — featuring it twice was redundant,
+  per Roadmap "Vis Hub swap plan"); (4) delete this banner.
+
+<div class="tool">
+  <div class="tool-head">
+    <div class="tool-title">The Lock Atlas</div>
+    <span class="tool-tag tag-entrance">Observatory</span>
+  </div>
+  <div class="tool-body">
+    <p>The framework&rsquo;s claims as a navigable constellation. Every result is a <em>lock</em> &mdash; ring colour for its field, centre glyph for its evidence tier (&#8857; theorem &middot; &#9633; observation &middot; &#8764; conjecture &middot; &#9675; near-lock &middot; &#9679; anti-lock), size for its connections. Click any node: mechanism, key equation, sources, and a self-contained mpmath snippet that computes the value from primitives &mdash; paste, run, verify. Anti-locks and non-merge verdicts are shown, never hidden: the map records what failed and what must not be conflated, in the same ink as what holds.</p>
+    <div class="preview" data-src="[ATLAS URL]" data-title="The Lock Atlas">
+      <div class="preview-placeholder">loading live preview&hellip;</div>
+      <iframe title="The Lock Atlas preview" loading="lazy" tabindex="-1"></iframe>
+      <span class="live-chip">Live</span>
+      <div class="preview-veil"><span class="enter-chip">&#9654;&nbsp; Enter</span></div>
+    </div>
+    <div class="tool-what"><strong>What it shows:</strong> the full lock ledger with layout presets (values on a log number-line; the organic connections view with Focus flashlight), views &amp; filters by tier and domain, accessibility and colour-blind-safe lenses, and permanent lock IDs (#lock_id) &mdash; the framework&rsquo;s citation contract, exposed.</div>
+    <div class="tool-anchor"><strong>Anchored in:</strong> the evidence discipline of the <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/methodology.html" target="_blank" rel="noopener">Methodology</a> (same tier glyphs) and the published papers each lock cites.</div>
+  </div>
+  <div class="tool-link"><a href="[ATLAS URL]" target="_blank" rel="noopener">Open full page &#8599;</a></div>
+</div>
+==================== END STAGED ATLAS CARD ==================== -->
+
 <!-- ——— The Binary Tower (entrance) ——— -->
 <div class="tool">
   <div class="tool-head">
@@ -228,17 +254,17 @@
   <div class="tool-link"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/binary-tower.html" target="_blank" rel="noopener">Open full page &#8599;</a></div>
 </div>
 
-<!-- ——— K_AUD Dashboard ——— -->
+<!-- ——— The Gap Dashboard (index.html, served at the site root; formerly 'K_AUD Dashboard') ——— -->
 <div class="tool">
   <div class="tool-head">
-    <div class="tool-title">K<sub>AUD</sub> Dashboard</div>
+    <div class="tool-title">The Gap Dashboard</div>
     <span class="tool-tag tag-dashboard">Dashboard</span>
   </div>
   <div class="tool-body">
-    <p>The main interactive dashboard. Core constants G and K<sub>AUD</sub>, the Binary Tower step structure, and key landmarks in one navigable interface &mdash; the entry point for hands-on exploration.</p>
-    <div class="preview" data-src="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/" data-title="K_AUD Dashboard">
+    <p>The main interactive dashboard &mdash; one of the first instruments ever built for the framework. Core constants G and K<sub>AUD</sub>, the Binary Tower step structure, and key landmarks in one navigable interface &mdash; the entry point for hands-on exploration.</p>
+    <div class="preview" data-src="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/" data-title="The Gap Dashboard">
       <div class="preview-placeholder">loading live preview&hellip;</div>
-      <iframe title="K_AUD Dashboard preview" loading="lazy" tabindex="-1"></iframe>
+      <iframe title="The Gap Dashboard preview" loading="lazy" tabindex="-1"></iframe>
       <span class="live-chip">Live</span>
       <div class="preview-veil"><span class="enter-chip">&#9654;&nbsp; Enter</span></div>
     </div>
@@ -424,4 +450,3 @@
 
 </body>
 </html>
-
