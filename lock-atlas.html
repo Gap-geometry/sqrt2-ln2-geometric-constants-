@@ -129,8 +129,25 @@
   /* The invisible fingertip target. A mouse is precise and must NOT get a fat hit area — it would make
      neighbouring nodes steal each other's clicks. A finger is not precise and needs one. So: fingers
      only. Nothing about the drawing changes either way. */
-  .hitpad{pointer-events:none}
+  /* fill:none = NEVER painted (I first used fill="transparent", which browsers happily PAINT — that was
+     the black rings Bee saw, on PC and iPad both, 2026-07-14). pointer-events:all makes an unpainted
+     shape hit-testable anyway: invisible to the eye, solid to a finger. That is the whole trick. */
+  .hitpad{fill:none;stroke:none;pointer-events:none}
   @media (pointer: coarse){ .hitpad{pointer-events:all} }
+
+  /* ── THE DOOR (small / touch screens only) ── */
+  #gate{display:none;position:fixed;inset:0;z-index:50;background:#0a1020;
+    align-items:center;justify-content:center;padding:24px;overflow:auto}
+  #gate.show{display:flex}
+  .gatebox{max-width:560px;border:1px solid var(--line);border-radius:14px;background:var(--panel);
+    padding:28px 26px;box-shadow:0 18px 50px #000a}
+  .gatebox h2{margin:0 0 14px;color:var(--gold);font-size:22px;font-weight:600;line-height:1.3}
+  .gatebox p{margin:0 0 12px;color:var(--ink);font-size:15px;line-height:1.62}
+  .gatebox .gsmall{color:var(--dim);font-size:13.5px}
+  .gatebox b{color:#fff}
+  #gateGo{margin-top:16px;padding:12px 22px;font-size:15px;border-radius:9px;cursor:pointer;
+    background:#0a1020;color:var(--gold);border:1px solid var(--gold);width:100%}
+  .gatebox .gdoor{margin-top:12px;margin-bottom:0;font-style:italic;text-align:center}
   /* ── Accessibility lens (◐ Clarity) — opt-in; higher contrast, thicker links, bolder labels, leans on shape over colour ── */
   .a11y #svg{filter:contrast(1.12) brightness(1.05)}
   .a11y .edge{stroke:#4a5f86;stroke-width:1.1}
@@ -241,6 +258,25 @@
     
     
     <input id="search" placeholder="search…" style="margin-left:auto;width:150px"/>
+  </div>
+
+  <!-- ── THE DOOR ─────────────────────────────────────────────────────────────────────
+       Shown only on a small or finger-driven screen. It tells the reader the truth and then
+       LETS THEM THROUGH. Nothing is withheld, nothing is locked, and nobody is told their
+       device is lesser — only that this particular map wants a bigger table.
+       (Bee's call, after testing on an iPad Pro in real Safari: "it really doesn't go well.")   -->
+  <div id="gate">
+    <div class="gatebox">
+      <h2>This one asks for a bigger table.</h2>
+      <p>The Atlas is made to be <b>sat with</b> — panned across, opened, read, and checked. Every lock
+         carries a runnable verification you're meant to copy into a terminal and run yourself. That
+         posture doesn't fit a small screen, and we'd rather say so than let you discover it slowly.</p>
+      <p>Nothing is withheld here. The same locks, the same walks, the same sources are all in this page.
+         It will simply be a poor read on this screen.</p>
+      <p class="gsmall">Best on a laptop, a desktop, or a large tablet with room to spare.</p>
+      <button id="gateGo">Open it anyway</button>
+      <p class="gsmall gdoor">The door isn't locked.</p>
+    </div>
   </div>
 
   <div class="split" id="split">
@@ -457,7 +493,7 @@
          entirely (see .hitpad in the CSS), so precision on a desktop is untouched. */
       const hitR=Math.max(r+13,22);
       const g=`<g class="node${hot?' hot':''}${peek===l.id?' peek':''}${dimCls}${l.pub!=="released"?' unpub':''}" data-id="${l.id}" transform="translate(${l.x.toFixed(1)},${l.y.toFixed(1)})">
-        <circle class="hitpad" r="${hitR.toFixed(1)}" fill="transparent"/>${shape}${txt}</g>`;
+        <circle class="hitpad" r="${hitR.toFixed(1)}" fill="none" stroke="none"/>${shape}${txt}</g>`;
       if(hot)selTop+=g;else s+=g;});
     s+=selTop;   // selected node rendered last → on top of its cluster, so it's always grab-able (fixes drag-in-a-cluster)
     svg.innerHTML=`<g id="cam">${s}</g>`; applyCam();
@@ -819,6 +855,21 @@
   document.getElementById('zout').onclick=()=>zoomStep(1/1.25);
   document.getElementById('zreset').onclick=()=>fitView();
   document.getElementById('zdock').onclick=function(){tipDocked=!tipDocked;this.classList.toggle('on',tipDocked);refreshTip();};
+
+  /* THE DOOR. Shown on a finger-driven screen, or any window too narrow to sit the map and the panel
+     side by side (the Atlas's whole grammar is "it opens right here, the map never goes away" — below
+     ~1024px that promise cannot be kept). It states the truth once, then opens. Dismissal is remembered,
+     because a warning that repeats forever stops being a courtesy and becomes a nag. */
+  (function(){const gate=document.getElementById('gate');if(!gate)return;
+    const coarse=window.matchMedia&&matchMedia('(pointer: coarse)').matches;
+    const narrow=window.innerWidth<1024;
+    let seen=false; try{seen=localStorage.getItem('atlas_door_v1')==='1';}catch(_){}
+    if((coarse||narrow)&&!seen) gate.classList.add('show');
+    const go=document.getElementById('gateGo');
+    if(go)go.onclick=()=>{gate.classList.remove('show');
+      try{localStorage.setItem('atlas_door_v1','1');}catch(_){}
+      try{renderMap();fitView();}catch(_){}};   // the map was laid out behind a covered window — re-fit it
+  })();
 
   /* Quiet — a preference about motion, not a verdict about the reader's machine. */
   function applyQuiet(){document.getElementById('split').classList.toggle('quiet',quiet);
