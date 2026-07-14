@@ -104,6 +104,27 @@
      Not one spark is removed. They simply stop dragging the whole observatory behind them. */
   #sparks{will-change:transform}
   @media (prefers-reduced-motion: reduce){.spark,.spark2{animation:none;opacity:0}}
+
+  /* ── QUIET  ──────────────────────────────────────────────────────────────
+     Not "low power". Not "mobile". A preference about MOTION — which some readers
+     want for their eyes, some for their attention, and some for an older machine,
+     and none of them should have to say which. Nothing is removed: every lock,
+     every edge, every walk stays. Only the movement rests.
+     Defaults from the reader's own OS setting; on a touch device it starts on,
+     because that is where the motion costs the most and helps the least. */
+  .quiet .spark,.quiet .spark2{animation:none;opacity:.5}
+  .quiet .pulse{animation:none;opacity:.16}
+  .quiet #sparks{will-change:auto}
+  /* (the reticle's orbiting electron is a SMIL animateTransform, not a class — reticleSVG() drops it when quiet) */
+  .quiet .tip{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(16,26,46,0.93)}
+
+  /* A backdrop blur must be recomputed whenever the pixels BEHIND it change — and the readout sits
+     over a map that moves whenever you pan. On a touch device the readout is shown on every tap
+     (id = hoverId||sel), so the blur was permanently live and permanently re-rendering. Beautiful on
+     a desktop GPU, punishing on a tablet. Fingers get a solid panel; it looks near-identical. */
+  @media (pointer: coarse){
+    .tip{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(16,26,46,0.93)}
+  }
   /* ── Accessibility lens (◐ Clarity) — opt-in; higher contrast, thicker links, bolder labels, leans on shape over colour ── */
   .a11y #svg{filter:contrast(1.12) brightness(1.05)}
   .a11y .edge{stroke:#4a5f86;stroke-width:1.1}
@@ -240,6 +261,8 @@
           <button id="a11y" title="Accessibility lens (Clarity) — higher contrast, thicker links, bolder labels; leans on shape over colour">◐</button>
           <button id="cbmode" title="Colour-blind-safe palette (Okabe–Ito) — swaps the domain colours for maximum hue distinctness">🎨</button>
           <button id="zdock" title="Dock the readout to the corner — ON: always in the corner · OFF (default): always above the node (hover or select)">◲</button>
+        <button id="quiet" title="Quiet — the motion rests. Sparks stop travelling, the halo stops breathing, the reticle stops turning. Nothing is removed: every lock, every edge, every walk stays exactly where it is. Kinder on the eyes, on the attention, and on an older machine.">☾</button>
+        <button id="fscreen" title="Full screen — hide the browser's own bars and give the map the whole window. Best on a tablet, or any screen where the Atlas feels cramped.">⛶</button>
           <span class="sldwrap" title="Connection luminosity — brightness of the link lines. Dim them to let the nodes breathe, or brighten to trace the web."><b>≈</b><input id="lum" type="range" min="6" max="100" value="100"></span>
           <span class="sldwrap" title="Name intensity — brightness of the lock names on the map. Fade them for a clean colour-web, or bring them up to read every label. (Each layout keeps its own show/hide; this rides on top.)"><b>A</b><input id="names" type="range" min="0" max="100" value="100"></span>
         </div>
@@ -274,6 +297,11 @@
     cross_domain_structural:"#D55E00",applied:"#999999",methodological:"#CCCCCC"};
   let cbPalette=false;
   const domColor=d=>(cbPalette?DOMCOL_CB:DOMCOL)[d]||(cbPalette?"#BBBBBB":"#7d8aa6");
+  /* Quiet: motion rests, nothing is removed. Starts ON if the reader's OS asks for reduced motion,
+     or if this is a touch device — where the animation costs the most and helps the least (iPad Pro,
+     real Safari, still laggy: Bee, 2026-07-14). Either way it is a switch, and the reader owns it. */
+  let quiet = (window.matchMedia && (matchMedia("(prefers-reduced-motion: reduce)").matches
+                                  || matchMedia("(pointer: coarse)").matches)) || false;
   let MODE="public", q="", sel=null, peek=null, dragNode=null, hoverId=null, flashlight=false, tipDocked=false, a11y=false, byDomain=false, byValue=false, valScale=null,
       fDom=new Set(LOCKS.map(l=>l.domain)), fStat=new Set(LOCKS.map(l=>l.status)), dragPos={}, byOrbital=false, curLayout='organic', grpFlash=false, grpFlashOff=false;
   function hexPts(r){let p=[];for(let i=0;i<6;i++){const a=Math.PI/2+i*Math.PI/3;p.push((r*Math.cos(a)).toFixed(1)+","+(r*Math.sin(a)).toFixed(1));}return p.join(" ");}
@@ -282,7 +310,7 @@
     return `<circle r="${r.toFixed(1)}" style="fill:transparent;stroke:${hc};stroke-width:1.8"/>`+t+`<circle r="${(r-3).toFixed(1)}" style="fill:transparent;stroke:${hc};stroke-width:1;opacity:0.5;stroke-dasharray:5 4"/>`;}
   // selected-node "observatory reticle": neon ring + mechanical ticks + segmented inner ring + one orbiting electron + pulse
   function reticleSVG(cx,cy,r,hc){
-    const RM=window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches, r1=r+13, r2=r+7, ro=r+7;
+    const RM=quiet||(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches), r1=r+13, r2=r+7, ro=r+7;
     let ticks="";const NT=24;
     for(let i=0;i<NT;i++){const a=i/NT*TAU,c=Math.cos(a),s2=Math.sin(a),card=(i%6===0),L=card?7:4;
       ticks+=`<line x1="${(c*(r1+1)).toFixed(1)}" y1="${(s2*(r1+1)).toFixed(1)}" x2="${(c*(r1+L)).toFixed(1)}" y2="${(s2*(r1+L)).toFixed(1)}" stroke="${hc}" stroke-width="${card?1.4:1}" opacity="${card?0.8:0.4}"/>`;}
@@ -693,7 +721,7 @@
   const wheelb=document.getElementById('wheel'), vtray=document.getElementById('vtray');
   if(wheelb)wheelb.onclick=e=>{e.stopPropagation(); wheelb.classList.toggle('on'); if(vtray)vtray.classList.toggle('open'); try{saveState();}catch(_){}};   // the wheel slides the visual tools open/closed, inline to the right
   function saveState(){try{const on={};_CTRLS.forEach(id=>{const b=document.getElementById(id);if(b)on[id]=b.classList.contains('on');});
-    localStorage.setItem('atlas_state_v1',JSON.stringify({on,w:paneMap.style.flex||'',lumBy:lumByLayout,namesBy:namesByLayout,gfOff:grpFlashOff,wfOff:walkFlashOff,pos:dragPos,lay:curLayout,cam:{k:+cam.k.toFixed(4),tx:+cam.tx.toFixed(1),ty:+cam.ty.toFixed(1)}}));}catch(e){}}
+    localStorage.setItem('atlas_state_v1',JSON.stringify({on,w:paneMap.style.flex||'',lumBy:lumByLayout,namesBy:namesByLayout,gfOff:grpFlashOff,wfOff:walkFlashOff,qt:quiet,pos:dragPos,lay:curLayout,cam:{k:+cam.k.toFixed(4),tx:+cam.tx.toFixed(1),ty:+cam.ty.toFixed(1)}}));}catch(e){}}
   function loadState(){try{let st=null; try{st=JSON.parse(localStorage.getItem('atlas_state_v1')||'null');}catch(e){} st=st||{};
     if(st.w)paneMap.style.flex=st.w;
     if(st.lumBy&&typeof st.lumBy==='object')lumByLayout=st.lumBy; else if(st.lum!=null&&st.lay)lumByLayout[st.lay]=+st.lum;   // per-layout edge luminosity (migrate an old single 'lum' onto its layout) — applied by setLayout below
@@ -703,6 +731,7 @@
     if(st.namesBy&&typeof st.namesBy==='object')namesByLayout=st.namesBy; else if(st.names!=null&&st.lay)namesByLayout[st.lay]=+st.names;   // restore per-layout name intensity (migrate an old single 'names' onto its layout) — BEFORE setLayout so it's applied
     if(st.gfOff)grpFlashOff=true;   // you turned the flashlight off inside Groups once — Groups remembers, and won't force it back on
     if(st.wfOff)walkFlashOff=true;  // and the same for the walks — asked once, never again
+    if(typeof st.qt==='boolean'){quiet=st.qt;applyQuiet();}   // your Quiet choice outranks the device default — said once, kept
     {const _lay=st.lay||'value'; setLayout((_lay==='orbital'&&MODE!=='internal')?'value':_lay);}   // saved layout, or the default for a first visit: the Number line (the evidence view — lead with it). Clusters only restores in Internal.
     if(st.cam&&isFinite(st.cam.k)&&(st.lay||'value')==='organic'){cam.k=st.cam.k;cam.tx=st.cam.tx;cam.ty=st.cam.ty;applyCam();}   // remember zoom/pan for ORGANIC only; the auto-layout presets always frame themselves fresh
   }catch(e){}}
@@ -776,6 +805,24 @@
   document.getElementById('zout').onclick=()=>zoomStep(1/1.25);
   document.getElementById('zreset').onclick=()=>fitView();
   document.getElementById('zdock').onclick=function(){tipDocked=!tipDocked;this.classList.toggle('on',tipDocked);refreshTip();};
+
+  /* Quiet — a preference about motion, not a verdict about the reader's machine. */
+  function applyQuiet(){document.getElementById('split').classList.toggle('quiet',quiet);
+    const b=document.getElementById('quiet'); if(b)b.classList.toggle('on',quiet);
+    document.body.classList.toggle('quiet',quiet);}
+  document.getElementById('quiet').onclick=()=>{quiet=!quiet;applyQuiet();renderMap();try{saveState();}catch(_){}};
+  applyQuiet();
+
+  /* Full screen — the browser's bars go, the map takes the window. */
+  const fsBtn=document.getElementById('fscreen');
+  fsBtn.onclick=()=>{const d=document.documentElement;
+    if(!document.fullscreenElement&&!document.webkitFullscreenElement){
+      (d.requestFullscreen||d.webkitRequestFullscreen||function(){}).call(d);
+    } else {
+      (document.exitFullscreen||document.webkitExitFullscreen||function(){}).call(document);
+    }};
+  document.addEventListener('fullscreenchange',()=>{const on=!!document.fullscreenElement;
+    fsBtn.classList.toggle('on',on); setTimeout(()=>{renderMap();fitView();},60);});   // the map box changed size — re-fit to it
   document.getElementById('a11y').onclick=function(){a11y=!a11y;this.classList.toggle('on',a11y);document.getElementById('split').classList.toggle('a11y',a11y);};
   document.getElementById('cbmode').onclick=function(){cbPalette=!cbPalette;this.classList.toggle('on',cbPalette);renderMap();buildViews();};
   // Layout preset: one colour-row per domain family, nodes spread along each row. Toggle restores the organic layout.
@@ -924,19 +971,35 @@
   // glass tooltip + node dragging
   function nodeClient(id){const n=N[id],r=svg.getBoundingClientRect(),sc=Math.min(r.width/VB.w,r.height/VB.h);
     return {cx:r.left+(r.width-VB.w*sc)/2+(n.x*cam.k+cam.tx)*sc, cy:r.top+(r.height-VB.h*sc)/2+(n.y*cam.k+cam.ty)*sc, rad:nodeR(id)*sc*cam.k};}
-  function refreshTip(){const tip=document.getElementById('tip');if(!tip)return;const id=hoverId||sel;
-    if(!id||!byId[id]||!visible(byId[id])){tip.style.display='none';return;}
+  /* THE READOUT WAS THE IPAD KILLER (found with Bee on an iPad Pro, in real Safari, 2026-07-14).
+     applyCam() calls refreshTip() on EVERY pan/zoom frame, and the old version, every single frame:
+       · rewrote tip.innerHTML  (a DOM write)
+       · then read tip.offsetWidth/offsetHeight — which forces the browser to STOP and re-lay-out
+         the page synchronously, mid-frame, to answer the question. Twice.
+     That is layout thrash: write, force-reflow, write, force-reflow, 60×/s. A desktop absorbs it.
+     A tablet does not. And the readout shows on SELECT, not just hover (id = hoverId||sel), so on a
+     touch device — where every tap selects — it was always on, and always thrashing.
+     Now: coalesced to one frame, content rebuilt ONLY when the lock changes, size measured ONCE and
+     cached. Identical to look at. Costs a fraction of what it cost. */
+  let _tipRAF=false,_tipId=null,_tipW=0,_tipH=0;
+  function refreshTip(){ if(_tipRAF)return; _tipRAF=true; requestAnimationFrame(()=>{_tipRAF=false; drawTip();}); }
+  function drawTip(){const tip=document.getElementById('tip');if(!tip)return;const id=hoverId||sel;
+    if(!id||!byId[id]||!visible(byId[id])){tip.style.display='none';_tipId=null;return;}
     const l=byId[id],pane=paneMap.getBoundingClientRect();
-    tip.innerHTML=`<div class="tid">${l.id}</div><div class="tv">${l.value}</div><div class="tdom">${l.domain} · ${l.status}</div>`;
-    tip.style.display='block';
+    if(id!==_tipId){   // only touch the DOM when the lock actually changed — not on every frame of a pan
+      tip.innerHTML=`<div class="tid">${l.id}</div><div class="tv">${l.value}</div><div class="tdom">${l.domain} · ${l.status}</div>`;
+      tip.style.display='block';
+      _tipW=tip.offsetWidth; _tipH=tip.offsetHeight;   // the one forced reflow, paid once per lock
+      _tipId=id;
+    } else if(tip.style.display==='none'){ tip.style.display='block'; }
     if(tipDocked){  // ◲ dock ON → readout always in the corner. Default (off) → always ABOVE the node (hover or select), never corner.
       tip.classList.add('docked'); tip.classList.remove('below');
-      const w=tip.offsetWidth,h=tip.offsetHeight;
+      const w=_tipW,h=_tipH;
       tip.style.left=Math.max(8,pane.width-w-12)+'px';
       tip.style.top=Math.max(8,pane.height-h-34)+'px';   // sits just above the gesture hint
       return;}
     tip.classList.remove('docked');
-    const p=nodeClient(id),nx=p.cx-pane.left, ny=p.cy-pane.top, w=tip.offsetWidth, h=tip.offsetHeight, m=8;
+    const p=nodeClient(id),nx=p.cx-pane.left, ny=p.cy-pane.top, w=_tipW, h=_tipH, m=8;
     let left=Math.max(m, Math.min(pane.width-w-m, nx-w/2));        // decenter to stay inside the map box
     let top=ny-p.rad-10-h, below=false;
     if(top<m){top=ny+p.rad+10; below=true;}                       // flip below near the top edge
