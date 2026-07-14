@@ -126,14 +126,18 @@
     .tip{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(16,26,46,0.93)}
   }
 
-  /* The invisible fingertip target. A mouse is precise and must NOT get a fat hit area — it would make
-     neighbouring nodes steal each other's clicks. A finger is not precise and needs one. So: fingers
-     only. Nothing about the drawing changes either way. */
-  /* fill:none = NEVER painted (I first used fill="transparent", which browsers happily PAINT — that was
-     the black rings Bee saw, on PC and iPad both, 2026-07-14). pointer-events:all makes an unpainted
-     shape hit-testable anyway: invisible to the eye, solid to a finger. That is the whole trick. */
-  .hitpad{fill:none;stroke:none;pointer-events:none}
-  @media (pointer: coarse){ .hitpad{pointer-events:all} }
+  /* ── The invisible fingertip target ──────────────────────────────────────────────────────────
+     A mouse is precise and must NOT get a fat hit area (neighbouring nodes would steal each other's
+     clicks). A finger is not precise and needs one. So: fingers only, and nothing drawn either way.
+
+     The black rings Bee saw (PC and iPad, 2026-07-14) were MINE, and were not a fill — they were a
+     STROKE. `.node circle{stroke:#0a1020;stroke-width:1.5}` paints an outline on every circle inside a
+     node, including this invisible one, and CSS always beats a presentation attribute — so my
+     stroke="none" on the element did precisely nothing. `.hitpad` (0,1,0) also loses to `.node circle`
+     (0,1,1), and even `.node circle.hitpad` (0,2,1) only TIES `.node.unpub circle`, which comes later
+     and would win. An #id selector ends the argument. Specificity, not vibes. */
+  #svg .node circle.hitpad{fill:none;stroke:none;stroke-width:0;pointer-events:none}
+  @media (pointer: coarse){ #svg .node circle.hitpad{pointer-events:all} }
 
   /* ── THE DOOR (small / touch screens only) ── */
   #gate{display:none;position:fixed;inset:0;z-index:50;background:#0a1020;
