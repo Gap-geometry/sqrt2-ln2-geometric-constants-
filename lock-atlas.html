@@ -987,7 +987,7 @@
     const mn=document.getElementById('lmenu'); if(mn)mn.classList.remove('open');
     if(names){const _df=(mode==='value'||mode==='grouped')?0:100; const nd=(namesByLayout[mode]!=null)?namesByLayout[mode]:_df; names.value=nd; document.documentElement.style.setProperty('--label-op',(nd/100).toFixed(2));}   // per-layout name intensity: the user's saved value for THIS layout if set, else the default (off on number line + groups, on elsewhere)
     if(lum){const _le=(mode==='value')?35:100; const lv=(lumByLayout[mode]!=null)?lumByLayout[mode]:_le; lum.value=lv; document.documentElement.style.setProperty('--edge-op',(lv/100).toFixed(2));}   // per-layout edge luminosity: Number line opens dim (~35%) so long lines stop slicing the evidence, full elsewhere; user's saved value for THIS layout wins
-    renderMap(); fitView(); renderPanel(); saveState();}
+    renderMap(); fitView(); renderPanel(); saveState();}   // fitView now knows Groups' own framing (see frameGroups), so the ⌖ reset button and the layout open agree
   // Layout preset: number line — x = numerical value (log scale over locks.json 'numerical'); y = domain swim-lane; valueless (non-numeric) locks land in a left gutter. Writes only l.x/l.y (camera + node grammar untouched).
   function layoutByValue(){
     const LANES=[...new Set(LOCKS.map(l=>l.domain))].sort();
@@ -1029,13 +1029,36 @@
   // ⌖ : frame every visible node, wherever they were dragged — nothing stays lost
   function minZoom(){const b=contentBBox();if(!b)return 0.3;const r=svg.getBoundingClientRect(),sc=Math.min(r.width/VB.w,r.height/VB.h),pad=30;
     return Math.min(3, Math.min((r.width/sc)/((b.x1-b.x0)+pad*2), (r.height/sc)/((b.y1-b.y0)+pad*2)));}
+  /* Groups' framing lives HERE now, so EVERY caller of fitView gets the same picture — the layout
+     opening, the ⌖ reset button, the full-screen re-fit. (Bee, 2026-07-14: ⌖ in Groups snapped to a
+     different, fit-all view than the default. Same door, same room.) Hub-centred, zoomed, nudged. */
+  /* the STABLE anchor for Groups: the most-connected visible lock. Framing on THIS (not on sel) means
+     the cluster holds still no matter which node you've clicked. (Bee, 2026-07-14: Groups drifted because
+     it re-centred on the last-selected node.) */
+  function groupHub(){ const deg={}; EDGES.forEach(e=>{deg[e.a]=(deg[e.a]||0)+1;deg[e.b]=(deg[e.b]||0)+1;});
+    let best=null,bd=-1; LOCKS.forEach(l=>{ if(!visible(l))return; const dg=deg[l.id]||0; if(dg>bd){bd=dg;best=l.id;} }); return best; }
+  function frameGroups(){ const l=byId[groupHub()]; if(!l) return false;
+    const GROUP_ZOOM=1.15, k=GROUP_ZOOM, GX=-46, GY=64;   // absolute zoom; GX -x=left, GY +y=down. Bee's eye.
+    tweenCam(k, VB.w/2 - l.x*k + GX, VB.h/2 - l.y*k + GY); return true; }
   function fitView(){const vis=LOCKS.filter(visible);if(!vis.length){tweenCam(1,0,0);return;}
+    if(curLayout==='grouped' && frameGroups()) return;   // Groups always frames its stable hub, not the selection
     let x0,y0,x1,y1,pad;
     if(byValue&&valScale){x0=6;x1=valScale.X1+8;y0=2;y1=735;pad=8;}   // Values view: frame the whole chart (left domain axis + bottom value axis), not just the dots — y1 grows with the taller vertical field
     else{x0=1e9;y0=1e9;x1=-1e9;y1=-1e9;pad=34;
       vis.forEach(l=>{const rW=nodeR(l.id);x0=Math.min(x0,l.x-rW);x1=Math.max(x1,l.x+rW);y0=Math.min(y0,l.y-rW);y1=Math.max(y1,l.y+rW);});}
-    const bw=(x1-x0)+pad*2,bh=(y1-y0)+pad*2,ff=(curLayout==='orbital'?1.18:(curLayout==='grouped'?0.80:1)),k=Math.max(0.3,Math.min(3,Math.min(VB.w/bw,VB.h/bh)*ff)),cx=(x0+x1)/2,cy=(y0+y1)/2;
-    const shX=byValue?0:0;   // Number line: centred — enough left room for the domain labels without kicking the whole chart toward the panel
+    /* per-layout fit zoom (Bee, 2026-07-14). >1 zooms IN, <1 OUT. Number line ('value') stays 1 —
+       it frames its own axes and must not crop the domain labels. Tune any one number; higher = closer.
+       Bee's insight: fitView frames the BOUNDING BOX, and Groups packs nodes into tight clusters with
+       big empty gaps, so its box is mostly air — the same 'fit' leaves nodes smaller on screen than a
+       spread-out layout does. So Groups needs a HIGHER number than Organic to make its nodes feel as
+       close. Organic 1.35 is her reference ('perfect'); grouped is pushed past it. */
+    const FIT={ grouped:1.82, orbital:1.4, organic:1.0, domain:1.08, value:1 };
+    const ff=FIT[curLayout]||1;
+    /* cap raised 3 -> 4.5 (Bee, 2026-07-14): Groups was STUCK because its fit already hit the old 3x
+       ceiling, so raising its FIT number did nothing. Manual zoom already allows 5x (zoomAt), so 4.5
+       here just lets fitView reach what a fingertip already could. */
+    const bw=(x1-x0)+pad*2,bh=(y1-y0)+pad*2,k=Math.max(0.3,Math.min(4.5,Math.min(VB.w/bw,VB.h/bh)*ff)),cx=(x0+x1)/2,cy=(y0+y1)/2;
+    const shX = byValue ? 26 : (curLayout==='domain' ? 34 : 0);   // small LEFT nudge (viewBox units; bigger = further left). Number line 26; By field 34 — Bee's 'hair-flick', 2026-07-14. Other layouts stay centred.
     tweenCam(k,VB.w/2-cx*k-shX,VB.h/2-cy*k);}
   // glass tooltip + node dragging
   function nodeClient(id){const n=N[id],r=svg.getBoundingClientRect(),sc=Math.min(r.width/VB.w,r.height/VB.h);
