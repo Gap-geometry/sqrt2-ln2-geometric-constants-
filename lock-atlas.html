@@ -1037,8 +1037,13 @@
      it re-centred on the last-selected node.) */
   function groupHub(){ const deg={}; EDGES.forEach(e=>{deg[e.a]=(deg[e.a]||0)+1;deg[e.b]=(deg[e.b]||0)+1;});
     let best=null,bd=-1; LOCKS.forEach(l=>{ if(!visible(l))return; const dg=deg[l.id]||0; if(dg>bd){bd=dg;best=l.id;} }); return best; }
+  /* PUBLIC_BUILD: true when this file holds ONLY the released locks (the generated lock-atlas.html, 85),
+     false in the flagship (110). It's not a mode toggle — it's how many locks are actually LAID OUT. With
+     only 85, the clusters/columns pack tighter and read more zoomed-in, so the public build wants a touch
+     more room. The flagship (110, gaps where held locks sit) keeps the framing Bee tuned. (Bee, 2026-07-14.) */
+  const PUBLIC_BUILD = (typeof DATA==='function') && DATA().length <= 90;
   function frameGroups(){ const l=byId[groupHub()]; if(!l) return false;
-    const GROUP_ZOOM=1.15, k=GROUP_ZOOM, GX=-46, GY=64;   // absolute zoom; GX -x=left, GY +y=down. Bee's eye.
+    const GROUP_ZOOM=(PUBLIC_BUILD?1.05:1.15), k=GROUP_ZOOM, GX=-46, GY=64;   // public build zooms out a touch; flagship keeps 1.15. GX -x=left, GY +y=down.
     tweenCam(k, VB.w/2 - l.x*k + GX, VB.h/2 - l.y*k + GY); return true; }
   function fitView(){const vis=LOCKS.filter(visible);if(!vis.length){tweenCam(1,0,0);return;}
     if(curLayout==='grouped' && frameGroups()) return;   // Groups always frames its stable hub, not the selection
@@ -1052,7 +1057,7 @@
        big empty gaps, so its box is mostly air — the same 'fit' leaves nodes smaller on screen than a
        spread-out layout does. So Groups needs a HIGHER number than Organic to make its nodes feel as
        close. Organic 1.35 is her reference ('perfect'); grouped is pushed past it. */
-    const FIT={ grouped:1.82, orbital:1.4, organic:1.0, domain:1.08, value:1 };
+    const FIT={ grouped:1.82, orbital:1.4, organic:1.0, domain:(PUBLIC_BUILD?0.98:1.08), value:1 };   // By field: the 85-lock public build zooms out a touch (Bee, 2026-07-14); flagship keeps 1.08
     const ff=FIT[curLayout]||1;
     /* cap raised 3 -> 4.5 (Bee, 2026-07-14): Groups was STUCK because its fit already hit the old 3x
        ceiling, so raising its FIT number did nothing. Manual zoom already allows 5x (zoomAt), so 4.5
