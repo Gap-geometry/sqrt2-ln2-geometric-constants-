@@ -125,6 +125,12 @@
   @media (pointer: coarse){
     .tip{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(16,26,46,0.93)}
   }
+
+  /* The invisible fingertip target. A mouse is precise and must NOT get a fat hit area — it would make
+     neighbouring nodes steal each other's clicks. A finger is not precise and needs one. So: fingers
+     only. Nothing about the drawing changes either way. */
+  .hitpad{pointer-events:none}
+  @media (pointer: coarse){ .hitpad{pointer-events:all} }
   /* ── Accessibility lens (◐ Clarity) — opt-in; higher contrast, thicker links, bolder labels, leans on shape over colour ── */
   .a11y #svg{filter:contrast(1.12) brightness(1.05)}
   .a11y .edge{stroke:#4a5f86;stroke-width:1.1}
@@ -442,8 +448,16 @@
       const flip=(l.x*cam.k+cam.tx)+(r+6+l.id.length*6)*cam.k > VBR;   // label would cross the divider → put it on the left
       // Values view de-clutter: only the selected node keeps its id label; others read as dots (hover shows identity in the readout).
       const txt=`<text x="${(r+3).toFixed(1)}" y="3">${l.id}</text>`;   // labels always drawn; the names slider (--label-op) decides visibility — value/grouped default it to 0 (off, drag up to reveal), on elsewhere
+      /* FINGERTIP TARGET (Bee, on an iPad Pro, 2026-07-14: "hitting nodes — too far away, need to zoom").
+         A fingertip covers ~8mm; Apple's own guideline asks for a 44pt target. These nodes are 12–20px.
+         So a finger MISSES, grabs the background, pans instead of selecting — and the reader is pushed
+         into zooming in just to touch a dot, then out again to reach a button. That loop is the bug.
+         This circle is invisible and changes nothing you can see: the dot stays exactly its own size,
+         only the GRABBABLE area grows to what a finger can actually hit. Mouse pointers ignore it
+         entirely (see .hitpad in the CSS), so precision on a desktop is untouched. */
+      const hitR=Math.max(r+13,22);
       const g=`<g class="node${hot?' hot':''}${peek===l.id?' peek':''}${dimCls}${l.pub!=="released"?' unpub':''}" data-id="${l.id}" transform="translate(${l.x.toFixed(1)},${l.y.toFixed(1)})">
-        ${shape}${txt}</g>`;
+        <circle class="hitpad" r="${hitR.toFixed(1)}" fill="transparent"/>${shape}${txt}</g>`;
       if(hot)selTop+=g;else s+=g;});
     s+=selTop;   // selected node rendered last → on top of its cluster, so it's always grab-able (fixes drag-in-a-cluster)
     svg.innerHTML=`<g id="cam">${s}</g>`; applyCam();
