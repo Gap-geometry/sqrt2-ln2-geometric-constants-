@@ -16,7 +16,15 @@
      pinch and zooms the whole page, and one-finger drags scroll the document instead of panning. ---- */
   #svg{touch-action:none;-webkit-tap-highlight-color:transparent}
   #svg *{-webkit-tap-highlight-color:transparent}
-  header{padding:11px 16px;border-bottom:1px solid var(--line)}
+  header{padding:11px 16px;border-bottom:1px solid var(--line);position:relative}
+  /* a way OUT (Bee, 2026-07-14): clicking nodes fills the browser history, so the Back button crawls
+     through every selection instead of leaving. These are direct doors to the Hub and About — one click
+     out, no history to unwind. Same idea as the nav strip at the foot of the white pages. */
+  .atlas-nav{position:absolute;top:12px;right:16px;display:flex;gap:8px;align-items:center;z-index:5}
+  .atlas-nav a{font-size:11.5px;color:var(--dim);text-decoration:none;border:1px solid var(--line);
+    border-radius:7px;padding:4px 10px;background:#0a1020;white-space:nowrap;transition:color .2s,border-color .2s}
+  .atlas-nav a:hover{color:var(--gold);border-color:var(--gold)}
+  @media (max-width:720px){ .atlas-nav{position:static;margin-top:8px;right:auto;top:auto} }
   h1{font-size:26px;margin:0;font-weight:400;letter-spacing:2px;color:var(--gold)}   /* instrument title standard 2026-07-07 */
   h1 .hint{color:var(--dim);font-weight:400;letter-spacing:normal}
   .tag{color:var(--dim);font-size:11.5px;margin-top:2px;max-width:980px}
@@ -253,6 +261,10 @@
 </head>
 <body>
   <header>
+    <nav class="atlas-nav">
+      <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations%20hub.html" title="Back to the Visualisations Hub">← Visualisations</a>
+      <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html" title="Back to About / the front page">About</a>
+    </nav>
     <h1>THE LOCK ATLAS <span class="hint">· the framework's identities as a living map</span></h1>
     <p class="tag">Click a node → it opens in the panel <b>without leaving the map</b>. Drag the middle bar to make either side bigger. Every lock has a permanent <b>ID</b>; the URL anchor <code>#&lt;lock_id&gt;</code> is the citation contract.</p>
   </header>
@@ -307,7 +319,13 @@
           <button id="a11y" title="Accessibility lens (Clarity) — higher contrast, thicker links, bolder labels; leans on shape over colour">◐</button>
           <button id="cbmode" title="Colour-blind-safe palette (Okabe–Ito) — swaps the domain colours for maximum hue distinctness">🎨</button>
           <button id="zdock" title="Dock the readout to the corner — ON: always in the corner · OFF (default): always above the node (hover or select)">◲</button>
-        <button id="quiet" title="Quiet — the motion rests. Sparks stop travelling, the halo stops breathing, the reticle stops turning. Nothing is removed: every lock, every edge, every walk stays exactly where it is. Kinder on the eyes, on the attention, and on an older machine.">☾</button>
+        <!-- Quiet — DORMANT 2026-07-14 (Bee): freezing a travelling spark left ugly static dashes on the map,
+             and the Atlas is already calm by default, so the feature earned little. Hidden, not deleted — the
+             CSS (.quiet …), the state, and the wiring all remain, so re-enabling it later (as a proper slow-motion
+             / reduced-effects setting) is: remove display:none here + restore the auto-on default + the saved-state
+             restore below. The performance fixes it shipped alongside (refreshTip, touch blur, hit-targets) are
+             separate and STAY. -->
+        <button id="quiet" style="display:none" title="Quiet — rests all motion (dormant).">☾</button>
         <button id="fscreen" title="Full screen — hide the browser's own bars and give the map the whole window. Best on a tablet, or any screen where the Atlas feels cramped.">⛶</button>
           <span class="sldwrap" title="Connection luminosity — brightness of the link lines. Dim them to let the nodes breathe, or brighten to trace the web."><b>≈</b><input id="lum" type="range" min="6" max="100" value="100"></span>
           <span class="sldwrap" title="Name intensity — brightness of the lock names on the map. Fade them for a clean colour-web, or bring them up to read every label. (Each layout keeps its own show/hide; this rides on top.)"><b>A</b><input id="names" type="range" min="0" max="100" value="100"></span>
@@ -346,8 +364,7 @@
   /* Quiet: motion rests, nothing is removed. Starts ON if the reader's OS asks for reduced motion,
      or if this is a touch device — where the animation costs the most and helps the least (iPad Pro,
      real Safari, still laggy: Bee, 2026-07-14). Either way it is a switch, and the reader owns it. */
-  let quiet = (window.matchMedia && (matchMedia("(prefers-reduced-motion: reduce)").matches
-                                  || matchMedia("(pointer: coarse)").matches)) || false;
+  let quiet = false;   // DORMANT 2026-07-14 — was auto-on for touch / prefers-reduced-motion. Kept as a var so the wiring stays intact; to revive, restore the matchMedia default that lived here.
   let MODE="public", q="", sel=null, peek=null, dragNode=null, hoverId=null, flashlight=false, tipDocked=false, a11y=false, byDomain=false, byValue=false, valScale=null,
       fDom=new Set(LOCKS.map(l=>l.domain)), fStat=new Set(LOCKS.map(l=>l.status)), dragPos={}, byOrbital=false, curLayout='organic', grpFlash=false, grpFlashOff=false;
   function hexPts(r){let p=[];for(let i=0;i<6;i++){const a=Math.PI/2+i*Math.PI/3;p.push((r*Math.cos(a)).toFixed(1)+","+(r*Math.sin(a)).toFixed(1));}return p.join(" ");}
@@ -785,7 +802,9 @@
     if(st.namesBy&&typeof st.namesBy==='object')namesByLayout=st.namesBy; else if(st.names!=null&&st.lay)namesByLayout[st.lay]=+st.names;   // restore per-layout name intensity (migrate an old single 'names' onto its layout) — BEFORE setLayout so it's applied
     if(st.gfOff)grpFlashOff=true;   // you turned the flashlight off inside Groups once — Groups remembers, and won't force it back on
     if(st.wfOff)walkFlashOff=true;  // and the same for the walks — asked once, never again
-    if(typeof st.qt==='boolean'){quiet=st.qt;applyQuiet();}   // your Quiet choice outranks the device default — said once, kept
+    /* Quiet DORMANT 2026-07-14 — do NOT restore a saved qt (a touch device may have auto-saved qt:true
+       before it was retired; honouring it would revive the frozen-spark look). To revive Quiet, restore:
+       if(typeof st.qt==='boolean'){quiet=st.qt;applyQuiet();} */
     {const _lay=st.lay||'value'; setLayout((_lay==='orbital'&&MODE!=='internal')?'value':_lay);}   // saved layout, or the default for a first visit: the Number line (the evidence view — lead with it). Clusters only restores in Internal.
     if(st.cam&&isFinite(st.cam.k)&&(st.lay||'value')==='organic'){cam.k=st.cam.k;cam.tx=st.cam.tx;cam.ty=st.cam.ty;applyCam();}   // remember zoom/pan for ORGANIC only; the auto-layout presets always frame themselves fresh
   }catch(e){}}
