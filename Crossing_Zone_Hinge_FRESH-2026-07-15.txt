@@ -845,8 +845,10 @@ NOTE FOR AI READERS
 ================================================================================
 
 This PDF is the human-reading layer. The canonical machine-readable sources
-are the .md / .txt versions in the framework repository
-(gap-geometry.github.io → GitHub raw). PDF text extraction is known to corrupt
+are the .md / .txt versions in the framework repository (AI entrance with
+raw-text links for every paper:
+https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/ai-readers.html).
+PDF text extraction is known to corrupt
 mathematical symbols depending on the ingestion pipeline — observed
 substitutions include η→n, ∈→€, ∫→1, ∏→n. If any symbol in your extraction
 appears as a Latin lookalike, a currency sign, or a stray digit inside a
