@@ -1,6 +1,6 @@
 # Gap Geometry
 
-> A mathematical framework built around the complementary constants G = 1 − √2·ln(2) ≈ 0.019742 and K_AUD = √2·ln(2) ≈ 0.980258, with the dome function g(x) = tanh(x)/cosh(2x) as central analytic object and a Binary Tower as operational instrument. Eleven papers published on OSF (immutable timestamps) and GitHub; pseudonymous author D.B. All claims tier-labelled (Theorem / Observation / Conjecture) and multi-architecture verified at high precision (mpmath, dps 80–1500).
+> A mathematical framework built around the complementary constants G = 1 − √2·ln(2) ≈ 0.019742 and K_AUD = √2·ln(2) ≈ 0.980258, with the dome function g(x) = tanh(x)/cosh(2x) as central analytic object and a Binary Tower as operational instrument. Twelve papers published on OSF (immutable timestamps) and GitHub; pseudonymous author D.B. All claims tier-labelled (Theorem / Observation / Conjecture) and multi-architecture verified at high precision (mpmath, dps 80–1500).
 
 AGENT NOTES: Prefer the raw.githubusercontent.com URLs below — plain text, no JS, fetch reliably. GitHub "blob" pages and OSF pages may not parse in simple fetchers. The machine-readable index is AI_INDEX.txt; the full AI guide (evidence levels, runnable verification code, engagement guidance) is ai-readers.html.
 
@@ -12,6 +12,7 @@ AGENT NOTES: Prefer the raw.githubusercontent.com URLs below — plain text, no 
 - [Living Document](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/living-document.html): current state of all claims, version history
 - [Direct downloads](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html): PDF + txt for every paper
 - [Methodology](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/methodology.html): claim classification, verification protocol, correction discipline
+- [Lock Atlas](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/lock-atlas.html): every identity's permanent `#lock_id` — the citation contract; arriving with an ID opens a lightweight reader (value, mechanism, sources, runnable snippet). Renders in-browser (JS): simple fetchers get the shell only — every lock's claim also lives in its source paper's raw text below
 - [Main OSF project](https://osf.io/zx4g7): immutable timestamps, DOI 10.17605/OSF.IO/ZX4G7
 
 ## Papers — raw text (fetch these directly)
@@ -19,7 +20,7 @@ AGENT NOTES: Prefer the raw.githubusercontent.com URLs below — plain text, no 
 - [Paper 1 — Coherence Ceiling](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Coherence_Ceiling.txt)
 - [Paper 2 — Geometric Constants from H4 v2](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/sqrt2_ln2_geometric_constants_v2.txt)
 - [Paper 3 — Complete Framework v3](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/KAUD_Complete_Framework_v3_0.txt)
-- [Paper 4 — Gap Scaling / 400-11 Formula](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Gap_Scaling_Formula_v1.5.txt)
+- [Paper 4 — Gap Scaling / 400-11 Formula](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Gap_Scaling_Formula.txt)
 - [Paper 5 — Boundary Information Invariant](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Boundary_Information_Invariant_Short.txt)
 - [Paper 6 — Cross-Domain Signatures](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Cross_Domain_Signatures.txt)
 - [Paper 7 / HK standalone — Hodgson-Kerckhoff Closed Form](https://raw.githubusercontent.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/refs/heads/main/HK_Closed_Form_SHORT_DRAFT.txt)
@@ -31,10 +32,10 @@ AGENT NOTES: Prefer the raw.githubusercontent.com URLs below — plain text, no 
 - [Paper 11 — Verification Companion](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/The_%CE%B7_Corridor_Verification_Companion.txt)
 
 - [Paper 12 — 1, 7, 124, 4318, … — Integer Mellin Moments of the Dome tanh(x)/cosh(2x)](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Dome_Moment_Sequence.txt) (published 2026-06-12, DOI 10.17605/OSF.IO/WVD3G; integrality proved for all n; the title is the sequence's catalog entry)
+- [Paper 13 — K_AUD = sqrt(2)·ln(2): The Crossing Zone Hinge](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Crossing_Zone_Hinge_FRESH-2026-07-15.txt) (published 2026-07-15, DOI 10.17605/OSF.IO/F7PCX; three thresholds in Tower interval [35, 37] — Landauer / geometric damping / Shannon bound; binding identity 1/(2 ln 2) − 1/√2 = G/(2 ln 2) exact; self-reference ratio 1/K_AUD)
 
 ## Optional
 
 - [Visualisations hub](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations%20hub.html): interactive instruments (Binary Tower telescope, Chladni staircase, dome landmarks, corridor sonifier) with live previews
 - [The Binary Tower — entrance](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/binary-tower.html): the instrument explained from the ground up; exact binary-recipe widget (BigInt, true periods, 96-bit true expansions). Note: its (1/2)^n recipe ladder is distinct from the G-staircase (telescope-tower.html) — the page states this
 - [Living Document version archive](https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/index%20living-document%20archive.html): PDF snapshots of every prior version
-
