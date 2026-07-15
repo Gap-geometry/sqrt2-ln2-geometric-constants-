@@ -257,6 +257,22 @@
   .vall:hover{color:#fff} .vsep{color:var(--line)}
   .vchk{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink);cursor:pointer;white-space:nowrap}
   .vchk input{accent-color:#8cc1ee;cursor:pointer}
+
+  /* ── ATLAS OVERHAUL · Reader / Map view states (2026-07-15) ────────────────────────────────
+     READER = the lock's panel, full width, NO map built (renderMap short-circuits — see its guard).
+     MAP    = today's Atlas, side-by-side, unchanged. Two states of one Atlas; a real toggle. */
+  body.reader .pane-map,
+  body.reader #divider{display:none}
+  body.reader .pane-panel{flex:1}
+  body.reader #viewbar{display:none}          /* the filter drawer is a map tool */
+  body.reader #tip{display:none}              /* the glass readout is map-only */
+  /* the view toggle buttons in the top bar — show the one that DOES something in the current state */
+  .viewbtn{font-size:11.5px;padding:4px 10px;border-radius:7px;cursor:pointer;border:1px solid var(--line);
+    background:#0a1020;color:var(--gold);white-space:nowrap}
+  .viewbtn:hover{border-color:var(--gold)}
+  .viewbtn .warn{color:var(--dim);font-size:10px;font-weight:400;margin-left:2px}
+  body.reader #toReaderBtn{display:none}      /* already reader → hide "reader only" */
+  body.map    #toMapBtn{display:none}         /* already map → hide "open map" */
 </style>
 </head>
 <body>
@@ -273,7 +289,9 @@
     <span class="hint">view</span>
     
     
-    <input id="search" placeholder="search…" style="margin-left:auto;width:150px"/>
+    <button class="viewbtn" id="toMapBtn" style="margin-left:auto" title="Open the map — best on a wide screen">⊞ Map / visualisation<span class="warn"> · best on a wide screen</span></button>
+    <button class="viewbtn" id="toReaderBtn" style="margin-left:auto" title="Collapse the map — read the panel only">▢ Reader only</button>
+    <input id="search" placeholder="search…" style="width:150px"/>
   </div>
 
   <!-- ── THE DOOR ─────────────────────────────────────────────────────────────────────
@@ -365,6 +383,7 @@
      or if this is a touch device — where the animation costs the most and helps the least (iPad Pro,
      real Safari, still laggy: Bee, 2026-07-14). Either way it is a switch, and the reader owns it. */
   let quiet = false;   // DORMANT 2026-07-14 — was auto-on for touch / prefers-reduced-motion. Kept as a var so the wiring stays intact; to revive, restore the matchMedia default that lived here.
+  let viewMode="map";   // ATLAS OVERHAUL: 'reader' (panel only, no map built) | 'map' (today's Atlas). Set properly on load by the two-arrival rule.
   let MODE="public", q="", sel=null, peek=null, dragNode=null, hoverId=null, flashlight=false, tipDocked=false, a11y=false, byDomain=false, byValue=false, valScale=null,
       fDom=new Set(LOCKS.map(l=>l.domain)), fStat=new Set(LOCKS.map(l=>l.status)), dragPos={}, byOrbital=false, curLayout='organic', grpFlash=false, grpFlashOff=false;
   function hexPts(r){let p=[];for(let i=0;i<6;i++){const a=Math.PI/2+i*Math.PI/3;p.push((r*Math.cos(a)).toFixed(1)+","+(r*Math.sin(a)).toFixed(1));}return p.join(" ");}
@@ -454,6 +473,7 @@
   const cam={k:1,tx:0,ty:0}, VB={w:720,h:460};
   function applyCam(){const g=document.getElementById('cam');if(g)g.setAttribute('transform',`translate(${cam.tx.toFixed(2)},${cam.ty.toFixed(2)}) scale(${cam.k.toFixed(4)})`);if(typeof refreshTip==='function')refreshTip();}
   function renderMap(){
+    if(viewMode==='reader') return;   // ATLAS OVERHAUL: in reader view the map is NOT built — this one guard neutralises every renderMap() call site at once, so no map cost until the map is opened
     const show=new Set(LOCKS.filter(visible).map(l=>l.id)); let s="", sp="";   // sp = sparks, kept OUT of the map's layer (see #sparks in the CSS)
     // Values view: number-line axis + domain swim-lanes, drawn under everything (rides the #cam transform). Only when byValue.
     if(byValue&&valScale){const vs=valScale;const GTOP=34,GBOT=692;
@@ -718,7 +738,7 @@
       <div class="val">${l.value}</div>${l.numerical?`<div class="num">${l.numerical}</div>`:""}
       <div class="sec"><h4>Mechanism</h4><div class="body">${l.mechanism||"—"}</div></div>
       <div class="sec"><h4>Key equation</h4><div class="keq">${l.key_equation||"—"}</div></div>
-      <div class="sec"><h4>Related locks <span style="text-transform:none;letter-spacing:0;font-weight:400;color:var(--dim)">· click to glow on the map · open it from there</span></h4><div class="rels">${(l.related||[]).map(relChip).join("")||"—"}</div></div>
+      <div class="sec"><h4>Related locks <span style="text-transform:none;letter-spacing:0;font-weight:400;color:var(--dim)">· ${viewMode==='reader'?'tap to follow':'click to glow on the map · open it from there'}</span></h4><div class="rels">${(l.related||[]).map(relChip).join("")||"—"}</div></div>
       <div class="sec"><h4>Notes</h4><div class="body">${l.notes||"—"}</div></div>
       ${verdictHTML(l)}
       <div class="verify"><h4>Verify — self-contained mpmath</h4>
@@ -728,7 +748,10 @@
         <div class="body">${srcline}</div>
         ${(l.cited_in&&l.cited_in.length)?`<div class="body" style="margin-top:9px"><span class="hint">Also appears in:</span><ul style="margin:4px 0 0;padding-left:18px;font-size:12.5px">${l.cited_in.map(c=>`<li style="margin:2px 0">${c.doi?`<a class="doi" href="https://doi.org/${c.doi}" target="_blank" rel="noopener">${c.paper}</a>`:`<b>${c.paper}</b>`}${c.where?` — <span class="hint">${c.where}</span>`:""}</li>`).join("")}</ul></div>`:""}
         <div class="srchint">Cite this lock by its permanent ID: <span class="srcid">#${l.id}</span></div></div>`;
-    panel.querySelectorAll('[data-go]').forEach(e=>e.onclick=()=>peekRel(e.dataset.go));
+    /* ATLAS OVERHAUL: related-chip behaviour is mode-aware. In READER, a chip navigates reader→reader
+       (open() updates #hash + panel; its renderMap no-ops, so no map is built). In MAP, keep the glow-
+       then-open-from-the-node behaviour. */
+    panel.querySelectorAll('[data-go]').forEach(e=>e.onclick=()=> (viewMode==='reader') ? open(e.dataset.go) : peekRel(e.dataset.go) );
     wireWalks();
     const code=document.getElementById('mpcode'); const mptext=l.mpmath||verifyFallback(l); if(code)code.textContent=mptext;
     const mpc=document.getElementById('mpcopy');
@@ -791,7 +814,14 @@
   const _CTRLS=['a11y','cbmode','zdock','wheel'];  // flashlight intentionally NOT persisted — it's Groups-scoped now; 'wheel' remembers whether the visual-tools tray is open
   const wheelb=document.getElementById('wheel'), vtray=document.getElementById('vtray');
   if(wheelb)wheelb.onclick=e=>{e.stopPropagation(); wheelb.classList.toggle('on'); if(vtray)vtray.classList.toggle('open'); try{saveState();}catch(_){}};   // the wheel slides the visual tools open/closed, inline to the right
-  function saveState(){try{const on={};_CTRLS.forEach(id=>{const b=document.getElementById(id);if(b)on[id]=b.classList.contains('on');});
+  function saveState(){
+    /* THE GOLDEN RULE (Atlas Overhaul, 2026-07-15): a citation opened in READER view must NEVER
+       overwrite a PC user's saved map session. In reader mode there is no camera / layout / filter to
+       save — those are all map tools — so reader writes NOTHING. localStorage is shared across tabs, so
+       this is what keeps a reader tab from silently stomping the map tab's saved camera + layout.
+       Once the reader opens the map (viewMode → 'map'), saving resumes normally. */
+    if(viewMode==='reader') return;
+    try{const on={};_CTRLS.forEach(id=>{const b=document.getElementById(id);if(b)on[id]=b.classList.contains('on');});
     localStorage.setItem('atlas_state_v1',JSON.stringify({on,w:paneMap.style.flex||'',lumBy:lumByLayout,namesBy:namesByLayout,gfOff:grpFlashOff,wfOff:walkFlashOff,qt:quiet,pos:dragPos,lay:curLayout,cam:{k:+cam.k.toFixed(4),tx:+cam.tx.toFixed(1),ty:+cam.ty.toFixed(1)}}));}catch(e){}}
   function loadState(){try{let st=null; try{st=JSON.parse(localStorage.getItem('atlas_state_v1')||'null');}catch(e){} st=st||{};
     if(st.w)paneMap.style.flex=st.w;
@@ -879,19 +909,15 @@
   document.getElementById('zreset').onclick=()=>fitView();
   document.getElementById('zdock').onclick=function(){tipDocked=!tipDocked;this.classList.toggle('on',tipDocked);refreshTip();};
 
-  /* THE DOOR. Shown on a finger-driven screen, or any window too narrow to sit the map and the panel
-     side by side (the Atlas's whole grammar is "it opens right here, the map never goes away" — below
-     ~1024px that promise cannot be kept). It states the truth once, then opens. Dismissal is remembered,
-     because a warning that repeats forever stops being a courtesy and becomes a nag. */
+  /* THE DOOR — RETIRED by the Atlas Overhaul, 2026-07-15. Reader-first ABSORBS it: a small screen now
+     defaults to the fast reader view (not the heavy map), so the old "this asks for a bigger table, open
+     anyway" warning is both redundant AND wrong (it warned about a map the reader wasn't going to get).
+     The honest small-screen answer is now: land on the lock, and the ⊞ Map button carries its own
+     "best on a wide screen" caveat for anyone who wants to try it. The #gate HTML + CSS are left dormant
+     (kept for reference / possible reuse); this trigger simply never fires. */
   (function(){const gate=document.getElementById('gate');if(!gate)return;
-    const coarse=window.matchMedia&&matchMedia('(pointer: coarse)').matches;
-    const narrow=window.innerWidth<1024;
-    let seen=false; try{seen=localStorage.getItem('atlas_door_v1')==='1';}catch(_){}
-    if((coarse||narrow)&&!seen) gate.classList.add('show');
     const go=document.getElementById('gateGo');
-    if(go)go.onclick=()=>{gate.classList.remove('show');
-      try{localStorage.setItem('atlas_door_v1','1');}catch(_){}
-      try{renderMap();fitView();}catch(_){}};   // the map was laid out behind a covered window — re-fit it
+    if(go)go.onclick=()=>gate.classList.remove('show');   // wired, but the gate is never shown now
   })();
 
   /* Quiet — a preference about motion, not a verdict about the reader's machine. */
@@ -1148,8 +1174,35 @@
     if(d<0.5){dx=Math.cos(i*1.7+j*0.9);dy=Math.sin(i*1.7+j*0.9);d=1;}   // coincident/stacked nodes have no direction to push — fan them apart deterministically
     if(d<mind){const p=(mind-d)/2,ux=dx/d,uy=dy/d; a.x-=ux*p;a.y-=uy*p;b.x+=ux*p;b.y+=uy*p;}}})();
   LOCKS.forEach(l=>{l._hx=l.x;l._hy=l.y;});   // clean 'home' baseline for organic (your saved drags override it)
-  setMode('public'); renderMap(); renderPanel();
-  const init=location.hash.slice(1); if(byId[init])open(init,false);
+  /* ── ATLAS OVERHAUL · the reader ↔ map switch ────────────────────────────────────────────
+     setViewMode sets the body class FIRST (so the map pane is visible before we measure it),
+     then builds the map only when entering map view. Reader view never calls renderMap (its guard
+     also short-circuits). Every caller — buttons, load — routes through here. */
+  function setViewMode(m){
+    viewMode = (m==='reader') ? 'reader' : 'map';
+    document.body.classList.toggle('reader', viewMode==='reader');
+    document.body.classList.toggle('map',    viewMode==='map');
+    if(viewMode==='map'){ renderMap(); try{fitView();}catch(e){} }
+    renderPanel();
+    /* view is NOT persisted — the two-arrival rule derives it fresh each load (a citation stays a citation,
+       an entrance stays an entrance). Nothing to save here; the golden rule lives in saveState. */
+  }
+  const _mb=document.getElementById('toMapBtn'), _rb=document.getElementById('toReaderBtn');
+  if(_mb)_mb.onclick=()=>setViewMode('map');
+  if(_rb)_rb.onclick=()=>setViewMode('reader');
+
+  setMode('public'); renderPanel();
+  const init=location.hash.slice(1);
+
+  /* THE TWO-ARRIVAL RULE (step-2 baseline; refined in step 3):
+       · arrived WITH a #lock_id  → a citation → READER on that lock (every device)
+       · arrived WITHOUT one      → an entrance → MAP on a wide screen, READER on narrow/touch  */
+  const _hasCitation = !!byId[init];
+  const _narrow = (window.matchMedia && (matchMedia("(pointer: coarse)").matches || matchMedia("(max-width: 1023px)").matches));
+  const _startReader = _hasCitation || _narrow;
+  if(_hasCitation) sel = init;            // land the reader on the cited lock
+  setViewMode(_startReader ? 'reader' : 'map');
+  if(_hasCitation && viewMode==='map') open(init,false);   // (map + citation only happens if we later allow it; harmless now)
 
   /* ===========================================================================
    THE WALKS  —  "A walk is a path, not an argument."
