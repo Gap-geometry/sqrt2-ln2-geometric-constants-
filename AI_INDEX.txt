@@ -160,7 +160,7 @@ Paper 12 (1, 7, 124, 4318, … — Integer Mellin Moments of the Dome tanh(x)/co
   DOI:      10.17605/OSF.IO/WVD3G
 
 Paper 13 (K_AUD = √2·ln(2): The Crossing Zone Hinge — three thresholds in Tower interval [35, 37]: Landauer / geometric damping / Shannon bound; binding identity 1/(2 ln 2) − 1/√2 = G/(2 ln 2) exact; self-reference ratio 1/K_AUD; published 2026-07-15):
-  Raw:      https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Crossing_Zone_Hinge_FRESH-2026-07-15.txt
+  Raw:      https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Crossing_Zone_Hinge.txt
   OSF:      https://osf.io/f7pcx/
   OSF txt:  https://osf.io/f7pcx/files/fh76a
   OSF pdf:  https://osf.io/f7pcx/files/f6aq8
