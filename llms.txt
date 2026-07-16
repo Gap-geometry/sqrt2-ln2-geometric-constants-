@@ -32,7 +32,7 @@ AGENT NOTES: Prefer the raw.githubusercontent.com URLs below — plain text, no 
 - [Paper 11 — Verification Companion](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/The_%CE%B7_Corridor_Verification_Companion.txt)
 
 - [Paper 12 — 1, 7, 124, 4318, … — Integer Mellin Moments of the Dome tanh(x)/cosh(2x)](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Dome_Moment_Sequence.txt) (published 2026-06-12, DOI 10.17605/OSF.IO/WVD3G; integrality proved for all n; the title is the sequence's catalog entry)
-- [Paper 13 — K_AUD = sqrt(2)·ln(2): The Crossing Zone Hinge](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Crossing_Zone_Hinge_FRESH-2026-07-15.txt) (published 2026-07-15, DOI 10.17605/OSF.IO/F7PCX; three thresholds in Tower interval [35, 37] — Landauer / geometric damping / Shannon bound; binding identity 1/(2 ln 2) − 1/√2 = G/(2 ln 2) exact; self-reference ratio 1/K_AUD)
+- [Paper 13 — K_AUD = sqrt(2)·ln(2): The Crossing Zone Hinge](https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Crossing_Zone_Hinge.txt) (published 2026-07-15, DOI 10.17605/OSF.IO/F7PCX; three thresholds in Tower interval [35, 37] — Landauer / geometric damping / Shannon bound; binding identity 1/(2 ln 2) − 1/√2 = G/(2 ln 2) exact; self-reference ratio 1/K_AUD)
 
 ## Optional
 
