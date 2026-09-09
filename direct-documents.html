@@ -1,540 +1,76 @@
+<!--
+  Gap Geometry — temporary MAINTENANCE / holding page.
+  Use: when reworking the site (e.g. rebuilding Repo 1), copy this whole file's contents and paste it
+  over the current main-gate page (the About page). It is fully self-contained — no external files,
+  no fonts, no scripts to fetch — so it works the moment it's live. Remove it (restore the real page)
+  when the rework is done. Keep this file named "Maintenance" so it is never mistaken for a live page.
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gap Geometry — Documents</title>
-<link rel="alternate" type="text/plain" href="AI_INDEX.txt" title="Machine-readable index (plain text)">
-<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt — AI site map">
-<meta name="author" content="D. B.">
-<meta name="description" content="Direct access to all published Gap Geometry documents. No summaries, no filters — the work speaks for itself.">
-
-<!--
-  ============================================================
-  PUBLICATION DATE STANDARD — Gap Geometry (blueprint for all living docs)
-  ============================================================
-
-  Every document entry carries a date line in the format:
-
-      Published: YYYY-MM-DD · Last update: YYYY-MM-DD · OSF: [id]
-
-  Rules:
-    1. "Published" is the FIRST OSF upload timestamp — immutable, third-party verified.
-    2. "Last update" is shown ONLY if the document has been revised after creation.
-       If Created == Updated, omit the "Last update" half.
-    3. Dates are written in ISO 8601 (YYYY-MM-DD) — sortable, country-agnostic, unambiguous.
-    4. Source of truth: osf.io metadata fields "Date Created" and "Date Updated".
-    5. Priority record (master list): /Gap Geometry/Publication Dates.md
-
-  ISO 8601 conversion reference (from OSF's "MMM DD, YYYY" format):
-      Jan 21, 2026  ->  2026-01-21
-      Jan 24, 2026  ->  2026-01-24
-      Jan 25, 2026  ->  2026-01-25
-      Feb  4, 2026  ->  2026-02-04
-      Mar 14, 2026  ->  2026-03-14
-      Mar 18, 2026  ->  2026-03-18
-      Mar 26, 2026  ->  2026-03-26
-      Apr  3, 2026  ->  2026-04-03
-      Apr 13, 2026  ->  2026-04-13
-
-  Why ISO: a reader in any country, at any time, with any locale setting, reads the same date.
-  2026-01-21 is unambiguous; "01/21/2026" vs "21/01/2026" is not.
-  ============================================================
--->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Gap Geometry — being reworked</title>
 <style>
-  :root {
-    --text: #1a1a1a;
-    --muted: #5a5a5a;
-    --subtle: #8a8a8a;
-    --rule: #c8c8c8;
-    --bg: #ffffff;
-    --card-bg: #fafaf8;
-    --card-border: #e0e0de;
-    --link: #2a5a8a;
-    --link-hover: #1a3a5a;
-    --max-width: 760px;
+  :root{
+    --ink:#1a2233;      /* deep navy ink   */
+    --muted:#5b6577;    /* soft grey       */
+    --line:#e6e8ee;     /* hairline        */
+    --gold:#b8892b;     /* restrained gold */
+    --bg:#ffffff;       /* white           */
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { background: var(--bg); }
-  body {
-    font-family: Optima, "Palatino Linotype", Palatino, Georgia, serif;
-    font-size: 17px;
-    line-height: 1.6;
-    color: var(--text);
-    background: var(--bg);
-    padding: 0 24px;
-    -webkit-font-smoothing: antialiased;
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    display:flex; align-items:center; justify-content:center; min-height:100vh; padding:2rem;
   }
-  main {
-    max-width: var(--max-width);
-    margin: 0 auto;
-    padding: 56px 0 80px 0;
-  }
+  .card{max-width:560px; width:100%; text-align:center}
 
-  /* Header */
-  header {
-    text-align: center;
-    padding-bottom: 32px;
-    margin-bottom: 40px;
-    border-bottom: 1px solid var(--rule);
-  }
-  h1.page-title {
-    font-size: 28px;
-    font-weight: 600;
-    letter-spacing: 0.01em;
-    margin-bottom: 10px;
-  }
-  p.page-intro {
-    font-size: 15px;
-    color: var(--muted);
-    max-width: 520px;
-    margin: 0 auto;
-  }
+  /* a quiet breathing mark: a circle with a small gap (a nod to the framework) */
+  .mark{width:56px; height:56px; margin:0 auto 1.6rem; display:block}
+  .mark circle{fill:none; stroke:var(--gold); stroke-width:3; stroke-linecap:round;
+    stroke-dasharray:150; stroke-dashoffset:26;               /* leaves a small gap in the ring */
+    transform-origin:50% 50%; animation:breathe 4.2s ease-in-out infinite}
+  @keyframes breathe{0%,100%{opacity:.55; transform:rotate(0deg)} 50%{opacity:1; transform:rotate(8deg)}}
 
-  /* Section headers */
-  h2 {
-    font-size: 14px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--subtle);
-    margin: 48px 0 20px 0;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--rule);
-  }
-  h2:first-of-type { margin-top: 0; }
-
-  /* Document cards */
-  .doc {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 4px;
-    padding: 16px 20px;
-    margin-bottom: 12px;
-  }
-  .doc-title {
-    font-size: 16px;
-    font-weight: 600;
-    margin-bottom: 8px;
-    line-height: 1.4;
-  }
-  .doc-links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px 16px;
-    font-size: 13px;
-  }
-  .doc-links a {
-    color: var(--link);
-    text-decoration: none;
-    padding: 2px 0;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.15s;
-  }
-  .doc-links a:hover {
-    color: var(--link-hover);
-    border-bottom-color: var(--link-hover);
-  }
-  .doc-links .sep {
-    color: var(--rule);
-    user-select: none;
-  }
-  .doc-doi {
-    font-size: 12px;
-    color: var(--subtle);
-    margin-top: 6px;
-  }
-  .doc-doi a {
-    color: var(--subtle);
-    text-decoration: none;
-    border-bottom: 1px dotted var(--rule);
-  }
-  .doc-doi a:hover {
-    color: var(--link);
-  }
-  /* Publication dates — ISO 8601 (YYYY-MM-DD). See blueprint comment at top of file. */
-  .doc-dates {
-    font-size: 12px;
-    color: var(--subtle);
-    margin-top: 4px;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: 0.02em;
-  }
-  .doc-dates .pub-anchor {
-    color: var(--muted);
-    font-weight: 600;
-  }
-
-  /* Footer */
-  footer {
-    margin-top: 56px;
-    padding-top: 24px;
-    border-top: 1px solid var(--rule);
-    text-align: center;
-    font-size: 14px;
-    color: var(--subtle);
-  }
-  footer a {
-    color: var(--link);
-    text-decoration: none;
-  }
-  footer a:hover {
-    border-bottom: 1px solid var(--link);
-  }
-  footer .back-hub {
-    display: inline-block;
-    margin-bottom: 16px;
-    font-size: 15px;
-    color: var(--link);
-  }
-  footer .contact {
-    font-size: 13px;
-    margin-top: 8px;
-  }
-
-  /* Responsive */
-  @media (max-width: 600px) {
-    body { font-size: 16px; padding: 0 16px; }
-    main { padding: 32px 0 48px 0; }
-    .doc { padding: 14px 16px; }
-  }
-
-  /* Print */
-  @media print {
-    body { font-size: 11pt; padding: 0; }
-    main { max-width: none; }
-    .doc { border: 1px solid #ccc; page-break-inside: avoid; }
-  }
+  h1{font-size:1.7rem; font-weight:600; letter-spacing:.2px; margin:0 0 .15rem}
+  .sub{font-size:.82rem; letter-spacing:.14em; text-transform:uppercase; color:var(--muted); margin:0 0 1.6rem}
+  .rule{width:44px; height:1px; background:var(--line); border:0; margin:1.6rem auto}
+  .lead{font-size:1.06rem; line-height:1.6; margin:0 0 1rem}
+  p.small{font-size:.95rem; line-height:1.65; color:var(--muted); margin:.4rem 0 0}
+  p.source{font-size:.95rem; line-height:1.6; color:var(--muted); margin:1.4rem 0 0}
+  p.source a{color:var(--gold); text-decoration:none; border-bottom:1px solid var(--line); padding-bottom:1px}
+  p.source a:hover{border-bottom-color:var(--gold)}
+  .foot{margin-top:2.2rem; font-size:.8rem; color:var(--muted)}
+  @media (prefers-reduced-motion:reduce){ .mark circle{animation:none} }
 </style>
 </head>
 <body>
-<main>
+  <main class="card">
+    <svg class="mark" viewBox="0 0 56 56" aria-hidden="true">
+      <circle cx="28" cy="28" r="24"></circle>
+    </svg>
 
-<header>
-  <h1 class="page-title">Documents</h1>
-  <p class="page-intro">Direct access to all published Gap Geometry documents. Plain text, PDF, and archival links for each.</p>
-</header>
+    <h1>Gap Geometry</h1>
+    <p class="sub">The Framework</p>
 
-<h2>Foundation Papers</h2>
-<p style="font-size: 14px; color: var(--muted); margin-bottom: 20px;">Reading order: 1 &rarr; 2 &rarr; 3 &rarr; 4 &rarr; 5</p>
+    <p class="lead">This page is being reworked.</p>
+    <p class="small">
+      The framework and its pages are being updated, and new material is on the way.
+      This is temporary — please check back in a few days.
+    </p>
 
-<div class="doc">
-  <div class="doc-title">1. The Coherence Ceiling and the Geometric Singularity of Binary</div>
-  <div class="doc-links">
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Coherence_Ceiling.txt" target="_blank" rel="noopener">Text</a>
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper1_Coherence_Ceiling.pdf" target="_blank" rel="noopener">PDF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/5vz2r/overview" target="_blank" rel="noopener">OSF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/5vz2r/files/2ha6e" target="_blank" rel="noopener">OSF txt</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/5vz2r/files/xpz5d" target="_blank" rel="noopener">OSF pdf</a>
-    <span class="sep">&middot;</span>
-    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Coherence_Ceiling.txt" target="_blank" rel="noopener">Raw</a>
-  </div>
-  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/5VZ2R" target="_blank" rel="noopener">10.17605/OSF.IO/5VZ2R</a></div>
-  <div class="doc-dates"><span class="pub-anchor">Published: 2026-01-21</span> &middot; Last update: 2026-05-05 &middot; OSF: 5vz2r</div>
-</div>
+    <p class="source">
+      In the meantime, the source stays open on
+      <a href="https://github.com/Gap-geometry" rel="noopener">GitHub</a>.
+    </p>
 
-<div class="doc">
-  <div class="doc-title">2. Geometric Constants from H4 &mdash; Mathematical Framework v2.0.2</div>
-  <div class="doc-links">
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/sqrt2_ln2_geometric_constants_v2.txt" target="_blank" rel="noopener">Text</a>
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper2_Geometric_Constants_v2.pdf" target="_blank" rel="noopener">PDF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/sjbe9/overview" target="_blank" rel="noopener">OSF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/sjbe9/files/42cyk" target="_blank" rel="noopener">OSF txt</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/sjbe9/files/qxsp8" target="_blank" rel="noopener">OSF pdf</a>
-    <span class="sep">&middot;</span>
-    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/sqrt2_ln2_geometric_constants_v2.txt" target="_blank" rel="noopener">Raw</a>
-  </div>
-  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/SJBE9" target="_blank" rel="noopener">10.17605/OSF.IO/SJBE9</a></div>
-  <div class="doc-dates"><span class="pub-anchor">Published: 2026-01-24</span> &middot; Last update: 2026-05-05 (v2.0.2 &mdash; &sect;1.1 attribution clarification crediting Gemini for K<sub>AUD</sub> closed-form identification, gap articulation, and naming; &sect;6.3/&sect;7.1/&sect;8.3 typography correction) &middot; OSF: sjbe9</div>
-</div>
-
-<div class="doc">
-  <div class="doc-title">3. Complete Framework v3.3.1</div>
-  <div class="doc-links">
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/KAUD_Complete_Framework_v3_0.txt" target="_blank" rel="noopener">Text</a>
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Paper3_Complete_Framework_v3_3.pdf" target="_blank" rel="noopener">PDF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/qh5s2/overview" target="_blank" rel="noopener">OSF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/qh5s2/files/46xac" target="_blank" rel="noopener">OSF txt</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/qh5s2/files/qn7rj" target="_blank" rel="noopener">OSF pdf</a>
-    <span class="sep">&middot;</span>
-    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/KAUD_Complete_Framework_v3_0.txt" target="_blank" rel="noopener">Raw</a>
-  </div>
-  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/QH5S2" target="_blank" rel="noopener">10.17605/OSF.IO/QH5S2</a></div>
-  <div class="doc-dates"><span class="pub-anchor">Published: 2026-01-25</span> &middot; Last update: 2026-05-05 (v3.3.1 &mdash; typography correction in &sect;6.3 &phi;-scaling ratio test; top banner UPDATE NOTICE added) &middot; OSF: qh5s2</div>
-</div>
-
-<div class="doc">
-  <div class="doc-title">4. Gap Scaling Across Domains: The 400/11 Formula</div>
-  <div class="doc-links">
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Gap_Scaling_Formula.txt" target="_blank" rel="noopener">Text</a>
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Gap_Scaling_Formula.pdf" target="_blank" rel="noopener">PDF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/c4gk5/overview" target="_blank" rel="noopener">OSF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/c4gk5/files/4h5ux" target="_blank" rel="noopener">OSF txt</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/c4gk5/files/4uhjr" target="_blank" rel="noopener">OSF pdf</a>
-    <span class="sep">&middot;</span>
-    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Gap_Scaling_Formula.txt" target="_blank" rel="noopener">Raw</a>
-  </div>
-  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/C4GK5" target="_blank" rel="noopener">10.17605/OSF.IO/C4GK5</a></div>
-  <div class="doc-dates"><span class="pub-anchor">Published: 2026-02-04</span> &middot; Last update: 2026-07-15 (v1.0.4 &mdash; error-bound wording erratum, three fixes; filenames neutralized) &middot; OSF: c4gk5</div>
-</div>
-
-<div class="doc">
-  <div class="doc-title">5. The Boundary Information Invariant of Quadratic Systems</div>
-  <div class="doc-links">
-    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Boundary_Information_Invariant_Short.txt" target="_blank" rel="noopener">Text</a>
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Boundary_Information_Invariant_Short.pdf" target="_blank" rel="noopener">PDF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/e72h8/overview" target="_blank" rel="noopener">OSF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/e72h8/files/hkscz" target="_blank" rel="noopener">OSF txt</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/e72h8/files/bs2r8" target="_blank" rel="noopener">OSF pdf</a>
-    <span class="sep">&middot;</span>
-    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/Boundary_Information_Invariant_Short.txt" target="_blank" rel="noopener">Raw</a>
-  </div>
-  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/E72H8" target="_blank" rel="noopener">10.17605/OSF.IO/E72H8</a></div>
-  <div class="doc-dates"><span class="pub-anchor">Published: 2026-03-18</span> &middot; Last update: 2026-04-13 &middot; OSF: e72h8</div>
-</div>
-
-<h2>Applications &amp; Cross-Domain Papers</h2>
-
-<div class="doc">
-  <div class="doc-title">6. Cross-Domain Signatures of &radic;2 &times; ln(2)</div>
-  <div class="doc-links">
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Cross_Domain_Signatures.txt" target="_blank" rel="noopener">Text</a>
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Cross_Domain_Signatures.pdf" target="_blank" rel="noopener">PDF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/ra3uq/overview" target="_blank" rel="noopener">OSF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/ra3uq/files/ejsku" target="_blank" rel="noopener">OSF txt</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/ra3uq/files/npkjg" target="_blank" rel="noopener">OSF pdf</a>
-    <span class="sep">&middot;</span>
-    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Cross_Domain_Signatures.txt" target="_blank" rel="noopener">Raw</a>
-  </div>
-  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/RA3UQ" target="_blank" rel="noopener">10.17605/OSF.IO/RA3UQ</a></div>
-  <div class="doc-dates"><span class="pub-anchor">Published: 2026-03-26</span> &middot; Last update: 2026-05-05 &middot; OSF: ra3uq</div>
-</div>
-
-<div class="doc">
-  <div class="doc-title">10. Saturation Constants of the Exact-Approximation Method</div>
-  <div class="doc-links">
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Saturation%20Constants%20of%20the%20Exact-Approximation%20Method.txt" target="_blank" rel="noopener">Text</a>
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Saturation%20Constants%20of%20the%20Exact-Approximation%20Method.pdf" target="_blank" rel="noopener">PDF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/6qzrb/overview" target="_blank" rel="noopener">OSF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/6qzrb/files/h4m3c" target="_blank" rel="noopener">OSF txt</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/6qzrb/files/dkjyq" target="_blank" rel="noopener">OSF pdf</a>
-    <span class="sep">&middot;</span>
-    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Saturation%20Constants%20of%20the%20Exact-Approximation%20Method.txt" target="_blank" rel="noopener">Raw</a>
-  </div>
-  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/6QZRB" target="_blank" rel="noopener">10.17605/OSF.IO/6QZRB</a></div>
-  <div class="doc-dates"><span class="pub-anchor">Published: 2026-06-02</span> &middot; OSF: 6qzrb</div>
-</div>
-
-<div class="doc">
-  <div class="doc-title">11. The &eta; Corridor in 3D Wilson&ndash;Fisher Critical Phenomena &mdash; Empirical Observation</div>
-  <div class="doc-links">
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The%20%CE%B7%20Corridor%20Empirical%20Observation.txt" target="_blank" rel="noopener">Text</a>
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The%20%CE%B7%20Corridor%20Empirical%20Observation.pdf" target="_blank" rel="noopener">PDF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/pd73b/overview" target="_blank" rel="noopener">OSF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/pd73b/files/syqrg" target="_blank" rel="noopener">OSF txt</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/pd73b/files/vq87y" target="_blank" rel="noopener">OSF pdf</a>
-    <span class="sep">&middot;</span>
-    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/The%20%CE%B7%20Corridor%20Empirical%20Observation.txt" target="_blank" rel="noopener">Raw</a>
-  </div>
-  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/PD73B" target="_blank" rel="noopener">10.17605/OSF.IO/PD73B</a></div>
-  <div class="doc-dates"><span class="pub-anchor">Published: 2026-06-02</span> &middot; OSF: pd73b</div>
-</div>
-
-<div class="doc">
-  <div class="doc-title">11 &mdash; Verification Companion: mpmath verification of the dome identities</div>
-  <div class="doc-links">
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The_%CE%B7_Corridor_Verification_Companion.txt" target="_blank" rel="noopener">Text</a>
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/The_%CE%B7_Corridor_Verification_Companion.pdf" target="_blank" rel="noopener">PDF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/pd73b/overview" target="_blank" rel="noopener">OSF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/pd73b/files/q3dys" target="_blank" rel="noopener">OSF txt</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/pd73b/files/y2cdh" target="_blank" rel="noopener">OSF pdf</a>
-    <span class="sep">&middot;</span>
-    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/The_%CE%B7_Corridor_Verification_Companion.txt" target="_blank" rel="noopener">Raw</a>
-  </div>
-  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/PD73B" target="_blank" rel="noopener">10.17605/OSF.IO/PD73B</a> (shared with main Paper 11 above &mdash; single OSF project)</div>
-  <div class="doc-dates"><span class="pub-anchor">Published: 2026-06-02</span> &middot; OSF: pd73b</div>
-</div>
-
-<div class="doc">
-  <div class="doc-title">12 &mdash; 1, 7, 124, 4318, &hellip; &mdash; Integer Mellin Moments of the Dome tanh(x)/cosh(2x)</div>
-  <div class="doc-links">
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Dome_Moment_Sequence.txt" target="_blank" rel="noopener">Text</a>
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Dome_Moment_Sequence.pdf" target="_blank" rel="noopener">PDF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/wvd3g/overview" target="_blank" rel="noopener">OSF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/wvd3g/files/y587z" target="_blank" rel="noopener">OSF txt</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/wvd3g/files/ar7qx" target="_blank" rel="noopener">OSF pdf</a>
-    <span class="sep">&middot;</span>
-    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Dome_Moment_Sequence.txt" target="_blank" rel="noopener">Raw</a>
-  </div>
-  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/WVD3G" target="_blank" rel="noopener">10.17605/OSF.IO/WVD3G</a></div>
-  <div class="doc-dates"><span class="pub-anchor">Published: 2026-06-12</span> &middot; OSF: wvd3g</div>
-</div>
-
-<div class="doc">
-  <div class="doc-title">13 &mdash; K<sub>AUD</sub> = &radic;2 &middot; ln(2): The Crossing Zone Hinge &mdash; Three Thresholds and the Identity 1/(2 ln 2) &minus; 1/&radic;2 = G/(2 ln 2)</div>
-  <div class="doc-links">
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Crossing_Zone_Hinge.txt" target="_blank" rel="noopener">Text</a>
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Crossing_Zone_Hinge.pdf" target="_blank" rel="noopener">PDF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/f7pcx/" target="_blank" rel="noopener">OSF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/f7pcx/files/fh76a" target="_blank" rel="noopener">OSF txt</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/f7pcx/files/f6aq8" target="_blank" rel="noopener">OSF pdf</a>
-    <span class="sep">&middot;</span>
-    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/Crossing_Zone_Hinge.txt" target="_blank" rel="noopener">Raw</a>
-  </div>
-  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/F7PCX" target="_blank" rel="noopener">10.17605/OSF.IO/F7PCX</a></div>
-  <div class="doc-dates"><span class="pub-anchor">Published: 2026-07-15</span> &middot; OSF: f7pcx</div>
-</div>
-<h2>Companion Documents</h2>
-
-<div class="doc">
-  <div class="doc-title">7. HK Full Framework (Hodgson&ndash;Kerckhoff with K<sub>AUD</sub> context)</div>
-  <div class="doc-links">
-    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/HK_Full_Framework_DRAFT.txt" target="_blank" rel="noopener">Text</a>
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/HK_Full_Framework.pdf" target="_blank" rel="noopener">PDF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/jbrhq/overview" target="_blank" rel="noopener">OSF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/jbrhq/files/cfk23" target="_blank" rel="noopener">OSF txt</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/jbrhq/files/yzhvu" target="_blank" rel="noopener">OSF pdf</a>
-    <span class="sep">&middot;</span>
-    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/HK_Full_Framework_DRAFT.txt" target="_blank" rel="noopener">Raw</a>
-  </div>
-  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/JBRHQ" target="_blank" rel="noopener">10.17605/OSF.IO/JBRHQ</a></div>
-  <div class="doc-dates"><span class="pub-anchor">Published: 2026-04-03</span> &middot; Last update: 2026-04-13 &middot; OSF: jbrhq</div>
-</div>
-
-<div class="doc">
-  <div class="doc-title">8. The 50 Hinge</div>
-  <div class="doc-links">
-    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/50_Hinge_Standalone_DRAFT.txt" target="_blank" rel="noopener">Text</a>
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/50_Hinge_Standalone.pdf" target="_blank" rel="noopener">PDF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/fbd9a/overview" target="_blank" rel="noopener">OSF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/fbd9a/files/g3zh9" target="_blank" rel="noopener">OSF txt</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/fbd9a/files/8zd9v" target="_blank" rel="noopener">OSF pdf</a>
-    <span class="sep">&middot;</span>
-    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/50_Hinge_Standalone_DRAFT.txt" target="_blank" rel="noopener">Raw</a>
-  </div>
-  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/FBD9A" target="_blank" rel="noopener">10.17605/OSF.IO/FBD9A</a></div>
-  <div class="doc-dates"><span class="pub-anchor">Published: 2026-04-03</span> &middot; Last update: 2026-04-13 &middot; OSF: fbd9a</div>
-</div>
-
-<div class="doc">
-  <div class="doc-title">9. Binary Scaling of &rho;</div>
-  <div class="doc-links">
-    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Binary_Scaling_Standalone_DRAFT.txt" target="_blank" rel="noopener">Text</a>
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/Binary_Scaling_Standalone.pdf" target="_blank" rel="noopener">PDF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/wtu4j/overview" target="_blank" rel="noopener">OSF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/wtu4j/files/r4kat" target="_blank" rel="noopener">OSF txt</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/wtu4j/files/fec4y" target="_blank" rel="noopener">OSF pdf</a>
-    <span class="sep">&middot;</span>
-    <a href="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/main/Binary_Scaling_Standalone_DRAFT.txt" target="_blank" rel="noopener">Raw</a>
-  </div>
-  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/WTU4J" target="_blank" rel="noopener">10.17605/OSF.IO/WTU4J</a></div>
-  <div class="doc-dates"><span class="pub-anchor">Published: 2026-04-03</span> &middot; Last update: 2026-04-13 &middot; OSF: wtu4j</div>
-</div>
-
-<h2>Standalone</h2>
-
-<div class="doc">
-  <div class="doc-title">A Closed Form for the Hodgson&ndash;Kerckhoff Tube-Packing Coefficient</div>
-  <div class="doc-links">
-    <a href="https://github.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/blob/main/HK_Closed_Form_SHORT_DRAFT.txt" target="_blank" rel="noopener">Text</a>
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/blob/main/HK_Closed_Form_SHORT.pdf" target="_blank" rel="noopener">PDF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/2expn/overview" target="_blank" rel="noopener">OSF</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/2expn/files/f493t" target="_blank" rel="noopener">OSF txt</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/2expn/files/hp4dy" target="_blank" rel="noopener">OSF pdf</a>
-    <span class="sep">&middot;</span>
-    <a href="https://raw.githubusercontent.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient/refs/heads/main/HK_Closed_Form_SHORT_DRAFT.txt" target="_blank" rel="noopener">Raw</a>
-  </div>
-  <div class="doc-doi">DOI: <a href="https://doi.org/10.17605/OSF.IO/2EXPN" target="_blank" rel="noopener">10.17605/OSF.IO/2EXPN</a> &mdash; Separate repository: <a href="https://github.com/Gap-geometry/A-Closed-Form-for-the-Hodgson-Kerckhoff-Tube-Packing-Coefficient" target="_blank" rel="noopener">GitHub</a></div>
-  <div class="doc-dates"><span class="pub-anchor">Published: 2026-04-03</span> &middot; Last update: 2026-05-04 (&sect;3 ellipse-area correction; &sect;3.1 added &mdash; second appearance of &radic;2&middot;ln(2) in HK 2007 c(R)) &middot; OSF: 2expn</div>
-</div>
-
-<h2>Repositories &amp; Archives</h2>
-
-<div class="doc" style="background: transparent; border-style: dashed;">
-  <div class="doc-links" style="font-size: 14px; gap: 8px 20px;">
-    <a href="https://github.com/Gap-geometry" target="_blank" rel="noopener">GitHub Organization</a>
-    <span class="sep">&middot;</span>
-    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-" target="_blank" rel="noopener">Main Repository</a>
-    <span class="sep">&middot;</span>
-    <a href="https://osf.io/zx4g7" target="_blank" rel="noopener">OSF Main Project</a>
-  </div>
-</div>
-
-<footer>
-  <div style="font-size:12px; opacity:0.75; margin-bottom:6px;">AI readers: <a href="ai-readers.html">guide</a> &middot; <a href="AI_INDEX.txt">machine index</a> &middot; <a href="llms.txt">llms.txt</a></div>
-
-  <a class="back-hub" href="about.html">&larr; Back to Gap Geometry Hub</a>
-  &nbsp;&middot;&nbsp;
-  <a class="back-hub" href="methodology.html">Methodology</a>
-  <div>D. B. &mdash; Gap Geometry &mdash; 2025&ndash;2026</div>
-  <div class="contact">
-    <a href="mailto:Gap-geometryK_AUD2@telenet.be">Gap-geometryK_AUD2@telenet.be</a>
-    &nbsp;&middot;&nbsp;
-    <a href="https://x.com/Aud2Gap" target="_blank" rel="noopener">@Aud2Gap</a>
-    &nbsp;&middot;&nbsp;
-    <a href="license.html">CC BY 4.0</a>
-  </div>
-</footer>
-
-</main>
+    <hr class="rule">
+    <p class="foot">Thank you for your patience. — Gap&nbsp;Geometry</p>
+  </main>
 </body>
+</html>
