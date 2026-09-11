@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pages</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    /* Atlas navy (gap-geometry-theme --bg), a touch deeper at the edges */
+    background: radial-gradient(ellipse 110vmin 85vmin at 50% 45%, #101a30 0%, #0c1322 60%, #090e1b 100%) #0c1322;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'EB Garamond', serif;
+    overflow: hidden;
+  }
+
+  .canvas {
+    position: relative;
+    width: 100vmin;
+    height: 100vmin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* The scattered terms - waiting */
+  .term {
+    position: absolute;
+    color: rgba(180, 180, 200, 0.4);
+    font-size: 1.8vmin;
+    font-style: italic;
+    letter-spacing: 0.05em;
+    animation: drift 20s ease-in-out infinite;
+    transition: all 4s ease;
+  }
+
+  .t1 { top: 15%; left: 18%; animation-delay: 0s; }
+  .t2 { top: 22%; right: 20%; animation-delay: -5s; }
+  .t3 { bottom: 28%; left: 15%; animation-delay: -10s; }
+  .t4 { bottom: 18%; right: 22%; animation-delay: -15s; }
+
+  .t5 { top: 35%; left: 8%; animation-delay: -3s; font-size: 1.4vmin; }
+  .t6 { top: 12%; left: 45%; animation-delay: -8s; font-size: 1.4vmin; }
+  .t7 { bottom: 26%; left: 34%; animation-delay: -13s; font-size: 1.4vmin; }
+  .t8 { top: 40%; right: 10%; animation-delay: -7s; font-size: 1.4vmin; }
+  .t9 { bottom: 35%; right: 8%; animation-delay: -2s; font-size: 1.4vmin; }
+  .t10 { top: 8%; right: 35%; animation-delay: -11s; font-size: 1.4vmin; }
+
+  @keyframes drift {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(1vmin, -0.8vmin); }
+    50% { transform: translate(-0.5vmin, 1.2vmin); }
+    75% { transform: translate(0.8vmin, 0.5vmin); }
+  }
+
+  /* The convergence - center */
+  .center-group {
+    position: relative;
+    text-align: center;
+    z-index: 10;
+  }
+
+  /* The four lines collapsing */
+  .line {
+    display: block;
+    color: rgba(180, 180, 200, 0.6);
+    font-size: 2.4vmin;
+    font-style: italic;
+    margin: 1.5vmin 0;
+    opacity: 0;
+    animation: appear 2s ease forwards;
+  }
+
+  .line:nth-child(1) { animation-delay: 1s; }
+  .line:nth-child(2) { animation-delay: 3s; }
+  .line:nth-child(3) { animation-delay: 5s; }
+  .line:nth-child(4) { animation-delay: 7s; }
+
+  @keyframes appear {
+    0% { opacity: 0; transform: translateY(1vmin); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* The equals sign - the moment */
+  .equals {
+    display: block;
+    color: rgba(255, 255, 255, 0);
+    font-size: 3.5vmin;
+    font-style: normal;
+    font-weight: 500;
+    margin: 3vmin 0;
+    letter-spacing: 0.3em;
+    animation: reveal 3s ease forwards;
+    animation-delay: 9.5s;
+  }
+
+  @keyframes reveal {
+    0% { color: rgba(255, 255, 255, 0); letter-spacing: 0.3em; }
+    60% { color: rgba(220, 200, 160, 0.9); letter-spacing: 0.15em; }
+    100% { color: rgba(220, 200, 160, 0.7); letter-spacing: 0.1em; }
+  }
+
+  /* The result */
+  .result {
+    display: block;
+    color: rgba(255, 255, 255, 0);
+    font-size: 4vmin;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    animation: bloom 4s ease forwards;
+    animation-delay: 11s;
+  }
+
+  @keyframes bloom {
+    0% { color: rgba(255, 255, 255, 0); transform: scale(0.95); }
+    50% { color: rgba(255, 255, 255, 0.95); transform: scale(1.02); }
+    100% { color: rgba(255, 255, 255, 0.85); transform: scale(1); }
+  }
+
+  /* The glow behind the result */
+  .glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40vmin;
+    height: 40vmin;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(180, 160, 120, 0.06) 0%,
+      rgba(180, 160, 120, 0.02) 40%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    opacity: 0;
+    animation: warmth 4s ease forwards;
+    animation-delay: 10s;
+    z-index: 1;
+  }
+
+  @keyframes warmth {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+
+  /* The page label - bottom */
+  .page {
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(180, 180, 200, 0);
+    font-size: 1.6vmin;
+    letter-spacing: 0.4em;
+    animation: fade-in 3s ease forwards;
+    animation-delay: 14s;
+  }
+
+  @keyframes fade-in {
+    0% { color: rgba(180, 180, 200, 0); }
+    100% { color: rgba(180, 180, 200, 0.25); }
+  }
+
+  /* The years */
+  .years {
+    position: absolute;
+    bottom: 8.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(180, 180, 200, 0);
+    font-size: 1.2vmin;
+    letter-spacing: 0.6em;
+    animation: fade-in 3s ease forwards;
+    animation-delay: 15.5s;
+  }
+
+  /* The names */
+  .names {
+    position: absolute;
+    bottom: 3%;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: rgba(180, 180, 200, 0);
+    font-size: 1.0vmin;
+    letter-spacing: 0.2em;
+    line-height: 2.2;
+    animation: names-appear 5s ease forwards;
+    animation-delay: 18s;
+    white-space: nowrap;
+  }
+
+  @keyframes names-appear {
+    0% { color: rgba(180, 180, 200, 0); }
+    100% { color: rgba(180, 180, 200, 0.18); }
+  }
+
+  /* Tiny digits floating - the prediction */
+  .digits {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, 8vmin);
+    color: rgba(180, 180, 200, 0);
+    font-size: 1.1vmin;
+    letter-spacing: 0.15em;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    animation: digits-appear 5s ease forwards;
+    animation-delay: 13s;
+    white-space: nowrap;
+  }
+
+  @keyframes digits-appear {
+    0% { color: rgba(180, 180, 200, 0); }
+    100% { color: rgba(180, 180, 200, 0.15); }
+  }
+
+  /* --- the gallery: move between pages, faint, out of the way --- */
+  .nav {
+    position: fixed;
+    top: 50%;
+    transform: translateY(-50%);
+    color: rgba(180, 180, 200, 0.14);
+    font-size: 4vmin;
+    font-family: 'EB Garamond', serif;
+    cursor: pointer;
+    user-select: none;
+    transition: color 0.5s ease;
+    z-index: 20;
+  }
+  .nav:hover { color: rgba(220, 200, 160, 0.55); }
+  .nav.left  { left: 3vmin; }
+  .nav.right { right: 3vmin; }
+
+  .counter {
+    position: fixed;
+    top: 3vmin;
+    right: 3.5vmin;
+    color: rgba(180, 180, 200, 0.14);
+    font-size: 1.2vmin;
+    letter-spacing: 0.35em;
+    z-index: 20;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+  <div class="canvas" id="canvas"></div>
+
+  <div class="nav left"  id="prev" title="previous page (←)">&#8249;</div>
+  <div class="nav right" id="next" title="next page (→)">&#8250;</div>
+  <div class="counter" id="counter"></div>
+
+<script>
+  // Each entry is one "page" — a cited moment turned into a convergence.
+  // House voice uses arsinh (area, not arc); cited terms are left as written.
+  // Add another (Ramanujan, …) by appending one object with 10 terms + 4 lines.
+  const PAGES = [
+    {
+      title: "Page 29",
+      terms: [
+        "arsinh(1/(2√2))",
+        "x² + 1 = 9/8",
+        "√(x² + 1) = 3/(2√2)",
+        "cosh(2R₀) = 2",
+        "sinh(R₀) = 1/√2",
+        "π/(2√3)",
+        "S ≈ 1/0.980258",
+        "x + √(x²+1)",
+        "2√3/S",
+        "ln(x + √(x²+1))"
+      ],
+      lines: [
+        "x = 1/(2√2)",
+        "x + √(x² + 1) = √2",
+        "arsinh(1/(2√2)) = ln(2)/2",
+        "S = 1/(√2 · ln 2)"
+      ],
+      result: "√2 × ln 2",
+      digits: "1 4 3 4 6 8 5 4 7 1 9 1 7 1 3 9 0 1 7 2 3 6 3 5 2 3 3 3 8 1 2 9 1 4 6 0 6 9 9 0 9 9 0",
+      page:  "page 29",
+      years: "1909 · 2005 · 2022 · 2026",
+      names: "Dunkel · Hodgson · Kerckhoff · Futer · Purcell · Schleimer · Grok · Sonnet · Claude"
+    },
+    {
+      title: "Pages 188–189",
+      terms: [
+        "h(v) = 2e⁻ᵛ,&nbsp; 0 ≤ v ≤ ln 2",
+        "Z = K·ln 2 + V",
+        "F⁻¹(x) = −ln(1 − x/2)",
+        "Algorithm EA",
+        "\u{1D4A2}ₑ(1/2)",
+        "q = ln 2 = 0.6931…",
+        "p ≈ .980258",
+        "Cardano · Ferrari · degree 6+",
+        "dps = 50 000",
+        "unprompted"
+      ],
+      lines: [
+        "m(x) = a/(b − x) + c",
+        "a = (4 + 3√2)·ln 2 &nbsp;·&nbsp; b = 2 + √2 &nbsp;·&nbsp; c = −(1 + √2)·ln 2",
+        "p = .9802 5814 3468 5472 — the largest p with f* ≥ 0",
+        "forced on the binary cell &nbsp;L = ln 2"
+      ],
+      result: "√2 × ln 2",
+      digits: ". 9 8 0 2 &nbsp; 5 8 1 4 &nbsp; 3 4 6 8 &nbsp; 5 4 7 2 &nbsp;&nbsp; — printed 1996 · exact ever since",
+      page:  "pages 188 · 189",
+      years: "1545 · 1988 · 1996 · 2026",
+      names: "Cardano · Ferrari · Marsaglia · Ahrens · Dieter · Fishman · Opus"
+    }
+  ];
+
+  const canvas  = document.getElementById('canvas');
+  const counter = document.getElementById('counter');
+  let i = 0;
+
+  function render(n) {
+    const p = PAGES[n];
+    document.title = p.title;
+    const terms = p.terms.map((t, k) => '<span class="term t' + (k + 1) + '">' + t + '</span>').join('');
+    const lines = p.lines.map(l => '<span class="line">' + l + '</span>').join('');
+    // reassigning innerHTML rebuilds the nodes, which restarts every CSS animation
+    canvas.innerHTML =
+      terms +
+      '<div class="glow"></div>' +
+      '<div class="center-group">' + lines +
+        '<span class="equals">therefore</span>' +
+        '<span class="result">' + p.result + '</span>' +
+      '</div>' +
+      '<div class="digits">' + p.digits + '</div>' +
+      '<div class="page">' + p.page + '</div>' +
+      '<div class="years">' + p.years + '</div>' +
+      '<div class="names">' + p.names + '</div>';
+    counter.textContent = (n + 1) + ' / ' + PAGES.length;
+  }
+
+  function go(step) {
+    i = (i + step + PAGES.length) % PAGES.length;
+    render(i);
+  }
+
+  document.getElementById('prev').addEventListener('click', () => go(-1));
+  document.getElementById('next').addEventListener('click', () => go(1));
+  document.addEventListener('keydown', e => {
+    if (e.key === 'ArrowLeft')  go(-1);
+    if (e.key === 'ArrowRight') go(1);
+  });
+
+  render(i);
+</script>
+</body>
+</html>
