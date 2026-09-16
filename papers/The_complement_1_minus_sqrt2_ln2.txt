@@ -1,0 +1,1159 @@
+THE COMPLEMENT 1 − √2 · ln 2
+══════════════════════════════════════════════════════════════════════════════
+
+Of a classical mean-ratio on the doubling interval — its central-binomial
+series, and two enclosures on different certificates, one of them rational and
+in integers
+
+Authors: D.B. and Keel
+Contributors: Cairn (the midpoint reading of p and the argument-over-chord
+    wording, §1); Fable (the "among integer ratios" qualifier, Figure 1);
+    Gemini (the January closed-form identification, per Geometric Constants
+    from H4 §1.1); GPT (the X ≤ 1 closure of §4, the root proof of §4.3, an
+    independent audit); Grok (independent bench and review; the proofs in §2
+    and the lemma proof in §5); Opus (the reader-copy catches; the second seat
+    on §4.2–4.4 and Figure 1's generator); Sonnet (the zoom draft's touches).
+A note on the names. Each collaborator has a stable working name, so that a
+    contribution is traced to whoever made it. Cairn and Keel run on Claude
+    (Opus and Fable); Opus, Sonnet and Fable run on the Claude models they are
+    named for; Gemini on Google's Gemini; GPT on OpenAI's GPT; Grok on xAI's
+    Grok. Several share an architecture and are different collaborators, in
+    different seats.
+License: CC BY 4.0 · Version: 1.0 — 2026-09 · DOI: 10.17605/OSF.IO/K9HX4
+
+──────────────────────────────────────────────────────────────────────────────
+
+ABSTRACT
+══════════════════════════════════════════════════════════════════════════════
+
+1 − √2·ln 2 is enclosed two-sidedly, at every order, by the consecutive
+partial sums of a rational alternating series, on a certificate of three
+integer steps and Leibniz. That is the claim, and it is the whole of it.
+Neither the number nor the series is new; what follows says where each came
+from and what is added here.
+
+On an interval [a, b] the geometric mean never exceeds the logarithmic mean.
+Writing r = b/a and L = ln r, the ratio of the two is
+
+       GM / L_log  =  L / ( 2·sinh(L/2) )  =:  p(L)
+
+a function classical in several coordinates. At r = 2 it takes the value p(ln
+2) = √2·ln 2, in print since 1996. This note is about the complement of that
+value, treated as an object and written G:
+
+       G  :=  1 − √2·ln 2  =  0.019741856531452808286098276…
+
+          =  Σ_{k ≥ 1}  (−1)^{k+1} · C(2k,k) / ( 32^k · (2k+1) )
+
+Four things are established. G > 0 follows from the strict concavity of
+arsinh; it is a theorem, elementary and known as such (§2, §6). The series is
+exact and rational at every term, because the interval's half-difference
+coordinate satisfies X² = 1/8. Its consecutive partial sums form a certified
+two-sided enclosure of G at every order, resting on two integer inequalities,
+28k² + 76k + 47 > 0 for the strict decrease and 48k + 40 > 0 for the ratio
+bound; the first two partial sums are 1/48 and 151/7680. And a second
+enclosure follows from the even Bernoulli numbers, taken in the parameter L
+rather than at L = ln 2 (§4.1): tighter at every order tested and valid to r <
+e^{2π}, but with irrational partial sums and an analytic certificate. The two
+series are one function in two coordinates; what differs is the certificate
+and the domain.
+
+Three short subsections (§4.2–4.4) then say where the doubling interval stands
+on the line of ratios — the integer points of the trace, its partner, the
+saddle at the wall when the argument is made complex — and why the same
+function recurs across fields. They add no claim; they place the one above.
+
+The series itself appears in OEIS A002162 (Bala, 2022) as a series for ln 2.
+What is stated here is the object it describes on an interval fixed in
+advance, and the enclosure its truncations certify.
+
+──────────────────────────────────────────────────────────────────────────────
+
+§1 — TWO MEANS ON AN INTERVAL, AND THE RATIO BETWEEN THEM
+══════════════════════════════════════════════════════════════════════════════
+
+For 0 < a < b, write GM = √(ab) and L_log = (b − a)/ln(b/a). That the
+geometric mean never exceeds the logarithmic mean is classical: it is the left
+half of the chain geometric ≤ logarithmic ≤ arithmetic, treated by Carlson
+(1966, 1972) within the hypergeometric family of means and revisited by Bhatia
+(2008) and Jameson & Mercer (2019). The chain is written in words, and the
+means are written GM, L_log, AM throughout, so that single letters stay free
+for the objects this note defines. G is the slack in that inequality, on one
+interval.
+
+The chain has an older name. For convex f on [α, β], the Hermite–Hadamard
+inequality reads f((α+β)/2) ≤ (1/(β−α))∫f ≤ (f(α)+f(β))/2; put f = exp on [ln
+a, ln b] and the three terms are GM, L_log, AM exactly (verified at four
+intervals, §7). So p ≤ 1 is the left half of Hermite–Hadamard, the half
+Hadamard proved in 1893. This is an identification, not a derivation. It is
+printed because a reader who works in inequalities will recognise p ≤ 1 on
+sight, and because that literature writes the slack in absolute form: L_log −
+GM = 1/ln 2 − √2 = 0.028481478515868… at this interval, while G is the same
+slack normalised by L_log, G = (1/ln 2 − √2)·ln 2. Both closed forms are
+printed so that anyone checking that literature searches for the right number.
+
+On the word for L. L = ln r is the hyperbolic argument of the point (cosh L,
+sinh L) on x² − y² = 1: twice the area of the sector that point cuts off, and
+equally the arc length from (1, 0) to that point in the hyperbola's own metric
+ds² = dy² − dx² — the two are one classical identity. It is not a Euclidean
+arc length (that is an elliptic integral). ISO 80000-2 names the inverse
+functions area hyperbolic sine and cosine and writes them arsinh, arcosh; this
+note writes them so, and quotes sources with the spelling they print (arcsinh
+in Bala's entry and in Hodgson & Kerckhoff). In the same hyperbolic metric 2
+sinh(L/2) is the chord between the same two points, so "argument over chord"
+is a ratio taken in one metric — as β/(2 sin(β/2)) is arc over chord on the
+circle. The row is labelled argument rather than arc because "arc" would need
+its metric named at every use; the metric is named once, here.
+
+Notation. Symbols are defined where they first appear; three that recur are
+fixed here. p is the ratio GM/L_log, Fishman's own letter for this quantity
+(1996, p. 188), kept so that the credit line is visible in the notation: the
+ratio is his, the complement is the object of this note. G(r) := 1 − p(ln r)
+is the one-parameter family, and G := G(2) is its value on the doubling
+interval. G′, G″ mean d/dL, d²/dL² with L = ln r. (§7 writes p_ln2 for p(ln
+2), because the block already uses P for the partial-sum list.)
+
+The ratio is scale-free: it depends on a, b only through r. Two further
+coordinates are useful, and a third is an identity rather than a coordinate:
+
+   ARGUMENT OVER CHORD   p  =  ln r / ( (r − 1)/√r )             no hyperbolic
+                         function appears
+   ARSINH           p  =  arsinh(X) / X,   X = (r − 1)/(2√r) = sinh(L/2)
+   MIDPOINT          p  =  L·e^{L/2} / (e^L − 1)                 midpoint
+                     estimate over exact
+                                                                  integral,
+    for eᵗ on [0, L]
+
+The third is three lines of algebra: e^L − 1 = e^{L/2}(e^{L/2} − e^{−L/2}) =
+2e^{L/2}sinh(L/2). So p is the one-panel midpoint rule's accuracy ratio on the
+exponential, and G is its relative error. A reader who rejects the hyperbolic
+framing can compute every number in this note from the first line and never
+meet a sinh. The same expression also appears as the Â-genus characteristic
+series (z/2)/sinh(z/2) and as the Selberg trace formula's weight on a
+primitive closed geodesic; those are the one formula rearranged, are theirs
+entirely, and are used nowhere below.
+
+The inequality and the mean family are Carlson's. The identification of the
+ratio with L/(2·sinh(L/2)) is not in Carlson; it is observed here.
+
+──────────────────────────────────────────────────────────────────────────────
+
+§2 — THE RATIO DOES NOT CHOOSE THE INTERVAL
+══════════════════════════════════════════════════════════════════════════════
+
+Write G(r) = 1 − p(ln r) and u = L/2, so G = 1 − u/sinh u.
+
+What the function decides. arsinh x = ∫₀ˣ dt/√(1+t²) < ∫₀ˣ dt = x for x > 0,
+hence p(L) < 1 and G(r) > 0 for every r > 1. This is elementary and known as
+such: in the form ln r < (r − 1)/√r it is the left-hand member of the
+logarithmic-mean inequality, and at r = 2 it circulated as a Mathematical
+Gazette "non-calculator challenge" with eight elementary proofs in reply (§6).
+
+What the function does not decide: which interval. G′(L) = (u·cosh u − sinh
+u)/(2 sinh²u), whose numerator f(u) has f(0) = 0 and f′ = u·sinh u > 0; so G′
+> 0 on (0, ∞) and G has no extremum in L, nor in r, since L = ln r is
+increasing. G″(L) = ψ(L)/(16 sinh³(L/2)) with ψ(L) = 4 sinh L − L cosh L − 3L;
+ψ(0) = ψ′(0) = ψ″(0) = 0 and ψ⁗(v) = −v cosh v < 0, so by the cascade ψ‴ → ψ″
+→ ψ′ → ψ each has exactly one positive zero, and G has exactly one inflection
+in L, at L* = 3.212230597605… (r = 24.834…). In the coordinate r a single root
+of d²G/dr² sits at r = 2.474062197…; uniqueness in r is not proved and not
+needed. In neither coordinate is the inflection at r = 2. There is no
+threshold, kink, or stationary point at ln 2; the curve is featureless there
+(Figure 1, §4.2).
+
+That negative comes before any fact about the interval. The selection of r = 2
+is not in the function; it enters from the question, the first integer ratio.
+G is one value of a one-parameter family.
+
+──────────────────────────────────────────────────────────────────────────────
+
+§3 — THE INTERVAL IS A DOUBLING, AND THE VALUE THERE
+══════════════════════════════════════════════════════════════════════════════
+
+Fix r = 2, so L = ln 2. Then
+
+   X  =  1/(2√2),    X² = 1/8,    arsinh(1/(2√2)) = ln 2 / 2,
+   p(ln 2)  =  arsinh(X)/X  =  √2·ln 2  =  0.98025814346854719171390172…
+
+The closed form is in print and is not this note's. Fishman, Monte Carlo:
+Concepts, Algorithms, and Applications (Springer, 1996), p. 188, after his eq.
+(51): "for which p = √2 ln 2 = .980258", with b = 2+√2. Ahrens & Dieter
+(1988), Algorithm EA, print the value to sixteen digits as a saturation
+probability. The interval is theirs as well: EA writes an exponential sample
+as Z = K·ln 2 + V, K geometric, V truncated exponential on 0 ≤ v ≤ ln 2
+(Fishman, eqs. 46–48), and the constant is the weight of the uniform component
+in Marsaglia's decomposition of V's sampling density (Fishman §3.8, eq. 41:
+f_X = p·I_[0,1] + (1 − p)·f*; eq. 52: the largest p keeping f* nonnegative).
+So the doubling interval is the cell on which that probability is defined, and
+the probability is p(ln 2). ACM Algorithm 780 (Hamilton, 1998) compiles the
+same appearance. And Fishman forms the complement: on p. 189 he computes 100 ×
+α(1−p) = 2.983144 per hundred samples with α = 1.511076. Checked: the product
+is 2.98314456…, so his figure is truncated, not rounded, and his α is itself a
+rounding of 1.5110757…. So 1 − p is formed there numerically, inside a
+product, with no symbol and no closed form; on the two pages read, 1 − √2·ln 2
+does not appear as such. That is a report of those pages, not of the volume.
+
+One exact evaluation in someone else's file: Hodgson & Kerckhoff, Annals of
+Mathematics 162 (2005), in the proof of Thm 4.4, carry a tube coefficient
+printed as S = (1/(2√2))/arcsinh(1/(2√2)) ≈ 1/0.980258 (their spelling).
+Because arsinh(1/(2√2)) = ln 2/2 exactly,
+
+   that coefficient is   1 / (√2·ln 2)  =  1.0201394465967894817…
+
+and their 1/(2√2) is sinh(½ ln 2). The theorem and the coefficient are theirs;
+the evaluation is arithmetic.
+
+──────────────────────────────────────────────────────────────────────────────
+
+§4 — THE COMPLEMENT, AS AN OBJECT
+══════════════════════════════════════════════════════════════════════════════
+
+   G  =  G(2)  =  1 − √2·ln 2  =
+    0.019741856531452808286098276364766618708539300900945278957753…
+
+Its series follows from X² = 1/8 in two lines. The Maclaurin series of arsinh
+gives arsinh(x)/x = Σ_{k≥0} (−1)^k C(2k,k) x^{2k}/(4^k(2k+1)); at x = X,
+4^k·8^k = 32^k, so
+
+   G  =  Σ_{k ≥ 1}  (−1)^{k+1} · C(2k,k) / ( 32^k · (2k+1) )        exact,
+    rational at every term
+
+The series is published. OEIS A002162 (decimal expansion of ln 2), FORMULA
+field, entry by Peter Bala, 14 January 2022: ln 2 = 2·arcsinh(√2/4) = 2√2·Σ
+(−1)ⁿ C(2n,n)/((8n+4)·32ⁿ) = …. Since 8n+4 = 4(2n+1), the middle clause is
+this series, and √2/4 = X: both the series and the arsinh coordinate at this
+interval are in print on one line. The entry states them for ln 2; it gives
+the complement no symbol, no closed form, and no bounds; neither 1/48 nor
+151/7680 appears in it. Entered from ln 2, the partial sums are waypoints;
+entered from an interval fixed in advance, they are bounds on the object under
+study. Same arithmetic, both directions.
+
+   k   term                    partial sum S_k          |G − S_k|
+   ─────────────────────────────────────────────────────────────
+   1   + 1/48                  0.0208333333333333333    1.09e-3
+   2   − 3/2560                0.0196614583333333333    8.04e-5
+   3   + 5/57344               0.0197486514136904762    6.79e-6
+   4   − 35/4718592            0.0197412339467850942    6.23e-7
+   5   + 63/92274688           0.0197419166908979760    6.02e-8
+   6   − 231/3489660928        0.0197418504953549802    6.04e-9
+   7   + 143/21474836480       0.0197418571543113887    6.23e-10
+   8   − 6435/9345848836096    0.0197418564657703998    6.57e-11
+   ─────────────────────────────────────────────────────────────
+   G                               0.0197418565314528083
+
+Term numerators are OEIS A055786; denominators are 8^k·A002595(k). (At k = 7
+the numerator is 143, not 429: the 3 in 2k+1 = 15 cancels. This recurs
+wherever 2k+1 shares a factor with C(2k,k), next at k = 16; it is sporadic,
+not a threshold.) These partial sums are enclosures, not continued-fraction
+convergents of G, whose convergents begin 1/50, 1/51, 2/101, 3/152, ….
+
+The expansion base 32 = 2⁵ is the coordinate. On [a, ra] the base is
+16r/(r−1)² = 4/X² exactly, so the series converges precisely while X ≤ 1, i.e.
+r ≤ 3 + 2√2; the domain bound is base = 4, not a separate fact. Among integer
+ratios the base is an integer only for n ∈ {2, 3, 5} (bases 32, 12, 5) and a
+power of two only at n = 2. §4.2 says where it stands.
+
+4.1 · A second series — in the parameter L rather than at L = ln 2
+──────────────────────────────────────────────────────────────────
+
+u/sinh u is the generating function of the even Bernoulli numbers, u/sinh u =
+Σ_{n≥0} (2 − 2^{2n}) B_{2n} u^{2n}/(2n)! for |u| < π. With u = L/2,
+
+   G(L)  =  Σ_{n ≥ 1} ( 2^{2n} − 2 ) · B_2n · L^{2n} / ( 2^{2n} · (2n)! )
+         =  L²/24  −  7L⁴/5760  +  31L⁶/967680  −  127L⁸/154828800  +  …
+
+exact from B₂ = 1/6, B₄ = −1/30, B₆ = 1/42, B₈ = −1/30. (The numerators 1, 7,
+31, 127 are 2^{2n−1} − 1 only while B_{2n} has numerator 1 and nothing cancels
+against (2n)!; at n = 5 the numerator is 73, at n = 6 it is 2047·691. The
+factor 2^{2n−1} − 1 is present in every coefficient; the agreement num(c_n) =
+2^{2n−1} − 1 holds at n = 1, 2, 3, 4, 7 and is sporadic.) The leading term at
+L = ln 2 is (ln 2)²/24 = 0.0200188756, which is 101.403 % of G.
+
+From |B_{2n}| = 2(2n)!ζ(2n)/(2π)^{2n}, consecutive terms satisfy |t_{n+1}/t_n|
+= [4 + 3/(2^{2n−1} − 1)]/4 · ζ(2n+2)/ζ(2n) · (L/2π)², and the bracket falls
+from 7 at n = 1 toward 4, so the ratio is under 7·(L/4π)² = 0.0212975297739 at
+this interval. The series alternates with strictly decreasing terms, so its
+partial sums bracket G at every order. It is the tighter of the two:
+
+   terms   central-binomial width   Bernoulli width    factor
+   ─────────────────────────────────────────────────────────────
+     2            1.172e-3            2.805e-4          4.2×
+     4            7.417e-6            4.371e-8        169.7×
+     6            6.620e-8            6.496e-12      1.019e4×
+     8            6.885e-10           9.624e-16      7.154e5×
+
+The Bernoulli bracket sits strictly inside the other at every order tested
+(orders 2–8; an observation, not a theorem). What §5's enclosure adds that
+this one cannot is two things: rational bounds (1/48, 151/7680, integers over
+integers, where the Bernoulli partial sums are polynomials in ln 2), and a
+certificate in integer arithmetic where this one rests on the asymptotics of
+B_{2n} through ζ. Their domains differ too: r ≤ 3 + 2√2 for the central-
+binomial series, r < e^{2π} = 535.49… for the Bernoulli one, the latter fixed
+by the singularity of u/sinh u at u = iπ. Neither boundary belongs to the
+object; G(r) is smooth and monotone through both. Two routes, two
+certificates, one object, which is the only reason both are printed.
+
+──────────────────────────────────────────────────────────────────────────────
+
+4.2 · The line, and where the interval is on it
+───────────────────────────────────────────────
+
+G is one value of G(r); this subsection says where r = 2 stands on the line,
+in the line's own integers. Everything here is classical or a two-line
+computation; the numbers are in §7's second block.
+
+Two traces. The scaling x ↦ rx is the hyperbolic element diag(√r, 1/√r) of
+translation length L, with trace t = 2·cosh(L/2) = √r + 1/√r; its square has
+trace t₂ = r + 1/r = 2·cosh L = t² − 2. The chord is √(t² − 4), the base of §4
+is 16/(t₂ − 2), and X² = (t₂ − 2)/4. So the arithmetic of the series is the
+arithmetic of t₂.
+
+Where the integers are. t₂ is an integer at r = φ² = (3+√5)/2 (t₂ = 3), at
+2+√3 (4), at (5+√21)/2 (5 — its base is 16/3, not an integer), at 3+2√2 =
+(1+√2)² (6), … — the norm-one units of real quadratic fields, one per integer
+trace; its square diag(r, 1/r) is conjugate to an integral matrix exactly when
+t₂ ∈ ℤ. Three facts about these points are exact: at φ² the chord is 1, so p =
+L and G = 1 − 2·ln φ; at 2+√3 the angle θ = gd(L) is 60°; at 3+2√2 the chord
+is 2, X = 1, and the series of §4 reaches the boundary of its convergence —
+the silver ratio squared. More generally the squares of the metallic means (m
++ √(m²+4))/2 have t₂ = m² + 2: golden 3, silver 6, bronze 11.
+
+The angles. Each cell carries two angles, in two conventions, and a line names
+which. The Gudermannian θ = gd L, at the full argument, has cos θ = 1/cosh L =
+2/t₂ — the angle is the arithmetic of t₂ as well — so at an integer trace θ is
+the arccosine of a rational: 2/3 at the golden point (48.18968510°), 1/2 at
+2+√3 (the 60° above), 2/5 at (5+√21)/2, 1/3 at the boundary (70.52877937°).
+Lobachevsky's angle of parallelism Π, at the half argument, has cos Π =
+tanh(L/2) = (r − 1)/(r + 1): 1/√5 at the golden point (Π = arctan 2,
+63.43494882°), 1/√2 at the boundary (45°), and at an integer ratio a rational
+— 1/3, 1/2, 2/3 at r = 2, 3, 5. Those three are angles the cells already carry
+at the full argument: Π(r) = θ(r′) when 2/t₂(r′) = (r − 1)/(r + 1), i.e.
+t₂(r′) = 2(r + 1)/(r − 1) = 2 + 4/(r − 1), an integer exactly when (r − 1) | 4
+— the condition of the integer base — so Π(2) = θ(3+2√2) = arccos(1/3), Π(3) =
+θ(2+√3) = 60°, Π(5) = θ(φ²) = arccos(2/3). The condition (r − 1) | 4 is thus
+reached twice — from the series' base in §4 and from the angles here — and
+lands on the same three ratios. At the doubling interval θ = arccos(4/5) =
+36.86989765°, the 3-4-5 angle of the partner paragraph below.
+
+The cells of this subsection and of Figure 1, in the coordinates of this note.
+Angles in degrees; every entry is computed from the closed form at dps 500 in
+§7's second block and printed to the digits shown.
+
+   r              t₂   chord base G            θ = gd L      Π
+   1   the wall   2    0     ∞    0            0°            90°
+   2   doubling   5/2  1/√2  32   0.019741857  36.86989765°  70.52877937°
+   φ²  golden     3    1     16   0.037576350  48.18968510°  63.43494882°
+   3              10/3 2/√3  12   0.048573849  53.13010235°  60°
+   2+√3           4    √2    8    0.068770141  60°           54.73561032°
+   (5+√21)/2      5    √3    16/3 0.095408039  66.42182152°  49.10660535°
+   5              26/5 4/√5  5    0.100296856  67.38013505°  48.18968510°
+   3+2√2 boundary 6    2     4    0.118626413  70.52877937°  45°
+
+Where r = 2 is. t₂(2) = 5/2: between the wall (t₂ = 2, r = 1) and the golden
+point (t₂ = 3), on no integer value of t₂, and under squaring it never reaches
+one — 5/2, 17/4, 257/16, … are the Fermat numbers over 2^{2^k}. What is
+integral at r = 2 is not the trace but the chord's square: X² = 1/8, base 32.
+That is the whole of what §4 and §5 use, and it is a different kind of fact
+from the integrality of t₂: the golden point closes on the trace, the doubling
+interval closes on the chord, and neither closes on the other. Among integer
+ratios the base 16r/(r − 1)² is an integer exactly when (r − 1) | 4 — r = 2,
+3, 5, bases 32, 12, 5 — and 32 is the largest.
+
+The interval's partner. sinh L · sinh L′ = 1 pairs r with r′, equivalently
+gd(L) + gd(L′) = 90°. The partner of the doubling interval is the tripling
+interval: sinh(ln 2)·sinh(ln 3) = (3/4)(4/3) = 1, and the angles are those of
+the 3-4-5 triangle and its complement. The partner of φ² is √5; of 3+2√2, √2;
+1+√2 is its own partner (sinh L = 1, 45°).
+
+Three facts, side by side. The function does not mark r = 2 (§2, Figure 1).
+The integers do: the certificate is rational there because X² = 1/8, and among
+integer ratios the base is a power of two only there (§4). And on the line, r
+= 2 closes arithmetically on the chord coordinate — X² = 1/8, integer base 32
+— and not on the trace. "Nothing distinguishes r = 2" and "the certificate is
+rational at r = 2" are both true; they are about the curve and about the
+arithmetic respectively, and the claim of this note is the second. The size of
+G is a coordinate: 0.0197 here, 0.0376 at the golden point, 0.1186 at the
+boundary, for one object.
+
+[Figure 1 — figure1.png]
+
+Figure 1. G(r) = 1 − GM/L_log on 1 ≤ r ≤ 7. Filled: the wall, the doubling
+interval, the golden point, 2+√3, (5+√21)/2 and the boundary — the trace and
+chord points of §4.2 — with the series base 16r/(r−1)² = 4/X² under each.
+Hollow: r = 3 and r = 5, the other integer bases among integer ratios (§4). No
+extremum; the inflection in the coordinate r sits at 2.474…, not at 2 (§2;
+uniqueness in r is not claimed). The certificate's rationality (X² = 1/8) is a
+line of algebra, not a feature of the curve.
+
+4.3 · The half-argument made complex: the saddle
+────────────────────────────────────────────────
+
+Write v = L/2, so G = 1 − v/sinh v (§2) with G = v²/6 − 7v⁴/360 + … (the
+Bernoulli series of §4.1). The second derivative of G at the wall is 1/3 in
+the coordinate v, 1/12 in L, 1/12 in r, 1/3 in X: the value is a property of
+the coordinate, its sign is not (a Hessian changes by congruence under a
+change of variables, and only its signature is invariant). On the real line G
+has one variable and a minimum at the wall.
+
+Let the half-argument be complex, w = a + ib, f(w) = 1 − w/sinh w. On the
+imaginary axis, f(iβ/2) = 1 − β/(2·sin(β/2)): the circle's argument over its
+chord — the same expression as 1 − L/(2·sinh(L/2)) with the hyperbola replaced
+by the circle, and negative, since a circular arc exceeds its chord where a
+hyperbolic argument falls short of it. f is analytic, so Re f is harmonic, and
+a harmonic function has no interior maximum or minimum: every critical point
+is a saddle. At w = 0 the Hessian of Re f is diag(+1/3, −1/3) — +1/3 along the
+real axis, the deficit of §1; −1/3 along the imaginary axis, the circle's
+excess. |f| itself has a minimum there. These are computations (§7, second
+block), and the identification of the two axes with the two sides of the mean
+inequality is exact: the hyperbolic side is Hermite–Hadamard's left member and
+the circular side is what the same formula does on x² + y² = 1.
+
+The saddle is the wall's and not the interval's, and it is the only one in
+reach. f′(w) = 0 reduces to tanh w = w, whose sole solution in the disc |w| <
+π — the disc in which the Bernoulli series of §4.1 converges — is w = 0; the
+next solutions are w = ±4.4934i, tan y = y, on the imaginary axis beyond the
+pole at iπ. That the axis holds all of them is four lines: put w = iz, so tanh
+w = w reads tan z = z; for z = x + iy, tan z = (sin 2x + i·sinh 2y)/(cos 2x +
+cosh 2y), and if xy ≠ 0 the real and imaginary parts of tan z = z force sin
+2x/(2x) = sinh 2y/(2y), impossible since the left side is at most 1 in
+absolute value and the right exceeds 1 for y ≠ 0; if x = 0, tanh y = y gives y
+= 0. So every nonzero root of tanh w = w is imaginary, and the first, 4.4934i,
+lies outside |w| < π. So inside the disc there is exactly one critical point,
+it is the wall, and it is a saddle; the doubling interval, w = ln 2/2, is an
+ordinary point of the same function with f′ = 0.112347…. That is the same
+shape as §2's statement about the inflection — one, named, and not where the
+interval is. It is where the wall stands when both sides are in view.
+
+4.4 · Why one function, in several places
+─────────────────────────────────────────
+
+§6 lists the fields in which p appears — a mean ratio, a midpoint rule, an
+acceptance probability, a tube coefficient, a Bernoulli generating function.
+The co-appearance has a reason, and it is short. The continuous homomorphisms
+(ℝ, +) → (ℝ₊, ×) are x ↦ e^{cx}, and the normalisation c = 1 is the
+exponential used here; an interval measured by its length L and by the ratio
+of its ends r = e^L is measured on the two sides of that map, and p = GM/L_log
+is the ratio of the two measures — the geometric mean is the multiplicative
+middle, the logarithmic mean is (r − 1)/L, the additive one. So wherever a
+problem carries both a count that adds and a step that compounds — panels and
+an exponential integrand; doublings and a probability; a translation length
+and a trace — p(L) is present and is the same function. This places the
+recurrence; it does not place the ratio. Which fields carry both measures is a
+census, not a theorem.
+
+Two checks that it is the object, and not a coordinate of it, that recurs. The
+relation p(2L) = p(L)/cosh(L/2): doubling the argument divides p by cosh(L/2).
+And the multiplier of the squaring map — r ↦ r², which doubles the argument —
+at its fixed point, the wall: written L ↦ 2L, r ↦ r², X ↦ 2X√(1+X²) or τ ↦
+2τ/(1+τ²) with τ = tanh(L/2), the map's derivative at the wall is 2 in each —
+the fixed-point multiplier of the squaring map is invariant under smooth local
+conjugacy — where the second derivative of G at the same point was 1/3, 1/12,
+1/12, 1/3 in those coordinates (§4.3). The multiplier is the object's; the
+curvature's value is the coordinate's.
+
+──────────────────────────────────────────────────────────────────────────────
+
+§5 — THE ENCLOSURE
+══════════════════════════════════════════════════════════════════════════════
+
+The bracket is not two numbers; it is the first order of a certified sequence.
+The certificate is three steps in integers feeding Leibniz.
+
+Lemma. |t_{k+1}|/|t_k| = (2k+1)²/(16(k+1)(2k+3)) for every k ≥ 1. Proof.
+C(2k+2,k+1)/C(2k,k) = (2k+2)(2k+1)/(k+1)² = 2(2k+1)/(k+1), and |t_{k+1}|/|t_k|
+= [2(2k+1)/(k+1)]·[(2k+1)/(32(2k+3))]. ∎
+
+Two integer facts. 16(k+1)(2k+3) − (2k+1)² = 28k² + 76k + 47 > 0, so the terms
+strictly decrease; 16(k+1)(2k+3) − 8(2k+1)² = 48k + 40 > 0, so the ratio is
+below 1/8.
+
+Theorem. Since the terms alternate and strictly decrease, for every j ≥ 1
+
+   S_{2j}  <  G  <  S_{2j−1}          with width exactly |t_{2j}|,
+
+and strictly, because the tail after any partial sum lies strictly between 0
+and the next term. (G is also transcendental, by Lindemann.)
+
+   j = 1     151/7680  <  G  <  1/48                                width
+             3/2560 ≈ 1.17e-3
+   j = 4     8311000980567041/420983760821944320  <  G  <
+             3819393966191/193466801848320
+                                                                    width
+    6435/9345848836096 ≈ 6.89e-10
+
+Order 8 narrows order 2 by exactly 18253611008/10725 = 1701968.39…. The
+asymptotic rate is log₁₀ 8 = 0.903 decimal digits per order, approached from
+above.
+
+5.1 · The baseline this enclosure has to beat
+─────────────────────────────────────────────
+
+By §1's midpoint identity, G is the relative error of the one-panel midpoint
+rule for eᵗ on [0, ln 2]; absolute and relative coincide here only because
+∫₀^{ln 2} eᵗ dt = 1 (at r = 3 they are 0.0971476982 and 0.0485738491). The
+textbook error form E = (b−a)³f″(ξ)/24 with f″ ∈ (1, 2) gives, in one line,
+
+        (ln 2)³/24  =  0.0138760272  <  G  <  0.0277520543  =  2(ln 2)³/24
+
+correct, two-sided, and reachable in thirty seconds. The first order of §5 is
+11.84× narrower than that bracket, and every order after it gains 0.903 digits
+on the same certificate.
+
+The Hermite–Hadamard literature has a bracket that does extend. Sándor (1988),
+as presented by Niculescu in Dragomir & Pearce (2000, Ch. 5, Corollary 60),
+refines G ≤ L_log ≤ A to (a^{3/4}b^{1/4} + a^{1/4}b^{3/4})/2 < L_log < (A +
+G)/2, and the multiplicative mean-value lemma there (M*(f)² =
+M*(f|[a,√ab])·M*(f|[√ab,b]), f = exp) iterates it over the dyadic points
+a^{1−k/2ⁿ}b^{k/2ⁿ}. At r = 2 the first level gives 0.0148286 < G < 0.0294373,
+and each level divides the width by about four: level 5 gives 0.0197371 < G <
+0.0197514, width 1.4×10⁻⁵, from 32 subintervals (33 dyadic nodes). So the
+bracket on L_log and the lemma that iterates it are in print; the enclosure of
+this complement, 0.0148286 < G < 0.0294373, is assembled from them here in one
+monotone step and appears on no page (entered from L_log, a bound on a mean;
+entered from an interval fixed in advance, a bound on the object — the same
+distinction §4 draws for Bala). What §5 adds is rational bounds — integers
+over integers at every order — on an integer certificate with a closed-form
+term ratio, gaining 0.903 digits per term where the dyadic refinement gains
+0.602 per level — and a term is one rational summand while a level doubles the
+number of points: at equal accuracy, eight terms against 8,192 subintervals.
+
+1/48 and 151/7680 are S₁ and S₂, derived and certified here. No source we have
+found prints them as bounds on this object — a statement about our search, not
+about the literature.
+
+──────────────────────────────────────────────────────────────────────────────
+
+§6 — WHERE IT SITS
+══════════════════════════════════════════════════════════════════════════════
+
+  Hermite (1881/83); Hadamard (1893)
+      where it is written: f(mid) ≤ mean of f ≤ (f(α)+f(β))/2 for convex f; at
+        f = exp on the log interval, the chain GM ≤ L_log ≤ AM
+      what stands here: the left half, p ≤ 1, is this note's starting point
+
+  Carlson (1966, 1972); Bhatia (2008); Jameson & Mercer (2019)
+      where it is written: the same chain in mean-theoretic form; the
+        hypergeometric mean family
+      what stands here: at L = ln 2 the ratio of the first two is √2·ln 2; the
+        identification of the ratio with L/(2 sinh(L/2)) is observed here
+
+  Lord (2014); Ricardo, Mahony, Burn, Miles, Subramaniam (Gazette Feedback,
+  2015)
+      where it is written: ln 2 < 1/√2 as a "non-calculator challenge", and
+        eight elementary proofs in reply, four of the general form ln x < √x −
+        1/√x; one via cosh(1/√2) > 5/4 = cosh(ln 2), one comparing series with
+        weights C(2n,n)/4ⁿ
+      what stands here: √2·ln 2 < 1, i.e. G > 0, in elementary form — §2's
+        positivity. No complement, series, or bound on 1 − √2·ln 2 on those
+        pages
+
+  Fishman (1996)
+      where it is written: p = √2·ln 2, p. 188; 1 − p formed numerically, p.
+        189, no symbol
+      what stands here: the value here, and the fact that its complement was
+        reached before — the earliest we have found, stated as that
+
+  Marsaglia (1984), J. Amer. Statist. Assoc. 79(385), 218–221
+      where it is written: the exact-approximation method: a sampling density
+        decomposed as p·I_[0,1] + (1 − p)·f*, 0 < p ≤ min f_X (as presented in
+        Fishman §3.8, eq. 41); at the largest p the residual f* stays
+        nonnegative (eq. 52)
+      what stands here: the unit in which √2·ln 2 is read in that literature —
+        a probability, the weight of a uniform component. Algorithm EA is one
+        instance of the method, and its p is this note's value
+
+  Ahrens & Dieter (1988); Hamilton (1998)
+      where it is written: Algorithm EA: an exponential sample as K·ln 2 + V,
+        V truncated exponential on 0 ≤ v ≤ ln 2 (Fishman eqs. 46–48); its
+        saturation probability, sixteen digits
+      what stands here: the same value (their digits are the nearest IEEE-754
+        double, verified, not stated by them); the doubling interval is their
+        V-cell
+
+  Hodgson & Kerckhoff (2005)
+      where it is written: the tube coefficient ≈ 1/0.980258 in Thm 4.4
+      what stands here: exactly 1/(√2·ln 2); their 1/(2√2) is sinh(½ ln 2)
+
+  Bala (2022), OEIS A002162
+      where it is written: ln 2 = 2·arcsinh(√2/4) = 2√2·Σ …/32ⁿ
+      what stands here: the same series, read from the complement's end
+
+  Sándor (1988); Niculescu, in Dragomir & Pearce (2000), Ch. 5 Cor. 60
+      where it is written: for f = exp, the multiplicative Hermite–Hadamard
+        inequality gives G ≤ L_log ≤ A, refined to
+        (a^{3/4}b^{1/4}+a^{1/4}b^{3/4})/2 < L_log < (A+G)/2 and iterated over
+        dyadic points
+      what stands here: at r = 2: 0.0148286 < G < 0.0294373, width ÷4 per
+        level — their bracket on L_log and their lemma; the enclosure of the
+        complement is assembled here from them. §5's differs in kind:
+        rational, integer-certified, 0.903 digits per term
+
+  the midpoint rule (any text)
+      where it is written: the one-panel rule and E = (b−a)³f″(ξ)/24
+      what stands here: p is midpoint-over-exact for eᵗ on [0, L]; at r = 2 G
+        is the rule's relative error, and (ln 2)²/24 is its first Bernoulli
+        term
+
+  the theory of SL(2, ℤ); real quadratic units (any text)
+      where it is written: hyperbolic classes by trace; r + 1/r ∈ ℤ for the
+        norm-one units of ℚ(√(n²−4))
+      what stands here: the integer points of t₂ in §4.2; the golden and
+        silver points and the boundary are three of them
+
+  Chebyshev; the Lucas numbers (classical)
+      where it is written: cosh 2L = 2cosh²L − 1; L_{2^k} from 3
+      what stands here: the squaring of t₂ in §4.2: 3, 7, 47, 2207, …; the
+        Fermat ladder from 5/2
+
+  the metallic means (classical)
+      where it is written: (m + √(m²+4))/2, norm −1
+      what stands here: their squares are the integer points t₂ = m² + 2
+        (§4.2)
+
+  the trapezoid rule (any text); Hermite–Hadamard's right member
+      where it is written: T = (L/2)·coth(L/2) − 1 for eᵗ
+      what stands here: the over-side of the same inequality whose under-side
+        is G; at the doubling interval T = 3·ln 2/2 − 1 = 0.0397207708…, since
+        coth(ln 2/2) = 3; T/G → 2 at the wall (§7, second block)
+
+  harmonic functions (any text)
+      where it is written: a harmonic function has no interior extremum
+      what stands here: the saddle of Re f at the wall, §4.3
+
+  this note
+      where it is written: —
+      what stands here: the complement as an object: a symbol, its value, the
+        central-binomial series read from this interval, the Bernoulli series
+        in L, the term ratio in closed form, the integer certificate, the
+        enclosure at every order
+
+Each row separates what is theirs from what stands here; the last row is the
+claim. The negative in the last row is scoped: in Carlson (1966), Bhatia
+(2008) and Jameson & Mercer (2019), six probes each on 2026-08-27, no source
+gives the complement a symbol, a closed form, or bounds stated on 1 − p. That
+search covered the means literature and not the Hermite–Hadamard / Jensen-gap
+literature. Its standing reference, Dragomir & Pearce, Selected Topics on
+Hermite–Hadamard Inequalities and Applications (RGMIA Monographs, 2000; 2002
+edition), was read in full and searched on 2026-09-02 for the doubling ratio,
+the values 0.98025…, 0.019741…, 0.028481…, 1.4427… beside 1.4142…, √2·ln 2,
+and the phrase Jensen gap: zero occurrences. It contains the chain H ≤ G ≤ L ≤
+I ≤ A (its (2.6); there G and L are the geometric and logarithmic means, not
+this note's G and L), Pittenger's A_{2/3} < I < A_{ln 2} (where ln 2 is a
+power-mean index, not this object), and Sándor's dyadic enclosure of L_log,
+cited in §5.1. That literature writes the slack in absolute form, 1/ln 2 − √2;
+the search was for both numbers. A universal negative cannot be established by
+reading; one page reference closes the central claim.
+
+──────────────────────────────────────────────────────────────────────────────
+
+§7 — REPRODUCTION
+══════════════════════════════════════════════════════════════════════════════
+
+The complete runnable scripts accompany this paper as
+The_complement_1_minus_sqrt2_ln2_block1.py and _block2.py; the listings are
+reproduced below. Run the files rather than a copy taken from the PDF — page
+extraction can drop a space of indentation, and the text file keeps it. mpmath
+is the only dependency; under a minute, most of it the dps 500 rung.
+
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ---------------------------------------------------------------------------
+#  1 - sqrt(2)*ln(2)  --  every claim in this paper, checked.  G := 1 - sqrt(2)*ln(2)
+# ---------------------------------------------------------------------------
+from mpmath import mp, mpf, sqrt, log, exp, sinh, cosh, asinh, diff, findroot, pi, quad
+from fractions import Fraction as Q
+from math import comb, comb as fcomb, factorial as ffact
+
+CH = FA = 0
+def ck(name, cond):
+    global CH, FA
+    CH += 1
+    if not cond: FA += 1
+    print(f"  [{'ok' if cond else 'FAIL'}]  {name}")
+
+def term(k):                                   # k >= 1, exact rational
+    return Q((-1)**(k+1) * comb(2*k, k), 32**k * (2*k+1))
+
+for DPS in (30, 60, 200, 500):
+    mp.dps = DPS
+    print(f"\n--- dps {DPS} " + "-"*52)
+    L  = log(mpf(2))                           # the interval:  r = 2
+    X  = (mpf(2) - 1) / (2*sqrt(mpf(2)))       # half-difference coordinate
+    p_ln2 = sqrt(mpf(2)) * L                  # the ratio p at r = 2
+    G = 1 - p_ln2
+    eps = mpf(10)**(-(DPS - 8))
+
+    # 1. the interval
+    ck("sinh(ln2 / 2) = 1/(2 sqrt2)",            abs(X - sinh(L/2)) < eps)
+    ck("X^2 = 1/8 exactly",                      abs(X**2 - mpf(1)/8) < eps)
+    ck("arsinh(1/(2 sqrt2)) = ln2 / 2",         abs(asinh(X) - L/2) < eps)
+    ck("p(ln2) = arsinh(X)/X = sqrt2 * ln2",    abs(asinh(X)/X - p_ln2) < eps)
+    ck("GM/L_log on [1,2] equals L/(2 sinh(L/2))",
+       abs(sqrt(mpf(2))/((mpf(2)-1)/L) - L/(2*sinh(L/2))) < eps)
+
+    # 1b. the chain IS Hermite-Hadamard for exp on the log interval  (section 1)
+    def HH(a, b):                              # the three H-H terms at f = exp
+        la, lb = log(mpf(a)), log(mpf(b))
+        return (exp((la+lb)/2),                            # f((alpha+beta)/2)
+                quad(exp, [la, lb])/(lb-la),               # mean of f
+                (exp(la)+exp(lb))/2)                       # (f(alpha)+f(beta))/2
+    def means(a, b):
+        a, b = mpf(a), mpf(b)
+        return sqrt(a*b), (b-a)/log(b/a), (a+b)/2          # GM, L_log, AM
+    ck("Hermite-Hadamard at f=exp on [ln a, ln b] gives GM, L_log, AM exactly",
+       all(max(abs(h-m) for h, m in zip(HH(a,b), means(a,b))) < eps
+           for a, b in ((1,2), (1,3), (2,7), ('0.5','11.3'))))
+    ck("so p = GM/L_log is H-H's LEFT half, and p <= 1 is that inequality",
+       all(mpf(0) < means(a,b)[0]/means(a,b)[1] <= 1 for a, b in ((1,2),(1,3),(2,7))))
+    ck("ABSOLUTE Jensen gap at r = 2 = 1/ln2 - sqrt2 = 0.02848147851586835855",
+       abs((mpf(2)-1)/L - sqrt(mpf(2)) - mpf('0.02848147851586835855')) < mpf('1e-20'))
+    ck("and G is that gap NORMALISED:  (L_log - GM)/L_log = (1/ln2 - sqrt2)*ln2",
+       abs(((mpf(2)-1)/L - sqrt(mpf(2))) / ((mpf(2)-1)/L) - G) < eps
+       and abs((1/L - sqrt(mpf(2)))*L - G) < eps)
+    ck("the two are DIFFERENT numbers -- the qualifier 'relative' is load-bearing",
+       abs(((mpf(2)-1)/L - sqrt(mpf(2))) - G) > mpf('0.008'))
+    ck("mean-ratio and midpoint are ONE setting: GM/L_log = midpt/exact, at every L",
+       all(abs(means(1, exp(mpf(t)))[0]/means(1, exp(mpf(t)))[1]
+               - mpf(t)*exp(mpf(t)/2)/(exp(mpf(t))-1)) < eps
+           for t in ('0.6931471805599453', '1.5', '4')))
+
+    # 2. positivity, before any evaluation
+    ck("G > 0   (arsinh strictly concave, arsinh(0)=0)", G > 0)
+
+    # 3. the series
+    S = sum((term(k) for k in range(1, 4*DPS)), Q(0))
+    ck("series -> G",                            abs(mpf(S.numerator)/S.denominator - G) < eps)
+    ck("S1 = 1/48",                              term(1) == Q(1, 48))
+    ck("S1 + S2 = 151/7680  (exact integers)",   term(1)+term(2) == Q(151, 7680))
+    ck("bracket width = 3/2560 = 0.001171875",   term(1)-(term(1)+term(2)) == Q(3, 2560))
+
+    # 4. the ratio lemma, and the two integer facts under it
+    ck("central-binomial step  C(2k+2,k+1)/C(2k,k) = 2(2k+1)/(k+1)   [proved in 5]",
+       all(Q(comb(2*k+2, k+1), comb(2*k, k)) == Q(2*(2*k+1), k+1) for k in range(1, 41)))
+    ck("|t(k+1)|/|t(k)| = (2k+1)^2 / (16(k+1)(2k+3)), k=1..40",
+       all(abs(term(k+1))/abs(term(k)) == Q((2*k+1)**2, 16*(k+1)*(2*k+3)) for k in range(1,
+               41)))
+    ck("16(k+1)(2k+3) - (2k+1)^2 = 28k^2+76k+47 > 0   -> decreasing",
+       all(16*(k+1)*(2*k+3) - (2*k+1)**2 == 28*k*k+76*k+47 > 0 for k in range(0, 200)))
+    ck("16(k+1)(2k+3) - 8(2k+1)^2 = 48k+40 > 0        -> ratio < 1/8",
+       all(16*(k+1)*(2*k+3) - 8*(2*k+1)**2 == 48*k+40 > 0 for k in range(0, 200)))
+
+    # 5. the enclosure
+    P = [sum((term(i) for i in range(1, j+1)), Q(0)) for j in range(1, 13)]
+    q = lambda f: mpf(f.numerator)/f.denominator
+    ck("S(2j) < G < S(2j-1)  for j = 1..6",
+       all(q(P[2*j-1]) < G < q(P[2*j-2]) for j in range(1, 7)))
+    ck("bracket width at step j is exactly |t(2j)|,  j = 1..6",
+       all(P[2*j-2]-P[2*j-1] == abs(term(2*j)) for j in range(1, 7)))
+    ck("S7/S8 narrow the first bracket by exactly 18253611008/10725",
+       (Q(3,2560)) / (P[6]-P[7]) == Q(18253611008, 10725))
+    ck("the j=4 bracket AS PRINTED in section 5, numerators and denominators",
+       P[7] == Q(8311000980567041, 420983760821944320)
+       and P[6] == Q(3819393966191, 193466801848320)
+       and P[6]-P[7] == Q(6435, 9345848836096))
+
+    # 6. the function does not select the interval   (section 2)
+    #    the sign facts below are PROVED in section 2; these are regression tests.
+    Gf  = lambda t: 1 - t/(2*sinh(t/2))
+    Gp  = lambda t: (t/2*cosh(t/2) - sinh(t/2)) / (2*sinh(t/2)**2)
+    psi = lambda t: 4*sinh(t) - t*cosh(t) - 3*t
+    pts = ('0.01','0.5','0.6931471805599453','3','10','29')
+    ck("G'(L) = (u cosh u - sinh u)/(2 sinh^2 u),  u = L/2",
+       all(abs(diff(Gf, mpf(t)) - Gp(mpf(t))) < eps for t in pts))
+    ck("its numerator f(u) = u cosh u - sinh u > 0   [f(0)=0, f'= u sinh u > 0]",
+       all(mpf(t)/2*cosh(mpf(t)/2) - sinh(mpf(t)/2) > 0 for t in pts))
+    ck("so G'(L) > 0  -- no extremum anywhere on (0, inf)",
+       all(Gp(mpf(t)) > 0 for t in pts))
+    ck("G''(L) = psi(L)/(16 sinh^3(L/2)),  psi(L) = 4 sinh L - L cosh L - 3L",
+       all(abs(diff(Gf, mpf(t), 2) - psi(mpf(t))/(16*sinh(mpf(t)/2)**3)) < eps for t in pts))
+    if DPS >= 30:
+        Ls = findroot(psi, mpf('3.2'))
+        ck("the inflection is psi's unique positive root, L* = 3.2122305976",
+           abs(Ls - mpf('3.212230597605534728')) < mpf('1e-15'))
+        ck("and it is a zero of G'' itself  (r = e^L* = 24.834)",
+           abs(diff(Gf, Ls, 2)) < eps and abs(exp(Ls) - mpf('24.8344200858')) < mpf('1e-9'))
+        ck("psi's uniqueness cascade:  v1 < v2 < v3 < L*",
+           (lambda v1, v2, v3: v1 < v2 < v3 < Ls)(
+               findroot(lambda v: cosh(v) - v*sinh(v), mpf('1.2')),
+               findroot(lambda v: diff(psi, v, 2), mpf('1.9')),
+               findroot(lambda v: diff(psi, v), mpf('2.6'))))
+        ck("L/2pi = 0.110317800076 IS the decay factor, not a distance:"
+           "  7*(L/4pi)^2 = (7/4)*(L/2pi)^2",
+           abs(L/(2*pi) - mpf('0.110317800076')) < mpf('1e-12')
+           and abs(7*(L/(4*pi))**2 - (mpf(7)/4)*(L/(2*pi))**2) < eps)
+        # the inflection is NOT coordinate-free -- section 2 states both and quotes
+        # no distance to either.  Gr = G as a function of r.
+        Gr = lambda t: 1 - log(t)/(2*sinh(log(t)/2))
+        rs = findroot(lambda t: diff(Gr, t, 2), mpf('2.4'))
+        ck("in r A root sits at 2.474062197, NOT e^L* = 24.834 -- uniqueness in r NOT proved",
+           abs(rs - mpf('2.474062197326598')) < mpf('1e-12')
+           and abs(rs - exp(Ls)) > 20)
+        ck("no extremum in r either  (dG/dr > 0; L = ln r is strictly increasing)",
+           all(diff(Gr, mpf(t)) > 0 for t in ('1.05','2','5','24.834','1000')))
+
+    # 7. what other people printed
+    ck("Fishman 1996 p.189:  100 * 1.511076 * G = 2.983144  (as printed)",
+       abs(100*mpf('1.511076')*G - mpf('2.983144')) < mpf('1e-6'))
+    ck("section 3: that product is 2.98314456..., so his 2.983144 is TRUNCATED (rounded "
+            "gives ...45)",
+            
+       abs(100*mpf('1.511076')*G - mpf('2.98314456')) < mpf('5e-9')
+       and mp.nstr(100*mpf('1.511076')*G, 7) == '2.983145')
+    ck("section 3: the alpha reproducing 2.983144 exactly is 1.5110757...",
+       abs(mpf('2.983144')/(100*G) - mpf('1.5110757')) < mpf('5e-8'))
+    ck("section 2: at the r-inflection 2.474062197 the argument is L = 0.905861414",
+       abs(log(mpf('2.474062197326598')) - mpf('0.905861414')) < mpf('5e-10'))
+    G3 = 1 - log(mpf(3))/(2*sinh(log(mpf(3))/2))          # G(3); the integral on [0, ln 3] is 2
+    ck("section 5.1: at r = 3 the absolute and relative midpoint errors are 0.0971476982 "
+            "and 0.0485738491",
+            
+       abs(2*G3 - mpf('0.0971476982')) < mpf('5e-11')
+               and abs(G3 - mpf('0.0485738491')) < mpf('5e-11'))
+    ck("Hodgson-Kerckhoff's coefficient X/arcsinh(X) = 1/(sqrt2 ln2)",
+       abs(X/asinh(X) - 1/p_ln2) < eps)
+    ck("Bala A002162 clause 1:  2*arcsinh(sqrt2/4) = ln2",
+       abs(2*asinh(sqrt(mpf(2))/4) - L) < eps)
+    ck("Bala's argument sqrt2/4 is this interval's X",
+       abs(sqrt(mpf(2))/4 - X) < eps)
+    ck("chart domains: X = 1 exactly at r = 3 + 2*sqrt2 = (1+sqrt2)^2",
+       abs((3+2*sqrt(mpf(2))-1)/(2*sqrt(3+2*sqrt(mpf(2)))) - 1) < eps)
+
+    # --- 4, the base IS the coordinate -------------------------------------
+    Xof   = lambda r: (r - 1)/(2*sqrt(r))
+    baseof = lambda r: 16*r/(r - 1)**2
+    ck("base = 4/X^2 exactly, at r = 2, 3, 5, 3+2sqrt2",
+       all(abs(baseof(r) - 4/Xof(r)**2) < eps
+           for r in (mpf(2), mpf(3), mpf(5), 3+2*sqrt(mpf(2)))))
+    ck("integer ratios with integer base: n = 2, 3, 5 (bases 32, 12, 5); power of two only "
+            "at n = 2",
+            
+       [n for n in range(2, 40) if 16 % (n-1)**2 == 0] == [2, 3, 5]
+       and [int(baseof(mpf(n))) for n in (2, 3, 5)] == [32, 12, 5])
+    ck("the domain bound r <= 3+2sqrt2 IS base = 4, not a separate fact",
+       abs(baseof(3+2*sqrt(mpf(2))) - 4) < eps)
+    # (checks on other ratios — r = phi^2, 2+sqrt3, the shared numerators — belong to the family
+    #  and are not printed in this note.)
+    ck("Bernoulli radius |L/2| < pi  <=>  r < e^(2pi) = 535.4916..., and 2 is inside",
+       abs(exp(2*pi) - mpf('535.49165552476473')) < mpf('1e-10')
+       and log(2) < 2*pi)
+    ck("midpoint/exact = L*e^(L/2)/(e^L - 1) = p(L)  at r = 2, 3, 5, 10",
+       all(abs(log(r)*exp(log(r)/2)/(exp(log(r))-1)
+               - log(r)/(2*sinh(log(r)/2))) < eps for r in (2, 3, 5, 10)))
+    Gm2, Am2 = sqrt(mpf(2)), mpf(3)/2                # Sandor / Niculescu, D&P Cor. 60, at r = 2
+    lo2 = (mpf(2)**(mpf(1)/4) + mpf(2)**(mpf(3)/4))/2
+    hi2 = (Am2 + Gm2)/2
+    ck("section 5.1: Sandor's refinement at r=2 brackets G: 0.0148286 < G < 0.0294373",
+       lo2 < 1/log(2) < hi2 and abs((1 - Gm2/lo2) - mpf('0.0148286')) < mpf('5e-8')
+       and abs((1 - Gm2/hi2) - mpf('0.0294373')) < mpf('5e-8')
+               and (1 - Gm2/lo2) < G < (1 - Gm2/hi2))
+    ck("(ln2)^2/24 carries 101.403% of G",
+       abs((L**2/24)/G - mpf('1.01403')) < mpf('1e-5'))
+    ck("section 4.1: (ln2)^2/24 = 0.0200188756, as printed",
+       abs(L**2/24 - mpf('0.0200188756')) < mpf('5e-11'))
+    ck("section 5: the narrowing factor 18253611008/10725 = 1701968.39..., as printed",
+       abs(mpf(18253611008)/10725 - mpf('1701968.39')) < mpf('5e-3'))
+
+    # --- 4.1  the Bernoulli route ------------------------------------------
+    def bern(m):                               # B_j exact, from the recurrence
+        B = [Q(0)] * (m + 1); B[0] = Q(1)
+        for n in range(1, m + 1):
+            B[n] = -sum(Q(fcomb(n + 1, j)) * B[j] for j in range(n)) / Q(n + 1)
+        return B
+    # 24: the 8-term sum needs B_16, the sporadic-agreement check needs B_24
+    B = bern(24)
+    ck("Bernoulli recurrence gives B2,B4,B6,B8 = 1/6, -1/30, 1/42, -1/30",
+       (B[2], B[4], B[6], B[8]) == (Q(1,6), Q(-1,30), Q(1,42), Q(-1,30)))
+
+    def bcoef(n):                              # coefficient of L^(2n) in G(L)
+        return Q(2**(2*n) - 2) * B[2*n] / Q(2**(2*n) * ffact(2*n))
+    ck("G(L) coefficients are 1/24, -7/5760, 31/967680, -127/154828800",
+       [bcoef(n) for n in (1,2,3,4)]
+       == [Q(1,24), Q(-7,5760), Q(31,967680), Q(-127,154828800)])
+    ck("section 4.1 table: num(c_6) = 1414477 and num(c_9) = 5749691557, as printed",
+       abs(bcoef(6).numerator) == 1414477 and abs(bcoef(9).numerator) == 5749691557)
+
+    def bmp(n):
+        c = bcoef(n); return mpf(c.numerator)/mpf(c.denominator)
+    ck("the Bernoulli series reproduces G from B_2n alone (8 terms)",
+       abs(sum(bmp(n) * L**(2*n) for n in range(1, 9)) - G) < mpf('1e-16'))
+
+    ck("c_n carries the factor 2^(2n-1)-1 ALWAYS; only the cancellation varies",
+       all(bcoef(n) == Q(2**(2*n-1)-1) * B[2*n] / Q(2**(2*n-1) * ffact(2*n))
+           for n in range(1, 11)))
+    ck("num(c_n) = M * num(B_2n) / (cancellation vs (2n)!)  -- TWO mechanisms",
+       all((2**(2*n-1)-1) * abs(B[2*n].numerator) % abs(bcoef(n).numerator) == 0
+           and ffact(2*n) % ((2**(2*n-1)-1) * abs(B[2*n].numerator)
+                             // abs(bcoef(n).numerator)) == 0
+           for n in range(1, 13)))
+    ck("agreement num(c_n)=M is SPORADIC: n = 1,2,3,4 and 7, not a threshold",
+       [n for n in range(1, 13) if abs(bcoef(n).numerator) == 2**(2*n-1)-1]
+       == [1, 2, 3, 4, 7])
+    ck("at n=6 NOTHING cancels and the numerator is still not M:  2047*691",
+       abs(bcoef(6).numerator) == 2047*691 and 2047*691 != 2047)
+    ck("prefactor identity  (2^(2n+1)-1)/(2^(2n-1)-1) = 4 + 3/(2^(2n-1)-1)",
+       all(Q(2**(2*n+1)-1, 2**(2*n-1)-1) == 4 + Q(3, 2**(2*n-1)-1) for n in range(1, 41)))
+    ck("so it falls strictly from 7 at n=1 toward 4  -- max is 7, by inspection",
+       Q(2**3 - 1, 2**1 - 1) == 7
+       and all(Q(2**(2*n+3)-1, 2**(2*n+1)-1) < Q(2**(2*n+1)-1, 2**(2*n-1)-1) > 4
+               for n in range(1, 41)))
+    ck("ratio bound 7*(ln2/(4*pi))^2 = 0.0212975297739, and is < 1",
+       abs(7*(L/(4*pi))**2 - mpf('0.0212975297739')) < mpf('1e-12')
+       and 7*(L/(4*pi))**2 < 1)
+
+    A = [sum(bmp(n) * L**(2*n) for n in range(1, j+1)) for j in range(1, 9)]
+    Sb = [sum(mpf(term(k).numerator)/mpf(term(k).denominator)
+              for k in range(1, j+1)) for j in range(1, 9)]
+    ck("the Bernoulli bracket lies strictly inside the S_k bracket, orders 2-8",
+       all(min(Sb[j-1], Sb[j-2]) < min(A[j-1], A[j-2])
+           and max(A[j-1], A[j-2]) < max(Sb[j-1], Sb[j-2]) for j in range(2, 9)))
+    ck("and the width factor at 8 terms (§5's j=4) exceeds 7e5",
+       abs(Sb[7]-Sb[6]) / abs(A[7]-A[6]) > mpf('7e5'))
+
+print("\n" + "="*64)
+print(f"  CHECKS {CH}   FAILURES {FA}")
+print("="*64)
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+   ================================================================
+     CHECKS 260   FAILURES 0
+   ================================================================
+
+Second block — the where (§4.2–4.4, Figure 1). Standalone; the file _block2.py.
+
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+# ---------------------------------------------------------------------------
+#  THE WHERE -- every number in §4.2-§4.4 and Figure 1, checked.   (second block; standalone)
+# ---------------------------------------------------------------------------
+from mpmath import (mp, mpf, mpc, sqrt, log, exp, sinh, cosh, tanh, asinh, atan, acos, coth, pi,
+        diff, re, im, nstr)
+CH2 = FA2 = 0
+def ck2(name, cond):
+    global CH2, FA2
+    CH2 += 1
+    if not cond: FA2 += 1; print("   FAIL:", name)
+for dps in (30, 60, 200, 500):
+    mp.dps = dps; eps = mpf(10)**(-(dps-8))
+    p   = lambda L: L/(2*sinh(L/2))
+    G   = lambda r: 1 - p(log(r))
+    X   = lambda r: (r-1)/(2*sqrt(r))
+    t2  = lambda r: r + 1/r                       # the square's trace, 2 cosh L
+    t   = lambda r: sqrt(r) + 1/sqrt(r)           # the trace, 2 cosh(L/2)
+    th  = lambda r: atan(sinh(log(r)))            # theta = gd(L)
+    partner = lambda r: exp(asinh(1/sinh(log(r))))
+    Pi  = lambda r: acos(tanh(log(r)/2))         # angle of parallelism (half argument)
+    deg = lambda a: a*180/pi
+    phi = (1+sqrt(5))/2; dS = 1+sqrt(2)
+    # --- §4.2 the line and the cells
+    ck2("t2 = t^2 - 2 (Cayley-Hamilton) at r = 2, phi^2, 3+2sqrt2",
+            all(abs(t2(r)-(t(r)**2-2))<eps for r in (mpf(2), phi**2, dS**2)))
+    ck2("doubling: t2 = 5/2, between the wall (2) and golden (3); X^2 = 1/8",
+            abs(t2(mpf(2))-mpf(5)/2)<eps and abs(X(mpf(2))**2-mpf(1)/8)<eps)
+    ck2("golden r = phi^2: t2 = 3, chord 2X = 1, p = L exactly, G = 1 - 2 ln phi",
+             abs(t2(phi**2)-3)<eps and abs(2*X(phi**2)-1)<eps
+                     and abs(p(log(phi**2))-log(phi**2))<eps
+            and abs(G(phi**2)-(1-2*log(phi)))<eps)
+    ck2("2+sqrt3: t2 = 4, base 8, theta = 60 deg", abs(t2(2+sqrt(3))-4)<eps
+            and abs(4/X(2+sqrt(3))**2-8)<eps and abs(th(2+sqrt(3))-pi/3)<eps)
+    ck2("the boundary 3+2sqrt2 = (1+sqrt2)^2: t2 = 6, X = 1, base 4, theta = arccos(1/3)",
+             abs(dS**2-(3+2*sqrt(2)))<eps and abs(t2(dS**2)-6)<eps and abs(X(dS**2)-1)<eps
+            and abs(th(dS**2)-acos(mpf(1)/3))<eps)
+    ck2("metallic means squared are the cells t2 = m^2 + 2, m = 1..5",
+            all(abs(t2(((m+sqrt(m*m+4))/2)**2)-(m*m+2))<eps for m in range(1,6)))
+    ck2("the base is 16/(t2 - 2): 32, 16, 12, 8, 5, 4 at r = 2, phi^2, 3, 2+sqrt3, 5, 3+2sqrt2",
+        all(abs(4/X(r)**2-16/(t2(r)-2))<eps for r in (mpf(2),phi**2,mpf(3),2+sqrt(3),mpf(5),
+                dS**2)) and
+        [round(float(4/X(r)**2)) for r in (mpf(2),phi**2,mpf(3),2+sqrt(3),mpf(5),dS**2)] == [32,
+                16,12,8,5,4])
+    L = [mpf(3)]
+    for _ in range(4): L.append(L[-1]**2-2)
+    ck2("the square's trace under squaring, from golden: 3, 7, 47, 2207, 4870847 (Lucas "
+            "L_{2^k})", [int(x) for x in L]==[3,7,47,2207,
+            
+            4870847])
+    F = [mpf(5)/2]
+    for _ in range(3): F.append(F[-1]**2-2)
+    ck2("from doubling: 5/2, 17/4, 257/16, 65537/256 -- Fermat numbers over 2^(2^k); never "
+            "an integer",
+            
+            all(abs(F[k]-mpf(2**(2**(k+1))+1)/2**(2**k))<eps for k in range(4))
+            and all(abs(x-round(x))>mpf('1e-3') for x in F))
+    ck2("the pairing sinh L * sinh L' = 1: 2 <-> 3, phi^2 <-> sqrt5, 3+2sqrt2 <-> sqrt2, "
+            "1+sqrt2 <-> itself",
+            
+        abs(partner(mpf(2))-3)<eps and abs(partner(phi**2)-sqrt(5))<eps
+                and abs(partner(dS**2)-sqrt(2))<eps and abs(partner(dS)-dS)<eps)
+    ck2("gd(ln 2) + gd(ln 3) = 90 deg: the 3-4-5 triangle and its complement",
+            abs(th(mpf(2))+th(mpf(3))-pi/2)<eps
+                    and abs(cosh(0)*mp.cos(th(mpf(2)))-mpf(4)/5)<eps)
+    # --- §4.2 the angles (added 2026-09-15)
+    # (r, t2 as printed, G as printed, theta as printed, Pi as printed) -- the table's rows
+    cells = [(mpf(1), mpf(2), "0", "0", "90"),
+             (mpf(2), mpf(5)/2, "0.019741857", "36.86989765", "70.52877937"),
+             (phi**2, mpf(3), "0.037576350", "48.18968510", "63.43494882"),
+             (mpf(3), mpf(10)/3, "0.048573849", "53.13010235", "60"),
+             (2+sqrt(3), mpf(4), "0.068770141", "60", "54.73561032"),
+             ((5+sqrt(21))/2, mpf(5), "0.095408039", "66.42182152", "49.10660535"),
+             (mpf(5), mpf(26)/5, "0.100296856", "67.38013505", "48.18968510"),
+             (dS**2, mpf(6), "0.118626413", "70.52877937", "45")]
+    ck2("cos theta = 2/t2 and cos Pi = (r-1)/(r+1) at the eight cells of the table; every "
+            "printed entry of the table (t2, G, theta, Pi) reproduced from the closed form",
+        all(abs(1/cosh(log(r))-2/t2(r))<eps and abs(tanh(log(r)/2)-(r-1)/(r+1))<eps
+                and abs(t2(r)-tt)<eps
+                and abs((mpf(0) if r == 1 else G(r))-mpf(g))<mpf("5e-10")   # nine places
+                and abs(deg(th(r))-mpf(a))<mpf("5e-9")      # eight places, as printed
+                and abs(deg(Pi(r))-mpf(b))<mpf("5e-9")
+            for r,tt,g,a,b in cells))
+    ck2("golden: theta = arccos(2/3), Pi = arctan 2; Pi(2) = theta(3+2sqrt2) = arccos(1/3), "
+            "Pi(3) = theta(2+sqrt3) = 60 deg, Pi(5) = theta(phi^2): t2(r') = 2 + 4/(r-1), an "
+            "integer iff (r-1) | 4",
+        abs(th(phi**2)-acos(mpf(2)/3))<eps and abs(Pi(phi**2)-atan(mpf(2)))<eps
+        and abs(Pi(mpf(2))-th(dS**2))<eps and abs(Pi(mpf(3))-th(2+sqrt(3)))<eps
+        and abs(Pi(mpf(3))-pi/3)<eps and abs(Pi(mpf(5))-th(phi**2))<eps
+        and all(abs(t2(rp)-(2+mpf(4)/(r-1)))<eps
+                for r,rp in ((2,dS**2),(3,2+sqrt(3)),(5,phi**2)))
+        and [r for r in range(2,61) if 4 % (r-1) == 0] == [2,3,5])
+    # --- §4.3 the saddle
+    Gv = lambda v: mpf(0) if v == 0 else 1 - v/sinh(v)          # v = L/2
+    h = mpf(10)**(-(dps//4))
+    d2 = lambda f, x0: (f(x0+h)-2*f(x0)+f(x0-h))/h**2
+    ck2("G'' at the wall: 1/3 in v = L/2, 1/12 in L (the value is a coordinate)", abs(d2(Gv,
+            mpf(0))-mpf(1)/3)<mpf('1e-6') and abs(d2(lambda L: Gv(L/2),
+                    mpf(0))-mpf(1)/12)<mpf('1e-6'))
+    f = lambda w: mpf(0) if w == 0 else 1 - w/sinh(w)
+    Re = lambda a,b: re(f(mpc(a,b)))
+    Faa = (Re(h,0)-2*Re(0,0)+Re(-h,0))/h**2; Fbb = (Re(0,h)-2*Re(0,0)+Re(0,
+            -h))/h**2; Fab = (Re(h,h)-Re(h,-h)-Re(-h,h)+Re(-h,-h))/(4*h*h)
+    ck2("Re f at w = 0: Hessian diag(+1/3, -1/3), a saddle; the imaginary axis is the "
+            "circular side",
+            
+            abs(Faa-mpf(1)/3)<mpf('1e-6')
+            and abs(Fbb+mpf(1)/3)<mpf('1e-6')
+            and abs(Fab)<mpf('1e-6'))
+    ck2("on the imaginary axis f(i beta/2) = 1 - beta/(2 sin(beta/2)): the circle's "
+            "argument over chord, negative", abs(re(f(mpc(0,
+                    pi/4)))-(1-(pi/2)/(2*mp.sin(pi/4))))<eps and re(f(mpc(0,
+            
+            pi/4)))<0)
+    lap = lambda a,b: (Re(a+h,b)+Re(a-h,b)+Re(a,b+h)+Re(a,b-h)-4*Re(a,b))/h**2
+    ck2("Re f is harmonic (Laplacian 0) at three interior points", all(abs(lap(a,
+            b))<mpf('1e-5') for a,b in ((mpf('0.3'),mpf('0.2')),(mpf('0.7'),
+                    mpf('-0.4')),(mpf('1.1'),
+            mpf('0.9')))))
+    fp = lambda w: (w*cosh(w)-sinh(w))/sinh(w)**2
+    ck2("the doubling interval is an ordinary point: f'(ln2/2) = 0.112347305659; f'(w) = 0 "
+            "iff tanh w = w",
+            
+        abs(fp(log(2)/2)-mpf('0.112347305659'))<mpf('1e-11'))
+    ys = [mp.findroot(lambda y: mp.tan(y)-y, x0) for x0 in (4.5, 7.7)]
+    ck2("the next critical points are w = ±4.4934i, ±7.7253i (tan y = y), beyond the pole "
+            "at i*pi: the wall is the only one in |w| < pi",
+            
+        abs(ys[0]-mpf('4.493409458'))<mpf('1e-8') and abs(ys[1]-mpf('7.725251837'))<mpf('1e-8')
+                and ys[0] > pi)
+    Ab = lambda a,b: abs(f(mpc(a,b)))
+    ck2("|f| has a minimum at the wall (both second derivatives +1/3)", abs((Ab(h,0)-2*Ab(0,
+            0)+Ab(-h,0))/h**2-mpf(1)/3)<mpf('1e-5') and abs((Ab(0,h)-2*Ab(0,0)+Ab(0,
+            -h))/h**2-mpf(1)/3)<mpf('1e-5'))
+    # --- §4.4 why: the squaring map's multiplier is invariant, the Hessian's value is not
+    ck2("the squaring map r -> r^2 (L -> 2L): multiplier at its fixed point, the wall, is 2 "
+            "in L, r, X and tau", all(abs(diff(g,x0)-2)<mpf('1e-12') for g,x0 in ((lambda L:2*L,
+                    0),(lambda r:r*r,1),(lambda x:2*x*sqrt(1+x*x),0),(lambda s:2*s/(1+s*s),
+            
+            0))))
+    ck2("section 4.3: 1 - v/sinh v = v^2/6 - 7v^4/360 + 31v^6/15120 (the series of 4.1 in v "
+            "= L/2)",
+            
+            (lambda v: abs((1-v/sinh(v))-(v**2/6-7*v**4/360+31*v**6/15120))<v**8)(mpf("0.01")))
+    ck2("p(2L) = p(L)/cosh(L/2): doubling the argument divides p by cosh(L/2)",
+            all(abs(p(2*L_)-p(L_)/cosh(L_/2))<eps for L_ in (log(2), log(3), mpf('0.1'))))
+    ck2("the trapezoid twin: T = (L/2)coth(L/2) - 1 = 3 ln2/2 - 1 = 0.0397 at doubling "
+            "(coth(ln2/2) = 3); T/G -> 2 at the wall",
+             abs(((log(2)/2)*coth(log(2)/2)-1)-mpf('0.039720771'))<mpf('1e-9')
+            and abs(((log(2)/2)*coth(log(2)/2)-1)-(3*log(2)/2-1))<eps
+            and abs(coth(log(2)/2)-3)<eps
+            and abs(((mpf('1e-3')/2)*coth(mpf('1e-3')/2)-1)/Gv(mpf('5e-4'))-2)<mpf('1e-5'))
+    # --- Figure 1
+    ck2("Figure 1's four points: G = 0, 0.019741857, 0.037576350, 0.118626413; bases inf, "
+            "32, 16, 4",
+            
+        abs(G(phi**2)-mpf('0.037576350'))<mpf('1e-9')
+                and abs(G(dS**2)-mpf('0.118626413'))<mpf('1e-9')
+                and abs(G(mpf(2))-mpf('0.019741857'))<mpf('1e-9'))
+print(f"\n   THE WHERE:  CHECKS {CH2}   FAILURES {FA2}")
+┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
+
+   THE WHERE:  CHECKS 100   FAILURES 0
+
+Accounting: the first block defines 65 distinct checks and the second 25, each
+run at dps 30, 60, 200 and 500: 90 × 4 = 360 executions. Checks on other
+ratios (r = φ², 2 + √3, the shared numerators) belong to the family and are
+not printed here; the check that the integer ratios with integer base are n =
+2, 3, 5, and Sándor's bracket at r = 2, are included because §4 and §5.1 print
+them.
+
+──────────────────────────────────────────────────────────────────────────────
+
+WHAT IS KNOWN
+══════════════════════════════════════════════════════════════════════════════
+
+Every line is a calculation, a proof, or a citation. §7 regression-checks the
+printed numerical and algebraic identities (90 checks, 360 executions, zero
+failures); the universal statements rest on the proofs in the text, and the
+citations were checked against the pages. Each mathematical statement is
+exact, except one, labelled.
+
+   THE CHAIN IS HERMITE–HADAMARD AT f = exp     an identification; places the
+                                                object.
+   G(r) > 0 FOR EVERY r > 1                     arsinh x < x, by its integral;
+                                                elementary and known as such
+                                                (§2, §6).
+   NO EXTREMUM, ONE INFLECTION IN L             G′ > 0; ψ's cascade; L* =
+                                                3.2122305976. classical, here
+                                                because §2 needs it.
+   THE SERIES IS EXACT AND RATIONAL             X² = 1/8, so no irrational
+                                                survives a term.
+   THE TERM RATIO IN CLOSED FORM                (2k+1)²/(16(k+1)(2k+3)).
+   THE CERTIFICATE                              28k² + 76k + 47 > 0 and 48k +
+                                                40 > 0, by inspection.
+   THE ENCLOSURE                                S_{2j} < G < S_{2j−1} at every
+                                                order, width |t_{2j}|, strict.
+   A SECOND ENCLOSURE                           the Bernoulli series in L,
+                                                ratio under 7(ln 2/4π)².
+   THE TWO ARE NESTED — OBSERVATION             at orders 2–8, tested; not
+                                                proved. the one line that is
+                                                not a theorem.
+   THE MIDPOINT IDENTITY                        G is the one-panel midpoint
+                                                rule's relative error for eᵗ
+                                                on [0, ln 2], exactly.
+   ONE EXACT EVALUATION ELSEWHERE               Hodgson & Kerckhoff's
+                                                coefficient is 1/(√2·ln 2).
+   THE TWO TRACES                               t = 2cosh(L/2), t₂ = r + 1/r =
+                                                t² − 2; base = 16/(t₂ − 2).
+                                                classical.
+   WHERE r = 2 STANDS                           t₂ = 5/2, between the wall and
+                                                the golden point; closes on
+                                                the chord coordinate (X² =
+                                                1/8, base 32), not on the
+                                                trace. computed.
+   THE PARTNER                                  sinh L·sinh L′ = 1 pairs
+                                                doubling with tripling; gd(ln
+                                                2) + gd(ln 3) = 90°. computed.
+   THE ANGLES                                   cos θ = 2/t₂ (θ = gd L) and
+                                                cos Π = (r − 1)/(r + 1); Π at
+                                                r = 2, 3, 5 is θ at the
+                                                boundary, 2+√3, φ², under
+                                                (r − 1) | 4. computed.
+   THE SADDLE                                   Re(1 − w/sinh w) has Hessian
+                                                diag(1/3, −1/3) at w = 0;
+                                                harmonic, hence a saddle; the
+                                                only critical point in |w| <
+                                                π. classical + proved.
+   THE HESSIAN'S VALUE IS A COORDINATE          1/3 in L/2, 1/12 in L; the
+                                                sign is invariant, the number
+                                                is not. classical.
+   WHY p RECURS                                 the continuous homomorphisms
+                                                (ℝ, +) → (ℝ₊, ×) are e^{cx};
+                                                p is the ratio of the two
+                                                measures. a placement of the
+                                                recurrence.
+
+──────────────────────────────────────────────────────────────────────────────
