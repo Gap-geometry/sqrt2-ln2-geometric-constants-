@@ -210,7 +210,7 @@ for DPS in (30, 60, 200, 500):
     ck("G(L) coefficients are 1/24, -7/5760, 31/967680, -127/154828800",
        [bcoef(n) for n in (1,2,3,4)]
        == [Q(1,24), Q(-7,5760), Q(31,967680), Q(-127,154828800)])
-    ck("section 4.1 table: num(c_6) = 1414477 and num(c_9) = 5749691557, as printed",
+    ck("section 4.1: num(c_6) = 1414477 as printed; num(c_9) = 5749691557 beyond it",
        abs(bcoef(6).numerator) == 1414477 and abs(bcoef(9).numerator) == 5749691557)
 
     def bmp(n):
