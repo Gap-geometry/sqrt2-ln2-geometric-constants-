@@ -32,4 +32,3 @@ Every number on the pages and in the papers is computed in arbitrary precision (
 All papers are deposited on OSF with DOIs — main project [osf.io/zx4g7](https://osf.io/zx4g7). OSF is the frozen anchor; this repository is the living layer. Corrections are additive and dated, never silent: a dated notice on the paper, the prior version kept.
 
 Licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/) · D. B. · Gap-geometryK_AUD2@telenet.be · [@Aud2Gap](https://x.com/Aud2Gap)
-
