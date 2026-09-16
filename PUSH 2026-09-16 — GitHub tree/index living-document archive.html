@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gap Geometry — Living Document Archive</title>
+<link rel="alternate" type="text/plain" href="AI_INDEX.txt" title="Machine-readable index (plain text)">
+<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt — AI site map">
+<meta name="author" content="D. B.">
+<meta name="description" content="Version archive for the Gap Geometry Living Document. PDF and text snapshots of every past version.">
+<style>
+  :root {
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --subtle: #8a8a8a;
+    --rule: #c8c8c8;
+    --bg: #ffffff;
+    --card-bg: #fafaf8;
+    --card-border: #e0e0de;
+    --link: #2a5a8a;
+    --link-hover: #1a3a5a;
+    --max-width: 760px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body {
+    font-family: Optima, "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    padding: 0 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 56px 0 80px 0;
+  }
+
+  /* Header */
+  header {
+    text-align: center;
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h1.page-title {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 10px;
+  }
+  p.page-intro {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  /* Section headers */
+  h2 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--subtle);
+    margin: 48px 0 20px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  p { margin: 0 0 14px 0; }
+
+  /* Archive entry cards */
+  .archive-entry {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .archive-entry .version-label {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .archive-entry .version-date {
+    font-size: 13px;
+    color: var(--subtle);
+    margin-bottom: 8px;
+  }
+  .archive-entry .version-note {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .archive-entry .version-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: 13px;
+  }
+  .archive-entry .version-links a {
+    color: var(--link);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .archive-entry .version-links a:hover {
+    color: var(--link-hover);
+    border-bottom-color: var(--link-hover);
+  }
+  .archive-entry .version-links .sep {
+    color: var(--rule);
+    user-select: none;
+  }
+
+  /* Current version notice */
+  .current-notice {
+    font-size: 14px;
+    color: var(--muted);
+    padding: 14px 18px;
+    border-left: 3px solid var(--rule);
+    background: var(--card-bg);
+    margin: 0 0 24px 0;
+    line-height: 1.55;
+  }
+  .current-notice a {
+    color: var(--link);
+    text-decoration: none;
+  }
+  .current-notice a:hover {
+    border-bottom: 1px solid var(--link);
+  }
+
+  /* Links */
+  a { color: var(--link); text-decoration: none; }
+  a:hover { color: var(--link-hover); }
+
+  /* Footer */
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 14px;
+    color: var(--subtle);
+  }
+  footer a {
+    color: var(--link);
+    text-decoration: none;
+  }
+  footer a:hover {
+    border-bottom: 1px solid var(--link);
+  }
+  footer .back-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-bottom: 16px;
+    font-size: 15px;
+  }
+  footer .contact {
+    font-size: 13px;
+    margin-top: 8px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    body { font-size: 16px; padding: 0 16px; }
+    main { padding: 32px 0 48px 0; }
+    .archive-entry { padding: 14px 16px; }
+  }
+
+  /* Print */
+  @media print {
+    body { font-size: 11pt; padding: 0; }
+    main { max-width: none; }
+    .archive-entry { border: 1px solid #ccc; page-break-inside: avoid; }
+  }
+  .site-nav{ margin:10px 0 8px; font-size:14px; line-height:1.9; }
+  .site-nav a{ text-decoration:none; }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1 class="page-title">Living Document Archive</h1>
+  <p class="page-intro">Archived versions of the Gap Geometry Living Document. Each version is preserved as a PDF (for humans) and a text file (for machines and archival). The current version is always on the <a href="living-document.html">Living Document</a> page.</p>
+</header>
+
+<!-- ============================================================ -->
+<h2>How This Archive Works</h2>
+
+<div class="current-notice">
+  The <a href="living-document.html">Living Document</a> always reflects the current state of the framework. When the Living Document is updated, the outgoing version is archived here as a dated PDF + text pair. GitHub also preserves the full commit history, but this archive provides clean, direct access to each version without requiring knowledge of version control.
+</div>
+
+<!-- ============================================================ -->
+<h2>Archived Versions</h2>
+
+<div class="archive-entry">
+  <div class="version-label">v1.6</div>
+  <div class="version-date">9 September 2026</div>
+  <div class="version-note">The rework. The page is now the claims register and nothing else: the object
+  &mdash; one classical function, p(L) = L/(2&thinsp;sinh(L/2)); the chord identity at r&nbsp;=&nbsp;2; the gap
+  as the complement 1&nbsp;&minus;&nbsp;&radic;2&middot;ln&thinsp;2, the shortfall of the argument against its
+  chord in one metric &mdash; then the Summary of Claims (kind &middot; scope &middot; status; no numbered
+  levels), the published record on two shelves with no paper numbers and a <em>read now</em> line for each
+  paper, what connects, the corrections log, the history. Readings taken through the Binary Tower live with
+  the instrument. The neutral forms &radic;2&middot;ln(2) and 1&nbsp;&minus;&nbsp;&radic;2&middot;ln(2) are
+  printed alone, the corpus symbols named once. <em>The complement 1&nbsp;&minus;&nbsp;&radic;2&middot;ln&thinsp;2</em>
+  &mdash; the paper on the object itself, its place on the line, the cells and the saddle &mdash; stands on the
+  Foundational shelf; the synthesis, <em>One coordinate up</em>, reads the thirteen papers on that line, and the
+  <em>read now</em> column is drawn from it. Pre-update
+  snapshot preserved below.</div>
+  <div class="version-links">
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/archive/OLD-2026-08-01_Living-Document.pdf" target="_blank" rel="noopener">PDF (pre-update snapshot, 1 August)</a>
+    <span class="sep">&middot;</span>
+    <em style="color: var(--subtle); font-size: 13px;">Current version &mdash; <a href="living-document.html">Living Document</a></em>
+  </div>
+</div>
+
+<div class="archive-entry">
+  <div class="version-label">v1.5&thinsp;+&thinsp;P13</div>
+  <div class="version-date">15 July 2026</div>
+  <div class="version-note">Two-paper publication day &mdash; and the Lock Atlas goes live. <em>K<sub>AUD</sub> = &radic;2 &middot; ln(2): The Crossing Zone Hinge &mdash; Three Thresholds and the Identity 1/(2&nbsp;ln&nbsp;2) &minus; 1/&radic;2 = G<sub>AUD</sub>/(2&nbsp;ln&nbsp;2)</em> published (DOI&nbsp;10.17605/OSF.IO/F7PCX) &mdash; three exactly-positioned thresholds in the Binary Tower&rsquo;s [35,&nbsp;37] interval, bound by exact identities, after a seven-round review chain across five AI architectures. <em>Gap Scaling Across Domains: The 400/11 Formula</em> updated to v1.0.4 (error-bound wording erratum, three fixes, no mathematical content changed; source filenames neutralized to <code style="font-size:13px;">Gap_Scaling_Formula.txt/.pdf</code>; DOI unchanged). The <a href="lock-atlas.html">Lock Atlas</a> &mdash; the framework&rsquo;s identities as a living map, 87 released locks with a reader/map two-arrival design &mdash; went live the same morning. The <a href="living-document.html">Living Document</a> now lists <em>The Crossing Zone Hinge</em> with live links, OSF code, and Published date; <em>The 400/11 Formula</em>&rsquo;s row carries the v1.0.4 update note. Pre-update snapshot (v1.5 state, 10 July) preserved below.</div>
+  <div class="version-links">
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/archive/OLD-2026-07-10_Living-Document.pdf" target="_blank" rel="noopener">PDF (pre-update snapshot, v1.5)</a>
+  </div>
+</div>
+
+<div class="archive-entry">
+  <div class="version-label">v1.5</div>
+  <div class="version-date">12 June 2026 &mdash; Superseded 2026-07-15</div>
+  <div class="version-note">New paper added: <em>1, 7, 124, 4318, &hellip; &mdash; Integer Mellin Moments of the Dome tanh(x)/cosh(2x)</em> (DOI&nbsp;10.17605/OSF.IO/WVD3G) &mdash; the standalone number-theory paper on the dome's even-moment integer sequence. Integrality proved for all n; the full 3&times;3&times;3 weight-family cube classified (unique integer triple, double-swept); the sequence verified absent from OEIS prior to publication (novelty check archived in the paper folder). First framework paper whose title is its own sequence. The <a href="living-document.html">Living Document</a> now lists <em>Integer Mellin Moments of the Dome</em> with live links, OSF code, and Published date. Pre-update snapshot (v1.4 state) preserved below.</div>
+  <div class="version-links">
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/archive/OLD-2026-06-11_Living-Document.pdf" target="_blank" rel="noopener">PDF (pre-update snapshot, v1.4)</a>
+  </div>
+</div>
+
+<div class="archive-entry">
+  <div class="version-label">v1.4</div>
+  <div class="version-date">2 June 2026 &mdash; Superseded 2026-06-12</div>
+  <div class="version-note">Two-paper publication day. <em>Saturation Constants of the Exact-Approximation Method</em> added to the framework following OSF publication on 2026-06-02 (DOI&nbsp;10.17605/OSF.IO/6QZRB) and same-day GitHub repo upload &mdash; the first framework paper to carry its own DOI on page 1 of the .txt and .pdf, establishing the new standard for future papers. <em>The &eta; Corridor in 3D Wilson&ndash;Fisher Critical Phenomena &mdash; Empirical Observation</em> and its Verification Companion published the same day under a single shared OSF project (DOI&nbsp;10.17605/OSF.IO/PD73B) &mdash; the framework&rsquo;s first multi-file deposit, with main paper and Companion sharing one DOI and cited together. Both papers carry their own DOI on page 1. The <a href="living-document.html">Living Document</a> now lists both with the live links, OSF codes, and Published date 2026-06-02. Pre-update snapshot (v1.3 state) preserved below.</div>
+  <div class="version-links">
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/archive/OLD-2026-05-27_Living-Document.pdf" target="_blank" rel="noopener">PDF (pre-update snapshot, v1.3)</a>
+  </div>
+</div>
+
+<div class="archive-entry">
+  <div class="version-label">v1.3</div>
+  <div class="version-date">5 May 2026 &mdash; Superseded 2 June 2026</div>
+  <div class="version-note">Cross-paper link architecture overhaul. Five of the early papers had paper-to-paper file URLs (which would break under any future filename change) replaced with a durable three-anchor block: <a href="https://osf.io/zx4g7" target="_blank" rel="noopener">OSF main project</a>, <a href="index.html">About page</a>, and <a href="direct-documents.html">Direct Documents</a> download index. Paper-specific DOIs preserved (DOIs are stable). Per-paper Update entries added/extended on the <a href="living-document.html">Living Document</a>. OSF deep-link IDs refreshed across all hub HTMLs after each push. No mathematical content changed in any paper. Same-day pre-link-cleanup state archived as the v1.2 snapshot below.</div>
+  <div class="version-links">
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/archive/OLD-2026-05-04_Living-Document.pdf" target="_blank" rel="noopener">PDF (pre-update snapshot, v1.2)</a>
+  </div>
+</div>
+
+<div class="archive-entry">
+  <div class="version-label">v1.2</div>
+  <div class="version-date">2 May 2026 &mdash; Superseded 5 May 2026</div>
+  <div class="version-note">Evidence-level unification. The Living Document now uses the three-level evidence classification from the <a href="methodology.html">Methodology</a> page: <strong>Level 1 &mdash; Exact</strong> [Theorem], <strong>Level 2 &mdash; Empirical</strong> [Observation], <strong>Level 3 &mdash; Conjectural</strong> [Conjecture]. The existing Verified / Conjectural / Open status badges are retained as secondary labels that map onto the primary levels. A new &ldquo;Level&rdquo; column is added to the Summary of Claims table. The Verification Protocol section now references all three levels by name.</div>
+  <div class="version-links">
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/archive/Living_Document_v1.0_2026-04-13.pdf" target="_blank" rel="noopener">PDF (pre-update snapshot)</a>
+    <span class="sep">&middot;</span>
+    <em style="color: var(--subtle); font-size: 13px;">Current version &mdash; <a href="living-document.html">Living Document</a></em>
+  </div>
+</div>
+
+<div class="archive-entry">
+  <div class="version-label">v1.1</div>
+  <div class="version-date">13 April 2026 &mdash; Superseded 2 May 2026</div>
+  <div class="version-note">Three-threshold refinement of the 35&ndash;37 zone. The earlier single &ldquo;Landauer crossing&rdquo; framing is replaced with three distinct thresholds: the Landauer crossing at n&middot;G&nbsp;=&nbsp;ln&nbsp;2 (n&nbsp;&asymp;&nbsp;35.11), the geometric-damping threshold at n&middot;G&nbsp;=&nbsp;1/&radic;2 (n&nbsp;&asymp;&nbsp;35.82), and the Shannon bound at n&middot;G&nbsp;=&nbsp;1/(2&nbsp;ln&nbsp;2) (n&nbsp;&asymp;&nbsp;36.54). The identity 1/(2&nbsp;ln&nbsp;2)&nbsp;&minus;&nbsp;1/&radic;2&nbsp;=&nbsp;G/(2&nbsp;ln&nbsp;2) is retitled as the &ldquo;&radic;2-to-Shannon gap identity&rdquo;. All OSF files refreshed to match.</div>
+  <div class="version-links">
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-/blob/main/archive/OLD-2026-04-13_Living-Document.pdf" target="_blank" rel="noopener">PDF (pre-update snapshot)</a>
+  </div>
+</div>
+
+<div class="current-notice" style="margin-top: 16px;">
+  <strong>Note on v1.0.</strong> The initial release (v1.0) and the three-threshold refinement (v1.1) were published the same day, 13 April 2026. Version 1.0 existed for only a few hours before being corrected. No separate PDF was archived for v1.0. The PDFs above reflect the corrected v1.1 state. The pre-correction HTML is preserved in the Git history.
+</div>
+
+<!--
+  === TEMPLATE FOR FUTURE ENTRIES ===
+  Copy this block when archiving a new version. Place newest entries at the top.
+
+<div class="archive-entry">
+  <div class="version-label">vX.X</div>
+  <div class="version-date">DD Month YYYY</div>
+  <div class="version-note">Description of what changed in this version.</div>
+  <div class="version-links">
+    <a href="living-document_vX.X_YYYY-MM-DD.pdf" target="_blank" rel="noopener">PDF</a>
+    <span class="sep">&middot;</span>
+    <a href="living-document_vX.X_YYYY-MM-DD.txt" target="_blank" rel="noopener">Text</a>
+  </div>
+</div>
+-->
+
+<!-- ============================================================ -->
+<h2>Naming Convention</h2>
+
+<p style="font-size: 14px; color: var(--muted);">
+  Archived files follow this pattern:<br>
+  <code style="font-family: monospace; font-size: 13px; background: var(--card-bg); padding: 2px 6px; border-radius: 3px;">living-document_v{VERSION}_{YYYY-MM-DD}.pdf</code><br>
+  <code style="font-family: monospace; font-size: 13px; background: var(--card-bg); padding: 2px 6px; border-radius: 3px;">living-document_v{VERSION}_{YYYY-MM-DD}.txt</code>
+</p>
+
+<footer>
+  <div style="font-size:12px; opacity:0.75; margin-bottom:6px;">AI readers: <a href="ai-readers.html">guide</a> &middot; <a href="AI_INDEX.txt">machine index</a> &middot; <a href="llms.txt">llms.txt</a></div>
+
+  <div class="back-links">
+    <div class="site-nav"><a class="back-hub" href="index.html">&larr; Gap Geometry</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="what-the-gap-is.html">What the gap is</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="direct-documents.html">Documents</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="living-document.html">Living Document</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="methodology.html">Methodology</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="visualisations%20hub.html">Instruments</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="ai-readers.html">AI readers</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="license.html">Licence</a></div>
+  </div>
+  <div>D. B. &mdash; Gap Geometry &mdash; 2025&ndash;2026</div>
+  <div class="contact">
+    <a href="mailto:Gap-geometryK_AUD2@telenet.be">Gap-geometryK_AUD2@telenet.be</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://x.com/Aud2Gap" target="_blank" rel="noopener">@Aud2Gap</a>
+    &nbsp;&middot;&nbsp;
+    <a href="license.html">CC BY 4.0</a>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>

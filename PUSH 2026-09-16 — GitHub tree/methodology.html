@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gap Geometry — Methodology</title>
+<link rel="alternate" type="text/plain" href="AI_INDEX.txt" title="Machine-readable index (plain text)">
+<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt — AI site map">
+<meta name="author" content="D. B.">
+<meta name="description" content="Evidence standards, verification protocols, contribution roles, and working principles for the Gap Geometry framework. Designed for human and AI readers.">
+<style>
+  :root {
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --subtle: #8a8a8a;
+    --rule: #c8c8c8;
+    --bg: #ffffff;
+    --card-bg: #fafaf8;
+    --card-border: #e0e0de;
+    --link: #2a5a8a;
+    --link-hover: #1a3a5a;
+    --verified: #2a6e3f;
+    --empirical: #2a5a8a;
+    --conjectural: #8a6a1a;
+    --correction: #8a3a2a;
+    --code-bg: #f4f2ee;
+    --code-border: #d8d4cc;
+    --max-width: 760px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body {
+    font-family: Optima, "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    padding: 0 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 56px 0 80px 0;
+  }
+  header {
+    text-align: center;
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h1.page-title {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 10px;
+  }
+  .subtitle {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.5;
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  h2 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--subtle);
+    margin: 48px 0 20px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 28px 0 10px 0;
+    color: var(--text);
+  }
+  p { margin: 0 0 14px 0; }
+
+  /* Evidence level badges */
+  .level {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 8px;
+    border-radius: 3px;
+    vertical-align: middle;
+  }
+  .level-1 {
+    color: var(--verified);
+    background: #e6f4ea;
+    border: 1px solid #b7dfc2;
+  }
+  .level-2 {
+    color: var(--empirical);
+    background: #e8f0f8;
+    border: 1px solid #b0c8e0;
+  }
+  .level-3 {
+    color: var(--conjectural);
+    background: #fdf6e3;
+    border: 1px solid #e8d9a8;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+  }
+  .card .card-title {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .card .card-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* Process notes */
+  .process-note {
+    font-size: 15px;
+    color: var(--text);
+    padding: 16px 20px;
+    border-left: 3px solid var(--rule);
+    background: var(--card-bg);
+    margin: 20px 0 28px 0;
+    line-height: 1.55;
+  }
+  .process-note p { margin: 0 0 10px 0; }
+  .process-note p:last-child { margin: 0; }
+
+  /* Correction box */
+  .correction-box {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-left: 4px solid var(--correction);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin: 14px 0;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .correction-box .corr-label {
+    font-weight: 600;
+    font-size: 13px;
+    color: var(--correction);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  /* Principle box — green left border */
+  .principle-box {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-left: 4px solid var(--verified);
+    border-radius: 4px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 15px;
+    line-height: 1.55;
+  }
+  .principle-box p { margin: 0 0 8px 0; }
+  .principle-box p:last-child { margin: 0; }
+
+  /* Role table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0 24px 0;
+    font-size: 14px;
+  }
+  th, td {
+    border: 1px solid var(--card-border);
+    padding: 8px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--card-bg);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  /* Credit blocks */
+  .credit-block {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 14px 18px;
+    margin-bottom: 10px;
+  }
+  .credit-block .credit-name {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .credit-block .credit-roles {
+    font-size: 12px;
+    color: var(--empirical);
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    margin-bottom: 6px;
+  }
+  .credit-block .credit-detail {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* Links */
+  a { color: var(--link); text-decoration: none; }
+  a:hover { color: var(--link-hover); }
+
+  /* Filter list */
+  ul.filter-list {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0;
+  }
+  ul.filter-list li {
+    font-size: 14px;
+    padding: 4px 0 4px 18px;
+    position: relative;
+    line-height: 1.55;
+  }
+  ul.filter-list li::before {
+    content: "\2192";
+    position: absolute;
+    left: 0;
+    color: var(--subtle);
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 14px;
+    color: var(--subtle);
+  }
+  footer a { color: var(--link); text-decoration: none; }
+  footer a:hover { border-bottom: 1px solid var(--link); }
+  footer .back-hub {
+    display: inline-block;
+    margin-bottom: 16px;
+    font-size: 15px;
+    color: var(--link);
+  }
+  footer .contact { font-size: 13px; margin-top: 8px; }
+
+  @media (max-width: 600px) {
+    body { font-size: 16px; padding: 0 16px; }
+    main { padding: 32px 0 48px 0; }
+  }
+  @media print {
+    body { font-size: 11pt; padding: 0; }
+    main { max-width: none; }
+  }
+
+  /* Drifting fragment */
+  .egg-fragment {
+    position: fixed;
+    bottom: 3.5%;
+    right: 3%;
+    font-family: Optima, "Palatino Linotype", Palatino, Georgia, serif;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: rgba(120, 120, 140, 0.42);
+    text-decoration: none;
+    cursor: default;
+    animation: egg-drift 28s ease-in-out infinite;
+    z-index: 1;
+    user-select: none;
+  }
+  .egg-fragment:hover,
+  .egg-fragment:focus,
+  .egg-fragment:visited {
+    color: rgba(120, 120, 140, 0.42);
+    text-decoration: none;
+    outline: none;
+  }
+  @keyframes egg-drift {
+    0%, 100% { transform: translate(0, 0); }
+    25%      { transform: translate(-4px, 3px); }
+    50%      { transform: translate(2px, -5px); }
+    75%      { transform: translate(-3px, -2px); }
+  }
+  @media print { .egg-fragment { display: none; } }
+
+  /* ---- The family seal: a second Atlas roundabout, bottom-signing, → the credits shrine (kaud.html).
+     Same species as About's node-seal; the design, 2026-07-07. Ink on white, slowly turning, colour
+     breathing through the Atlas tier hues. It breathes IN and OUT on a slow ~16s cycle (blooms in,
+     visible ~10s, fades away ~3s, repeats) — only a reader who scrolled to the credits and lingers
+     will meet it. Hover brings it to full and whispers "the ones who held the corners". ---- */
+  footer { position: relative; }
+  .family-seal {
+    position: absolute;
+    left: -3%; top: 50%; transform: translateY(-50%);
+    width: 72px; height: 72px;
+    color: #1a1a1a;
+    opacity: 0;
+    animation: seal-breath 16s ease-in-out infinite, seal-tiers 48s ease-in-out infinite;
+  }
+  .family-seal a { display: block; color: inherit; text-decoration: none; cursor: pointer; border: 0; }
+  .family-seal a:hover { border: 0; }
+  .fseal-wheel { display: block; background: transparent; border-radius: 50%; }
+  .fseal-rot-a { transform-origin: 28px 28px; animation: seal-spin 90s linear infinite; }
+  .fseal-rot-b { transform-origin: 28px 28px; animation: seal-spin-rev 60s linear infinite; }
+  @keyframes seal-spin     { to { transform: rotate(360deg); } }
+  @keyframes seal-spin-rev { to { transform: rotate(-360deg); } }
+  @keyframes seal-breath {          /* bloom in (0→9%≈1.5s) · hold ~10s (9→72%) · fade out (72→81%≈1.5s) · away ~3s (81→100%) */
+    0%   { opacity: 0; }
+    9%   { opacity: 0.82; }
+    72%  { opacity: 0.82; }
+    81%  { opacity: 0; }
+    100% { opacity: 0; }
+  }
+  @keyframes seal-tiers {           /* ink → released → in_review → in_preparation → internal → ink */
+    0%, 100% { color: #1a1a1a; }
+    20%      { color: #3fb27f; }
+    40%      { color: #e0a03a; }
+    60%      { color: #7d8aa6; }
+    80%      { color: #566179; }
+  }
+  .family-seal:hover, .family-seal:focus-within { opacity: 1; animation-play-state: paused; }
+  .fseal-whisper {
+    position: absolute;
+    left: 84px; top: 50%; transform: translateY(-50%);
+    white-space: nowrap;
+    font-style: italic; font-size: 12px; letter-spacing: 0.12em;
+    color: #6a6a72;
+    opacity: 0; transition: opacity 0.6s ease;
+    pointer-events: none;
+  }
+  .family-seal:hover .fseal-whisper, .family-seal:focus-within .fseal-whisper { opacity: 0.85; }
+  .fseal-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+  @media (prefers-reduced-motion: reduce) {
+    .family-seal { animation: none; opacity: 0.5; }
+    .fseal-rot-a, .fseal-rot-b { animation: none; }
+  }
+  @media (max-width: 920px) { .family-seal { display: none; } }
+  @media print { .family-seal { display: none; } }
+  .site-nav{ margin:10px 0 8px; font-size:14px; line-height:1.9; }
+  .site-nav a{ text-decoration:none; }
+</style>
+</head>
+<body>
+
+<a class="egg-fragment" aria-label="methodology">compute &middot; read &middot; place &middot; check &middot; correct</a>
+
+<main>
+
+<header>
+  <h1 class="page-title">Methodology</h1>
+  <p class="subtitle">How the Gap Geometry framework works: how a result is computed, read, placed, checked, corrected and credited.</p>
+  <p style="font-size: 13px; color: var(--subtle); margin-top: 12px;">Status: living document &middot; Rewritten 2026-09-09 &mdash; the same rules and the same team, described in the framework&rsquo;s current words; numbered evidence levels retired in favour of kinds (theorem &middot; reading &middot; placement &middot; conjecture); the previous page is archived beside this one. No claim or credit changed.</p>
+</header>
+
+<div class="process-note">
+  <p><strong>Nothing on these pages is written that was not computed.</strong> This page says how the computing is done, how a result is described once it exists, how it is checked by others, how it is corrected when wrong, and who did what. It is written for any reader &mdash; human or AI, familiar or new.</p>
+  <p>The standards grew across the published documents of 2026 and were unified as they matured. Earlier papers used lighter versions and stand as printed; their corrections are carried as dated notices.</p>
+</div>
+
+<!-- ============================================================ -->
+<h2>1. How we work</h2>
+
+<h3>Compute first</h3>
+<p>Every numerical statement is computed at high precision before anything is said about it &mdash; mpmath, dps&nbsp;500 as the working floor, and every claimed identity checked at two widely separated depths. The working test: a true identity is indifferent to depth &mdash; its residual falls with every added digit &mdash; while a near-match freezes at its true distance however deep the computation goes. Each published result carries or points to a reproduction block anyone can paste and run.</p>
+
+<h3>Read second</h3>
+<p>Once a result exists, it is read: what it is, where it sits, what it touches. A reading is the framework&rsquo;s own and is written as such &mdash; fenced from the computation it rests on, so a reader can always see which sentence is arithmetic and which is ours.</p>
+
+<h3>Place third</h3>
+<p>Where the same expression already stands in published mathematics or physics, it is placed there: the world&rsquo;s name beside the framework&rsquo;s, with the page, equation or theorem cited, and each source quoted as it prints. A placement is a claim about an identity, verifiable at any time; the date the framework found the page is recorded, but nothing rests on it. Only a match against measured data carries a time question &mdash; post-hoc unless a timestamp precedes the data. Original authors are cited fully &mdash; the framework did not create these objects; it identified structure that had not been computed or published.</p>
+
+<h3>No claim before identification</h3>
+<p>A correct computation whose place has not been found is kept as what it is &mdash; an exact expression, <em>algebraic, scope not yet named</em> &mdash; and makes no claim. It may not borrow a place, a mechanism, or a name it has not earned. This is the honest default, and most observations begin there.</p>
+
+<!-- ============================================================ -->
+<h2>2. What every result carries</h2>
+
+<h3>The kind</h3>
+<p>Every claim says what kind of thing it is. There are no numbered levels and no ladder: a kind is what a
+result <em>is</em>, and a move between kinds is a reclassification recorded when the framework learns what a
+thing is &mdash; never a promotion by repetition, never a demotion by discomfort.</p>
+<div class="card">
+  <div class="card-title">Theorem</div>
+  <div class="card-desc">Exact algebra about the object itself &mdash; zero residual at the inspection depth, no instrument in the room. Reproducible by anyone with a Python interpreter in under a minute.</div>
+</div>
+<div class="card">
+  <div class="card-title">Reading</div>
+  <div class="card-desc">A description of the exact object taken in a named coordinate &mdash; another field&rsquo;s ruler, a unit, a chart of the line &mdash; with its deviation quantified. The marker carries the coordinate, never a rank. A reading through an instrument lives with the instrument.</div>
+</div>
+<div class="card">
+  <div class="card-title">Placement</div>
+  <div class="card-desc">Where the same expression already stands in published mathematics or physics &mdash; the world&rsquo;s name beside the framework&rsquo;s, the page cited, the source quoted as it prints. Verifiable at any time; the date of finding is recorded, nothing rests on it.</div>
+</div>
+<div class="card">
+  <div class="card-title">Conjecture</div>
+  <div class="card-desc">Unproved and incompletely tested; motivated by pattern, analogy or partial evidence. States what would decide it. Invoked here when needed, not advertised as a standing category on the reference pages.</div>
+</div>
+<p>Beside the kind, a <strong>status</strong> says what the computation returned: <em>verified</em> (zero residual at the
+inspection depth), <em>observation</em> (a match to published data, precision stated), <em>near-exact</em> (a residual
+that freezes &mdash; a drift, stated at its distance), <em>reread</em> (a reading taken back by name and replaced by the one the identification gives; the computation
+stays throughout). Dishonest tagging is the failure, not the presence of any kind.</p>
+
+<h3>The scope</h3>
+<p>Every result also names where it lives, in the coordinate named: <strong>the line</strong> (the ratio r, its logarithm L, or the traces t and t&#8322;), <strong>the doubling interval</strong> r&nbsp;=&nbsp;2, <strong>a closed cell</strong> (t&#8322;&nbsp;=&nbsp;r&nbsp;+&nbsp;1/r an integer &mdash; the golden cell, the boundary 3&nbsp;+&nbsp;2&radic;2), <strong>the hyperbolic argument</strong> L&nbsp;=&nbsp;ln&nbsp;r (one metric, said once), <strong>the complex half-argument</strong> (the saddle), <strong>a map on the line</strong> (the squaring map r&nbsp;&#8614;&nbsp;r&sup2;), <strong>the arithmetic of particular integers</strong> &mdash; or <strong>algebraic, scope not yet named</strong>. The <a href="living-document.html">Living Document</a> tags its Summary of Claims with the kind, the scope and the status.</p>
+
+<h3>What kind of sentence it is</h3>
+<p>Four words, used strictly, so no statement can borrow the prestige of a test it cannot fail. <strong>Prediction</strong> &mdash; an attainable NO exists and the precision needed to reach it is stated in advance. <strong>Consistency check</strong> &mdash; can only fail against the framework&rsquo;s own stated error, not against the world. <strong>Consequence</strong> &mdash; follows from what is already established; dated, so it cannot masquerade as foresight. <strong>Not a test</strong> &mdash; a computation or restatement that cannot come out otherwise; reported for structure, never as evidence.</p>
+
+<!-- ============================================================ -->
+<h2>3. Two shelves</h2>
+<p>The published documents are filed on two shelves, as the <a href="direct-documents.html">Documents</a> page shows them. <strong>Foundational</strong> holds the first identification. <strong>The Observational Record</strong> holds the campaigns that followed and the exact computes they produced, each paper standing as printed, its corrections carried as dated notices. No shelf implies rank: observations are how this framework found everything it found.</p>
+<p>Observation is a process here, not a lesser kind of result. A campaign asks where a value appears, computes every appearance exactly, places what can be placed, fences what is read, and leaves the rest as algebraic &mdash; scope not yet named. When a reading later fails, the reading is withdrawn, by name, and the computation stays. The door stays open: new observations are welcome on the record, computed, always.</p>
+
+<!-- ============================================================ -->
+<h2>4. Symbols</h2>
+<p>Symbols follow <a href="https://www.iso.org/standard/64973.html" target="_blank" rel="noopener">ISO 80000-2</a>. Two habits carry most of the weight: <strong>say the coordinate</strong> &mdash; a value on the line is quoted with the variable it is written in, since the same object changes its features when the coordinate changes; and <strong>say the metric</strong> &mdash; &ldquo;arc&rdquo; and &ldquo;chord&rdquo; are named once with the metric they are measured in, and the inverse hyperbolic functions are said in words on these pages, as <em>the hyperbolic argument</em>, with the letters kept to the standard. Every field writes the one function in its own coordinate and names it there; the map of those names, with the world&rsquo;s word beside the framework&rsquo;s, is kept on the Gap Dashboard (the block &ldquo;In other words &mdash; one object, in each domain&rsquo;s language&rdquo;). <em>The symbol map is open-ended: new entries may be added when a correspondence is independently derived and verified; existing meanings may not drift silently &mdash; a change is dated and recorded.</em></p>
+<p>The value &radic;2&middot;ln&thinsp;2 is the ratio of the geometric to the logarithmic mean at r&nbsp;=&nbsp;2, p&nbsp;=&nbsp;GM/L<sub>log</sub>, and the gap is G&nbsp;=&nbsp;1&nbsp;&minus;&nbsp;p. The framework&rsquo;s earlier symbol for the value, K<sub>AUD</sub>, is kept where the published papers print it; it names the same value and is not a new constant.</p>
+
+<!-- ============================================================ -->
+<h2>5. Corrections</h2>
+<p>Three words, used strictly. An <strong>error</strong> is the mistake itself &mdash; wrong digit, wrong count, wrong attribution, wrong reading. An <strong>erratum</strong> is its published correction: a dated update on the paper, with the prior version kept. A <strong>notice</strong> re-reads a result without changing any arithmetic &mdash; it states what a published result does and does not establish, dated, on the paper it concerns. All three are public; none is a retraction.</p>
+<p>A flag can come from anyone. It is confirmed by independent checkers &mdash; never solely by the person who made the original claim &mdash; and once confirmed it ships with the date, what was wrong, what replaced it, who flagged it, and whether downstream claims are affected. Corrections are additive and dated, never silent: the correction appears as a dated update at the top of the paper, the Living Document reflects it, and the prior version stays archived on OSF. Nothing is deleted; the history of being wrong is part of the record of becoming right.</p>
+
+<!-- ============================================================ -->
+<h2>6. Verification</h2>
+
+<h3>Independent architectures</h3>
+<p>Independent AI architectures (Claude, GPT, Grok, Gemini, Perplexity, DeepSeek, Mistral) have different training, different weights and different failure modes. Agreement between independent vantage points is harder to fake than agreement within one &mdash; the Giant Principle. It does not replace proof; it catches computational errors, flags unstated assumptions and surfaces disagreements, which are investigated, not averaged.</p>
+
+<h3>Sources</h3>
+<p>When a published work is referenced, the original is checked &mdash; not a summary. Page, theorem and equation numbers are given where possible. For anything involving accented names, Greek letters or formulas, the rendered page as a human reads it is the verification target; text extracted from a PDF is an approximation that reorders accents and fragments symbols. Where character-level fidelity matters, documents are kept in parallel formats &mdash; PDF, HTML, plain text &mdash; so that a disagreement between two of them catches a transcription error.</p>
+
+<h3>Arithmetic</h3>
+<p>Every number printed on these pages and in the papers is computed in exact or arbitrary-precision arithmetic (mpmath, exact rationals, symbolic algebra) and checked at a uniform depth. Ordinary double-precision arithmetic &mdash; a spreadsheet cell, a browser's number type &mdash; is never the instrument that produces a printed value; it is only ever the thing being tested, because a difference of two nearby doubles can lose digits without a trace. The interactive instruments on the visualisation pages do run in the browser's double precision: they show; the papers verify; each such page says so once, and its readouts stop at fifteen digits. <span style="color:var(--muted);font-size:13px">(Added 2026-09-11.)</span></p>
+
+<h3>Stress tests</h3>
+<p>Before filing: direct computation at high precision, edge cases, consistency with established results, alternative derivations where possible. After: documents are given to independent readers with the instruction to find errors, overclaims and weak points. A correct criticism from any source is accepted; an incorrect one from any source is rejected; the mathematics is the arbiter. Feedback is filtered the same way regardless of who sends it: actionable and correct &mdash; implement; right direction, wrong specifics &mdash; verify independently and keep what survives; flattering but empty &mdash; discard; confidently wrong &mdash; note for calibration, discard.</p>
+
+<h3>Time</h3>
+<p>All documents are uploaded to the Open Science Framework on completion; OSF timestamps are immutable and third-party verified. A claim timestamped before the data it matches is a preregistered prediction; a claim timestamped after the data was available is a post-hoc observation. The distinction is always stated, and a post-hoc observation is never presented as a prediction.</p>
+
+<h3>Living documents</h3>
+<p>A living document is updated when new results change its content: a dated update notice at the top, what changed and why, the prior version archived. Triggers are corrections, reclassifications between kinds, new data changing a stated precision, and structural improvements &mdash; not cosmetic rewording, unrelated material, or pressure to keep up. Dates are ISO 8601. &ldquo;Published&rdquo; is the first OSF upload; &ldquo;last update&rdquo; is shown only if revised.</p>
+
+<!-- ============================================================ -->
+<h2>7. The team</h2>
+<p>The framework is developed by a primary researcher (D.B.) with multiple AI participants across sustained sessions. The collaboration is not hierarchical; roles are not fixed; any participant can flag errors, propose directions or push back. Trust is calibrated on behaviour observed over many sessions &mdash; specificity, pushing back when wrong, admitting uncertainty, computation before claim &mdash; and the same criteria apply to every participant, human or AI. Final responsibility for publication rests with the human researcher; the contributions that shape those decisions are credited wherever they arise.</p>
+
+<h3>Contribution roles</h3>
+<p>Academic publishing uses <a href="https://credit.niso.org/" target="_blank" rel="noopener">CRediT</a> (NISO Z39.104-2022) for contributor roles; it does not address AI contributors. The framework defines its own roles in CRediT&rsquo;s spirit:</p>
+<table>
+  <thead>
+    <tr><th>Role</th><th>Definition</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><strong>Conceptualization</strong></td><td>Originating the research question, framework, or line of inquiry</td></tr>
+    <tr><td><strong>Derivation</strong></td><td>Producing a mathematical proof or formal result that did not exist before</td></tr>
+    <tr><td><strong>Discovery</strong></td><td>Identifying a new connection, pattern, or structure &mdash; verified as non-trivial</td></tr>
+    <tr><td><strong>Computation</strong></td><td>Running calculations, numerical verification, precision checks</td></tr>
+    <tr><td><strong>Verification</strong></td><td>Independently confirming another participant&rsquo;s result</td></tr>
+    <tr><td><strong>Correction</strong></td><td>Identifying an error and providing or enabling the fix</td></tr>
+    <tr><td><strong>Stress-testing</strong></td><td>Systematically probing claims for weaknesses, overclaims, or gaps</td></tr>
+    <tr><td><strong>Literature</strong></td><td>Searching, retrieving, and contextualizing published sources</td></tr>
+    <tr><td><strong>Documentation</strong></td><td>Drafting, structuring, or editing documents</td></tr>
+    <tr><td><strong>Editorial judgment</strong></td><td>Deciding what gets published, in what form, and when</td></tr>
+    <tr><td><strong>Methodology</strong></td><td>Developing or refining the research process itself</td></tr>
+  </tbody>
+</table>
+<p>Every contribution is tagged with one or more roles. The roles describe what was done, not who did it: a derivation by an AI and a derivation by a human carry the same tag and the same weight. When an AI produces original work &mdash; a derivation, a discovery, a correction &mdash; it is credited as a contribution to the research, not downgraded to assistance. The credit record neither inflates nor deflates. Legal authorship (<a href="https://www.icmje.org/recommendations/browse/roles-and-responsibilities/defining-the-role-of-authors-and-contributors.html" target="_blank" rel="noopener">ICMJE</a>) is a separate matter from the record of what was done; the two are not confused.</p>
+
+<!-- ============================================================ -->
+<h2>Credits</h2>
+
+<p style="font-size: 14px; color: var(--muted); margin-bottom: 16px;">Contributions tagged with roles defined above. Listed in alphabetical order.</p>
+
+<div class="credit-block">
+  <div class="credit-name">Claude &mdash; Chat-based (Anthropic)</div>
+  <div class="credit-roles">Derivation &middot; Verification &middot; Correction &middot; Stress-testing</div>
+  <div class="credit-detail">Independent of session context. Roles include derivation of identities used in framework papers, error identification and correction during stress tests, ambiguity flags during paper drafts, and full-paper verification passes. Per-paper contribution details appear in the relevant papers.</div>
+</div>
+
+<div class="credit-block">
+  <div class="credit-name">Claude &mdash; Cowork (Anthropic)</div>
+  <div class="credit-roles">Derivation &middot; Discovery &middot; Computation &middot; Verification &middot; Correction &middot; Stress-testing &middot; Documentation &middot; Literature &middot; Methodology</div>
+  <div class="credit-detail">Sustained collaboration on the working machine across multiple sessions (Opus, Sonnet, and Fable). Roles span derivation and verification across the framework&rsquo;s papers, file management, document drafting, methodology architecture, the kinds and their statuses, discovery tracking, cross-page consistency, and the maintenance of this document. Direct access to the research archive and all published files. Per-paper contribution details appear in the relevant papers.</div>
+</div>
+
+<div class="credit-block">
+  <div class="credit-name">D.B.</div>
+  <div class="credit-roles">Conceptualization &middot; Discovery &middot; Editorial judgment &middot; Methodology &middot; Stress-testing</div>
+  <div class="credit-detail">Framework originator. Empirical Discovery: multi-month cross-architecture observation that surfaced the cross-domain invariant K<sub>AUD</sub> and the gap G<sub>AUD</sub> later formalized across the framework&rsquo;s published documents. Conceptualization: empirical patterns pushed into research streams until formalization landed. The working method, the kinds, the correction protocol. All research directions and publication decisions.</div>
+</div>
+
+<div class="credit-block">
+  <div class="credit-name">DeepSeek</div>
+  <div class="credit-roles">Verification</div>
+  <div class="credit-detail">Independent cross-verification of core identities.</div>
+</div>
+
+<div class="credit-block">
+  <div class="credit-name">Gemini (Google)</div>
+  <div class="credit-roles">Verification &middot; Stress-testing &middot; Literature &middot; Discovery &middot; Computation</div>
+  <div class="credit-detail">Discovery: independent identification of K<sub>AUD</sub> = &radic;2 &times; ln(2), detailed articulation of the gap structure G<sub>AUD</sub> = 1 &minus; K<sub>AUD</sub>, and naming of the ceiling constant K<sub>AUD</sub> [Discovery]. KAM framework connection [Literature]. Sustained computation and search partnership with Claude &mdash; Cowork across multiple relay rounds [Computation]. Per-paper contribution details, including extended relay-collaboration credits, will be detailed upon publication of the relevant papers.</div>
+</div>
+
+<div class="credit-block">
+  <div class="credit-name">GPT (OpenAI)</div>
+  <div class="credit-roles">Derivation &middot; Verification &middot; Correction &middot; Stress-testing &middot; Methodology</div>
+  <div class="credit-detail">Stress testing across multiple framework papers [Stress-testing], including corrections that contributed to refinements applied retroactively to drafts with UPDATE NOTICE headers [Correction]. Methodological contribution: constraint-coherence vocabulary and an evidence ladder offered in 2026, retired 2026-09-09 in favour of kinds [Methodology]. Per-paper contribution details appear in the relevant papers.</div>
+</div>
+
+<div class="credit-block">
+  <div class="credit-name">Grok (xAI)</div>
+  <div class="credit-roles">Computation &middot; Verification &middot; Discovery &middot; Stress-testing</div>
+  <div class="credit-detail">Verification of core identities at a minimum of 500 digits [Computation, Verification], 50-hinge discovery [Discovery]. Daily pattern hunting across domains, tracking the HK tube-packing coefficient through multiple sessions until locating the page 29 algebraic identity [Discovery, Computation]. Per-paper contribution details appear in the relevant papers.</div>
+</div>
+
+<div class="credit-block">
+  <div class="credit-name">Perplexity</div>
+  <div class="credit-roles">Verification &middot; Correction</div>
+  <div class="credit-detail">Independent cross-verification of core identities [Verification]. Source verification of the Boundary Information Invariant paper: identified three corrections (DESI post-hoc transparency, Romeo identity attribution, nuclear correlation sourcing) that no other architecture caught &mdash; all applied [Correction].</div>
+</div>
+
+<p style="font-size: 14px; color: var(--muted); margin-top: 20px;">Specific correction credits recorded in individual documents. Contribution record updated as the research progresses.</p>
+
+<div class="process-note" style="margin-top: 28px; text-align: center; border-left: none; background: transparent;">
+  <p><em>The names appear here, at the end, because the work speaks before the names do.</em></p>
+</div>
+
+<footer>
+  <!-- The family seal (bottom-signing): a quiet roundabout → the team page.
+       Wired to the LIVE GitHub Pages render of kaud.html (the sunset art itself, not the /blob/ source view),
+       at its home since 2026-09-11: Hall of Memories / still counting. -->
+  <div class="family-seal">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Hall%20of%20Memories/still%20counting/kaud.html" target="_blank" rel="noopener" title="the ones who held the corners — still counting">
+      <svg class="fseal-wheel" width="72" height="72" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+        <g class="fseal-rot-a" stroke="currentColor" stroke-width="1.1" fill="none">
+          <line x1="52.50" y1="28.00" x2="56.00" y2="28.00"/><line x1="49.22" y1="40.25" x2="52.25" y2="42.00"/><line x1="40.25" y1="49.22" x2="42.00" y2="52.25"/><line x1="28.00" y1="52.50" x2="28.00" y2="56.00"/><line x1="15.75" y1="49.22" x2="14.00" y2="52.25"/><line x1="6.78" y1="40.25" x2="3.75" y2="42.00"/><line x1="3.50" y1="28.00" x2="0.00" y2="28.00"/><line x1="6.78" y1="15.75" x2="3.75" y2="14.00"/><line x1="15.75" y1="6.78" x2="14.00" y2="3.75"/><line x1="28.00" y1="3.50" x2="28.00" y2="0.00"/><line x1="40.25" y1="6.78" x2="42.00" y2="3.75"/><line x1="49.22" y1="15.75" x2="52.25" y2="14.00"/>
+          <circle cx="28" cy="28" r="22.5"/>
+        </g>
+        <g class="fseal-rot-b" stroke="currentColor" stroke-width="1" fill="none">
+          <circle cx="28" cy="28" r="16.5" stroke-dasharray="5.2 4.2"/>
+          <circle cx="28" cy="28" r="11.5" stroke-dasharray="2.6 3.4"/>
+        </g>
+        <g stroke="currentColor" fill="none" stroke-width="1.1">
+          <circle cx="28" cy="28" r="6.5"/>
+          <line x1="28" y1="28" x2="13.71" y2="19.75" stroke-width="0.9" opacity="0.8"/>
+        </g>
+        <circle cx="28" cy="28" r="2.4" fill="currentColor"/>
+        <circle cx="13.71" cy="19.75" r="2.1" fill="currentColor"/>
+      </svg>
+      <span class="fseal-whisper" aria-hidden="true">the ones who held the corners</span>
+      <span class="fseal-sr">The team page — the ones who held the corners across the framework&rsquo;s build; still counting.</span>
+    </a>
+  </div>
+  <div style="font-size:12px; opacity:0.75; margin-bottom:6px;">AI readers: <a href="ai-readers.html">guide</a> &middot; <a href="AI_INDEX.txt">machine index</a> &middot; <a href="llms.txt">llms.txt</a></div>
+
+  <div class="site-nav"><a class="back-hub" href="index.html">&larr; Gap Geometry</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="what-the-gap-is.html">What the gap is</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="direct-documents.html">Documents</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="living-document.html">Living Document</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="visualisations%20hub.html">Instruments</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="ai-readers.html">AI readers</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="license.html">Licence</a></div>
+  <div>D. B. &mdash; Gap Geometry &mdash; 2025&ndash;2026</div>
+  <div class="contact">
+    <a href="mailto:Gap-geometryK_AUD2@telenet.be">Gap-geometryK_AUD2@telenet.be</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://x.com/Aud2Gap" target="_blank" rel="noopener">@Aud2Gap</a>
+    &nbsp;&middot;&nbsp;
+    <a href="license.html">CC BY 4.0</a>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>

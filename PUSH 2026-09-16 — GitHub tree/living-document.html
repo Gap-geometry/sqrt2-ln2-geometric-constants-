@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gap Geometry — Living Document</title>
+<link rel="alternate" type="text/plain" href="AI_INDEX.txt" title="Machine-readable index (plain text)">
+<link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt — AI site map">
+<meta name="author" content="D. B.">
+<meta name="description" content="Living overview of the Gap Geometry framework: summaries, formulas, verification status, and interlaced structure of all published documents.">
+
+<!--
+  ============================================================
+  PUBLICATION DATE STANDARD — Gap Geometry (blueprint for all living docs)
+  ============================================================
+
+  Every document entry carries a date line in the format:
+
+      Published: YYYY-MM-DD · Last update: YYYY-MM-DD · OSF: [id]
+
+  Rules:
+    1. "Published" is the FIRST OSF upload timestamp — immutable, third-party verified.
+    2. "Last update" is shown ONLY if the document has been revised after creation.
+       If Created == Updated, omit the "Last update" half.
+    3. Dates are written in ISO 8601 (YYYY-MM-DD) — sortable, country-agnostic, unambiguous.
+    4. Source of truth: osf.io metadata fields "Date Created" and "Date Updated".
+    5. Priority record (master list): /Gap Geometry/Publication Dates.md
+
+  This is a "living document" — its own Published date is the date the framework's
+  first paper went to OSF (2026-01-21). The version-info block under the page title
+  carries the framework-level anchor. Individual paper summaries below carry their own.
+
+  ISO 8601 conversion reference (from OSF's "MMM DD, YYYY" format):
+      Jan 21, 2026  ->  2026-01-21
+      Jan 24, 2026  ->  2026-01-24
+      Jan 25, 2026  ->  2026-01-25
+      Feb  4, 2026  ->  2026-02-04
+      Mar 14, 2026  ->  2026-03-14
+      Mar 18, 2026  ->  2026-03-18
+      Mar 26, 2026  ->  2026-03-26
+      Apr  3, 2026  ->  2026-04-03
+      Apr 13, 2026  ->  2026-04-13
+
+  Why ISO: a reader in any country, at any time, with any locale setting, reads the same date.
+  2026-01-21 is unambiguous; "01/21/2026" vs "21/01/2026" is not.
+  ============================================================
+-->
+
+<style>
+  :root {
+    --text: #1a1a1a;
+    --muted: #5a5a5a;
+    --subtle: #8a8a8a;
+    --rule: #c8c8c8;
+    --bg: #ffffff;
+    --card-bg: #fafaf8;
+    --card-border: #e0e0de;
+    --link: #2a5a8a;
+    --link-hover: #1a3a5a;
+    --verified: #2a6e3f;
+    --conjectural: #8a6a1a;
+    --open: #5a5a8a;
+    --max-width: 760px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { background: var(--bg); }
+  body {
+    font-family: Optima, "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 17px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+    padding: 0 24px;
+    -webkit-font-smoothing: antialiased;
+  }
+  main {
+    max-width: var(--max-width);
+    margin: 0 auto;
+    padding: 56px 0 80px 0;
+  }
+
+  /* Header */
+  header {
+    text-align: center;
+    padding-bottom: 32px;
+    margin-bottom: 40px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h1.page-title {
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    margin-bottom: 10px;
+  }
+  p.page-intro {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 560px;
+    margin: 0 auto 16px auto;
+  }
+  .version-info {
+    font-size: 13px;
+    color: var(--subtle);
+  }
+
+  /* Section headers */
+  h2 {
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--subtle);
+    margin: 48px 0 20px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule);
+  }
+  h2:first-of-type { margin-top: 0; }
+
+  /* Subsection headers */
+  h3 {
+    font-size: 17px;
+    font-weight: 600;
+    margin: 32px 0 10px 0;
+    color: var(--text);
+  }
+
+  /* Paragraphs */
+  p { margin: 0 0 14px 0; }
+  p.note {
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 20px;
+  }
+
+  /* Formula blocks */
+  .formula {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 18px;
+    text-align: center;
+    padding: 14px 20px;
+    margin: 16px 0 20px 0;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    line-height: 1.5;
+  }
+  .formula .label {
+    font-family: Optima, "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 12px;
+    color: var(--subtle);
+    display: block;
+    margin-top: 4px;
+  }
+
+  /* Status badges */
+  .status {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 8px;
+    border-radius: 3px;
+    vertical-align: middle;
+  }
+  .status-verified {
+    color: var(--verified);
+    background: #e6f4ea;
+    border: 1px solid #b7dfc2;
+  }
+  .status-conjectural {
+    color: var(--conjectural);
+    background: #fdf6e3;
+    border: 1px solid #e8d9a8;
+  }
+  .status-open {
+    color: var(--open);
+    background: #ededf4;
+    border: 1px solid #c8c8da;
+  }
+
+  /* Evidence-level badges (unified 3-level system — see methodology.html) */
+  .level {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 2px 8px;
+    border-radius: 3px;
+    vertical-align: middle;
+  }
+  .level-1 {
+    color: var(--verified);
+    background: #e6f4ea;
+    border: 1px solid #b7dfc2;
+  }
+  .level-2 {
+    color: #2a5a8a;
+    background: #e8f0f8;
+    border: 1px solid #b8d0e8;
+  }
+  .level-3 {
+    color: var(--conjectural);
+    background: #fdf6e3;
+    border: 1px solid #e8d9a8;
+  }
+
+  /* Summary of Claims table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 18px 0 24px 0;
+    font-size: 14px;
+  }
+  th, td {
+    border: 1px solid var(--card-border);
+    padding: 10px 12px;
+    text-align: left;
+    vertical-align: top;
+  }
+  th {
+    background: var(--card-bg);
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  /* Document summary cards */
+  .doc-summary {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-bottom: 16px;
+  }
+  .doc-summary .doc-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .doc-summary .doc-title {
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    flex: 1;
+  }
+  .doc-summary .doc-body {
+    font-size: 15px;
+    color: var(--text);
+    line-height: 1.55;
+  }
+  .doc-summary .doc-body p { margin: 0 0 10px 0; }
+  .doc-summary .doc-body p:last-child { margin-bottom: 0; }
+  .doc-summary .key-result {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 16px;
+    color: var(--text);
+    padding: 8px 14px;
+    background: #fff;
+    border-left: 3px solid var(--card-border);
+    margin: 10px 0;
+  }
+  .doc-summary .doc-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 16px;
+    font-size: 13px;
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px solid var(--card-border);
+  }
+  .doc-summary .doc-links a {
+    color: var(--link);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .doc-summary .doc-links a:hover {
+    color: var(--link-hover);
+    border-bottom-color: var(--link-hover);
+  }
+  .doc-summary .doc-links .sep {
+    color: var(--rule);
+    user-select: none;
+  }
+  .doc-summary .doc-doi {
+    font-size: 12px;
+    color: var(--subtle);
+    margin-top: 6px;
+  }
+  .doc-summary .doc-doi a {
+    color: var(--subtle);
+    text-decoration: none;
+    border-bottom: 1px dotted var(--rule);
+  }
+  .doc-summary .doc-doi a:hover { color: var(--link); }
+  /* Publication dates — ISO 8601 (YYYY-MM-DD). See blueprint comment at top of file. */
+  .doc-summary .doc-dates {
+    font-size: 12px;
+    color: var(--subtle);
+    margin-top: 4px;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+  .doc-summary .doc-dates .pub-anchor {
+    color: var(--muted);
+    font-weight: 600;
+  }
+
+  /* Links */
+  a { color: var(--link); text-decoration: none; }
+  a:hover { color: var(--link-hover); }
+
+  /* Method note box */
+  .method-note {
+    font-size: 14px;
+    color: var(--muted);
+    padding: 14px 18px;
+    border-left: 3px solid var(--rule);
+    background: var(--card-bg);
+    margin: 16px 0 24px 0;
+    line-height: 1.55;
+  }
+
+  /* Footer */
+  footer {
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    text-align: center;
+    font-size: 14px;
+    color: var(--subtle);
+  }
+  footer a {
+    color: var(--link);
+    text-decoration: none;
+  }
+  footer a:hover {
+    border-bottom: 1px solid var(--link);
+  }
+  footer .back-hub {
+    display: inline-block;
+    margin-bottom: 16px;
+    font-size: 15px;
+    color: var(--link);
+  }
+  footer .contact {
+    font-size: 13px;
+    margin-top: 8px;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    body { font-size: 16px; padding: 0 16px; }
+    main { padding: 32px 0 48px 0; }
+    .doc-summary { padding: 16px 18px; }
+    .doc-summary .doc-head { flex-direction: column; }
+  }
+
+  /* Print */
+  @media print {
+    body { font-size: 11pt; padding: 0; }
+    main { max-width: none; }
+    .doc-summary { border: 1px solid #ccc; page-break-inside: avoid; }
+    .status { border: 1px solid #999; }
+  }
+  .site-nav{ margin:10px 0 8px; font-size:14px; line-height:1.9; }
+  .site-nav a{ text-decoration:none; }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <h1 class="page-title">Living Document</h1>
+  <p class="page-intro">The claims register of the Gap Geometry framework &mdash; the study of the
+  shortfall of the hyperbolic argument ln&thinsp;2 against its chord: the &asymp;&thinsp;2% (exactly 1 &minus; &radic;2&middot;ln&thinsp;2) by which the argument of
+  doubling falls short of its chord, in one metric. The object, the status of every claim, the published
+  record on its two shelves, and the corrections. This page evolves as the framework evolves; nothing on it
+  is written that was not computed.</p>
+  <div class="version-info">
+    <span style="font-weight:600; color: var(--muted);">Framework first published: 2026-01-21</span>
+    &nbsp;&middot;&nbsp;
+    Version 1.7 &mdash; Current as of 2026-09-11
+    &nbsp;&middot;&nbsp;
+    <a href="index%20living-document%20archive.html">Previous versions</a>
+    &nbsp;&middot;&nbsp;
+    <a href="methodology.html">Methodology</a>
+    &nbsp;&middot;&nbsp;
+    <a href="direct-documents.html">Documents</a>
+  </div>
+</header>
+
+<!-- ============================================================ -->
+<h2>The object</h2>
+
+<div class="formula">
+  p(L) &nbsp;=&nbsp; L / (2&thinsp;sinh(L/2)), &nbsp; L = ln r
+  <span class="label">One classical function of one variable &mdash; the ratio of the geometric to the logarithmic mean of the interval&rsquo;s ends, GM/L<sub>log</sub>; in the hyperbola&rsquo;s own metric, the argument over its chord.</span>
+</div>
+<div class="formula">
+  2&thinsp;sinh(ln&thinsp;2 / 2) &nbsp;=&nbsp; 1/&radic;2
+  <span class="label">The chord identity at r = 2 &mdash; exact, three lines of algebra.</span>
+</div>
+<div class="formula">
+  G &nbsp;=&nbsp; 1 &minus; p(ln&thinsp;2) &nbsp;=&nbsp; 1 &minus; &radic;2 &middot; ln&thinsp;2 &nbsp;&asymp;&nbsp; 0.019741856&hellip;
+  <span class="label">The gap &mdash; how far the argument ln&thinsp;2 falls short of its chord 1/&radic;2. Its complement &radic;2&middot;ln&thinsp;2 &asymp; 0.980258143&hellip; is the ratio itself.</span>
+</div>
+
+<p>The gap is one point on one classical function. The function already stands in published mathematics:
+the &Acirc;-genus characteristic series of index theory (a citation, never evidence); the Hodgson&ndash;Kerckhoff
+tube-packing coefficient of hyperbolic geometry (the framework&rsquo;s closed-form identification, published
+with DOI); the constant <em>p</em> of the Ahrens&ndash;Dieter exact-approximation sampler as Fishman prints it;
+the weight on the geometric side of the Selberg trace formula. Each field uses the function; none evaluates
+it at ln&thinsp;2; none cites the others. The framework did not discover the function &mdash; it identified a
+point on it, and proved the small things about that point that were provable: the shortfall is strict, its
+series is rational, and its angle was never chosen. The line the point sits on &mdash; the other cells, the
+traces, the saddle &mdash; is the subject of <em>The complement 1&nbsp;&minus;&nbsp;&radic;2&middot;ln&thinsp;2</em>. The
+<a href="what-the-gap-is.html">five-minute version</a> is a separate page.</p>
+
+<div class="method-note">
+  <strong>Verification.</strong> Every numerical statement is inspected at dps&nbsp;500 before it is written,
+  and every claimed identity is checked at two widely separated depths: a true identity is indifferent to
+  depth, a near-match freezes. Five hundred is a floor, not a ceiling: where a question needed more, the depth went further
+  &mdash; thousands of digits, and in one research pass fifty thousand &mdash; and a paper may also print a computation at a lower
+  depth once the closed form of its path is identified and stated. Either way the inspection was done at 500 first, because not all
+  closed forms reveal themselves at the same digit, and each paper states the depth it printed. A residual that freezes is recorded as a <em>drift</em> at its distance
+  &mdash; never rounded away, never called noise &mdash; and the claim that carries it says so. External references are checked against the rendered original. The bar does not relax to
+  accommodate a claim that fails to meet it. Full details: <a href="methodology.html">Methodology</a>.
+</div>
+
+<!-- ============================================================ -->
+<h2>Summary of Claims</h2>
+
+<div class="method-note">
+  <strong>How to read this table.</strong> Nothing here is written that was not computed. Each claim carries its
+  <strong>kind</strong> &mdash; <em>theorem</em>: exact algebra about the object, zero residual, no instrument in the
+  room; <em>placement</em>: where the same expression stands in the world&rsquo;s published
+  mathematics &mdash; an identity, verifiable at any time; the date of finding is recorded, nothing rests on it &mdash; its <strong>scope</strong>, where it lives in the coordinate named (the
+  doubling interval r&nbsp;=&nbsp;2; the hyperbolic argument L&nbsp;=&nbsp;ln&nbsp;r, one metric said once;
+  algebraic &mdash; an identity that holds for every value and so marks no point), and its <strong>status</strong>
+  &mdash; <em>verified</em> (zero residual at the inspection depth) or <em>observation</em> (a match to published
+  data, precision stated); <em>reread</em> marks a paper whose computation stands while its reading was withdrawn by name
+  and replaced by the one the identification gives. Symbols follow <a href="https://www.iso.org/standard/64973.html">ISO 80000-2</a>; the
+  <a href="methodology.html">Methodology</a> page defines the kinds and scopes. The symbol map is open-ended:
+  new entries may be added when a correspondence is independently derived and verified; existing meanings
+  may not drift silently &mdash; a change is dated and recorded.
+</div>
+
+<div class="method-note" style="margin-top:10px">
+  <strong>The corpus symbols, read once.</strong> The published papers print the value &radic;2&middot;ln(2) as
+  <span class="mono">K<sub>AUD</sub></span> and its complement 1&nbsp;&minus;&nbsp;&radic;2&middot;ln(2) as
+  <span class="mono">G<sub>AUD</sub></span>. They are the framework&rsquo;s names for a shared cell: the value is
+  Fishman&rsquo;s constant <em>p</em> at r&nbsp;=&nbsp;2 and the ratio of the geometric to the logarithmic mean on
+  [1,&thinsp;2] before it is anyone&rsquo;s K. This page prints the neutral forms; the names appear only here and
+  inside the papers that print them.
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Claim</th>
+      <th>Kind</th>
+      <th>Scope</th>
+      <th>Status</th>
+      <th>Value / Key Result</th>
+      <th>Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>G = 1 &minus; &radic;2&middot;ln(2)</td>
+      <td>theorem</td>
+      <td>the doubling interval</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>&asymp; 0.019741856&hellip; &mdash; the shortfall of the hyperbolic argument ln&thinsp;2 against its chord 1/&radic;2, one metric; in the world&rsquo;s words G = 1 &minus; GM/L<sub>log</sub> at r = 2</td>
+      <td>The Coherence Ceiling; Geometric Constants from H4; Complete Framework; the identification (2026)</td>
+    </tr>
+    <tr>
+      <td>&radic;2&middot;ln(2)</td>
+      <td>theorem</td>
+      <td>the doubling interval</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>&asymp; 0.980258143&hellip; &mdash; the ratio of the geometric to the logarithmic mean at r = 2, GM/L<sub>log</sub>. </td>
+      <td>The Coherence Ceiling; Geometric Constants from H4; Complete Framework</td>
+    </tr>
+    <tr>
+      <td>Chord identity: 2&thinsp;sinh(ln&thinsp;2/2) = 1/&radic;2</td>
+      <td>theorem</td>
+      <td>the hyperbolic argument</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>Exact, three lines of algebra &mdash; the chord of the doubling angle</td>
+      <td>the identification, 2026</td>
+    </tr>
+    <tr>
+      <td>(1 &minus; &radic;2&middot;ln(2)) + &radic;2&middot;ln(2) = 1 (exact)</td>
+      <td>theorem</td>
+      <td>algebraic</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>Algebraic identity</td>
+      <td>The Coherence Ceiling</td>
+    </tr>
+    <tr>
+      <td>Boundary Information Invariant</td>
+      <td>theorem</td>
+      <td>algebraic</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>Invariant of quadratic systems</td>
+      <td>The Boundary Information Invariant</td>
+    </tr>
+    <tr>
+      <td>HK closed-form coefficient</td>
+      <td>theorem</td>
+      <td>the hyperbolic argument</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>Closed form for Hodgson&ndash;Kerckhoff packing &mdash; the identification&rsquo;s published anchor</td>
+      <td>The HK Standalone; The Hodgson&ndash;Kerckhoff Closed Form</td>
+    </tr>
+    <tr>
+      <td>Cross-domain appearances of &radic;2&middot;ln(2)</td>
+      <td>placement</td>
+      <td>the doubling interval</td>
+      <td><span class="status status-verified">Verified</span></td>
+      <td>Independent appearances of the same expression across domains, each placed on its own paper &mdash; identities, verifiable at any time. Where a paper matches measured data instead, that match carries its own date question and says so</td>
+      <td>Cross-Domain Signatures</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="method-note" style="margin-top:14px">
+  <strong>Readings live with their instrument.</strong> Positions taken through the Binary Tower &mdash; its steps,
+  crossings and landmarks, and the Diophantine portrait of the ratio &rho; &mdash; are readings, not properties of the
+  object, so a reader never mistakes a position on a ruler for a property of the thing measured. They are kept,
+  with their status and notices, on the Binary Tower&rsquo;s own page.
+</div>
+
+<!-- ============================================================ -->
+<h2>The published record</h2>
+
+<p>Two shelves, as the <a href="direct-documents.html">Documents</a> page files them &mdash; that page holds
+every link, format and update notice; this list holds the status. <strong>Foundational</strong> holds the first
+identification. <strong>The Observational Record</strong> holds the campaigns that followed and the exact
+computes they produced, each paper standing as printed, its corrections carried as dated notices. No shelf
+implies rank, and the papers carry no numbers here: the shelf says what a paper is, the date says when.
+<em>Read now</em> restates each paper&rsquo;s observation in the identified coordinate &mdash; what it computed, and
+what in it was a reading &mdash; from the framework&rsquo;s reading of its own papers, September 2026; the synthesis
+of the thirteen on one line is <em>One coordinate up</em>.</p>
+
+<h3>Foundational</h3>
+<table>
+  <thead><tr><th>Paper</th><th>Status</th><th>Stands as</th><th>Read now (2026-09)</th></tr></thead>
+  <tbody>
+    <tr><td><strong>The Coherence Ceiling and the Geometric Singularity of Binary</strong><br><span style="color:var(--subtle);font-size:12px">2026-01-21</span></td><td><span class="status status-verified">Verified</span></td><td>as printed; evidence section added 2026-05-05</td><td>The first identification. The paper chose the chord as the denominator; that choice is why its number is 1 &minus; &radic;2&middot;ln(2) and not a shortfall over the mean or over the argument itself. On the line: the doubling interval, and the golden cell.</td></tr>
+    <tr><td><strong>The complement 1 &minus; &radic;2&middot;ln&thinsp;2</strong><br><span style="color:var(--subtle);font-size:12px">2026-09 &middot; DOI 10.17605/OSF.IO/K9HX4</span></td><td><span class="status status-verified">Verified</span></td><td>as printed</td><td>The paper on the object itself: one classical function p(L) = L/(2&thinsp;sinh(L/2)), the chord identity at r = 2, the gap as its shortfall in one metric. Proves what is provable about the point &mdash; the shortfall is strict, its series is rational, its angle was never chosen &mdash; and places the function where it already stands. Carries the map of the line: the cells, the traces, the saddle at the wall. On the line: the doubling interval, read from the wall.</td></tr>
+  </tbody>
+</table>
+
+<h3>The Observational Record</h3>
+<table>
+  <thead><tr><th>Paper</th><th>Status</th><th>Stands as</th><th>Read now (2026-09)</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Geometric Constants from H4 &mdash; Mathematical Framework v2.0.2</strong><br><span style="color:var(--subtle);font-size:12px">2026-01-24</span></td><td><span class="status status-verified">Verified</span></td><td>as printed; attribution and typography updates 2026-05-05</td><td>Six exact identities and one near-match. Its four &ldquo;origins&rdquo; of &radic;2 are four readings of one number; the fifth &mdash; 1/&radic;2 as the chord of the argument ln&thinsp;2 &mdash; is the one that later computes. On the line: the doubling interval; the rest is the golden side.</td></tr>
+    <tr><td><strong>Complete Framework v3.3.1</strong><br><span style="color:var(--subtle);font-size:12px">2026-01-25</span></td><td><span class="status status-verified">Verified</span></td><td>as printed; typography update 2026-05-05</td><td>One identity written three ways without naming it &mdash; a chord-normalised deficit, the logarithm ln(e/2<sup>&radic;2</sup>), the norm &Vert;(ln&thinsp;2, ln&thinsp;2)&Vert;&#8322; &mdash; the same number. The tower here is a display of n&middot;G; it becomes a ruler later. On the line: the doubling interval &mdash; three spellings of one identity.</td></tr>
+    <tr><td><strong>Gap Scaling Across Domains: The 400/11 Formula</strong><br><span style="color:var(--subtle);font-size:12px">2026-02-04</span></td><td><span class="status status-verified">Verified</span></td><td>with notice &mdash; the three-term form is a portrait of the ratio, not an instrument; erratum v1.0.4, 2026-07-15</td><td>A rational approximation of the ratio &rho; built in three steps: the first forced (400/11 is a convergent), the second a choice, the third a rounding whose remainder is the printed 4&times;10<sup>&minus;14</sup>. The chain of primes lives in base ten; &rho; itself is base-free. On the line: the doubling interval; &delta; is off the line.</td></tr>
+    <tr><td><strong>The Boundary Information Invariant of Quadratic Systems</strong><br><span style="color:var(--subtle);font-size:12px">2026-03-18</span></td><td><span class="status status-verified">Verified</span></td><td>as printed; three-threshold refinement 2026-04-13</td><td>Every exact line is an identity in three numbers &mdash; the gap, &radic;2, ln&thinsp;2 &mdash; rearranged. The tower becomes a ruler here (positions n = target/G, computed); the matches against outside numbers are bounded readings. On the line: the doubling interval, read through the ruler n&middot;G.</td></tr>
+    <tr><td><strong>Cross-Domain Signatures of &radic;2 &times; ln(2)</strong><br><span style="color:var(--subtle);font-size:12px">2026-03-26</span></td><td><span class="status status-verified">Verified</span></td><td>placements; ellipse-area correction 2026-05-04</td><td>Identities in the same three numbers, the Hodgson&ndash;Kerckhoff closed form, and two classical theorems correctly quoted. HK&rsquo;s two landmarks are two different cells &mdash; r&nbsp;=&nbsp;2 and r&nbsp;=&nbsp;2+&radic;3 &mdash; read then as one environment. On the line: the doubling interval and the cell 2+&radic;3.</td></tr>
+    <tr><td><strong>The Hodgson&ndash;Kerckhoff Closed Form and the Framework</strong><br><span style="color:var(--subtle);font-size:12px">2026-04-03</span></td><td><span class="status status-verified">Verified</span></td><td>the identity exact; seven tower-side errata carried</td><td>One exact new line: the hyperbolic argument evaluated at 1/(2&radic;2) &mdash; HK&rsquo;s six-digit coefficient is 1/(&radic;2&middot;ln&thinsp;2) exactly. The rest re-quotes earlier identities. On the line: the doubling interval (the coefficient) and the cell 2+&radic;3 (HK&rsquo;s radius R&#8320;).</td></tr>
+    <tr><td><strong>The 50 Hinge</strong><br><span style="color:var(--subtle);font-size:12px">2026-04-03</span></td><td><span class="status status-verified">Verified</span></td><td>with notice &mdash; the count corrected 2026-08</td><td>One number, 1/G = 50.65&hellip;, seen three ways &mdash; its floor, the step nearest the ratio, a rounded denominator; the paper&rsquo;s own &sect;9 says two of the three are one fact. The physical 50s are classical physics with no computation linking them to the gap. On the line: the doubling interval, read through the ruler.</td></tr>
+    <tr><td><strong>Binary Scaling of &rho;</strong><br><span style="color:var(--subtle);font-size:12px">2026-04-03</span></td><td><span class="status status-verified">Verified &middot; reread</span></td><td>every value correct; the prime-hierarchy reading withdrawn 2026-08 and replaced 2026-09 &mdash; the paper is the base-two register of 4/11; ord<sub>11</sub>(2) = 10 stands</td><td>The base-two register of the rational that the 400/11 paper read in base ten: orders, periods, floors, factorisations &mdash; all classical. Same number, two bases, two &ldquo;hierarchies&rdquo;. On the line: the doubling interval; base two is off the line.</td></tr>
+    <tr><td><strong>Saturation Constants of the Exact-Approximation Method</strong><br><span style="color:var(--subtle);font-size:12px">2026-06-02</span></td><td><span class="status status-verified">Verified</span></td><td>as printed; eq. (3.4) derives p(L) for arbitrary L</td><td>Where p(L) = L/(2&thinsp;sinh(L/2)) first appears as a function &mdash; the object, arriving through a sampling minimax. Every number holds; &ldquo;forced&rdquo; and &ldquo;novel&rdquo; are readings. On the line: the doubling interval, the golden cell and the cell r&nbsp;=&nbsp;5 (the family); the other half lives on an interval, not a cell.</td></tr>
+    <tr><td><strong>The &eta; Corridor in 3D Wilson&ndash;Fisher Critical Phenomena &mdash; Empirical Observation (with its verification companion)</strong><br><span style="color:var(--subtle);font-size:12px">2026-06-02</span></td><td><span class="status status-verified">Verified &middot; Observation</span></td><td>as printed; strengthened twice</td><td>Part II is classical analysis of one function &mdash; peak at &phi;, self-reference at the silver ratio, integral ln&thinsp;2/2, the dome sequence written for the first time. Part I is one number: the largest printed &eta; at d&nbsp;=&nbsp;3 is 0.0382 and 2G is 0.0395, indistinguishable at the tightest datum. On the line: the doubling interval, 1+&radic;2, &phi;+&radic;&phi;, 2+&radic;3.</td></tr>
+    <tr><td><strong>1, 7, 124, 4318, &hellip; &mdash; Integer Mellin Moments of the Dome</strong><br><span style="color:var(--subtle);font-size:12px">2026-06-12</span></td><td><span class="status status-verified">Verified</span></td><td>as printed; proved for all n</td><td>One identity, g = tanh&thinsp;2x &minus; tanh&thinsp;x, gives the whole family; the integers follow from three classical theorems on Bernoulli numbers and are proved for all n. &ldquo;Surgery&rdquo; and &ldquo;arithmetic shadow&rdquo; are readings. On the line: the squaring map r&nbsp;&#8614;&nbsp;r&sup2; (x&nbsp;&#8614;&nbsp;2x in the half-argument).</td></tr>
+    <tr><td><strong>The Crossing Zone Hinge &mdash; Three Thresholds and the Identity 1/(2 ln 2) &minus; 1/&radic;2 = G/(2 ln 2)</strong><br><span style="color:var(--subtle);font-size:12px">2026-07-15</span></td><td><span class="status status-verified">Verified</span></td><td>as printed; the Tower used exactly, solutions never rounded</td><td>The three thresholds are a geometric progression with ratio 1/(&radic;2&middot;ln&thinsp;2); every identity in the paper is a property of that progression. &ldquo;Hinge&rdquo; and &ldquo;self-referential&rdquo; are readings. On the line: the doubling interval, read through the ruler &mdash; a geometric progression with ratio 1/(&radic;2&middot;ln&thinsp;2).</td></tr>
+    <tr><td><strong>One coordinate up &mdash; the thirteen papers read on the line through r = 2</strong> <span style="color:var(--subtle);font-size:12px">(note)</span><br><span style="color:var(--subtle);font-size:12px">2026-09 &middot; DOI 10.17605/OSF.IO/UJWC7</span></td><td><span class="status status-verified">Verified</span></td><td>as printed; the synthesis &mdash; no new claim, every row a placement of an existing one</td><td>The thirteen papers above, one line each, read in the identified coordinate: what each computed, what in it was a reading, and where on the line it sits. The <em>read now</em> column of this page is drawn from it. Each paper carries a three-line reading pointer pointing here, dated at deposit. On the line: all of it.</td></tr>
+  </tbody>
+</table>
+
+<h3>Standalone</h3>
+<table>
+  <thead><tr><th>Paper</th><th>Status</th><th>Stands as</th><th>Read now (2026-09)</th></tr></thead>
+  <tbody>
+    <tr><td><strong>A Closed Form for the Hodgson&ndash;Kerckhoff Tube-Packing Coefficient</strong><br><span style="color:var(--subtle);font-size:12px">2026-04-03</span></td><td><span class="status status-verified">Verified</span></td><td>the identity alone, separately citable; ellipse-area correction and &sect;3.1 added 2026-05-04</td><td>The identity alone, nothing attached.</td></tr>
+  </tbody>
+</table>
+
+<!-- ============================================================ -->
+<h2>What connects</h2>
+
+<p>The documents share one line. Everything below is either an identity on it or a conversion into its unit.</p>
+
+<div class="key-result">
+  (1 &minus; &radic;2&middot;ln&thinsp;2) + &radic;2&middot;ln&thinsp;2 = 1 &nbsp;&nbsp; (exact, algebraic)
+  <span class="note">Complementarity &mdash; The Coherence Ceiling; Geometric Constants from H4; Complete Framework</span>
+</div>
+<div class="key-result">
+  2&thinsp;sinh(ln&thinsp;2/2) = 1/&radic;2 &nbsp;&nbsp;&middot;&nbsp;&nbsp; 1/S = &radic;2&middot;ln&thinsp;2
+  <span class="note">The chord identity, and the Hodgson&ndash;Kerckhoff coefficient as its reciprocal &mdash; The Hodgson&ndash;Kerckhoff Closed Form; the Standalone; the identification</span>
+</div>
+<div class="key-result">
+  1/(2 ln 2) &minus; 1/&radic;2 = G/(2 ln 2) &nbsp;&nbsp; (exact)
+  <span class="note">The &radic;2-to-Shannon spacing &mdash; The Crossing Zone Hinge</span>
+</div>
+<p style="font-size:13px;color:var(--muted)">The Tower&rsquo;s addresses &mdash; the three thresholds, 37, the 50 hinge &mdash; are readings and live with the instrument.</p>
+
+
+<!-- ============================================================ -->
+<h2>Corrections &amp; Notes</h2>
+
+<div class="method-note">
+  <strong>Three-threshold refinement (13 April 2026, supersedes the 9 April note):</strong> The 35&ndash;37 region of the Binary Tower contains three distinct thresholds, not one &ldquo;Landauer crossing&rdquo;:
+  <ul>
+    <li><strong>Landauer crossing</strong> &mdash; n&middot;G = ln 2, exact at n &asymp; 35.11 (between integer steps 35 and 36).</li>
+    <li><strong>Geometric damping threshold</strong> &mdash; n&middot;G = 1/&radic;2, exact at n &asymp; 35.82 (integer step 36 is adjacent).</li>
+    <li><strong>Shannon bound</strong> &mdash; n&middot;G = 1/(2 ln 2), exact at n &asymp; 36.54 (integer step 37 is adjacent).</li>
+  </ul>
+  The crossing-zone spacings are algebraically locked: &Delta;n&#8321;&#8322; = 1/&radic;2, &Delta;n&#8322;&#8323; = 1/(2 ln 2), with ratio &Delta;n&#8322;&#8323; / &Delta;n&#8321;&#8322; = 1/K<sub>AUD</sub>. The exact identity 1/(2 ln 2) &minus; 1/&radic;2 = G<sub>AUD</sub>/(2 ln 2) is unchanged but renamed from &ldquo;Landauer crossing identity&rdquo; to &ldquo;&radic;2-to-Shannon gap identity&rdquo; because it describes the spacing between thresholds 2 and 3, not the Landauer crossing. Applied across the five companion papers, from <em>The Boundary Information Invariant</em> to <em>Binary Scaling of &rho;</em>, and their OSF descriptions on 2026-04-13.
+</div>
+
+<div class="method-note"><strong>Evidence-level unification (2 May 2026):</strong> two parallel classification vocabularies (the AI Readers page&rsquo;s two levels; this page&rsquo;s three statuses) were unified into the three evidence levels of the Methodology page. No claim changed level; the words did.</div>
+
+<div class="method-note"><strong>Kinds replace levels (2026-09-09):</strong> the three numbered evidence levels of May are retired.
+  A claim now carries its <em>kind</em> (theorem &middot; reading, with its coordinate named &middot; placement &middot; conjecture),
+  its <em>scope</em> (where it lives on the line), and its <em>status</em> (verified &middot; observation &middot; near-exact with its
+  drift &middot; reread). Readings taken through the Binary Tower live with the instrument. Symbols follow ISO 80000-2, the
+  papers are filed on two shelves and carry no numbers, and the value &radic;2&middot;ln(2) is printed in its neutral form
+  with the corpus symbols named once. No claim changed; the words did, again &mdash; this time because the object had been
+  identified and the words could finally say what it is. The <a href="ai-readers.html">AI Readers</a> page carries the
+  verification script and the paper map for machine readers.</div>
+
+<!-- ============================================================ -->
+<h2>Document History</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Version</th>
+      <th>Date</th>
+      <th>Changes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>v1.7</td>
+      <td>2026-09-11</td>
+      <td>Two rows. <em>The complement 1 &minus; &radic;2&middot;ln&thinsp;2</em> joins the Foundational shelf &mdash; the paper on the
+      object itself. <em>One coordinate up</em> joins the Observational Record as a note &mdash; the synthesis of the thirteen on
+      one line, from which this page&rsquo;s <em>read now</em> column is drawn; the thirteen papers carry a three-line reading pointer
+      notice pointing to it. The header now writes the shortfall as &asymp;&thinsp;2% with its exact form beside it. No claim or
+      status changed. Prior version archived.</td>
+    </tr>
+    <tr>
+      <td>v1.6</td>
+      <td>2026-09-09</td>
+      <td>The rework. The page is now the claims register and nothing else: the object &mdash; one classical
+      function, the chord identity at r&nbsp;=&nbsp;2, the gap as its shortfall in one metric &mdash; the Summary of
+      Claims, the published record, what connects, the corrections log, this history. Every claim carries its
+      <em>kind</em> (theorem &middot; placement), its <em>scope</em> and its <em>status</em>; the numbered evidence
+      levels are retired. Rows that must name the Binary Tower to describe themselves &mdash; the step structure,
+      the Landauer crossing, 37, the 50 hinge, gap scaling &rho;, binary scaling of &rho; &mdash; are readings and
+      moved with their status and notices to the instrument; one block stands in their place. The papers are
+      filed on the Documents page&rsquo;s two shelves (Foundational &middot; The Observational Record &middot;
+      Standalone) with no numbers, one line per paper plus a <em>read now</em> line restating each paper&rsquo;s
+      observation in the identified coordinate. The neutral forms &radic;2&middot;ln(2) and
+      1&nbsp;&minus;&nbsp;&radic;2&middot;ln(2) are printed alone, the corpus symbols named once. Verification is
+      stated as the Methodology page states it: dps&nbsp;500 as the inspection floor, deeper where a question needed
+      it, a lower printed depth once the closed form of a path is identified, a residual that freezes recorded as a
+      drift. The page&rsquo;s own prose says &ldquo;the hyperbolic argument&rdquo;; paper titles are quoted as printed;
+      symbols follow ISO 80000-2. <em>The complement 1&nbsp;&minus;&nbsp;&radic;2&middot;ln&thinsp;2</em> is the paper on the object itself, on the
+      Foundational shelf; the synthesis <em>One coordinate up</em> reads the thirteen on the line, and the <em>read now</em>
+      column is drawn from it. No claim or status changed. Prior version archived.</td>
+    </tr>
+    <tr>
+      <td>v1.5</td>
+      <td>2026-06-12</td>
+      <td><em>1, 7, 124, 4318, &hellip; &mdash; Integer Mellin Moments of the Dome</em> added following OSF publication (DOI 10.17605/OSF.IO/WVD3G). Integrality theorem for all n; full weight-family cube classification; OEIS novelty check archived in the paper folder; four-architecture pre-deposit review 2026-06-12 (three editorial findings, fixed same day); Adams 1878 quote verified against the primary GDZ scan; Voronoï 1889 provenance added. Pre-update snapshot (v1.4 state) archived 2026-06-11.</td>
+    </tr>
+    <tr>
+      <td>v1.4</td>
+      <td>2026-06-02</td>
+      <td>Two-paper publication day. <em>Saturation Constants of the Exact-Approximation Method</em> (DOI 10.17605/OSF.IO/6QZRB) and <em>The &eta; Corridor in 3D Wilson&ndash;Fisher Critical Phenomena</em> (with Verification Companion, shared DOI 10.17605/OSF.IO/PD73B) published on OSF and GitHub. Both papers carry their own DOI on page 1, establishing the standard for future papers. (Row added 2026-06-11 &mdash; omitted at the time of the 2026-06-02 update.)</td>
+    </tr>
+    <tr>
+      <td>v1.3</td>
+      <td>2026-05-05</td>
+      <td>Cross-paper link architecture overhaul. Five of the early papers had paper-to-paper file URLs (which would break under any future filename change) replaced with a durable three-anchor block: OSF main project, About page, Direct Documents download index. Paper-specific DOIs preserved (DOIs are stable). Per-paper Update entries added/extended on this page. OSF deep-link IDs refreshed across all hub HTMLs after each push. No mathematical content changed in any paper.</td>
+    </tr>
+    <tr>
+      <td>v1.2</td>
+      <td>2026-05-02</td>
+      <td>Evidence-level unification. Three-level classification (Level 1 &mdash; Exact, Level 2 &mdash; Empirical, Level 3 &mdash; Conjectural) integrated from <a href="methodology.html">Methodology</a>. Existing Verified / Conjectural / Open badges retained as secondary status labels. New &ldquo;Level&rdquo; column added to Summary of Claims table. Verification Protocol updated to reference all three levels.</td>
+    </tr>
+    <tr>
+      <td>v1.1</td>
+      <td>2026-04-13</td>
+      <td>Three-threshold refinement of the 35&ndash;37 zone (Landauer crossing, geometric damping, Shannon bound). &radic;2-to-Shannon gap identity renamed.</td>
+    </tr>
+    <tr>
+      <td>v1.0</td>
+      <td>2026-04-13</td>
+      <td>Initial public release. All 10 documents summarised with key formulas, verification status, and interlaced structure.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- ============================================================ -->
+<h2>Repositories &amp; Archives</h2>
+
+<div class="doc-summary" style="background: transparent; border-style: dashed;">
+  <div class="doc-links" style="font-size: 14px; gap: 8px 20px; border: none; padding: 0; margin: 0;">
+    <a href="https://github.com/Gap-geometry" target="_blank" rel="noopener">GitHub Organization</a>
+    <span class="sep">&middot;</span>
+    <a href="https://github.com/Gap-geometry/sqrt2-ln2-geometric-constants-" target="_blank" rel="noopener">Main Repository</a>
+    <span class="sep">&middot;</span>
+    <a href="https://osf.io/zx4g7" target="_blank" rel="noopener">OSF Main Project</a>
+    <span class="sep">&middot;</span>
+    <a href="index%20living-document%20archive.html">Version Archive</a>
+  </div>
+</div>
+
+<footer>
+  <div style="font-size:12px; opacity:0.75; margin-bottom:6px;">AI readers: <a href="ai-readers.html">guide</a> &middot; <a href="AI_INDEX.txt">machine index</a> &middot; <a href="llms.txt">llms.txt</a></div>
+
+  <div class="site-nav"><a class="back-hub" href="index.html">&larr; Gap Geometry</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="what-the-gap-is.html">What the gap is</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="direct-documents.html">Documents</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="methodology.html">Methodology</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="visualisations%20hub.html">Instruments</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="ai-readers.html">AI readers</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="license.html">Licence</a></div>
+  <div>D. B. &mdash; Gap Geometry &mdash; 2025&ndash;2026</div>
+  <div class="contact">
+    <a href="mailto:Gap-geometryK_AUD2@telenet.be">Gap-geometryK_AUD2@telenet.be</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://x.com/Aud2Gap" target="_blank" rel="noopener">@Aud2Gap</a>
+    &nbsp;&middot;&nbsp;
+    <a href="license.html">CC BY 4.0</a>
+  </div>
+</footer>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,610 @@
+<!doctype html>
+<html lang="en">
+<!--
+  THE LAB — one navy shell, tabbed, for the gap's instruments.
+  Collapses the standalone lab pages into one page; each view reads the SAME
+  closed-form feed used by TOOLBOX/landmarks.py (25 checks) and closed_cells.py (37 checks).
+  Values cross-checked against the toolbox 2026-09-07 (r=2, golden, 2+√3, 3+2√2, 5) — all match.
+  Formulas:  L = ln r ;  G = 1 − L/(2 sinh(L/2)) ;  t₂ = r + 1/r ;  chord 2X = √(t₂−2) ;
+             base = 16/(t₂−2) ;  θ = gd L = atan(sinh L) ;  Π = arccos(tanh(L/2)) ;
+             partner r′ = √((t₂+2)/(t₂−2)) ;  saddle field = Re(1 − w/sinh w), Hessian diag(+1/3,−1/3).
+  Hero tabs live now: "The gap & its place" and "The saddle". Others (Cells, Angles, Golden,
+  Scope) port in next — same shell, same feed.
+-->
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Gap — its place, its shape, its scope · Gap Geometry</title>
+<style>
+  :root{ --bg:#0c1322; --card:#121c30; --ink:#dce6f7; --dim:#8fa3c4;
+         --gold:#f0c04a; --blue:#2f6bf2; --blue2:#6fa0ff; --red:#f38181;
+         --grid:#22314f; --line:#33456b; }
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}
+  .wrap{max-width:900px;margin:0 auto;padding:22px 20px 44px;}
+  h1{font-size:20px;font-weight:600;margin:0 0 3px;letter-spacing:.2px}
+  .sub{color:var(--dim);font-size:13px;line-height:1.5;margin:0 0 16px;max-width:660px}
+  .sub b{color:var(--gold);font-weight:600}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:16px}
+  .tab{background:none;border:none;color:var(--dim);font:inherit;font-size:14px;
+    padding:9px 15px;border-radius:8px 8px 0 0;cursor:pointer;position:relative;top:1px}
+  .tab.on{color:var(--ink);background:var(--card);border:1px solid var(--line);border-bottom-color:var(--card)}
+  .tab.soon{opacity:.4;cursor:default}
+  .tab.soon::after{content:" · soon";font-size:11px;color:var(--dim)}
+  .view{display:none} .view.on{display:block}
+  .board{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px}
+  .row{display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start}
+  canvas{width:100%;height:auto;display:block;border-radius:8px;touch-action:none}
+  .col-fig{flex:1 1 420px;min-width:300px}
+  .col-side{flex:1 1 230px;min-width:220px}
+  .cap{font-size:12px;color:var(--dim);margin:8px 2px 0;line-height:1.5}
+  .cap b{color:var(--ink)}
+  .read{background:#0e1830;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .read h3{margin:0 0 8px;font-size:12px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px;font-weight:600}
+  .kv{display:flex;justify-content:space-between;gap:10px;font-variant-numeric:tabular-nums;
+    font-size:14px;padding:3px 0;border-bottom:1px solid rgba(51,69,107,.4)}
+  .kv:last-child{border-bottom:none}
+  .kv .k{color:var(--dim)} .kv .v{font-weight:600}
+  .kv .v.gold{color:var(--gold)}
+  .place{margin-top:12px;background:rgba(240,192,74,.09);border:1px solid rgba(240,192,74,.35);
+    border-radius:10px;padding:10px 12px;font-size:13px;line-height:1.5}
+  .place b{color:var(--gold)}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--dim);margin-top:9px}
+  .legend span{display:flex;align-items:center;gap:6px}
+  .dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+  .fence{margin-top:16px;font-size:11.5px;color:var(--dim);line-height:1.6}
+  .fence b{color:var(--gold)}
+  .frameWrap{position:relative}
+  iframe.inst{width:100%;height:640px;border:1px solid var(--line);border-radius:12px;background:var(--bg);display:block}
+  .openlink{display:inline-block;margin-top:8px;font-size:12px;color:var(--blue2);text-decoration:none}
+  .openlink:hover{text-decoration:underline}
+  .portnote{font-size:11.5px;color:var(--dim);margin:0 2px 10px}
+  .scpre{background:#0e1830;border:1px solid var(--line);color:var(--dim);font:inherit;font-size:12px;
+    padding:4px 10px;border-radius:7px;cursor:pointer}
+  .scpre:hover{color:var(--ink);border-color:var(--blue2)}
+  input[type=range]{accent-color:var(--gold)}
+  /* translation block — one object, many true readings (under the tabs, all views) */
+  .xlate{margin:-2px 0 18px;border:1px solid var(--line);border-radius:12px;
+    background:linear-gradient(180deg,rgba(47,107,242,.07),transparent);overflow:hidden}
+  .xlate>summary{list-style:none;cursor:pointer;padding:11px 15px;font-size:13px;color:var(--ink);
+    display:flex;align-items:center;gap:9px}
+  .xlate>summary::-webkit-details-marker{display:none}
+  .xlate>summary .chev{color:var(--dim);transition:transform .18s;font-size:10px}
+  .xlate[open]>summary .chev{transform:rotate(90deg)}
+  .xlate>summary b{color:var(--blue2);font-weight:600}
+  .xlate .xbody{padding:2px 15px 15px}
+  .xlate .xlead{font-size:12.5px;color:var(--dim);line-height:1.55;margin:0 0 12px;max-width:648px}
+  .xlate .xlead b{color:var(--gold);font-weight:600}
+  .xrow{display:grid;grid-template-columns:132px 1fr auto;gap:12px;align-items:baseline;
+    padding:6px 0;border-top:1px solid rgba(51,69,107,.4);font-size:12.5px}
+  .xrow:first-of-type{border-top:none}
+  .xrow .dom{color:var(--blue2);font-weight:600}
+  .xrow .say{color:var(--ink);line-height:1.45}
+  .xrow .say em{color:var(--dim);font-style:normal}
+  .xrow .sym{color:var(--gold);font-variant-numeric:tabular-nums;white-space:nowrap;font-size:12px}
+  .xnote{font-size:11.5px;color:var(--dim);line-height:1.55;margin:12px 0 0;padding-top:10px;border-top:1px solid var(--line)}
+  .xnote b{color:var(--ink)}
+  @media(max-width:560px){.xrow{grid-template-columns:1fr;gap:2px}.xrow .sym{justify-self:start}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>The Gap — its place, its shape, its scope</h1>
+  <p class="sub">The gap itself, up close — one page, several views, all reading the same feed. The gap is
+  <b>G = 1 − √2·ln 2 = 0.019742</b> at the doubling cell — but that number is one point on a smooth
+  curve, and the curve has a shape. Here is the point, and here is the shape.</p>
+
+  <div class="tabs">
+    <button class="tab on" data-t="place">The gap &amp; its place</button>
+    <button class="tab" data-t="saddle">The saddle</button>
+    <button class="tab" data-t="scope">Scope</button>
+    <button class="tab" data-t="cells">Cells</button>
+    <button class="tab" data-t="angles">Angles</button>
+    <button class="tab" data-t="land3d">3-D landscape</button>
+    <button class="tab" data-t="exp">Experiments</button>
+  </div>
+
+  <!-- ============ TRANSLATION BLOCK — one object, many true readings ============ -->
+  <details class="xlate">
+    <summary><span class="chev">▶</span><span>In other words — <b>one object, in each domain's language</b></span></summary>
+    <div class="xbody">
+      <p class="xlead">Everything on this page is one function of one variable —
+        <b>p(L) = L / (2 sinh(L/2))</b>, with L = ln r. Each field below writes it in the
+        coordinate its habits favour, and names it there. These are not analogies: they are the
+        <b>same line, renamed</b> — all true at once. The famous number is where r = 2 lands in
+        every one of them.</p>
+      <div class="xrow"><span class="dom">means</span><span class="say">geometric-to-logarithmic mean ratio — the Hermite–Hadamard slack <em>(GM ≤ L_log)</em></span><span class="sym">GM / L_log</span></div>
+      <div class="xrow"><span class="dom">quadrature</span><span class="say">the midpoint rule's relative error for e&#8348; — <em>at r = 2 that error is the gap</em>; the trapezoid rule's excess is its over-side twin, <em>T/G → 2 at the wall</em></span><span class="sym">E, T</span></div>
+      <div class="xrow"><span class="dom">sampling</span><span class="say">acceptance probability of the exponential sampler <em>(Fishman · ziggurat)</em></span><span class="sym">p</span></div>
+      <div class="xrow"><span class="dom">hyperbolic geom.</span><span class="say">tube radius, and the coefficient <em>S = 1/p</em> — the chord over the hyperbolic argument, <em>one metric, said once: Minkowski arc L, chord 2 sinh(L/2)</em></span><span class="sym">R, S</span></div>
+      <div class="xrow"><span class="dom">the dome</span><span class="say">the increment of tanh under the squaring map, L ↦ 2L <em>(g = tanh 2x − tanh x, x = L/2)</em></span><span class="sym">g</span></div>
+      <div class="xrow"><span class="dom">number theory</span><span class="say">Dirichlet eta &amp; Bernoulli moments — the integer sequence a(n)</span><span class="sym">η(s), B&#8322;&#8345;</span></div>
+      <div class="xrow"><span class="dom">critical phenomena</span><span class="say">anomalous dimension &amp; corridor — a bound η ≤ 2G on printed values</span><span class="sym">η, R(N)</span></div>
+      <div class="xrow"><span class="dom">dynamics / info</span><span class="say">a Lyapunov spectrum, an L² norm — <em>‖(ln 2, ln 2)‖₂ is a spelling of √2·ln 2</em></span><span class="sym">‖·‖₂</span></div>
+      <div class="xrow"><span class="dom">base ten</span><span class="say">continued-fraction convergents &amp; unit fractions of the digits</span><span class="sym">ρ</span></div>
+      <div class="xrow"><span class="dom">the tower</span><span class="say">a threshold an integer step n crosses <em>(c/G for three targets)</em> — a conversion; states no claim</span><span class="sym">n·G</span></div>
+      <div class="xrow" style="opacity:.75"><span class="dom" style="font-style:italic">added 2026-09-09</span><span class="say" style="font-style:italic">the rows ruled after the first ten — the saddle, the traces, the maps, the cells, the angles</span><span class="sym"></span></div>
+      <div class="xrow"><span class="dom">complex analysis</span><span class="say">the half-argument made complex, <em>w = L/2</em>: Re(1 − w/sinh w) is harmonic, so its Hessian is <em>±λ</em> everywhere — a saddle; the wall is the only critical point in |w| &lt; π <em>(±1/3 in w; the value is the coordinate's, the signs are the object's)</em></span><span class="sym">w, Re f</span></div>
+      <div class="xrow"><span class="dom">hyperbolic classes</span><span class="say">the trace <em>t = 2 cosh(L/2)</em> and the square's trace <em>t₂ = r + 1/r</em>; its square diag(r, 1/r) is conjugate to an integral matrix exactly when t₂ is an integer — <em>a closed cell</em>; r = 2 has t₂ = 5/2</span><span class="sym">t, t₂</span></div>
+      <div class="xrow"><span class="dom">Chebyshev / Lucas</span><span class="say">the squaring map <em>t₂ ↦ t₂² − 2</em> (L ↦ 2L): from the golden cell the Lucas ladder 3, 7, 47, 2207; from r = 2 the ladder 5/2, 17/4, 257/16, … <em>never lands</em></span><span class="sym">T₂, L₂ₖ</span></div>
+      <div class="xrow"><span class="dom">metallic means</span><span class="say">(m + √(m²+4))/2, norm −1; their squares are the closed cells <em>t₂ = m² + 2</em> — φ² (chord 1, p = L), (1+√2)² = 3+2√2 (the boundary)</span><span class="sym">φ, δ<sub>S</sub></span></div>
+      <div class="xrow"><span class="dom">the angles</span><span class="say">the Gudermannian <em>θ = gd L</em> (cos θ = 2/t₂) and Lobachevsky's angle of parallelism <em>Π</em> (cos Π = tanh(L/2)); 70.53° = Π(2) = θ(3+2√2)</span><span class="sym">θ, Π</span></div>
+      <p class="xnote">The hidden language is the <b>coordinate</b>: r, b−a, L, L/2, u, s, N, the digits, n — and w, t, t₂, m, θ, Π — one line, fifteen variables. Translating between any two rows is a single substitution. <em>(Distinct from letters that merely <b>collide</b> — the same mark standing for different objects; that is a separate map.)</em> Symbols follow <a href="https://www.iso.org/standard/64973.html" style="color:var(--blue2)">ISO 80000-2</a>; inverse hyperbolic functions are said in words here — "the hyperbolic argument" — and spelled ar- offline. <b>The symbol map is open-ended:</b> new entries may be added when a correspondence is independently derived and verified; existing meanings may not drift silently — a change is dated and recorded.</p>
+    </div>
+  </details>
+
+  <!-- ================= TAB 1 : THE GAP & ITS PLACE ================= -->
+  <section class="view on" id="v-place">
+    <div class="board">
+      <div class="row">
+        <div class="col-fig">
+          <canvas id="curve" width="760" height="470"></canvas>
+          <div class="legend">
+            <span><i class="dot" style="background:var(--gold)"></i>doubling — the number lives here</span>
+            <span><i class="dot" style="background:#d7a24a"></i>filled: §4.2 trace/chord cells</span>
+            <span><i class="dot" style="background:#0c1322;border:2px solid var(--blue2)"></i>hollow: other integer ratios</span>
+          </div>
+          <p class="cap">Move across the curve — every cell above the wall has a gap. <b>The famous
+          number is not alone; it is where <span style="color:var(--gold)">r = 2</span> lands.</b></p>
+        </div>
+        <div class="col-side">
+          <div class="read">
+            <h3>the cell under the cursor</h3>
+            <div class="kv"><span class="k">r</span><span class="v" id="p-r">2.000</span></div>
+            <div class="kv"><span class="k">L = ln r</span><span class="v" id="p-L">0.6931</span></div>
+            <div class="kv"><span class="k">t₂ = r + 1/r</span><span class="v" id="p-t2">2.500</span></div>
+            <div class="kv"><span class="k">G (the gap)</span><span class="v gold" id="p-G">0.019742</span></div>
+            <div class="kv"><span class="k">θ = gd L</span><span class="v" id="p-th">36.87°</span></div>
+            <div class="kv"><span class="k">Π</span><span class="v" id="p-Pi">70.53°</span></div>
+            <div class="kv"><span class="k">chord 2X</span><span class="v" id="p-ch">0.7071</span></div>
+            <div class="kv"><span class="k">L from the chord</span><span class="v" id="p-as">0.6931</span></div>
+            <div class="kv"><span class="k">base 16r/(r−1)²</span><span class="v" id="p-b">32.0</span></div>
+            <div class="kv"><span class="k">partner r′</span><span class="v" id="p-pt">3.000</span></div>
+          </div>
+          <div class="place" style="margin-top:10px">
+            <canvas id="arcInset" width="320" height="176" style="width:100%;height:auto;background:#0c1322;border-radius:8px"></canvas>
+            <div style="font-size:11px;color:var(--dim);margin-top:5px"><b>The object.</b> The gap is the
+            <b>arc</b> (argument <b>L</b>) falling short of the <b>chord</b> (2·sinh(L/2)), in the hyperbola's own
+            metric — <em>arc &lt; chord</em>, so p &lt; 1. Read backwards: <b>L is twice the hyperbolic argument of half the chord</b> — at
+            r = 2, sinh(ln 2 / 2) = 1/(2√2). At golden the chord is exactly 1.</div>
+          </div>
+          <div class="place" id="p-place"><b>The place.</b> r = 2 is the first integer ratio — the
+          smallest distinction you can draw. The gap there is <b>0.019742</b>: what one flat sample of
+          the doubling cell fails to keep. <em>The curve is smooth here — the gold is our pointer, not a
+          feature of the function (<em>The complement</em> §4, Figure 1: G is smooth at r = 2; among integer ratios, the base 16r/(r−1)² = 4/X² is a power of two only there).</em></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TAB 2 : THE SADDLE ================= -->
+  <section class="view" id="v-saddle">
+    <div class="board">
+      <div class="row">
+        <div class="col-fig">
+          <canvas id="saddle" width="760" height="470"></canvas>
+          <div class="legend">
+            <span><i class="dot" style="background:var(--gold)"></i>deficit + (along rapidity)</span>
+            <span><i class="dot" style="background:var(--blue2)"></i>excess − (along rotation)</span>
+            <span><i class="dot" style="background:var(--ink)"></i>the wall — the only critical point</span>
+          </div>
+          <p class="cap">The gap's own field, <b>Re(1 − w/sinh w)</b>, around the wall. Not a valley,
+          not a hill — a <b>saddle</b>: it rises one way and falls the other, and the wall is the single
+          balance point inside |w| &lt; π.</p>
+        </div>
+        <div class="col-side">
+          <div class="read">
+            <h3>the shape at the wall</h3>
+            <div class="kv"><span class="k">along rapidity (real)</span><span class="v gold" id="s-rap">+1/3</span></div>
+            <div class="kv"><span class="k">along rotation (imag)</span><span class="v" id="s-rot" style="color:var(--blue2)">−1/3</span></div>
+            <div class="kv"><span class="k">read here as</span><span class="v">deficit / excess</span></div>
+            <div class="kv"><span class="k">value under cursor</span><span class="v" id="s-val">0.000</span></div>
+          </div>
+          <div class="place"><b>Why it matters.</b> The gap isn't a flat little error — it's the
+          <b>curvature</b> of a saddle. One eigenvalue up (+1/3), one down (−1/3), equal and opposite because
+          the real part of an analytic function is harmonic. The house reads the two directions as deficit and
+          excess (the reading is exact at second order and only there — <em>The complement</em> §4.3); the ±1/3 is the value in
+          the half-argument <em>w = L/2</em>, and changes with the coordinate; its signs do not.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= TAB : THE SCOPE (the gap that never closes) ================= -->
+  <section class="view" id="v-scope">
+    <div class="board">
+      <div class="row">
+        <div class="col-fig">
+          <canvas id="scope" width="760" height="470"></canvas>
+          <div class="legend">
+            <span><i class="dot" style="background:var(--gold)"></i>the trace of the ratio</span>
+            <span><i class="dot" style="background:var(--ink)"></i>the moving point</span>
+          </div>
+          <p class="cap">An oscilloscope of the ratio — two tones, one against the other:
+          <b>x = sin 2πt</b>, <b>y = sin(2π·R·t)</b>. A <b>rational</b> R draws a still, closed figure;
+          an <b>irrational</b> one <b>never comes home</b> — it keeps drawing, forever.</p>
+        </div>
+        <div class="col-side">
+          <div class="read">
+            <h3>the ratio on the scope</h3>
+            <div class="kv"><span class="k">R</span><span class="v gold" id="sc-R">0.980258</span></div>
+            <div class="kv"><span class="k">nearest simple ratio</span><span class="v" id="sc-rat">—</span></div>
+            <div class="kv"><span class="k">closes after</span><span class="v" id="sc-close">never</span></div>
+            <div class="kv"><span class="k">kind</span><span class="v" id="sc-kind">transcendental</span></div>
+          </div>
+          <div class="place" id="sc-note"><b>The gap you can watch.</b> The ceiling
+          <b>√2·ln 2</b> is transcendental — so its figure <b>never closes.</b> That refusal to
+          come home is irrationality made visible: p(ln 2) = √2·ln 2 is no fraction a/b. Dial to a rational and
+          watch it snap shut.</div>
+          <div style="margin-top:12px;font-size:12px;color:var(--dim)">ratio R
+            <input id="sc-slider" type="range" min="0.30" max="1.70" step="0.0001" value="0.9802581" style="width:100%">
+          </div>
+          <div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap">
+            <button class="scpre" data-r="0.98025814" data-k="transcendental" data-note="kaud">√2·ln 2 — the doubling interval</button>
+            <button class="scpre" data-r="1" data-k="rational" data-note="wall">1:1 — the wall</button>
+            <button class="scpre" data-r="0.5" data-k="rational" data-note="rat">1/2</button>
+            <button class="scpre" data-r="0.66666667" data-k="rational" data-note="rat">2/3</button>
+            <button class="scpre" data-r="1.5" data-k="rational" data-note="rat">3:2</button>
+            <button class="scpre" data-r="0.70710678" data-k="irrational" data-note="rt2">1/√2</button>
+            <button class="scpre" data-r="1.61803399" data-k="irrational" data-note="phi">φ golden</button>
+          </div>
+          <div style="margin-top:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
+            <button id="sc-hear" style="font:inherit;padding:4px 11px;border:1px solid var(--gold);background:transparent;color:var(--gold);border-radius:6px;cursor:pointer">▶ hear the gap</button>
+            <span style="font-size:12px;color:var(--dim)">vol
+              <input id="sc-vol" type="range" min="0" max="0.16" step="0.005" value="0.07" style="width:88px;vertical-align:middle">
+            </span>
+            <span id="sc-beat" style="font-size:12px;color:var(--dim)"></span>
+          </div>
+          <div style="margin-top:6px;font-size:11px;color:var(--dim)">Two soft sine tones at <b>f</b> and <b>f·R</b> — the picture, heard. A rational R resolves; √2·ln 2 beats forever. (Soft by default; starts on your click.)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== ported instruments (load the existing navy files; merge onto the feed next) ===== -->
+  <section class="view" id="v-cells">
+    <p class="portnote">The closed-cells instrument — integer-t₂ cells, chord, base, θ, partner. Ported as-is; folds onto the shared feed next.</p>
+    <div class="frameWrap">
+      <iframe class="inst" data-lab="cells" title="Closed cells"></iframe>
+      <a class="openlink" href="#" data-lab-open="cells" target="_blank" rel="noopener">open the closed-cells instrument ↗</a>
+    </div>
+  </section>
+  <section class="view" id="v-angles">
+    <p class="portnote">The conformal-angles reading of sinh w — where angles pass, and where they fold.</p>
+    <div class="frameWrap">
+      <iframe class="inst" data-lab="angles" title="Conformal angles"></iframe>
+      <a class="openlink" href="#" data-lab-open="angles" target="_blank" rel="noopener">open the conformal-angles instrument ↗</a>
+    </div>
+  </section>
+  <section class="view" id="v-land3d">
+    <p class="portnote">The 3-D gap landscape — the surface the curve and the saddle live on.</p>
+    <div class="frameWrap">
+      <iframe class="inst" data-lab="land3d" title="3-D gap landscape"></iframe>
+      <a class="openlink" href="#" data-lab-open="land3d" target="_blank" rel="noopener">open the 3-D landscape ↗</a>
+    </div>
+  </section>
+  <section class="view" id="v-exp">
+    <p class="portnote">The experiments bench — the saddle and the golden sliders, with play; the wall&rsquo;s field beside the 2xy field; cells read as turn angles; a builders&rsquo; box. (The scope is the Scope tab.)</p>
+    <div class="frameWrap">
+      <iframe class="inst" data-lab="exp" title="Experiments bench"></iframe>
+      <a class="openlink" href="#" data-lab-open="exp" target="_blank" rel="noopener">open the experiments bench ↗</a>
+    </div>
+  </section>
+
+  <script id="labs">
+const LABS={"cells": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\"/>\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/>\n<title>The Lab — closed cells (the t₂ ladder)<\/title>\n<style>\n  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');\n  :root{\n    --bg:#0c1322; --card-bg:#121c30; --card-border:#23314d; --rule:#23314d;\n    --text:#dfe6f2; --muted:#a8b6cf; --subtle:#8aa0c0;\n    --classical:#6c9bcf; --classical-dot:#2f6bf2; --observed:#f0c04a;\n    --reading:#9c86e0; --value:#f38181; --gold:#f0c04a;\n  }\n  *{box-sizing:border-box;}\n  body{margin:0;color:var(--text);font-family:'EB Garamond',Georgia,serif;\n    background:radial-gradient(ellipse 120vmin 90vmin at 50% 30%, #101a30 0%, #0c1322 60%, #090e1b 100%) #0c1322;\n    min-height:100vh;}\n  .wrap{max-width:1180px;margin:0 auto;padding:22px;}\n  .banner{display:inline-block;font-size:10.5px;letter-spacing:1.6px;color:#0c1322;background:var(--observed);padding:3px 11px;border-radius:10px;font-family:Georgia,serif;}\n  h1{font-size:24px;font-style:italic;margin:12px 0 3px;font-weight:500;color:var(--text);}\n  .sub{color:var(--muted);font-size:14px;margin:0;}\n  .mono{font-family:'Courier New',monospace;}\n  .classical{color:var(--classical);} .observed{color:var(--observed);} .reading{color:var(--reading);}\n  .value{color:var(--value);} .gold{color:var(--gold);} .faint{color:var(--subtle);}\n  .grid{display:flex;gap:18px;margin-top:18px;align-items:flex-start;flex-wrap:wrap;}\n  .board{background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:8px;flex:1;min-width:520px;box-shadow:0 2px 20px rgba(0,0,0,.25);}\n  .side{width:356px;min-width:300px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:17px 19px;box-shadow:0 2px 20px rgba(0,0,0,.25);}\n  h2.k{font-size:11.5px;letter-spacing:1px;color:var(--subtle);margin:0 0 11px;font-weight:normal;font-family:Georgia,serif;}\n  .stack div{font-size:14.5px;margin:5px 0;color:var(--text);}\n  .stack .lab{display:inline-block;width:78px;color:var(--muted);}\n  .fence{margin-top:12px;padding-top:11px;border-top:1px solid var(--rule);font-size:12.5px;color:var(--muted);line-height:1.5;}\n  .legend{margin-top:13px;font-size:12.5px;color:var(--muted);line-height:1.9;}\n  .legend .sw{display:inline-block;width:11px;height:11px;border-radius:2px;margin:0 5px 0 13px;vertical-align:baseline;}\n  text{font-family:'EB Garamond',Georgia,serif;} .cap{font-size:11px;fill:var(--subtle);} .nlab{font-size:12.5px;fill:var(--muted);}\n  .node{cursor:pointer;}\n  footer{margin-top:15px;color:var(--subtle);font-size:12px;font-style:italic;}\n\n  /* connections block */\n  .connect{margin-top:20px;background:var(--card-bg);border:1px solid var(--card-border);border-radius:16px;padding:14px 16px 8px;box-shadow:0 2px 20px rgba(0,0,0,.25);}\n  .connect .head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;}\n  .connect h3{font-size:15px;font-style:italic;font-weight:500;margin:0;color:var(--text);}\n  .connect .hint{color:var(--subtle);font-size:12px;}\n  .seg{display:inline-flex;border:1px solid var(--card-border);border-radius:8px;overflow:hidden;margin-left:auto;}\n  .seg button{border:0;background:transparent;color:var(--muted);font-family:Georgia,serif;font-size:12.5px;padding:5px 12px;cursor:pointer;}\n  .seg button.on{background:#1c2942;color:var(--text);}\n  .seg button+button{border-left:1px solid var(--card-border);}\n<\/style>\n<\/head>\n<body>\n<div class=\"wrap\">\n  <span class=\"banner\">THE LAB · A WORKING MAP, NOT CURRENT STATEMENTS · A COPY<\/span>\n  <h1>Closed cells — the t₂ ladder, read across<\/h1>\n  <p class=\"sub\">A closed cell is r&gt;1 with integer t₂ = r + 1/r (the square's trace). Even rungs of t₂; the doubling cell r=2 sits between two of them, on a ladder it is not on. Every number here computed, dps 40.<\/p>\n\n  <div class=\"grid\">\n    <div class=\"board\"><svg id=\"board\" viewBox=\"0 0 820 300\" width=\"100%\"><\/svg><\/div>\n    <div class=\"side\" id=\"panel\"><\/div>\n  <\/div>\n\n  <div class=\"connect\">\n    <div class=\"head\">\n      <h3>How they connect<\/h3>\n      <span class=\"hint\">partners bend <b>below<\/b> (sinh L·sinh L′ = 1) · squaring bends <b>above<\/b> (n → n²−2) · hover a cell to light its links<\/span>\n      <div class=\"seg\">\n        <button data-m=\"partners\">Partners<\/button>\n        <button data-m=\"squaring\">Squaring<\/button>\n        <button data-m=\"both\" class=\"on\">Both<\/button>\n      <\/div>\n    <\/div>\n    <svg id=\"conn\" viewBox=\"0 0 820 360\" width=\"100%\"><\/svg>\n  <\/div>\n\n  <footer>The four column-rules are one line of algebra each; the continued fractions are periodic (Lagrange) — the cells' \"always existing\" fingerprint, the Resistance lens. Only L is transcendental. Verified, dps 40. Sandbox copy — not the live Atlas.<\/footer>\n<\/div>\n\n<script>\nconst SVGNS='http://www.w3.org/2000/svg';\nconst CELLS=[\n {n:2, kind:'wall', r:'1', L:'0', G:'0 exactly', chord:'0', base:'+∞', th:'0°', partner:'—', cf:'[1] (rational)', papers:'the wall · r=1 · endpoints coincide', note:'the map’s zero'},\n {n:3, kind:'visited', r:'φ² = (3+√5)/2', L:'0.96242', G:'0.0375763', chord:'1', base:'16', th:'48.19°', partner:'√5', cf:'[2; 1̄]', papers:'Paper 2 (φ, 120-cell radius, corridor) · Paper 5 (φ²) · Paper 11 (dome peak) · partner √5: Paper 2', note:'golden'},\n {n:4, kind:'visited', r:'2 + √3', L:'1.31696', G:'0.0687701', chord:'√2', base:'8', th:'60° exactly', partner:'√3', cf:'[3; 1,2]', papers:'Paper 7 & Paper 11 §9.10 — HK’s R₀ = ½·ln(2+√3): sinh R₀ = 1/√2, base 8. The 60° was never written.', note:'R₀ lives here'},\n {n:5, kind:'unvisited', r:'(5+√21)/2', L:'1.56680', G:'0.0954080', chord:'√3', base:'16/3', th:'66.42°', partner:'1.52753', cf:'[4; 1,3]', papers:'— no paper stood here. THE FIRST closed cell the house has never visited.', note:'unvisited'},\n {n:6, kind:'visited', r:'3 + 2√2', L:'1.76275', G:'0.1186264', chord:'2', base:'4', th:'70.53°', partner:'√2', cf:'[5; 1,4]', papers:'Paper 14 — the boundary X=1, base 4. Partner √2 = Paper 13’s a. θ = arccos(1/3), the tetrahedral angle, never written.', note:'door one'},\n {n:7, kind:'unvisited', r:'(7+3√5)/2', L:'1.92485', G:'0.1391821', chord:'√5', base:'16/5', th:'73.40°', partner:'1.34164', cf:'[6; 1,5]', papers:'— no paper stood here.', note:'unvisited'},\n {n:8, kind:'unvisited', r:'4 + √15', L:'2.06344', G:'0.1576053', chord:'√6', base:'8/3', th:'75.52°', partner:'1.29099', cf:'[7; 1,6]', papers:'— no paper stood here.', note:'unvisited'},\n {n:9, kind:'unvisited', r:'(9+√77)/2', L:'2.18464', G:'0.1742823', chord:'√7', base:'16/7', th:'77.16°', partner:'1.25357', cf:'[8; 1,7]', papers:'— no paper stood here.', note:'unvisited'}\n];\nconst DOUBLING={n:2.5, kind:'doubling', r:'2', L:'ln 2 = 0.69315', G:'0.0197419', chord:'√(1/2)=1/√2', base:'32 (chord ladder)', th:'36.87°', partner:'—', cf:'[2] (rational!)', papers:'Papers 1–14 · the 3-4-5 cell (Paper 7 §7.10). NOT closed — its closure is on the OTHER ladder, the chord’s, at X²=1/8.', note:'not closed — between two rungs it isn’t on'};\n\nconst OX=70, S=95;\nconst nx=n=>OX+(n-2)*S;\nfunction E(t,a,h){const e=document.createElementNS(SVGNS,t);for(const k in a)e.setAttribute(k,a[k]);if(h!=null)e.innerHTML=h;return e;}\nconst col=k=>({wall:'#dfe6f2',visited:'#2f6bf2',gold:'#f0c04a',unvisited:'#8aa0c0',doubling:'#f38181'}[k]);\n\n/* ---------- top board: the ladder ---------- */\nfunction build(){\n  const svg=document.getElementById('board'), AY=170; svg.innerHTML='';\n  svg.appendChild(E('line',{x1:nx(2),y1:AY,x2:nx(9)+30,y2:AY,stroke:'#a8b6cf','stroke-width':1.6}));\n  svg.appendChild(E('polygon',{points:`${nx(9)+30},${AY} ${nx(9)+20},${AY-4} ${nx(9)+20},${AY+4}`,fill:'#a8b6cf'}));\n  svg.appendChild(E('text',{x:nx(9)-10,y:AY+42,class:'nlab'},'t₂ = r + 1/r  (square trace)  →'));\n  svg.appendChild(E('text',{x:OX-6,y:AY-72,class:'cap'},'periodic continued fractions · the “always existing” side'));\n  CELLS.forEach(c=>{\n    const x=nx(c.n);\n    svg.appendChild(E('line',{x1:x,y1:AY-6,x2:x,y2:AY+6,stroke:'#8aa0c0','stroke-width':1}));\n    let dot;\n    if(c.kind==='wall') dot=E('circle',{cx:x,cy:AY,r:5,fill:col('wall')});\n    else if(c.kind==='visited') dot=E('circle',{cx:x,cy:AY,r:7,fill:(c.n===3?col('gold'):col('visited'))});\n    else dot=E('circle',{cx:x,cy:AY,r:7,fill:'#121c30',stroke:col('unvisited'),'stroke-width':1.6,'stroke-dasharray':'2 2'});\n    const g=E('g',{class:'node'}); g.appendChild(dot);\n    g.appendChild(E('text',{x:x,y:AY+24,'text-anchor':'middle',class:'nlab'},'t₂='+c.n));\n    g.appendChild(E('text',{x:x,y:AY-16,'text-anchor':'middle',class:'cap'},c.note));\n    g.addEventListener('click',()=>panel(c));\n    svg.appendChild(g);\n  });\n  const dx=nx(2.5), dy=AY-46;\n  svg.appendChild(E('line',{x1:dx,y1:AY,x2:dx,y2:dy+8,stroke:col('doubling'),'stroke-width':1,'stroke-dasharray':'2 3'}));\n  const dg=E('g',{class:'node'});\n  dg.appendChild(E('circle',{cx:dx,cy:dy,r:7,fill:col('doubling')}));\n  dg.appendChild(E('text',{x:dx,y:dy-12,'text-anchor':'middle',class:'value',style:'font-size:12px'},'r = 2'));\n  dg.addEventListener('click',()=>panel(DOUBLING)); svg.appendChild(dg);\n  svg.appendChild(E('text',{x:dx+12,y:dy-1,class:'cap',fill:col('doubling')},'not on the ladder (t₂ = 2.5)'));\n}\n\n/* ---------- the connections block: arc diagram ---------- */\nfunction arc(xa,xb,depth,up){const mx=(xa+xb)/2,y=190+(up?-depth:depth);return `M ${xa} 190 Q ${mx} ${y} ${xb} 190`;}\nfunction buildConn(mode){\n  const svg=document.getElementById('conn'); svg.innerHTML=''; const CY=190;\n  // axis + nodes\n  svg.appendChild(E('line',{x1:nx(2),y1:CY,x2:nx(9)+22,y2:CY,stroke:'#4a5a78','stroke-width':1.4}));\n  svg.appendChild(E('text',{x:nx(9)-2,y:CY+30,class:'cap'},'t₂ →'));\n  svg.appendChild(E('text',{x:OX-4,y:44,class:'cap',fill:'#7fa8e0'},'▲ squaring  t₂ → t₂²−2  (climbs the ladder)'));\n  svg.appendChild(E('text',{x:OX-4,y:344,class:'cap',fill:'#f0c04a'},'▼ partners  sinh L·sinh L′ = 1  (fold back toward the wall)'));\n\n  const arcs=[];\n  CELLS.forEach(c=>{\n    const n=c.n, x=nx(n);\n    if(mode==='partners'||mode==='both'){\n      if(n>=3){\n        const pr=Math.sqrt((n+2)/(n-2)), pt=pr+1/pr, xp=nx(pt);\n        const bright=(n===6);                       // the √2 partner: P13 ↔ P14\n        const a=E('path',{d:arc(x,xp,42+Math.abs(x-xp)*0.22,false),fill:'none',\n          stroke:bright?'#f0c04a':'#b9922f','stroke-width':bright?2:1.3,opacity:bright?0.85:0.5});\n        a.setAttribute('data-n',n); a.setAttribute('data-rel','p'); arcs.push(a); svg.appendChild(a);\n        svg.appendChild(E('circle',{cx:xp,cy:CY,r:2.6,fill:'#f0c04a',opacity:0.7}));\n        if(bright) svg.appendChild(E('text',{x:(x+xp)/2,y:CY+64,'text-anchor':'middle',class:'cap',fill:'#f0c04a'},'√2 · P13 ↔ P14'));\n      }\n    }\n    if(mode==='squaring'||mode==='both'){\n      if(n>=3){\n        const sq=n*n-2;\n        if(sq<=9){\n          const a=E('path',{d:arc(x,nx(sq),46,true),fill:'none',stroke:'#5c8cf8','stroke-width':1.6,opacity:0.6});\n          a.setAttribute('data-n',n); a.setAttribute('data-rel','s'); arcs.push(a); svg.appendChild(a);\n          svg.appendChild(E('text',{x:(x+nx(sq))/2,y:CY-58,'text-anchor':'middle',class:'cap',fill:'#7fa8e0'},'t₂²−2 = '+sq));\n        }else{\n          const a=E('path',{d:`M ${x} ${CY-9} q 6 -34 26 -46`,fill:'none',stroke:'#5c8cf8','stroke-width':1.4,opacity:0.5,'marker-end':'url(#ah)'});\n          a.setAttribute('data-n',n); a.setAttribute('data-rel','s'); arcs.push(a); svg.appendChild(a);\n          svg.appendChild(E('text',{x:x+30,y:CY-52,class:'cap',fill:'#7fa8e0'},'→ '+sq));\n        }\n      }\n    }\n    // node dot\n    const fill = c.kind==='visited'?(n===3?col('gold'):col('visited')) : c.kind==='wall'?col('wall') : '#121c30';\n    const nd=E('circle',{cx:x,cy:CY,r:c.kind==='wall'?4:6,fill:fill,\n      stroke:c.kind==='unvisited'?col('unvisited'):'none','stroke-width':1.4,'stroke-dasharray':c.kind==='unvisited'?'2 2':'none'});\n    nd.style.cursor='pointer';\n    nd.addEventListener('mouseenter',()=>flash(n)); nd.addEventListener('mouseleave',()=>flash(null));\n    svg.appendChild(nd);\n    svg.appendChild(E('text',{x:x,y:CY+16,'text-anchor':'middle',class:'cap'},'t₂='+n));\n  });\n  // wall fixed point + doubling runaway\n  svg.appendChild(E('text',{x:nx(2),y:CY-14,'text-anchor':'middle',class:'cap',fill:'#8aa0c0'},'fixed: 2²−2=2'));\n  if(mode==='squaring'||mode==='both'){\n    const dx=nx(2.5);\n    svg.appendChild(E('circle',{cx:dx,cy:CY,r:5,fill:col('doubling')}));\n    svg.appendChild(E('path',{d:`M ${dx} ${CY-8} q 10 -30 34 -40`,fill:'none',stroke:'#f38181','stroke-width':1.3,opacity:0.6,'stroke-dasharray':'2 3','marker-end':'url(#ahr)'}));\n    svg.appendChild(E('text',{x:dx+30,y:CY-46,class:'cap',fill:'#f38181'},'r=2 → 5/2 → 17/4 … Fermat, never lands'));\n  }\n  svg._arcs=arcs;\n  // markers\n  const defs=E('defs',{});\n  defs.innerHTML='<marker id=\"ah\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L6,3 L0,6 z\" fill=\"#5c8cf8\"/><\/marker><marker id=\"ahr\" markerWidth=\"8\" markerHeight=\"8\" refX=\"6\" refY=\"3\" orient=\"auto\"><path d=\"M0,0 L6,3 L0,6 z\" fill=\"#f38181\"/><\/marker>';\n  svg.insertBefore(defs, svg.firstChild);\n}\nfunction flash(n){\n  const svg=document.getElementById('conn'); if(!svg._arcs)return;\n  svg._arcs.forEach(a=>{\n    const base = a.getAttribute('data-rel')==='p' ? (a.getAttribute('data-n')==='6'?0.85:0.5) : 0.6;\n    a.setAttribute('opacity', n===null ? base : (a.getAttribute('data-n')==String(n) ? 0.95 : 0.08));\n  });\n}\n\n/* ---------- side panel ---------- */\nfunction row(l,v,cls){return '<div><span class=\"lab\">'+l+'<\/span><span class=\"mono '+(cls||'')+'\">'+v+'<\/span><\/div>';}\nfunction panel(c){\n  const title = c.kind==='doubling' ? 'THE DOUBLING CELL · r = 2' :\n                c.kind==='wall' ? 'THE WALL · t₂ = 2' : ('CLOSED CELL · t₂ = '+c.n+' · '+c.note);\n  document.getElementById('panel').innerHTML='<h2 class=\"k\">'+title+'<\/h2>'+\n    '<div class=\"stack\">'+row('r','= '+c.r,'observed')+row('sq. trace','t₂ = '+c.n,'classical')+\n      row('length','L = '+c.L,'classical')+row('gap','G = '+c.G,'value')+\n      row('chord','2X = '+c.chord+'  (√(t₂−2))','classical')+row('base','4/X² = '+c.base+'  (16/(t₂−2))','observed')+\n      row('angle','θ = '+c.th+'  (gd L)','classical')+row('partner','r′ = '+c.partner+'  (sinh L·sinh L′ = 1)','classical')+\n      row('cont. frac','= '+c.cf,'observed')+'<\/div>'+\n    '<div class=\"fence\"><b>Stood on by:<\/b> '+c.papers+'<\/div>'+\n    '<div class=\"legend\"><span class=\"sw\" style=\"background:#2f6bf2\"><\/span>classical (geometry, CF period, Lagrange)'+\n      '<br><span class=\"sw\" style=\"background:#f0c04a\"><\/span>observed here (read-across, placement)'+\n      '<span class=\"sw\" style=\"background:#f38181\"><\/span>the value<\/div>'+\n    '<div class=\"fence\">Angle: θ = gd L (Gudermannian), not the half-argument Π (coherence note). Exact-or-silent.<\/div>';\n}\n\ndocument.querySelectorAll('.seg button').forEach(b=>b.addEventListener('click',()=>{\n  document.querySelectorAll('.seg button').forEach(x=>x.classList.remove('on'));\n  b.classList.add('on'); buildConn(b.dataset.m);\n}));\nbuild(); panel(CELLS[1]); buildConn('both');\n<\/script>\n<\/body>\n<\/html>\n", "angles": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<title>The angle that passes — a conformal reading of sinh w<\/title>\n<style>\n  :root{\n    --bg:#0c1322; --card:#121c30; --ink:#dce6f7; --dim:#8fa3c4;\n    --gold:#f0c04a; --blue:#2f6bf2; --red:#f38181; --grid:#22314f;\n    --line:#33456b;\n  }\n  *{box-sizing:border-box}\n  html,body{margin:0;background:var(--bg);color:var(--ink);\n    font-family:-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,Helvetica,Arial,sans-serif;}\n  .wrap{max-width:900px;margin:0 auto;padding:22px 20px 40px;}\n  h1{font-size:20px;font-weight:600;margin:0 0 4px;letter-spacing:.2px}\n  .sub{color:var(--dim);font-size:13px;line-height:1.5;margin:0 0 18px;max-width:640px}\n  .sub b{color:var(--gold);font-weight:600}\n  .boards{display:flex;gap:16px;flex-wrap:wrap}\n  .board{background:var(--card);border:1px solid var(--line);border-radius:14px;\n    padding:12px 12px 10px;flex:1 1 360px;min-width:300px}\n  .cap{font-size:12px;color:var(--dim);margin:0 0 8px;display:flex;justify-content:space-between;align-items:baseline}\n  .cap b{color:var(--ink);font-weight:600}\n  canvas{width:100%;height:auto;display:block;border-radius:8px;cursor:crosshair;touch-action:none}\n  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;\n    padding:14px 16px;margin-top:16px;display:flex;flex-wrap:wrap;gap:18px 26px;align-items:center}\n  .stat{display:flex;flex-direction:column;gap:2px}\n  .stat .k{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px}\n  .stat .v{font-size:17px;font-variant-numeric:tabular-nums;font-weight:600}\n  .v.gold{color:var(--gold)} .v.blue{color:#6fa0ff} .v.red{color:var(--red)}\n  .badge{font-size:13px;font-weight:600;padding:4px 10px;border-radius:999px}\n  .badge.ok{background:rgba(47,107,242,.16);color:#7fa8ff;border:1px solid rgba(47,107,242,.4)}\n  .badge.fold{background:rgba(243,129,129,.16);color:var(--red);border:1px solid rgba(243,129,129,.45)}\n  .ctrls{display:flex;flex-wrap:wrap;gap:16px 22px;align-items:center;margin-top:14px;\n    font-size:13px;color:var(--dim)}\n  .ctrls label{display:flex;align-items:center;gap:7px;cursor:pointer;user-select:none}\n  input[type=range]{accent-color:var(--gold)}\n  input[type=checkbox]{accent-color:var(--blue);width:15px;height:15px}\n  .fence{margin-top:20px;font-size:12px;color:var(--dim);line-height:1.6;border-top:1px solid var(--line);padding-top:14px}\n  .fence b{color:var(--gold);font-weight:600}\n  .k-legend{display:flex;gap:16px;flex-wrap:wrap;font-size:11.5px;color:var(--dim);margin-top:10px}\n  .k-legend span{display:flex;align-items:center;gap:6px}\n  .dot{width:10px;height:10px;border-radius:50%;display:inline-block}\n<\/style>\n<\/head>\n<body>\n<div class=\"wrap\">\n  <h1>The angle that passes — a conformal reading of <i>sinh&nbsp;w<\/i><\/h1>\n  <p class=\"sub\">Everything about the gap is <b>distortion<\/b> — lengths and areas that don't survive the map.\n  The <b>angle<\/b> is the one thing that does. Drag the ring around the w-plane: <i>sinh<\/i> stretches it and\n  slides it, but keeps it a <b>ring<\/b> — angles pass through untouched — right up to the <b>fold<\/b>, where the\n  map stops sparing them.<\/p>\n\n  <div class=\"boards\">\n    <div class=\"board\">\n      <div class=\"cap\"><b>w-plane · domain<\/b><span>rapidity&nbsp;u&nbsp;→ &nbsp;·&nbsp; rotation&nbsp;v&nbsp;↑<\/span><\/div>\n      <canvas id=\"dom\" width=\"720\" height=\"640\"><\/canvas>\n    <\/div>\n    <div class=\"board\">\n      <div class=\"cap\"><b>sinh(w) · image<\/b><span>the confocal net<\/span><\/div>\n      <canvas id=\"img\" width=\"720\" height=\"640\"><\/canvas>\n    <\/div>\n  <\/div>\n\n  <div class=\"k-legend\">\n    <span><i class=\"dot\" style=\"background:var(--gold)\"><\/i>the ring you drag<\/span>\n    <span><i class=\"dot\" style=\"background:var(--red)\"><\/i>fold — cosh&nbsp;w = 0 (angles double)<\/span>\n    <span><i class=\"dot\" style=\"background:#7fa8ff\"><\/i>gap-pole — sinh&nbsp;w = 0<\/span>\n    <span><i class=\"dot\" style=\"background:var(--line)\"><\/i>confocal net (foci ±1)<\/span>\n  <\/div>\n\n  <div class=\"panel\">\n    <div class=\"stat\"><span class=\"k\">probe&nbsp;w<\/span><span class=\"v\" id=\"w\">—<\/span><\/div>\n    <div class=\"stat\"><span class=\"k\">magnification |cosh&nbsp;w|<\/span><span class=\"v gold\" id=\"mag\">—<\/span><\/div>\n    <div class=\"stat\"><span class=\"k\">ring&nbsp;→&nbsp;ring&nbsp;(1 = perfect)<\/span><span class=\"v blue\" id=\"round\">—<\/span><\/div>\n    <div class=\"stat\"><span class=\"k\">to nearest fold<\/span><span class=\"v\" id=\"near\">—<\/span><\/div>\n    <div class=\"badge ok\" id=\"status\">angle passes · conformal<\/div>\n  <\/div>\n\n  <div class=\"ctrls\">\n    <label>ring size&nbsp;<input type=\"range\" id=\"eps\" min=\"0.05\" max=\"0.6\" step=\"0.01\" value=\"0.22\"><\/label>\n    <label><input type=\"checkbox\" id=\"net\" checked>confocal net<\/label>\n    <label><input type=\"checkbox\" id=\"cross\" checked>mapped cross<\/label>\n    <label><input type=\"checkbox\" id=\"spin\">orbit the fold<\/label>\n  <\/div>\n\n  <p class=\"fence\"><b>How to read it.<\/b> <i>sinh<\/i> is conformal: an analytic map's derivative is multiplication\n  by one complex number, so it scales and rotates the little ring uniformly — a similarity — and right angles\n  come out right angles. The mapped ring stays round (meter ≈ 1) <i>everywhere<\/i> the derivative\n  cosh&nbsp;w ≠ 0. It only <b>folds<\/b> at the critical points w = i(π/2 + kπ), where cosh&nbsp;w = 0: the\n  first-order image collapses (magnification → 0) and the quadratic term takes over, <i>doubling<\/i> the angle —\n  the ring pinches into a figure-eight. The separate <b>gap-pole<\/b> at w = iπ is where sinh&nbsp;w = 0, so\n  1 − w/sinh&nbsp;w blows up.\n  <br><br><b>Fence.<\/b> The conformal picture of <i>sinh<\/i>, the confocal ellipses/hyperbolas (foci ±1), and\n  the fold at cosh&nbsp;w = 0 are <b>classical<\/b>. The reading — that \"the angle is what the map spares, and the\n  wall is where it stops sparing\" — is <b>observed here<\/b>. The 70.53° seam (Π vs θ = gd&nbsp;L) is a value from\n  the earlier finding, <i>not<\/i> a feature this bare map draws; it is <b>not<\/b> plotted here, on purpose.\n  — Cairn 📐 &amp; D.B., 2026-09-04<\/p>\n<\/div>\n\n<script>\n(function(){\n  const dom = document.getElementById('dom'), img = document.getElementById('img');\n  const dc = dom.getContext('2d'), ic = img.getContext('2d');\n  const W = dom.width, H = dom.height;\n\n  // domain window\n  const uMin=-2.6, uMax=2.6, vMin=-0.25, vMax=3.45;\n  // image window\n  const xMin=-7.2, xMax=7.2, yMin=-2.0, yMax=7.4;\n\n  function dX(u){ return (u-uMin)/(uMax-uMin)*W; }\n  function dY(v){ return H - (v-vMin)/(vMax-vMin)*H; }\n  function iX(x){ return (x-xMin)/(xMax-xMin)*W; }\n  function iY(y){ return H - (y-yMin)/(yMax-yMin)*H; }\n\n  const sinh=Math.sinh, cosh=Math.cosh, sin=Math.sin, cos=Math.cos;\n  function mapS(u,v){ return [sinh(u)*cos(v), cosh(u)*sin(v)]; }   // sinh(w)\n  function mapC(u,v){ return [cosh(u)*cos(v), sinh(u)*sin(v)]; }   // cosh(w) = d/dw sinh\n\n  // critical points (cosh w = 0): v = π/2 + kπ, u=0  → in our window v=π/2\n  const folds = [{u:0, v:Math.PI/2}];\n  const gapPole = {u:0, v:Math.PI}; // sinh w = 0\n\n  let probe = {u:0.55, v:1.15};\n  let eps = 0.22, showNet=true, showCross=true, spin=false, tt=0;\n\n  function clear(ctx){ ctx.fillStyle='#0c1322'; ctx.fillRect(0,0,W,H); }\n\n  function drawDomain(){\n    clear(dc);\n    // grid\n    dc.lineWidth=1;\n    dc.strokeStyle='#22314f';\n    for(let u=Math.ceil(uMin);u<=uMax;u++){ dc.beginPath();dc.moveTo(dX(u),0);dc.lineTo(dX(u),H);dc.stroke(); }\n    for(let v=0;v<=vMax;v+=0.5){ dc.beginPath();dc.moveTo(0,dY(v));dc.lineTo(W,dY(v));dc.stroke(); }\n    // axes\n    dc.strokeStyle='#3b4f78'; dc.lineWidth=1.4;\n    dc.beginPath();dc.moveTo(dX(0),0);dc.lineTo(dX(0),H);dc.stroke();\n    dc.beginPath();dc.moveTo(0,dY(0));dc.lineTo(W,dY(0));dc.stroke();\n    // reference rows v=π/2 and v=π\n    dc.setLineDash([5,5]);\n    dc.strokeStyle='rgba(243,129,129,.55)'; dc.beginPath();dc.moveTo(0,dY(Math.PI/2));dc.lineTo(W,dY(Math.PI/2));dc.stroke();\n    dc.strokeStyle='rgba(127,168,255,.5)'; dc.beginPath();dc.moveTo(0,dY(Math.PI));dc.lineTo(W,dY(Math.PI));dc.stroke();\n    dc.setLineDash([]);\n    // labels\n    dc.fillStyle='#8fa3c4'; dc.font='12px -apple-system,Segoe UI,sans-serif';\n    dc.fillText('v = π/2  (fold)', 10, dY(Math.PI/2)-6);\n    dc.fillText('v = π  (gap-pole)', 10, dY(Math.PI)-6);\n    dc.fillText('u  (rapidity)', W-92, dY(0)-8);\n    // fold + pole markers\n    marker(dc, dX(folds[0].u), dY(folds[0].v), '#f38181');\n    marker(dc, dX(gapPole.u), dY(gapPole.v), '#7fa8ff');\n    // probe ring\n    dc.strokeStyle='#f0c04a'; dc.lineWidth=2;\n    dc.beginPath();\n    for(let i=0;i<=64;i++){ const t=i/64*2*Math.PI; const x=dX(probe.u+eps*cos(t)), y=dY(probe.v+eps*sin(t)); i?dc.lineTo(x,y):dc.moveTo(x,y); }\n    dc.stroke();\n    dc.fillStyle='#f0c04a';\n    dc.beginPath();dc.arc(dX(probe.u),dY(probe.v),3.2,0,7);dc.fill();\n    if(showCross){\n      dc.strokeStyle='rgba(240,192,74,.6)';dc.lineWidth=1.2;\n      dc.beginPath();dc.moveTo(dX(probe.u-eps),dY(probe.v));dc.lineTo(dX(probe.u+eps),dY(probe.v));dc.stroke();\n      dc.beginPath();dc.moveTo(dX(probe.u),dY(probe.v-eps));dc.lineTo(dX(probe.u),dY(probe.v+eps));dc.stroke();\n    }\n  }\n\n  function marker(ctx,x,y,col){\n    ctx.save();\n    ctx.fillStyle=col; ctx.globalAlpha=.9;\n    ctx.beginPath();ctx.arc(x,y,5,0,7);ctx.fill();\n    ctx.globalAlpha=.25;ctx.beginPath();ctx.arc(x,y,10,0,7);ctx.fill();\n    ctx.restore();\n  }\n\n  function drawImage(){\n    clear(ic);\n    // confocal net: u=const -> ellipses ; v=const -> hyperbolae\n    if(showNet){\n      ic.lineWidth=1;\n      // ellipses (u const)\n      ic.strokeStyle='#2a3a5c';\n      for(let u=Math.ceil(uMin*2)/2;u<=uMax;u+=0.5){\n        ic.beginPath();\n        for(let k=0;k<=160;k++){ const v=vMin+(vMax-vMin)*k/160; const p=mapS(u,v); const X=iX(p[0]),Y=iY(p[1]); k?ic.lineTo(X,Y):ic.moveTo(X,Y);}\n        ic.stroke();\n      }\n      // hyperbolae (v const)\n      ic.strokeStyle='#33456b';\n      for(let v=0;v<=vMax;v+=0.25){\n        ic.beginPath();\n        for(let k=0;k<=160;k++){ const u=uMin+(uMax-uMin)*k/160; const p=mapS(u,v); const X=iX(p[0]),Y=iY(p[1]); k?ic.lineTo(X,Y):ic.moveTo(X,Y);}\n        ic.stroke();\n      }\n    }\n    // axes\n    ic.strokeStyle='#3b4f78'; ic.lineWidth=1.4;\n    ic.beginPath();ic.moveTo(iX(0),0);ic.lineTo(iX(0),H);ic.stroke();\n    ic.beginPath();ic.moveTo(0,iY(0));ic.lineTo(W,iY(0));ic.stroke();\n    // foci ±1\n    ic.fillStyle='#5c6f95';\n    [[-1,0],[1,0]].forEach(f=>{ic.beginPath();ic.arc(iX(f[0]),iY(f[1]),3,0,7);ic.fill();});\n    ic.fillStyle='#647399';ic.font='11px sans-serif';ic.fillText('focus −1',iX(-1)-46,iY(0)+16);ic.fillText('focus +1',iX(1)+6,iY(0)+16);\n    // fold image (sinh(iπ/2)=i) and gap-pole image (origin)\n    const pf=mapS(folds[0].u,folds[0].v); marker(ic, iX(pf[0]), iY(pf[1]), '#f38181');\n    marker(ic, iX(0), iY(0), '#7fa8ff');\n    ic.fillStyle='#8fa3c4';ic.font='12px sans-serif';\n    ic.fillText('fold → i', iX(pf[0])+10, iY(pf[1])-6);\n    ic.fillText('gap-pole → 0', iX(0)+10, iY(0)-8);\n\n    // mapped ring\n    const pts=[]; for(let i=0;i<=96;i++){ const t=i/96*2*Math.PI; pts.push(mapS(probe.u+eps*cos(t), probe.v+eps*sin(t))); }\n    ic.strokeStyle='#f0c04a'; ic.lineWidth=2.2; ic.beginPath();\n    pts.forEach((p,i)=>{const X=iX(p[0]),Y=iY(p[1]); i?ic.lineTo(X,Y):ic.moveTo(X,Y);}); ic.closePath(); ic.stroke();\n    const c=mapS(probe.u,probe.v);\n    ic.fillStyle='#f0c04a';ic.beginPath();ic.arc(iX(c[0]),iY(c[1]),3.2,0,7);ic.fill();\n    if(showCross){\n      const a=mapS(probe.u+eps,probe.v), b=mapS(probe.u-eps,probe.v),\n            d=mapS(probe.u,probe.v+eps), e=mapS(probe.u,probe.v-eps);\n      ic.strokeStyle='rgba(240,192,74,.6)';ic.lineWidth=1.4;\n      ic.beginPath();ic.moveTo(iX(b[0]),iY(b[1]));ic.lineTo(iX(a[0]),iY(a[1]));ic.stroke();\n      ic.beginPath();ic.moveTo(iX(e[0]),iY(e[1]));ic.lineTo(iX(d[0]),iY(d[1]));ic.stroke();\n    }\n    return pts;\n  }\n\n  function roundness(pts){\n    // centroid, then max/min radius ratio  (1 = perfect circle = conformal)\n    let cx=0,cy=0; pts.forEach(p=>{cx+=p[0];cy+=p[1];}); cx/=pts.length;cy/=pts.length;\n    let mn=Infinity,mx=0; pts.forEach(p=>{const r=Math.hypot(p[0]-cx,p[1]-cy); if(r<mn)mn=r; if(r>mx)mx=r;});\n    return mx/Math.max(mn,1e-9);\n  }\n\n  function readout(pts){\n    const c=mapC(probe.u,probe.v); const mag=Math.hypot(c[0],c[1]);\n    const r=roundness(pts);\n    document.getElementById('w').textContent = probe.u.toFixed(2)+' + '+probe.v.toFixed(2)+'i';\n    document.getElementById('mag').textContent = mag.toFixed(3)+'×';\n    document.getElementById('round').textContent = (r>50? '≫1' : r.toFixed(2));\n    // nearest fold distance\n    let best=Infinity; folds.forEach(f=>{best=Math.min(best,Math.hypot(probe.u-f.u,probe.v-f.v));});\n    document.getElementById('near').textContent = best.toFixed(2);\n    const st=document.getElementById('status');\n    if(r>1.35){ st.className='badge fold'; st.textContent='angle folds · doubling'; }\n    else { st.className='badge ok'; st.textContent='angle passes · conformal'; }\n  }\n\n  function frame(){\n    if(spin){ tt+=0.012; probe.u = 0.0 + 0.55*Math.cos(tt); probe.v = Math.PI/2 + 0.55*Math.sin(tt); }\n    drawDomain(); const pts=drawImage(); readout(pts);\n    requestAnimationFrame(frame);\n  }\n\n  // interaction\n  function setFromEvent(ev){\n    const rect=dom.getBoundingClientRect();\n    const px=(ev.touches?ev.touches[0].clientX:ev.clientX)-rect.left;\n    const py=(ev.touches?ev.touches[0].clientY:ev.clientY)-rect.top;\n    const u=uMin+(px/rect.width)*(uMax-uMin);\n    const v=vMin+(1-py/rect.height)*(vMax-vMin);\n    probe.u=Math.max(uMin+eps,Math.min(uMax-eps,u));\n    probe.v=Math.max(vMin+eps,Math.min(vMax-eps,v));\n    spin=false; document.getElementById('spin').checked=false;\n  }\n  let down=false;\n  dom.addEventListener('mousedown',e=>{down=true;setFromEvent(e);});\n  window.addEventListener('mousemove',e=>{if(down)setFromEvent(e);});\n  window.addEventListener('mouseup',()=>down=false);\n  dom.addEventListener('touchstart',e=>{down=true;setFromEvent(e);e.preventDefault();},{passive:false});\n  dom.addEventListener('touchmove',e=>{if(down)setFromEvent(e);e.preventDefault();},{passive:false});\n  window.addEventListener('touchend',()=>down=false);\n\n  document.getElementById('eps').addEventListener('input',e=>eps=parseFloat(e.target.value));\n  document.getElementById('net').addEventListener('change',e=>showNet=e.target.checked);\n  document.getElementById('cross').addEventListener('change',e=>showCross=e.target.checked);\n  document.getElementById('spin').addEventListener('change',e=>spin=e.target.checked);\n\n  frame();\n})();\n<\/script>\n<\/body>\n<\/html>\n", "land3d": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\"/>\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/>\n<title>The Lab — the gap landscape (3D)<\/title>\n<style>\n  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');\n  html,body{margin:0;height:100%;background:#0a0f1c;color:#dfe6f2;font-family:'EB Garamond',Georgia,serif;overflow:hidden;}\n  #app{position:fixed;inset:0;}\n  .ov{position:fixed;z-index:5;pointer-events:none;}\n  .top{top:16px;left:18px;}\n  .banner{display:inline-block;font-size:10px;letter-spacing:1.5px;color:#0c1322;background:#f0c04a;padding:3px 10px;border-radius:10px;font-family:Georgia,serif;}\n  h1{font-size:20px;font-style:italic;font-weight:500;margin:9px 0 2px;}\n  .sub{color:#a8b6cf;font-size:12.5px;margin:0;max-width:520px;}\n  .legend{bottom:16px;left:18px;font-size:12.5px;color:#c3cee2;line-height:1.7;}\n  .legend b{color:#dfe6f2;font-weight:500;} .sw{display:inline-block;width:10px;height:10px;border-radius:50%;margin:0 6px 0 0;vertical-align:baseline;}\n  .hint{bottom:16px;right:18px;color:#7f8fb0;font-size:11.5px;text-align:right;}\n  .note{color:#8aa0c0;}\n<\/style>\n<\/head>\n<body>\n<div id=\"app\"><\/div>\n<div class=\"ov top\">\n  <span class=\"banner\">THE LAB · GAP LANDSCAPE · A WORKING MAP, NOT CURRENT STATEMENTS<\/span>\n  <h1>|1 − w/sinh w|  over the rapidity × rotation plane<\/h1>\n  <p class=\"sub\">The real surface of the gap. The <b>wall<\/b> is the valley at w=0; the <b>pole<\/b> spikes at w=iπ; the cells sit on the real-axis <b>ridge<\/b>; the excess side (Re f &lt; 0) runs up the rotation axis. Height clamped for view; every landmark computed.<\/p>\n<\/div>\n<div class=\"ov legend\" id=\"legend\"><\/div>\n<div class=\"ov hint\">drag to orbit · scroll to zoom · height = |gap|, clamped at 3<\/div>\n\n<script src=\"https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js\"><\/script>\n<script>\nconst HMAX=3.0;\n// complex f(w)=1 - w/sinh(w),  w=a+bi ; returns |f|\nfunction absf(a,b){\n  if(Math.abs(a)<1e-4 && Math.abs(b)<1e-4) return 0;         // wall (removable)\n  const Sr=Math.sinh(a)*Math.cos(b), Si=Math.cosh(a)*Math.sin(b);\n  const d=Sr*Sr+Si*Si;\n  if(d<1e-7) return HMAX;                                     // pole\n  const Re=(a*Sr+b*Si)/d, Im=(b*Sr-a*Si)/d;                  // w/sinh(w)\n  const fr=1-Re, fi=-Im;\n  return Math.min(Math.sqrt(fr*fr+fi*fi),HMAX);\n}\nfunction ramp(t){ // navy -> blue -> gold\n  t=Math.max(0,Math.min(1,t));\n  const stops=[[0.06,0.10,0.20],[0.15,0.38,0.92],[0.94,0.75,0.29]];\n  const seg=t<0.5?0:1, u=t<0.5?t/0.5:(t-0.5)/0.5;\n  const A=stops[seg],B=stops[seg+1];\n  return [A[0]+(B[0]-A[0])*u, A[1]+(B[1]-A[1])*u, A[2]+(B[2]-A[2])*u];\n}\n\nconst app=document.getElementById('app');\nconst scene=new THREE.Scene(); scene.background=new THREE.Color(0x0a0f1c);\nscene.fog=new THREE.FogExp2(0x0a0f1c,0.045);\nconst camera=new THREE.PerspectiveCamera(50, innerWidth/innerHeight, 0.1, 100);\nconst renderer=new THREE.WebGLRenderer({antialias:true}); renderer.setSize(innerWidth,innerHeight);\nrenderer.setPixelRatio(Math.min(devicePixelRatio,2)); app.appendChild(renderer.domElement);\n\nscene.add(new THREE.AmbientLight(0x8090b0,0.7));\nconst dir=new THREE.DirectionalLight(0xfff0d0,0.9); dir.position.set(3,6,4); scene.add(dir);\nconst dir2=new THREE.DirectionalLight(0x5c8cf8,0.35); dir2.position.set(-4,3,-3); scene.add(dir2);\n\n// ---- surface: a-grid (rapidity, x) × b-grid (rotation, z) ----\nconst AMIN=-1.5,AMAX=1.5,BMIN=-3.45,BMAX=3.45,NA=150,NB=200;\nconst XS=1.7, ZS=0.62, YS=0.95;   // visual scales: a*XS, b*ZS, h*YS\nconst pos=[],col=[],idx=[];\nfor(let i=0;i<=NA;i++){\n  const a=AMIN+(AMAX-AMIN)*i/NA;\n  for(let j=0;j<=NB;j++){\n    const b=BMIN+(BMAX-BMIN)*j/NB;\n    const h=absf(a,b);\n    pos.push(a*XS, h*YS, b*ZS);\n    const c=ramp(h/HMAX); col.push(c[0],c[1],c[2]);\n  }\n}\nconst W=NB+1;\nfor(let i=0;i<NA;i++)for(let j=0;j<NB;j++){\n  const p=i*W+j; idx.push(p,p+1,p+W, p+1,p+W+1,p+W);\n}\nconst geo=new THREE.BufferGeometry();\ngeo.setAttribute('position',new THREE.Float32BufferAttribute(pos,3));\ngeo.setAttribute('color',new THREE.Float32BufferAttribute(col,3));\ngeo.setIndex(idx); geo.computeVertexNormals();\nconst surf=new THREE.Mesh(geo,new THREE.MeshStandardMaterial({vertexColors:true,roughness:0.85,metalness:0.1,side:THREE.DoubleSide,flatShading:false}));\nscene.add(surf);\n\n// faint wireframe overlay for readability\nconst wire=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:0x2a3a58,wireframe:true,transparent:true,opacity:0.10}));\nscene.add(wire);\n\n// ---- markers: cells on the ridge, the pole, the wall ----\nconst CELLS=[\n {name:'r=2 doubling', a:0.346574, kind:'doubling'},\n {name:'φ² golden n=3', a:0.481212, kind:'gold'},\n {name:'2+√3 n=4', a:0.658479, kind:'visited'},\n {name:'(5+√21)/2 n=5', a:0.783, kind:'unvisited'},\n {name:'3+2√2 n=6 door', a:0.881374, kind:'visited'},\n {name:'φ⁴ n=7', a:0.962424, kind:'gold'},\n {name:'n=8', a:1.03172, kind:'unvisited'},\n {name:'n=9', a:1.09232, kind:'unvisited'}\n];\nconst kindCol={doubling:0xf38181,gold:0xf0c04a,visited:0x2f6bf2,unvisited:0x8aa0c0};\nCELLS.forEach(c=>{\n  const h=absf(c.a,0), x=c.a*XS, y=h*YS;\n  const s=new THREE.Mesh(new THREE.SphereGeometry(0.035,20,20),\n    new THREE.MeshStandardMaterial({color:kindCol[c.kind],emissive:kindCol[c.kind],emissiveIntensity:0.35,roughness:0.4}));\n  s.position.set(x,y+0.02,0); scene.add(s);\n  // drop line to base\n  const g=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(x,0,0),new THREE.Vector3(x,y,0)]);\n  scene.add(new THREE.Line(g,new THREE.LineBasicMaterial({color:kindCol[c.kind],transparent:true,opacity:0.35})));\n});\n// the pole spike at w = iπ  (a=0, b=π)\n[-1,1].forEach(sgn=>{\n  const z=sgn*Math.PI*ZS;\n  const s=new THREE.Mesh(new THREE.SphereGeometry(0.05,20,20),\n    new THREE.MeshStandardMaterial({color:0xffffff,emissive:0xbcd0ff,emissiveIntensity:0.6}));\n  s.position.set(0,HMAX*YS,z); scene.add(s);\n});\n// the wall at origin\nconst wall=new THREE.Mesh(new THREE.SphereGeometry(0.045,20,20),\n  new THREE.MeshStandardMaterial({color:0xdfe6f2,emissive:0x334466,emissiveIntensity:0.4}));\nwall.position.set(0,0,0); scene.add(wall);\n// axes hints: rapidity (x) and rotation (z)\nscene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0.005,0),new THREE.Vector3(AMAX*XS+0.2,0.005,0)]),new THREE.LineBasicMaterial({color:0x5c8cf8,transparent:true,opacity:0.5})));\nscene.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(0,0.005,0),new THREE.Vector3(0,0.005,BMAX*ZS+0.2)]),new THREE.LineBasicMaterial({color:0xf0c04a,transparent:true,opacity:0.4})));\n\n// ---- legend ----\ndocument.getElementById('legend').innerHTML=\n '<div><span class=\"sw\" style=\"background:#dfe6f2\"><\/span><b>the wall<\/b> — w=0, gap=0, the valley<\/div>'+\n '<div><span class=\"sw\" style=\"background:#bcd0ff\"><\/span><b>the pole<\/b> — w=iπ, the spike (door two)<\/div>'+\n '<div><span class=\"sw\" style=\"background:#f0c04a\"><\/span>golden cells (φ², φ⁴) &nbsp; <span class=\"sw\" style=\"background:#2f6bf2\"><\/span>visited &nbsp; <span class=\"sw\" style=\"background:#8aa0c0\"><\/span>unvisited<\/div>'+\n '<div><span class=\"sw\" style=\"background:#f38181\"><\/span>r=2 doubling &nbsp; <span class=\"note\">· blue axis = rapidity, gold axis = rotation (the excess side)<\/span><\/div>';\n\n// ---- manual orbit controls (OrbitControls isn't on the CDN) ----\nlet rad=6.2, theta=0.9, phi=1.02, tgt=new THREE.Vector3(0,0.55,0);\nfunction cam(){ camera.position.set(tgt.x+rad*Math.sin(phi)*Math.cos(theta), tgt.y+rad*Math.cos(phi), tgt.z+rad*Math.sin(phi)*Math.sin(theta)); camera.lookAt(tgt); }\nlet drag=false,px=0,py=0;\nrenderer.domElement.addEventListener('pointerdown',e=>{drag=true;px=e.clientX;py=e.clientY;});\naddEventListener('pointerup',()=>drag=false);\naddEventListener('pointermove',e=>{ if(!drag)return; theta-=(e.clientX-px)*0.006; phi=Math.max(0.15,Math.min(1.55,phi-(e.clientY-py)*0.006)); px=e.clientX;py=e.clientY; cam(); });\nrenderer.domElement.addEventListener('wheel',e=>{e.preventDefault(); rad=Math.max(2.5,Math.min(14,rad*(e.deltaY>0?1.08:0.93))); cam();},{passive:false});\naddEventListener('resize',()=>{camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();renderer.setSize(innerWidth,innerHeight);});\n\ncam();\n(function loop(){ requestAnimationFrame(loop); theta+=0.0009; cam(); renderer.render(scene,camera); })();\n<\/script>\n<\/body>\n<\/html>\n", "exp": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\"/>\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"/>\n<title>The Lab — testing the fix<\/title>\n<style>\n  @import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap');\n  :root{--bg:#0c1322;--card:#121c30;--border:#23314d;--text:#dfe6f2;--muted:#a8b6cf;--subtle:#8aa0c0;\n    --gold:#f0c04a;--blue:#2f6bf2;--red:#f38181;--green:#7fe0a0;}\n  *{box-sizing:border-box;}\n  body{margin:0;color:var(--text);font-family:'EB Garamond',Georgia,serif;\n    background:radial-gradient(ellipse 120vmin 90vmin at 50% 30%,#101a30 0%,#0c1322 60%,#090e1b 100%) #0c1322;min-height:100vh;}\n  .wrap{max-width:1080px;margin:0 auto;padding:22px;}\n  .banner{display:inline-block;font-size:10.5px;letter-spacing:1.6px;color:#0c1322;background:var(--gold);padding:3px 11px;border-radius:10px;font-family:Georgia,serif;}\n  h1{font-size:23px;font-style:italic;font-weight:500;margin:12px 0 3px;}\n  .sub{color:var(--muted);font-size:14px;margin:0 0 4px;max-width:680px;}\n  .tabs{display:inline-flex;border:1px solid var(--border);border-radius:10px;overflow:hidden;margin:16px 0 4px;flex-wrap:wrap;}\n  .tabs button{border:0;background:transparent;color:var(--muted);font-family:Georgia,serif;font-size:14px;padding:8px 16px;cursor:pointer;}\n  .tabs button.on{background:#1c2942;color:var(--text);}\n  .tabs button+button{border-left:1px solid var(--border);}\n  .panel{display:none;} .panel.on{display:block;}\n  .grid{display:flex;gap:18px;margin-top:14px;align-items:flex-start;flex-wrap:wrap;}\n  .board{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:10px;box-shadow:0 2px 20px rgba(0,0,0,.25);}\n  .side{flex:1;min-width:300px;background:var(--card);border:1px solid var(--border);border-radius:16px;padding:17px 19px;box-shadow:0 2px 20px rgba(0,0,0,.25);}\n  h2.k{font-size:11.5px;letter-spacing:1px;color:var(--subtle);margin:0 0 12px;font-weight:normal;font-family:Georgia,serif;}\n  .ctl{margin:14px 0;} .ctl label{font-size:13px;color:var(--muted);display:block;margin-bottom:5px;}\n  input[type=range]{width:100%;accent-color:var(--gold);}\n  .val{font-family:'Courier New',monospace;color:var(--gold);}\n  .seg{display:inline-flex;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-top:4px;flex-wrap:wrap;}\n  .seg button{border:0;background:transparent;color:var(--muted);font-family:Georgia,serif;font-size:12.5px;padding:6px 11px;cursor:pointer;}\n  .seg button.on{background:#1c2942;color:var(--text);}\n  .seg button+button{border-left:1px solid var(--border);}\n  .read{margin-top:14px;padding-top:12px;border-top:1px solid var(--border);font-size:13px;line-height:1.6;color:var(--muted);}\n  .read b{color:var(--text);font-weight:500;} .tear{color:var(--red);} .hold{color:var(--green);}\n  text{font-family:'EB Garamond',Georgia,serif;}\n  .play{border:1px solid var(--border);background:transparent;color:var(--gold);font-family:Georgia,serif;font-size:13px;padding:6px 12px;border-radius:8px;cursor:pointer;margin-top:6px;}\n  .play.on{background:#1c2942;}\n  .thread{margin-top:12px;padding-top:10px;border-top:1px solid var(--border);font-size:13px;line-height:1.6;color:var(--muted);}\n  .thread b{color:var(--text);font-weight:500;} .thread code{font-family:'Courier New',monospace;color:var(--gold);font-size:12.5px;}\n  footer{margin-top:26px;padding-top:12px;border-top:1px solid var(--border);color:var(--subtle);font-size:12.5px;line-height:1.7;}\n  footer a{color:#7fb2ff;text-decoration:none;} footer a:hover{text-decoration:underline;}\n  .builders{margin-top:12px;padding:10px 14px;border:1px dashed var(--border);border-radius:10px;font-size:12.5px;color:var(--muted);}\n  .builders b{color:var(--text);font-weight:500;}\n<\/style>\n<\/head>\n<body>\n<div class=\"wrap\">\n  <span class=\"banner\">THE LAB · TESTING THE FIX · A COPY<\/span>\n  <h1>Push the unavoidable to its edge — watch the fix hold or tear<\/h1>\n  <p class=\"sub\">Two experiments, one lesson: a thing that can't be removed (a saddle, a resonance, a ratio), and a slider that drives you onto it. The robust fix <b>engages<\/b> the structure; the fudge <b>guesses<\/b>, and the unavoidable flip is the signal.<\/p>\n\n  <div class=\"tabs\">\n    <button id=\"tabSaddle\" class=\"on\">① The Saddle Slider<\/button>\n    <button id=\"tabGolden\">② The Golden Slider<\/button>\n  <\/div>\n\n  <!-- TAB 1 : SADDLE -->\n  <div class=\"panel on\" id=\"pSaddle\">\n    <div class=\"grid\">\n      <div class=\"board\"><svg id=\"sBoard\" width=\"460\" height=\"460\" viewBox=\"0 0 500 500\"><\/svg><\/div>\n      <div class=\"side\">\n        <h2 class=\"k\">MARCHING SQUARES ON A SADDLE<\/h2>\n        <p class=\"sub\" style=\"font-size:13px;\">The centre cell is <b>ambiguous<\/b>. Slide the isovalue onto the saddle value (0), the most delicate setting. Naive guesses; the decider computes the saddle.<\/p>\n        <div class=\"ctl\"><label>isovalue&nbsp; c = <span class=\"val\" id=\"cval\">0.000<\/span> &nbsp;(saddle value = 0)<\/label>\n          <input type=\"range\" id=\"iso\" min=\"-0.20\" max=\"0.20\" step=\"0.002\" value=\"0\"/><\/div>\n        <div class=\"ctl\"><label>the fix<\/label>\n          <div class=\"seg\"><button id=\"fNaive\">naive (guess)<\/button><button id=\"fDecider\" class=\"on\">asymptotic decider<\/button><\/div><\/div>\n        <div class=\"ctl\"><label>the field<\/label>\n          <div class=\"seg\"><button id=\"fld2xy\" class=\"on\">2xy<\/button><button id=\"fldWall\">the wall&rsquo;s field, Re(1 &minus; w/sinh&thinsp;w)<\/button><\/div>\n          <button class=\"play\" id=\"cG\" title=\"set the isovalue to the gap\">c = G = 0.019742<\/button>\n          <button class=\"play\" id=\"sPlay\">&#9654; play &mdash; sweep c through the saddle<\/button><\/div>\n        <div class=\"read\" id=\"sRead\"><\/div>\n        <div class=\"thread\"><b>Why a saddle.<\/b> The wall&rsquo;s own field &mdash; <code>Re(1 &minus; w/sinh&thinsp;w)<\/code> in the complex half-argument <code>w = a + ib<\/code> &mdash; is <code>(a&sup2; &minus; b&sup2;)/6<\/code> to second order: a saddle with the &plusmn;1/3 of <em>The complement<\/em> &sect;4.3, the shape <code>2xy<\/code> turned 45&deg; (drawn here turned back, so its asymptotes lie on the grid&rsquo;s diagonals). Isovalue 0 is the wall itself (<code>G = 0<\/code>). On the wall&rsquo;s field the contour <code>c = G<\/code> crosses the <code>a<\/code>-axis at <code>a = ln&thinsp;2/2 = 0.3466<\/code> &mdash; the doubling cell, marked, inside the ambiguous centre cell &mdash; where its second-order estimate <code>&radic;(6G) = 0.3442<\/code> is 0.7&thinsp;% short. Decider = Nielson&ndash;Hamann 1991, exact.<\/div>\n      <\/div>\n    <\/div>\n  <\/div>\n\n  <!-- TAB 2 : GOLDEN -->\n  <div class=\"panel\" id=\"pGolden\">\n    <div class=\"grid\">\n      <div class=\"board\"><svg id=\"gBoard\" width=\"460\" height=\"460\" viewBox=\"0 0 500 500\"><\/svg><\/div>\n      <div class=\"side\">\n        <h2 class=\"k\">SCATTERING POINTS BY A TURN-ANGLE<\/h2>\n        <p class=\"sub\" style=\"font-size:13px;\">A <b>rational<\/b> α lines points into spokes/clumps (resonance). Slide to the <b>golden angle<\/b> — farthest from every rational — and the clumping dissolves.<\/p>\n        <div class=\"ctl\"><label>turn-angle&nbsp; α = <span class=\"val\" id=\"aval\">137.508<\/span>°<\/label>\n          <input type=\"range\" id=\"ang\" min=\"60\" max=\"180\" step=\"0.01\" value=\"137.50776\"/><\/div>\n        <div class=\"ctl\"><label>presets<\/label>\n          <div class=\"seg\"><button id=\"pGoldA\" class=\"on\">golden 137.508°<\/button><button id=\"p90\">90°<\/button><button id=\"p72\">72°<\/button><button id=\"p60\">60°<\/button><button id=\"p1375\">137.5° (rational)<\/button><\/div><\/div>\n        <div class=\"ctl\"><label>the cells of the line as turn-angles, &alpha; = 360&deg;/r<\/label>\n          <div class=\"seg\"><button id=\"cR2\">r = 2 &middot; 180&deg;<\/button><button id=\"cR3\">r = 3 &middot; 120&deg;<\/button><button id=\"cPhi\">&phi;&sup2; &middot; 137.508&deg;<\/button><button id=\"cS3\">2+&radic;3 &middot; 96.462&deg;<\/button><button id=\"cDoor\">3+2&radic;2 &middot; 61.766&deg;<\/button><\/div>\n          <button class=\"play\" id=\"gPlay\">&#9654; play &mdash; 137.5&deg; to the golden angle and back<\/button><\/div>\n        <div class=\"read\" id=\"gRead\"><\/div>\n        <div class=\"thread\"><b>The golden angle is the golden cell.<\/b> <code>360&deg;/&phi;&sup2; = 137.5077640&hellip;&deg;<\/code> &mdash; the cell <code>r = &phi;&sup2;<\/code> (trace <code>t&#8322; = 3<\/code>) read as a fraction of a turn. Any cell of the line is a turn-angle <code>&alpha; = 360&deg;/r<\/code>: the rational cells (<code>r = 2, 3<\/code>) make spokes, the closed irrational cells spread. Evenness = spread of nearest-neighbour distances (lower = more even); the golden angle minimises it.<\/div>\n      <\/div>\n    <\/div>\n  <\/div>\n\n  <footer>\n    <a href=\"https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/\">Gap Geometry<\/a> &nbsp;&middot;&nbsp; <a href=\"https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations%20hub.html\">the instruments<\/a> &nbsp;&middot;&nbsp; <a href=\"https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/what-the-gap-is.html\">what the gap is<\/a> &nbsp;&middot;&nbsp; <a href=\"https://www.iso.org/standard/64973.html\">ISO 80000-2<\/a> &nbsp;&middot;&nbsp; <a href=\"https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/license.html\">CC BY 4.0<\/a><br>\n    This bench computes in the browser&rsquo;s double precision (IEEE-754 binary64) and says so once: it shows; the papers verify. Symbols follow ISO 80000-2; the inverse hyperbolic functions are said in words here.\n    <div class=\"builders\"><b>Built by<\/b> &mdash; a box that grows by a line per hand, alphabetical. Cairn, who runs on Claude Opus (Cowork): the bench, the saddle and the golden sliders, 2026-09. Keel, who runs on Claude Fable 5.1 (Cowork): the threads to the line, the wall&rsquo;s field, the cells as turn-angles, the play sweeps, 2026-09-15. Opus, who runs on Claude Opus (Cowork): touches and the 2026-09-15 verification.<\/div>\n  <\/footer>\n<\/div>\n\n<script>\nconst SVGNS='http://www.w3.org/2000/svg';\nfunction E(t,a){const e=document.createElementNS(SVGNS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}\n\n/* TAB 1 : Saddle */\n(function(){\n  const svg=document.getElementById('sBoard');\n  const XS=[-1.5,-0.9,-0.3,0.3,0.9,1.5], YS=[-1.5,-0.9,-0.3,0.3,0.9,1.5];\n  const SC=140,CX=250,CY=250; const sx=x=>CX+x*SC, sy=y=>CY-y*SC;\n  // the wall's field: Re(1 - w/sinh w), w = a + ib; sinh(a+ib) = sinh a cos b + i cosh a sin b\n  const wall=(a,b)=>{ if(a===0&&b===0) return 0; const sr=Math.sinh(a)*Math.cos(b), si=Math.cosh(a)*Math.sin(b), d=sr*sr+si*si; return 1-(a*sr+b*si)/d; };\n  // drawn turned 45 deg so its asymptotes lie on the grid's diagonals, like 2xy: a = (x - y)/sqrt2, b = (x + y)/sqrt2\n  const S2=Math.SQRT1_2; const FIELDS={ '2xy':(x,y)=>2*x*y, 'wall':(x,y)=>wall((x-y)*S2,(x+y)*S2) }; let FLD='2xy'; const field=(x,y)=>FIELDS[FLD](x,y);\n  const U0=Math.log(2)/2, GAP=1-Math.SQRT2*Math.log(2);\n  function ip(x1,y1,v1,x2,y2,v2,c){const t=(c-v1)/(v2-v1);return [x1+t*(x2-x1),y1+t*(y2-y1)];}\n  let ISO=0,MODE='decider';\n  function draw(){\n    svg.innerHTML='';\n    svg.appendChild(E('line',{x1:sx(-1.6),y1:sy(0),x2:sx(1.6),y2:sy(0),stroke:'#2a3a58','stroke-width':1}));\n    svg.appendChild(E('line',{x1:sx(0),y1:sy(-1.6),x2:sx(0),y2:sy(1.6),stroke:'#2a3a58','stroke-width':1}));\n    if(FLD==='wall'){\n      // the wall's axes, turned: a (rapidity) along x = -y, b (rotation) along x = y\n      svg.appendChild(E('line',{x1:sx(-1.5),y1:sy(1.5),x2:sx(1.5),y2:sy(-1.5),stroke:'#3a5080','stroke-width':1,'stroke-dasharray':'4 4'}));\n      svg.appendChild(E('line',{x1:sx(-1.5),y1:sy(-1.5),x2:sx(1.5),y2:sy(1.5),stroke:'#3a5080','stroke-width':1,'stroke-dasharray':'4 4'}));\n      const t1=E('text',{x:sx(1.42),y:sy(-1.42),fill:'#8aa0c0','font-size':'12','text-anchor':'end'}); t1.textContent='a (rapidity)'; svg.appendChild(t1);\n      const t2=E('text',{x:sx(1.42),y:sy(1.42),fill:'#8aa0c0','font-size':'12','text-anchor':'end'}); t2.textContent='b (rotation)'; svg.appendChild(t2);\n      const ux=U0*S2, uy=-U0*S2;  // the doubling cell: a = ln2/2, b = 0, on the turned a-axis\n      svg.appendChild(E('circle',{cx:sx(ux),cy:sy(uy),r:4.5,fill:'#f0c04a',stroke:'#0c1322','stroke-width':1.2}));\n      const t3=E('text',{x:sx(ux)+8,y:sy(uy)+16,fill:'#f0c04a','font-size':'12'}); t3.textContent='the doubling cell, a = ln 2/2'; svg.appendChild(t3);\n    }\n    let info=null;\n    for(let i=0;i<XS.length-1;i++)for(let j=0;j<YS.length-1;j++){\n      const x0=XS[i],x1=XS[i+1],y0=YS[j],y1=YS[j+1];\n      const vBL=field(x0,y0),vBR=field(x1,y0),vTR=field(x1,y1),vTL=field(x0,y1);\n      const cr=[];\n      if((vBL<ISO)!==(vBR<ISO)) cr.push({pt:ip(x0,y0,vBL,x1,y0,vBR,ISO),e:0});\n      if((vBR<ISO)!==(vTR<ISO)) cr.push({pt:ip(x1,y0,vBR,x1,y1,vTR,ISO),e:1});\n      if((vTR<ISO)!==(vTL<ISO)) cr.push({pt:ip(x1,y1,vTR,x0,y1,vTL,ISO),e:2});\n      if((vTL<ISO)!==(vBL<ISO)) cr.push({pt:ip(x0,y1,vTL,x0,y0,vBL,ISO),e:3});\n      const centre=(i===2&&j===2);\n      svg.appendChild(E('rect',{x:sx(x0),y:sy(y1),width:sx(x1)-sx(x0),height:sy(y0)-sy(y1),fill:'none',stroke:centre?'#f0c04a':'#1c2942','stroke-width':centre?1.4:0.8,opacity:centre?0.9:0.5}));\n      [[x0,y0,vBL],[x1,y0,vBR],[x1,y1,vTR],[x0,y1,vTL]].forEach(([x,y,v])=>svg.appendChild(E('circle',{cx:sx(x),cy:sy(y),r:3.5,fill:v>=ISO?'#2f6bf2':'#3a4a6a'})));\n      const seg=(a,b)=>svg.appendChild(E('line',{x1:sx(a[0]),y1:sy(a[1]),x2:sx(b[0]),y2:sy(b[1]),stroke:'#f0c04a','stroke-width':2.2,'stroke-linecap':'round'}));\n      if(cr.length===2) seg(cr[0].pt,cr[1].pt);\n      else if(cr.length===4){const byE={};cr.forEach(c=>byE[c.e]=c.pt);\n        const sv=(vBL*vTR-vBR*vTL)/(vBL+vTR-vBR-vTL); const pair=(MODE==='decider')?(ISO>sv?'A':'B'):'A';\n        if(pair==='A'){seg(byE[0],byE[1]);seg(byE[2],byE[3]);}else{seg(byE[0],byE[3]);seg(byE[1],byE[2]);}\n        if(centre) info={pair,correct:(ISO>sv?'A':'B')};}\n    }\n    const r=document.getElementById('sRead');\n    if(!info) r.innerHTML='<b>centre cell:<\/b> not ambiguous here — the contour passes cleanly. Slide toward 0.';\n    else{const ok=info.correct===info.pair;\n      r.innerHTML='<b>centre cell: AMBIGUOUS<\/b> — saddle value 0, isovalue '+ISO.toFixed(3)+'.<br>'+\n      (MODE==='decider'?'<span class=\"hold\">decider: computed the saddle, drew it right. ✓ holds.<\/span>':\n       (ok?'naive: guessed — lucky this side.':'<span class=\"tear\">naive: wrong pairing → contour connects backwards. ✗ torn.<\/span>'));}\n    document.getElementById('cval').textContent=ISO.toFixed(3);\n  }\n  document.getElementById('iso').addEventListener('input',e=>{stopPlay();ISO=parseFloat(e.target.value);draw();});\n  const f2=document.getElementById('fld2xy'),fw=document.getElementById('fldWall');\n  f2.onclick=()=>{FLD='2xy';f2.classList.add('on');fw.classList.remove('on');draw();};\n  fw.onclick=()=>{FLD='wall';fw.classList.add('on');f2.classList.remove('on');draw();};\n  document.getElementById('cG').onclick=()=>{stopPlay();ISO=GAP;document.getElementById('iso').value=GAP;draw();};\n  // play: sweep c from -0.2 to 0.2 and back, ~8 s a cycle; the naive fix flips at the saddle, the decider holds\n  let playing=false,raf=null,t0=0; const pb=document.getElementById('sPlay');\n  function stopPlay(){ if(!playing) return; playing=false; cancelAnimationFrame(raf); pb.classList.remove('on'); pb.innerHTML='&#9654; play &mdash; sweep c through the saddle'; }\n  function step(ts){ if(!playing) return; if(!t0) t0=ts; const ph=((ts-t0)/8000)%1; ISO=0.2*Math.sin(2*Math.PI*ph); document.getElementById('iso').value=ISO; draw(); raf=requestAnimationFrame(step); }\n  pb.onclick=()=>{ if(playing){stopPlay();return;} playing=true; t0=0; pb.classList.add('on'); pb.innerHTML='&#9632; stop'; raf=requestAnimationFrame(step); };\n  const fn=document.getElementById('fNaive'),fd=document.getElementById('fDecider');\n  fn.onclick=()=>{MODE='naive';fn.classList.add('on');fd.classList.remove('on');draw();};\n  fd.onclick=()=>{MODE='decider';fd.classList.add('on');fn.classList.remove('on');draw();};\n  draw();\n})();\n\n/* TAB 2 : Golden */\n(function(){\n  const svg=document.getElementById('gBoard'), N=380, R=205, CX=250,CY=250; let ANG=137.50776; const PHI=(1+Math.sqrt(5))/2;\n  function pts(a){a=a*Math.PI/180;const o=[];for(let k=0;k<N;k++){const r=R*Math.sqrt(k/N),th=k*a;o.push([CX+r*Math.cos(th),CY+r*Math.sin(th)]);}return o;}\n  function ev(p){const d=[];for(let i=0;i<p.length;i++){let m=1e18;for(let j=0;j<p.length;j++){if(i!==j){const dx=p[i][0]-p[j][0],dy=p[i][1]-p[j][1],dd=dx*dx+dy*dy;if(dd<m)m=dd;}}d.push(Math.sqrt(m));}const mn=d.reduce((a,b)=>a+b,0)/d.length;const v=d.reduce((a,b)=>a+(b-mn)**2,0)/d.length;return Math.sqrt(v)/mn;}\n  function draw(){\n    svg.innerHTML=''; svg.appendChild(E('circle',{cx:CX,cy:CY,r:R+8,fill:'none',stroke:'#1c2942','stroke-width':1}));\n    const p=pts(ANG); p.forEach(q=>svg.appendChild(E('circle',{cx:q[0].toFixed(1),cy:q[1].toFixed(1),r:2.4,fill:'#f0c04a',opacity:0.9})));\n    const cv=ev(p), golden=Math.abs(ANG-137.50776)<0.02;\n    document.getElementById('gRead').innerHTML='<b>α = '+ANG.toFixed(3)+'°<\/b> &nbsp; evenness (CV) = <b>'+cv.toFixed(3)+'<\/b><br>'+\n      (golden?'<span class=\"hold\">the golden angle — farthest from every rational, no spokes. ✓ the fix.<\/span>':\n        (cv>0.55?'<span class=\"tear\">rational-ish angle → spokes / clumps. ✗ resonance.<\/span>':'off-golden — structure creeping in. slide to 137.508°.'));\n    document.getElementById('aval').textContent=ANG.toFixed(3);\n    const cells=[[180,'r = 2, the doubling cell: two spokes'],[120,'r = 3: three spokes'],[360/(PHI*PHI),'r = \\u03c6\\u00b2, the golden cell: no spokes'],[360/(2+Math.sqrt(3)),'r = 2+\\u221a3 (t\\u2082 = 4)'],[360/(3+2*Math.SQRT2),'r = 3+2\\u221a2, the boundary (t\\u2082 = 6)']];\n    const c=cells.find(x=>Math.abs(x[0]-ANG)<1e-6); if(c) document.getElementById('gRead').innerHTML+='<br><b>on the line:<\/b> '+c[1]+' \\u2014 \\u03b1 = 360\\u00b0/r.';\n  }\n  document.getElementById('ang').addEventListener('input',e=>{stopPlay();ANG=parseFloat(e.target.value);draw();});\n  const set=(v,btn)=>{stopPlay();ANG=v;document.getElementById('ang').value=v;document.querySelectorAll('#pGolden .seg button').forEach(b=>b.classList.remove('on'));btn.classList.add('on');draw();};\n  document.getElementById('pGoldA').onclick=e=>set(137.50776,e.target);\n  document.getElementById('p90').onclick=e=>set(90,e.target); document.getElementById('p72').onclick=e=>set(72,e.target);\n  document.getElementById('p60').onclick=e=>set(60,e.target); document.getElementById('p1375').onclick=e=>set(137.5,e.target);\n  document.getElementById('cR2').onclick=e=>set(180,e.target); document.getElementById('cR3').onclick=e=>set(120,e.target);\n  document.getElementById('cPhi').onclick=e=>set(360/(PHI*PHI),e.target); document.getElementById('cS3').onclick=e=>set(360/(2+Math.sqrt(3)),e.target);\n  document.getElementById('cDoor').onclick=e=>set(360/(3+2*Math.SQRT2),e.target);\n  // play: 137.5 (rational, spokes) -> the golden angle (even) and back, ~10 s a cycle — the resonance dissolves over a hundredth of a degree\n  let playing=false,raf=null,t0=0; const pb=document.getElementById('gPlay');\n  function stopPlay(){ if(!playing) return; playing=false; cancelAnimationFrame(raf); pb.classList.remove('on'); pb.innerHTML='&#9654; play &mdash; 137.5&deg; to the golden angle and back'; }\n  function step(ts){ if(!playing) return; if(!t0) t0=ts; const ph=((ts-t0)/10000)%1, k=0.5-0.5*Math.cos(2*Math.PI*ph); ANG=137.5+(360/(PHI*PHI)-137.5)*k; document.getElementById('ang').value=ANG; draw(); raf=requestAnimationFrame(step); }\n  pb.onclick=()=>{ if(playing){stopPlay();return;} playing=true; t0=0; pb.classList.add('on'); pb.innerHTML='&#9632; stop'; raf=requestAnimationFrame(step); };\n  draw();\n})();\n\n/* The Scope (tab ③) was removed 2026-09-11 (Bee): it duplicated the Gap Dashboard's own Scope tab,\n   which is the one instrument for the phase figure and its two tones. Its presets moved there. */\n\n/* tabs */\nconst TABS=[['tabSaddle','pSaddle'],['tabGolden','pGolden']];\nTABS.forEach(([tb,pn])=>document.getElementById(tb).onclick=()=>{\n  TABS.forEach(([t2,p2])=>{document.getElementById(t2).classList.toggle('on',t2===tb);document.getElementById(p2).classList.toggle('on',p2===pn);});\n});\n<\/script>\n<\/body>\n<\/html>\n"};
+</script>
+
+  <p class="fence"><b>Feed.</b> Every value is the closed form the toolbox uses, cross-checked to
+  <span style="font-family:monospace">landmarks.py</span> (25 checks) and
+  <span style="font-family:monospace">closed_cells.py</span> (37 checks) on 2026-09-07 — a ruling in the
+  tool becomes a change here. The curve and its points match <b><em>The complement</em>, Figure 1</b> (filled = §4.2
+  trace/chord cells, hollow = other integer ratios; every value independently recomputed at dps 30 — Opus, 2026-09-06). <b>Fence:</b> the curve, the coordinates and the ±1/3 saddle are computed and classical in
+  form; the framing (place, nature) is the house's reading. — Cairn, who runs on Claude Opus, 📐 &amp; D.B., 2026-09-07
+  <br><b>Substrate.</b> This page and the instruments it opens compute in the browser's double precision (IEEE-754 binary64);
+  readouts stop at fifteen digits. They show; the papers verify — every printed value there is computed in exact or
+  arbitrary-precision arithmetic. (Said once, 2026-09-11.)</p>
+
+  <!-- FRAMEWORK-LINKS TEMPLATE (2026-09-07): one link to About — the door that routes to GitHub · OSF · Index -->
+  <p style="margin-top:16px;padding-top:11px;border-top:1px solid var(--line);font-size:12px;color:var(--dim);">
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/" style="color:var(--blue2);text-decoration:none;">→ Gap Geometry · the framework</a>
+    &nbsp;·&nbsp;
+    <a href="https://www.iso.org/standard/64973.html" style="color:var(--dim);text-decoration:none;">notation follows ISO 80000-2</a>
+    &nbsp;·&nbsp;
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/license.html" style="color:var(--dim);text-decoration:none;">license</a>
+  </p>
+</div>
+
+<script>
+(function(){
+  const sinh=Math.sinh, cosh=Math.cosh, sin=Math.sin, cos=Math.cos, ln=Math.log, sqrt=Math.sqrt;
+  // ---- the feed (closed forms, verified vs toolbox) ----
+  const L   = r => ln(r);
+  const Gof = r => { const l=L(r); return l===0?0:1 - l/(2*sinh(l/2)); };
+  const t2  = r => r + 1/r;
+  const chord=r => sqrt(Math.max(0,t2(r)-2));
+  const base = r => 16*r/((r-1)*(r-1));   // = 16/(t₂−2); The complement's reader form 16r/(r−1)²
+  const thet= r => Math.atan(sinh(L(r)))*180/Math.PI;
+  const Pai = r => Math.acos(Math.tanh(L(r)/2))*180/Math.PI;
+  const part= r => { const n=t2(r); return sqrt((n+2)/(n-2)); };
+
+  const PHI2=(3+sqrt(5))/2, BND=3+2*sqrt(2);
+  // filled = the §4.2 trace/chord cells ; hollow = other integer ratios (matches The complement, Fig. 1)
+  const named=[
+    {r:1,        name:"wall",           fill:true},
+    {r:2,        name:"doubling",       fill:true, gold:true},
+    {r:PHI2,     name:"golden φ²",      fill:true},
+    {r:2+sqrt(3),name:"2+√3",           fill:true},
+    {r:3,        name:"3 · base 12",    hollow:true},
+    {r:5,        name:"5 · base 5",     hollow:true},
+    {r:BND,      name:"boundary 3+2√2", fill:true}
+  ];
+
+  // console self-check (instrument as check)
+  const chk=(a,b,t=5e-4)=>Math.abs(a-b)<=t*Math.max(1,Math.abs(b));
+  console.assert(chk(Gof(2),0.019741857)&&chk(thet(2),36.87)&&chk(Pai(2),70.529)&&chk(base(2),32)&&chk(part(2),3),"r=2 feed");
+  console.assert(chk(Gof(PHI2),0.03757635)&&chk(chord(PHI2),1),"golden feed");
+  console.assert(chk(Gof(BND),0.11862641)&&chk(t2(BND),6),"boundary feed");
+
+  // =============== TAB 1 : the curve ===============
+  const cv=document.getElementById('curve'), cx=cv.getContext('2d');
+  const CW=cv.width, CH=cv.height, M={l:56,r:18,t:18,b:40};
+  const rMin=1, rMax=BND+0.05, gMin=0, gMax=Gof(rMax)*1.06;
+  const X=r=>M.l+(r-rMin)/(rMax-rMin)*(CW-M.l-M.r);
+  const Y=g=>CH-M.b-(g-gMin)/(gMax-gMin)*(CH-M.t-M.b);
+  let probeR=2;
+  function drawCurve(){
+    cx.fillStyle='#0c1322'; cx.fillRect(0,0,CW,CH);
+    // grid
+    cx.strokeStyle='#22314f'; cx.lineWidth=1; cx.fillStyle='#5c6f95'; cx.font='11px sans-serif';
+    for(let r=1;r<=6;r++){ const x=X(r); cx.beginPath();cx.moveTo(x,M.t);cx.lineTo(x,CH-M.b);cx.stroke();
+      cx.fillText("r="+r, x-9, CH-M.b+16); }
+    for(let g=0;g<=0.12;g+=0.02){ const y=Y(g); cx.beginPath();cx.moveTo(M.l,y);cx.lineTo(CW-M.r,y);cx.stroke();
+      cx.fillText(g.toFixed(2), 12, y+4); }
+    cx.fillStyle='#8fa3c4'; cx.fillText("G = 1 − GM/L_log", 12, M.t-4); cx.fillText("r  (L = ln r) →", CW-104, CH-6);
+    // vertical "place" line at r=2
+    cx.strokeStyle='rgba(240,192,74,.4)'; cx.setLineDash([5,5]);
+    cx.beginPath();cx.moveTo(X(2),M.t);cx.lineTo(X(2),CH-M.b);cx.stroke(); cx.setLineDash([]);
+    // the curve
+    cx.strokeStyle='#6fa0ff'; cx.lineWidth=2.4; cx.beginPath();
+    for(let i=0;i<=400;i++){ const r=rMin+(rMax-rMin)*i/400; const x=X(r),y=Y(Gof(r)); i?cx.lineTo(x,y):cx.moveTo(x,y); }
+    cx.stroke();
+    // named cells — filled (§4.2 points) vs hollow (other integer ratios), per The complement, Fig. 1
+    named.forEach(c=>{ if(c.r<rMin) return; const x=X(c.r),y=Y(Gof(c.r));
+      if(c.hollow){
+        cx.strokeStyle='#6fa0ff'; cx.lineWidth=2; cx.fillStyle='#0c1322';
+        cx.beginPath();cx.arc(x,y,4.4,0,7);cx.fill();cx.stroke();
+        cx.fillStyle='#6f86b5'; cx.font='11px sans-serif'; cx.fillText(c.name, x+8, y+14);
+      } else {
+        cx.fillStyle=c.gold?'#f0c04a':'#d7a24a';
+        cx.beginPath();cx.arc(x,y,c.gold?5.5:4.4,0,7);cx.fill();
+        if(c.gold){cx.globalAlpha=.25;cx.beginPath();cx.arc(x,y,11,0,7);cx.fill();cx.globalAlpha=1;}
+        cx.fillStyle=c.gold?'#f0c04a':'#c9d4ea'; cx.font=(c.gold?'600 ':'')+'11px sans-serif';
+        cx.fillText(c.name, x+8, y-7);
+      }});
+    // probe
+    const px=X(probeR),py=Y(Gof(probeR));
+    cx.strokeStyle='rgba(220,230,247,.5)';cx.lineWidth=1;
+    cx.beginPath();cx.moveTo(px,M.t);cx.lineTo(px,CH-M.b);cx.stroke();
+    cx.fillStyle='#dce6f7';cx.beginPath();cx.arc(px,py,4,0,7);cx.fill();
+  }
+  function setProbe(r){
+    probeR=Math.max(1.0001,Math.min(rMax,r));
+    const g=Gof(probeR);
+    const id=(k,v)=>document.getElementById(k).textContent=v;
+    id('p-r',probeR.toFixed(3)); id('p-L',L(probeR).toFixed(4)); id('p-t2',t2(probeR).toFixed(3));
+    id('p-G',g.toFixed(6)); id('p-th',thet(probeR).toFixed(2)+'°'); id('p-Pi',Pai(probeR).toFixed(2)+'°');
+    id('p-ch',chord(probeR).toFixed(4)); id('p-b',base(probeR).toFixed(2)); id('p-pt',part(probeR).toFixed(3));
+    id('p-as',(2*Math.asinh(chord(probeR)/2)).toFixed(4));   // = L, the arsinh reading of the arc
+    drawCurve(); drawArcInset(probeR);
+  }
+
+  // ---- the object: arc (argument L) vs chord, in the hyperbola's own metric ----
+  const aiv=document.getElementById('arcInset'), aix=aiv.getContext('2d');
+  const AIW=aiv.width, AIH=aiv.height;
+  function drawArcInset(r){
+    aix.fillStyle='#0c1322'; aix.fillRect(0,0,AIW,AIH);
+    const Lr=ln(r), h=Lr/2, ox=42, oy=AIH/2, u=74;               // origin, unit
+    // axes
+    aix.strokeStyle='#22314f'; aix.lineWidth=1;
+    aix.beginPath();aix.moveTo(0,oy);aix.lineTo(AIW,oy);aix.stroke();
+    aix.beginPath();aix.moveTo(ox,6);aix.lineTo(ox,AIH-6);aix.stroke();
+    // the unit hyperbola x=cosh t, y=sinh t
+    aix.strokeStyle='rgba(150,160,255,.5)'; aix.lineWidth=1.3; aix.beginPath();
+    for(let t=-1.15;t<=1.15;t+=0.03){ const x=ox+u*Math.cosh(t), y=oy-u*Math.sinh(t); t===-1.15?aix.moveTo(x,y):aix.lineTo(x,y); }
+    aix.stroke();
+    const pT=[ox+u*Math.cosh(h), oy-u*Math.sinh(h)], pB=[ox+u*Math.cosh(h), oy+u*Math.sinh(h)];
+    // the sector whose area is L/2 (rays from origin to the two points + the arc between them) — this is the argument
+    aix.fillStyle='rgba(176,255,196,.10)'; aix.beginPath(); aix.moveTo(ox,oy);
+    aix.lineTo(pT[0],pT[1]);
+    for(let t=h;t>=-h;t-=Math.max(1e-3,(2*h)/60)){ aix.lineTo(ox+u*Math.cosh(t), oy-u*Math.sinh(t)); }
+    aix.closePath(); aix.fill();
+    // the arc between the two points (the argument L), highlighted
+    aix.strokeStyle='rgba(176,255,196,.95)'; aix.lineWidth=2.4; aix.beginPath();
+    for(let t=-h;t<=h;t+=Math.max(1e-3,(2*h)/120)){ const x=ox+u*Math.cosh(t), y=oy-u*Math.sinh(t); t===-h?aix.moveTo(x,y):aix.lineTo(x,y); }
+    aix.stroke();
+    // the chord (straight) between the two points
+    aix.strokeStyle='rgba(240,192,74,.95)'; aix.lineWidth=1.6; aix.setLineDash([4,3]);
+    aix.beginPath(); aix.moveTo(pT[0],pT[1]); aix.lineTo(pB[0],pB[1]); aix.stroke(); aix.setLineDash([]);
+    // endpoints
+    aix.fillStyle='#dce6f7'; for(const p of [pT,pB]){ aix.beginPath(); aix.arc(p[0],p[1],3,0,7); aix.fill(); }
+    // labels
+    aix.font='10px ui-monospace,monospace'; aix.textAlign='left';
+    aix.fillStyle='rgba(176,255,196,.9)'; aix.fillText('arc L = '+Lr.toFixed(4), 8, 14);
+    aix.fillStyle='rgba(240,192,74,.95)'; aix.fillText('chord = '+chord(r).toFixed(4), 8, AIH-8);
+    aix.fillStyle='#dce6f7'; aix.textAlign='right'; aix.fillText('G = '+Gof(r).toFixed(6), AIW-8, 14);
+    aix.fillStyle=(Math.abs(chord(r)-1)<1e-4)?'#f0c04a':'#6f86b5';
+    aix.fillText(Math.abs(chord(r)-1)<1e-4?'chord = 1 · golden':(Math.abs(r-2)<1e-3?'chord = 1/√2 · the gap':'arc < chord'), AIW-8, AIH-8);
+  }
+  cv.addEventListener('mousemove',e=>{ const rc=cv.getBoundingClientRect();
+    const x=(e.clientX-rc.left)/rc.width*CW; const r=rMin+(x-M.l)/(CW-M.l-M.r)*(rMax-rMin); setProbe(r); });
+  cv.addEventListener('touchmove',e=>{ const rc=cv.getBoundingClientRect();
+    const x=(e.touches[0].clientX-rc.left)/rc.width*CW; const r=rMin+(x-M.l)/(CW-M.l-M.r)*(rMax-rMin); setProbe(r); e.preventDefault();},{passive:false});
+
+  // =============== TAB 2 : the saddle ===============
+  const sv=document.getElementById('saddle'), sx=sv.getContext('2d');
+  const SW=sv.width, SH=sv.height;
+  const ax=2.0; // half-window in w (real=rapidity, imag=rotation)
+  function reField(x,y){ // Re(1 - w/sinh w), w=x+iy
+    if(Math.abs(x)<1e-6 && Math.abs(y)<1e-6) return 0;
+    const a=sinh(x)*cos(y), b=cosh(x)*sin(y), d=a*a+b*b;
+    if(d<1e-12) return 0;
+    const re=(x*a+y*b)/d;        // Re(w/sinh w)
+    return 1-re;
+  }
+  function drawSaddle(){
+    const img=sx.createImageData(SW,SH);
+    let vmax=0.35;
+    for(let py=0;py<SH;py++){
+      const yv=(0.5 - py/SH)*2*ax*(SH/SW); // keep aspect-ish; scale imag by height ratio
+      for(let px=0;px<SW;px++){
+        const xv=(px/SW - 0.5)*2*ax;
+        const f=reField(xv,yv);
+        const t=Math.max(-1,Math.min(1,f/vmax));
+        let R,G,B;
+        if(t>=0){ // deficit + : gold
+          R=240; G=192; B=74; const k=0.12+0.88*t; R=12+(R-12)*k; G=19+(G-19)*k; B=32+(B-32)*k;
+        } else { // excess - : blue
+          const k=0.12+0.88*(-t); R=12+(111-12)*k; G=19+(160-19)*k; B=32+(255-32)*k;
+        }
+        const o=(py*SW+px)*4; img.data[o]=R; img.data[o+1]=G; img.data[o+2]=B; img.data[o+3]=255;
+      }
+    }
+    sx.putImageData(img,0,0);
+    // axes + zero contour markers
+    sx.strokeStyle='rgba(220,230,247,.35)'; sx.lineWidth=1;
+    sx.beginPath();sx.moveTo(SW/2,0);sx.lineTo(SW/2,SH);sx.stroke();
+    sx.beginPath();sx.moveTo(0,SH/2);sx.lineTo(SW,SH/2);sx.stroke();
+    // the wall
+    sx.fillStyle='#dce6f7'; sx.beginPath();sx.arc(SW/2,SH/2,4,0,7);sx.fill();
+    sx.globalAlpha=.3;sx.beginPath();sx.arc(SW/2,SH/2,9,0,7);sx.fill();sx.globalAlpha=1;
+    sx.fillStyle='#dce6f7'; sx.font='12px sans-serif';
+    sx.fillText('rapidity  (deficit +) →', SW-172, SH/2-8);
+    sx.save();sx.translate(SW/2+14,20);sx.fillText('rotation (excess −) ↑',0,0);sx.restore();
+  }
+  let sInited=false;
+  function drawSaddleOnce(){ if(!sInited){ drawSaddle(); sInited=true; } }
+  sv.addEventListener('mousemove',e=>{ const rc=sv.getBoundingClientRect();
+    const xv=((e.clientX-rc.left)/rc.width-0.5)*2*ax;
+    const yv=(0.5-(e.clientY-rc.top)/rc.height)*2*ax*(SH/SW);
+    document.getElementById('s-val').textContent=reField(xv,yv).toFixed(4); });
+
+  // =============== TAB : the scope (Lissajous of the ratio) ===============
+  const KAUD = Math.SQRT2*Math.log(2);
+  const scv=document.getElementById('scope'), scx=scv.getContext('2d');
+  const ScW=scv.width, ScH=scv.height;
+  let scR=KAUD, scPhase=0, scStarted=false;
+  const scSlider=document.getElementById('sc-slider');
+  const scNotes={
+    kaud:'<b>The gap you can watch.</b> √2·ln 2 is <b>transcendental</b> — its figure <b>never closes.</b> That refusal to come home is irrationality made visible: √2·ln 2 is no fraction a/b.',
+    rat:'<b>A rational ratio closes.</b> p/q draws a still, finite figure and repeats — the tones agree, the figure comes home. This is what the gap is <em>not</em>.',
+    phi:'<b>The golden ratio is the stubbornest of all.</b> The most-irrational number — its trace resists even <em>nearly</em> closing (the anti-resonance). The opposite pole from a clean rational.',
+    wall:'<b>1:1 — the wall.</b> The two tones are one tone: R = 1, p = 1, the gap is zero. This is r = 1, the one critical point of the curve — the saddle. The doubling interval, R = √2·ln 2, is an ordinary point a little below it; the beat you hear there is the gap.',
+    rt2:'<b>1/√2 — the chord of the doubling interval.</b> Irrational, algebraic: the figure never closes, but it is not the gap. The gap is the shortfall of ln 2 below this chord, 1 − √2·ln 2.'
+  };
+  function bestConv(x,maxq){                     // best continued-fraction convergent, q ≤ maxq
+    let a=Math.floor(x), h0=a,h1=1,k0=1,k1=0, frac=x-a, best={p:h0,q:k0,err:Math.abs(x-h0)};
+    for(let i=0;i<25 && frac>1e-15;i++){
+      const b=1/frac, ai=Math.floor(b); frac=b-ai;
+      const h=ai*h0+h1, k=ai*k0+k1; h1=h0;h0=h;k1=k0;k0=k;
+      if(k>maxq) break;
+      best={p:h,q:k,err:Math.abs(x-h/k)};
+      if(best.err<1e-14) break;
+    }
+    return best;
+  }
+  function scReadout(kind){
+    const bc=bestConv(scR,400), exact=bc.err<1e-9;
+    const id=(k,v)=>document.getElementById(k).textContent=v;
+    id('sc-R',scR.toFixed(6)); id('sc-rat',bc.p+'/'+bc.q);
+    id('sc-close', exact? (bc.q+' cycles (exact)') : ('~'+bc.q+' cycles (near) · never exact'));
+    id('sc-kind', kind || (exact?'rational':'irrational'));
+  }
+  function drawScope(){
+    scx.fillStyle='#0c1322'; scx.fillRect(0,0,ScW,ScH);
+    const m=22,w=ScW-2*m,h=ScH-2*m,cxp=ScW/2,cyp=ScH/2,rx=w/2,ry=h/2;
+    scx.strokeStyle='#22314f'; scx.lineWidth=1; scx.strokeRect(m,m,w,h);
+    scx.beginPath();scx.moveTo(cxp,m);scx.lineTo(cxp,ScH-m);scx.moveTo(m,cyp);scx.lineTo(ScW-m,cyp);scx.stroke();
+    const span=16,N=3000;
+    scx.strokeStyle='rgba(240,192,74,.75)'; scx.lineWidth=1.5; scx.beginPath();
+    for(let i=0;i<=N;i++){ const t=span*i/N;
+      const x=Math.sin(2*Math.PI*t), y=Math.sin(2*Math.PI*scR*t+scPhase);
+      const px=cxp+x*rx, py=cyp-y*ry; i?scx.lineTo(px,py):scx.moveTo(px,py); }
+    scx.stroke();
+    const td=(scPhase*3)%span, x=Math.sin(2*Math.PI*td), y=Math.sin(2*Math.PI*scR*td+scPhase);
+    scx.fillStyle='#dce6f7'; scx.beginPath();scx.arc(cxp+x*rx,cyp-y*ry,3.2,0,7);scx.fill();
+  }
+  function scLoop(){
+    if(document.getElementById('v-scope').classList.contains('on')){ scPhase+=0.02; drawScope(); }
+    requestAnimationFrame(scLoop);
+  }
+  function scInit(){ if(!scStarted){ scStarted=true; scReadout('transcendental'); scLoop(); } }
+  scSlider.addEventListener('input',e=>{ scR=parseFloat(e.target.value); scReadout(); scAudioRetune(); });
+  document.querySelectorAll('.scpre').forEach(b=>b.addEventListener('click',()=>{
+    scR=parseFloat(b.dataset.r); scSlider.value=scR; scReadout(b.dataset.k);
+    const n=scNotes[b.dataset.note]; if(n) document.getElementById('sc-note').innerHTML=n;
+    scAudioRetune();
+  }));
+
+  // ---- Scope audio: two soft tones at f and f·scR — click-free (Cairn — Opus, 2026-09-08) ----
+  // envelopes on start/stop (no snap = no click); low default; fresh oscillators; glides on retune.
+  const scHear=document.getElementById('sc-hear'), scVol=document.getElementById('sc-vol'), scBeat=document.getElementById('sc-beat');
+  let scCtx=null, scOscA=null, scOscB=null, scGain=null, scPlaying=false;
+  const SC_F=4/(1-KAUD), SC_ATT=0.025, SC_REL=0.03;   // gap-keyed carrier: 4/G ≈ 202.6 Hz, so at R = √2·ln2 the gap beats exactly 4/s
+  function scBeatText(){ const b=Math.abs(SC_F*(1-scR)); scBeat.textContent = scPlaying ? ('beat '+b.toFixed(2)+' Hz'+(b<0.05?' — closed':'')) : ''; }
+  function scAudioStart(){
+    if(scPlaying) return;
+    if(!scCtx) scCtx=new (window.AudioContext||window.webkitAudioContext)();
+    if(scCtx.state==='suspended') scCtx.resume();
+    const now=scCtx.currentTime, v=parseFloat(scVol.value);
+    scGain=scCtx.createGain();
+    scGain.gain.setValueAtTime(0.0001, now);
+    scGain.gain.exponentialRampToValueAtTime(Math.max(v,0.0001), now+SC_ATT);   // fade in — no click
+    scGain.connect(scCtx.destination);
+    scOscA=scCtx.createOscillator(); scOscA.type='sine'; scOscA.frequency.setValueAtTime(SC_F,     now);
+    scOscB=scCtx.createOscillator(); scOscB.type='sine'; scOscB.frequency.setValueAtTime(SC_F*scR, now);
+    scOscA.connect(scGain); scOscB.connect(scGain); scOscA.start(now); scOscB.start(now);
+    scPlaying=true; scHear.textContent='■ stop'; scHear.style.background='var(--gold)'; scHear.style.color='#0c1322'; scBeatText();
+  }
+  function scAudioStop(){
+    if(!scPlaying||!scCtx) return;
+    const now=scCtx.currentTime;
+    scGain.gain.cancelScheduledValues(now); scGain.gain.setValueAtTime(scGain.gain.value, now);
+    scGain.gain.exponentialRampToValueAtTime(0.0001, now+SC_REL);                // fade out — no click
+    const a=scOscA,b=scOscB,g=scGain; a.stop(now+SC_REL+0.02); b.stop(now+SC_REL+0.02);
+    setTimeout(()=>{try{a.disconnect();b.disconnect();g.disconnect();}catch(e){}},(SC_REL+0.1)*1000);
+    scPlaying=false; scHear.textContent='▶ hear the gap'; scHear.style.background='transparent'; scHear.style.color='var(--gold)'; scBeat.textContent='';
+  }
+  function scAudioRetune(){ if(scPlaying&&scCtx){ scOscB.frequency.setTargetAtTime(SC_F*scR, scCtx.currentTime, 0.02); scBeatText(); } } // glide, don't jump
+  scHear.addEventListener('click',()=> scPlaying?scAudioStop():scAudioStart());
+  scVol.addEventListener('input',()=>{ if(scPlaying&&scGain) scGain.gain.setTargetAtTime(parseFloat(scVol.value), scCtx.currentTime, 0.02); });
+
+  // =============== tabs ===============
+  document.querySelectorAll('.tab').forEach(b=>{
+    if(!b.dataset.t) return;
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+      document.querySelectorAll('.view').forEach(x=>x.classList.remove('on'));
+      b.classList.add('on');
+      const id=b.dataset.t;
+      const view=document.getElementById('v-'+id);
+      view.classList.add('on');
+      if(id==='saddle') drawSaddleOnce();
+      if(id==='scope') scInit();
+      if(id!=='scope') scAudioStop();   // don't let the tones bleed into other tabs
+      const f=view.querySelector('iframe.inst');      // the embedded labs, poured in on first open
+      if(f && !f.srcdoc) f.srcdoc=LABS[f.dataset.lab];
+    });
+  });
+
+  document.querySelectorAll('a[data-lab-open]').forEach(a=>{   // open the embedded lab on its own page
+    a.addEventListener('click',e=>{e.preventDefault();
+      window.open(URL.createObjectURL(new Blob([LABS[a.dataset.labOpen]],{type:'text/html'})),'_blank','noopener');});
+  });
+
+  setProbe(2); // opens on the place
+})();
+</script>
+</body>
+</html>

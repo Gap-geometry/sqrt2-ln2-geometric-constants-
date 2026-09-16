@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<!--
+  NOTATION — 2026-08-29.  The gap is written G_AUD on this surface, not a bare G.
+  G_AUD = 1 - K_AUD,  K_AUD = sqrt(2)*ln(2).  Same object, same value, same name
+  ("the Gap", January 2026); only the typeset symbol changed.
+
+  METRIC — 2026-09-07.  On this surface "arc" is the hyperbolic argument L = ln r
+  (ISO 80000-2: ar-; the Minkowski arc between the two points) and "chord" is
+  2 sinh(L/2), their chord in the same metric.  K_AUD = arc/chord = L/(2 sinh(L/2))
+  = GM/LM is a ratio taken in one metric; that is why it is below 1.
+
+  WHY: the bare letter G already belongs to Catalan's constant (0.915965...),
+  Gauss's constant (0.834626... = 1/M(1,sqrt2)), and the geometric mean in the
+  means literature.  The subscript matches K_AUD, which the corpus has used since
+  January because Khinchin's constant had already taken a bare K.  The subscript
+  is also the framework's own handle, Aud2Gap.
+
+  Decision: 2026-08-29, five seats and Bee.  Record:
+  ROADMAP for Gap Geometry/Communications/
+    FOR CAIRN and THE TEAM - the letter G is crowded ... - Opus 2026-08-29.md
+
+  In code, G_AUD is a plain identifier alongside the existing K_AUD.
+  In prose, it is written G<sub>AUD</sub>.
+  Archived and deposited surfaces keep the bare G as written - frozen is archive.
+-->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Binary Tower — Gap Geometry</title>
+<meta name="author" content="D. B.">
+<meta name="description" content="The Binary Tower, explained from the entrance: what it is, what K_AUD is, what it computes, why the Gap matters — with an exact binary-recipe widget (BigInt engine, true periods), 25 true constant expansions, and a compare/shift mode.">
+<!-- TWO-ENDS NOTE (2026-08-04, per a ruling): the √φ master formula
+     (2^k·G<sub>AUD</sub> = 2^(k−6)·√φ, pivot at k=6 → step 64) is the TRANSLATED tower. √φ ≈ 1.272 > 1 is an
+     IMPORTED target, so the pivot at 64 sits ABOVE unity — the DERIVED tower ends at n = 1/G<sub>AUD</sub> ≈ 50.65
+     (K_AUD < 1 is a theorem). That is intended here: 64 names the translated window. But it is
+     STRUCTURE, not dynamics of the gap (above unity, n(t)/n(1) = t identically). Do not re-present
+     √φ/64 as a derived result. Ref: MEMO "the tower has two ends" (2026-08-04). -->
+
+<link rel="alternate" type="text/plain" href="../AI_INDEX.txt" title="Machine-readable index (plain text)">
+<link rel="alternate" type="text/plain" href="../llms.txt" title="llms.txt — AI site map">
+<style>
+  :root {
+    --text: #1a1a1a; --muted: #5a5a5a; --subtle: #8a8a8a; --rule: #c8c8c8;
+    --bg: #ffffff; --card-bg: #fafaf8; --card-border: #e0e0de;
+    --link: #2a5a8a; --link-hover: #1a3a5a;
+    --litA: #2a5a8a; --litA-glow: #7aa8d8;
+    --litB: #b05a7a; --litB-glow: #d8a0b8;
+    --litAB: #4a3a7a;
+    --landmark: #b07a2a;
+    --max-width: 720px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: Optima, "Palatino Linotype", Palatino, Georgia, serif;
+    font-size: 17px; line-height: 1.6; color: var(--text); background: var(--bg);
+    padding: 0 24px; -webkit-font-smoothing: antialiased;
+  }
+  main { max-width: var(--max-width); margin: 0 auto; padding: 48px 0 80px 0; }
+  /* tabs (added 2026-09-07) */
+  .tabbar { display:flex; gap:6px; flex-wrap:wrap; border-bottom:1px solid var(--card-border); margin:6px 0 22px; }
+  .tabbtn { background:none; border:none; font-family:Optima,"Palatino Linotype",Palatino,Georgia,serif;
+            font-size:15px; color:var(--muted); padding:8px 15px; border-radius:8px 8px 0 0; cursor:pointer; position:relative; top:1px; }
+  .tabbtn.on { color:var(--text); background:var(--card-bg); border:1px solid var(--card-border); border-bottom-color:var(--card-bg); font-weight:600; }
+  .tabbtn:hover { color:var(--text); }
+  .tp { display:none; } .tp.on { display:block; }
+
+  header.entry { text-align: center; margin-bottom: 10px; }
+  h1 { font-size: 30px; font-weight: 600; letter-spacing: 0.01em; }
+  .subtitle { font-size: 15px; color: var(--muted); margin-top: 6px; }
+
+  .origin {
+    margin: 26px auto 34px auto; max-width: 560px; text-align: center;
+    font-style: italic; color: var(--muted); font-size: 16px; line-height: 1.65;
+  }
+  .origin details { margin-top: 8px; font-style: normal; font-size: 14px; color: var(--subtle); }
+  .origin summary { cursor: pointer; list-style: none; color: var(--link); font-size: 13px; font-style: normal; }
+  .origin summary::-webkit-details-marker { display: none; }
+  .origin summary:hover { color: var(--link-hover); }
+
+  .panel {
+    background: var(--card-bg); border: 1px solid var(--card-border);
+    border-radius: 5px; margin-bottom: 12px; overflow: hidden;
+  }
+  .panel summary {
+    cursor: pointer; padding: 13px 18px; list-style: none;
+    display: flex; align-items: baseline; gap: 12px;
+  }
+  .panel summary::-webkit-details-marker { display: none; }
+  .panel summary:hover { background: #f2f2ee; }
+  .panel .q {
+    font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.07em;
+    color: var(--subtle); white-space: nowrap;
+  }
+  .panel .one-liner { font-size: 15.5px; color: var(--text); font-style: italic; flex: 1; }
+  .panel .chev { color: var(--subtle); font-size: 12px; transition: transform 0.2s; }
+  .panel[open] .chev { transform: rotate(90deg); }
+  .panel .expand {
+    padding: 12px 18px 16px 18px; font-size: 14.5px; color: var(--muted); line-height: 1.6;
+    border-top: 1px dashed var(--card-border);
+  }
+
+  .chip {
+    display: inline-block; font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.06em; padding: 1px 7px; border-radius: 3px; vertical-align: 1px;
+  }
+  .chip-thm { color: #3a6a3a; background: #e8f4e8; border: 1px solid #b8d8b8; }
+  .chip-obs { color: #2a5a8a; background: #e8f0f8; border: 1px solid #b8d0e8; }
+
+  .gloss { border-bottom: 1px dotted var(--subtle); cursor: help; position: relative; }
+  .gloss:hover::after, .gloss:focus::after {
+    content: attr(data-tip);
+    position: absolute; left: 0; bottom: 130%; z-index: 10;
+    width: 270px; background: #2a2a28; color: #f4f4f0;
+    font-size: 12.5px; font-style: normal; line-height: 1.5;
+    padding: 8px 11px; border-radius: 5px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+  }
+
+  h2.sec {
+    font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--subtle); margin: 40px 0 16px 0; padding-bottom: 7px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .widget {
+    background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 6px;
+    padding: 20px 22px;
+  }
+  .widget-row { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; }
+  .widget label.fld { font-size: 13px; color: var(--subtle); width: 92px; }
+  .widget input[type="text"] {
+    font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 15px;
+    padding: 7px 12px; border: 1px solid var(--rule); border-radius: 4px; width: 210px;
+  }
+  .widget input.fieldA:focus { outline: 2px solid var(--litA-glow); border-color: var(--litA); }
+  .widget input.fieldB:focus { outline: 2px solid var(--litB-glow); border-color: var(--litB); }
+  .preset {
+    font-family: inherit; font-size: 13px; color: var(--link); background: #fff;
+    border: 1px solid var(--card-border); border-radius: 999px; padding: 4px 12px; cursor: pointer;
+  }
+  .preset:hover { border-color: var(--litA-glow); color: var(--link-hover); }
+  .preset-hint { font-size: 12px; color: var(--subtle); width: 100%; }
+
+  .recipe {
+    font-family: "SF Mono", Consolas, Menlo, monospace; font-size: 13.5px;
+    background: #fff; border: 1px solid var(--card-border); border-radius: 4px;
+    padding: 10px 14px; margin: 10px 0 6px 0; line-height: 1.7; min-height: 44px;
+    overflow-wrap: anywhere;
+  }
+  .recipe .bit1 { color: var(--litA); font-weight: 700; }
+  .recipe .rep { text-decoration: overline; }
+  .recipe .note { color: var(--landmark); font-family: Optima, Georgia, serif; font-size: 13.5px; }
+  .recipe .match { color: #3a6a3a; font-family: Optima, Georgia, serif; font-size: 13.5px; }
+  .relation {
+    font-size: 14px; color: var(--litAB); background: #f0edf8; border: 1px solid #d0c8e8;
+    border-radius: 4px; padding: 9px 14px; margin-bottom: 8px; line-height: 1.55;
+    font-family: Optima, Georgia, serif;
+  }
+  .int-chips { margin-bottom: 4px; }
+  .int-chip {
+    display: inline-block; font-family: "SF Mono", Consolas, monospace; font-size: 13px;
+    color: #3a6a3a; background: #e8f4e8; border: 1px solid #b8d8b8;
+    border-radius: 4px; padding: 2px 9px; margin: 2px 4px 2px 0;
+  }
+
+  .legend { font-size: 12.5px; color: var(--subtle); margin: 6px 0 8px 0; }
+  .sw { display: inline-block; width: 11px; height: 11px; border-radius: 2px; vertical-align: -1px; margin-right: 3px; }
+  .swA { background: var(--litA); } .swB { background: var(--litB); } .swAB { background: var(--litAB); }
+
+  .ladder-wrap { display: flex; gap: 18px; margin-top: 10px; }
+  .ladder { flex: 0 0 auto; width: 240px; }
+  .rung {
+    height: 9px; margin-bottom: 2px; border-radius: 2px;
+    background: #ececea; border: 1px solid #e2e2de;
+    position: relative; transition: background 0.22s, border-color 0.22s;
+  }
+  .rung.litA  { background: var(--litA);  border-color: var(--litA);  box-shadow: 0 0 5px var(--litA-glow); }
+  .rung.litB  { background: var(--litB);  border-color: var(--litB);  box-shadow: 0 0 5px var(--litB-glow); }
+  .rung.litAB { background: var(--litAB); border-color: var(--litAB); box-shadow: 0 0 6px #a898d8; }
+  .rung.landmark-rung { border-color: var(--landmark); }
+  .rung .lm-label {
+    position: absolute; left: 250px; top: -4px; white-space: nowrap;
+    font-size: 11.5px; color: var(--landmark); font-family: Optima, Georgia, serif;
+  }
+  .rung .n-label {
+    position: absolute; left: -34px; top: -4px; width: 28px; text-align: right;
+    font-size: 10px; color: var(--subtle); font-family: Consolas, monospace;
+  }
+  .ladder-side { flex: 1; font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+
+  footer {
+    margin-top: 52px; padding-top: 24px; border-top: 1px solid var(--rule);
+    text-align: center; font-size: 14px; color: var(--subtle);
+  }
+  footer a { color: var(--link); text-decoration: none; }
+  footer a:hover { border-bottom: 1px solid var(--link); }
+  footer .back-hub { display: inline-block; margin-bottom: 16px; font-size: 15px; color: var(--link); }
+  footer .contact { font-size: 13px; margin-top: 8px; }
+
+  @media (max-width: 620px) {
+    body { padding: 0 14px; }
+    .ladder-wrap { flex-direction: column; }
+    .rung .lm-label { left: auto; right: 4px; top: -3px; font-size: 10px; }
+    .gloss:hover::after { width: 200px; }
+  }
+</style>
+
+<style>
+/* ═══ MERGE 2026-08-06 — the one Tower page: Atlas dark palette (gap-geometry-theme),
+   HOW TO READ + ASK THE TOWER added, recipe widget preserved intact. White original
+   archived in Visualisation.htlm/Hall of Memories/. ═══ */
+:root{
+  --bg:#0c1322; --card-bg:#121c30; --card-border:#23314d; --rule:#23314d;
+  --text:#dfe6f2; --muted:#a8b6cf; --subtle:#8aa0c0;
+  --link:#6c9bcf; --link-hover:#9cc0e8;
+  --litA:#2f6bf2; --litA-glow:#5c8cf8; --litB:#f38181; --litB-glow:#f8a8a8;
+  --litAB:#7a5cd1; --landmark:#f0c04a;
+}
+body{ background:var(--bg); color:var(--text); }
+.recipe .match{ color:#5cc46a; }
+.ask-sec{ background:var(--card-bg); border:1px solid var(--card-border); border-radius:8px;
+  padding:18px 20px; margin:22px 0; }
+.ask-sec h2{ color:var(--text); border-bottom:1px solid var(--card-border); padding-bottom:6px; }
+.ask-sec input[type=text]{ font-family:ui-monospace,monospace; font-size:1.02em; padding:9px 12px;
+  border:1px solid var(--card-border); border-radius:6px; width:58%; background:#0e1626; color:var(--text); }
+.ask-sec button{ font-size:1em; padding:9px 16px; border-radius:6px; border:1px solid var(--card-border);
+  background:#1a2740; color:var(--text); cursor:pointer; }
+.ask-sec button:hover{ background:#22335a; }
+.at-grid{ display:grid; grid-template-columns:auto 1fr; gap:4px 14px;
+  font-family:ui-monospace,monospace; font-size:.92em; margin-top:10px; }
+.at-grid b{ color:var(--subtle); font-weight:normal; }
+.at-verdict{ border-left:4px solid var(--landmark); padding:9px 13px; background:#16213a;
+  margin-top:12px; font-size:.98em; }
+.at-law{ font-family:ui-monospace,monospace; font-size:.74em; color:var(--landmark);
+  border:1px solid var(--card-border); border-radius:4px; padding:0 5px; margin-left:5px; cursor:help; }
+.at-ci{ font-family:ui-monospace,monospace; font-size:.82em; margin:8px 0 0; color:#5cc46a; }
+.at-ci.bad{ color:#f38181; }
+.at-manual p{ margin:6px 0; font-size:.95em; color:var(--muted); }
+.conv-table{ width:100%; border-collapse:collapse; font-family:ui-monospace,Menlo,monospace;
+  font-size:.86em; margin-top:12px; }
+.conv-table th{ text-align:left; color:var(--subtle); font-weight:normal; font-size:.9em;
+  text-transform:uppercase; letter-spacing:.08em; padding:6px 10px 6px 0;
+  border-bottom:1px solid var(--line); }
+.conv-table td{ padding:5px 10px 5px 0; border-bottom:1px solid rgba(35,49,77,.5);
+  color:var(--muted); }
+.conv-table td:first-child{ color:var(--text); }
+.conv-table tr.conv-group td{ color:#ffd700; font-size:.85em; letter-spacing:.12em;
+  text-transform:uppercase; padding-top:14px; border-bottom:1px solid var(--line); }
+.conv-table tr.derived td:nth-child(3){ color:#f0c04a; }
+.conv-table tr.translated td:nth-child(3){ color:#6c9bcf; }
+
+/* ═══ WARM-DARK FINISH (2026-08-07) — completes the merge + adopts resistance's block grammar.
+   Overrides the leftover LIGHT widget colours from block 1 so the page reads fully dark, then layers
+   resistance's language: BLOCKS = layered darks (#111a2e panel over #0a0f1c inset) + hairline #1d2942
+   dividers + a little more air; NUMBERS glow cyan #5ecfd6 (like .ratio/.rcf); the WARM TRIO spread
+   wide — amber-orange #e8934a · soft gold #f0c04a · light amber #ffc98a — instead of one yellow.
+   Titles white. Block 1 left intact (reversible); this block wins by document order. ═══ */
+/* — titles & text — */
+h1{ color:#ffffff; font-family:ui-monospace,"SF Mono",Menlo,"JetBrains Mono",Consolas,monospace; font-weight:600; letter-spacing:.3em; text-transform:uppercase; }
+.subtitle{ color:#8aa0c0; }
+h2.sec{ color:#eef3fb; border-bottom-color:#1d2942; }
+.origin summary{ color:#5ecfd6; } .origin summary:hover{ color:#9be3e8; }
+.panel .one-liner{ color:#dfe6f2; }
+.ladder-side{ color:#a8b6cf; }
+.gloss{ border-bottom-color:#5a6a86; }
+/* — BLOCKS: resistance's layered darks + hairline dividers + more air — */
+.panel{ background:#111a2e; border-color:#1d2942; border-radius:6px; }
+.panel summary:hover{ background:#182338; }
+.panel .expand{ border-top-color:#1d2942; }
+.widget{ background:#111a2e; border-color:#1d2942; border-radius:6px; padding:22px 24px; }
+.ask-sec{ background:#111a2e; border-color:#1d2942; padding:20px 24px; }
+.recipe{ background:#0a0f1c; border-color:#1d2942; }             /* darkest inset, like a resistance row */
+.relation{ background:#161f38; border-color:#2a3a5c; color:#cfc6ef; }
+.ask-sec input[type=text], .widget input[type="text"]{ background:#0a0f1c; color:#dfe6f2; border-color:#1d2942; }
+.conv-table td{ border-bottom-color:rgba(29,41,66,.5); }
+.conv-table tr:hover td{ background:#111a2e; }                   /* row hover, like resistance .row:hover */
+.at-verdict{ background:#0f1830; border-left-color:#e8934a; }
+/* — NUMBERS glow cyan (resistance's .ratio / .rcf) — */
+.rung .n-label{ color:#5ecfd6; }
+.recipe .bit1{ color:#5ecfd6; font-weight:700; }
+.conv-table td:nth-child(2){ color:#5ecfd6; }                    /* the value column glows cyan */
+/* — WARM TRIO spread wide (less single yellow) — */
+.recipe .note{ color:#e8934a; }                                 /* landmark note → amber-orange */
+.recipe .match{ color:#7fd89a; }
+.rung .lm-label{ color:#f0c04a; }                               /* landmark labels → soft gold */
+.rung.landmark-rung{ border-color:#e8934a; }                    /* landmark rung border → amber-orange */
+.at-law{ color:#f0c04a; }
+.conv-table tr.conv-group td{ color:#f0c04a; }                  /* group headers → soft gold (was #ffd700) */
+.conv-table tr.derived td:nth-child(3){ color:#f0c04a; }
+/* — chips & presets — */
+.chip-thm{ color:#7fd89a; background:rgba(92,196,106,.13); border-color:rgba(92,196,106,.38); }
+.chip-obs{ color:#8cc1ee; background:rgba(108,155,207,.13); border-color:rgba(108,155,207,.38); }
+.int-chip{ color:#7fd89a; background:rgba(92,196,106,.12); border-color:rgba(92,196,106,.34); }
+.preset{ background:#121c30; color:#5ecfd6; border-color:#1d2942; }
+.preset:hover{ border-color:#5ecfd6; color:#ffc98a; }
+/* — cross-page links (inline): muted slate #6b7a94 — the browser's visited-purple went too dark on navy;
+   brighten to cyan on hover. Footer / back-hub links keep their own blue (more specific rules). — */
+a{ color:#6b7a94; }
+a:visited{ color:#6b7a94; }
+a:hover{ color:#5ecfd6; }
+
+/* ═══ RESISTANCE BLOCK GRAMMAR (2026-08-07) — "the blocks aren't apparent, it feels broader,
+   and darker." Adopt resistance's screen ratios: dissolve the raised cards so sections breathe on a
+   DARKER ground (resistance's #0a0f1c + its two faint radial glows), parted by whitespace + hairline
+   captions instead of bordered boxes. Only the live INSTRUMENT (the recipe widget) keeps a thin frame.
+   Fully reversible — delete this block and the cards return. ═══ */
+/* — darker ground + resistance's depth glows — */
+body{
+  background:#0a0f1c;
+  background-image:
+    radial-gradient(120% 80% at 50% -10%, rgba(94,207,214,.05), transparent 60%),
+    radial-gradient(90% 60% at 100% 100%, rgba(240,192,74,.035), transparent 60%);
+  background-attachment:fixed;
+}
+/* — dissolve the two tool sections: open, not boxed; a hairline caption carries the header — */
+.ask-sec{ background:transparent; border:0; border-radius:0; padding:0; margin:34px 0; }
+.ask-sec h2{
+  font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.16em;
+  color:#8aa0c0; border-bottom:1px solid #1d2942; padding-bottom:7px; margin-bottom:14px;
+}
+/* — dissolve the Q&A accordions into a hairline-separated list (resistance-row feel) — */
+.panel{ background:transparent; border:0; border-radius:0; margin:0; border-top:1px solid #1d2942; }
+.panel:last-of-type{ border-bottom:1px solid #1d2942; }
+.panel summary{ padding:12px 2px; }
+.panel summary:hover{ background:rgba(94,207,214,.045); }
+.panel .expand{ padding:2px 2px 14px 2px; border-top:0; }
+/* — inputs must not vanish on the darker ground — */
+.ask-sec input[type=text], .widget input[type="text"]{ background:#0d1526; }
+/* — the recipe stays the ONE framed instrument, but thin (resistance .readout weight) — */
+.widget{ background:#0d1526; border:1px solid #1d2942; border-radius:4px; }
+.recipe{ background:#080c17; }   /* inset a touch below the widget's own dark */
+
+/* — the recipe ladder (2026-08-07): unlit rungs read as a DIM-BLUE ladder instead of white;
+   a lit rung glows AMBER-ORANGE. Redefined at the variable level so the legend swatches (.swA/.swB/
+   .swAB, which read the same vars) follow automatically. Field B keeps a distinct cyan channel for
+   compare-mode; "both" blends to soft gold. — */
+:root{
+  --litA:#e8934a; --litA-glow:#f0b070;   /* primary lit  → amber-orange */
+  --litB:#5ecfd6; --litB-glow:#8fe0e6;   /* compare field → cyan (distinct 2nd channel) */
+  --litAB:#f0c04a;                        /* both lit      → soft gold (the blend) */
+}
+.rung{ background:#233150; border-color:#2c3d63; }   /* unlit → dim blue, no longer white */
+.rung.litAB{ box-shadow:0 0 6px #f0c04a; }           /* "both" glow follows the gold */
+</style>
+</head>
+<body>
+<main>
+
+<header class="entry">
+  <h1>The Binary Tower</h1>
+  <div class="subtitle">The framework&rsquo;s computational instrument &mdash; with the Corridor, the 400/11 residual, and the connection map.</div>
+</header>
+
+<!-- ═══ ASK THE TOWER — the reading instrument (tower-core inline, CI-gated) ═══ -->
+<div class="tabbar">
+  <button class="tabbtn" data-tab="read">Read</button>
+  <button class="tabbtn on" data-tab="staircase">Staircase</button>
+  <button class="tabbtn" data-tab="bits">Bits &amp; orbit</button>
+  <button class="tabbtn" data-tab="gtool">G, exactly</button>
+  <button class="tabbtn" data-tab="recipe">Binary recipe</button>
+</div>
+<p class="metric-strip" style="margin:-14px 0 20px; font-size:.86em; color:var(--muted); border-left:3px solid var(--card-border); padding:6px 10px;">
+  <strong>Before you read a number here:</strong> the Tower is a unit converter and a landmark instrument — a reading is an address, not evidence, and states no claim.
+  <em>Arc</em> on this page is the hyperbolic argument <em>L = ln r</em> and <em>chord</em> is <em>2 sinh(L/2)</em>, both in one metric — the
+  <a href="#" data-goto="read" style="color:var(--landmark)">Read</a> tab says it once, with the rules M1–M10; the symbols of every field are on the
+  <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations%20hub.html" style="color:var(--landmark)">Gap Dashboard</a> (“In other words”), and the letters follow
+  <a href="https://www.iso.org/standard/64973.html" style="color:var(--landmark)">ISO 80000-2</a>.
+</p>
+
+
+<section class="ask-sec tp" data-tab="read">
+  <h2>How to read the tower</h2>
+  <p style="color:var(--muted); font-size:.95em;"><strong>The metric, said once.</strong> On this page <em>arc</em> is the hyperbolic argument <em>L = ln r</em> (ISO 80000-2: ar-; the Minkowski arc between the two points) and <em>chord</em> is <em>2 sinh(L/2)</em>, their chord in the same metric. <em>K<sub>AUD</sub> = arc/chord = L/(2 sinh(L/2)) = GM/L<sub>log</sub></em> is a ratio taken in one metric, which is why it sits below 1; on a circle the same ratio sits above 1. <em>Doubling</em> names the interval <em>r = 2</em> only. K<sub>AUD</sub> is the framework&rsquo;s historical symbol for the value <em>p</em> at <em>r = 2</em> — this page keeps it because its laws and self-test were written in it; it is not a new constant. What the Tower is for and is not for is written out beside this file (<em>WHAT THE BINARY TOWER IS — is for, is not for</em>, 2026-09-08); the symbols of every field, fifteen rows, are on the Gap Dashboard&rsquo;s &ldquo;In other words&rdquo; block.</p>
+  <p style="color:var(--subtle); font-size:.88em; margin-top:10px;">The tower is a measurement
+  instrument and a <strong>recognition index</strong> &mdash; its hits are addresses, not
+  evidence. Golden targets carry an irreducible &epsilon; by theorem; arc-native hits survive
+  the tower&rsquo;s deletion as exact identities, and that surviving identity is the finding.</p>
+  <p style="color:var(--subtle); font-size:.88em; margin-top:10px;"><strong>Where the unit comes
+  from</strong> (added 2026-08-27). The tower converts by <em>G<sub>AUD</sub></em>, and <em>G<sub>AUD</sub></em> is fixed by
+  one matrix. Doubling, <em>z</em>&nbsp;&rarr;&nbsp;2<em>z</em>, is
+  diag(&radic;2,&thinsp;1/&radic;2) in PSL(2,&#8477;); for any hyperbolic element
+  |tr| = 2&middot;cosh(&#8467;/2), so tr&sup2;&nbsp;&minus;&nbsp;4 = 4&middot;sinh&sup2;(&#8467;/2), and
+  <em>p</em> = 2&middot;arccosh(|tr|/2)&nbsp;&divide;&nbsp;&radic;(tr&sup2;&nbsp;&minus;&nbsp;4).
+  Here tr&sup2; = 9/2 exactly, &radic;(tr&sup2;&nbsp;&minus;&nbsp;4) = 1/&radic;2, and
+  <em>p</em> = &radic;2&middot;ln&thinsp;2 = K_AUD, so <em>G<sub>AUD</sub></em> = 1&nbsp;&minus;&nbsp;K_AUD.
+  Because the formula sees the matrix only through its trace, the unit is the same for every copy
+  of the dilation <em>z &#8611; 2z</em> (translation length ln&thinsp;2) &mdash; <strong>the tower&rsquo;s ruler does not depend on where you stand.</strong>
+  <em>Wording may still be adjusted.</em></p>
+</section>
+
+<section class="ask-sec tp on" data-tab="staircase">
+  <h2>The gap as a unit &mdash; the conversion table</h2>
+  <p style="color:var(--muted); font-size:.95em;">The tower is, in the end, a familiar kind of
+  tool: a <strong>unit converter</strong>. The unit is the gap itself &mdash;
+  <strong>1&nbsp;gap = G<sub>AUD</sub> = 0.019741856531&hellip;</strong> &mdash; and a tower reading is a number
+  expressed in gap units, n&nbsp;=&nbsp;t/G<sub>AUD</sub>, the way kilometres express a distance already
+  measured in miles. <em>A conversion states no claim.</em> It is the same number in a
+  different unit &mdash; exact, useful, and silent about meaning. The framework&rsquo;s
+  &ldquo;translated readings&rdquo; are precisely such conversions; the
+  &ldquo;derived marks&rdquo; are the unit system&rsquo;s own calibration points, like
+  0&deg; and 100&deg; on a Celsius thermometer. This converter covers one dimension only:
+  lengths along the gap&rsquo;s own axis. The live converter is temporarily removed for rework; this is the printed card.</p>
+  <table class="conv-table">
+    <thead><tr><th>value</th><th>t</th><th>in gap units (t/G<sub>AUD</sub>)</th><th>nearest step</th><th>remainder (gaps)</th></tr></thead>
+    <tbody>
+      <tr class="conv-group"><td colspan="5">derived marks &mdash; the unit&rsquo;s own calibration points</td></tr>
+      <tr class="derived"><td>ln&thinsp;2 &mdash; one bit; the arc itself</td><td>0.6931471806</td><td>35.1105368158</td><td>35</td><td>+0.110537</td></tr>
+      <tr class="derived"><td>1/&radic;2 &mdash; the chord</td><td>0.7071067812</td><td>35.8176435970</td><td>36</td><td>&minus;0.182356</td></tr>
+      <tr class="derived"><td>1/(2&thinsp;ln&thinsp;2) &mdash; Shannon bound</td><td>0.7213475204</td><td>36.5389911174</td><td>37</td><td>&minus;0.461009</td></tr>
+      <tr class="derived"><td>K<sub>AUD</sub> &mdash; the ceiling</td><td>0.9802581435</td><td>49.6537973471</td><td>50</td><td>&minus;0.346203</td></tr>
+      <tr class="derived"><td>1 &mdash; unity, the last derived mark</td><td>1</td><td>50.6537973471</td><td>51</td><td>&minus;0.346203</td></tr>
+      <tr class="conv-group"><td colspan="5">conversions &mdash; world values expressed in gap units (no claim stated)</td></tr>
+      <tr class="translated"><td>1/&phi; &mdash; the floor</td><td>0.6180339887</td><td>31.3057684198</td><td>31</td><td>+0.305768</td></tr>
+      <tr class="translated"><td>&radic;&phi;</td><td>1.2720196495</td><td>64.4326255480</td><td>64</td><td>+0.432626</td></tr>
+      <tr class="translated"><td>e/2 &mdash; the control</td><td>1.3591409142</td><td>68.8456484356</td><td>69</td><td>&minus;0.154352</td></tr>
+      <tr class="translated"><td>&radic;2</td><td>1.4142135624</td><td>71.6352871940</td><td>72</td><td>&minus;0.364713</td></tr>
+      <tr class="translated"><td>&phi;</td><td>1.6180339887</td><td>81.9595657669</td><td>82</td><td>&minus;0.040434</td></tr>
+      <tr class="translated"><td>&pi;</td><td>3.1415926536</td><td>159.1335976220</td><td>159</td><td>+0.133598</td></tr>
+    </tbody>
+  </table>
+  <p style="color:var(--subtle); font-size:.85em; margin-top:10px;">One thing worth seeing:
+  <strong>K<sub>AUD</sub> and unity share a remainder</strong> &mdash; they sit exactly one gap
+  apart (1 &minus; K<sub>AUD</sub> = G<sub>AUD</sub>), the unit measuring itself. And
+  <strong>&lfloor;1/G<sub>AUD</sub>&rfloor; = 50</strong>: fifty whole gaps fit under one, which is also the
+  first term of G<sub>AUD</sub>&rsquo;s continued fraction &mdash; <em>the same fact twice</em>, because the
+  first term of a continued fraction <em>is</em> the floor of the reciprocal, by definition of
+  the algorithm. Guaranteed, not found. All values computed and
+  verified at mpmath dps&nbsp;500 &mdash; the framework&rsquo;s uniform working precision.
+  Why so deep for ten printed digits: different closed forms and drifts reveal themselves at
+  different depths &mdash; a false match can hold at 30 digits and break at 200 &mdash; so one
+  deep standard is kept for everything, as a general safety procedure
+  (<a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/methodology.html" target="_blank" rel="noopener">Methodology</a>).
+  The page itself computes in the browser&rsquo;s double precision (binary64) and stops its readouts at fifteen
+  digits: it shows, the table and the papers verify.
+  Remainders are signed distances to the nearest step, in gaps. <b>Each landing is a reading, not an
+  identity</b> — one bit (ln&thinsp;2) sits at 35.11, off the rung by +0.11; what is exact here is the
+  <em>spacing</em> between marks (Δ ratio = 1/K<sub>AUD</sub>), not the marks themselves. See the Convert tab's note.</p>
+</section>
+
+<section class="ask-sec tp on" data-tab="staircase">
+  <h2>The staircase &mdash; n &times; G<sub>AUD</sub>, drawn</h2>
+  <p style="color:var(--muted); font-size:.95em;">The conversion table above, made visible. Each faint rung is a
+  whole step <b>n</b>, at height <b>n&middot;G<sub>AUD</sub></b>; a landmark is a known constant that lands
+  <em>near</em> a rung &mdash; drawn at its <b>exact</b> position with its signed remainder, never as the
+  integer alone. <b>Derived marks</b> (blue) are the unit&rsquo;s own calibration; <b>conversions</b> (amber)
+  are imported values in gap units and <em>state no claim</em>. The <b>derived tower ends at unity</b>
+  (n&nbsp;&asymp;&nbsp;50.65, since K<sub>AUD</sub>&nbsp;&lt;&nbsp;1 is a theorem); <b>64</b> is the
+  <em>translated</em> window (the &radic;&phi; pivot) &mdash; structure, not dynamics.</p>
+  <canvas id="stairCv" width="760" height="680" style="width:100%;height:auto;background:#fff;border:1px solid var(--card-border);border-radius:8px;"></canvas>
+  <div id="stairRead" style="font-family:'Courier New',monospace;font-size:13px;color:var(--muted);margin-top:8px;min-height:1.4em;">hover the staircase &mdash; step, height, nearest landmark, remainder</div>
+  <p style="color:var(--subtle);font-size:.85em;margin-top:8px;">Positions computed live from
+  G<sub>AUD</sub>&nbsp;=&nbsp;1&nbsp;&minus;&nbsp;&radic;2&middot;ln&nbsp;2; they match the printed table (mpmath dps 500).
+  Further conversions sit above the shown window: e/2 at 68.85, &radic;2 at 71.64, &phi; at 81.96, &pi; at 159.13.</p>
+</section>
+
+<!-- ═══ BITS & ORBIT — the doubling lens, folded in from the Dyadic Ruler (2026-09-08) ═══ -->
+<section class="ask-sec tp" data-tab="bits">
+  <style>
+    .bt-wrap{ --bt-lit:#e8934a; --bt-line:#c9d2e0; --bt-well:#0c1322; --bt-phos:#b0ffc4; --bt-dim:#5ecfd6; }
+    .bt-card{ background:var(--card-bg); border:1px solid var(--card-border); border-radius:10px; padding:14px 16px; margin:14px 0; }
+    .bt-cap{ font-size:12.5px; color:var(--muted); font-family:'Courier New',monospace; }
+    .bt-row{ display:flex; align-items:center; gap:10px; margin:6px 0; }
+    .bt-lab{ width:64px; font-family:'Courier New',monospace; font-size:13px; color:var(--text); }
+    .bt-grid{ flex:1; display:grid; grid-template-columns:repeat(48,1fr); gap:2px; }
+    .bt-bit{ height:15px; border-radius:2px; }
+    .bt-bit1{ background:var(--bt-lit); }
+    .bt-bit0{ background:transparent; border:1px solid var(--bt-line); }
+    .bt-picker{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:12px; }
+    .bt-num{ padding:5px 11px; font-size:13px; font-family:'Courier New',monospace; color:var(--muted);
+      border:1px solid var(--card-border); border-radius:7px; background:transparent; cursor:pointer; }
+    .bt-num.on{ background:rgba(232,147,74,.14); border-color:var(--bt-lit); color:var(--text); }
+    .bt-ctls{ display:flex; align-items:center; gap:8px; margin-top:8px; }
+    .bt-ctl{ padding:6px 13px; font-size:13px; font-family:'Courier New',monospace; color:var(--text);
+      border:1px solid var(--card-border); border-radius:7px; background:transparent; cursor:pointer; }
+    .bt-read{ margin-left:auto; font-size:12.5px; color:var(--muted); font-family:'Courier New',monospace; text-align:right; line-height:1.5; }
+    .bt-wrap svg{ width:100%; height:auto; display:block; background:var(--bt-well); border-radius:8px; }
+  </style>
+  <div class="bt-wrap">
+    <h2>Bits &amp; orbit &mdash; the doubling lens</h2>
+    <p style="color:var(--muted); font-size:.95em;">The staircase measures a number in one unit, the gap. This
+    reads it in a <b>family</b> of units, the powers of two &mdash; the same as walking its binary digits, one
+    doubling at a time. The step is <b>ln&thinsp;2</b> because ln&thinsp;2 is the translation length of doubling
+    (z&nbsp;&#8614;&nbsp;2z), so this is the arc&rsquo;s own native motion. Folded in from the Dyadic Ruler;
+    bits computed mpmath dps&nbsp;60.</p>
+
+    <div class="bt-card">
+      <div class="bt-cap">first 48 binary digits &mdash; every 1 sits over a 0</div>
+      <div style="margin-top:10px">
+        <div class="bt-row"><div class="bt-lab">G<sub>AUD</sub></div><div id="dydRowG" class="bt-grid"></div></div>
+        <div class="bt-row"><div class="bt-lab">K<sub>AUD</sub></div><div id="dydRowK" class="bt-grid"></div></div>
+      </div>
+      <div class="bt-cap" style="margin-top:10px">G<sub>AUD</sub> + K<sub>AUD</sub> = 1 &rarr; exact bit complement, 72 of 72.
+      The gap-ruler reads them one step apart; the bits read them as opposites &mdash; one identity, two witnesses.</div>
+    </div>
+
+    <div class="bt-card">
+      <div id="dydPicker" class="bt-picker"></div>
+      <svg id="dydTrack" viewBox="0 0 640 236" aria-label="doubling orbit"></svg>
+      <div class="bt-ctls">
+        <button class="bt-ctl" id="dydPlay">&#9654; play</button>
+        <button class="bt-ctl" id="dydStep">step &rarr;</button>
+        <button class="bt-ctl" id="dydReset">&#8634; reset</button>
+        <div id="dydRead" class="bt-read"></div>
+      </div>
+      <div class="bt-cap" style="margin-top:10px">Each row is one doubling. x is where the number lands in [0,1).
+      Rationals fall into a few columns and close (period = order of 2 mod the denominator); irrationals never land twice.</div>
+    </div>
+
+    <p style="font-size:14px;color:var(--muted)">Reading guide: try <b>1/7</b> (three columns, closes at 3) and
+    <b>1/11</b> (ten), then <b>G<sub>AUD</sub></b> or <b>ln&thinsp;2</b> &mdash; they refuse to ever repeat. That
+    scatter is the null: no hidden structure in base 2. The one guardrail &mdash; this lens is base-2 native, so a
+    pattern only counts if it would survive in another base.</p>
+  </div>
+</section>
+
+<div class="tp" data-tab="read"><!-- FAQ / explanatory panels -->
+
+<script>
+(function(){
+  var cv=document.getElementById('stairCv'); if(!cv) return; var cx=cv.getContext('2d');
+  var W=cv.width, H=cv.height, M={l:60,r:214,t:22,b:30};
+  var G=1-Math.SQRT2*Math.log(2), PHI=(1+Math.sqrt(5))/2, vMax=1.30;
+  function Y(v){ return H-M.b-(v/vMax)*(H-M.t-M.b); }
+  var COL={d:"#2a5a8a", c:"#b07a2a"};
+  var marks=[
+    {t:1/PHI,               name:"1/φ — the floor",        k:"c"},
+    {t:Math.log(2),         name:"ln 2 — one bit, the arc",     k:"d"},
+    {t:1/Math.SQRT2,        name:"1/√2 — the chord",       k:"d"},
+    {t:1/(2*Math.log(2)),   name:"1/(2·ln2) — Shannon",    k:"d"},
+    {t:Math.SQRT2*Math.log(2), name:"K_AUD — the ceiling",     k:"d"},
+    {t:1,                   name:"unity — derived end",         k:"d", end:true},
+    {t:Math.sqrt(PHI),      name:"√φ — translated pivot", k:"c"}
+  ];
+  function draw(){
+    cx.clearRect(0,0,W,H); cx.fillStyle="#fff"; cx.fillRect(0,0,W,H);
+    cx.strokeStyle="#f0f0f0"; cx.fillStyle="#9a9a9a"; cx.font="11px sans-serif"; cx.lineWidth=1;
+    for(var v=0; v<=vMax+1e-9; v+=0.1){ var y=Y(v); cx.beginPath();cx.moveTo(M.l,y);cx.lineTo(W-M.r,y);cx.stroke(); cx.fillText(v.toFixed(1),8,y+3); }
+    cx.fillStyle="#5a5a5a"; cx.fillText("height = n·G_AUD", 8, M.t-8);
+    cx.strokeStyle="#d3dae2"; cx.lineWidth=1;
+    for(var n=1;n<=64;n++){ var vv=n*G; if(vv>vMax) break; var yy=Y(vv);
+      cx.beginPath();cx.moveTo(M.l,yy);cx.lineTo(W-M.r,yy);cx.stroke();
+      if(n%5===0){ cx.fillStyle="#b8c0cc"; cx.fillText(n, W-M.r+4, yy+3); } }
+    // draw each mark's line + dot at its TRUE height, collect for label declutter
+    var info=marks.map(function(m){ var y=Y(m.t), pos=m.t/G, near=Math.round(pos), rem=pos-near;
+      cx.strokeStyle=m.end?"#111":COL[m.k]; cx.lineWidth=2; if(m.end) cx.setLineDash([6,4]);
+      cx.beginPath();cx.moveTo(M.l,y);cx.lineTo(W-M.r,y);cx.stroke(); cx.setLineDash([]);
+      cx.fillStyle=COL[m.k]; cx.beginPath();cx.arc(W-M.r,y,3.6,0,7);cx.fill();
+      return { m:m, y:y, ly:y, pos:pos, near:near, rem:rem }; });
+    // declutter labels: keep >= LH apart top→bottom, then clamp the cluster into view
+    var LH=32; info.sort(function(a,b){return a.y-b.y;});
+    for(var i=1;i<info.length;i++){ if(info[i].ly < info[i-1].ly+LH) info[i].ly=info[i-1].ly+LH; }
+    var over=info[info.length-1].ly-(H-M.b-8); if(over>0){ for(var j=0;j<info.length;j++) info[j].ly-=over; }
+    info.forEach(function(d){ var lx=W-M.r+12;
+      cx.strokeStyle="#d3dae2"; cx.lineWidth=1;                    // leader from true height to label slot
+      cx.beginPath(); cx.moveTo(W-M.r+4, d.y); cx.lineTo(lx-3, d.ly); cx.stroke();
+      cx.fillStyle="#1a1a1a"; cx.font="600 12px sans-serif"; cx.fillText(d.m.name, lx, d.ly-2);
+      cx.fillStyle="#8a8a8a"; cx.font="11px 'Courier New',monospace";
+      cx.fillText("n="+d.pos.toFixed(3)+"  ("+(d.rem>=0?"+":"")+d.rem.toFixed(3)+" → "+d.near+")", lx, d.ly+11);
+    });
+    cx.font="11px sans-serif";
+    cx.fillStyle=COL.d; cx.fillText("■ derived (calibration)", M.l, H-9);
+    cx.fillStyle=COL.c; cx.fillText("■ conversion (no claim)", M.l+152, H-9);
+    cx.fillStyle="#111"; cx.fillText("–– derived end (unity)", M.l+312, H-9);
+  }
+  draw();
+  cv.addEventListener('mousemove', function(e){ var rc=cv.getBoundingClientRect();
+    var yPix=(e.clientY-rc.top)/rc.height*H;
+    var v=Math.max(0,Math.min(vMax,(H-M.b-yPix)/(H-M.t-M.b)*vMax));
+    var n=Math.max(1,Math.round(v/G)), val=n*G;
+    var best=marks[0], bd=1e9; marks.forEach(function(m){ var d=Math.abs(m.t-val); if(d<bd){bd=d;best=m;} });
+    var pos=best.t/G, near=Math.round(pos), rem=pos-near;
+    document.getElementById('stairRead').textContent =
+      "step n="+n+"   height="+val.toFixed(8)+"   nearest: "+best.name.split(" — ")[0]+" at n="+pos.toFixed(3)+" ("+(rem>=0?"+":"")+rem.toFixed(3)+")";
+  });
+})();
+</script>
+
+
+<div class="origin">
+  &ldquo;The tower was born from noticing &mdash; ratios, <span class="gloss" data-tip="A pivot is a step where the structure turns rather than just continues. The staircase's far end, step 64 (= 64·G<sub>AUD</sub>), lands near √φ — within 0.7%, deviation stated, never hidden: the Pivot.">pivots</span>, <span class="gloss" data-tip="A crossing is where the climbing staircase (steps = multiples of G<sub>AUD</sub>) passes a known threshold — like an elevator passing a marked floor. The Landauer crossing is where it passes ln 2, the minimum energy cost of erasing one bit: at 35.11 G<sub>AUD</sub>-steps.">crossings</span> that kept landing near each other. It exists so those meetings can be watched instead of just remembered.&rdquo;
+  <details>
+    <summary>more</summary>
+    Coincidences are easier to judge when they stand on the same scale &mdash; one ladder, where everything noticed gets to stand. Some patterns dissolve under that test. The ones that survive are in the papers.
+  </details>
+</div>
+
+<details class="panel">
+  <summary><span class="q">What is this tool?</span><span class="one-liner">A ladder of halvings: rung n holds (1/2)<sup>n</sup>. The only moves are double and halve.</span><span class="chev">&#9656;</span></summary>
+  <div class="expand">That&rsquo;s all &ldquo;binary&rdquo; means &mdash; counting with just 0 and 1, so every number becomes a recipe of doublings. Your computer plays videos and games by stacking halvings and doublings very, very fast. This tower is that world, drawn as a ladder you can climb.</div>
+</details>
+
+<details class="panel">
+  <summary><span class="q">What is K<sub>AUD</sub>?</span><span class="one-liner">K<sub>AUD</sub> = &radic;2 &middot; ln 2 &asymp; 0.980258 &mdash; geometry&rsquo;s simplest diagonal times information&rsquo;s simplest cost.</span><span class="chev">&#9656;</span></summary>
+  <div class="expand">&radic;2 is what a square&rsquo;s diagonal costs; ln 2 is what one yes/no decision costs. Their product is the framework&rsquo;s central constant &mdash; and what&rsquo;s left over is the Gap: G<sub>AUD</sub> = 1 &minus; K<sub>AUD</sub> &asymp; 0.019742. About 2%.</div>
+</details>
+
+<details class="panel">
+  <summary><span class="q">What does it compute?</span><span class="one-liner">Type a number &mdash; the tower lights the rungs that build it. That&rsquo;s its binary recipe.</span><span class="chev">&#9656;</span></summary>
+  <div class="expand">Two ladders, one family: <strong>this widget&rsquo;s ladder</strong> is the binary recipe &mdash; rung n holds (1/2)<sup>n</sup>, and your number lights the rungs it uses. <strong>The framework&rsquo;s Tower staircase</strong> is a different ladder: its steps are <em>multiples of the Gap</em> (step n sits at n&middot;G<sub>AUD</sub>), and that is where the named <span class="gloss" data-tip="A landmark is a step of the G<sub>AUD</sub>-staircase where a named constant lands nearby — always reported with its exact position and signed remainder, never as the integer alone.">landmarks</span> live. They come in two kinds, and the difference matters: <strong>derived marks</strong> &mdash; ln 2 at 35.111, the chord 1/&radic;2 at 35.818, K<sub>AUD</sub> at 49.654, unity at 50.654 &mdash; are the unit&rsquo;s own calibration points, and &radic;2/4 at 17.909 belongs with them, being exactly half the chord. <strong>Conversions</strong> &mdash; 1/&phi; at 31.306, &radic;&phi; at 64.433, &phi; at 81.960, and &pi;/3 at 53.045 &mdash; are imported values expressed in gap units, and state no claim. The <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Hall%20of%20Memories/telescope-tower.html" target="_blank" rel="noopener">Telescope Tower</a> searches that staircase &mdash; and always states the deviation. Try the widget below for the recipe side.</div>
+</details>
+
+<details class="panel">
+  <summary><span class="q">Why the Gap matters</span><span class="one-liner">The same ~0.0197 keeps being noticed in places that never asked for it.</span><span class="chev">&#9656;</span></summary>
+  <div class="expand">A hyperbolic-geometry bound, a 1970s sampling algorithm&rsquo;s saturation point, the &eta; <span class="gloss" data-tip="Paper 11's observation: at 3D Wilson–Fisher critical points, 2 − η stays inside [2·K_AUD, 2] — a band of width 2G ≈ 0.0395. (A different object from the Coherence Corridor [1/φ, K_AUD].)">corridor</span> of 3D phase transitions. The papers document each appearance with evidence labels &mdash; <span class="chip chip-thm">Theorem</span> for proved, <span class="chip chip-obs">Observation</span> for seen-and-verified-but-not-derived &mdash; and those labels appear on this page too. Why labels? &rarr; <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/methodology.html" target="_blank" rel="noopener">Methodology</a>.</div>
+</details>
+
+</div><!-- /read -->
+
+<div class="tp" data-tab="gtool">
+<h2 class="sec" id="g-exact">The gap, exactly &mdash; a tool for <span style="font-family:monospace">G<sub>AUD</sub></span></h2>
+
+<p class="note"><strong>Everything above works on the <em>digits</em> of a constant. This section
+works on one constant's <em>structure</em>.</strong>
+<span style="font-family:monospace">G = 1 &minus; &radic;2&middot;ln&thinsp;2 = 0.019741856531452808286&hellip;</span>
+is not a leftover: it has an exact rational series, its two published bounds are that series' first
+two partial sums, and its remainder under halving is a smaller copy of itself.
+<em>The series panel below is computed in exact rational arithmetic with BigInt &mdash; no floating
+point anywhere in it. Added 2026-08-27.</em></p>
+
+<div class="panel" id="gx-wrap" style="border:1px solid var(--card-border); background:var(--card-bg); border-radius:8px; padding:14px 16px; margin:14px 0;">
+
+  <!-- ── 1 ─────────────────────────────────────────────── -->
+  <div style="border-bottom:1px solid var(--card-border); padding-bottom:14px; margin-bottom:14px;">
+    <strong>1 &middot; The series &mdash; exact rationals</strong>
+    <div style="font-family:monospace; font-size:.92em; margin:7px 0 9px; color:var(--muted);">
+      G<sub>AUD</sub> = &Sigma;<sub>k&ge;1</sub> (&minus;1)<sup>k+1</sup> &middot; C(2k,k) / ( 32<sup>k</sup> &middot; (2k+1) )
+    </div>
+    <div class="widget-row" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+      <label for="gx-n">terms&nbsp;N</label>
+      <input id="gx-n" type="range" min="1" max="16" value="2" style="flex:1; min-width:170px;">
+      <output id="gx-nv" style="font-family:monospace; min-width:2.2em;">2</output>
+    </div>
+    <div id="gx-out" style="font-family:monospace; font-size:.9em; line-height:1.7; margin-top:9px; word-break:break-all;"></div>
+  </div>
+
+  <!-- ── 2 ─────────────────────────────────────────────── -->
+  <div style="border-bottom:1px solid var(--card-border); padding-bottom:14px; margin-bottom:14px;">
+    <strong>2 &middot; The halving ladder &mdash; what is left after N halvings</strong>
+    <div style="font-size:.9em; color:var(--muted); margin:6px 0 9px;">
+      Halve the cell N times and the remainder is
+      <span style="font-family:monospace">1 &minus; p(ln&thinsp;2 / 2<sup>N</sup>)</span> &mdash;
+      the gap of <em>that</em> rung's own cell. It is also the relative error of the composite
+      midpoint rule on <span style="font-family:monospace">2<sup>N</sup></span> panels, which is why
+      the ratio tends to <strong>&frac14;</strong>: the midpoint rule is second order.
+    </div>
+    <div class="widget-row" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+      <label for="gx-h">halvings&nbsp;N</label>
+      <input id="gx-h" type="range" min="0" max="20" value="3" style="flex:1; min-width:170px;">
+      <output id="gx-hv" style="font-family:monospace; min-width:2.2em;">3</output>
+    </div>
+    <div id="gx-hout" style="font-family:monospace; font-size:.9em; line-height:1.7; margin-top:9px;"></div>
+  </div>
+
+  <!-- ── 3 ─────────────────────────────────────────────── -->
+  <div>
+    <strong>3 &middot; Any integer cell &mdash; and why 2 is the only one with a binary base</strong>
+    <div style="font-size:.9em; color:var(--muted); margin:6px 0 9px;">
+      On the cell <span style="font-family:monospace">[x, n&middot;x]</span> the same expansion has
+      base <span style="font-family:monospace">16n/(n&minus;1)&sup2;</span>. It is an integer only at
+      <span style="font-family:monospace">n = 2, 3, 5</span>, and a power of two only at
+      <span style="font-family:monospace">n = 2</span>.
+    </div>
+    <div class="widget-row" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
+      <label for="gx-cell">cell ratio&nbsp;n</label>
+      <input id="gx-cell" type="number" min="2" max="100000" step="1" value="2" style="width:8em;">
+    </div>
+    <div id="gx-cout" style="font-family:monospace; font-size:.9em; line-height:1.7; margin-top:9px;"></div>
+  </div>
+
+  <div id="gx-selftest" style="font-size:.82em; color:var(--subtle); margin-top:13px; border-top:1px solid var(--card-border); padding-top:9px;"></div>
+</div>
+
+<p class="note"><strong>What this tool does not show.</strong> The first rung of the ladder carries
+about 74.9% of the whole, and <em>that is generic</em> &mdash; a cascade of ratio &frac14; always
+puts &frac34; on its first term, at every length. It is not a fact about
+<span style="font-family:monospace">&radic;2</span> or about base&nbsp;2. And the ladder is
+<strong>scale-free</strong>: adding a rung at the top is exactly doubling, so it does not single out
+<span style="font-family:monospace">n = 2</span>. <em>What singles out 2 is elsewhere &mdash; one bit
+consumed, the unit denominator <span style="font-family:monospace">n &minus; 1 = 1</span>, and the
+base <span style="font-family:monospace">32 = 2<sup>5</sup></span> in panel 3.</em></p>
+
+<script>
+(function(){
+  "use strict";
+  // ── G_AUD to 56 places, as an exact BigInt ratio. Verified at dps 60.
+  var GNUM = 1974185653145280828609827636476661870853930090094527896n;
+  var GDEN = 10n ** 56n;
+  var LN2  = 0.6931471805599453094172321214581765680755;
+
+  function gcd(a,b){ a=a<0n?-a:a; b=b<0n?-b:b; while(b){ var t=a%b; a=b; b=t; } return a; }
+  function red(n,d){ var g=gcd(n,d)||1n; return [n/g, d/g]; }
+  // decimal expansion of n/d to p places, by BigInt division
+  function dec(n,d,p){
+    var neg = (n<0n)!==(d<0n); n=n<0n?-n:n; d=d<0n?-d:d;
+    var scaled = n * (10n**BigInt(p)) / d;
+    var s = scaled.toString().padStart(p+1,"0");
+    return (neg?"-":"") + s.slice(0,s.length-p) + "." + s.slice(s.length-p);
+  }
+  function binom2k(k){ // C(2k,k)
+    var num=1n, den=1n;
+    for(var i=1;i<=k;i++){ num *= BigInt(k+i); den *= BigInt(i); }
+    return num/den;
+  }
+  function partial(N){           // exact S_N as [num, den]
+    var n=0n, d=1n;
+    for(var k=1;k<=N;k++){
+      var tn = binom2k(k), td = (32n**BigInt(k)) * BigInt(2*k+1);
+      if(k%2===0) tn = -tn;
+      var r = red(n*td + tn*d, d*td); n=r[0]; d=r[1];
+    }
+    return [n,d];
+  }
+  // |G_AUD - S_N| as a decimal string
+  function gapTo(n,d,p){
+    var a = GNUM*d, b = n*GDEN, den = GDEN*d;
+    var num = a-b; if(num<0n) num=-num;
+    return dec(num, den, p);
+  }
+  // cancellation-safe tail: (2 sinh(h/2) - h) / (2 sinh(h/2)), numerator by series
+  function tail(h){
+    var num=0, term=2*Math.pow(h/2,3)/6, m=1;
+    while(m<40 && Math.abs(term)>1e-300){ num+=term; m++;
+      term = 2*Math.pow(h/2,2*m+1); for(var i=2;i<=2*m+1;i++) term/=i; }
+    var den = 2*Math.sinh(h/2);
+    return num/den;
+  }
+
+  var $ = function(i){ return document.getElementById(i); };
+  function paintSeries(){
+    var N = +$("gx-n").value; $("gx-nv").textContent = N;
+    var s = partial(N), lines = [];
+    lines.push("S_" + N + "  =  " + s[0].toString() + " / " + s[1].toString());
+    lines.push("      =  " + dec(s[0], s[1], 24));
+    lines.push("G_AUD     =  0.019741856531452808286098");
+    lines.push("|G_AUD - S_" + N + "|  =  " + gapTo(s[0], s[1], 24).replace(/0+$/,"0"));
+    if(N===1) lines.push('⚑  S_1 = 1/48 — the UPPER bound this framework published.');
+    if(N===2) lines.push('⚑  S_2 = 151/7680 — the LOWER bound. 1/48 − 3/2560 = 160/7680 − 9/7680.');
+    if(N>=2) lines.push("the series alternates with terms decreasing, so S_2 < G_AUD < S_1 — which is WHY the bounds hold.");
+    $("gx-out").innerHTML = lines.map(function(l){return l.replace(/</g,"&lt;");}).join("<br>");
+  }
+  function paintLadder(){
+    var N = +$("gx-h").value; $("gx-hv").textContent = N;
+    var h = LN2/Math.pow(2,N), t = tail(h), prev = N>0 ? tail(LN2/Math.pow(2,N-1)) : null;
+    var out = [];
+    out.push("cell ratio      2^(1/" + Math.pow(2,N) + ")" + (N===0 ? "  = 2, the binary cell itself" : ""));
+    out.push("1 - p(ln2/2^" + N + ")  =  " + t.toPrecision(15));
+    if(prev!==null) out.push("ratio to N-1    =  " + (t/prev).toPrecision(12) + "   → 1/4");
+    out.push("i.e. the composite midpoint rule on " + Math.pow(2,N) + " panel" + (N?"s":"") + " keeps all but this.");
+    $("gx-hout").innerHTML = out.join("<br>");
+  }
+  function paintCell(){
+    var n = Math.max(2, Math.min(100000, Math.floor(+$("gx-cell").value||2)));
+    var bn = 16n*BigInt(n), bd = BigInt((n-1)*(n-1));
+    var r = red(bn,bd), isInt = (r[1]===1n), isP2 = isInt && (r[0] & (r[0]-1n)) === 0n;
+    var p = Math.sqrt(n)*Math.log(n)/(n-1);
+    $("gx-cout").innerHTML = [
+      "base 16n/(n-1)²  =  " + r[0].toString() + (isInt ? "" : " / " + r[1].toString()),
+      "integer base    =  " + (isInt ? "yes" : "no") + "        power of two = " + (isP2 ? "YES" : "no"),
+      "p(ln n) = √n·ln n/(n-1)  =  " + p.toPrecision(15),
+      "1 - p(ln n)             =  " + (1-p).toPrecision(15)
+    ].join("<br>");
+  }
+
+  // ── self-test, against values verified at dps 60
+  function selfTest(){
+    var f = [], s1 = partial(1), s2 = partial(2), s8 = partial(8);
+    if(!(s1[0]===1n && s1[1]===48n)) f.push("S_1 != 1/48");
+    if(!(s2[0]===151n && s2[1]===7680n)) f.push("S_2 != 151/7680");
+    if(!(s8[0]===8311000980567041n && s8[1]===420983760821944320n)) f.push("S_8 wrong");
+    if(Math.abs(tail(LN2/2) - 0.0049872411909414037) > 1e-17) f.push("tail N=1");
+    if(Math.abs(tail(LN2/256) - 3.05463734426828396e-7) > 1e-22) f.push("tail N=8");
+    if(dec(GNUM,GDEN,20) !== "0.01974185653145280828") f.push("G_AUD constant");
+    $("gx-selftest").innerHTML = f.length
+      ? "⚑ SELF-TEST FAILED: " + f.join(", ")
+      : "self-test: 6 checks passed — S₁ = 1/48, S₂ = 151/7680, S₈ exact, "
+        + "the tail at N = 1 and N = 8, and G_AUD to 20 places. Panel 1 is exact rational "
+        + "arithmetic (BigInt); panels 2 and 3 are double precision, good to ~15 digits.";
+  }
+
+  $("gx-n").addEventListener("input", paintSeries);
+  $("gx-h").addEventListener("input", paintLadder);
+  $("gx-cell").addEventListener("input", paintCell);
+  paintSeries(); paintLadder(); paintCell(); selfTest();
+})();
+</script>
+
+<p class="note"><strong>And why this cell at all &mdash; three computations.</strong>
+<span style="font-family:monospace">G &gt; 0 for every r &gt; 1</span>, from the strict concavity of
+<span style="font-family:monospace">arcsinh</span> &mdash; a theorem, so the function prices any
+relation. <strong>But no feature of it sits at <span style="font-family:monospace">ln&thinsp;2</span></strong>:
+swept over <span style="font-family:monospace">L &isin; (0,&thinsp;30)</span>, the slope has no zeros
+and the curvature has exactly one, at <span style="font-family:monospace">r = 24.83</span>;
+<span style="font-family:monospace">ln&thinsp;2</span> sits at 21.6&thinsp;% of the way to it, and
+11.0&thinsp;% of the way to the nearest singularity. <strong>What is left: 2 is the first integer
+ratio, and G<sub>AUD</sub> is what that first relation costs.</strong> Panel&nbsp;3 above is the same statement in
+the other direction &mdash; it is the base <span style="font-family:monospace">32 = 2&#8309;</span>
+that is unique to this cell, not a feature of the curve.</p>
+
+</div><!-- /gtool -->
+
+<div class="tp" data-tab="recipe">
+<h2 class="sec">Try it &mdash; the binary recipe</h2>
+
+<div class="widget">
+  <div class="widget-row">
+    <label class="fld" for="numIn">Number</label>
+    <input type="text" id="numIn" class="fieldA" value="0.6875" aria-label="Number to decompose" spellcheck="false">
+  </div>
+  <div class="widget-row">
+    <button class="preset" data-v="0.6875">0.6875</button>
+    <button class="preset" data-v="0.1">0.1</button>
+    <button class="preset" data-k="third">1/3</button>
+    <button class="preset" data-k="pi3">&pi; &minus; 3</button>
+    <button class="preset" data-k="ln2">ln 2</button>
+    <button class="preset" data-k="G_AUD">G<sub>AUD</sub></button>
+    <button class="preset" data-k="KAUD">K<sub>AUD</sub></button>
+    <button class="preset" data-k="landauer">G/(2&middot;ln 2)</button>
+    <span class="preset-hint">Preset constants use 96 true binary digits (precomputed at 60-digit precision) &mdash; not your browser&rsquo;s rounded copy.</span>
+  </div>
+  <div class="widget-row">
+    <label class="fld" for="cmpSel">Compare with</label>
+    <select id="cmpSel" style="font-family:inherit; font-size:14px; padding:6px 8px; border:1px solid var(--rule); border-radius:4px;">
+      <option value="">&mdash; nothing &mdash;</option>
+      <option value="G_AUD">G_AUD</option>
+      <option value="twoG">2G</option>
+      <option value="KAUD">K_AUD</option>
+      <option value="ln2">ln 2</option>
+      <option value="inv_sqrt2">1/&radic;2</option>
+      <option value="sqrt2_4">&radic;2/4</option>
+      <option value="landauer">G/(2&middot;ln 2)</option>
+      <option value="inv_phi">1/&phi; (corridor floor)</option>
+      <option value="custom">custom&hellip;</option>
+    </select>
+    <input type="text" id="numInB" class="fieldB" style="display:none;" placeholder="second number" aria-label="Second number" spellcheck="false">
+  </div>
+
+  <div class="relation" id="relationOut" style="display:none;"></div>
+  <div class="int-chips" id="intChips"></div>
+  <div class="recipe" id="recipeOut"></div>
+  <div class="legend" id="legend" style="display:none;"><span class="sw swA"></span>first number &nbsp; <span class="sw swB"></span>second number &nbsp; <span class="sw swAB"></span>both use this rung</div>
+  <div class="legend" style="display:block; border-top: 1px dashed var(--card-border); padding-top: 7px; margin-top: 8px;">The tower decomposes <em>anything</em> &mdash; that is what calculators do. Lit rungs are arithmetic, never significance. Significance, when claimed, lives in the papers, with evidence labels attached.</div>
+
+  <div class="ladder-wrap">
+    <div class="ladder" id="ladder" aria-label="Tower rungs 1 to 64"></div>
+    <div class="ladder-side">
+      <p><strong>Reading the ladder:</strong> each rung n is the value (1/2)<sup>n</sup>. A lit rung means the recipe uses that halving. This is the <em>recipe ladder</em> &mdash; the framework&rsquo;s landmark staircase (steps = multiples of G<sub>AUD</sub>) is a different ladder; the <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Hall%20of%20Memories/telescope-tower.html" target="_blank" rel="noopener">Telescope Tower</a> searches it and reports how near any number lands to a G<sub>AUD</sub>-step, deviation included.</p>
+      <p><strong>Seeing relations:</strong> on the tower, dividing by 2 is a one-rung slide. Try G<sub>AUD</sub> vs 2G, or 1/&radic;2 vs &radic;2/4 &mdash; same recipe, shifted one rung. Relations between framework numbers become <em>shapes</em>.</p>
+      <p id="sideNote" style="color: var(--landmark);"></p>
+      <p style="font-size:12.5px; color: var(--subtle);">Full instruments: <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations%20hub.html" target="_blank" rel="noopener">Dashboard</a> &middot; <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Hall%20of%20Memories/telescope-tower.html" target="_blank" rel="noopener">Telescope Tower</a></p>
+    </div>
+  </div>
+</div>
+
+</div><!-- /recipe -->
+
+<footer>
+  <div style="font-size:12px; opacity:0.75; margin-bottom:6px;">AI readers: <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/ai-readers.html">guide</a> &middot; <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/AI_INDEX.txt">machine index</a> &middot; <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/llms.txt">llms.txt</a></div>
+  <a class="back-hub" href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/">&larr; Back to Gap Geometry Hub</a>
+  &nbsp;&middot;&nbsp;
+  <a class="back-hub" href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations%20hub.html">Visualisations</a>
+  &nbsp;&middot;&nbsp;
+  <a class="back-hub" href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/methodology.html">Methodology</a>
+  <div>D. B. &mdash; Gap Geometry &mdash; 2025&ndash;2026</div>
+  <div class="contact">
+    <a href="mailto:Gap-geometryK_AUD2@telenet.be">Gap-geometryK_AUD2@telenet.be</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://x.com/Aud2Gap" target="_blank" rel="noopener">@Aud2Gap</a>
+    &nbsp;&middot;&nbsp;
+    <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/license.html">CC BY 4.0</a>
+  </div>
+</footer>
+
+<!-- FRAMEWORK-LINKS TEMPLATE (2026-09-07): one link to About — the door that routes to GitHub · OSF · Index -->
+<div style="max-width:var(--max-width);margin:26px auto 0;padding-top:14px;border-top:1px solid var(--card-border);font-size:13px;color:var(--muted);text-align:center;">
+  <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/" style="color:var(--link);text-decoration:none;">→ Gap Geometry · the framework</a>
+  &nbsp;·&nbsp;
+  <a href="https://www.iso.org/standard/64973.html" style="color:var(--muted);text-decoration:none;">notation follows ISO 80000-2</a>
+  &nbsp;·&nbsp;
+  <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/license.html" style="color:var(--muted);text-decoration:none;">license</a>
+</div>
+</main>
+
+<script>
+(function () {
+  "use strict";
+  var RUNGS = 64;
+
+  function bigFmt(b) {
+    var s = b.toString();
+    if (s.length <= 7) return s.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    var exp = s.length - 1;
+    return s.charAt(0) + "." + s.slice(1, 3) + " × 10^" + exp;
+  }
+
+  /* NOTE (cross-check 2026-06-11): the framework's landmark steps (18, 35, 36, 50, 53, 64)
+     live on the G_AUD-STAIRCASE (steps = multiples of G_AUD — the Telescope Tower's grid), NOT on
+     this binary-recipe ladder. Painting them here was a conflation; removed. */
+  var LANDMARKS = {};
+
+  /* True binary expansions, precomputed offline with mpmath at 60-digit precision (96 bits). */
+  var CONSTS = {
+    G_AUD:         { name: "G_AUD = 1 − √2·ln 2",        val: 0.019741856531452808286, irr: true,
+                 bits: "000001010000110111001101011001000010101000110111110010101000111110001001000101111110101000111000" },
+    twoG:      { name: "2G",                      val: 0.039483713062905616572, irr: true,
+                 bits: "000010100001101110011010110010000101010001101111100101010001111100010010001011111101010001110000" },
+    KAUD:      { name: "K_AUD = √2·ln 2",         val: 0.98025814346854719171, irr: true,
+                 bits: "111110101111001000110010100110111101010111001000001101010111000001110110111010000001010111000111" },
+    ln2:       { name: "ln 2",                    val: 0.69314718055994530942, irr: true,
+                 bits: "101100010111001000010111111101111101000111001111011110011010101111001001111000111011001110011000" },
+    inv_sqrt2: { name: "1/√2 — the chord at the doubling cell; ⚑ also X at r = 2+√3", val: 0.7071067811865475244, irr: true,
+               /* named 2026-09-01. TWO readings, one number, and they are NOT the same object:
+                  · the CHORD at r = 2,  2·sinh(ln2/2) = 1/√2  — the arc/dome bridge's own value;
+                  · the COORDINATE X = (r−1)/(2√r) at r = 2+√3 = 3.7320508…, where the
+                    central-binomial base 4/X² equals 8 (Paper 14 §4).
+                  Recorded so the two cells are never read as one. */
+                 bits: "101101010000010011110011001100111111100111011110011001001000010001011001011111011000100110110011" },
+    sqrt2_4:   { name: "√2/4 = 1/(2√2) — X at the doubling cell, and half the chord", val: 0.3535533905932737622, irr: true,
+               /* named 2026-09-01. this IS Paper 14 §2's coordinate at r = 2:
+                  X = (r−1)/(2√r) = sinh(L/2) = 1/(2√2), whence X² = 1/8 and the
+                  expansion base 4/X² = 32. the "half the chord" reading already
+                  in the explainer above is the same number, one object. */
+                 bits: "010110101000001001111001100110011111110011101111001100100100001000101100101111101100010011011001" },
+    pi3:       { name: "π − 3",                   val: 0.14159265358979323846, irr: true,
+                 bits: "001001000011111101101010100010001000010110100011000010001101001100010011000110011000101000101110" },
+    third:     { name: "1/3",                     val: 1/3, irr: false, period: [1, 2],
+                 bits: "010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101" },
+    landauer:  { name: "G_AUD/(2·ln 2) — √2-to-Shannon gap", val: 0.014240739257934179279, irr: true,
+               /* renamed from "Landauer crossing cost" 2026-08-20 per the 13 Apr 2026
+                  notices (Papers 5, 6, 7): this identity is the spacing between
+                  thresholds 2 and 3; the Landauer crossing proper is n·G_AUD = ln 2
+                  at n ≈ 35.11 — a different object. */
+                 bits: "000000111010010101000111111101010110001000111001100011000011011101100101000010100111010100011100" },
+    inv_phi:   { name: "1/φ = φ − 1 — the Corridor floor",   val: 0.6180339887498948482, irr: true,
+                 bits: "100111100011011101111001101110010111111101001010011111000001010111110011100111001100000001100000" },
+    e2:        { name: "e − 2",                              val: 0.718281828459045202, irr: true, fame: true,
+                 bits: "101101111110000101010001011000101000101011101101001010100110101010111111011100010101100010000000" },
+    pi4:       { name: "π/4",                                val: 0.785398163397448279, irr: true, fame: true,
+                 bits: "110010010000111111011010101000100010000101101000110000100011010011000100110001100110001010001011" },
+    gamma:     { name: "γ (Euler–Mascheroni)",               val: 0.577215664901532866, irr: true, fame: true,
+                 bits: "100100111100010001100111111000110111110110110000110001111010010011010001101111100011111110000001" },
+    sqrt2m1:   { name: "√2 − 1 = 1/(1+√2) — the silver ratio's reciprocal", val: 0.414213562373095034, irr: true, fame: true,
+               /* named 2026-09-01. the silver ratio 1+√2 squares to 3+2√2 = 5.8284271…,
+                  which is where X = 1 exactly and the central-binomial base 4/X² = 4 —
+                  the outer limit of Paper 14 §4's chart. ⚑ THAT IS A FACT ABOUT THE
+                  r-ROAD, NOT ABOUT THIS LADDER: no tower word is claimed here and this
+                  value's staircase position, 20.9814898…, carries no landmark. */
+                 bits: "011010100000100111100110011001111111001110111100110010010000100010110010111110110001001101100110" },
+    seventh:   { name: "1/7",                                val: 0.142857142857142849, irr: false, fame: true, period: [1, 3],
+                 bits: "001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001001" },
+    half_ln2:  { name: "ln(2)/2 — the dome integral (Paper 11, Thm 9.5)", val: 0.346573590279972643, irr: true,
+                 bits: "010110001011100100001011111110111110100011100111101111001101010111100100111100011101100111001100" },
+    thue_morse:{ name: "Thue–Morse constant — its binary digits are the Thue–Morse sequence itself", val: 0.412454033640107576, irr: true, fame: true,
+                 bits: "011010011001011010010110011010011001011001101001011010011001011010010110011010010110100110010110" },
+    champ2:    { name: "binary Champernowne — its digits count 1, 10, 11, 100, 101, …", val: 0.862240125868054541, irr: true, fame: true,
+                 bits: "110111001011101111000100110101011110011011110111110000100011001010011101001010110110101111100011" },
+    catalan:   { name: "Catalan constant β(2)",              val: 0.915965594177219011, irr: true, fame: true,
+                 bits: "111010100111110010111000100111110100000010011010111010000100010100100001010110000010001011100011" },
+    apery:     { name: "ζ(3) − 1 (Apéry)",                   val: 0.202056903159594292, irr: true, fame: true,
+                 bits: "001100111011101000000000010011110000000001100010000100111000001101110001011100010101110001011001" },
+    erdosb:    { name: "Erdős–Borwein − 1 (sum of Mersenne reciprocals)", val: 0.606695152415291816, irr: true, fame: true,
+                 bits: "100110110101000001011111100111100100001111110010001001000011011111110011011100101100010100101000" },
+    feig:      { name: "Feigenbaum δ − 4",                   val: 0.669201609102990647, irr: true, fame: true,
+                 bits: "101010110101000011001011111100011000011100100101110100011101000111000000010011101101010001011010" },
+    sqrt3m1:   { name: "√3 − 1",                             val: 0.732050807568877304, irr: true, fame: true,
+                 bits: "101110110110011110101110100001011000010011001010101001110011101100100101011101000010110101110000" },
+    eta2:      { name: "π²/12 = η(2)",                       val: 0.822467033424113203, irr: true, fame: true,
+                 bits: "110100101000110100110011000100101001100000111110100110010001100001110011110110001001000100100010" }
+  };
+
+  /* ---------- ladder ---------- */
+  var ladder = document.getElementById("ladder");
+  for (var n = 1; n <= RUNGS; n++) {
+    var r = document.createElement("div");
+    r.className = "rung" + (LANDMARKS[n] ? " landmark-rung" : "");
+    r.id = "rung-" + n;
+    if (n === 1 || n % 8 === 0) { var nl = document.createElement("span"); nl.className = "n-label"; nl.textContent = n; r.appendChild(nl); }
+    if (LANDMARKS[n]) { var lm = document.createElement("span"); lm.className = "lm-label"; lm.textContent = LANDMARKS[n]; r.appendChild(lm); }
+    ladder.appendChild(r);
+  }
+
+  /* ---------- exact decimal engine (BigInt) ----------
+     A typed decimal "0.0142407393" is the exact rational 142407393/10^10.
+     Decimals always terminate or eventually repeat in binary. We compute the
+     digits exactly, and we also compute the TRUE tail + period from the
+     reduced denominator: q = 2^a · 5^b  ⇒  tail = a rungs, period = ord(2 mod 5^b)
+     = 4·5^(b−1). Random long decimals carry astronomical periods — that is the
+     honest reason the repeat block usually does not fit in 64 rungs.            */
+  function expandDecimalExact(str) {
+    var m = str.trim().match(/^(\d*)(?:\.(\d+))?$/);
+    if (!m || (m[1] === "" && !m[2])) return null;
+    var intStr = m[1] || "0", fracStr = m[2] || "";
+    var intPart = BigInt(intStr);
+    var q = BigInt("1" + "0".repeat(fracStr.length || 0));
+    var p = fracStr ? BigInt(fracStr) : 0n;
+    var bits = [], seen = {}, termAt = 0, repStart = 0, repLen = 0;
+    var rem = p;
+    for (var i = 1; i <= RUNGS; i++) {
+      if (rem === 0n) { termAt = i - 1; break; }
+      var key = rem.toString();
+      if (seen[key] !== undefined && !repLen) { repStart = seen[key]; repLen = (i - 1) - seen[key]; }
+      if (!repLen) seen[key] = i - 1;
+      rem = rem * 2n;
+      if (rem >= q) { bits.push(1); rem -= q; } else { bits.push(0); }
+    }
+    while (bits.length < RUNGS) {
+      if (termAt) bits.push(0);
+      else if (repLen) bits.push(bits[repStart + ((bits.length - repStart) % repLen)]);
+      else bits.push(0);
+    }
+    /* if positive but no rung lights within the window, find the true first rung exactly */
+    var firstRung = 0;
+    if (p !== 0n && bits.indexOf(1) === -1) {
+      var k = q.toString(2).length - p.toString(2).length;
+      if ((p << BigInt(k)) < q) k += 1;
+      firstRung = k;
+    }
+    /* exact tail + period from the reduced denominator */
+    var tailLen = 0n, periodLen = 0n;
+    if (p !== 0n) {
+      var x = p, y = q;
+      while (y) { var t = x % y; x = y; y = t; }
+      var qq = q / x;
+      while (qq % 2n === 0n) { qq /= 2n; tailLen++; }
+      var b5 = 0n;
+      while (qq % 5n === 0n) { qq /= 5n; b5++; }
+      if (b5 > 0n) periodLen = 4n * 5n ** (b5 - 1n);
+    }
+    return { intPart: intPart, bits: bits, terminates: termAt > 0 || p === 0n, termAt: termAt,
+             repStart: repStart, repLen: repLen, val: parseFloat(str), hasFrac: p !== 0n, digits: fracStr.length,
+             tailLen: tailLen, periodLen: periodLen, firstRung: firstRung };
+  }
+
+  function expandConst(key) {
+    var c = CONSTS[key];
+    var bits = [];
+    for (var i = 0; i < RUNGS; i++) bits.push(c.bits.charAt(i) === "1" ? 1 : 0);
+    return { intPart: 0n, bits: bits, terminates: false, termAt: 0,
+             repStart: c.period ? c.period[0] - 1 : 0, repLen: c.period ? c.period[1] : 0,
+             val: c.val, hasFrac: true, constKey: key, irr: c.irr, tailLen: 0n, periodLen: 0n };
+  }
+
+  function nearestConst(x, typedDigits) {
+    /* a rounded d-digit snapshot of c differs from c by at most 0.5·10^−d;
+       0.6 covers it with margin, the 3e-15 floor covers float comparison.
+       (×6 was 10× too loose — it false-matched 0.7185 to e−2 in testing.) */
+    var tol = Math.max(Math.pow(10, -(Math.max(typedDigits, 4))) * 0.6, 3e-15);
+    var best = null;
+    Object.keys(CONSTS).forEach(function (k) {
+      var d = Math.abs(x - CONSTS[k].val);
+      if (d < tol && (!best || d < best.d)) best = { k: k, d: d };
+    });
+    return best;
+  }
+
+  function detectRelation(a, b, nameA, nameB) {
+    if (!(a > 0) || !(b > 0)) return "";
+    if (Math.abs(a - b) / b < 1e-12) return nameA + " and " + nameB + " are the same number — identical rungs.";
+    var r = Math.log2(a / b), k = Math.round(r);
+    if (k !== 0 && Math.abs(r - k) < 1e-9) {
+      var lo = k > 0 ? nameB : nameA, hi = k > 0 ? nameA : nameB, kk = Math.abs(k);
+      return lo + " = " + hi + " ÷ 2" + (kk > 1 ? "^" + kk : "") +
+             " — same recipe, slid " + kk + " rung" + (kk > 1 ? "s" : "") + " down the tower. On the tower, ÷2 is a shift, not a change of shape.";
+    }
+    return "";
+  }
+
+  var state = { A: null, B: null, nameA: "", nameB: "" };
+
+  function fmtRecipe(d, label) {
+    /* whole numbers: show the integer's own binary form, not a fractional shell */
+    if (!d.hasFrac) {
+      var ib = d.intPart > 0n ? d.intPart.toString(2) : "0";
+      var mers = (/^1+$/.test(ib) && d.intPart > 1n)
+        ? ' <span class="match">All ones &mdash; a Mersenne number: 2<sup>' + ib.length + '</sup> &minus; 1. In binary, the Mersenne numbers are exactly the all-ones rows.</span>'
+        : "";
+      var ibShow = ib.length > 72 ? ib.slice(0, 60) + "&hellip; (" + ib.length + " binary digits)" : ib;
+      return (label ? "<strong>" + label + "</strong><br>" : "") +
+        ibShow + "<sub>2</sub> &nbsp;=&nbsp; " + d.intPart.toString() +
+        '<br><span class="note">Whole number &mdash; doublings only, no rungs needed. A year, a phone number, a zip code: every whole number splits into powers of 2 like this, automatically. The chips are arithmetic, not a message.</span>' + mers;
+    }
+    /* positive but smaller than the 64-rung window: say so honestly */
+    if (d.firstRung > RUNGS) {
+      return (label ? "<strong>" + label + "</strong><br>" : "") +
+        '<span class="note">Positive, but smaller than the tower&rsquo;s window: its first lit rung would be rung ' + d.firstRung +
+        ' — i.e. this number is about (1/2)<sup>' + d.firstRung + '</sup>. The 64 rungs shown all stay dark. Small is not mysterious; it is just deep.</span>';
+    }
+    var shown = d.terminates ? Math.max(d.termAt, 1) : (d.repLen && d.repStart + 2 * d.repLen <= 40 ? d.repStart + 2 * d.repLen : 40);
+    var s = "";
+    for (var i = 0; i < Math.min(shown, RUNGS); i++) {
+      var ch = d.bits[i] === 1 ? '<span class="bit1">1</span>' : "0";
+      if (d.repLen && i >= d.repStart && i < d.repStart + d.repLen && !d.terminates) ch = '<span class="rep">' + ch + "</span>";
+      s += ch;
+    }
+    var terms = [], j;
+    for (j = 0; j < RUNGS && terms.length < 5; j++) if (d.bits[j] === 1) terms.push("1/2<sup>" + (j + 1) + "</sup>");
+    var more = (function () { var c = 0; for (var t = 0; t < RUNGS; t++) c += d.bits[t]; return c > 5; })();
+    var sum = terms.length ? terms.join(" + ") + (more || !d.terminates ? " + …" : "") : "(no fractional part)";
+
+    var tail;
+    if (!d.hasFrac) tail = '<span class="note">Whole number — doublings only, no rungs needed. A year, a phone number, a zip code: every whole number splits into powers of 2 like this, automatically. The chips are arithmetic, not a message.</span>';
+    else if (d.constKey && CONSTS[d.constKey].irr)
+      tail = '<span class="note">Irrational — the recipe never ends and never repeats. These are its true first 64 rungs.</span>';
+    else if (d.constKey && !CONSTS[d.constKey].irr)
+      tail = '<span class="note">Repeats forever (overlined block). Rational, but not binary-native.</span>';
+    else if (d.terminates)
+      tail = '<span class="note">This exact decimal ends in ' + d.termAt + " rung" + (d.termAt > 1 ? "s" : "") + ".</span>";
+    else if (d.repLen)
+      tail = '<span class="note">This exact decimal repeats forever (overlined block, period ' + d.repLen + " from rung " + (d.repStart + 1) + ").</span>";
+    else if (d.periodLen && d.periodLen > 0n)
+      tail = '<span class="note">This exact decimal repeats — every decimal does — but its block is ' +
+             bigFmt(d.periodLen) + ' rungs long (after a tail of ' + d.tailLen.toString() +
+             '), far beyond the 64 shown. Random digits buy astronomical periods. Irrational constants are different: no period, ever.</span>';
+    else
+      tail = '<span class="note">No repeat within 64 rungs.</span>';
+
+    var matchLine = "";
+    if (!d.constKey && d.hasFrac && d.digits >= 4) {
+      var near = nearestConst(d.val, d.digits);
+      if (near) {
+        matchLine = '<br><span class="match">This looks like a decimal snapshot of <strong>' + CONSTS[near.k].name +
+          "</strong> — the true constant" + (CONSTS[near.k].irr ? " is irrational: its recipe never ends" : " repeats forever") +
+          (CONSTS[near.k].fame ? " <em>(famous constant — recognized so you know the tool knows it; the framework claims nothing about it)</em>" : "") +
+          '. <a href="#" data-show="' + near.k + '">Show the true expansion</a></span>';
+      }
+    }
+    return (label ? "<strong>" + label + "</strong><br>" : "") +
+           "0." + s + (d.terminates ? "" : "…") + "<sub>2</sub> &nbsp;=&nbsp; " + sum + "<br>" + tail + matchLine;
+  }
+
+  function paint() {
+    var A = state.A, B = state.B;
+    for (var n = 1; n <= RUNGS; n++) {
+      var el = document.getElementById("rung-" + n);
+      el.classList.remove("litA", "litB", "litAB");
+      var a = A && A.bits[n - 1] === 1, b = B && B.bits[n - 1] === 1;
+      if (a && b) el.classList.add("litAB");
+      else if (a) el.classList.add("litA");
+      else if (b) el.classList.add("litB");
+    }
+    document.getElementById("legend").style.display = B ? "" : "none";
+
+    var chips = document.getElementById("intChips");
+    chips.innerHTML = "";
+    if (A && A.intPart > 0n) {
+      var ip = A.intPart, k = 0n, parts = [];
+      while ((1n << k) <= ip) k++;
+      for (var kk = k - 1n; kk >= 0n; kk--) if (ip & (1n << kk)) parts.push(kk);
+      parts.slice(0, 12).forEach(function (e) {
+        var c = document.createElement("span"); c.className = "int-chip";
+        c.textContent = "2^" + e.toString() + " = " + (1n << e).toString(); chips.appendChild(c);
+      });
+      if (parts.length > 12) {
+        var moreChip = document.createElement("span"); moreChip.className = "int-chip";
+        moreChip.textContent = "+ " + (parts.length - 12) + " more doublings";
+        chips.appendChild(moreChip);
+      }
+      var lbl = document.createElement("span");
+      lbl.style.cssText = "font-size:12.5px;color:var(--subtle);margin-left:6px;";
+      lbl.textContent = "← whole part: doublings"; chips.appendChild(lbl);
+    }
+
+    var out = A ? fmtRecipe(A, state.nameA) : "";
+    if (B) out += "<hr style='border:none;border-top:1px dashed #e0e0de;margin:8px 0;'>" + fmtRecipe(B, state.nameB);
+    document.getElementById("recipeOut").innerHTML = out ||
+      '<span class="note">Give me a number ≥ 0 — the tower only climbs one way.</span>';
+
+    var rel = document.getElementById("relationOut");
+    var msg = (A && B) ? detectRelation(A.val, B.val, state.nameA || "A", state.nameB || "B") : "";
+    rel.style.display = msg ? "" : "none";
+    rel.innerHTML = msg;
+
+    document.getElementById("sideNote").textContent =
+      A && A.hasFrac && !A.terminates && !A.constKey && !A.repLen ? "Long periods are normal — typed digits make the repeat block explode. The framework presets carry true digits instead." : "";
+
+    Array.prototype.forEach.call(document.querySelectorAll("[data-show]"), function (a) {
+      a.addEventListener("click", function (e) {
+        e.preventDefault();
+        setA(expandConst(a.dataset.show), CONSTS[a.dataset.show].name);
+        document.getElementById("numIn").value = CONSTS[a.dataset.show].val.toFixed(15) + "…";
+      });
+    });
+  }
+
+  function setA(d, name) { state.A = d; state.nameA = name || ""; paint(); }
+  function setB(d, name) { state.B = d; state.nameB = name || ""; paint(); }
+
+  var input = document.getElementById("numIn");
+  input.addEventListener("input", function () {
+    var v = input.value.replace(",", ".").trim().replace(/\.$/, "");
+    var d = expandDecimalExact(v);
+    if (d) { setA(d, null); return; }
+    if (v !== "") {
+      state.A = null; state.nameA = ""; paint();
+      document.getElementById("recipeOut").innerHTML =
+        '<span class="note">Can&rsquo;t read that as a plain number &mdash; digits and one dot only (e.g. 7 or 0.142857). Expression input like 1/phi or sqrt(6) lives in the <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Hall%20of%20Memories/telescope-tower.html" target="_blank" rel="noopener">Telescope Tower</a>.</span>';
+    }
+  });
+  document.querySelectorAll(".preset").forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      if (btn.dataset.k) {
+        input.value = CONSTS[btn.dataset.k].val.toFixed(15) + "…";
+        setA(expandConst(btn.dataset.k), CONSTS[btn.dataset.k].name);
+      } else {
+        input.value = btn.dataset.v;
+        setA(expandDecimalExact(btn.dataset.v), null);
+      }
+    });
+  });
+
+  var cmpSel = document.getElementById("cmpSel");
+  var inputB = document.getElementById("numInB");
+  cmpSel.addEventListener("change", function () {
+    if (cmpSel.value === "") { inputB.style.display = "none"; setB(null, ""); }
+    else if (cmpSel.value === "custom") { inputB.style.display = ""; inputB.focus(); setB(null, ""); }
+    else { inputB.style.display = "none"; setB(expandConst(cmpSel.value), CONSTS[cmpSel.value].name); }
+  });
+  inputB.addEventListener("input", function () {
+    var d = expandDecimalExact(inputB.value.replace(",", ".").trim().replace(/\.$/, ""));
+    setB(d, d ? "your second number" : "");
+  });
+
+  setA(expandDecimalExact("0.6875"), null);
+})();
+</script>
+
+
+<script>
+/* ============================================================================
+   TOWER-CORE — the Gap Geometry tower as ONE engine that knows what it
+   computes and cites how.  v0.1 sandbox — 2026-08-06
+   order ("we need it to really happen").
+
+   THE MANUAL, EXECUTED. Every output cites the law (M1–M10) that produced it.
+   Data slice mirrors the Atlas state of 2026-08-06 (categories enforced at
+   build; family = the recognition-index split, theorem-anchored by
+   Lindemann–Weierstrass).  ⚠ Note: this constant block is to be
+   GENERATED from locks.json in the build step — hand-synced today, marked.
+
+   Self-verifying: call TowerCore.selfTest() — identity suite + the CIRCLE
+   control corpus (the manual's portability CI). A core that cannot pass the
+   circle should refuse to report; ask-the-tower.html enforces exactly that.
+   Precision note: JS doubles (~1e-15 floor). The dps-50/520 verifications
+   live in the Atlas snippets and Paper 14 Appendix A; this core re-checks
+   every identity to the double floor on load.
+   ========================================================================== */
+(function (global) {
+  "use strict";
+
+  /* ---- the constants (M1: the unit) ---- */
+  const LN2 = Math.LN2;
+  const SQRT2 = Math.SQRT2;
+  const K = SQRT2 * LN2;              /* K_AUD = arc/chord  */
+  const G_AUD = 1 - K;                    /* the gap — the unit */
+  const PHI = (1 + Math.sqrt(5)) / 2;
+  const X = 1 / (2 * SQRT2);          /* the half-chord = sinh(ln2/2) */
+  const UNITY_N = 1 / G_AUD;              /* M2: the last derived rung, 50.6538 */
+
+  /* ---- the manual, as citable laws ---- */
+  const LAWS = {
+    M1: "M1 UNIT & PERIOD — the unit is G_AUD = 1 − √2·ln 2; its period is 1/G_AUD ≈ 50.6538.",
+    M2: "M2 UNITY BOUNDARY — below n = 1/G_AUD the tower is dynamics of the gap; above it, positions restate the constants themselves (n(t)/n(1) = t): structure, not dynamics.",
+    M3: "M3 ONE-RUNG LAW — multiplying by K converts chord to arc; true of every arc/chord pair.",
+    M4: "M4 RESTATEMENT LAW — n(t)/n(1) = t identically; a position above unity restates its own target.",
+    M5: "M5 LEDGERS — linear n·G_AUD = t · decay Kⁿ = t · compounded 1−Kⁿ = t. A reading declares its ledger.",
+    M6: "M6 CATEGORY AT BIRTH — every target is derived (a function of the arc/chord) or translated (imported); the reading inherits the target's category.",
+    M7: "M7 REMAINDER — report the exact position and its remainder; never the rounded integer alone; never arithmetic between rounded steps.",
+    M8: "M8 BASELINE — a random target's mean step-deviation is 25/n %, ceiling 50/n %. Every translated reading prints its chance floor.",
+    M9: "M9 t-SHADOWS — tanh/sech(ln n·/2) give the rational shadows (Euclid's triples); figures checkable by ruler; structure, never evidence.",
+    M10: "M10 RECOGNITION, NOT EVIDENCE — a tower hit is an address. Golden targets carry an irreducible ε by theorem (Lindemann–Weierstrass). Arc-native hits: delete the tower; what survives in exact coordinates is the finding."
+  };
+
+  /* ---- the target slice (⚠ generate from locks.json; hand-synced 2026-08-06)
+     family: arc_native | golden   category: derived | translated
+     survives: the M10 Step-B sentence — what remains when the tower is deleted */
+  const TARGETS = [
+    { id: "half_chord", atlas: "p_L_arc_over_chord", name: "√2/4 = 1/(2√2)", value: X,
+      family: "arc_native", category: "derived",
+      survives: "√2/4 = 1/(2√2) = sinh(ln2/2) — HALF THE CHORD of the arc ln 2 (Romeo's measured optimum is this number exactly; neither 18 nor G_AUD appears in it)." },
+    { id: "chord", atlas: "chord_identity", name: "1/√2 (the chord)", value: 1 / SQRT2,
+      family: "arc_native", category: "derived",
+      survives: "2·sinh(ln2/2) = 1/√2 exactly — the chord identity; K_AUD = arc ÷ chord." },
+    { id: "arc", atlas: "doubling_map_ln2", name: "ln 2 (the arc)", value: LN2,
+      family: "arc_native", category: "derived",
+      survives: "ln 2 is the translation length of the dilation z ↦ 2z; multiplier exactly 2. (Not the squaring map r ↦ r², and not x ↦ 2x mod 1.)" },
+    { id: "shannon", atlas: "shannon_bound_threshold", name: "1/(2 ln 2)", value: 1 / (2 * LN2),
+      family: "arc_native", category: "derived",
+      survives: "1/(2ln2) = chord²/arc; the zone's t with t·K = 1/√2 and t·K² = ln 2 — the geometric progression." },
+    { id: "k_aud", atlas: "k_aud_h4_derivation", name: "K_AUD", value: K,
+      /* atlas id corrected 2026-08-20: was "landauer_crossing" (the 35.11
+         crossing's node); K_AUD sits at 49.65 and its Atlas home is
+         k_aud_h4_derivation. */
+      family: "arc_native", category: "derived",
+      survives: "K_AUD = arc/chord = √2·ln 2; its position 49.6538 sits exactly one rung below unity: (1−K)/G_AUD = 1." },
+    { id: "unity", atlas: null, name: "1 (unity)", value: 1,
+      family: "arc_native", category: "derived",
+      survives: "Unity is the boundary theorem: every framework-derived target is ≤ 1, so no derived rung exists above n = 1/G_AUD = 50.6538." },
+    { id: "sqrt2", atlas: null, name: "√2 (the eigenvalue)", value: SQRT2,
+      family: "arc_native", category: "derived",
+      survives: "√2 = e^{ln2/2} — the doubling element's eigenvalue λ; the trace is 3/√2 (min poly 2x²−9, field ℚ(√2))." },
+    { id: "nine_eighths", atlas: null, name: "9/8", value: 9 / 8,
+      family: "arc_native", category: "derived",
+      survives: "9/8 = cosh²(ln2/2) exactly — the Minkowski square above the Pythagorean tone; any near-integer tower reading of it is the rounded shadow." },
+    { id: "five_fourths", atlas: null, name: "5/4", value: 5 / 4,
+      family: "arc_native", category: "derived",
+      survives: "5/4 = cosh(ln 2) — the binary point's Euclidean norm²; excess over the Minkowski reading = 2·sinh²(ln2/2) = 1/4 exactly." },
+    { id: "one_third", atlas: "standard_model_positions", name: "1/3", value: 1 / 3,
+      family: "arc_native", category: "derived",
+      survives: "1/3 = tanh(ln2/2) — the Poincaré radius; the t that generates the 3-4-5 triple on BOTH conics (tan on the circle, tanh here)." },
+    { id: "three_fifths", atlas: "standard_model_positions", name: "3/5", value: 3 / 5,
+      family: "arc_native", category: "derived",
+      survives: "3/5 = tanh(ln 2) — the Klein radius; with sech(ln2) = 4/5 the exact 3-4-5 point. Structure for every base (M9)." },
+    /* ---- the golden imports: approximation by THEOREM, forever (M10 Step A) ---- */
+    { id: "inv_phi", atlas: "tower_near_targets", name: "1/φ", value: 1 / PHI,
+      family: "golden", category: "translated",
+      survives: null, note: "Corridor floor — a DIFFERENT object from the k=5 tower target √φ/2 (P3 v3.3's own ruling)." },
+    { id: "sqrt_phi_2", atlas: "tower_master_formula", name: "√φ/2", value: Math.sqrt(PHI) / 2,
+      family: "golden", category: "translated",
+      survives: null, note: "k=5 pivot target; ε = −0.671% is irreducible — Lindemann–Weierstrass." },
+    { id: "sqrt_phi", atlas: "tower_master_formula", name: "√φ", value: Math.sqrt(PHI),
+      family: "golden", category: "translated",
+      survives: null, note: "k=6 pivot target; 64 is the rounding of its own exact position 64.4326." },
+    { id: "phi", atlas: "lead_82_g_phi", name: "φ", value: PHI,
+      family: "golden", category: "translated",
+      survives: null, note: "Above BOTH tower ends (translated 64, derived 50.65). n(φ)/n(1) = φ identically — the reading restates φ." }
+  ];
+
+  const EPS = 1e-12;
+
+  /* ---- recognised constants — objects the index knows by face (M10 in person).
+     Not ladder targets: their content lives in their own definitions; the ladder
+     position merely restates them. First resident: ρ, the gap-scaling ratio —
+     the corpus's first use of G_AUD as a UNIT, measuring Feigenbaum's residue. ---- */
+  const DELTA_F = 4.669201609102990671853203820466; /* Feigenbaum δ, published digits */
+  const RHO = G_AUD / ((DELTA_F - 14 / 3) / DELTA_F);
+  const RECOGNIZED = [
+    { name: "ρ (gap scaling ratio)", value: RHO, atlas: "rho_400_11",
+      story: "THIS IS ρ ITSELF — G_AUD measuring the Feigenbaum residue: ρ = G_AUD/((δ−14/3)/δ) = 36.3632352997… . Its rational PORTRAIT is 400/11 − 1/2500 − 1/939939 (error 4.01×10⁻¹⁴) — a portrait, not an instrument: it describes ρ, it cannot compute it (Paper 4's 2026 notice; the control test finds roughly one random target in three matches that residual — 25–33% across five seeds; the erratum declines the point estimate, and so does this page). 400/11 is genuinely ρ's fourth continued-fraction convergent. Its ladder position here merely restates the number (M2/M4)." },
+    { name: "400/11", value: 400 / 11, atlas: "rho_400_11",
+      story: "The fourth continued-fraction convergent of ρ — nature's rational, not ours. As a LADDER position it sits inside the 35–37 crossing zone (a positioned observation, nothing more); its real life is as ρ's best small rational." }
+  ];
+
+  /* ---- M1/M5/M7: position in all three ledgers ---- */
+  function position(t) {
+    if (!(t > 0)) return null;
+    const n = t / G_AUD;
+    const nearest = Math.round(n);
+    return {
+      target: t,
+      linear: n,                                     /* M5: linear n·G_AUD = t   */
+      decay: Math.log(t) / Math.log(K),              /* M5: Kⁿ = t           */
+      compounded: t < 1 ? Math.log(1 - t) / Math.log(K) : null, /* 1−Kⁿ = t */
+      nearest: nearest,
+      remainder: n - nearest,                        /* M7                    */
+      side: n <= UNITY_N ? "in-gap (dynamics)" : "above unity (structure)", /* M2 */
+      laws: ["M1", "M5", "M7", "M2"]
+    };
+  }
+
+  /* ---- M8: the chance floor at step n ---- */
+  function baseline(n) {
+    return { meanPct: 25 / n, ceilingPct: 50 / n, laws: ["M8"] };
+  }
+
+  /* ---- precision-aware matching: the index matches at the READER's precision.
+     tol is ABSOLUTE (half a unit in the last typed place, supplied by the page);
+     default falls back to the strict EPS. One candidate → recognised, with its
+     distance and the next-nearest known value stated. Several → AMBIGUOUS, all
+     listed, more digits requested. That is the honest answer to "how many
+     digits are needed": exactly as many as make the answer unique. ---- */
+  function candidates(t, tol) {
+    const out = [];
+    for (const tg of TARGETS) {
+      const d = Math.abs(t - tg.value);
+      if (d <= tol) out.push({ kind: "target", ref: tg, dist: d });
+    }
+    for (const r of RECOGNIZED) {
+      const d = Math.abs(t - r.value);
+      if (d <= tol) out.push({ kind: "const", ref: r, dist: d });
+    }
+    out.sort((a, b) => a.dist - b.dist);
+    return out;
+  }
+  function nearestOther(t, excludeRef) {
+    let best = null;
+    const all = TARGETS.map(x => ({ n: x.name, v: x.value }))
+      .concat(RECOGNIZED.map(x => ({ n: x.name, v: x.value })));
+    for (const o of all) {
+      if (excludeRef && o.n === excludeRef.name) continue;
+      const d = Math.abs(t - o.v);
+      if (!best || d < best.dist) best = { name: o.n, dist: d };
+    }
+    return best;
+  }
+
+  /* ---- the full typed reading (M6 + M10) ---- */
+  function read(t) {
+    const pos = position(t);
+    if (!pos) return { error: "target must be a positive number" };
+    const tol = (arguments.length > 1 && arguments[1] > 0)
+      ? arguments[1] : EPS * Math.max(1, Math.abs(t));
+    const cands = candidates(t, tol);
+    let tg = null, rec = null, ambiguous = null, matchInfo = null;
+    if (cands.length === 1) {
+      if (cands[0].kind === "const") rec = cands[0].ref; else tg = cands[0].ref;
+      const other = nearestOther(t, cands[0].ref);
+      matchInfo = { distance: cands[0].dist, tolerance: tol,
+        nextNearest: other ? other.name : null,
+        nextDistance: other ? other.dist : null };
+    } else if (cands.length > 1) {
+      ambiguous = cands.map(c => ({ name: c.ref.name, distance: c.dist }));
+    }
+    const base = baseline(pos.linear);
+    const devPct = (pos.nearest * G_AUD - t) / t * 100;  /* the phantom, named */
+    const beat = Math.abs(devPct) / base.ceilingPct; /* fraction of randoms tighter */
+    const out = {
+      position: pos, baseline: base,
+      nearestIntegerDeviationPct: devPct,
+      chance: { fractionOfRandomsThisTight: Math.min(1, beat),
+        sentence: "≈ " + Math.round(Math.min(1, beat) * 100) +
+          "% of random targets at this rung land at least this close to an integer (M8). A searched hit must also print how many candidates were tried." },
+      laws: pos.laws.concat(["M6", "M8", "M10"])
+    };
+    if (matchInfo) out.match = matchInfo;
+    if (ambiguous) {
+      out.ambiguous = ambiguous;
+      out.verdict = "AMBIGUOUS AT THIS PRECISION — your digits match " + ambiguous.length +
+        " known values (" + ambiguous.map(a => a.name).join(" · ") +
+        "). The index matches at the precision you give it: add digits until one remains.";
+    } else if (rec) {
+      out.known = { name: rec.name, atlas: rec.atlas, family: "recognised constant", category: "—" };
+      out.verdict = "RECOGNISED (M10 — the index knows this face): " + rec.story;
+    } else if (tg) {
+      out.known = { name: tg.name, atlas: tg.atlas, family: tg.family, category: tg.category };
+      if (tg.family === "golden") {
+        out.verdict = "GOLDEN TARGET (M10 Step A): approximation by THEOREM — G_AUD is transcendental, this target is algebraic, so no integer rung can ever land exactly (Lindemann–Weierstrass). Record deviation + category; build nothing on the hit." + (tg.note ? "  · " + tg.note : "");
+      } else {
+        out.verdict = "ARC-NATIVE (M10 Step B — delete the tower): " + tg.survives;
+      }
+      if (pos.side === "above unity (structure)")
+        out.verdict += " · ABOVE UNITY (M2+M4): its tower position restates the target itself (n(t)/n(1) = t) — structure, not dynamics.";
+    } else {
+      out.verdict = pos.side === "above unity (structure)"
+        ? "UNKNOWN TARGET, ABOVE UNITY (M2+M4): its position merely restates the number (n(t)/n(1)=t). Only an exact identity could carry content here."
+        : "UNKNOWN TARGET, IN-GAP: a reading, not a finding. Check the chance line (M8); if you scanned a list, the family-wise number is the honest headline. If something exact survives WITHOUT the tower, that is the finding (M10 Step C).";
+    }
+    return out;
+  }
+
+  /* ---- the test-vocabulary (Ruling of 2026-08-06) ---- */
+  function classify(kind) {
+    const V = {
+      "prediction": "PREDICTION — a NO exists in the world and is attainable; state the precision at which it becomes decidable.",
+      "consistency": "CONSISTENCY CHECK — a NO exists only against our own error; forced by algebra, still worth running, always labelled.",
+      "consequence": "CONSEQUENCE — a former prediction, now proved; carries both dates (predicted, proved).",
+      "not-a-test": "NOT A TEST — no result could contradict it; rewrite or remove; never label-and-keep."
+    };
+    return V[kind] || Object.values(V).join("\n");
+  }
+
+  function law(id) { return LAWS[id] || null; }
+
+  /* ---- SELF-TEST: identities + THE CIRCLE CI (portability = the proof of the manual) ---- */
+  function selfTest() {
+    const F = 1e-14; const results = []; let pass = 0;
+    function t(name, diff, tol) {
+      const ok = Math.abs(diff) < (tol || F);
+      results.push({ name: name, ok: ok, residual: diff });
+      if (ok) pass++;
+    }
+    /* identity suite (double-precision floor; dps-520 versions: Paper 14 App. A) */
+    t("chord identity 2sinh(ln2/2)=1/√2", 2 * Math.sinh(LN2 / 2) - 1 / SQRT2);
+    t("K = arc/chord", LN2 / (2 * Math.sinh(LN2 / 2)) - K);
+    t("multiplier e^{ln2}=2", Math.exp(LN2) - 2);
+    t("Poincaré tanh(ln2/2)=1/3", Math.tanh(LN2 / 2) - 1 / 3);
+    t("Klein tanh(ln2)=3/5", Math.tanh(LN2) - 3 / 5);
+    t("cosh²(ln2/2)=9/8", Math.pow(Math.cosh(LN2 / 2), 2) - 9 / 8);
+    t("Euclid norm² cosh(ln2)=5/4", Math.cosh(LN2) - 5 / 4);
+    t("progression t·K=1/√2", (1 / (2 * LN2)) * K - 1 / SQRT2);
+    t("progression (1/√2)·K=ln2", K / SQRT2 - LN2);
+    t("one-below (1−K)/G_AUD = 1", (1 - K) / G_AUD - 1);
+    t("Mersenne rung k=5", 2 * Math.sinh(5 * LN2 / 2) - 31 / Math.pow(2, 2.5), 1e-13);
+    /* THE CIRCLE CI — the manual on foreign ground (surplus side) */
+    const Gc = Math.asin(X) / X - 1;
+    t("circle: surplus positive", Gc > 0 ? 0 : 1);
+    t("circle: restatement law n(t)/n(1)=t", ((3 / 5) / Gc) / (1 / Gc) - 3 / 5);
+    t("circle: hexagon chord 2sin(π/6)=1", 2 * Math.sin(Math.PI / 6) - 1);
+    t("twins: G_AUD+Gc ≈ 1/24 (odd part)", (G_AUD + Gc) - 1 / 24, 3e-4);
+    t("twins: Gc−G_AUD ≈ 3/1280 (even part)", (Gc - G_AUD) - 3 / 1280, 3e-5);
+    return { pass: pass, total: results.length, green: pass === results.length, results: results };
+  }
+
+  global.TowerCore = {
+    version: "0.1-sandbox-2026-08-06",
+    G_AUD: G_AUD, K_AUD: K, UNITY_N: UNITY_N, X: X,
+    LAWS: LAWS, TARGETS: TARGETS,
+    position: position, baseline: baseline, read: read,
+    classify: classify, law: law, selfTest: selfTest
+  };
+}(typeof window !== "undefined" ? window : globalThis));
+
+</script>
+<script>
+/* tab switching (added 2026-09-07) — shows all .tp blocks matching the clicked tab */
+(function(){
+  var btns = document.querySelectorAll('.tabbtn');
+  function show(t){
+    document.querySelectorAll('.tp').forEach(function(e){ e.classList.toggle('on', e.getAttribute('data-tab')===t); });
+    btns.forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-tab')===t); });
+  }
+  btns.forEach(function(b){ b.addEventListener('click', function(){ show(b.getAttribute('data-tab')); }); });
+})();
+</script>
+
+<!-- ═══ BITS & ORBIT logic — folded in from the Dyadic Ruler (Cairn 2026-09-08) ═══ -->
+<script>
+(function(){
+  var DATA={"G_AUD":"000001010000110111001101011001000010101000110111110010101000111110001001","K_AUD":"111110101111001000110010100110111101010111001000001101010111000001110110","ln2":"101100010111001000010111111101111101000111001111011110011010101111001001","inv_phi":"100111100011011101111001101110010111111101001010011111000001010111110011","sqrt2m1":"011010100000100111100110011001111111001110111100110010010000100010110010","one_seventh":"001001001001001001001001001001001001001001001001001001001001001001001001","one_eleventh":"000101110100010111010001011101000101110100010111010001011101000101110100"};
+  var PERIOD={"one_seventh":3,"one_eleventh":10};
+  var NUMS=[["G_AUD","G_AUD"],["K_AUD","K_AUD"],["ln 2","ln2"],["1/φ","inv_phi"],["√2−1","sqrt2m1"],["1/7","one_seventh"],["1/11","one_eleventh"]];
+  var STEPS=40, cur="G_AUD", n=0, timer=null;
+  var PHOS="#b0ffc4", DIM="#5ecfd6", EMBER="#e8934a", INKDIM="#7f8c86", LINE="#2a3550";
+  var $=function(id){return document.getElementById(id);};
+  if(!$("dydTrack")) return;
+
+  function fill(id,s){var el=$(id);if(!el)return;el.innerHTML="";for(var i=0;i<48;i++){var d=document.createElement("div");d.className="bt-bit "+(s[i]==="1"?"bt-bit1":"bt-bit0");el.appendChild(d);}}
+  fill("dydRowG",DATA.G_AUD); fill("dydRowK",DATA.K_AUD);
+
+  function val(key,start){var s=DATA[key],v=0;for(var k=0;k<32 && start+k<s.length;k++){if(s[start+k]==="1")v+=Math.pow(2,-(k+1));}return v;}
+
+  var pk=$("dydPicker");
+  NUMS.forEach(function(p){var b=document.createElement("button");b.className="bt-num"+(p[1]===cur?" on":"");b.textContent=p[0];b.onclick=function(){cur=p[1];reset();document.querySelectorAll("#dydPicker .bt-num").forEach(function(x){x.classList.remove("on");});b.classList.add("on");};pk.appendChild(b);});
+
+  var SVG="http://www.w3.org/2000/svg", X0=24, X1=616, Y0=30, DY=(214-30)/STEPS;
+  function el(tag,at){var e=document.createElementNS(SVG,tag);for(var k in at)e.setAttribute(k,at[k]);return e;}
+  function draw(){
+    var t=$("dydTrack");if(!t)return;t.innerHTML="";
+    [0,0.5,1].forEach(function(v){var x=X0+v*(X1-X0);
+      t.appendChild(el("line",{x1:x,y1:Y0-8,x2:x,y2:214,stroke:LINE,"stroke-width":0.6,"stroke-dasharray":v===0.5?"2 4":"0"}));
+      var tx=el("text",{x:x,y:18,fill:INKDIM,"font-size":12,"font-family":"ui-monospace,monospace","text-anchor":"middle"});tx.textContent=v;t.appendChild(tx);});
+    var seen={};
+    for(var j=0;j<=n;j++){
+      var v=val(cur,j), x=X0+v*(X1-X0), y=Y0+j*DY, isCur=(j===n);
+      var key=Math.round(v*4096), revisit=seen[key]!==undefined; seen[key]=1;
+      t.appendChild(el("circle",{cx:x,cy:y,r:isCur?4.5:2.6,fill:isCur?PHOS:(revisit?EMBER:DIM),"fill-opacity":isCur?1:(revisit?0.9:0.5)}));
+    }
+    var per=PERIOD[cur];
+    $("dydRead").innerHTML="n = "+n+"  ·  frac ≈ "+val(cur,n).toFixed(4)+"<br>"+(per?("rational · period "+per+" — closes"):"irrational — never closes");
+  }
+  function advance(){ if(n<STEPS){n++;draw();} else stop(); }
+  function stop(){ if(timer){clearInterval(timer);timer=null;} $("dydPlay").innerHTML="▶ play";}
+  function reset(){ stop(); n=0; draw(); }
+  $("dydStep").onclick=function(){stop();advance();};
+  $("dydReset").onclick=reset;
+  $("dydPlay").onclick=function(){
+    if(timer){stop();return;}
+    if(n>=STEPS)n=0;
+    $("dydPlay").innerHTML="❚❚ pause";
+    timer=setInterval(advance,170);
+  };
+  draw();
+})();
+</script>
+<script>document.querySelectorAll('[data-goto]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();const b=document.querySelector('.tabbtn[data-tab="'+a.dataset.goto+'"]');if(b)b.click();window.scrollTo({top:0,behavior:'smooth'});}));</script>
+</body>
+</html>
