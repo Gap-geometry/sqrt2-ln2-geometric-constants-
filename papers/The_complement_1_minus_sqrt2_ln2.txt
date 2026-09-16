@@ -29,8 +29,10 @@ ABSTRACT
 1 − √2·ln 2 is enclosed two-sidedly, at every order, by the consecutive
 partial sums of a rational alternating series, on a certificate of three
 integer steps and Leibniz. That is the claim, and it is the whole of it.
-Neither the number nor the series is new; what follows says where each came
-from and what is added here.
+Neither the number nor the series is new; what follows says where each came from
+and what is added here. §6 sets that out source by source — mean inequalities,
+variate generation, hyperbolic geometry, the OEIS — each row separating what is
+written there from what stands here.
 
 On an interval [a, b] the geometric mean never exceeds the logarithmic mean.
 Writing r = b/a and L = ln r, the ratio of the two is
@@ -263,11 +265,13 @@ u/sinh u is the generating function of the even Bernoulli numbers, u/sinh u =
          =  L²/24  −  7L⁴/5760  +  31L⁶/967680  −  127L⁸/154828800  +  …
 
 exact from B₂ = 1/6, B₄ = −1/30, B₆ = 1/42, B₈ = −1/30. (The numerators 1, 7,
-31, 127 are 2^{2n−1} − 1 only while B_{2n} has numerator 1 and nothing cancels
-against (2n)!; at n = 5 the numerator is 73, at n = 6 it is 2047·691. The
-factor 2^{2n−1} − 1 is present in every coefficient; the agreement num(c_n) =
-2^{2n−1} − 1 holds at n = 1, 2, 3, 4, 7 and is sporadic.) The leading term at
-L = ln 2 is (ln 2)²/24 = 0.0200188756, which is 101.403 % of G.
+31, 127 are 2^{2n−1} − 1. In general, writing M = 2^{2n−1} − 1, num(c_n) is what
+is left of M·num(B_{2n}) once (2n)! has divided out what it can, and that is
+sporadic: at n = 5 the 5 of B₁₀ = 5/66 and the 7 of 511 = 7·73 both cancel into
+10! and 73 survives; at n = 6 it is 2047·691; at n = 7 the 7 of B₁₄ = 7/6
+cancels into 14! and 8191 stands. The factor 2^{2n−1} − 1 is present in every
+coefficient; the agreement num(c_n) = M holds at n = 1, 2, 3, 4, 7.) The leading
+term at L = ln 2 is (ln 2)²/24 = 0.0200188756, which is 101.403 % of G.
 
 From |B_{2n}| = 2(2n)!ζ(2n)/(2π)^{2n}, consecutive terms satisfy |t_{n+1}/t_n|
 = [4 + 3/(2^{2n−1} − 1)]/4 · ζ(2n+2)/ζ(2n) · (L/2π)², and the bracket falls
@@ -868,7 +872,7 @@ for DPS in (30, 60, 200, 500):
     ck("G(L) coefficients are 1/24, -7/5760, 31/967680, -127/154828800",
        [bcoef(n) for n in (1,2,3,4)]
        == [Q(1,24), Q(-7,5760), Q(31,967680), Q(-127,154828800)])
-    ck("section 4.1 table: num(c_6) = 1414477 and num(c_9) = 5749691557, as printed",
+    ck("section 4.1: num(c_6) = 1414477 as printed; num(c_9) = 5749691557 beyond it",
        abs(bcoef(6).numerator) == 1414477 and abs(bcoef(9).numerator) == 5749691557)
 
     def bmp(n):
@@ -1126,6 +1130,11 @@ exact, except one, labelled.
                                                 on [0, ln 2], exactly.
    ONE EXACT EVALUATION ELSEWHERE               Hodgson & Kerckhoff's
                                                 coefficient is 1/(√2·ln 2).
+   THE CONCORDANCE                              §6: where each piece is written,
+                                                and what stands here in each
+                                                case. searched and dated; the
+                                                negatives scoped to the pages
+                                                read.
    THE TWO TRACES                               t = 2cosh(L/2), t₂ = r + 1/r =
                                                 t² − 2; base = 16/(t₂ − 2).
                                                 classical.
