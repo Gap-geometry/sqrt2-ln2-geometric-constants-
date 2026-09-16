@@ -241,6 +241,31 @@ mpmath.
    and so mark no point; they are kept because the papers print them.
 
 ================================================
+THE FIRST PASS, IN NUMBERS
+================================================
+
+For a reader that gets this text but cannot fetch a raw file: the substance of One coordinate up and of the
+Gap Dashboard's feed. Every number computed at 500 digits by the closed forms the papers use (TOOLBOX/
+ai_readers_firstpass.py), printed to the digits shown.
+
+The object. p(L) = L/(2 sinh(L/2)), G(r) = 1 − p, L = ln r. At r = 2: √2·ln 2 = 0.980258143468547191713902;
+G = 1 − √2·ln 2 = 0.0197418565314528082860983 — 1.974 % of the logarithmic mean, exact, never zero.
+
+The line of ratios (One coordinate up). X = sinh(L/2); t2 = r + 1/r; base 4/X²; θ = gd L; cos Π = tanh(L/2).
+  the wall                                   r = 1.000000000    L = 0.0            X = 0.0            t2 = 2.000000000    base = ∞            G = 0.0            θ = 0.0°             Π = 90.0°
+  the doubling interval                      r = 2.000000000    L = 0.6931471806   X = 0.3535533906   t2 = 2.500000000    base = 32.000000    G = 0.01974185653  θ = 36.8698976458°   Π = 70.5287793655°
+  r = 3                                      r = 3.000000000    L = 1.098612289    X = 0.5773502692   t2 = 3.333333333    base = 12.000000    G = 0.04857384910  θ = 53.1301023542°   Π = 60.0°
+  the golden point, r = φ²                   r = 2.618033989    L = 0.9624236501   X = 0.5000000000   t2 = 3.000000000    base = 16.000000    G = 0.03757634988  θ = 48.1896851042°   Π = 63.4349488229°
+  r = 5                                      r = 5.000000000    L = 1.609437912    X = 0.8944271910   t2 = 5.200000000    base = 5.0000000    G = 0.1002968556   θ = 67.380135052°    Π = 48.1896851042°
+  the boundary of the series, r = 3 + 2√2    r = 5.828427125    L = 1.762747174    X = 1.000000000    t2 = 6.000000000    base = 4.0000000    G = 0.1186264130   θ = 70.5287793655°   Π = 45.0°
+  the Bernoulli boundary, r = e^{2π}         r = 535.4916555    L = 6.283185307    X = 11.54873936    t2 = 535.4935230    base = 0.029990992  G = 0.7279709450   θ = 89.7860070747°   Π = 4.94887122019°
+
+The Dashboard's feed. u0 = ln 2/2 = 0.34657359027997265471; the wall w = 0 is a saddle of Re(1 − w/sinh w), Hessian ±1/3;
+2-jet u²/6 → √(6G) = 0.344167312784 against u0 = 0.346573590280 (0.7 % short). Series G = Σ (−1)^(k+1) C(2k,k)/(32^k (2k+1)):
+partial sums 1/48 = 0.020833333333333 and 151/7680 = 0.019661458333333 enclose G. Trapezoid twin T = 3 ln 2/2 − 1 = 0.039720770839918
+(coth(ln 2/2) = 3). Integer traces t2 = 5/2, 10/3, 26/5 at r = 2, 3, 5 — bases 32, 12, 5 — the cells (r − 1) | 4 selects,
+and the same three from the angles: Π(2) = arccos 1/3, Π(3) = 60°, Π(5) = arccos 2/3.
+
 CROSS-DOMAIN APPEARANCES
 ================================================
 
