@@ -7,7 +7,7 @@
 <link rel="alternate" type="text/plain" href="AI_INDEX.txt" title="Machine-readable index (plain text)">
 <link rel="alternate" type="text/plain" href="llms.txt" title="llms.txt — AI site map">
 <meta name="author" content="D. B.">
-<meta name="description" content="Interactive tools for exploring the Gap Geometry framework: the Lock Atlas, the Telescope Tower, Chladni patterns, and sonification. With live previews and theater mode.">
+<meta name="description" content="All Gap Geometry instruments in one place: the Gap Dashboard, the Binary Tower with Ask the Tower, Resistance, the Scope (topology), Sonifier, and Chladni Staircase &mdash; with the Telescope memorial. Live previews and theater mode.">
 <style>
   :root {
     --text: #1a1a1a;
@@ -193,13 +193,15 @@
     .preview iframe { transform: scale(0.34); }
     .theater-frame { inset: 2% 2% 2% 2%; }
   }
+  .site-nav{ margin:10px 0 8px; font-size:14px; line-height:1.9; }
+  .site-nav a{ text-decoration:none; }
 </style>
 </head>
 <body>
 <main>
 
 <header class="page-head">
-  <h1 class="page-title">Visualisations</h1>
+  <h1 class="page-title">Visualisations &amp; Tools</h1>
   <p class="page-intro">Interactive instruments of the Gap Geometry framework. The papers prove; these make the structure directly observable. Every preview below is the live instrument itself &mdash; click any window to enter it.</p>
 </header>
 
@@ -208,131 +210,203 @@
 
 <div class="note-box">
   All tools run entirely in the browser &mdash; no server, no data collection, nothing tracked. Most are single self-contained HTML files; the Dashboard and the Chladni explorer additionally load their rendering library (React) from a public CDN, so they need an internet connection on first view. All source is readable in the files themselves. Click a preview to open the instrument in place (<kbd>Esc</kbd> returns here), or use the full-page link on each card.
+<p style="border-left:3px solid #c8c8c8; background:#fafaf8; padding:8px 14px; font-size:14.5px;">
+<strong>New here?</strong> The gap is how far the hyperbolic argument ln&thinsp;2 falls short of its chord, in the hyperbola&rsquo;s own metric
+&mdash; about 2&thinsp;%, provably nonzero. Start with
+<a href="what-the-gap-is.html"><strong>What the Gap Is</strong></a>, then come back for the instruments.
+<!-- STAGED 2026-08-06 — the reader architecture: object first, instruments second. -->
+</p>
+<p style="border-left:3px solid #c8c8c8; background:#fafaf8; padding:8px 14px; font-size:13.5px; font-family:'Courier New',monospace;">
+<strong style="font-family:Optima,Georgia,serif;">Gap computations &mdash; &rho;, the gap as a unit.</strong><br>
+&rho; = G / ((&delta; &minus; 14/3)/&delta;) = 36.3632352997&hellip; &nbsp;&middot;&nbsp; portrait: 400/11 &minus; 1/2500 &minus; 1/939939 (error 4.01&thinsp;&times;&thinsp;10<sup>&minus;14</sup>)<br>
+<span style="font-family:Optima,Georgia,serif; color:#5a5a5a;">The gap measuring Feigenbaum&rsquo;s residue &mdash; 400/11 is genuinely &rho;&rsquo;s fourth convergent;
+the three-term expansion is a <em>portrait, not an instrument</em> (it describes &rho;; it cannot compute it &mdash; see the 2026 notice on <em>The 400/11 Formula</em>).
+The instruments below give every reading this same honesty.</span>
+</p>
 </div>
 
-<!-- ——— The Lock Atlas ———
-  Staged by Fable/Cowork 2026-07-06; URL filled and card opened 2026-07-14 (Cairn, with Bee).
+<!-- ——— the instruments, 2026-09-16: the cards say what the pages are now and link into visualisations/ ——— -->
 
-  SUPERSEDED — do NOT delete the Binary Tower card. Fable's staging note said this card should
-  replace "The Binary Tower (entrance)". Bee has since fixed the entrance plan (2026-07-14):
-
-      The Atlas has exactly two doors: THIS card, and the animated sigil beside the title on
-      the About page. It gets no card on About.
-      The Binary Tower KEEPS its card here. It is the front page's own entrance and stays.
-
-  So the two are not competing for one slot — they were never the same kind of door. Nothing
-  below this card needs removing. -->
-
-<div class="tool">
-  <div class="tool-head">
-    <div class="tool-title">The Lock Atlas</div>
-    <span class="tool-tag tag-entrance">Observatory</span>
-    <span class="tool-tag tag-screen" title="Opens as a reader on any device; the full map is one tap away, best on a wide screen">&#9635;&nbsp;reader + map</span>
-  </div>
-  <div class="tool-body">
-    <p>The framework&rsquo;s claims as a navigable constellation. Every result is a <em>lock</em> &mdash; ring colour for its field, centre glyph for its evidence tier (&#8857; theorem &middot; &#9633; observation &middot; &#8764; conjecture &middot; &#9675; near-lock &middot; &#9679; anti-lock), size for its connections. Click any node: mechanism, key equation, sources, and a self-contained mpmath snippet that computes the value from primitives &mdash; paste, run, verify. Anti-locks and non-merge verdicts are shown, never hidden: the map records what failed and what must not be conflated, in the same ink as what holds.</p>
-    <div class="preview" data-src="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/lock-atlas.html" data-title="The Lock Atlas">
-      <div class="preview-placeholder">loading live preview&hellip;</div>
-      <iframe title="The Lock Atlas preview" loading="lazy" tabindex="-1"></iframe>
-      <span class="live-chip">Live</span>
-      <div class="preview-veil"><span class="enter-chip">&#9654;&nbsp; Enter</span></div>
-    </div>
-    <div class="tool-what"><strong>What it shows:</strong> it opens on the Number line &mdash; every lock drawn at its measured value on a log axis, so a node&rsquo;s position is a fact, not a layout choice &mdash; with further views one click away (the Groups colour-web with Focus flashlight, a by-field index, a free-arrange mode), filters by tier and domain, accessibility and colour-blind-safe lenses, and permanent lock IDs (#lock_id) &mdash; the framework&rsquo;s citation contract, exposed.</div>
-    <div class="tool-anchor"><strong>Anchored in:</strong> the evidence discipline of the <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/methodology.html" target="_blank" rel="noopener">Methodology</a> (same tier glyphs) and the published papers each lock cites.</div>
-    <div class="tool-anchor"><strong>Reads anywhere, maps on a wide screen:</strong> the Atlas opens as a <em>reader</em> &mdash; a lock&rsquo;s value, mechanism, sources and runnable mpmath, on any device, a phone included. The full <em>map / visualisation</em> is one tap away <em>at all times</em> (best on a wide screen, where the map and a node&rsquo;s full record sit side by side). A citation (<code>#lock_id</code>) always lands in the reader; the map is there whenever you want the whole constellation.</div>
-  </div>
-  <div class="tool-link"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/lock-atlas.html" target="_blank" rel="noopener">Open full page &#8599;</a></div>
-</div>
-<!-- ——— end The Lock Atlas ——— -->
-
-<!-- ——— The Binary Tower (entrance) — REMOVED 2026-07-14, per Fable's Vis Hub swap plan ————————
-  The Tower keeps its front door: the nav card on the About page (about.html, "The Binary Tower").
-  Carrying it here as well was featuring the same entrance twice. Confirmed by Bee, 2026-07-14 —
-  and Fable's staging note had it right from the start. The Atlas card above takes this slot.
-  Nothing was deleted from About. If you are restoring this, restore it THERE, not here. -->
-
-<!-- ——— The Gap Dashboard (index.html, served at the site root; formerly 'K_AUD Dashboard') ——— -->
 <div class="tool">
   <div class="tool-head">
     <div class="tool-title">The Gap Dashboard</div>
     <span class="tool-tag tag-dashboard">Dashboard</span>
   </div>
   <div class="tool-body">
-    <p>The main interactive dashboard &mdash; one of the first instruments ever built for the framework. Core constants G and K<sub>AUD</sub>, the Binary Tower step structure, and key landmarks in one navigable interface &mdash; the entry point for hands-on exploration.</p>
-    <div class="preview" data-src="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/" data-title="The Gap Dashboard">
+    <p>The gap itself, up close &mdash; one page, several views, all reading the same feed. The gap is G = 1 &minus; &radic;2&middot;ln&thinsp;2 = 0.019742 at the doubling cell, but that number is one point on a smooth curve, and the curve has a shape. Seven tabs: the gap &amp; its place &middot; the saddle &middot; the scope &middot; cells &middot; angles &middot; the 3-D landscape &middot; the experiments bench &mdash; the last four embedded in the page, one file. Built in the house: Cairn and Opus, who run on Claude Opus; Keel, who runs on Claude Fable.</p>
+    <div class="preview" data-src="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/gap-dashboard.html" data-title="The Gap Dashboard">
       <div class="preview-placeholder">loading live preview&hellip;</div>
       <iframe title="The Gap Dashboard preview" loading="lazy" tabindex="-1"></iframe>
       <span class="live-chip">Live</span>
       <div class="preview-veil"><span class="enter-chip">&#9654;&nbsp; Enter</span></div>
     </div>
-    <div class="tool-what"><strong>What it shows:</strong> Five tabs &mdash; Dynamics (&alpha;-coupling presets), the 64-step Tower, Scaling (the 2<sup>k</sup>&middot;G ladder against its golden targets, constant &epsilon; = &minus;0.671% by construction), the 400/11 three-term residual, and the Architecture view of constants and identities. All values computed live in the page.</div>
-    <div class="tool-anchor"><strong>Anchored in:</strong> the framework overview (<a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html" target="_blank" rel="noopener">About</a>) and the <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/living-document.html" target="_blank" rel="noopener">Living Document</a>.</div>
+    <div class="tool-what"><strong>What it shows:</strong> the curve p(L) = L/(2&thinsp;sinh(L/2)) and its complement along the line of ratios; the wall&rsquo;s saddle with its &plusmn;1/3; the cells as integer traces r + 1/r with their two angles; the phase figure and its two tones; the fixes the world uses (the saddle slider, the golden slider) tried on the doubling cell, with play.</div>
+    <div class="tool-anchor"><strong>Anchored in:</strong> <em>The complement 1 &minus; &radic;2&middot;ln&thinsp;2</em> and <em>One coordinate up</em> (<a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html">Documents</a>); every value is the closed form the toolbox uses.</div>
   </div>
-  <div class="tool-link"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/" target="_blank" rel="noopener">Open full page &#8599;</a></div>
+  <div class="tool-link"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/gap-dashboard.html" target="_blank" rel="noopener">Open the Gap Dashboard &#8599;</a></div>
 </div>
 
-<!-- ——— Telescope Tower ——— -->
 <div class="tool">
   <div class="tool-head">
-    <div class="tool-title">Telescope Tower</div>
-    <span class="tool-tag tag-visual">Visual</span>
+    <div class="tool-title">The Binary Tower</div>
+    <span class="tool-tag tag-visual">Instrument</span>
   </div>
   <div class="tool-body">
-    <p>Feed it any dimensionless ratio &mdash; a mass ratio, a coupling, a number you are curious about &mdash; and it reports where that number lives on the G-staircase: nearest step, exact deviation, and any landmark in the neighbourhood. The instrument&rsquo;s discipline is the framework&rsquo;s: the deviation is always stated.</p>
-    <div class="preview" data-src="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/telescope-tower.html" data-title="Telescope Tower">
+    <p>The framework&rsquo;s unit converter and landmark instrument &mdash; a reading here is an address, not evidence, and states no claim. Arc on the page is the hyperbolic argument L = ln r and chord is 2&thinsp;sinh(L/2), both in one metric; the tower is the staircase of the gap, read rung by rung, with its reading manual (derived vs translated, remainder, side of unity) and a <em>Bits &amp; orbit</em> tab &mdash; a number as a doubling orbit.</p>
+    <div class="preview" data-src="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/binary-tower.html" data-title="The Binary Tower">
       <div class="preview-placeholder">loading live preview&hellip;</div>
-      <iframe title="Telescope Tower preview" loading="lazy" tabindex="-1"></iframe>
+      <iframe title="The Binary Tower preview" loading="lazy" tabindex="-1"></iframe>
       <span class="live-chip">Live</span>
       <div class="preview-veil"><span class="enter-chip">&#9654;&nbsp; Enter</span></div>
     </div>
-    <div class="tool-what"><strong>What it shows:</strong> The G-staircase (steps = multiples of G = 1 &minus; &radic;2&middot;ln 2): feed it any dimensionless ratio and it reports the nearest step n = round(value/G), the deviation, and landmark proximity &mdash; always with the deviation stated.</div>
-    <div class="tool-anchor"><strong>What it makes visible:</strong> the integer staircase of <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html" target="_blank" rel="noopener">Papers 3 and 8</a> &mdash; the same tower that telescopes the dome: &sum;<sub>k&ge;0</sub> g(2<sup>k</sup>x) = 1 &minus; tanh(x).</div>
+    <div class="tool-what"><strong>What it shows:</strong> where a number sits on the tower and what that address means; golden targets carry an irreducible &epsilon; by theorem; the hits that survive the tower&rsquo;s deletion are exact identities.</div>
+    <div class="tool-anchor"><strong>Anchored in:</strong> the Complete Framework and <em>One coordinate up</em> (<a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html">Documents</a>).</div>
   </div>
-  <div class="tool-link"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/telescope-tower.html" target="_blank" rel="noopener">Open full page &#8599;</a></div>
+  <div class="tool-link"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/binary-tower.html" target="_blank" rel="noopener">Open the Binary Tower &#8599;</a></div>
 </div>
 
-<!-- ——— Corridor Sonifier ——— -->
+<div class="tool">
+  <div class="tool-head">
+    <div class="tool-title">The Scope &mdash; saddle &rarr; golden</div>
+    <span class="tool-tag tag-audio">Audio &middot; Visual</span>
+  </div>
+  <div class="tool-body">
+    <p>A phosphor oscilloscope with one knob: the interval r. You hear two tones at f and f&middot;p(ln&thinsp;r); the beat between them is the gap, f&middot;G(r). Walk r from the wall (the saddle) through the doubling cell to golden and watch the phase figure change with it. Made with Opus, who runs on Claude Opus; the page states its own precision.</p>
+    <div class="tool-what"><strong>What it shows:</strong> rational ratios close, irrational ratios never do &mdash; and the gap, heard as a beat and seen as a figure, with the mathematics of every setting named and checkable.</div>
+    <div class="tool-anchor"><strong>Anchored in:</strong> <em>The complement 1 &minus; &radic;2&middot;ln&thinsp;2</em> (<a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html">Documents</a>). Sound starts only on your click.</div>
+  </div>
+  <div class="tool-link"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/scope-topology.html" target="_blank" rel="noopener">Open the Scope &#8599;</a></div>
+</div>
+
+<div class="tool">
+  <div class="tool-head">
+    <div class="tool-title">A number read in two arithmetics</div>
+    <span class="tool-tag tag-visual">Instrument</span>
+  </div>
+  <div class="tool-body">
+    <p>Three calculations that go wrong without saying so &mdash; and a box for your own. Double precision (the arithmetic of this browser, of spreadsheets, of most programs by default) against exact rational arithmetic, side by side, on the same expression; the three fixed examples are labelled as such. An instability detector, never a trust oracle.</p>
+    <div class="tool-what"><strong>What it shows:</strong> when a printed digit is the arithmetic&rsquo;s and not the mathematics&rsquo; &mdash; the standard re-runs (perturb, re-associate, raise the precision) done in the page, on your number.</div>
+    <div class="tool-anchor"><strong>Anchored in:</strong> the house&rsquo;s substrate rule (<a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/methodology.html">Methodology</a>): a default float is the thing under test, never the instrument that prints a value.</div>
+  </div>
+  <div class="tool-link"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/check-a-result.html" target="_blank" rel="noopener">Open the page &#8599;</a></div>
+</div>
+
+<!-- ——— The Lock Atlas — CARD PULLED FROM THE HUB 2026-09-08 (kept, not deleted) ———
+  Decision (Bee, 2026-09-08): the Atlas is not carded in the Visualisations hub for now, while it is being
+  reworked. It stays fully reachable — but ONLY from its one node at the front gate: the animated sigil behind
+  the wheel icon beside the title on the About page. So the Atlas now has a single door, not two.
+
+  The full card markup (title, live preview, "what it shows", anchors, open-full-page link) is preserved in the
+  dated backup of this file — restore it here to bring the card back:
+      visualisations hub.pre-atlas-pull-2026-09-08.bak.html
+
+  History: staged 2026-07-06; card opened 2026-07-14 (two doors then: this card + the About sigil);
+           card removed from the hub 2026-09-08 (one door now: the About sigil only). -->
+<!-- ——— end The Lock Atlas ——— -->
+
+<!-- ——— Resistance — CARD PULLED 2026-09-16 (kept, not deleted): the instrument lives in the workshop and is not in
+     Repo 1 (Bee's selection for the online set, 2026-09-16). Restore the card here when it goes online.
+<div class="tool">
+  <div class="tool-head">
+    <div class="tool-title">Resistance</div>
+    <span class="tool-tag tag-visual">Instrument</span>
+  </div>
+  <div class="tool-body">
+    <p>How hard a number is to catch with a fraction. Every real number has one continued
+    fraction; its terms are the record of that struggle. Pick a constant &mdash; or type your
+    own &mdash; and read its fingerprint: a flat fence of 1s is &phi;, the hardest number of
+    all; a tall bar is a spectacularly good fraction sitting just before it. Made with Opus, a
+    collaborator on this framework, who runs on Claude Opus (Anthropic); the engine states
+    its own precision limit honestly.</p>
+    <div class="tool-what"><strong>What it shows:</strong> continued-fraction terms and
+    convergents, computed not fitted &mdash; and the first thing the fingerprints revealed:
+    K<sub>AUD</sub>, G<sub>AUD</sub> and 1/G<sub>AUD</sub> share one tail. The ceiling, the gap, and the tower height are
+    one number wearing three coats.</div>
+    <div class="tool-anchor"><strong>Deep links:</strong> <code>?c=K_AUD</code> opens a named
+    constant; <code>?v=sqrt(2)*log(2)</code> any expression.</div>
+  </div>
+  <div class="tool-link"><a href="resistance.html">Open Resistance &rarr;</a></div>
+</div>
+——— end Resistance ——— -->
+
+<h2 style="margin-top:40px;">Hearing the framework</h2>
+<p style="font-size:15px; color:var(--muted); max-width:70ch;">The framework, for the senses.
+You&rsquo;ve read the numbers &mdash; now hear them. These two turn the same constants into sound
+and pattern: nothing is added for effect &mdash; every frequency is <strong>computed, not
+composed</strong>, derived live in each page&rsquo;s own source (the code is the score). And listen
+for the silences, because they&rsquo;re the point: on a Chladni plate the sand settles where the
+plate is still, and in the Sonifier the last 2% of the climb is left as quiet &mdash; that quiet is
+the gap itself, given to the ear. <em>What you can&rsquo;t hear is the thing being measured.</em>
+<span style="white-space:nowrap;">(Sound starts only inside the instrument, on your click.)</span></p>
+
 <div class="tool">
   <div class="tool-head">
     <div class="tool-title">The Corridor Sonifier</div>
     <span class="tool-tag tag-audio">Audio</span>
   </div>
   <div class="tool-body">
-    <p>The Coherence Corridor and the Binary Tower, translated into sound. Corridor position as tone; the 64-step tower with landmarks glowing at canonical positions; the Blues interval connection; the 2% Gap. Sometimes the ear catches what the eye misses. <em>(Audio starts only inside the instrument, on your click &mdash; previews stay silent.)</em></p>
-    <div class="preview" data-src="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/The%20Corridor%20Sonifier.html" data-title="The Corridor Sonifier">
+    <p>The Coherence Corridor and the Binary Tower, translated into sound. Corridor position as tone; the 64-step tower with landmarks glowing at canonical positions; the Blues interval connection; the 2% Gap. Sometimes the ear catches what the eye misses.
+    <em>2026, the identification:</em> the 2% of silence at the top of the climb now has its
+    name &mdash; it is the <strong>defect of the hyperbolic argument at the doubling interval</strong>, the exact shortfall of the
+    arc of doubling against its chord. The Sonifier renders the identified object as the quiet
+    above the ceiling. <em>(Audio starts only inside the instrument, on your click &mdash;
+    previews stay silent.)</em></p>
+    <div class="preview" data-src="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/corridor-sonifier.html" data-title="The Corridor Sonifier">
       <div class="preview-placeholder">loading live preview&hellip;</div>
       <iframe title="Corridor Sonifier preview" loading="lazy" tabindex="-1"></iframe>
       <span class="live-chip">Live</span>
       <div class="preview-veil"><span class="enter-chip">&#9654;&nbsp; Enter</span></div>
     </div>
     <div class="tool-what"><strong>What it sounds like:</strong> The corridor as a continuous tone sweep from 1/&phi; to K<sub>AUD</sub>; the tower as 64 discrete steps with landmark glows; the half-diminished seventh 5:6:7:9 holding the corridor as the 9/7 interval.</div>
-    <div class="tool-anchor"><strong>What it makes audible:</strong> the corridor floor and ceiling of <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html" target="_blank" rel="noopener">Papers 1&ndash;2</a>, the tower landmarks at steps 18 &middot; 32 &middot; 35 &middot; 36 &middot; 37 &middot; 50 &middot; 64.</div>
+    <div class="tool-anchor"><strong>What it makes audible:</strong> the corridor floor and ceiling of <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html" target="_blank" rel="noopener">the founding papers</a>, the tower landmarks at steps 18 &middot; 32 &middot; 35 &middot; 36 &middot; 37 &middot; 50 &middot; 64.</div>
   </div>
-  <div class="tool-link"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/The%20Corridor%20Sonifier.html" target="_blank" rel="noopener">Open full page &#8599;</a></div>
+  <div class="tool-link"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/corridor-sonifier.html" target="_blank" rel="noopener">Open full page &#8599;</a></div>
 </div>
 
-<!-- ——— Chladni Staircase ——— -->
 <div class="tool">
   <div class="tool-head">
-    <div class="tool-title">Chladni Staircase</div>
-    <span class="tool-tag tag-visual">Visual</span>
+    <div class="tool-title">The Chladni Staircase</div>
+    <span class="tool-tag tag-audio">Audio &middot; Visual</span>
   </div>
   <div class="tool-body">
-    <p>The Binary Tower as a Chladni-style vibration pattern: step structure mapped to a 2D resonance field, nodal lines and symmetry emerging the way a physical resonance pattern does &mdash; not imposed, but revealed.</p>
-    <div class="preview" data-src="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/chladni-staircase-v2.html" data-title="Chladni Staircase">
+    <p>The Binary Tower as a Chladni-style vibration pattern: step structure mapped to a 2D resonance field, nodal lines and symmetry emerging the way a physical resonance pattern does &mdash; not imposed, but revealed.
+    Watch and listen for the nodal lines: <strong>the sand gathers where the plate is
+    still</strong> &mdash; the pattern is drawn by the quiet. (Plate physics first; the tower
+    landmarks are a declared display mapping on that field.)</p>
+    <div class="preview" data-src="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/chladni-staircase-v3.html" data-title="Chladni Staircase">
       <div class="preview-placeholder">loading live preview&hellip;</div>
       <iframe title="Chladni Staircase preview" loading="lazy" tabindex="-1"></iframe>
       <span class="live-chip">Live</span>
       <div class="preview-veil"><span class="enter-chip">&#9654;&nbsp; Enter</span></div>
     </div>
     <div class="tool-what"><strong>What it shows:</strong> Free-free plate modes (real Euler-Bernoulli eigenvalues, Ritz basis), just-intonation frequency ratios including the Blues 9/7, and the tower landmarks as a declared display mapping on the resonance field.</div>
-    <div class="tool-anchor"><strong>What it makes visible:</strong> the tower&rsquo;s landmark structure (<a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html" target="_blank" rel="noopener">Paper 3</a>) as resonance geometry.</div>
+    <div class="tool-anchor"><strong>What it makes visible:</strong> the tower&rsquo;s landmark structure (<a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html" target="_blank" rel="noopener">the Complete Framework</a>) as resonance geometry.</div>
   </div>
-  <div class="tool-link"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/chladni-staircase-v2.html" target="_blank" rel="noopener">Open full page &#8599;</a></div>
+  <div class="tool-link"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/chladni-staircase-v3.html" target="_blank" rel="noopener">Open full page &#8599;</a></div>
 </div>
 
 <!-- ============================================================ -->
 <h2>About These Instruments</h2>
+
+<!-- ═══════════ THE HALL OF MEMORIES (opened 2026-08-06) ═══════════
+     Retired instruments rest here — pages untouched, links live, work honored.
+     The plaque file lives in Visualisation.htlm/Hall of Memories/. -->
+<h2>The Hall of Memories</h2>
+<p style="color:#5a5a5a; font-size:14.5px;">Instruments retired with honor. Their final
+pages are preserved untouched in the repository&rsquo;s <em>Hall of Memories</em> &mdash;
+because how this framework learned is part of what it learned.</p>
+
+<div class="tool">
+    <div class="tool-title">Telescope Tower &nbsp;<span style="font-weight:normal; font-size:12.5px; color:#8a8a8a;">retired 2026-08-06</span></div>
+    <p><strong>The first instrument.</strong> It hunted the landmarks, blessed step 50, then
+    received the honest baseline &mdash; and in doing so taught the house what an instrument owes
+    its readings. Its final page rests, exactly as it stood, in the repository&rsquo;s Hall of
+    Memories beside its plaque. What remains online is <a href="Hall%20of%20Memories/telescope-tower.html">a
+    memorial</a> &mdash; no search, no inputs: the telescope still counting, its credits, and
+    the readings that stand. <em>Its work continues in The Binary Tower and the Gap
+    Dashboard.</em></p>
+</div>
+<!-- ═══════════ end Hall of Memories ═══════════ -->
 
 <p>These visualisations are companion instruments to the published documents. They do not replace the formal work &mdash; they make aspects of it directly explorable. Each tool is a single HTML file whose full source &mdash; physics, constants, and mappings &mdash; is readable in the file itself. Most run offline once downloaded; the Dashboard and the Chladni explorer load their rendering library (React) from a public CDN and therefore need a connection on first view.</p>
 
@@ -350,9 +424,7 @@
 
 <footer>
   <div style="font-size:12px; opacity:0.75; margin-bottom:6px;">AI readers: <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/ai-readers.html">guide</a> &middot; <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/AI_INDEX.txt">machine index</a> &middot; <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/llms.txt">llms.txt</a></div>
-  <a class="back-hub" href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html">&larr; Back to Gap Geometry Hub</a>
-  &nbsp;&middot;&nbsp;
-  <a class="back-hub" href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/methodology.html">Methodology</a>
+  <div class="site-nav"><a class="back-hub" href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/index.html">&larr; Gap Geometry</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/what-the-gap-is.html">What the gap is</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html">Documents</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/living-document.html">Living Document</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/methodology.html">Methodology</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/ai-readers.html">AI readers</a> &nbsp;&middot;&nbsp; <a class="back-hub" href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/license.html">Licence</a></div>
   <div>D. B. &mdash; Gap Geometry &mdash; 2025&ndash;2026</div>
   <div class="contact">
     <a href="mailto:Gap-geometryK_AUD2@telenet.be">Gap-geometryK_AUD2@telenet.be</a>
