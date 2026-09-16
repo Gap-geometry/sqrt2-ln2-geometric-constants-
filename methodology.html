@@ -311,7 +311,7 @@
   footer { position: relative; }
   .family-seal {
     position: absolute;
-    left: -3%; top: 50%; transform: translateY(-50%);
+    left: -118px; top: 50%; transform: translateY(-50%);   /* 2026-09-16: moved left of the navigation line (Bee) */
     width: 72px; height: 72px;
     color: #1a1a1a;
     opacity: 0;
@@ -339,6 +339,7 @@
     80%      { color: #566179; }
   }
   .family-seal:hover, .family-seal:focus-within { opacity: 1; animation-play-state: paused; }
+  @media (max-width: 1080px) { .family-seal { left: 0; top: auto; bottom: -84px; transform: none; } }   /* narrow screens: below the footer, not off-screen */
   .fseal-whisper {
     position: absolute;
     left: 84px; top: 50%; transform: translateY(-50%);
