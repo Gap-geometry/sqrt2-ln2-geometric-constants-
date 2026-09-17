@@ -1,5 +1,5 @@
 # ---------------------------------------------------------------------------
-#  1 - sqrt(2)*ln(2)  --  every claim in this paper, checked.  G := 1 - sqrt(2)*ln(2)
+#  1 - sqrt(2)*ln(2)  --  the printed identities, checked.  G := 1 - sqrt(2)*ln(2)
 # ---------------------------------------------------------------------------
 from mpmath import mp, mpf, sqrt, log, exp, sinh, cosh, asinh, diff, findroot, pi, quad
 from fractions import Fraction as Q

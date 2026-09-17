@@ -26,13 +26,9 @@ License: CC BY 4.0 · Version: 1.0 — 2026-09 · DOI: 10.17605/OSF.IO/K9HX4
 ABSTRACT
 ══════════════════════════════════════════════════════════════════════════════
 
-1 − √2·ln 2 is enclosed two-sidedly, at every order, by the consecutive
-partial sums of a rational alternating series, on a certificate of three
-integer steps and Leibniz. That is the claim, and it is the whole of it.
-Neither the number nor the series is new; what follows says where each came from
-and what is added here. §6 sets that out source by source — mean inequalities,
-variate generation, hyperbolic geometry, the OEIS — each row separating what is
-written there from what stands here.
+1 − √2·ln 2 is enclosed two-sidedly, at every order, by the consecutive partial
+sums of a rational alternating series, on a certificate of three integer steps
+and Leibniz. That is the claim, and it is the whole of it.
 
 On an interval [a, b] the geometric mean never exceeds the logarithmic mean.
 Writing r = b/a and L = ln r, the ratio of the two is
@@ -65,9 +61,12 @@ on the line of ratios — the integer points of the trace, its partner, the
 saddle at the wall when the argument is made complex — and why the same
 function recurs across fields. They add no claim; they place the one above.
 
-The series itself appears in OEIS A002162 (Bala, 2022) as a series for ln 2.
-What is stated here is the object it describes on an interval fixed in
-advance, and the enclosure its truncations certify.
+Neither the number nor the series is new. The series appears in OEIS A002162
+(Bala, 2022) as a series for ln 2; what is stated here is the object it
+describes on an interval fixed in advance, and the enclosure its truncations
+certify. §6 says where each came from and what is added here, source by source —
+mean inequalities, variate generation, hyperbolic geometry, the OEIS — each row
+separating what is written there from what stands here.
 
 ──────────────────────────────────────────────────────────────────────────────
 
@@ -290,11 +289,11 @@ The Bernoulli bracket sits strictly inside the other at every order tested
 (orders 2–8; an observation, not a theorem). What §5's enclosure adds that
 this one cannot is two things: rational bounds (1/48, 151/7680, integers over
 integers, where the Bernoulli partial sums are polynomials in ln 2), and a
-certificate in integer arithmetic where this one rests on the asymptotics of
-B_{2n} through ζ. Their domains differ too: r ≤ 3 + 2√2 for the central-
-binomial series, r < e^{2π} = 535.49… for the Bernoulli one, the latter fixed
-by the singularity of u/sinh u at u = iπ. Neither boundary belongs to the
-object; G(r) is smooth and monotone through both. Two routes, two
+certificate in integer arithmetic where this one rests on the exact Bernoulli–ζ
+identity and an analytic bound on ζ. Their domains differ too: r ≤ 3 + 2√2 for
+the central-binomial series, r < e^{2π} = 535.49… for the Bernoulli one, the
+latter fixed by the singularity of u/sinh u at u = iπ. Neither boundary belongs
+to the object; G(r) is smooth and monotone through both. Two routes, two
 certificates, one object, which is the only reason both are printed.
 
 ──────────────────────────────────────────────────────────────────────────────
@@ -438,12 +437,12 @@ The co-appearance has a reason, and it is short. The continuous homomorphisms
 exponential used here; an interval measured by its length L and by the ratio
 of its ends r = e^L is measured on the two sides of that map, and p = GM/L_log
 is the ratio of the two measures — the geometric mean is the multiplicative
-middle, the logarithmic mean is (r − 1)/L, the additive one. So wherever a
-problem carries both a count that adds and a step that compounds — panels and
-an exponential integrand; doublings and a probability; a translation length
-and a trace — p(L) is present and is the same function. This places the
-recurrence; it does not place the ratio. Which fields carry both measures is a
-census, not a theorem.
+middle, the logarithmic mean is (r − 1)/L, the additive one. So in the settings
+listed here, where these same additive and multiplicative interval measures
+occur — panels and an exponential integrand; doublings and a probability; a
+translation length and a trace — their ratio is p(L), the same function. This
+places the recurrence; it does not place the ratio. Which fields carry both
+measures is a census, not a theorem.
 
 Two checks that it is the object, and not a coordinate of it, that recurs. The
 relation p(2L) = p(L)/cosh(L/2): doubling the argument divides p by cosh(L/2).
@@ -452,8 +451,8 @@ at its fixed point, the wall: written L ↦ 2L, r ↦ r², X ↦ 2X√(1+X²) or
 2τ/(1+τ²) with τ = tanh(L/2), the map's derivative at the wall is 2 in each —
 the fixed-point multiplier of the squaring map is invariant under smooth local
 conjugacy — where the second derivative of G at the same point was 1/3, 1/12,
-1/12, 1/3 in those coordinates (§4.3). The multiplier is the object's; the
-curvature's value is the coordinate's.
+1/12, 1/3 in those coordinates (§4.3). The multiplier belongs to the map; the
+curvature's value belongs to the coordinate.
 
 ──────────────────────────────────────────────────────────────────────────────
 
@@ -661,7 +660,7 @@ is the only dependency; under a minute, most of it the dps 500 rung.
 
 ┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈┈
 # ---------------------------------------------------------------------------
-#  1 - sqrt(2)*ln(2)  --  every claim in this paper, checked.  G := 1 - sqrt(2)*ln(2)
+#  1 - sqrt(2)*ln(2)  --  the printed identities, checked.  G := 1 - sqrt(2)*ln(2)
 # ---------------------------------------------------------------------------
 from mpmath import mp, mpf, sqrt, log, exp, sinh, cosh, asinh, diff, findroot, pi, quad
 from fractions import Fraction as Q
