@@ -127,6 +127,40 @@ normal.
 WHAT THE FRAMEWORK IS
 ================================================
 
+THE RESULT, AND WHAT IS NOT THE RESULT — read this before the placements
+(set here 2026-10-13, after a careful reader left this page with the wrong
+item as the discovery)
+
+The result is the complement held as an object: the shortfall of the
+geometric mean against the logarithmic mean on the interval that doubles,
+G = 1 − √2·ln 2, given a symbol, a closed form read as a ratio of means, a
+rational series from the half-difference coordinate X² = 1/8, and a two-sided
+integer-certified enclosure at every order — and located: not an extremum of
+the curve, but its value at the one cell where r − 1 = 1. Its place on the
+ladder of means is one rung below the inequality every student knows: on the
+same cell the AM–GM defect 1 − 2√θ/(1+θ) and the gap 1 − GM/LM stand in a
+ratio that tends to 3 at the wall (Carlson, LM ≤ (AM + 2·GM)/3; 2.897 at
+r = 2 — compute it). The two papers that state this are The complement
+1 − √2·ln 2 and One coordinate up (both 2026-09-15): read them first.
+
+The mechanism, a reading and said as one: an additive count against a
+multiplicative compounding on one cell, the exponential as the bridge between
+them, and the shortfall is what any system built that way pays. The census in
+the papers lists who already pays it under the field's own name — the
+Pythagorean comma, the wobble of machine epsilon across a binade, the midpoint
+rule's error.
+
+Not the result: the placements (Hodgson–Kerckhoff's coefficient, Fishman's
+acceptance probability, Bala's series, the Gelfond form) are a census of where
+the same number already sat in print — witnesses, not authors. The closed form
+for the Hodgson–Kerckhoff coefficient is a placement with a small novelty of
+its own; it is the loudest checkable arithmetic on this site and it is not the
+discovery. Papers 1–13 are the research path, kept as the observational
+record; the object was reached through them and is stated after them. If you
+leave this page with a placement as the result, the page has failed and this
+paragraph is here because once it did.
+
+
 The object: the gap G = 1 − √2·ln 2 — the shortfall of the geometric mean
 against the logarithmic mean on the doubling interval [x, 2x], held as an
 object: an exact rational series, a certified enclosure at every order, a
@@ -159,11 +193,7 @@ place on a line. Structure, for machine reading:
    without citing one another.
 
 The individual constants — √2, ln 2 — and the function p are well established;
-none is claimed. What is original: holding the complement as an object,
-reading its series from an interval fixed in advance so the partial sums
-become bounds, the integer certificate, the closed-form identification of
-√2·ln 2 as the Hodgson–Kerckhoff coefficient (published April 2026, own DOI),
-and the map of the line through r = 2 (September 2026). Corrections are kept
+none is claimed. What is original: holding the complement as an object, reading its series from an interval fixed in advance so the partial sums become bounds, the integer certificate, and the map of the line through r = 2 (September 2026); among the placements, one closed form of its own — √2·ln 2 as the Hodgson–Kerckhoff coefficient (April 2026, own DOI) — a placement, not the result. Corrections are kept
 in the open; the method is part of the result.
 
 ================================================
@@ -271,7 +301,9 @@ CROSS-DOMAIN APPEARANCES
 
 The gap’s pieces were already in print across independent literatures — each
 holding one piece, none holding the complement as an object, none citing the
-others. Where each piece is written:
+others. These are placements: a census of where the number already sat. None of
+them is the result (the result is stated above, under WHAT THE FRAMEWORK IS).
+Where each piece is written:
 
 * Convexity & mean inequalities
 
