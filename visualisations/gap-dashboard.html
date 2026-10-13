@@ -5,7 +5,7 @@
   Collapses the standalone lab pages into one page; each view reads the SAME
   closed-form feed used by TOOLBOX/landmarks.py (25 checks) and closed_cells.py (37 checks).
   Values cross-checked against the toolbox 2026-09-07 (r=2, golden, 2+√3, 3+2√2, 5) — all match.
-  Formulas:  L = ln r ;  G = 1 − L/(2 sinh(L/2)) ;  t₂ = r + 1/r ;  chord 2X = √(t₂−2) ;
+  Formulas:  L = ln r ;  p = L/(2 sinh(L/2)) = GM/L_log ;  gap G = 1 − p ;  t₂ = r + 1/r ;  chord 2X = √(t₂−2) ;
              base = 16/(t₂−2) ;  θ = gd L = atan(sinh L) ;  Π = arccos(tanh(L/2)) ;
              partner r′ = √((t₂+2)/(t₂−2)) ;  saddle field = Re(1 − w/sinh w), Hessian diag(+1/3,−1/3).
   Hero tabs live now: "The gap & its place" and "The saddle". Others (Cells, Angles, Golden,
@@ -223,7 +223,9 @@
           </div>
           <p class="cap">An oscilloscope of the ratio — two tones, one against the other:
           <b>x = sin 2πt</b>, <b>y = sin(2π·R·t)</b>. A <b>rational</b> R draws a still, closed figure;
-          an <b>irrational</b> one <b>never comes home</b> — it keeps drawing, forever.</p>
+          an <b>irrational</b> one <b>never comes home</b> — it keeps drawing, forever. <span style="color:var(--dim)">How
+          <em>nearly</em> it comes home, and how often, is what number theory calls a number's <b>irrationality exponent</b>:
+          the scope draws the question; a proof settles it for one number at a time (see π).</span></p>
         </div>
         <div class="col-side">
           <div class="read">
@@ -248,6 +250,7 @@
             <button class="scpre" data-r="1.5" data-k="rational" data-note="rat">3:2</button>
             <button class="scpre" data-r="0.70710678" data-k="irrational" data-note="rt2">1/√2</button>
             <button class="scpre" data-r="1.61803399" data-k="irrational" data-note="phi">φ golden</button>
+            <button class="scpre" data-r="0.78539816" data-k="transcendental" data-note="pi">π/4 — the circle, on the dial</button>
           </div>
           <div style="margin-top:10px;display:flex;align-items:center;gap:10px;flex-wrap:wrap">
             <button id="sc-hear" style="font:inherit;padding:4px 11px;border:1px solid var(--gold);background:transparent;color:var(--gold);border-radius:6px;cursor:pointer">▶ hear the gap</button>
@@ -362,7 +365,7 @@ const LABS={"cells": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset
       cx.fillText("r="+r, x-9, CH-M.b+16); }
     for(let g=0;g<=0.12;g+=0.02){ const y=Y(g); cx.beginPath();cx.moveTo(M.l,y);cx.lineTo(CW-M.r,y);cx.stroke();
       cx.fillText(g.toFixed(2), 12, y+4); }
-    cx.fillStyle='#8fa3c4'; cx.fillText("G = 1 − GM/L_log", 12, M.t-4); cx.fillText("r  (L = ln r) →", CW-104, CH-6);
+    cx.fillStyle='#8fa3c4'; cx.fillText("gap G = 1 − GM/L_log   (the ratio GM/L_log is p)", 12, M.t-4); cx.fillText("r  (L = ln r) →", CW-104, CH-6);
     // vertical "place" line at r=2
     cx.strokeStyle='rgba(240,192,74,.4)'; cx.setLineDash([5,5]);
     cx.beginPath();cx.moveTo(X(2),M.t);cx.lineTo(X(2),CH-M.b);cx.stroke(); cx.setLineDash([]);
@@ -433,7 +436,7 @@ const LABS={"cells": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset
     aix.font='10px ui-monospace,monospace'; aix.textAlign='left';
     aix.fillStyle='rgba(176,255,196,.9)'; aix.fillText('arc L = '+Lr.toFixed(4), 8, 14);
     aix.fillStyle='rgba(240,192,74,.95)'; aix.fillText('chord = '+chord(r).toFixed(4), 8, AIH-8);
-    aix.fillStyle='#dce6f7'; aix.textAlign='right'; aix.fillText('G = '+Gof(r).toFixed(6), AIW-8, 14);
+    aix.fillStyle='#dce6f7'; aix.textAlign='right'; aix.fillText('gap G = '+Gof(r).toFixed(6), AIW-8, 14);
     aix.fillStyle=(Math.abs(chord(r)-1)<1e-4)?'#f0c04a':'#6f86b5';
     aix.fillText(Math.abs(chord(r)-1)<1e-4?'chord = 1 · golden':(Math.abs(r-2)<1e-3?'chord = 1/√2 · the gap':'arc < chord'), AIW-8, AIH-8);
   }
@@ -501,6 +504,7 @@ const LABS={"cells": "<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset
     rat:'<b>A rational ratio closes.</b> p/q draws a still, finite figure and repeats — the tones agree, the figure comes home. This is what the gap is <em>not</em>.',
     phi:'<b>The golden ratio is the stubbornest of all.</b> The most-irrational number — its trace resists even <em>nearly</em> closing (the anti-resonance). The opposite pole from a clean rational.',
     wall:'<b>1:1 — the wall.</b> The two tones are one tone: R = 1, p = 1, the gap is zero. This is r = 1, the one critical point of the curve — the saddle. The doubling interval, R = √2·ln 2, is an ordinary point a little below it; the beat you hear there is the gap.',
+    pi:'<b>π, scaled to the dial (π/4; a rational factor changes nothing about how nearly it comes home).</b> Its figure never closes, and how <em>nearly</em> it comes home is a famous question: on this dial, after 28 cycles of x (that is 7π) it misses home by 0.0089 of a cycle, after 452 (113π, the famous 355/113) by 0.00003. How often a number comes that close, relative to how long it took, is its <b>irrationality exponent</b>. For π a preprint of September 2026 (OpenAI, <i>The irrationality exponent of π is 2</i>) claims a proof that the exponent is 2: it comes home as close as you like, never exceptionally close for the time taken. Not ours; pointed at. The scope drew the question in July 2026 for every R — and with R = √2·ln 2 the trace, after its first cycle, falls short of home by exactly 1 − R: the gap itself — a shortfall of the trace, not an error of ours or theirs.',
     rt2:'<b>1/√2 — the chord of the doubling interval.</b> Irrational, algebraic: the figure never closes, but it is not the gap. The gap is the shortfall of ln 2 below this chord, 1 − √2·ln 2.'
   };
   function bestConv(x,maxq){                     // best continued-fraction convergent, q ≤ maxq
