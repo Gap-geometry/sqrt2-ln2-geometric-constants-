@@ -741,7 +741,7 @@ gap. The note stays as written; the order of events is a matter of record and
 is given here. 2026-01-21: The Coherence Ceiling on OSF (DOI
 10.17605/OSF.IO/5VZ2R) — the ratio √2·ln 2 and its complement in the
 framework; 2026-01-24/25: Geometric Constants from H4 v2/v3, the January
-closed-form identification. 2026-05-03: the author herself finds the print,
+closed-form identification. 2026-05-03: the author, D. B., finds the print,
 during a cold-search visibility test of the ratio on a public model — the
 TOMS 780 / Ahrens–Dieter (1988) / Fishman (1996, pp. 188–189) trail, verified
 that day from the volume. 2026-06-02: Paper 10 published, citing the print.
