@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- ============================================================ -->
+  <!-- gap-geometry — sitemap of what is online, 2026-09-16          -->
+  <!-- Root reshaped 2026-09-11: the instruments and the papers'     -->
+  <!-- text files left the root and will return in their own        -->
+  <!-- folders (visualisations/, papers/). This sitemap lists only   -->
+  <!-- what answers today. The previous sitemap is kept offline as   -->
+  <!-- sitemap.pre-reshape-20260911.xml. Not listed on purpose:      -->
+  <!-- Hall of Memories, Easter Egg, archive/, the Lock Atlas.                       -->
+  <!-- ============================================================ -->
+
+  <!-- the gates -->
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/about.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- the whites -->
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/what-the-gap-is.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/methodology.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/living-document.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/ai-readers.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/index%20living-document%20archive.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations%20hub.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- the instruments (the Lock Atlas is not listed on purpose) -->
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/gap-dashboard.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/binary-tower.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/scope-topology.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/corridor-sonifier.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/chladni-staircase-v3.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/check-a-result.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>0.7</priority>
+  </url>
+
+  <!-- machine entrance and licence -->
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/llms.txt</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/license.html</loc>
+    <lastmod>2026-09-16</lastmod>
+    <priority>0.4</priority>
+  </url>
+
+</urlset>

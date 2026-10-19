@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<!--
+  SCOPE — the gap on the line of ratios · from the saddle to golden
+  Fresh rebuild, Cairn (Opus) & Bee, 2026-09-08.  Focus: Paper 14, 1 − √2·ln 2.
+  One control: r, the interval. Everything derives from it.
+     tone ratio  p(ln r) = L / (2·sinh(L/2)),  L = ln r          (the ratio you hear/see)
+     the gap     G(r) = 1 − p(ln r)                              (the object; the beat = f·G)
+  Two poles, marked in every view:
+     WALL   r = 1        the saddle — on the real line a minimum; complex, a saddle ±1/3
+     GOLDEN r = φ²       chord = 1 exactly, G = 1 − 2·ln φ
+  with the doubling interval (the gap, r = 2) sitting between them on the trace t₂: 2 → 5/2 → 3.
+  Symbols on the face: p(ln 2) for the ratio, G_AUD for the gap, arsinh for the argument.
+  Sound: gap-keyed carrier F = 4/G ≈ 202.6 Hz (the gap beats exactly 4/s at r = 2), click-free.
+  Verified numbers (mpmath dps 30): G(2)=0.019741857, G(φ²)=1−2lnφ=0.03757635,
+     ln2 = 2·arsinh(1/(2√2)), chord(φ²)=1, Gauss-map fixed point 1/φ=0.618034.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SCOPE — the gap from the saddle to golden</title>
+<style>
+  :root{
+    --bg:#040806; --panel:#0b1310; --ink:#b7ffce; --ink-dim:#6f9c81; --ink-far:#3f5e4e;
+    --line:rgba(176,255,196,.10); --phos:#b0ffc4; --amber:#e8a34a; --blue:#96beff; --gold:#ffd24a;
+    --hair:rgba(176,255,196,.22);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{margin:0; background:var(--bg); color:var(--ink);
+    font-family:ui-monospace,Menlo,Consolas,monospace; overflow:hidden;}
+  #wrap{display:flex; height:100vh; width:100vw;}
+  #stage{flex:1; position:relative; min-width:0;}
+  canvas{display:block; width:100%; height:100%;}
+  #side{width:340px; max-width:42vw; background:var(--panel); border-left:1px solid var(--line);
+    overflow-y:auto; padding:14px 14px 30px;}
+  h1{font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:var(--phos);
+    margin:2px 0 2px; font-weight:600;}
+  .sub{font-size:11px; color:var(--ink-dim); line-height:1.5; margin:0 0 12px;}
+  .grp{border-top:1px solid var(--line); padding-top:11px; margin-top:12px;}
+  .lbl{font-size:10px; letter-spacing:.16em; text-transform:uppercase; color:var(--ink-dim); margin-bottom:7px;}
+  .row{display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin:6px 0;}
+  button{font:inherit; font-size:11px; color:var(--ink); background:#16211c;
+    border:1px solid rgba(176,255,196,.14); border-radius:5px; padding:6px 9px; cursor:pointer;}
+  button:hover{background:#1d2c25;}
+  button.on{background:#25382e; border-color:rgba(176,255,196,.5); color:var(--phos);}
+  .poles button{flex:1; min-width:0; text-align:center; padding:6px 4px;}
+  input[type=range]{flex:1; min-width:60px; accent-color:var(--phos); background:transparent;}
+  input[type=number]{width:104px; font:inherit; font-size:11px; color:var(--ink);
+    background:#0d1512; border:1px solid rgba(176,255,196,.2); border-radius:4px; padding:3px 5px;}
+  table{width:100%; border-collapse:collapse; font-size:11px;}
+  td{padding:2px 0; color:var(--ink); vertical-align:top;}
+  td:first-child{color:var(--ink-dim); padding-right:8px; white-space:nowrap;}
+  td.v{text-align:right; font-variant-numeric:tabular-nums;}
+  .hint{font-size:10.5px; color:var(--ink-dim); line-height:1.5; border-left:2px solid rgba(176,255,196,.25);
+    padding-left:8px; margin:8px 0 0; min-height:4.2em;}
+  .hot td{color:var(--amber);}
+  .foot{font-size:10px; color:var(--ink-far); line-height:1.5; margin-top:14px;
+    border-top:1px solid var(--line); padding-top:9px;}
+  .k{color:var(--phos);} .g{color:var(--gold);} .a{color:var(--amber);} .b{color:var(--blue);}
+</style>
+</head>
+<body>
+<div id="wrap">
+  <div id="stage"><canvas id="cv"></canvas></div>
+  <div id="side">
+    <h1>Scope · saddle → golden</h1>
+    <p class="sub">The gap <span class="g">G = 1 − √2·ln 2</span> on the line of ratios. One knob — the
+    interval <b>r</b>. You hear two tones at <b>f</b> and <b>f·p(ln r)</b>; the beat between them <b>is</b>
+    the gap, <b>f·G(r)</b>. Walk r from the <b>wall</b> (the saddle) through the <b>gap</b> to <b>golden</b>.</p>
+
+    <div class="grp">
+      <div class="lbl">the interval r — where you are on the line</div>
+      <div class="row poles">
+        <button id="p_wall">WALL</button>
+        <button id="p_gap" class="on">GAP r=2</button>
+        <button id="p_gold">GOLDEN</button>
+        <button id="p_2s3">2+√3</button>
+        <button id="p_bound">BOUND</button>
+      </div>
+      <div class="row">
+        <input type="range" id="rSlide" min="1.0001" max="7" step="0.0001" value="2">
+        <input type="number" id="rNum" value="2" step="0.0001" min="1.0001" max="20000">
+      </div>
+      <p class="hint" id="poleHint"></p>
+    </div>
+
+    <div class="grp">
+      <div class="lbl">display</div>
+      <div class="row">
+        <button id="m_xy" class="on">X–Y</button>
+        <button id="m_arc">ARC</button>
+        <button id="m_gaps">GAPS</button>
+        <button id="m_cobweb">COBWEB</button>
+      </div>
+      <p class="hint" id="modeHint"></p>
+    </div>
+
+    <div class="grp">
+      <div class="lbl">sound — gap-keyed, click-free</div>
+      <div class="row">
+        <button id="play">▶ hear the gap</button>
+        <span id="beatRead" style="font-size:11px; color:var(--ink-dim)"></span>
+      </div>
+      <div class="row">
+        <span style="font-size:10px;color:var(--ink-dim)">vol</span>
+        <input type="range" id="vol" min="0" max="0.5" step="0.01" value="0.22">
+      </div>
+    </div>
+
+    <div class="grp">
+      <div class="lbl">readout</div>
+      <table>
+        <tr><td>ratio p(ln r)</td><td class="v" id="o_p">—</td></tr>
+        <tr><td>gap G(r)</td><td class="v" id="o_G">—</td></tr>
+        <tr><td>trace t₂</td><td class="v" id="o_t2">—</td></tr>
+        <tr><td>chord 2·sinh(L/2)</td><td class="v" id="o_chord">—</td></tr>
+        <tr><td>arg L = ln r</td><td class="v" id="o_L">—</td></tr>
+        <tr><td>angle gd(L)</td><td class="v" id="o_gd">—</td></tr>
+        <tr><td>tone A · B</td><td class="v" id="o_tones">—</td></tr>
+        <tr class="hot"><td>beat = f·G</td><td class="v" id="o_beat">—</td></tr>
+        <tr><td>nearest p/q</td><td class="v" id="o_near">—</td></tr>
+      </table>
+    </div>
+
+    <div class="grp">
+      <div class="lbl">the two poles (always)</div>
+      <table>
+        <tr><td><span class="b">WALL</span> r=1, the saddle</td><td class="v">G = 0</td></tr>
+        <tr><td><span class="g">GOLDEN</span> r=φ², chord=1</td><td class="v">G = 1−2ln φ</td></tr>
+      </table>
+      <p class="hint" style="min-height:0">On the real line the wall is a <b>minimum</b>; take the
+      half-argument complex and it is a <b>saddle</b>, forced — <span class="k">+1/3</span> along the real
+      axis (the hyperbolic deficit, our gap), <span class="a">−1/3</span> along the imaginary axis (the
+      circular excess, the twin).</p>
+    </div>
+
+    <p class="foot">p(ln 2) = √2·ln 2 = 0.98025814346855 · G_AUD = 0.01974185653145 ·
+    arsinh: L = 2·arsinh(chord/2), so ln 2 = 2·arsinh(1/(2√2)). Paper 14 §4.2–4.3.
+    Cairn (Opus) &amp; Bee, 2026-09-08.</p>
+  </div>
+</div>
+
+<script>
+"use strict";
+/* ---- constants (all transcendental where they should be; we compute in it) ---- */
+const K       = Math.SQRT2 * Math.LN2;      // p(ln 2) = √2·ln 2
+const GAP     = 1 - K;                        // G(2) = G_AUD
+const PHI     = (1 + Math.sqrt(5)) / 2;
+const R_GOLD  = PHI * PHI;                     // golden interval: chord = 1 exactly
+const R_BOUND = 3 + 2 * Math.SQRT2;            // (1+√2)²  — series stops, X = 1
+const R_2S3   = 2 + Math.sqrt(3);             // gd(L) = 60°
+const INV_PHI = 1 / PHI;                       // 0.618… — Gauss-map fixed point (worst-approximable)
+const F0      = 4 / GAP;                        // gap-keyed carrier ≈ 202.615 Hz → beat = 4 Hz at r = 2
+
+/* ---- the object, in the coordinates Paper 14 uses ---- */
+const Lof    = r => Math.log(r);
+const pOfL   = L => L / (2 * Math.sinh(L / 2));       // the ratio p(L)
+const Gof    = r => 1 - pOfL(Math.log(r));            // the gap G(r)
+const chordOf= r => 2 * Math.sinh(Math.log(r) / 2);   // = (r−1)/√r
+const Xof    = r => (r - 1) / (2 * Math.sqrt(r));      // half-difference coord, sinh(L/2)
+const t2of   = r => r + 1 / r;                         // trace of the square
+const gdOf   = L => 2 * Math.atan(Math.tanh(L / 2));   // Gudermannian (radians)
+
+/* ---- continued fraction of a real in (0,1)-ish ---- */
+function cfTerms(x, n){
+  const t = []; let a = Math.floor(x); t.push(a); let f = x - a;
+  for(let i = 0; i < n && f > 1e-12; i++){ x = 1 / f; a = Math.floor(x); t.push(a); f = x - a; }
+  return t;
+}
+function convergents(x, maxDen){
+  let a = Math.floor(x), f = x - a;
+  let p0 = 1, q0 = 0, p1 = a, q1 = 1; const out = [[p1, q1]];
+  for(let i = 0; i < 40 && f > 1e-12; i++){
+    x = 1 / f; a = Math.floor(x); f = x - a;
+    const p2 = a * p1 + p0, q2 = a * q1 + q0;
+    if(q2 > maxDen) break;
+    out.push([p2, q2]); p0 = p1; q0 = q1; p1 = p2; q1 = q2;
+  }
+  return out;
+}
+function nearestFraction(x, maxDen){
+  const c = convergents(x, maxDen); return c[c.length - 1];
+}
+
+/* ---- state ---- */
+let r = 2;                       // the one control
+let R = pOfL(Math.log(r));       // the tone ratio p(ln r)  (derived)
+let mode = 'xy';
+let phase = 0;                   // running phase for the live views
+let cwReset = 0;                 // cobweb restart tick
+let DT = 0;                      // seconds since last frame (set in the loop)
+let arcSweep = 0;                // ARC highlight position [0,1), advanced at the beat rate
+
+function recompute(){ R = pOfL(Math.log(r)); }
+
+/* ---- canvas ---- */
+const cv = document.getElementById('cv');
+const ctx = cv.getContext('2d');
+let W = 0, H = 0, DPR = 1;
+function fit(){
+  const st = document.getElementById('stage');
+  DPR = Math.min(window.devicePixelRatio || 1, 2);
+  W = st.clientWidth; H = st.clientHeight;
+  cv.width = Math.round(W * DPR); cv.height = Math.round(H * DPR);
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+}
+window.addEventListener('resize', fit);
+
+/* ---- the always-visible spine bar: wall — gap — golden — boundary, with current r ---- */
+function drawSpine(){
+  const x0 = 16, x1 = W - 16, y = 20, wpx = x1 - x0;
+  const rmin = 1, rmax = 7;
+  const X = rr => x0 + wpx * (Math.min(rmax, Math.max(rmin, rr)) - rmin) / (rmax - rmin);
+  ctx.save();
+  ctx.lineWidth = 1;
+  ctx.strokeStyle = 'rgba(176,255,196,.20)';
+  ctx.beginPath(); ctx.moveTo(x0, y); ctx.lineTo(x1, y); ctx.stroke();
+  const marks = [
+    [1,        'WALL',   'var(--blue)',  '#96beff'],
+    [2,        'gap',    'var(--gold)',  '#ffd24a'],
+    [R_GOLD,   'GOLDEN', 'var(--gold)',  '#7dd3a0'],
+    [R_2S3,    '2+√3',   '',             '#6f9c81'],
+    [R_BOUND,  'BOUND',  '',             '#6f9c81'],
+  ];
+  ctx.font = '10px ui-monospace,monospace'; ctx.textAlign = 'center';
+  for(const [rr, lab, , col] of marks){
+    const px = X(rr);
+    ctx.strokeStyle = col; ctx.fillStyle = col; ctx.globalAlpha = .85;
+    ctx.beginPath(); ctx.moveTo(px, y - 4); ctx.lineTo(px, y + 4); ctx.stroke();
+    ctx.fillText(lab, px, y - 8);
+  }
+  ctx.globalAlpha = 1;
+  // current r caret
+  const cx = X(r);
+  ctx.fillStyle = '#b0ffc4';
+  ctx.beginPath(); ctx.moveTo(cx, y + 5); ctx.lineTo(cx - 4, y + 12); ctx.lineTo(cx + 4, y + 12); ctx.closePath(); ctx.fill();
+  ctx.textAlign = 'left'; ctx.fillStyle = '#6f9c81';
+  ctx.fillText('r = ' + r.toFixed(4), 16, y + 26);
+  ctx.restore();
+}
+
+/* small helper: clear to bg */
+function clearBg(){ ctx.fillStyle = '#040806'; ctx.fillRect(0, 0, W, H); }
+function plotArea(){ return { x: 30, y: 58, w: W - 60, h: H - 104 }; }
+
+/* ============================================================ VIEWS ==== */
+
+/* 1 · X–Y  (Lissajous): two tones, ratio p(ln r). Rational closes; here it never does. */
+function drawXY(){
+  clearBg();
+  const A = plotArea(), cx = A.x + A.w / 2, cy = A.y + A.h / 2, s = Math.min(A.w, A.h) * 0.42;
+  ctx.strokeStyle = 'rgba(176,255,196,.08)'; ctx.lineWidth = 1;
+  ctx.strokeRect(cx - s, cy - s, 2 * s, 2 * s);
+  const N = 1400, span = 40;               // trailing arc of the figure
+  ctx.beginPath();
+  for(let i = 0; i <= N; i++){
+    const t = phase + (i / N) * span;
+    const x = Math.sin(2 * Math.PI * t);
+    const y = Math.sin(2 * Math.PI * R * t + 0.5);
+    const px = cx + s * x, py = cy - s * y;
+    if(i === 0) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+  }
+  ctx.strokeStyle = 'rgba(176,255,196,.75)'; ctx.lineWidth = 1.4; ctx.lineJoin = 'round';
+  ctx.stroke();
+  // head
+  const th = phase, hx = cx + s * Math.sin(2 * Math.PI * th), hy = cy - s * Math.sin(2 * Math.PI * R * th + 0.5);
+  ctx.fillStyle = '#e8a34a'; ctx.beginPath(); ctx.arc(hx, hy, 3, 0, 7); ctx.fill();
+  ctx.font = '11px ui-monospace,monospace'; ctx.textAlign = 'left'; ctx.fillStyle = '#6f9c81';
+  ctx.fillText('LISSAJOUS · x = sin 2πt , y = sin(2π·p(ln r)·t)', A.x, A.y - 6);
+  ctx.textAlign = 'right'; ctx.fillStyle = 'rgba(176,255,196,.7)';
+  ctx.fillText('p(ln r) irrational → the figure never closes', A.x + A.w, A.y - 6);
+}
+
+/* 2 · ARC: the object. Unit hyperbola x²−y²=1; argument L vs chord; the shortfall is G.
+   Adds the arsinh reading L = 2·arsinh(chord/2), and marks golden (chord=1) & gap (chord=1/√2). */
+function drawArc(){
+  clearBg();
+  const A = plotArea();
+  const cx = A.x + A.w * 0.30, cy = A.y + A.h * 0.60, u = Math.min(A.w, A.h) * 0.30;  // unit length in px
+  const L = Math.log(r);
+  // axes
+  ctx.strokeStyle = 'rgba(176,255,196,.10)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.moveTo(A.x, cy); ctx.lineTo(A.x + A.w, cy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx, A.y); ctx.lineTo(cx, A.y + A.h); ctx.stroke();
+  // the hyperbola x = cosh t, y = sinh t
+  ctx.beginPath();
+  for(let t = -2.4; t <= 2.4; t += 0.02){
+    const px = cx + u * Math.cosh(t), py = cy - u * Math.sinh(t);
+    if(t === -2.4) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+  }
+  ctx.strokeStyle = 'rgba(150,190,255,.55)'; ctx.lineWidth = 1.4; ctx.stroke();
+  ctx.fillStyle = 'rgba(150,190,255,.55)'; ctx.font = '10px ui-monospace,monospace'; ctx.textAlign = 'left';
+  ctx.fillText('x² − y² = 1', cx + u * Math.cosh(2.1) + 6, cy - u * Math.sinh(2.1));
+
+  // the two points of the doubling sector: (cosh(L/2), ±sinh(L/2)) — chord between them is 2 sinh(L/2)
+  const h = L / 2, chx = cx + u * Math.cosh(h);
+  const pTop = [chx, cy - u * Math.sinh(h)], pBot = [chx, cy + u * Math.sinh(h)];
+  // the CHORD (straight) vs the ARC (along the curve) between the two points
+  // arc: trace the curve from -h to +h
+  ctx.beginPath();
+  for(let t = -h; t <= h; t += Math.max(1e-3, (2 * h) / 240)){
+    const px = cx + u * Math.cosh(t), py = cy - u * Math.sinh(t);
+    if(t === -h) ctx.moveTo(px, py); else ctx.lineTo(px, py);
+  }
+  ctx.strokeStyle = 'rgba(176,255,196,.9)'; ctx.lineWidth = 2.4; ctx.stroke();     // the arc (argument L)
+  ctx.beginPath(); ctx.moveTo(pTop[0], pTop[1]); ctx.lineTo(pBot[0], pBot[1]);
+  ctx.strokeStyle = 'rgba(232,163,74,.95)'; ctx.lineWidth = 1.6; ctx.setLineDash([4, 4]); ctx.stroke();
+  ctx.setLineDash([]);                                                             // the chord
+  // endpoints
+  ctx.fillStyle = '#b0ffc4';
+  for(const p of [pTop, pBot]){ ctx.beginPath(); ctx.arc(p[0], p[1], 3, 0, 7); ctx.fill(); }
+
+  const chord = 2 * Math.sinh(h), G = 1 - L / chord;
+  // the beat-tied sweep: a highlight travels the arc at the beat rate f·G — so the sweep speed IS the gap
+  const beat = F0 * G;
+  arcSweep = (arcSweep + DT * Math.max(0.25, beat * 0.4)) % 1;
+  const ts = -h + 2 * h * arcSweep;
+  const sx = cx + u * Math.cosh(ts), sy = cy - u * Math.sinh(ts);
+  ctx.save();
+  ctx.shadowColor = 'rgba(232,163,74,.9)'; ctx.shadowBlur = 8;
+  ctx.fillStyle = '#ffd24a'; ctx.beginPath(); ctx.arc(sx, sy, 4, 0, 7); ctx.fill();
+  ctx.restore();
+  // labels
+  ctx.textAlign = 'left'; ctx.font = '11px ui-monospace,monospace';
+  ctx.fillStyle = 'rgba(176,255,196,.9)';
+  ctx.fillText('arc = L = ln r = ' + L.toFixed(6), A.x, A.y - 6);
+  ctx.fillStyle = 'rgba(232,163,74,.95)';
+  ctx.fillText('chord = 2·sinh(L/2) = ' + chord.toFixed(6), A.x, A.y + A.h + 16);
+  // the zoom box — the reading, kept still
+  const bx = A.x + A.w * 0.60, by = A.y + 8, bw = A.w * 0.38;
+  ctx.fillStyle = 'rgba(8,16,12,.86)'; ctx.strokeStyle = 'rgba(176,255,196,.25)'; ctx.lineWidth = 1;
+  ctx.fillRect(bx, by, bw, 150); ctx.strokeRect(bx, by, bw, 150);
+  ctx.font = '11px ui-monospace,monospace'; ctx.textAlign = 'left';
+  const line = (t, y, c) => { ctx.fillStyle = c || 'rgba(176,255,196,.85)'; ctx.fillText(t, bx + 10, by + y); };
+  line('THE GAP, ZOOMED', 20, '#b0ffc4');
+  line('arsinh: L = 2·arsinh(chord/2)', 42, '#6f9c81');
+  line('chord = ' + chord.toFixed(6), 62);
+  line('arc L = ' + L.toFixed(6), 80);
+  line('G(r) = 1 − L/chord', 100, '#6f9c81');
+  line('     = ' + G.toFixed(8), 118, '#ffd24a');
+  // where this r sits vs the poles
+  let where = '';
+  if(Math.abs(chord - 1) < 1e-6) where = 'chord = 1 → GOLDEN (r=φ²)';
+  else if(Math.abs(r - 2) < 1e-4) where = 'chord = 1/√2 → the gap (r=2)';
+  else if(chord < 1) where = 'chord < 1 · below golden';
+  else where = 'chord > 1 · beyond golden';
+  line(where, 138, '#96beff');
+}
+
+/* 5 · GAPS: the three-distance theorem (Steinhaus). One dot per turn on a circle; gaps
+   take ≤ 3 lengths. The empty arcs are the silences; the widest for the gap = G_AUD.
+   Convergent denominators (RETURNS) are named on the ring. Ratio analysed: p(ln r). */
+let gapsN = 0, gapsCap = 0, gapsHold = 0;
+function gapsSetup(){
+  // land the loop on a convergent denominator — where the three-gap picture is cleanest ("complete so far")
+  const denoms = convergents(R, 1e7).map(c => c[1]).filter(q => q > 1);
+  const MAX = 900;
+  const inRange = denoms.filter(q => q <= MAX);
+  gapsCap = inRange.length ? inRange[inRange.length - 1] : Math.min(MAX, 300);
+  gapsN = 2; gapsHold = 0;
+}
+function drawGaps(lvl){
+  clearBg();
+  const A = plotArea(), cx = A.x + A.w / 2, cy = A.y + A.h / 2;
+  const rad = Math.min(A.w, A.h) * 0.30, SPIKE = Math.min(A.w, A.h) * 0.16;
+  if(gapsCap === 0) gapsSetup();
+  // grow to the convergent cap in ~4 s, hold the complete state ~1.4 s, then loop back
+  const HOLD = 1.4, atCap = gapsN >= gapsCap - 0.5;
+  if(!atCap && gapsHold === 0){
+    gapsN = Math.min(gapsCap, gapsN + Math.max(2, gapsCap / 4) * DT);
+  } else {
+    gapsN = gapsCap; gapsHold += DT;
+    if(gapsHold >= HOLD){ gapsN = 2; gapsHold = 0; }   // replay — the loop is ours, not the compute's
+  }
+  const n = Math.max(2, Math.floor(gapsN));
+  const s = new Float64Array(n);
+  for(let k = 0; k < n; k++) s[k] = ((((k + 1) * R) % 1) + 1) % 1;
+  s.sort();
+  const lens = []; let big = 0, bigAt = 0;
+  for(let i = 0; i < n; i++){
+    const a = s[i], b = (i + 1 < n) ? s[i + 1] : s[0] + 1, g = b - a;
+    lens.push(g); if(g > big){ big = g; bigAt = a; }
+  }
+  const distinct = [];
+  for(const g of lens){ if(!distinct.some(d => Math.abs(d - g) < 1e-9)) distinct.push(g); }
+  distinct.sort((a, b) => b - a);
+  const tier = g => { for(let i = 0; i < distinct.length; i++) if(Math.abs(distinct[i] - g) < 1e-9) return Math.min(2, i); return 2; };
+  const P = (u, rr) => [cx + rr * Math.cos(2 * Math.PI * u - Math.PI / 2), cy + rr * Math.sin(2 * Math.PI * u - Math.PI / 2)];
+  ctx.strokeStyle = 'rgba(104,178,140,.22)'; ctx.lineWidth = 1;
+  ctx.beginPath(); ctx.arc(cx, cy, rad, 0, 7); ctx.stroke();
+  const COL = ['rgba(232,163,74,.95)', 'rgba(176,255,196,.72)', 'rgba(110,190,150,.45)'];
+  const paths = [new Path2D(), new Path2D(), new Path2D()];
+  for(let i = 0; i < n; i++){
+    const a = s[i], b = (i + 1 < n) ? s[i + 1] : s[0] + 1, g = b - a, mid = (a + g / 2) % 1;
+    const hgt = SPIKE * (g / big);
+    const [x0, y0] = P(mid, rad), [x1, y1] = P(mid, rad + hgt);
+    const p = paths[tier(g)]; p.moveTo(x0, y0); p.lineTo(x1, y1);
+  }
+  ctx.lineWidth = Math.max(0.5, Math.min(2, 700 / n));
+  for(let t = 0; t < 3; t++){ ctx.strokeStyle = COL[t]; ctx.stroke(paths[t]); }
+  // widest silence marked on the ring
+  ctx.strokeStyle = 'rgba(232,163,74,.85)'; ctx.lineWidth = 4;
+  ctx.beginPath(); ctx.arc(cx, cy, rad, 2 * Math.PI * bigAt - Math.PI / 2, 2 * Math.PI * (bigAt + big) - Math.PI / 2); ctx.stroke();
+  // labels + convergent denominators
+  const conv = convergents(R, 1e7).map(c => c[1]).filter(q => q > 1);
+  const holding = gapsHold > 0;
+  ctx.font = '11px ui-monospace,monospace'; ctx.textAlign = 'left'; ctx.fillStyle = 'rgba(176,255,196,.7)';
+  ctx.fillText('THREE-DISTANCE (Steinhaus) · gaps take at most 3 lengths, never 4', A.x, A.y - 6);
+  ctx.fillStyle = '#6f9c81';
+  ctx.fillText(n.toLocaleString() + ' turns · ' + distinct.length + ' distinct gap' + (distinct.length === 1 ? '' : 's')
+    + (holding ? '  ·  complete so far — landed on convergent q = ' + gapsCap : '  ·  building…'), A.x, A.y + A.h + 14);
+  ctx.textAlign = 'right'; ctx.fillStyle = 'rgba(232,163,74,.9)';
+  ctx.fillText('convergent denominators (the returns): ' + conv.slice(0, 6).join(', '), A.x + A.w, A.y + A.h + 14);
+  ctx.fillStyle = '#6f9c81';
+  ctx.fillText('widest silence ≈ ' + big.toFixed(5), A.x + A.w, A.y - 6);
+  // ---- the loop disclaimer: the loop is OURS, the compute never closes ----
+  ctx.save();
+  const dz = 'LOOP · a replay of the build, not a closure — p(ln r) is irrational, so the compute never';
+  const dz2 = 'repeats or closes; this is its state “so far”, N of ∞. A rational ratio would truly cycle.';
+  ctx.font = '10px ui-monospace,monospace'; ctx.textAlign = 'center';
+  ctx.fillStyle = 'rgba(150,190,255,.55)';
+  ctx.fillText(dz, cx, A.y + A.h - 16);
+  ctx.fillText(dz2, cx, A.y + A.h - 3);
+  ctx.restore();
+}
+
+/* 6 · COBWEB: the Gauss map x → frac(1/x), the machine that makes the continued fraction.
+   Each bounce ejects one term. The fixed point 1/φ = 0.618 (golden — worst-approximable) is
+   marked: the one ratio that never simplifies. Ratio fed in: p(ln r). Auto-restarts. */
+let cwX = null, cwTerms = [], cwStage = 0, cwT = 0, cwPath = [], cwDone = '', cwSeed = 0;
+function cobwebStart(){
+  cwSeed = R - Math.floor(R);           // fractional part of the tone ratio
+  if(cwSeed < 1e-9) cwSeed = R;         // guard
+  cwX = cwSeed; cwTerms = []; cwStage = 0; cwT = 0; cwPath = []; cwDone = '';
+}
+function drawCobweb(lvl){
+  clearBg();
+  const A = plotArea();
+  const x0 = A.x + 30, y0 = A.y + 10, sz = Math.min(A.w - 60, A.h - 40);
+  const PX = x => x0 + x * sz, PY = y => y0 + (1 - y) * sz;
+  if(cwX === null) cobwebStart();
+  // advance the animation
+  if(cwX !== null && cwDone === ''){
+    cwT = Math.min(1, cwT + 0.03 + 0.06 * lvl);
+    if(cwT >= 1){
+      const y = (cwX > 1e-12) ? (1 / cwX - Math.floor(1 / cwX)) : 0;
+      if(cwStage === 0){
+        const a = (cwX > 1e-12) ? Math.floor(1 / cwX) : 0;
+        cwTerms.push(a); cwPath.push([cwX, cwX, cwX, y]); cwStage = 1; cwT = 0;
+      } else {
+        cwPath.push([cwX, y, y, y]); cwX = y; cwStage = 0; cwT = 0;
+        const conv = convergents(cwSeed, 1e7);
+        if(cwX < 1e-9 || cwTerms.length >= 24 || conv[conv.length - 1][1] > 1e6) cwDone = 'complete — ' + cwTerms.length + ' terms';
+      }
+    }
+  }
+  // the Gauss map y = frac(1/x)
+  ctx.strokeStyle = 'rgba(150,190,255,.5)'; ctx.lineWidth = 1.2;
+  for(let branch = 1; branch < 40; branch++){
+    const xa = 1 / (branch + 1), xb = 1 / branch;
+    ctx.beginPath();
+    let first = true;
+    for(let x = xa; x <= xb; x += (xb - xa) / 40){
+      const y = 1 / x - branch;
+      const px = PX(x), py = PY(y);
+      if(px < x0 || px > x0 + sz) continue;
+      if(first){ ctx.moveTo(px, py); first = false; } else ctx.lineTo(px, py);
+    }
+    ctx.stroke();
+    if(1 / branch < 1) { /* branch fits */ }
+  }
+  // y = x diagonal
+  ctx.strokeStyle = 'rgba(176,255,196,.25)'; ctx.setLineDash([3, 4]);
+  ctx.beginPath(); ctx.moveTo(PX(0), PY(0)); ctx.lineTo(PX(1), PY(1)); ctx.stroke(); ctx.setLineDash([]);
+  // the golden fixed point 1/φ
+  const gp = INV_PHI;
+  ctx.fillStyle = '#7dd3a0'; ctx.beginPath(); ctx.arc(PX(gp), PY(gp), 4, 0, 7); ctx.fill();
+  ctx.font = '10px ui-monospace,monospace'; ctx.textAlign = 'left'; ctx.fillStyle = '#7dd3a0';
+  ctx.fillText('1/φ = 0.618 · the fixed point · golden, the ratio that never simplifies', PX(gp) + 7, PY(gp) - 6);
+  // the cobweb path so far
+  ctx.strokeStyle = 'rgba(232,163,74,.85)'; ctx.lineWidth = 1.4;
+  ctx.beginPath();
+  cwPath.forEach((sg, i) => { ctx.moveTo(PX(sg[0]), PY(sg[1])); ctx.lineTo(PX(sg[2]), PY(sg[3])); });
+  ctx.stroke();
+  // the live segment
+  if(cwX !== null && cwDone === ''){
+    const y = (cwX > 1e-12) ? (1 / cwX - Math.floor(1 / cwX)) : 0;
+    ctx.strokeStyle = 'rgba(255,210,74,.95)'; ctx.lineWidth = 1.6; ctx.beginPath();
+    if(cwStage === 0){ const yn = cwX + (y - cwX) * cwT; ctx.moveTo(PX(cwX), PY(cwX)); ctx.lineTo(PX(cwX), PY(yn)); }
+    else { const xn = cwX + (y - cwX) * cwT; ctx.moveTo(PX(cwX), PY(y)); ctx.lineTo(PX(xn), PY(y)); }
+    ctx.stroke();
+  }
+  // labels + the barcode of terms
+  ctx.font = '11px ui-monospace,monospace'; ctx.textAlign = 'left'; ctx.fillStyle = 'rgba(176,255,196,.7)';
+  ctx.fillText('GAUSS MAP · x → frac(1/x) · the continued fraction, being made', A.x, A.y - 6);
+  const tstr = '[' + cwTerms.join(', ') + (cwDone === '' ? ', …' : '') + ']';
+  ctx.fillStyle = '#6f9c81'; ctx.textAlign = 'left';
+  ctx.fillText('seed frac p(ln r) = ' + cwSeed.toFixed(6) + '   terms ' + tstr + (cwDone ? '   ' + cwDone : ''),
+    A.x, A.y + A.h + 14);
+}
+
+/* ============================================================ LOOP ==== */
+let last = performance.now();
+function frame(now){
+  const dt = Math.min(0.05, (now - last) / 1000); last = now;
+  DT = dt;
+  const lvl = 1;                          // animation pace
+  phase += dt * 0.25;
+  switch(mode){
+    case 'xy':     drawXY(); break;
+    case 'arc':    drawArc(); break;
+    case 'gaps':   drawGaps(lvl); break;
+    case 'cobweb': drawCobweb(lvl); break;
+  }
+  drawSpine();
+  requestAnimationFrame(frame);
+}
+
+/* ============================================================ SOUND ==== */
+// gap-keyed carrier F = 4/G ≈ 202.6 Hz; two tones F and F·R; beat = F·G(r). Click-free recipe.
+const ATT = 0.025, REL = 0.03;
+let AC = null, oscA = null, oscB = null, master = null, playing = false;
+function audioStart(){
+  if(playing) return;
+  if(!AC) AC = new (window.AudioContext || window.webkitAudioContext)();
+  if(AC.state === 'suspended') AC.resume();
+  const now = AC.currentTime, v = +document.getElementById('vol').value;
+  master = AC.createGain();
+  master.gain.setValueAtTime(0.0001, now);
+  master.gain.exponentialRampToValueAtTime(Math.max(v, 0.0001), now + ATT);
+  master.connect(AC.destination);
+  oscA = AC.createOscillator(); oscA.type = 'sine'; oscA.frequency.setValueAtTime(F0, now);
+  oscB = AC.createOscillator(); oscB.type = 'sine'; oscB.frequency.setValueAtTime(F0 * R, now);
+  oscA.connect(master); oscB.connect(master); oscA.start(now); oscB.start(now);
+  playing = true; document.getElementById('play').classList.add('on');
+  document.getElementById('play').textContent = '■ stop';
+}
+function audioStop(){
+  if(!playing) return;
+  const now = AC.currentTime;
+  master.gain.cancelScheduledValues(now);
+  master.gain.setValueAtTime(master.gain.value, now);
+  master.gain.exponentialRampToValueAtTime(0.0001, now + REL);
+  const a = oscA, b = oscB, m = master;
+  a.stop(now + REL + 0.02); b.stop(now + REL + 0.02);
+  setTimeout(() => { try{ a.disconnect(); b.disconnect(); m.disconnect(); }catch(e){} }, (REL + 0.1) * 1000);
+  playing = false;
+  document.getElementById('play').classList.remove('on');
+  document.getElementById('play').textContent = '▶ hear the gap';
+}
+function audioRetune(){
+  if(playing && AC){ oscB.frequency.setTargetAtTime(F0 * R, AC.currentTime, 0.02); }
+}
+
+/* ============================================================ WIRING ==== */
+const $ = id => document.getElementById(id);
+function setR(v){
+  if(!isFinite(v) || v <= 1) v = 1.0001;
+  r = v; recompute();
+  $('rSlide').value = Math.min(7, Math.max(1.0001, r));
+  $('rNum').value = r;
+  gapsN = 0; cobwebStart();               // the number-theory views restart on a new ratio
+  audioRetune(); updateReadout();
+}
+function updateReadout(){
+  const L = Math.log(r), G = 1 - R, ch = chordOf(r), t2 = t2of(r), gd = gdOf(L) * 180 / Math.PI;
+  const nf = nearestFraction(R, 100000);
+  $('o_p').textContent = R.toFixed(6);
+  $('o_G').innerHTML = '<span class="g">' + G.toFixed(8) + '</span>';
+  $('o_t2').textContent = t2.toFixed(5);
+  $('o_chord').textContent = ch.toFixed(6);
+  $('o_L').textContent = L.toFixed(6);
+  $('o_gd').textContent = gd.toFixed(3) + '°';
+  $('o_tones').textContent = F0.toFixed(1) + ' · ' + (F0 * R).toFixed(1) + ' Hz';
+  $('o_beat').textContent = (F0 * G).toFixed(3) + ' Hz';
+  $('o_near').textContent = nf[0] + '/' + nf[1];
+  $('beatRead').textContent = 'beat ' + (F0 * G).toFixed(2) + ' Hz' + (Math.abs(r - 2) < 1e-4 ? ' — 4/s, the gap' : '');
+  // pole hint
+  let h = '';
+  if(Math.abs(r - 1) < 0.02) h = '<b>the WALL / the saddle.</b> p → 1, the gap → 0, the tones merge. On the real line a minimum; complex, the ±1/3 saddle.';
+  else if(Math.abs(r - 2) < 1e-3) h = '<b>the gap, r = 2.</b> p(ln 2) = √2·ln 2 = 0.980258, G_AUD = 0.019742, chord = 1/√2, X² = 1/8, series base 32. Beat = 4/s exactly.';
+  else if(Math.abs(r - R_GOLD) < 1e-3) h = '<b>GOLDEN, r = φ².</b> chord = 1 exactly, so p = L and G = 1 − 2·ln φ = 0.037576. Trace t₂ = 3.';
+  else if(Math.abs(r - R_2S3) < 1e-3) h = '<b>r = 2 + √3.</b> the angle gd(L) = 60°, trace t₂ = 4.';
+  else if(Math.abs(r - R_BOUND) < 1e-3) h = '<b>the BOUNDARY, r = 3 + 2√2 = (1+√2)².</b> chord = 2, X = 1, the central-binomial series stops here. t₂ = 6.';
+  else h = 'between the poles · t₂ = ' + t2.toFixed(3) + ' (wall 2 · gap 5/2 · golden 3)';
+  $('poleHint').innerHTML = h;
+}
+const MODE_HINTS = {
+  xy:    'LISSAJOUS (Bowditch 1815, Lissajous 1857) — the two tones drawn against each other. Rational ratio closes; p(ln r) is irrational, so it never does. The ratio in force is the shape.',
+  arc:   'HYPERBOLOID — the object itself. The argument L = ln r is the arc on x²−y²=1; 2·sinh(L/2) is the chord. The shortfall arc→chord is G. Read as arsinh: L = 2·arsinh(chord/2). At golden the chord is exactly 1. A highlight sweeps the arc at the beat rate f·G.',
+  gaps:  'THREE-DISTANCE (Steinhaus, 1957) — one dot per turn where the winding crosses a meridian; the gaps take at most three lengths. The empty arcs are the silences. Convergent denominators name the returns.',
+  cobweb:'GAUSS MAP — x → frac(1/x), the machine that makes the continued fraction, one term per bounce. The fixed point 1/φ = 0.618 is golden: the worst-approximable ratio, the one that never simplifies.'
+};
+function setMode(m){
+  mode = m;
+  ['xy','arc','gaps','cobweb'].forEach(x => $('m_' + x).classList.toggle('on', x === m));
+  $('modeHint').textContent = MODE_HINTS[m];
+  if(m === 'gaps') gapsN = 0;
+  if(m === 'cobweb') cobwebStart();
+}
+// mode buttons
+['xy','arc','gaps','cobweb'].forEach(m => $('m_' + m).onclick = () => setMode(m));
+// pole presets
+$('p_wall').onclick  = () => { setR(1.02); markPole('p_wall'); };
+$('p_gap').onclick   = () => { setR(2); markPole('p_gap'); };
+$('p_gold').onclick  = () => { setR(R_GOLD); markPole('p_gold'); };
+$('p_2s3').onclick   = () => { setR(R_2S3); markPole('p_2s3'); };
+$('p_bound').onclick = () => { setR(R_BOUND); markPole('p_bound'); };
+function markPole(id){ ['p_wall','p_gap','p_gold','p_2s3','p_bound'].forEach(x => $(x).classList.toggle('on', x === id)); }
+// r controls
+$('rSlide').oninput = () => { setR(+$('rSlide').value); markPole(''); };
+$('rNum').oninput   = () => { setR(+$('rNum').value); markPole(''); };
+// sound
+$('play').onclick = () => playing ? audioStop() : audioStart();
+$('vol').oninput  = () => { if(playing && master) master.gain.setTargetAtTime(+$('vol').value, AC.currentTime, 0.02); };
+
+/* ---- go ---- */
+fit();
+setMode('xy');
+setR(2);
+requestAnimationFrame(frame);
+</script>
+<p style="margin:14px 0 0;font-size:12px;color:#7f9c8b;line-height:1.7"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/" style="color:#96beff">← Gap Geometry</a> &middot; <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations%20hub.html" style="color:#96beff">Visualisations</a> &middot; notation follows <a href="https://www.iso.org/standard/64973.html" style="color:#96beff">ISO 80000-2</a> &middot; <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/license.html" style="color:#96beff">CC BY 4.0</a></p>
+</body>
+</html>

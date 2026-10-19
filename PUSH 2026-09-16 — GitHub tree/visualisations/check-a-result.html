@@ -1,0 +1,333 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A number read in two arithmetics</title>
+<style>
+  :root{
+    --void:#070b14; --glass:rgba(255,255,255,.035); --glass-line:#26324a; --glass-line2:#33425f;
+    --ink:#c7d2e4; --ink-dim:#7d8aa6; --gold:#f0c04a; --arc:#7fb2ff; --dome:#5cc48a; --warn:#ff9d8a;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{ -webkit-text-size-adjust:100%; }
+  body{ margin:0; background:var(--void); color:var(--ink); font-family:"Helvetica Neue",Inter,system-ui,sans-serif;
+        font-size:15.5px; line-height:1.6; padding:30px 20px 60px; }
+  .wrap{ max-width:860px; margin:0 auto; }
+  .tag{ display:inline-block; font-family:var(--mono); font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--gold);
+        border:1px solid var(--gold); border-radius:5px; padding:2px 9px; margin-bottom:14px; opacity:.85; }
+  h1{ font-family:var(--mono); font-size:23px; font-weight:600; letter-spacing:.26em; text-transform:uppercase; color:#fff; margin:0 0 4px; line-height:1.3; }
+  .sub{ font-family:var(--mono); font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:var(--ink-dim); margin:0 0 14px; line-height:1.7; }
+  h2{ font-family:var(--mono); font-size:13px; font-weight:600; letter-spacing:.16em; text-transform:uppercase; color:var(--gold); margin:34px 0 8px; }
+  p{ margin:.7rem 0; }
+  b{ color:#fff; font-weight:600; }
+  code, pre{ font-family:var(--mono); font-size:.86rem; }
+  code{ color:#fff; }
+  pre{ background:var(--glass); border:1px solid var(--glass-line); border-radius:10px; padding:.8rem 1rem; overflow-x:auto; color:#fff; }
+  button{ font-family:var(--mono); font-size:13px; padding:5px 14px; color:var(--ink); border:1px solid var(--glass-line2); border-radius:7px; background:transparent; cursor:pointer; }
+  button:hover{ border-color:var(--gold); color:#fff; }
+  table{ border-collapse:collapse; width:100%; font-family:var(--mono); font-size:.8rem; margin:.6rem 0; }
+  th,td{ border-bottom:1px solid var(--glass-line); padding:.4rem .55rem; text-align:left; vertical-align:top; }
+  th{ color:var(--ink-dim); font-weight:normal; font-size:11px; letter-spacing:.08em; text-transform:uppercase; }
+  .out{ white-space:pre-wrap; font-family:var(--mono); font-size:.86rem; background:var(--glass); border:1px solid var(--glass-line); border-radius:12px; padding:.8rem 1rem; margin:.5rem 0; min-height:1.4rem; }
+  .out:empty::before{ content:"results appear here after you click"; color:var(--ink-dim); font-style:italic; }
+  #expr{ font-family:var(--mono); font-size:.92rem; padding:.45rem .6rem; width:58%; max-width:22rem; color:#fff; background:rgba(0,0,0,.35);
+         border:1px solid var(--gold) !important; border-radius:7px; outline:none; }
+  .wrong{ color:var(--warn); } .right{ color:var(--dome); }
+  .note{ color:var(--ink-dim); font-size:.9rem; line-height:1.7; }
+  .note b{ color:var(--ink); }
+  details.demo{ margin:.5rem 0 .8rem; }
+  details.demo > summary{ cursor:pointer; list-style:none; display:inline-block; font-family:var(--mono); font-size:13px; color:var(--ink);
+        border:1px solid var(--glass-line2); border-radius:7px; background:transparent; padding:5px 14px; }
+  details.demo > summary:hover{ border-color:var(--gold); color:#fff; }
+  details.demo > summary::-webkit-details-marker{ display:none; }
+  details.demo > summary::before{ content:"▸ "; color:var(--gold); }
+  details[open].demo > summary::before{ content:"▾ "; }
+  details.demo > summary .hide{ display:none; } details[open].demo > summary .hide{ display:inline; } details[open].demo > summary .show{ display:none; }
+  .own{ background:var(--glass); border:1px solid var(--glass-line); border-left:2px solid var(--gold); border-radius:14px; padding:.2rem 1.3rem 1rem; margin:34px 0; backdrop-filter:blur(2px); }
+  .own h2{ margin-top:1rem; }
+  .own .out{ background:rgba(0,0,0,.25); }
+  .own .out:empty::before{ content:"your result appears here"; }
+  footer{ font-family:var(--mono); font-size:12px; color:var(--ink-dim); border-top:1px solid var(--glass-line); margin-top:36px; padding-top:14px; line-height:1.7; }
+  a{ color:var(--dome); }
+</style>
+
+<div class="wrap">
+<span class="tag">tool · a reader</span>
+<h1>A number read in two arithmetics</h1>
+<p class="sub">Three calculations that go wrong without saying so — and a box for your own.</p>
+<p class="note"><b>The two arithmetics.</b> <i>Double precision</i> on this page is IEEE-754 binary64 — the arithmetic of this browser, of spreadsheets, and of most programs by default; it keeps about sixteen significant digits. <i>Exact</i> is rational arithmetic on integers of any size, with no rounding at any step. Everything is computed here, in your browser, as you open it. <b>Two is exactly what this page computes in</b> — those two, and no others. The box further down also prints what <i>single</i> precision would <i>store</i>, which is one rounding of the finished answer rather than a third computation, and it says so on the line. And there are arithmetics this page does not use at all: <i>decimal</i> in pocket calculators and ledgers, <i>float32</i> and <i>bfloat16</i> in graphics and machine learning. The appendix shows how to find out which one a tool is actually using.</p>
+
+<p>Below are three short calculations. Each has an answer that is known and agreed. Each, run in ordinary machine arithmetic, returns something else — and nothing in the output says so. The three are fixed examples — open each to see its run, computed in this browser as you open it. The boxed section further down is where you enter a calculation of your own.</p>
+
+<h2>1. A recurrence that settles on the wrong number</h2>
+<p>The sequence below is defined by a simple rule. In exact arithmetic it approaches <b>5</b>. Run it in double precision — the arithmetic your browser, your spreadsheet, and most programs use by default — and watch it.</p>
+<pre>x&#8320; = 4,  x&#8321; = 4.25
+x&#8345;&#8330;&#8321; = 108 &minus; (815 &minus; 1500 / x&#8345;&#8331;&#8321;) / x&#8345;</pre>
+<details class="demo" ontoggle="if(this.open&&!this.dataset.ran){this.dataset.ran=1;runMuller();}"><summary><span class="show">Show the run</span><span class="hide">Hide the run</span></summary>
+<div id="muller" class="out"></div></details>
+<p class="note">It does not crash, oscillate, or flag anything. It converges — smoothly, confidently — to 100. Nothing in the output distinguished this from a correct run. The result was not random: it is the stable point of the arithmetic you did not choose, not of the calculation you wrote.</p>
+
+<h2>2. A sequence that should shrink, and grows</h2>
+<p>This sequence is exactly the successive powers of <code>1/1.618033988…</code>, computed by subtraction. In exact arithmetic it decreases toward zero forever. In double precision:</p>
+<pre>a&#8320; = 1,  a&#8321; = 1 / 1.6180339887498949
+a&#8345;&#8330;&#8321; = a&#8345;&#8331;&#8321; &minus; a&#8345;</pre>
+<details class="demo" ontoggle="if(this.open&&!this.dataset.ran){this.dataset.ran=1;runGolden();}"><summary><span class="show">Show the run</span><span class="hide">Hide the run</span></summary>
+<div id="golden" class="out"></div></details>
+<p class="note">For a while it is right to every digit shown. Then the error grows by a fixed factor each step, until the sequence stops shrinking and begins to diverge, flipping sign from one step to the next — an oscillation that grows without bound, the opposite of the true decay. <b>The two step numbers where that happens are read off the run above, not stated here</b> — they depend on this engine's arithmetic, and a page that typed them in would be asserting what it can compute.</p>
+
+<h2>3. One expression, two answers</h2>
+<p>The next value is a single arithmetic expression. Its exact value is about <code>&minus;0.8274</code>. Written two algebraically identical ways and evaluated in double precision, it gives two different results, neither near the truth.</p>
+<details class="demo" ontoggle="if(this.open&&!this.dataset.ran){this.dataset.ran=1;runRump();}"><summary><span class="show">Show the two results</span><span class="hide">Hide the two results</span></summary>
+<div id="rump" class="out"></div></details>
+<p class="note">Same expression, same inputs, same arithmetic — only the order of operations differs. A number that changes when you rearrange the algebra was never resting on solid ground.</p>
+
+<h2>The check</h2>
+<p>None of this is a defect in any tool. It is what fixed-precision arithmetic does, and it has been documented for decades. The one thing missing is a warning — so supply your own. Given a number you care about, do three things to it and watch whether the answer moves:</p>
+<table>
+  <tr><th>check</th><th>what to do</th><th>how, concretely</th><th>read it as</th></tr>
+  <tr><td>coarser</td><td>recompute at lower precision</td><td>Python <code>numpy.float32(x)</code>; a spreadsheet's single precision; carry fewer digits</td><td>if the answer <b>moves a lot</b>, precision is load-bearing</td></tr>
+  <tr><td>exact</td><td>recompute in exact or higher precision</td><td>Python <code>fractions.Fraction</code>; <code>mpmath</code> at 50 digits; a CAS</td><td>a <b>large</b> move means the fast path lost something that mattered</td></tr>
+  <tr><td>nudge</td><td>perturb an input by one unit in the last place</td><td>Python <code>math.nextafter(x, math.inf)</code></td><td>if the answer <b>jumps</b>, the computation is unstable there</td></tr>
+</table>
+<p>Here is the exact check run for you on the first calculation — the same recurrence, once in double precision and once in exact rational arithmetic:</p>
+<details class="demo" ontoggle="if(this.open&&!this.dataset.ran){this.dataset.ran=1;runCompare();}"><summary><span class="show">Show the comparison</span><span class="hide">Hide the comparison</span></summary>
+<div id="compare" class="out"></div></details>
+<p><b>Reading it.</b> Judge "moves" against the size of the quantity, not in absolute terms — and expect a small, harmless move on any irrational answer, since <code>&radic;2</code> or <code>&pi;r&sup2;</code> has no exact fractional form. What you are watching for is a <b>large</b> or uncontrolled move: that means the number is unstable and should not be trusted as printed. A number that holds steady under all three is numerically <b>stable</b> — which is necessary, not sufficient.</p>
+<p class="note"><b>One caution.</b> These checks test the arithmetic, not the intent. They cannot tell you the formula was the right one: a wrong formula, computed stably, passes all three and is still wrong. Stability is not correctness.</p>
+
+<div class="own">
+<h2>Try it on a calculation of your own</h2>
+<p>A value here is a piece of arithmetic: numbers joined by <code>+ &minus; * /</code>, brackets, powers, and the few functions listed below. Type one — your own, or one of the examples — and the box runs the three checks from the table above on it: what double precision stores, the same value at single precision, the exact value where it can be known here, and <b>the nudge</b> — the last number in your expression moved by one unit in its last place, and the whole thing recomputed. The two arithmetics are the ones named at the top of the page.</p>
+<p>
+  <input id="expr" type="text" value="0.1 + 0.2" spellcheck="false" autocapitalize="off">
+  <button onclick="runExpr()">Check it</button>
+</p>
+<p class="note">examples:
+  <a href="#" onclick="ex('0.1 + 0.2');return false">0.1 + 0.2</a> &middot;
+  <a href="#" onclick="ex('0.1 + 0.2 - 0.3');return false">0.1 + 0.2 &minus; 0.3</a> &middot;
+  <a href="#" onclick="ex('1 / (0.1 + 0.2 - 0.3)');return false">1 / (0.1 + 0.2 &minus; 0.3)</a> &middot;
+  <a href="#" onclick="ex('1/3 + 1/3 + 1/3');return false">1/3 three times</a> &middot;
+  <a href="#" onclick="ex('1/49');return false">1/49</a> &middot;
+  <a href="#" onclick="ex('Math.sqrt(2)');return false">&radic;2</a> &middot;
+  <a href="#" onclick="ex('Math.PI');return false">&pi;</a> &middot;
+  <a href="#" onclick="ex('Math.sin(Math.PI)');return false">sin &pi;</a> &middot;
+  <a href="#" onclick="ex('Math.sqrt(2)**2');return false">(&radic;2)&sup2;</a>
+</p>
+<div id="exprout" class="out"></div>
+<p class="note">The <b>exact</b> line appears only when the expression is ordinary arithmetic (computed here as an exact fraction) or is one of a few known constants; for anything else the true value must come from an exact tool such as <code>mpmath</code>. Every figure is computed in your browser; nothing is looked up.</p>
+</div>
+
+<h2>Appendix — what is your tool computing on?</h2>
+<p>A few one-line probes tell you which arithmetic a tool actually uses, before you rely on any answer it gives.</p>
+<details class="demo" ontoggle="if(this.open&&!this.dataset.ran){this.dataset.ran=1;runFinger();}"><summary><span class="show">Show this browser's probes</span><span class="hide">Hide this browser's probes</span></summary>
+<div id="finger" class="out"></div></details>
+<p class="note">If a tool returns <code>0.1 + 0.2</code> as exactly <code>0.3</code>, or reports that <code>2&#8309;&#179; + 1 &ne; 2&#8309;&#179;</code>, or prints an irrational to more than about sixteen correct digits, it is not using ordinary double precision — it is decimal, exact, or symbolic underneath, and these particular failures will not bite it in the same way.</p>
+<p><b>Four more probes this page cannot run for you</b> — they read conventions, not arithmetic, and a convention lives in the tool you use, not in this one. Type each into that tool:</p>
+<table>
+  <tr><th>type</th><th>one answer means</th><th>the other means</th></tr>
+  <tr><td><code>log(2)</code></td><td><code>0.6931…</code> — natural logarithm (programming languages, mathematics)</td><td><code>0.3010…</code> — base 10 (spreadsheets, most calculators; natural is <code>ln</code> there)</td></tr>
+  <tr><td><code>sin(180)</code></td><td><code>0</code> — degrees (most calculators as switched on)</td><td><code>&minus;0.8011…</code> — radians (every programming language)</td></tr>
+  <tr><td><code>2.5</code> rounded to a whole number</td><td><code>2</code> — round half to even (IEEE, Python)</td><td><code>3</code> — round half away from zero (spreadsheet ROUND, calculators)</td></tr>
+  <tr><td><code>1/3</code></td><td colspan="2">count the digits shown — that is the tool's <i>display</i> limit, which is not its precision; a spreadsheet shows at most fifteen, and stores fifteen when you paste</td></tr>
+</table>
+<p class="note">One more, found while this page was being benched against Python: <code>pow</code> is not required by IEEE-754 to be correctly rounded, only recommended, and the golden table's <code>n = 2</code> row differs by one unit in the last place between a browser's engine and CPython (<code>…d60</code> against <code>…d61</code>; the correctly rounded value is CPython's). The relative error printed on that row is therefore the engine's, not the arithmetic's — which is the page's subject, met in its own table.</p>
+<p class="note">None of these is an error; each is a choice the tool's builders made, and both choices are in daily use. A number carried from one tool to another carries these choices with it — and the same expression, typed into two tools, can return two correct answers to two different questions. If your tool uses a comma as the decimal mark, <code>0,980</code> and <code>0.980</code> are one number; a file that crosses between the two conventions may not be.</p>
+
+<footer>
+  <p>D.B., 2026-09-11 · <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/license.html">CC&nbsp;BY&nbsp;4.0</a>. Every figure and every verdict above is computed in your browser as you open it; the only typed numbers are the three known reference answers (5, &minus;0.827396…, and the true powers of 1/&phi;), which are what the computed values are compared against.<br><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/">← Gap Geometry</a> &middot; <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations%20hub.html">Visualisations</a></p>
+</footer>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const fmt = x => (typeof x==="number" ? x.toPrecision(12) : String(x));
+
+function runMuller(){
+  let x0=4, x1=4.25, rows=[["n","value (double precision)"]];
+  for(let n=2;n<=30;n++){ const x2=108-(815-1500/x0)/x1;
+    if([2,4,6,8,10,15,20,25,30].includes(n)) rows.push([n, fmt(x2)]);
+    x0=x1; x1=x2; }
+  $("muller").innerHTML = table(rows) +
+    `\ntrue limit: 5     returned: <span class="wrong">100</span>`;
+}
+
+function runGolden(){
+  const phi=(1+Math.sqrt(5))/2; let a0=1, a1=1/phi, rows=[["n","value","true 1/1.618…&#8319;","rel. error"]];
+  let nGrow=null, nNeg=null, nRel=null;          // read off the run, never typed in
+  for(let n=2;n<=50;n++){ const a2=a0-a1, t=Math.pow(phi,-n);
+    if(nGrow===null && Math.abs(a2)>=Math.abs(a1)) nGrow=n;          // stopped shrinking
+    if(nNeg===null && a2<0) nNeg=n;                                   // sign lost (truth is > 0 forever)
+    if(nRel===null && Math.abs(a2-t)/t>=1) nRel=n;                    // relative error reached 100 %
+    if([2,10,20,30,35,37,39,41,43,45].includes(n))
+      rows.push([n, a2.toExponential(4), t.toExponential(4), (Math.abs(a2-t)/t).toExponential(2)]);
+    a0=a1; a1=a2; }
+  $("golden").innerHTML = table(rows) +
+    `\nfirst n where it stops shrinking:        <span class="wrong">n = ${nGrow}</span>` +
+    `\nfirst n where the value goes negative:   <span class="wrong">n = ${nNeg}</span>` +
+    `\nfirst n where relative error reaches 1:  <span class="wrong">n = ${nRel}</span>` +
+    `\n<span class="note">all three read off the run above in this browser; none is typed into this page. the true sequence is positive and decreasing forever.</span>`;
+}
+
+function runRump(){
+  const a=77617, b=33096;
+  const wayA = 333.75*b**6 + a**2*(11*a**2*b**2 - b**6 - 121*b**4 - 2) + 5.5*b**8 + a/(2*b);
+  const wayB = (333.75 - a**2)*b**6 + a**2*(11*a**2*b**2 - 121*b**4 - 2) + 5.5*b**8 + a/(2*b);
+  $("rump").innerHTML =
+    `arrangement A:  <span class="wrong">${wayA.toExponential(6)}</span>\n` +
+    `arrangement B:  <span class="wrong">${wayB.toExponential(6)}</span>\n` +
+    `true value:     <span class="right">-0.827396059946821…</span>`;
+}
+
+// exact rational arithmetic with BigInt, for the comparison
+function gcd(a,b){a=a<0n?-a:a;b=b<0n?-b:b;while(b){[a,b]=[b,a%b];}return a||1n;}
+class R{ constructor(n,d=1n){ if(d<0n){n=-n;d=-d;} const g=gcd(n,d); this.n=n/g; this.d=d/g; }
+  sub(o){return new R(this.n*o.d-o.n*this.d,this.d*o.d);} div(o){return new R(this.n*o.d,this.d*o.n);}
+  static i(k){return new R(BigInt(k),1n);} num(){return Number(this.n)/Number(this.d);} }
+function runCompare(){
+  let d0=4,d1=4.25;                             // double
+  let r0=new R(4n,1n), r1=new R(17n,4n);        // exact
+  const c108=R.i(108),c815=R.i(815),c1500=R.i(1500);
+  const rows=[["n","double precision","exact rational"]];
+  for(let n=2;n<=40;n++){
+    const d2=108-(815-1500/d0)/d1;
+    const r2=c108.sub(c815.sub(c1500.div(r0)).div(r1));
+    if([5,10,20,30,40].includes(n)) rows.push([n, fmt(d2), r2.num().toPrecision(12)]);
+    d0=d1; d1=d2; r0=r1; r1=r2;
+  }
+  $("compare").innerHTML = table(rows) +
+    `\ndouble precision → <span class="wrong">100</span>     exact → <span class="right">5</span>`;
+}
+
+function runFinger(){
+  const probes = [
+    ["0.1 + 0.2", (0.1+0.2)],
+    ["0.1 + 0.2 === 0.3", (0.1+0.2===0.3)],
+    ["smallest e with 1+e ≠ 1", Number.EPSILON],
+    ["2^53 + 1 === 2^53", (9007199254740992+1===9007199254740992)],
+    ["Math.sin(Math.PI)", Math.sin(Math.PI)],
+    ["Math.sqrt(2)**2 - 2", (Math.sqrt(2)**2-2)],
+  ];
+  const looksDouble = (0.1+0.2 !== 0.3)
+      && (9007199254740992+1 === 9007199254740992)
+      && (Math.abs(Number.EPSILON - 2.220446049250313e-16) < 1e-30);
+  const verdict = looksDouble
+    ? `read from the results above: these are the marks of IEEE-754 binary64 — ordinary double precision — which is what this page's own engine uses.`
+    : `read from the results above: these do not match ordinary double precision; this engine is using something else (decimal, exact, or extended).`;
+  $("finger").innerHTML = table([["probe","result"], ...probes.map(p=>[p[0], String(p[1])])]) +
+    `\n${verdict}\nthe point is to run these same probes inside the tool you actually use — a spreadsheet cell, a Python prompt, a calculator — to read what IT computes on.`;
+}
+
+// --- "try a number" exact-rational evaluator (reuses gcd defined above) ---
+function _mk(n,d){ if(d<0n){n=-n;d=-d;} const g=gcd(n,d); return [n/g,d/g]; }
+function _lit(s){ if(s.includes('.')){ const [i,f]=s.split('.'); return _mk(BigInt((i||'0')+f), 10n**BigInt(f.length)); } return _mk(BigInt(s),1n); }
+const _radd=(a,b)=>_mk(a[0]*b[1]+b[0]*a[1],a[1]*b[1]), _rsub=(a,b)=>_mk(a[0]*b[1]-b[0]*a[1],a[1]*b[1]),
+      _rmul=(a,b)=>_mk(a[0]*b[0],a[1]*b[1]), _rdiv=(a,b)=>_mk(a[0]*b[1],a[1]*b[0]);
+function evalRational(expr){
+  const s=expr.replace(/\s+/g,''); const toks=s.match(/(\d+\.\d+|\.\d+|\d+|[()+\-*/])/g);
+  if(!toks||toks.join('')!==s) return null;
+  const bp={'+':1,'-':1,'*':2,'/':2}, out=[], op=[], isn=t=>/[\d.]/.test(t[0]); let prev='start';
+  for(let i=0;i<toks.length;i++){ const t=toks[i];
+    if(isn(t)){ out.push(_lit(t)); prev='num'; }
+    else if(t==='('){ op.push('('); prev='('; }
+    else if(t===')'){ while(op.length&&op[op.length-1]!=='(') out.push(op.pop()); if(!op.length) return null; op.pop(); prev='num'; }
+    else { const un=(t==='-'||t==='+')&&(prev==='start'||prev==='op'||prev==='(');
+      if(un){ if(t==='-') op.push('u'); prev='op'; }
+      else { while(op.length&&op[op.length-1]!=='('&&(op[op.length-1]==='u'||bp[op[op.length-1]]>=bp[t])) out.push(op.pop()); op.push(t); prev='op'; } } }
+  while(op.length){ const o=op.pop(); if(o==='(') return null; out.push(o); }
+  const st=[]; for(const t of out){ if(Array.isArray(t)) st.push(t);
+    else if(t==='u'){ const a=st.pop(); if(a===undefined) return null; st.push(_rsub([0n,1n],a)); }
+    else { const b=st.pop(),a=st.pop(); if(a===undefined||b===undefined) return null; if(t==='/'&&b[0]===0n) return 'divzero';
+      st.push(t==='+'?_radd(a,b):t==='-'?_rsub(a,b):t==='*'?_rmul(a,b):_rdiv(a,b)); } }
+  return st.length===1?st[0]:null;
+}
+// evalRational returns: [n,d] exact · null (not plain arithmetic) · 'divzero' (an exact division by zero)
+function _dec(r){ let [n,d]=r; if(d===1n) return n.toString(); const sign=n<0n?'-':''; n=n<0n?-n:n;
+  let s=sign+(n/d).toString()+'.', rem=n%d; for(let i=0;i<36&&rem!==0n;i++){ rem*=10n; s+=(rem/d).toString(); rem%=d; }
+  return rem!==0n ? s+'…' : s; }
+function _dyadic(d){ while(d%2n===0n) d/=2n; return d===1n; }
+function _fracOfDouble(x){
+  if(x===0) return [0n,1n];
+  const neg=x<0; x=Math.abs(x);
+  const buf=new DataView(new ArrayBuffer(8)); buf.setFloat64(0,x);
+  const bits=(BigInt(buf.getUint32(0)>>>0)<<32n)|BigInt(buf.getUint32(4)>>>0);
+  const expo=Number((bits>>52n)&0x7ffn), mant=bits&0xfffffffffffffn;
+  let num,den;
+  if(expo===0){ num=mant; den=1n<<1074n; }
+  else { num=mant|(1n<<52n); const e=expo-1075; if(e>=0){ num<<=BigInt(e); den=1n; } else { den=1n<<BigInt(-e); } }
+  const g=gcd(num,den); return [neg?-(num/g):num/g, den/g];
+}
+function _equalsExact(dv,n,d){ const [dn,dd]=_fracOfDouble(dv); return dn*d===n*dd; }
+// --- the third check: one unit in the last place of an input ---
+function nextUp(x){
+  if(!isFinite(x)) return x;
+  if(x===0) return Number.MIN_VALUE;
+  const b=new DataView(new ArrayBuffer(8)); b.setFloat64(0,x);
+  let bits=(BigInt(b.getUint32(0)>>>0)<<32n)|BigInt(b.getUint32(4)>>>0);
+  bits = x>0 ? bits+1n : bits-1n;
+  b.setUint32(0, Number(bits>>32n)); b.setUint32(4, Number(bits & 0xffffffffn));
+  return b.getFloat64(0);
+}
+function nudgeExpr(raw){
+  const m=[...raw.matchAll(/\d+\.\d+|\.\d+|\d+/g)];
+  if(!m.length) return null;
+  const last=m[m.length-1], v=parseFloat(last[0]);
+  if(!isFinite(v)) return null;
+  const v2=nextUp(v);
+  const alt=raw.slice(0,last.index)+v2.toPrecision(17)+raw.slice(last.index+last[0].length);
+  let d2; try{ d2=Function('"use strict";return ('+alt+')')(); }catch(e){ return null; }
+  if(typeof d2!=='number') return null;
+  return {which:last[0], to:v2, val:d2, nonfinite:!isFinite(d2)};
+}
+const KNOWN = {
+  "Math.sqrt(2)":"1.41421356237309504880… (irrational)",
+  "Math.sqrt(3)":"1.73205080756887729352… (irrational)",
+  "Math.PI":"3.14159265358979323846… (irrational)",
+  "Math.E":"2.71828182845904523536… (irrational)",
+  "Math.log(2)":"0.69314718055994530941… (irrational)",
+  "Math.sin(Math.PI)":"0 (exactly)",
+  "Math.sqrt(2)**2":"2 (exactly)"
+};
+function ex(s){ $("expr").value=s; runExpr(); }
+function runExpr(){
+  const raw=$("expr").value.trim(), out=$("exprout");
+  const strip=raw.replace(/Math\.(PI|E|sqrt|sin|cos|tan|log|exp)/g,'#').replace(/\*\*/g,'#').replace(/[0-9.eE+\-*/()#\s]/g,'');
+  if(strip!==''){ out.innerHTML=`<span class="wrong">Allowed: numbers, + - * / ( ), ** and Math.sqrt/sin/cos/tan/log/exp/PI/E.</span>`; return; }
+  let dv; try{ dv=Function('"use strict";return ('+raw+')')(); }catch(e){ out.innerHTML=`<span class="wrong">Could not evaluate that.</span>`; return; }
+  if(typeof dv!=='number'||!isFinite(dv)){
+    const r0=evalRational(raw);
+    out.innerHTML = r0==='divzero'
+      ? `double precision:  ${dv}\nexact value:       <span class="wrong">undefined — division by zero.</span> The divisor is exactly zero; there is no value to compare.`
+      : `<span class="wrong">Not a finite number</span> — double precision returned ${dv}.`;
+    return; }
+  const single=Math.fround(dv), lines=[];
+  lines.push(`double precision:  ${dv.toPrecision(17)}   <span class="note">[binary64 · computed here]</span>`);
+  lines.push(`rounded to single:  ${single.toPrecision(9)}   <span class="note">[the binary64 result above, rounded once to float32 &mdash; NOT recomputed in float32]</span>`);
+  const r=evalRational(raw), key=raw.replace(/\s+/g,'');
+  if(r==='divzero'){ lines.push(`exact value:       <span class="wrong">undefined — division by zero.</span>`);
+    lines.push(`<span class="wrong">the double above is not a value at all</span> — the divisor is exactly zero, but in double precision it came out as a rounding residue, and the division went through on that residue.`);
+  } else if(r){ lines.push(`exact value:       ${_dec(r)}   <span class="note">[exact rationals on BigInt &mdash; computed here, no rounding at any step]</span>`);
+    lines.push(_equalsExact(dv,r[0],r[1]) ? `<span class="right">the double above equals this exact value.</span>`
+                             : `<span class="wrong">the double above is not this exact value</span> — precision was lost (rounding a literal, or an intermediate step).`);
+  } else if(KNOWN[key]!==undefined){ lines.push(`exact value:       ${KNOWN[key]}   <span class="note">[a known constant, typed into this page &mdash; not computed here]</span>`);
+    lines.push(/irrational/.test(KNOWN[key]) ? `<span class="wrong">irrational</span> — no binary float holds it exactly; the double is the nearest, good to about 16 digits.`
+      : `the exact value is ${KNOWN[key].split(' ')[0]} — compare it to the double above.`);
+  } else { lines.push(`exact value:       (not handled by the exact engine here — use mpmath or a CAS for its exact value)`); }
+  const nu=nudgeExpr(raw);
+  if(nu&&nu.nonfinite){
+    lines.push(`nudged input:      ${nu.which} &rarr; ${nu.to.toPrecision(17)}  gives  ${String(nu.val)}   <span class="note">[binary64 · last literal moved one unit in its last place]</span>`);
+    lines.push(`<span class="wrong">one unit in the last place of that input takes the result out of the finite range</span> — the computation sits on a pole here; the unnudged answer is a number only because rounding missed it.`);
+  } else if(nu){
+    const move = dv!==0 ? Math.abs(nu.val-dv)/Math.abs(dv) : Math.abs(nu.val-dv);
+    lines.push(`nudged input:      ${nu.which} &rarr; ${nu.to.toPrecision(17)}  gives  ${nu.val.toPrecision(17)}   <span class="note">[binary64 · last literal moved one unit in its last place, whole expression recomputed]</span>`);
+    lines.push(move>1e-9
+      ? `<span class="wrong">the answer moved by ${move.toExponential(2)}, relative</span> — one unit in the last place of that input shifted the result by far more. the computation is unstable here.`
+      : `<span class="right">the answer barely moved (${move.toExponential(2)}, relative)</span> — stable under a one-ulp nudge of the last input.`);
+  } else { lines.push(`nudged input:      (no numeric literal to perturb here)`); }
+  out.innerHTML=lines.join("\n");
+}
+
+function table(rows){
+  const head = rows[0], body = rows.slice(1);
+  return "<table><tr>" + head.map(h=>`<th>${h}</th>`).join("") + "</tr>" +
+    body.map(r=>"<tr>"+r.map(c=>`<td>${c}</td>`).join("")+"</tr>").join("") + "</table>";
+}
+</script>
