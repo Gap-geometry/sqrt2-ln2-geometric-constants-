@@ -65,6 +65,7 @@
   footer{margin-top:44px;border-top:1px solid var(--line);padding-top:14px;
          color:var(--dim);font-size:13px;text-align:center;}
 </style>
+<style id="sideforms">/* side forms for text extractors (2026-10-19): a caret before every superscript and an underscore before every subscript, hidden to the eye, present in the text, so 32<sup>k</sup> flattens to 32^k */.sf{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}</style>
 </head>
 <body>
 <main>
@@ -110,7 +111,7 @@ framework learn. All derived; none rounded.</p>
 <tr><td>the Landauer crossing</td><td>ln 2</td><td>n = 35.110537…</td></tr>
 <tr><td>the geometric damping threshold</td><td>1/√2</td><td>n = 35.817644…</td></tr>
 <tr><td>the Shannon bound</td><td>1/(2 ln 2)</td><td>n = 36.538991…</td></tr>
-<tr><td>the ceiling</td><td>K<sub>AUD</sub></td><td>n = 49.653797…</td></tr>
+<tr><td>the ceiling</td><td>K<span class="sf">_</span><sub>AUD</sub></td><td>n = 49.653797…</td></tr>
 <tr><td>unity — the last derived rung</td><td>1</td><td>n = 50.653797…</td></tr>
 </table>
 </div>
