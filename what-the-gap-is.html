@@ -42,6 +42,7 @@
   .site-nav{ margin:10px 0 8px; font-size:14px; line-height:1.9; }
   .site-nav a{ text-decoration:none; }
 </style>
+<style id="sideforms">/* side forms for text extractors (2026-10-19): a caret before every superscript and an underscore before every subscript, hidden to the eye, present in the text, so 32<sup>k</sup> flattens to 32^k */.sf{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}</style>
 </head>
 <body>
 
@@ -67,7 +68,7 @@ Dashboard&rsquo;s subject. This page is about one point on it, <span class="mono
 Its scope is the doubling interval. Nothing here is written that was not computed.</p>
 
 <div class="caution"><strong>The corpus symbols, read once.</strong> The published papers print the ratio
-&radic;2&middot;ln(2) as <span class="mono">K<sub>AUD</sub></span> and the gap as <span class="mono">G<sub>AUD</sub></span>
+&radic;2&middot;ln(2) as <span class="mono">K<span class="sf">_</span><sub>AUD</sub></span> and the gap as <span class="mono">G<span class="sf">_</span><sub>AUD</sub></span>
 &mdash; the framework&rsquo;s names for a shared value: the ratio is also the constant <em>p</em> Fishman prints for
 Algorithm EA, and the reciprocal of a coefficient in Hodgson&ndash;Kerckhoff. This page prints the neutral forms;
 the names appear only here and inside the papers that print them.</div>
@@ -81,17 +82,17 @@ count that adds and a step that compounds meets that function somewhere. Here is
 turns up, and what the number <em>is</em> in each place.</p>
 
 <table class="vals words">
-<tr><td class="n">means</td><td>the ratio of the geometric mean to the logarithmic mean, <span class="mono">GM/L<sub>log</sub></span> &mdash; a dimensionless ratio; the gap is the slack of a classical inequality, normalised</td></tr>
-<tr><td class="n">quadrature</td><td>the one-panel midpoint rule&rsquo;s accuracy on <span class="mono">e<sup>t</sup></span> over <span class="mono">[0, ln&thinsp;2]</span> &mdash; a relative error; the gap is what one flat sample of the doubling cell fails to keep</td></tr>
+<tr><td class="n">means</td><td>the ratio of the geometric mean to the logarithmic mean, <span class="mono">GM/L<span class="sf">_</span><sub>log</sub></span> &mdash; a dimensionless ratio; the gap is the slack of a classical inequality, normalised</td></tr>
+<tr><td class="n">quadrature</td><td>the one-panel midpoint rule&rsquo;s accuracy on <span class="mono">e<span class="sf">^</span><sup>t</sup></span> over <span class="mono">[0, ln&thinsp;2]</span> &mdash; a relative error; the gap is what one flat sample of the doubling cell fails to keep</td></tr>
 <tr><td class="n">sampling</td><td>the largest weight a uniform component can carry in Marsaglia&rsquo;s exact-approximation method &mdash; a <em>probability</em>; Ahrens &amp; Dieter&rsquo;s Algorithm EA lives on the cell <span class="mono">0 &le; v &le; ln&thinsp;2</span>, and Fishman printed the closed form</td></tr>
 <tr><td class="n">hyperbolic geometry</td><td>the reciprocal of Hodgson&ndash;Kerckhoff&rsquo;s tube coefficient, <span class="mono">1/S</span> &mdash; the chord over the hyperbolic argument, in one metric</td></tr>
 <tr><td class="n">number theory</td><td>the generating function of the even Bernoulli numbers, <span class="mono">u/sinh&thinsp;u</span>, evaluated at <span class="mono">u = ln&thinsp;2/2</span> &mdash; a coefficient series, which is where the second enclosure comes from</td></tr>
-<tr><td class="n">this framework</td><td>the earlier papers&rsquo; ceiling and gap, <span class="mono">K<sub>AUD</sub></span> and <span class="mono">G<sub>AUD</sub></span> &mdash; the same two numbers under the names they were first met by; read today as <span class="mono">p</span> and <span class="mono">G</span></td></tr>
+<tr><td class="n">this framework</td><td>the earlier papers&rsquo; ceiling and gap, <span class="mono">K<span class="sf">_</span><sub>AUD</sub></span> and <span class="mono">G<span class="sf">_</span><sub>AUD</sub></span> &mdash; the same two numbers under the names they were first met by; read today as <span class="mono">p</span> and <span class="mono">G</span></td></tr>
 </table>
 
 <p>Why one function in several places has a short reason, and it is not mysterious. The exponential is the map
 that turns adding into multiplying; an interval measured by its length <span class="mono">L</span> and by the ratio of
-its ends <span class="mono">r = e<sup>L</sup></span> is measured on the two sides of that map, and
+its ends <span class="mono">r = e<span class="sf">^</span><sup>L</sup></span> is measured on the two sides of that map, and
 <span class="mono">p</span> is the ratio of the two measures &mdash; the multiplicative middle over the additive one.
 So wherever a problem carries both &mdash; panels and an exponential integrand, doublings and a probability, a
 translation length and a trace &mdash; <span class="mono">p(L)</span> is present, and it is the same function.
@@ -119,8 +120,8 @@ it is small or large, but because these relations are exact.</p>
 <table class="vals">
   <tr><td class="n">the chord identity</td><td><span class="mono">2&thinsp;sinh(ln&thinsp;2/2) = 1/&radic;2</span> &mdash; three lines of algebra</td></tr>
   <tr><td class="n">the complement</td><td><span class="mono">1 &minus; p(ln&thinsp;2) = 1 &minus; &radic;2&middot;ln&thinsp;2</span></td></tr>
-  <tr><td class="n">three spellings</td><td><span class="mono">&radic;2&middot;(1/&radic;2 &minus; ln&thinsp;2)</span> &nbsp;=&nbsp; <span class="mono">ln(e/2<sup>&radic;2</sup>)</span> &nbsp;=&nbsp; <span class="mono">1 &minus; &Vert;(ln&thinsp;2, ln&thinsp;2)&Vert;&#8322;</span> &mdash; one number</td></tr>
-  <tr><td class="n">it is not zero</td><td><span class="mono">GM &lt; L<sub>log</sub></span> strictly on every interval &mdash; a theorem, not a measurement (the strict inequality <span class="mono">sinh&thinsp;x &gt; x</span> for <span class="mono">x &gt; 0</span>)</td></tr>
+  <tr><td class="n">three spellings</td><td><span class="mono">&radic;2&middot;(1/&radic;2 &minus; ln&thinsp;2)</span> &nbsp;=&nbsp; <span class="mono">ln(e/2<span class="sf">^</span><sup>&radic;2</sup>)</span> &nbsp;=&nbsp; <span class="mono">1 &minus; &Vert;(ln&thinsp;2, ln&thinsp;2)&Vert;&#8322;</span> &mdash; one number</td></tr>
+  <tr><td class="n">it is not zero</td><td><span class="mono">GM &lt; L<span class="sf">_</span><sub>log</sub></span> strictly on every interval &mdash; a theorem, not a measurement (the strict inequality <span class="mono">sinh&thinsp;x &gt; x</span> for <span class="mono">x &gt; 0</span>)</td></tr>
   <tr><td class="n">its reciprocal in print</td><td><span class="mono">1/(&radic;2&middot;ln&thinsp;2) = 1.020139&hellip;</span> &mdash; the Hodgson&ndash;Kerckhoff tube coefficient, printed there as <span class="mono">&asymp; 1/0.980258</span></td></tr>
 </table>
 
@@ -131,10 +132,10 @@ it is small or large, but because these relations are exact.</p>
 interval the coordinate is <span class="mono">x = 1/(2&radic;2)</span>, so <span class="mono">x&sup2; = 1/8</span>
 is rational and every term lands on a rational:</p>
 
-<div class="big">1 &minus; &radic;2&middot;ln&thinsp;2 &nbsp;=&nbsp; &Sigma;<sub>k&ge;1</sub> (&minus;1)<sup>k+1</sup> &middot; C(2k,k) / ( 32<sup>k</sup> &middot; (2k+1) )</div>
+<div class="big">1 &minus; &radic;2&middot;ln&thinsp;2 &nbsp;=&nbsp; &Sigma;<span class="sf">_(</span><sub>k&ge;1</sub><span class="sf">)</span> (&minus;1)<span class="sf">^(</span><sup>k+1</sup><span class="sf">)</span> &middot; C(2k,k) / ( 32<span class="sf">^</span><sup>k</sup> &middot; (2k+1) )</div>
 
 <table class="vals">
-<tr><td>k</td><td>term</td><td>partial sum S<sub>k</sub></td><td class="n">|G &minus; S<sub>k</sub>|</td></tr>
+<tr><td>k</td><td>term</td><td>partial sum S<span class="sf">_</span><sub>k</sub></td><td class="n">|G &minus; S<span class="sf">_</span><sub>k</sub>|</td></tr>
 <tr><td>1</td><td>+ 1/48</td><td>0.0208333333333333333</td><td class="n">1.09e&minus;3</td></tr>
 <tr><td>2</td><td>&minus; 3/2560</td><td>0.0196614583333333333</td><td class="n">8.04e&minus;5</td></tr>
 <tr><td>3</td><td>+ 5/57344</td><td>0.0197486514136904762</td><td class="n">6.79e&minus;6</td></tr>
@@ -148,12 +149,12 @@ is rational and every term lands on a rational:</p>
 
 <p>Central binomial coefficients over powers of two, at every term. The series is classical &mdash; it is the
 series for <span class="mono">ln&thinsp;2</span> in OEIS A002162 (Bala, 2022), <span class="mono">ln&thinsp;2 =
-2&radic;2&thinsp;&Sigma; (&minus;1)<sup>n</sup>C(2n,n)/((8n+4)&middot;32<sup>n</sup>)</span> &mdash; read here from the
+2&radic;2&thinsp;&Sigma; (&minus;1)<span class="sf">^</span><sup>n</sup>C(2n,n)/((8n+4)&middot;32<span class="sf">^</span><sup>n</sup>)</span> &mdash; read here from the
 other end, where it brackets a value. Its first two partial sums are the two bounds the framework published:</p>
 
 <table class="vals">
-<tr><td>S<sub>1</sub></td><td>= 1/48</td><td>= 0.0208333333333333333</td><td>&larr; the upper bound</td></tr>
-<tr><td>S<sub>2</sub></td><td>= 1/48 &minus; 3/2560</td><td>= 0.0196614583333333333</td><td>&larr; the lower bound</td></tr>
+<tr><td>S<span class="sf">_</span><sub>1</sub></td><td>= 1/48</td><td>= 0.0208333333333333333</td><td>&larr; the upper bound</td></tr>
+<tr><td>S<span class="sf">_</span><sub>2</sub></td><td>= 1/48 &minus; 3/2560</td><td>= 0.0196614583333333333</td><td>&larr; the lower bound</td></tr>
 <tr><td>&nbsp;</td><td>= 160/7680 &minus; 9/7680</td><td>= <strong>151/7680</strong>, exactly</td><td>&nbsp;</td></tr>
 </table>
 
@@ -168,7 +169,7 @@ rational arithmetic.</p>
 <span class="mono">N</span> halvings is the gap of the interval you stopped at:</p>
 
 <table class="vals">
-<tr><td>N</td><td>1 &minus; p(L/2<sup>N</sup>)</td><td>ratio to previous</td></tr>
+<tr><td>N</td><td>1 &minus; p(L/2<span class="sf">^</span><sup>N</sup>)</td><td>ratio to previous</td></tr>
 <tr><td>1</td><td>0.004987241190941403699</td><td>&nbsp;</td></tr>
 <tr><td>2</td><td>0.001250084774994772754</td><td>0.25065657086434</td></tr>
 <tr><td>3</td><td>0.000312726456018779652</td><td>0.25016419868012</td></tr>
@@ -178,8 +179,8 @@ rational arithmetic.</p>
 </table>
 
 <p>The ratio is a quarter, and the reason is elementary: <span class="mono">p</span> is the midpoint rule&rsquo;s ratio
-for <span class="mono">e<sup>x</sup></span>, the composite midpoint rule on <span class="mono">2<sup>N</sup></span> panels
-has ratio exactly <span class="mono">p(L/2<sup>N</sup>)</span>, and the midpoint rule is second order &mdash; halve
+for <span class="mono">e<span class="sf">^</span><sup>x</sup></span>, the composite midpoint rule on <span class="mono">2<span class="sf">^</span><sup>N</sup></span> panels
+has ratio exactly <span class="mono">p(L/2<span class="sf">^</span><sup>N</sup>)</span>, and the midpoint rule is second order &mdash; halve
 the step, quarter the error. Two things the ladder does not show: the three quarters carried by the first rung is
 generic to any cascade of ratio 1/4, and the ladder is scale-free &mdash; it does not single out
 <span class="mono">r = 2</span>. The infinite product is the hyperbolic twin of the dyadic product whose circular
@@ -210,7 +211,7 @@ complement formed once, numerically, inside a rejection cost. Ahrens &amp; Diete
 the same sixteen digits. Hodgson &amp; Kerckhoff, <em>Universal bounds for hyperbolic Dehn surgery</em> (Annals 2005, p.&nbsp;401):
 the coefficient <span class="mono">S = (1/(2&radic;2))/arcsinh(1/(2&radic;2)) &asymp; 1/0.980258</span>, their spelling. The means
 literature &mdash; Carlson (1966, 1972), Bhatia (2008), Jameson &amp; Mercer (2019) &mdash; carries the inequality
-<span class="mono">GM &le; L<sub>log</sub></span> for every interval and evaluates it at none. The exact-approximation method is
+<span class="mono">GM &le; L<span class="sf">_</span><sub>log</sub></span> for every interval and evaluates it at none. The exact-approximation method is
 Marsaglia&rsquo;s (1984). Each source is quoted as it prints. What is delivered here is the complement as an object: its exact value, its
 series with rational terms and the bracket in integers, and its place on the line, in symbols that follow the standard
 &mdash; accurate to any depth and located, so that anyone can compute with it, correct against it, or build on it tomorrow.</p>

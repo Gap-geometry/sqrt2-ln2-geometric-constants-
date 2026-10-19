@@ -343,6 +343,7 @@ body{
 .rung{ background:#233150; border-color:#2c3d63; }   /* unlit → dim blue, no longer white */
 .rung.litAB{ box-shadow:0 0 6px #f0c04a; }           /* "both" glow follows the gold */
 </style>
+<style id="sideforms">/* side forms for text extractors (2026-10-19): a caret before every superscript and an underscore before every subscript, hidden to the eye, present in the text, so 32<sup>k</sup> flattens to 32^k */.sf{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}</style>
 </head>
 <body>
 <main>
@@ -371,19 +372,19 @@ body{
 
 <section class="ask-sec tp" data-tab="read">
   <h2>How to read the tower</h2>
-  <p style="color:var(--muted); font-size:.95em;"><strong>The metric, said once.</strong> On this page <em>arc</em> is the hyperbolic argument <em>L = ln r</em> (ISO 80000-2: ar-; the Minkowski arc between the two points) and <em>chord</em> is <em>2 sinh(L/2)</em>, their chord in the same metric. <em>K<sub>AUD</sub> = arc/chord = L/(2 sinh(L/2)) = GM/L<sub>log</sub></em> is a ratio taken in one metric, which is why it sits below 1; on a circle the same ratio sits above 1. <em>Doubling</em> names the interval <em>r = 2</em> only. K<sub>AUD</sub> is the framework&rsquo;s historical symbol for the value <em>p</em> at <em>r = 2</em> — this page keeps it because its laws and self-test were written in it; it is not a new constant. What the Tower is for and is not for is written out beside this file (<em>WHAT THE BINARY TOWER IS — is for, is not for</em>, 2026-09-08); the symbols of every field, fifteen rows, are on the Gap Dashboard&rsquo;s &ldquo;In other words&rdquo; block.</p>
+  <p style="color:var(--muted); font-size:.95em;"><strong>The metric, said once.</strong> On this page <em>arc</em> is the hyperbolic argument <em>L = ln r</em> (ISO 80000-2: ar-; the Minkowski arc between the two points) and <em>chord</em> is <em>2 sinh(L/2)</em>, their chord in the same metric. <em>K<span class="sf">_</span><sub>AUD</sub> = arc/chord = L/(2 sinh(L/2)) = GM/L<span class="sf">_</span><sub>log</sub></em> is a ratio taken in one metric, which is why it sits below 1; on a circle the same ratio sits above 1. <em>Doubling</em> names the interval <em>r = 2</em> only. K<span class="sf">_</span><sub>AUD</sub> is the framework&rsquo;s historical symbol for the value <em>p</em> at <em>r = 2</em> — this page keeps it because its laws and self-test were written in it; it is not a new constant. What the Tower is for and is not for is written out beside this file (<em>WHAT THE BINARY TOWER IS — is for, is not for</em>, 2026-09-08); the symbols of every field, fifteen rows, are on the Gap Dashboard&rsquo;s &ldquo;In other words&rdquo; block.</p>
   <p style="color:var(--subtle); font-size:.88em; margin-top:10px;">The tower is a measurement
   instrument and a <strong>recognition index</strong> &mdash; its hits are addresses, not
   evidence. Golden targets carry an irreducible &epsilon; by theorem; arc-native hits survive
   the tower&rsquo;s deletion as exact identities, and that surviving identity is the finding.</p>
   <p style="color:var(--subtle); font-size:.88em; margin-top:10px;"><strong>Where the unit comes
-  from</strong> (added 2026-08-27). The tower converts by <em>G<sub>AUD</sub></em>, and <em>G<sub>AUD</sub></em> is fixed by
+  from</strong> (added 2026-08-27). The tower converts by <em>G<span class="sf">_</span><sub>AUD</sub></em>, and <em>G<span class="sf">_</span><sub>AUD</sub></em> is fixed by
   one matrix. Doubling, <em>z</em>&nbsp;&rarr;&nbsp;2<em>z</em>, is
   diag(&radic;2,&thinsp;1/&radic;2) in PSL(2,&#8477;); for any hyperbolic element
   |tr| = 2&middot;cosh(&#8467;/2), so tr&sup2;&nbsp;&minus;&nbsp;4 = 4&middot;sinh&sup2;(&#8467;/2), and
   <em>p</em> = 2&middot;arccosh(|tr|/2)&nbsp;&divide;&nbsp;&radic;(tr&sup2;&nbsp;&minus;&nbsp;4).
   Here tr&sup2; = 9/2 exactly, &radic;(tr&sup2;&nbsp;&minus;&nbsp;4) = 1/&radic;2, and
-  <em>p</em> = &radic;2&middot;ln&thinsp;2 = K_AUD, so <em>G<sub>AUD</sub></em> = 1&nbsp;&minus;&nbsp;K_AUD.
+  <em>p</em> = &radic;2&middot;ln&thinsp;2 = K_AUD, so <em>G<span class="sf">_</span><sub>AUD</sub></em> = 1&nbsp;&minus;&nbsp;K_AUD.
   Because the formula sees the matrix only through its trace, the unit is the same for every copy
   of the dilation <em>z &#8611; 2z</em> (translation length ln&thinsp;2) &mdash; <strong>the tower&rsquo;s ruler does not depend on where you stand.</strong>
   <em>Wording may still be adjusted.</em></p>
@@ -393,8 +394,8 @@ body{
   <h2>The gap as a unit &mdash; the conversion table</h2>
   <p style="color:var(--muted); font-size:.95em;">The tower is, in the end, a familiar kind of
   tool: a <strong>unit converter</strong>. The unit is the gap itself &mdash;
-  <strong>1&nbsp;gap = G<sub>AUD</sub> = 0.019741856531&hellip;</strong> &mdash; and a tower reading is a number
-  expressed in gap units, n&nbsp;=&nbsp;t/G<sub>AUD</sub>, the way kilometres express a distance already
+  <strong>1&nbsp;gap = G<span class="sf">_</span><sub>AUD</sub> = 0.019741856531&hellip;</strong> &mdash; and a tower reading is a number
+  expressed in gap units, n&nbsp;=&nbsp;t/G<span class="sf">_</span><sub>AUD</sub>, the way kilometres express a distance already
   measured in miles. <em>A conversion states no claim.</em> It is the same number in a
   different unit &mdash; exact, useful, and silent about meaning. The framework&rsquo;s
   &ldquo;translated readings&rdquo; are precisely such conversions; the
@@ -402,13 +403,13 @@ body{
   0&deg; and 100&deg; on a Celsius thermometer. This converter covers one dimension only:
   lengths along the gap&rsquo;s own axis. The live converter is temporarily removed for rework; this is the printed card.</p>
   <table class="conv-table">
-    <thead><tr><th>value</th><th>t</th><th>in gap units (t/G<sub>AUD</sub>)</th><th>nearest step</th><th>remainder (gaps)</th></tr></thead>
+    <thead><tr><th>value</th><th>t</th><th>in gap units (t/G<span class="sf">_</span><sub>AUD</sub>)</th><th>nearest step</th><th>remainder (gaps)</th></tr></thead>
     <tbody>
       <tr class="conv-group"><td colspan="5">derived marks &mdash; the unit&rsquo;s own calibration points</td></tr>
       <tr class="derived"><td>ln&thinsp;2 &mdash; one bit; the arc itself</td><td>0.6931471806</td><td>35.1105368158</td><td>35</td><td>+0.110537</td></tr>
       <tr class="derived"><td>1/&radic;2 &mdash; the chord</td><td>0.7071067812</td><td>35.8176435970</td><td>36</td><td>&minus;0.182356</td></tr>
       <tr class="derived"><td>1/(2&thinsp;ln&thinsp;2) &mdash; Shannon bound</td><td>0.7213475204</td><td>36.5389911174</td><td>37</td><td>&minus;0.461009</td></tr>
-      <tr class="derived"><td>K<sub>AUD</sub> &mdash; the ceiling</td><td>0.9802581435</td><td>49.6537973471</td><td>50</td><td>&minus;0.346203</td></tr>
+      <tr class="derived"><td>K<span class="sf">_</span><sub>AUD</sub> &mdash; the ceiling</td><td>0.9802581435</td><td>49.6537973471</td><td>50</td><td>&minus;0.346203</td></tr>
       <tr class="derived"><td>1 &mdash; unity, the last derived mark</td><td>1</td><td>50.6537973471</td><td>51</td><td>&minus;0.346203</td></tr>
       <tr class="conv-group"><td colspan="5">conversions &mdash; world values expressed in gap units (no claim stated)</td></tr>
       <tr class="translated"><td>1/&phi; &mdash; the floor</td><td>0.6180339887</td><td>31.3057684198</td><td>31</td><td>+0.305768</td></tr>
@@ -420,10 +421,10 @@ body{
     </tbody>
   </table>
   <p style="color:var(--subtle); font-size:.85em; margin-top:10px;">One thing worth seeing:
-  <strong>K<sub>AUD</sub> and unity share a remainder</strong> &mdash; they sit exactly one gap
-  apart (1 &minus; K<sub>AUD</sub> = G<sub>AUD</sub>), the unit measuring itself. And
-  <strong>&lfloor;1/G<sub>AUD</sub>&rfloor; = 50</strong>: fifty whole gaps fit under one, which is also the
-  first term of G<sub>AUD</sub>&rsquo;s continued fraction &mdash; <em>the same fact twice</em>, because the
+  <strong>K<span class="sf">_</span><sub>AUD</sub> and unity share a remainder</strong> &mdash; they sit exactly one gap
+  apart (1 &minus; K<span class="sf">_</span><sub>AUD</sub> = G<span class="sf">_</span><sub>AUD</sub>), the unit measuring itself. And
+  <strong>&lfloor;1/G<span class="sf">_</span><sub>AUD</sub>&rfloor; = 50</strong>: fifty whole gaps fit under one, which is also the
+  first term of G<span class="sf">_</span><sub>AUD</sub>&rsquo;s continued fraction &mdash; <em>the same fact twice</em>, because the
   first term of a continued fraction <em>is</em> the floor of the reciprocal, by definition of
   the algorithm. Guaranteed, not found. All values computed and
   verified at mpmath dps&nbsp;500 &mdash; the framework&rsquo;s uniform working precision.
@@ -435,22 +436,22 @@ body{
   digits: it shows, the table and the papers verify.
   Remainders are signed distances to the nearest step, in gaps. <b>Each landing is a reading, not an
   identity</b> — one bit (ln&thinsp;2) sits at 35.11, off the rung by +0.11; what is exact here is the
-  <em>spacing</em> between marks (Δ ratio = 1/K<sub>AUD</sub>), not the marks themselves. See the Convert tab's note.</p>
+  <em>spacing</em> between marks (Δ ratio = 1/K<span class="sf">_</span><sub>AUD</sub>), not the marks themselves. See the Convert tab's note.</p>
 </section>
 
 <section class="ask-sec tp on" data-tab="staircase">
-  <h2>The staircase &mdash; n &times; G<sub>AUD</sub>, drawn</h2>
+  <h2>The staircase &mdash; n &times; G<span class="sf">_</span><sub>AUD</sub>, drawn</h2>
   <p style="color:var(--muted); font-size:.95em;">The conversion table above, made visible. Each faint rung is a
-  whole step <b>n</b>, at height <b>n&middot;G<sub>AUD</sub></b>; a landmark is a known constant that lands
+  whole step <b>n</b>, at height <b>n&middot;G<span class="sf">_</span><sub>AUD</sub></b>; a landmark is a known constant that lands
   <em>near</em> a rung &mdash; drawn at its <b>exact</b> position with its signed remainder, never as the
   integer alone. <b>Derived marks</b> (blue) are the unit&rsquo;s own calibration; <b>conversions</b> (amber)
   are imported values in gap units and <em>state no claim</em>. The <b>derived tower ends at unity</b>
-  (n&nbsp;&asymp;&nbsp;50.65, since K<sub>AUD</sub>&nbsp;&lt;&nbsp;1 is a theorem); <b>64</b> is the
+  (n&nbsp;&asymp;&nbsp;50.65, since K<span class="sf">_</span><sub>AUD</sub>&nbsp;&lt;&nbsp;1 is a theorem); <b>64</b> is the
   <em>translated</em> window (the &radic;&phi; pivot) &mdash; structure, not dynamics.</p>
   <canvas id="stairCv" width="760" height="680" style="width:100%;height:auto;background:#fff;border:1px solid var(--card-border);border-radius:8px;"></canvas>
   <div id="stairRead" style="font-family:'Courier New',monospace;font-size:13px;color:var(--muted);margin-top:8px;min-height:1.4em;">hover the staircase &mdash; step, height, nearest landmark, remainder</div>
   <p style="color:var(--subtle);font-size:.85em;margin-top:8px;">Positions computed live from
-  G<sub>AUD</sub>&nbsp;=&nbsp;1&nbsp;&minus;&nbsp;&radic;2&middot;ln&nbsp;2; they match the printed table (mpmath dps 500).
+  G<span class="sf">_</span><sub>AUD</sub>&nbsp;=&nbsp;1&nbsp;&minus;&nbsp;&radic;2&middot;ln&nbsp;2; they match the printed table (mpmath dps 500).
   Further conversions sit above the shown window: e/2 at 68.85, &radic;2 at 71.64, &phi; at 81.96, &pi; at 159.13.</p>
 </section>
 
@@ -487,10 +488,10 @@ body{
     <div class="bt-card">
       <div class="bt-cap">first 48 binary digits &mdash; every 1 sits over a 0</div>
       <div style="margin-top:10px">
-        <div class="bt-row"><div class="bt-lab">G<sub>AUD</sub></div><div id="dydRowG" class="bt-grid"></div></div>
-        <div class="bt-row"><div class="bt-lab">K<sub>AUD</sub></div><div id="dydRowK" class="bt-grid"></div></div>
+        <div class="bt-row"><div class="bt-lab">G<span class="sf">_</span><sub>AUD</sub></div><div id="dydRowG" class="bt-grid"></div></div>
+        <div class="bt-row"><div class="bt-lab">K<span class="sf">_</span><sub>AUD</sub></div><div id="dydRowK" class="bt-grid"></div></div>
       </div>
-      <div class="bt-cap" style="margin-top:10px">G<sub>AUD</sub> + K<sub>AUD</sub> = 1 &rarr; exact bit complement, 72 of 72.
+      <div class="bt-cap" style="margin-top:10px">G<span class="sf">_</span><sub>AUD</sub> + K<span class="sf">_</span><sub>AUD</sub> = 1 &rarr; exact bit complement, 72 of 72.
       The gap-ruler reads them one step apart; the bits read them as opposites &mdash; one identity, two witnesses.</div>
     </div>
 
@@ -508,7 +509,7 @@ body{
     </div>
 
     <p style="font-size:14px;color:var(--muted)">Reading guide: try <b>1/7</b> (three columns, closes at 3) and
-    <b>1/11</b> (ten), then <b>G<sub>AUD</sub></b> or <b>ln&thinsp;2</b> &mdash; they refuse to ever repeat. That
+    <b>1/11</b> (ten), then <b>G<span class="sf">_</span><sub>AUD</sub></b> or <b>ln&thinsp;2</b> &mdash; they refuse to ever repeat. That
     scatter is the null: no hidden structure in base 2. The one guardrail &mdash; this lens is base-2 native, so a
     pattern only counts if it would survive in another base.</p>
   </div>
@@ -578,7 +579,7 @@ body{
 
 
 <div class="origin">
-  &ldquo;The tower was born from noticing &mdash; ratios, <span class="gloss" data-tip="A pivot is a step where the structure turns rather than just continues. The staircase's far end, step 64 (= 64·G<sub>AUD</sub>), lands near √φ — within 0.7%, deviation stated, never hidden: the Pivot.">pivots</span>, <span class="gloss" data-tip="A crossing is where the climbing staircase (steps = multiples of G<sub>AUD</sub>) passes a known threshold — like an elevator passing a marked floor. The Landauer crossing is where it passes ln 2, the minimum energy cost of erasing one bit: at 35.11 G<sub>AUD</sub>-steps.">crossings</span> that kept landing near each other. It exists so those meetings can be watched instead of just remembered.&rdquo;
+  &ldquo;The tower was born from noticing &mdash; ratios, <span class="gloss" data-tip="A pivot is a step where the structure turns rather than just continues. The staircase's far end, step 64 (= 64·G<span class="sf">_</span><sub>AUD</sub>), lands near √φ — within 0.7%, deviation stated, never hidden: the Pivot.">pivots</span>, <span class="gloss" data-tip="A crossing is where the climbing staircase (steps = multiples of G<span class="sf">_</span><sub>AUD</sub>) passes a known threshold — like an elevator passing a marked floor. The Landauer crossing is where it passes ln 2, the minimum energy cost of erasing one bit: at 35.11 G<span class="sf">_</span><sub>AUD</sub>-steps.">crossings</span> that kept landing near each other. It exists so those meetings can be watched instead of just remembered.&rdquo;
   <details>
     <summary>more</summary>
     Coincidences are easier to judge when they stand on the same scale &mdash; one ladder, where everything noticed gets to stand. Some patterns dissolve under that test. The ones that survive are in the papers.
@@ -586,18 +587,18 @@ body{
 </div>
 
 <details class="panel">
-  <summary><span class="q">What is this tool?</span><span class="one-liner">A ladder of halvings: rung n holds (1/2)<sup>n</sup>. The only moves are double and halve.</span><span class="chev">&#9656;</span></summary>
+  <summary><span class="q">What is this tool?</span><span class="one-liner">A ladder of halvings: rung n holds (1/2)<span class="sf">^</span><sup>n</sup>. The only moves are double and halve.</span><span class="chev">&#9656;</span></summary>
   <div class="expand">That&rsquo;s all &ldquo;binary&rdquo; means &mdash; counting with just 0 and 1, so every number becomes a recipe of doublings. Your computer plays videos and games by stacking halvings and doublings very, very fast. This tower is that world, drawn as a ladder you can climb.</div>
 </details>
 
 <details class="panel">
-  <summary><span class="q">What is K<sub>AUD</sub>?</span><span class="one-liner">K<sub>AUD</sub> = &radic;2 &middot; ln 2 &asymp; 0.980258 &mdash; geometry&rsquo;s simplest diagonal times information&rsquo;s simplest cost.</span><span class="chev">&#9656;</span></summary>
-  <div class="expand">&radic;2 is what a square&rsquo;s diagonal costs; ln 2 is what one yes/no decision costs. Their product is the framework&rsquo;s central constant &mdash; and what&rsquo;s left over is the Gap: G<sub>AUD</sub> = 1 &minus; K<sub>AUD</sub> &asymp; 0.019742. About 2%.</div>
+  <summary><span class="q">What is K<span class="sf">_</span><sub>AUD</sub>?</span><span class="one-liner">K<span class="sf">_</span><sub>AUD</sub> = &radic;2 &middot; ln 2 &asymp; 0.980258 &mdash; geometry&rsquo;s simplest diagonal times information&rsquo;s simplest cost.</span><span class="chev">&#9656;</span></summary>
+  <div class="expand">&radic;2 is what a square&rsquo;s diagonal costs; ln 2 is what one yes/no decision costs. Their product is the framework&rsquo;s central constant &mdash; and what&rsquo;s left over is the Gap: G<span class="sf">_</span><sub>AUD</sub> = 1 &minus; K<span class="sf">_</span><sub>AUD</sub> &asymp; 0.019742. About 2%.</div>
 </details>
 
 <details class="panel">
   <summary><span class="q">What does it compute?</span><span class="one-liner">Type a number &mdash; the tower lights the rungs that build it. That&rsquo;s its binary recipe.</span><span class="chev">&#9656;</span></summary>
-  <div class="expand">Two ladders, one family: <strong>this widget&rsquo;s ladder</strong> is the binary recipe &mdash; rung n holds (1/2)<sup>n</sup>, and your number lights the rungs it uses. <strong>The framework&rsquo;s Tower staircase</strong> is a different ladder: its steps are <em>multiples of the Gap</em> (step n sits at n&middot;G<sub>AUD</sub>), and that is where the named <span class="gloss" data-tip="A landmark is a step of the G<sub>AUD</sub>-staircase where a named constant lands nearby — always reported with its exact position and signed remainder, never as the integer alone.">landmarks</span> live. They come in two kinds, and the difference matters: <strong>derived marks</strong> &mdash; ln 2 at 35.111, the chord 1/&radic;2 at 35.818, K<sub>AUD</sub> at 49.654, unity at 50.654 &mdash; are the unit&rsquo;s own calibration points, and &radic;2/4 at 17.909 belongs with them, being exactly half the chord. <strong>Conversions</strong> &mdash; 1/&phi; at 31.306, &radic;&phi; at 64.433, &phi; at 81.960, and &pi;/3 at 53.045 &mdash; are imported values expressed in gap units, and state no claim. The <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Hall%20of%20Memories/telescope-tower.html" target="_blank" rel="noopener">Telescope Tower</a> searches that staircase &mdash; and always states the deviation. Try the widget below for the recipe side.</div>
+  <div class="expand">Two ladders, one family: <strong>this widget&rsquo;s ladder</strong> is the binary recipe &mdash; rung n holds (1/2)<span class="sf">^</span><sup>n</sup>, and your number lights the rungs it uses. <strong>The framework&rsquo;s Tower staircase</strong> is a different ladder: its steps are <em>multiples of the Gap</em> (step n sits at n&middot;G<span class="sf">_</span><sub>AUD</sub>), and that is where the named <span class="gloss" data-tip="A landmark is a step of the G<span class="sf">_</span><sub>AUD</sub>-staircase where a named constant lands nearby — always reported with its exact position and signed remainder, never as the integer alone.">landmarks</span> live. They come in two kinds, and the difference matters: <strong>derived marks</strong> &mdash; ln 2 at 35.111, the chord 1/&radic;2 at 35.818, K<span class="sf">_</span><sub>AUD</sub> at 49.654, unity at 50.654 &mdash; are the unit&rsquo;s own calibration points, and &radic;2/4 at 17.909 belongs with them, being exactly half the chord. <strong>Conversions</strong> &mdash; 1/&phi; at 31.306, &radic;&phi; at 64.433, &phi; at 81.960, and &pi;/3 at 53.045 &mdash; are imported values expressed in gap units, and state no claim. The <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Hall%20of%20Memories/telescope-tower.html" target="_blank" rel="noopener">Telescope Tower</a> searches that staircase &mdash; and always states the deviation. Try the widget below for the recipe side.</div>
 </details>
 
 <details class="panel">
@@ -608,7 +609,7 @@ body{
 </div><!-- /read -->
 
 <div class="tp" data-tab="gtool">
-<h2 class="sec" id="g-exact">The gap, exactly &mdash; a tool for <span style="font-family:monospace">G<sub>AUD</sub></span></h2>
+<h2 class="sec" id="g-exact">The gap, exactly &mdash; a tool for <span style="font-family:monospace">G<span class="sf">_</span><sub>AUD</sub></span></h2>
 
 <p class="note"><strong>Everything above works on the <em>digits</em> of a constant. This section
 works on one constant's <em>structure</em>.</strong>
@@ -624,7 +625,7 @@ point anywhere in it. Added 2026-08-27.</em></p>
   <div style="border-bottom:1px solid var(--card-border); padding-bottom:14px; margin-bottom:14px;">
     <strong>1 &middot; The series &mdash; exact rationals</strong>
     <div style="font-family:monospace; font-size:.92em; margin:7px 0 9px; color:var(--muted);">
-      G<sub>AUD</sub> = &Sigma;<sub>k&ge;1</sub> (&minus;1)<sup>k+1</sup> &middot; C(2k,k) / ( 32<sup>k</sup> &middot; (2k+1) )
+      G<span class="sf">_</span><sub>AUD</sub> = &Sigma;<span class="sf">_(</span><sub>k&ge;1</sub><span class="sf">)</span> (&minus;1)<span class="sf">^(</span><sup>k+1</sup><span class="sf">)</span> &middot; C(2k,k) / ( 32<span class="sf">^</span><sup>k</sup> &middot; (2k+1) )
     </div>
     <div class="widget-row" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
       <label for="gx-n">terms&nbsp;N</label>
@@ -639,9 +640,9 @@ point anywhere in it. Added 2026-08-27.</em></p>
     <strong>2 &middot; The halving ladder &mdash; what is left after N halvings</strong>
     <div style="font-size:.9em; color:var(--muted); margin:6px 0 9px;">
       Halve the cell N times and the remainder is
-      <span style="font-family:monospace">1 &minus; p(ln&thinsp;2 / 2<sup>N</sup>)</span> &mdash;
+      <span style="font-family:monospace">1 &minus; p(ln&thinsp;2 / 2<span class="sf">^</span><sup>N</sup>)</span> &mdash;
       the gap of <em>that</em> rung's own cell. It is also the relative error of the composite
-      midpoint rule on <span style="font-family:monospace">2<sup>N</sup></span> panels, which is why
+      midpoint rule on <span style="font-family:monospace">2<span class="sf">^</span><sup>N</sup></span> panels, which is why
       the ratio tends to <strong>&frac14;</strong>: the midpoint rule is second order.
     </div>
     <div class="widget-row" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
@@ -678,7 +679,7 @@ puts &frac34; on its first term, at every length. It is not a fact about
 <strong>scale-free</strong>: adding a rung at the top is exactly doubling, so it does not single out
 <span style="font-family:monospace">n = 2</span>. <em>What singles out 2 is elsewhere &mdash; one bit
 consumed, the unit denominator <span style="font-family:monospace">n &minus; 1 = 1</span>, and the
-base <span style="font-family:monospace">32 = 2<sup>5</sup></span> in panel 3.</em></p>
+base <span style="font-family:monospace">32 = 2<span class="sf">^</span><sup>5</sup></span> in panel 3.</em></p>
 
 <script>
 (function(){
@@ -793,7 +794,7 @@ swept over <span style="font-family:monospace">L &isin; (0,&thinsp;30)</span>, t
 and the curvature has exactly one, at <span style="font-family:monospace">r = 24.83</span>;
 <span style="font-family:monospace">ln&thinsp;2</span> sits at 21.6&thinsp;% of the way to it, and
 11.0&thinsp;% of the way to the nearest singularity. <strong>What is left: 2 is the first integer
-ratio, and G<sub>AUD</sub> is what that first relation costs.</strong> Panel&nbsp;3 above is the same statement in
+ratio, and G<span class="sf">_</span><sub>AUD</sub> is what that first relation costs.</strong> Panel&nbsp;3 above is the same statement in
 the other direction &mdash; it is the base <span style="font-family:monospace">32 = 2&#8309;</span>
 that is unique to this cell, not a feature of the curve.</p>
 
@@ -813,8 +814,8 @@ that is unique to this cell, not a feature of the curve.</p>
     <button class="preset" data-k="third">1/3</button>
     <button class="preset" data-k="pi3">&pi; &minus; 3</button>
     <button class="preset" data-k="ln2">ln 2</button>
-    <button class="preset" data-k="G_AUD">G<sub>AUD</sub></button>
-    <button class="preset" data-k="KAUD">K<sub>AUD</sub></button>
+    <button class="preset" data-k="G_AUD">G<span class="sf">_</span><sub>AUD</sub></button>
+    <button class="preset" data-k="KAUD">K<span class="sf">_</span><sub>AUD</sub></button>
     <button class="preset" data-k="landauer">G/(2&middot;ln 2)</button>
     <span class="preset-hint">Preset constants use 96 true binary digits (precomputed at 60-digit precision) &mdash; not your browser&rsquo;s rounded copy.</span>
   </div>
@@ -844,8 +845,8 @@ that is unique to this cell, not a feature of the curve.</p>
   <div class="ladder-wrap">
     <div class="ladder" id="ladder" aria-label="Tower rungs 1 to 64"></div>
     <div class="ladder-side">
-      <p><strong>Reading the ladder:</strong> each rung n is the value (1/2)<sup>n</sup>. A lit rung means the recipe uses that halving. This is the <em>recipe ladder</em> &mdash; the framework&rsquo;s landmark staircase (steps = multiples of G<sub>AUD</sub>) is a different ladder; the <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Hall%20of%20Memories/telescope-tower.html" target="_blank" rel="noopener">Telescope Tower</a> searches it and reports how near any number lands to a G<sub>AUD</sub>-step, deviation included.</p>
-      <p><strong>Seeing relations:</strong> on the tower, dividing by 2 is a one-rung slide. Try G<sub>AUD</sub> vs 2G, or 1/&radic;2 vs &radic;2/4 &mdash; same recipe, shifted one rung. Relations between framework numbers become <em>shapes</em>.</p>
+      <p><strong>Reading the ladder:</strong> each rung n is the value (1/2)<span class="sf">^</span><sup>n</sup>. A lit rung means the recipe uses that halving. This is the <em>recipe ladder</em> &mdash; the framework&rsquo;s landmark staircase (steps = multiples of G<span class="sf">_</span><sub>AUD</sub>) is a different ladder; the <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Hall%20of%20Memories/telescope-tower.html" target="_blank" rel="noopener">Telescope Tower</a> searches it and reports how near any number lands to a G<span class="sf">_</span><sub>AUD</sub>-step, deviation included.</p>
+      <p><strong>Seeing relations:</strong> on the tower, dividing by 2 is a one-rung slide. Try G<span class="sf">_</span><sub>AUD</sub> vs 2G, or 1/&radic;2 vs &radic;2/4 &mdash; same recipe, shifted one rung. Relations between framework numbers become <em>shapes</em>.</p>
       <p id="sideNote" style="color: var(--landmark);"></p>
       <p style="font-size:12.5px; color: var(--subtle);">Full instruments: <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations%20hub.html" target="_blank" rel="noopener">Dashboard</a> &middot; <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/Hall%20of%20Memories/telescope-tower.html" target="_blank" rel="noopener">Telescope Tower</a></p>
     </div>
@@ -1072,18 +1073,18 @@ that is unique to this cell, not a feature of the curve.</p>
     if (!d.hasFrac) {
       var ib = d.intPart > 0n ? d.intPart.toString(2) : "0";
       var mers = (/^1+$/.test(ib) && d.intPart > 1n)
-        ? ' <span class="match">All ones &mdash; a Mersenne number: 2<sup>' + ib.length + '</sup> &minus; 1. In binary, the Mersenne numbers are exactly the all-ones rows.</span>'
+        ? ' <span class="match">All ones &mdash; a Mersenne number: 2<span class="sf">^</span><sup>' + ib.length + '</sup> &minus; 1. In binary, the Mersenne numbers are exactly the all-ones rows.</span>'
         : "";
       var ibShow = ib.length > 72 ? ib.slice(0, 60) + "&hellip; (" + ib.length + " binary digits)" : ib;
       return (label ? "<strong>" + label + "</strong><br>" : "") +
-        ibShow + "<sub>2</sub> &nbsp;=&nbsp; " + d.intPart.toString() +
+        ibShow + "<span class=\"sf\">_</span><sub>2</sub> &nbsp;=&nbsp; " + d.intPart.toString() +
         '<br><span class="note">Whole number &mdash; doublings only, no rungs needed. A year, a phone number, a zip code: every whole number splits into powers of 2 like this, automatically. The chips are arithmetic, not a message.</span>' + mers;
     }
     /* positive but smaller than the 64-rung window: say so honestly */
     if (d.firstRung > RUNGS) {
       return (label ? "<strong>" + label + "</strong><br>" : "") +
         '<span class="note">Positive, but smaller than the tower&rsquo;s window: its first lit rung would be rung ' + d.firstRung +
-        ' — i.e. this number is about (1/2)<sup>' + d.firstRung + '</sup>. The 64 rungs shown all stay dark. Small is not mysterious; it is just deep.</span>';
+        ' — i.e. this number is about (1/2)<span class="sf">^</span><sup>' + d.firstRung + '</sup>. The 64 rungs shown all stay dark. Small is not mysterious; it is just deep.</span>';
     }
     var shown = d.terminates ? Math.max(d.termAt, 1) : (d.repLen && d.repStart + 2 * d.repLen <= 40 ? d.repStart + 2 * d.repLen : 40);
     var s = "";
@@ -1093,7 +1094,7 @@ that is unique to this cell, not a feature of the curve.</p>
       s += ch;
     }
     var terms = [], j;
-    for (j = 0; j < RUNGS && terms.length < 5; j++) if (d.bits[j] === 1) terms.push("1/2<sup>" + (j + 1) + "</sup>");
+    for (j = 0; j < RUNGS && terms.length < 5; j++) if (d.bits[j] === 1) terms.push("1/2<span class=\"sf\">^</span><sup>" + (j + 1) + "</sup>");
     var more = (function () { var c = 0; for (var t = 0; t < RUNGS; t++) c += d.bits[t]; return c > 5; })();
     var sum = terms.length ? terms.join(" + ") + (more || !d.terminates ? " + …" : "") : "(no fractional part)";
 
@@ -1125,7 +1126,7 @@ that is unique to this cell, not a feature of the curve.</p>
       }
     }
     return (label ? "<strong>" + label + "</strong><br>" : "") +
-           "0." + s + (d.terminates ? "" : "…") + "<sub>2</sub> &nbsp;=&nbsp; " + sum + "<br>" + tail + matchLine;
+           "0." + s + (d.terminates ? "" : "…") + "<span class=\"sf\">_</span><sub>2</sub> &nbsp;=&nbsp; " + sum + "<br>" + tail + matchLine;
   }
 
   function paint() {

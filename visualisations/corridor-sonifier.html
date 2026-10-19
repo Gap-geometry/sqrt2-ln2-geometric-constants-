@@ -346,9 +346,10 @@
      Every frequency ratio computed here derives from:
        K_AUD = Math.SQRT2 * Math.LN2
        PHI   = (1 + Math.sqrt(5)) / 2
-       G<sub>AUD</sub>     = 1 - K_AUD
+       G_AUD      = 1 - K_AUD
      No magic numbers. No curve fitting. Run it. */
 </style>
+<style id="sideforms">/* side forms for text extractors (2026-10-19): a caret before every superscript and an underscore before every subscript, hidden to the eye, present in the text, so 32<sup>k</sup> flattens to 32^k */.sf{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}</style>
 </head>
 <body>
 
@@ -369,13 +370,13 @@
 <div class="section">
   <h2>I. The Corridor</h2>
   <div class="desc">
-    Click and drag across the corridor. Floor (1/&phi; &asymp; 0.618) to ceiling (K<sub>AUD</sub> &asymp; 0.980).
+    Click and drag across the corridor. Floor (1/&phi; &asymp; 0.618) to ceiling (K<span class="sf">_</span><sub>AUD</sub> &asymp; 0.980).
     The tone maps your position. The last 2% — between ceiling and unity — is silence.
   </div>
   <div class="corridor-container">
     <div class="corridor-bar" id="corridorBar">
       <span class="corridor-marker floor">1/&phi;</span>
-      <span class="corridor-marker kaud">K<sub>AUD</sub></span>
+      <span class="corridor-marker kaud">K<span class="sf">_</span><sub>AUD</sub></span>
       <div class="corridor-needle" id="corridorNeedle" style="left:-10px"></div>
     </div>
     <div class="corridor-labels">
@@ -391,10 +392,10 @@
 <div class="section">
   <h2>II. The Binary Tower</h2>
   <div class="desc">
-    64 steps of n &times; G<sub>AUD</sub>. Click any step to hear its tone. Landmarks glow:
+    64 steps of n &times; G<span class="sf">_</span><sub>AUD</sub>. Click any step to hear its tone. Landmarks glow:
     step 18 (&radic;2/4, Shell 3), 32 (&radic;&phi;/2, k=5 tower target — sits ~0.67% from 32&middot;G),
     35 (ln 2, Landauer crossing — last sub-Landauer step), 36 (1/&radic;2, Geometric-damping threshold),
-    37 (1/(2 ln 2), Shannon bound), 50 (K<sub>AUD</sub>, Ceiling), 64 (&radic;&phi;, Pivot).
+    37 (1/(2 ln 2), Shannon bound), 50 (K<span class="sf">_</span><sub>AUD</sub>, Ceiling), 64 (&radic;&phi;, Pivot).
     The corridor floor 1/&phi; &asymp; 0.618 is a separate reference that sits ~2.2% below 32&middot;G.
   </div>
   <div class="tower-container">
@@ -407,7 +408,7 @@
 <div class="section">
   <h2>III. The Blues Interval</h2>
   <div class="desc">
-    log&#x2082;(9/7) = 0.36257. Corridor width (K<sub>AUD</sub> &minus; 1/&phi;) = 0.36222. Difference: 0.42 cents.
+    log&#x2082;(9/7) = 0.36257. Corridor width (K<span class="sf">_</span><sub>AUD</sub> &minus; 1/&phi;) = 0.36222. Difference: 0.42 cents.
     A musician bending from the flat-5 to the flat-7 traverses the corridor.
   </div>
   <div class="blues-container">
@@ -429,14 +430,14 @@
 <div class="section">
   <h2>IV. The Gap</h2>
   <div class="desc">
-    A tone rises from floor toward unity. It reaches K<sub>AUD</sub> and stops.
+    A tone rises from floor toward unity. It reaches K<span class="sf">_</span><sub>AUD</sub> and stops.
     The remaining 2% is the breathing room. The space where the real thing happens.
   </div>
   <div class="gap-container">
     <button class="gap-btn" id="btnGap">Listen to the approach</button>
     <div class="gap-visual">
       <div class="gap-fill" id="gapFill" style="width:0%"></div>
-      <span class="gap-marker" style="left:98%">K<sub>AUD</sub></span>
+      <span class="gap-marker" style="left:98%">K<span class="sf">_</span><sub>AUD</sub></span>
       <span class="gap-marker" style="left:100%">1</span>
     </div>
   </div>
@@ -460,7 +461,7 @@
     <details>
       <summary>I. Corridor &rarr; pitch: two octaves from floor to unity.</summary>
       <div class="how-body">
-        Your position v between the floor (1/&phi;) and unity is rescaled to t = (v &minus; 1/&phi;)/(1 &minus; 1/&phi;), then mapped as <code>freq = 220 &middot; 2^(2t)</code> &mdash; A3 at the floor, rising smoothly through two octaves toward 880&nbsp;Hz at unity. But the tone is cut at v &gt; K<sub>AUD</sub>: the last 2% is rendered as <em>silence</em>, because that is what the gap is &mdash; the part of the climb that never sounds.
+        Your position v between the floor (1/&phi;) and unity is rescaled to t = (v &minus; 1/&phi;)/(1 &minus; 1/&phi;), then mapped as <code>freq = 220 &middot; 2^(2t)</code> &mdash; A3 at the floor, rising smoothly through two octaves toward 880&nbsp;Hz at unity. But the tone is cut at v &gt; K<span class="sf">_</span><sub>AUD</sub>: the last 2% is rendered as <em>silence</em>, because that is what the gap is &mdash; the part of the climb that never sounds.
       </div>
     </details>
 
@@ -474,7 +475,7 @@
     <details>
       <summary>III. The blue notes: why 7/5, 9/5, and the 9/7 bend.</summary>
       <div class="how-body">
-        The root is A3 = 220&nbsp;Hz. The flat-5 is <code>220 &middot; 7/5</code> = 308&nbsp;Hz and the flat-7 is <code>220 &middot; 9/5</code> = 396&nbsp;Hz &mdash; the septimal (harmonic-seventh family) tunings that blues bends gravitate toward. Bending from flat-5 to flat-7 therefore traverses the ratio (9/5)/(7/5) = <strong>9/7</strong>. Measured the way the ear measures &mdash; in octaves &mdash; that bend spans log&#x2082;(9/7) = 0.3625701. The corridor&rsquo;s width, K<sub>AUD</sub> &minus; 1/&phi; = 0.3622242, is numerically 0.42 cents away (a cent is 1/1200 of an octave; trained ears distinguish ~5 cents, so the two are audibly identical). <em>Tier note:</em> this proximity is an Observation &mdash; a numerical coincidence between an octave-measure and a dimensionless width, reported as numbers, with no mechanism claimed. The chord button plays 5:6:7:9 &mdash; the half-diminished seventh &mdash; in which the 9/7 interval sits between its two upper voices.
+        The root is A3 = 220&nbsp;Hz. The flat-5 is <code>220 &middot; 7/5</code> = 308&nbsp;Hz and the flat-7 is <code>220 &middot; 9/5</code> = 396&nbsp;Hz &mdash; the septimal (harmonic-seventh family) tunings that blues bends gravitate toward. Bending from flat-5 to flat-7 therefore traverses the ratio (9/5)/(7/5) = <strong>9/7</strong>. Measured the way the ear measures &mdash; in octaves &mdash; that bend spans log&#x2082;(9/7) = 0.3625701. The corridor&rsquo;s width, K<span class="sf">_</span><sub>AUD</sub> &minus; 1/&phi; = 0.3622242, is numerically 0.42 cents away (a cent is 1/1200 of an octave; trained ears distinguish ~5 cents, so the two are audibly identical). <em>Tier note:</em> this proximity is an Observation &mdash; a numerical coincidence between an octave-measure and a dimensionless width, reported as numbers, with no mechanism claimed. The chord button plays 5:6:7:9 &mdash; the half-diminished seventh &mdash; in which the 9/7 interval sits between its two upper voices.
       </div>
     </details>
 

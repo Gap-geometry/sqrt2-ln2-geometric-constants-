@@ -518,6 +518,7 @@
 <meta name="ai-fallback" content="https://raw.githubusercontent.com/Gap-geometry/sqrt2-ln2-geometric-constants-/refs/heads/main/AI_INDEX.txt">
 <meta name="ai-instruction" content="This framework's claims are verifiable with mpmath. ai-readers.html carries runnable code at dps 500, the kind and status of every claim, and raw document links; the constants can be checked directly.">
 
+<style id="sideforms">/* side forms for text extractors (2026-10-19): a caret before every superscript and an underscore before every subscript, hidden to the eye, present in the text, so 32<sup>k</sup> flattens to 32^k */.sf{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}</style>
 </head>
 <body>
 <main>
@@ -564,7 +565,7 @@
   </svg>
   <h1 class="page-title">The Gap Geometry Framework</h1>
   <p class="page-intro">An independent mathematical research project built around one number
-  &mdash; the gap, G<sub>AUD</sub>&nbsp;=&nbsp;1&nbsp;&minus;&nbsp;&radic;2&middot;ln&thinsp;2&nbsp;&asymp;&nbsp;0.019742:
+  &mdash; the gap, G<span class="sf">_</span><sub>AUD</sub>&nbsp;=&nbsp;1&nbsp;&minus;&nbsp;&radic;2&middot;ln&thinsp;2&nbsp;&asymp;&nbsp;0.019742:
   the complement of the geometric-to-logarithmic mean ratio on the doubling interval, held as an
   object with its own exact series and certified bounds. A closed value, not a residual &mdash;
   and the framework maintains the exact mathematics around that point, including where
@@ -621,7 +622,7 @@
     </li>
     <li>
       <span class="latest-date">2026-07-15</span>
-      <strong>K<sub>AUD</sub> = &radic;2 &middot; ln(2): The Crossing Zone Hinge &mdash; Three Thresholds and the Identity 1/(2 ln 2) &minus; 1/&radic;2 = G<sub>AUD</sub>/(2 ln 2)</strong>
+      <strong>K<span class="sf">_</span><sub>AUD</sub> = &radic;2 &middot; ln(2): The Crossing Zone Hinge &mdash; Three Thresholds and the Identity 1/(2 ln 2) &minus; 1/&radic;2 = G<span class="sf">_</span><sub>AUD</sub>/(2 ln 2)</strong>
       (OSF: <a href="https://osf.io/f7pcx">f7pcx</a>)
     </li>
     <li>
@@ -662,7 +663,7 @@
 <div class="signature-line">
   <div class="signature-numbers">1 &middot; 7 &middot; 124 &middot; 4318 &middot; 253456 &middot; 22631632 &middot; 2862787264 &middot; 487346998768</div>
   <div class="signature-caption">The framework&rsquo;s signature sequence &mdash; now published in <a href="https://doi.org/10.17605/OSF.IO/WVD3G" target="_blank" rel="noopener">Integer Mellin Moments of the Dome</a></div>
-  <div class="signature-caption">a(n) = M<sub>g</sub>(2n) / M<sub>g</sub>(2)<sup>n</sup> &nbsp;&middot;&nbsp; dome g(x) = tanh(x) / cosh(2x) &nbsp;&middot;&nbsp; &eta; Corridor paper, Theorem 9.7 / Corollary 9.9</div>
+  <div class="signature-caption">a(n) = M<span class="sf">_</span><sub>g</sub>(2n) / M<span class="sf">_</span><sub>g</sub>(2)<span class="sf">^</span><sup>n</sup> &nbsp;&middot;&nbsp; dome g(x) = tanh(x) / cosh(2x) &nbsp;&middot;&nbsp; &eta; Corridor paper, Theorem 9.7 / Corollary 9.9</div>
 </div>
 
 <!-- ============================================================ -->
@@ -700,7 +701,7 @@
     <p style="margin:0 0 8px; font-size:16.5px;"><strong>Take a quantity and its double.</strong> Their geometric mean
     falls short of their logarithmic mean &mdash; always, and on the doubling interval [x,&thinsp;2x] by exactly
     <strong>G&nbsp;=&nbsp;1&nbsp;&minus;&nbsp;&radic;2&middot;ln&thinsp;2&nbsp;&#8776;&nbsp;1.974&thinsp;%</strong> of the latter.
-    That shortfall is the gap: an exact number &mdash; computable to any depth, provably never zero. (The papers write it G<sub>AUD</sub>.)</p>
+    That shortfall is the gap: an exact number &mdash; computable to any depth, provably never zero. (The papers write it G<span class="sf">_</span><sub>AUD</sub>.)</p>
     <p style="margin:0 0 8px; font-size:14.5px;">The same number wears several faces, and the
     drawing shows the plainest. Another: at the one angle whose length is ln&thinsp;2 &mdash; the size of a single
     yes/no &mdash; an arc falls short of its chord by exactly the gap. The same value is also the
@@ -731,8 +732,8 @@
 
 <p>This framework began with a single observation: for any integer base n, define
 K(n) = &radic;n &times; ln(n). Only n = 2 produces K(n) &lt; 1. The constant
-K<sub>AUD</sub> = &radic;2 &times; ln(2) &asymp; 0.980 defined a ceiling, and the gap
-G<sub>AUD</sub> = 1 &minus; K<sub>AUD</sub> &asymp; 0.0197 became the subject of this research.</p>
+K<span class="sf">_</span><sub>AUD</sub> = &radic;2 &times; ln(2) &asymp; 0.980 defined a ceiling, and the gap
+G<span class="sf">_</span><sub>AUD</sub> = 1 &minus; K<span class="sf">_</span><sub>AUD</sub> &asymp; 0.0197 became the subject of this research.</p>
 
 <p><strong>The gap is now identified, and there are two doors to it. Neither is prior to the
 other, and the framework states both, because a reader given only one will mistake the coordinate
@@ -745,12 +746,12 @@ diag(&radic;2,&thinsp;1/&radic;2) of PSL(2,&#8477;). For any such element the st
 framework&rsquo;s function can be written in the trace alone:
 <em>p</em>(&gamma;) = &#8467; &divide; &radic;(tr&sup2;&gamma;&nbsp;&minus;&nbsp;4), with the translation length &#8467; read off the trace through |tr&nbsp;&gamma;| = 2&thinsp;cosh(&#8467;/2).
 Here tr&sup2; = 9/2 exactly and &radic;(tr&sup2;&nbsp;&minus;&nbsp;4) = 1/&radic;2, giving
-<em>p</em> = &radic;2&middot;ln(2) &mdash; the value the papers print as K<sub>AUD</sub>. Because the formula sees the element only
+<em>p</em> = &radic;2&middot;ln(2) &mdash; the value the papers print as K<span class="sf">_</span><sub>AUD</sub>. Because the formula sees the element only
 through its trace, and the trace survives conjugation, <strong>that value is a conjugacy
 invariant of the doubling element</strong> &mdash; the same for every copy of that map, anywhere.
 This door needs no geometry and no model: two matrix entries and a calculator.</p>
 
-<p><strong>Geometrically &mdash; an arc and its chord.</strong> G<sub>AUD</sub> is how far an arc falls short of
+<p><strong>Geometrically &mdash; an arc and its chord.</strong> G<span class="sf">_</span><sub>AUD</sub> is how far an arc falls short of
 the straight line joining its ends, at the one angle whose length is ln&thinsp;2 &mdash; the length
 of doubling. It is a point on one classical function &mdash; the hyperbolic argument over its chord, <em>p</em>(<em>L</em>) = <em>L</em>/(2&thinsp;sinh(<em>L</em>/2)) &mdash; which mathematics already
 holds in four places: the &Acirc;-genus series of index theory, Hodgson&ndash;Kerckhoff&rsquo;s
@@ -769,7 +770,7 @@ its series is rational, its angle was never chosen. See
   have discovered any of them.</p>
   <p>What is original: noticing that one point on that function is an <em>address</em>, and that
   it is occupied &mdash; two published literatures stand at the same value without citing one
-  another; the derivation of G<sub>AUD</sub> as the unique sub-unity gap of binary information density; the
+  another; the derivation of G<span class="sf">_</span><sub>AUD</sub> as the unique sub-unity gap of binary information density; the
   closed-form identification of
   &radic;2&middot;ln(2) as the Hodgson&ndash;Kerckhoff coefficient; and a correction record kept
   in the open, because the method is part of the result. <strong>The ingredients are known. The
@@ -784,7 +785,7 @@ its series is rational, its angle was never chosen. See
   handed only the picture will conclude this is a result about hyperbolic geometry, and a reader
   handed only the matrix will miss why the value was ever looked for.</p>
   <p><strong>The precision:</strong> <em>p</em> is the invariant &mdash; a function defined on
-  every hyperbolic element of PSL(2,&#8477;). K<sub>AUD</sub> is its <em>value</em> at one of
+  every hyperbolic element of PSL(2,&#8477;). K<span class="sf">_</span><sub>AUD</sub> is its <em>value</em> at one of
   them. A number is not an invariant; it is the invariant <em>of</em> something. And a conjugacy
   invariant is a <em>kind</em>, not an importance: every hyperbolic element has one.
   <em>Added 2026-08-27; wording may still be adjusted.</em></p>
@@ -850,7 +851,7 @@ others. Where each piece is written:</p>
   <div class="domain-desc">OEIS A002162 (Bala, 2022) prints the gap&rsquo;s series &mdash; aimed
   at ln&thinsp;2; reading the same series from the complement&rsquo;s end is the
   framework&rsquo;s contribution. Term numerators are A055786; denominators
-  8<sup>k</sup>&middot;A002595(k).</div>
+  8<span class="sf">^</span><sup>k</sup>&middot;A002595(k).</div>
 </div>
 <div class="domain-card">
   <div class="domain-name">Numerical quadrature</div>
@@ -870,8 +871,8 @@ others. Where each piece is written:</p>
 -->
 <div class="domain-card">
   <div class="domain-name">Number theory</div>
-  <div class="domain-desc">G<sub>AUD</sub> = ln(e/2<sup>&radic;2</sup>) exactly; by
-  Gelfond&ndash;Schneider 2<sup>&radic;2</sup> is transcendental, and by Lindemann so is
+  <div class="domain-desc">G<span class="sf">_</span><sub>AUD</sub> = ln(e/2<span class="sf">^</span><sup>&radic;2</sup>) exactly; by
+  Gelfond&ndash;Schneider 2<span class="sf">^</span><sup>&radic;2</sup> is transcendental, and by Lindemann so is
   ln&thinsp;2 &mdash; the gap is transcendental. A property, not an argument.</div>
 </div>
 <div class="domain-card">
@@ -912,9 +913,9 @@ route into the work was historical (the H&#x2084; 120-cell circumradius; Coxeter
 <em>Regular Polytopes</em>, 1973, after Schl&auml;fli), and whose structural home the
 identification later revealed to be the object itself: the doubling map&rsquo;s own multiplier
 carries &radic;2, its chord is 1/&radic;2, its trace field is &#x211a;(&radic;2). The gap
-G<sub>AUD</sub> = 1 &minus; K<sub>AUD</sub> &asymp; 0.01974 is computed exactly from these definitions.</p>
+G<span class="sf">_</span><sub>AUD</sub> = 1 &minus; K<span class="sf">_</span><sub>AUD</sub> &asymp; 0.01974 is computed exactly from these definitions.</p>
 
-<p>K<sub>AUD</sub> = &radic;2 &times; ln(2) &asymp; 0.98026 is the product of two public mathematical objects, computed directly from their definitions. What follows by published computation: the (2&minus;&eta;) corridor [2K<sub>AUD</sub>, 2]
+<p>K<span class="sf">_</span><sub>AUD</sub> = &radic;2 &times; ln(2) &asymp; 0.98026 is the product of two public mathematical objects, computed directly from their definitions. What follows by published computation: the (2&minus;&eta;) corridor [2K<span class="sf">_</span><sub>AUD</sub>, 2]
 and the dome&rsquo;s Mellin spectrum. What is
 reported as observation, carried as such on its own paper: the &eta;-bound 2G across O(N)
 universality classes, and the places where independent literatures stand at the framework&rsquo;s

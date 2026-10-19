@@ -196,6 +196,7 @@
   .site-nav{ margin:10px 0 8px; font-size:14px; line-height:1.9; }
   .site-nav a{ text-decoration:none; }
 </style>
+<style id="sideforms">/* side forms for text extractors (2026-10-19): a caret before every superscript and an underscore before every subscript, hidden to the eye, present in the text, so 32<sup>k</sup> flattens to 32^k */.sf{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}</style>
 </head>
 <body>
 <main>
@@ -218,7 +219,7 @@
 </p>
 <p style="border-left:3px solid #c8c8c8; background:#fafaf8; padding:8px 14px; font-size:13.5px; font-family:'Courier New',monospace;">
 <strong style="font-family:Optima,Georgia,serif;">Gap computations &mdash; &rho;, the gap as a unit.</strong><br>
-&rho; = G / ((&delta; &minus; 14/3)/&delta;) = 36.3632352997&hellip; &nbsp;&middot;&nbsp; portrait: 400/11 &minus; 1/2500 &minus; 1/939939 (error 4.01&thinsp;&times;&thinsp;10<sup>&minus;14</sup>)<br>
+&rho; = G / ((&delta; &minus; 14/3)/&delta;) = 36.3632352997&hellip; &nbsp;&middot;&nbsp; portrait: 400/11 &minus; 1/2500 &minus; 1/939939 (error 4.01&thinsp;&times;&thinsp;10<span class="sf">^(</span><sup>&minus;14</sup><span class="sf">)</span>)<br>
 <span style="font-family:Optima,Georgia,serif; color:#5a5a5a;">The gap measuring Feigenbaum&rsquo;s residue &mdash; 400/11 is genuinely &rho;&rsquo;s fourth convergent;
 the three-term expansion is a <em>portrait, not an instrument</em> (it describes &rho;; it cannot compute it &mdash; see the 2026 notice on <em>The 400/11 Formula</em>).
 The instruments below give every reading this same honesty.</span>
@@ -369,7 +370,7 @@ the gap itself, given to the ear. <em>What you can&rsquo;t hear is the thing bei
       <span class="live-chip">Live</span>
       <div class="preview-veil"><span class="enter-chip">&#9654;&nbsp; Enter</span></div>
     </div>
-    <div class="tool-what"><strong>What it sounds like:</strong> The corridor as a continuous tone sweep from 1/&phi; to K<sub>AUD</sub>; the tower as 64 discrete steps with landmark glows; the half-diminished seventh 5:6:7:9 holding the corridor as the 9/7 interval.</div>
+    <div class="tool-what"><strong>What it sounds like:</strong> The corridor as a continuous tone sweep from 1/&phi; to K<span class="sf">_</span><sub>AUD</sub>; the tower as 64 discrete steps with landmark glows; the half-diminished seventh 5:6:7:9 holding the corridor as the 9/7 interval.</div>
     <div class="tool-anchor"><strong>What it makes audible:</strong> the corridor floor and ceiling of <a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/direct-documents.html" target="_blank" rel="noopener">the founding papers</a>, the tower landmarks at steps 18 &middot; 32 &middot; 35 &middot; 36 &middot; 37 &middot; 50 &middot; 64.</div>
   </div>
   <div class="tool-link"><a href="https://gap-geometry.github.io/sqrt2-ln2-geometric-constants-/visualisations/corridor-sonifier.html" target="_blank" rel="noopener">Open full page &#8599;</a></div>

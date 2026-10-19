@@ -87,6 +87,7 @@
   .xnote b{color:var(--ink)}
   @media(max-width:560px){.xrow{grid-template-columns:1fr;gap:2px}.xrow .sym{justify-self:start}}
 </style>
+<style id="sideforms">/* side forms for text extractors (2026-10-19): a caret before every superscript and an underscore before every subscript, hidden to the eye, present in the text, so 32<sup>k</sup> flattens to 32^k */.sf{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}</style>
 </head>
 <body>
 <div class="wrap">
@@ -128,7 +129,7 @@
       <div class="xrow"><span class="dom">complex analysis</span><span class="say">the half-argument made complex, <em>w = L/2</em>: Re(1 − w/sinh w) is harmonic, so its Hessian is <em>±λ</em> everywhere — a saddle; the wall is the only critical point in |w| &lt; π <em>(±1/3 in w; the value is the coordinate's, the signs are the object's)</em></span><span class="sym">w, Re f</span></div>
       <div class="xrow"><span class="dom">hyperbolic classes</span><span class="say">the trace <em>t = 2 cosh(L/2)</em> and the square's trace <em>t₂ = r + 1/r</em>; its square diag(r, 1/r) is conjugate to an integral matrix exactly when t₂ is an integer — <em>a closed cell</em>; r = 2 has t₂ = 5/2</span><span class="sym">t, t₂</span></div>
       <div class="xrow"><span class="dom">Chebyshev / Lucas</span><span class="say">the squaring map <em>t₂ ↦ t₂² − 2</em> (L ↦ 2L): from the golden cell the Lucas ladder 3, 7, 47, 2207; from r = 2 the ladder 5/2, 17/4, 257/16, … <em>never lands</em></span><span class="sym">T₂, L₂ₖ</span></div>
-      <div class="xrow"><span class="dom">metallic means</span><span class="say">(m + √(m²+4))/2, norm −1; their squares are the closed cells <em>t₂ = m² + 2</em> — φ² (chord 1, p = L), (1+√2)² = 3+2√2 (the boundary)</span><span class="sym">φ, δ<sub>S</sub></span></div>
+      <div class="xrow"><span class="dom">metallic means</span><span class="say">(m + √(m²+4))/2, norm −1; their squares are the closed cells <em>t₂ = m² + 2</em> — φ² (chord 1, p = L), (1+√2)² = 3+2√2 (the boundary)</span><span class="sym">φ, δ<span class="sf">_</span><sub>S</sub></span></div>
       <div class="xrow"><span class="dom">the angles</span><span class="say">the Gudermannian <em>θ = gd L</em> (cos θ = 2/t₂) and Lobachevsky's angle of parallelism <em>Π</em> (cos Π = tanh(L/2)); 70.53° = Π(2) = θ(3+2√2)</span><span class="sym">θ, Π</span></div>
       <p class="xnote">The hidden language is the <b>coordinate</b>: r, b−a, L, L/2, u, s, N, the digits, n — and w, t, t₂, m, θ, Π — one line, fifteen variables. Translating between any two rows is a single substitution. <em>(Distinct from letters that merely <b>collide</b> — the same mark standing for different objects; that is a separate map.)</em> Symbols follow <a href="https://www.iso.org/standard/64973.html" style="color:var(--blue2)">ISO 80000-2</a>; inverse hyperbolic functions are said in words here — "the hyperbolic argument" — and spelled ar- offline. <b>The symbol map is open-ended:</b> new entries may be added when a correspondence is independently derived and verified; existing meanings may not drift silently — a change is dated and recorded.</p>
     </div>
